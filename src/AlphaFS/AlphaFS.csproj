@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0-windows</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
     <ApplicationIcon>../../icon/app.ico</ApplicationIcon>
     <IsPackable>true</IsPackable>
     <PackageId>1llum1n4t1s.AlphaFS</PackageId>
@@ -17,7 +18,7 @@
     <PackageProjectUrl>https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS</PackageProjectUrl>
     <PackageOutputPath>../../artifacts</PackageOutputPath>
     <RepositoryUrl>https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS</RepositoryUrl>
-    <Version>1.0.5</Version>
+    <Version>1.0.8</Version>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Resources.Designer.cs">
