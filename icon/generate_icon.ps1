@@ -105,7 +105,7 @@ function Create-IconFromPng {
             $binaryWriter.Write($pngDataCache[$size])
         }
 
-        Write-Host "✓ Successfully created: $OutputIcoPath with sizes: $($sizes -join ', ')" -ForegroundColor Green
+        Write-Host "Successfully created: $OutputIcoPath with sizes: $($sizes -join ', ')" -ForegroundColor Green
         return $true
     }
     catch {
@@ -145,7 +145,9 @@ if (Test-Path $appIconPath) {
 }
 
 if ($allSuccess) {
-    Write-Host "`nIcon generation completed successfully!" -ForegroundColor Green
+    Write-Host ""
+    Write-Host "Icon generation completed successfully!" -ForegroundColor Green
 } else {
-    Write-Host "`nIcon generation completed with some warnings." -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "Icon generation completed with some warnings." -ForegroundColor Yellow
 }
