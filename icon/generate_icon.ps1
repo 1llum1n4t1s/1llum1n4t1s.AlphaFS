@@ -17,11 +17,11 @@ function Create-IconFromPng {
 
     # PNGファイルの存在確認
     if (-not (Test-Path $PngPath)) {
-        Write-Host "ERROR: PNGファイルが見つかりません: $PngPath" -ForegroundColor Red
+        Write-Host ('ERROR: PNG file not found: ' + $PngPath) -ForegroundColor Red
         return $false
     }
 
-    Write-Host "Processing: $PngPath -> $OutputIcoPath"
+    Write-Host ('Processing: ' + $PngPath + ' -> ' + $OutputIcoPath)
 
     # リソース管理用の変数初期化
     $sourceImage = $null
@@ -105,11 +105,11 @@ function Create-IconFromPng {
             $binaryWriter.Write($pngDataCache[$size])
         }
 
-        Write-Host "Successfully created: $OutputIcoPath with sizes: $($sizes -join ', ')" -ForegroundColor Green
+        Write-Host ('Successfully created: ' + $OutputIcoPath + ' with sizes: ' + ($sizes -join ', ')) -ForegroundColor Green
         return $true
     }
     catch {
-        Write-Host "ERROR: $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host ('ERROR: ' + $_.Exception.Message) -ForegroundColor Red
         return $false
     }
     finally {
@@ -127,12 +127,12 @@ function Create-IconFromPng {
 $scriptDir = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Path }
 
 if (-not $scriptDir) {
-    Write-Host "ERROR: スクリプトディレクトリを確認できません" -ForegroundColor Red
+    Write-Host 'ERROR: Script directory could not be determined.' -ForegroundColor Red
     exit 1
 }
 
-$appIconPath = Join-Path -Path $scriptDir -ChildPath "app_icon.png"
-$appIcoPath = Join-Path -Path $scriptDir -ChildPath "app.ico"
+$appIconPath = Join-Path -Path $scriptDir -ChildPath 'app_icon.png'
+$appIcoPath = Join-Path -Path $scriptDir -ChildPath 'app.ico'
 
 $allSuccess = $true
 
@@ -141,13 +141,13 @@ if (Test-Path $appIconPath) {
     $success = Create-IconFromPng -PngPath $appIconPath -OutputIcoPath $appIcoPath
     if (-not $success) { $allSuccess = $false }
 } else {
-    Write-Host "WARNING: app_icon.png が見つかりません: $appIconPath" -ForegroundColor Yellow
+    Write-Host ('WARNING: app_icon.png not found: ' + $appIconPath) -ForegroundColor Yellow
 }
 
 if ($allSuccess) {
-    Write-Host ""
-    Write-Host "Icon generation completed successfully!" -ForegroundColor Green
+    Write-Host ''
+    Write-Host 'Icon generation completed successfully!' -ForegroundColor Green
 } else {
-    Write-Host ""
-    Write-Host "Icon generation completed with some warnings." -ForegroundColor Yellow
+    Write-Host ''
+    Write-Host 'Icon generation completed with some warnings.' -ForegroundColor Yellow
 }
