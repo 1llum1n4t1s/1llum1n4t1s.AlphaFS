@@ -7,6 +7,7 @@
 *.vbproj merge=union
 *.fsproj merge=union
 *.dbproj merge=union
+*.ps1 text eol=crlf
 
 # CSharp
 *.cs diff=csharp
