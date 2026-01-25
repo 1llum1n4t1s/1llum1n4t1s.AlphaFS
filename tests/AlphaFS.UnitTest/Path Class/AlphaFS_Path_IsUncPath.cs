@@ -54,10 +54,14 @@ namespace AlphaFS.UnitTest
                if (!(!path.StartsWith(Alphaleonis.Win32.Filesystem.Path.GlobalRootPrefix, StringComparison.OrdinalIgnoreCase) ||
                      !path.StartsWith(Alphaleonis.Win32.Filesystem.Path.VolumePrefix, StringComparison.OrdinalIgnoreCase)))
 
+               {
                   Assert.AreEqual(expected, actual);
+               }
 
                if (actual)
+               {
                   uncPathCnt++;
+               }
             }
             catch (Exception ex)
             {

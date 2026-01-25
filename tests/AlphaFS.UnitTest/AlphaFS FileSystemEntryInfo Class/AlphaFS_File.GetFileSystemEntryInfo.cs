@@ -51,7 +51,7 @@ namespace AlphaFS.UnitTest
 
             Assert.IsTrue(fsei.GetType().IsEquivalentTo(typeof(Alphaleonis.Win32.Filesystem.FileSystemEntryInfo)));
 
-            Assert.IsTrue(fsei.Attributes != System.IO.FileAttributes.Directory, "The directory attribute is found, but is not expected.");
+            Assert.AreNotEqual(System.IO.FileAttributes.Directory, fsei.Attributes, "The directory attribute is found, but is not expected.");
 
             Assert.AreEqual(file.FullName, fsei.FullPath, "The paths are not equal, but are expected to be.");
          }

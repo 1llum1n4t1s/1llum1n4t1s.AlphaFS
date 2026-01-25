@@ -46,7 +46,9 @@ namespace Alphaleonis.Win32.Filesystem
                var length = path.Length;
 
                if (length == rootLength)
+               {
                   return null;
+               }
 
                while (length > rootLength && path[--length] != DirectorySeparatorChar && path[length] != AltDirectorySeparatorChar) { }
 

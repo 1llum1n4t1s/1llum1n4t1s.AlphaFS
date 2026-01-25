@@ -36,16 +36,24 @@ namespace Alphaleonis
       internal static string ReplaceIgnoreCase(this string str, string oldValue, string newValue)
       {
          if (null == str)
+         {
             throw new ArgumentNullException("str");
+         }
 
          if (str.Trim().Length == 0)
+         {
             return str;
+         }
 
          if (null == oldValue)
+         {
             throw new ArgumentNullException("oldValue");
+         }
 
          if (oldValue.Trim().Length == 0)
+         {
             throw new ArgumentException("String cannot be of zero length.");
+         }
 
 
          // Prepare string builder for storing the processed string.
@@ -67,17 +75,21 @@ namespace Alphaleonis
             var isNothingToAppend = charsUntilReplacment == 0;
 
             if (!isNothingToAppend)
+            {
                resultStringBuilder.Append(str, startSearchFromIndex, charsUntilReplacment);
+            }
 
             if (!isReplacementNullOrWhiteSpace)
+            {
                resultStringBuilder.Append(newValue);
+            }
 
 
             // Prepare start index for the next search.
             // This needed to prevent infinite loop, otherwise method always start search 
             // from the start of the string. For example: if an oldValue == "EXAMPLE", newValue == "example"
             // and comparisonType == "any ignore case" will conquer to replacing:
-            // "EXAMPLE" to "example" to "example" to "example" … infinite loop.
+            // "EXAMPLE" to "example" to "example" to "example" ï¿½ infinite loop.
             startSearchFromIndex = foundAt + oldValue.Length;
 
             if (startSearchFromIndex == str.Length)
@@ -162,14 +174,18 @@ namespace Alphaleonis
          var bytes = Convert.ToDouble(numberOfBytes, CultureInfo.InvariantCulture);
 
          if (bytes < 0)
+         {
             bytes = 0;
-         
+         }
+
          else
+         {
             while (bytes > kb)
             {
                bytes /= kb;
                index++;
             }
+         }
 
 
          // Will return "512 B" instead of "512,00 B".

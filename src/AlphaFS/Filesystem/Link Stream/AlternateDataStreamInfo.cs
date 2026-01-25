@@ -141,18 +141,24 @@ namespace Alphaleonis.Win32.Filesystem
       private static string ParseStreamName(string streamName)
       {
          if (null == streamName || streamName.Length < 2)
+         {
             return string.Empty;
+         }
 
          if (streamName[0] != Path.StreamSeparatorChar)
+         {
             throw new ArgumentException(Resources.Invalid_Stream_Name, "streamName");
+         }
 
-         
+
          var sb = new StringBuilder(streamName.Length);
 
          for (int i = 1, l = streamName.Length; i < l; i++)
          {
             if (streamName[i] == Path.StreamSeparatorChar)
+            {
                break;
+            }
 
             sb.Append(streamName[i]);
          }

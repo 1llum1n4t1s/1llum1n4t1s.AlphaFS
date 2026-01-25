@@ -35,7 +35,7 @@ namespace AlphaFS.UnitTest
 
          var filePath = Alphaleonis.Win32.Filesystem.Shell32.PathCreateFromUrl(urlPath);
 
-         Assert.IsTrue(urlPath.StartsWith("file:///"));
+         Assert.StartsWith("file:///", urlPath);
 
          Assert.IsTrue(filePath.Equals(folder));
       }

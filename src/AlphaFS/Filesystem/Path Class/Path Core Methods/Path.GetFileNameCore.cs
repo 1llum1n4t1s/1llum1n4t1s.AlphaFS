@@ -40,10 +40,14 @@ namespace Alphaleonis.Win32.Filesystem
       internal static string GetFileNameCore(string path, bool checkInvalidPathChars)
       {
          if (null == path)
+         {
             return null;
+         }
 
          if (checkInvalidPathChars)
+         {
             CheckInvalidPathChars(path, false, true);
+         }
 
          var length = path.Length;
          var index = length;
@@ -53,7 +57,9 @@ namespace Alphaleonis.Win32.Filesystem
             var ch = path[index];
 
             if (IsDVsc(ch, null))
+            {
                return path.Substring(index + 1, length - index - 1);
+            }
          }
 
          return path;

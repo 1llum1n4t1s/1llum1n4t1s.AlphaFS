@@ -37,9 +37,13 @@ namespace Alphaleonis.Win32.Filesystem
          public ChangeErrorMode(ErrorMode mode)
          {
             if (IsAtLeastWindows7)
+            {
                SetThreadErrorMode(mode, out _oldMode);
+            }
             else
+            {
                _oldMode = SetErrorMode(mode);
+            }
          }
 
          void IDisposable.Dispose()
@@ -47,9 +51,13 @@ namespace Alphaleonis.Win32.Filesystem
             ErrorMode oldMode;
 
             if (IsAtLeastWindows7)
+            {
                SetThreadErrorMode(_oldMode, out oldMode);
+            }
             else
+            {
                SetErrorMode(_oldMode);
+            }
          }
       }
    }

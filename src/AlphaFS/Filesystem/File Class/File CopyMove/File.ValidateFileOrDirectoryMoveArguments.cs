@@ -41,50 +41,68 @@ namespace Alphaleonis.Win32.Filesystem
          destinationPathLp = destinationPath;
          
          if (cma.PathsChecked)
+         {
             return cma;
+         }
 
 
          cma.IsCopy = IsCopyAction(cma);
 
          if (!cma.IsCopy)
+         {
             cma.DelayUntilReboot = VerifyDelayUntilReboot(sourcePath, cma.MoveOptions, cma.PathFormat);
+         }
 
 
          if (cma.PathFormat != PathFormat.LongFullPath)
          {
             if (null == sourcePath)
+            {
                throw new ArgumentNullException("sourcePath");
-            
+            }
+
             // File Move action: destinationPath is allowed to be null when MoveOptions.DelayUntilReboot is specified.
 
             if (!cma.DelayUntilReboot && null == destinationPath)
+            {
                throw new ArgumentNullException("destinationPath");
-            
+            }
+
 
             if (sourcePath.Trim().Length == 0)
+            {
                throw new ArgumentException(Resources.Path_Is_Zero_Length_Or_Only_White_Space, "sourcePath");
+            }
 
             if (null != destinationPath && destinationPath.Trim().Length == 0)
+            {
                throw new ArgumentException(Resources.Path_Is_Zero_Length_Or_Only_White_Space, "destinationPath");
+            }
 
 
             // MSDN: .NET3.5+: IOException: The sourceDirName and destDirName parameters refer to the same file or directory.
             // Do not use StringComparison.OrdinalIgnoreCase to allow renaming a folder with different casing.
 
             if (sourcePath.Equals(destinationPath, StringComparison.Ordinal))
+            {
                NativeError.ThrowException(Win32Errors.ERROR_SAME_DRIVE, destinationPath);
+            }
 
 
             if (!driveChecked)
             {
                // Check for local or network drives, such as: "C:" or "\\server\c$" (but not for "\\?\GLOBALROOT\").
                if (!sourcePath.StartsWith(Path.GlobalRootPrefix, StringComparison.OrdinalIgnoreCase))
+               {
                   Directory.ExistsDriveOrFolderOrFile(cma.Transaction, sourcePath, isFolder, (int) Win32Errors.NO_ERROR, true, false);
+               }
 
 
                // File Move action: destinationPath is allowed to be null when MoveOptions.DelayUntilReboot is specified.
                if (!cma.DelayUntilReboot)
+               {
                   Directory.ExistsDriveOrFolderOrFile(cma.Transaction, destinationPath, isFolder, (int) Win32Errors.NO_ERROR, true, false);
+               }
             }
 
 
@@ -97,7 +115,9 @@ namespace Alphaleonis.Win32.Filesystem
             sourcePathLp = Path.GetExtendedLengthPathCore(cma.Transaction, sourcePath, cma.PathFormat, fullPathOptions);
 
             if (isFolder || !cma.IsCopy)
+            {
                cma.SourcePathLp = sourcePathLp;
+            }
 
 
             // When destinationPath is null, the file/folder needs to be removed on Computer startup.
@@ -118,7 +138,9 @@ namespace Alphaleonis.Win32.Filesystem
                   // Process Move action options, possible fallback to Copy action.
 
                   if (!cma.IsCopy)
+                  {
                      cma = Directory.ValidateMoveAction(cma);
+                  }
                }
 
 
@@ -130,7 +152,9 @@ namespace Alphaleonis.Win32.Filesystem
 
                      // Remove the AlphaFS flag since it is unknown to the native Win32 CopyFile/MoveFile functions.
 
+                  {
                      cma.CopyOptions &= ~CopyOptions.CopyTimestamp;
+                  }
                }
             }
 

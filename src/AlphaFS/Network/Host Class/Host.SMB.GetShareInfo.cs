@@ -92,7 +92,9 @@ namespace Alphaleonis.Win32.Network
       internal static ShareInfo GetShareInfoCore(ShareInfoLevel shareLevel, string host, string share, bool continueOnException)
       {
          if (Utils.IsNullOrWhiteSpace(share))
+         {
             return null;
+         }
 
 
          // When host == null, the local computer is used.
@@ -106,10 +108,8 @@ namespace Alphaleonis.Win32.Network
 
          startNetShareGetInfo:
 
-         SafeGlobalMemoryBufferHandle safeBuffer;
-
          uint structureLevel = Convert.ToUInt16(shareLevel, CultureInfo.InvariantCulture);
-         var lastError = NativeMethods.NetShareGetInfo(stripUnc, share, structureLevel, out safeBuffer);
+         var lastError = NativeMethods.NetShareGetInfo(stripUnc, share, structureLevel, out var safeBuffer);
 
          using (safeBuffer)
          {
@@ -158,7 +158,9 @@ namespace Alphaleonis.Win32.Network
 
                default:
                   if (!continueOnException)
+                  {
                      throw new NetworkInformationException((int) lastError);
+                  }
 
                   break;
             }

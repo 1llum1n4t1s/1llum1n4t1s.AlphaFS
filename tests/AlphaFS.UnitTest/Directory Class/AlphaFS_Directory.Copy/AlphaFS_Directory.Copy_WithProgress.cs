@@ -75,7 +75,7 @@ namespace AlphaFS.UnitTest
             Assert.AreEqual(sourceTotal, props["Total"], "The number of total file system objects do not match.");
             Assert.AreEqual(sourceTotalFiles, props["File"], "The number of total files do not match.");
             Assert.AreEqual(sourceTotalSize, props["Size"], "The total file size does not match.");
-            Assert.AreNotEqual(null, copyResult);
+            Assert.IsNotNull(copyResult);
 
 
             // Test against copyResult results.
@@ -101,7 +101,9 @@ namespace AlphaFS.UnitTest
       {
          if (callbackReason == Alphaleonis.Win32.Filesystem.CopyMoveProgressCallbackReason.StreamSwitch)
 
+         {
             Assert.AreEqual(0, totalBytesTransferred);
+         }
 
 
          else
@@ -110,7 +112,7 @@ namespace AlphaFS.UnitTest
 
             Console.WriteLine("\tCallback: Copied: [{0}%] --> [{1:N0}] bytes.", pct.ToString("N2", CultureInfo.CurrentCulture), totalBytesTransferred);
 
-            Assert.IsTrue(totalBytesTransferred > 0);
+            Assert.IsGreaterThan(totalBytesTransferred, 0);
          }
 
 

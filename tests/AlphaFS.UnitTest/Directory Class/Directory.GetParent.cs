@@ -69,7 +69,9 @@ namespace AlphaFS.UnitTest
                actual = result == null ? null : result.FullName;
 
                if (!skipAssert)
+               {
                   Assert.AreEqual(expected, actual);
+               }
             }
             catch (Exception ex)
             {

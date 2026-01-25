@@ -40,14 +40,12 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       internal static IEnumerable<string> ReadAllLinesCore(KernelTransaction transaction, string path, Encoding encoding, PathFormat pathFormat)
       {
-         using (var sr = new StreamReader(OpenCore(transaction, path, FileMode.Open, FileAccess.Read, FileShare.Read, ExtendedFileAttributes.SequentialScan, null, null, pathFormat), encoding))
-         {
-            string line;
+         using var sr = new StreamReader(OpenCore(transaction, path, FileMode.Open, FileAccess.Read, FileShare.Read, ExtendedFileAttributes.SequentialScan, null, null, pathFormat), encoding);
+         string line;
 
-            while (null != (line = sr.ReadLine()))
+         while (null != (line = sr.ReadLine()))
 
-               yield return line;
-         }
+            yield return line;
       }
    }
 }

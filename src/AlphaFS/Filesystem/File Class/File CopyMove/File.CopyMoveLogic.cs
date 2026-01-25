@@ -71,7 +71,9 @@ namespace Alphaleonis.Win32.Filesystem
          var isCopy = !isMove && Utils.IsNotNull(cma.CopyOptions);
 
          if (isCopy.Equals(isMove))
+         {
             throw new NotSupportedException(Resources.Cannot_Determine_Copy_Or_Move);
+         }
 
          return isCopy;
       }

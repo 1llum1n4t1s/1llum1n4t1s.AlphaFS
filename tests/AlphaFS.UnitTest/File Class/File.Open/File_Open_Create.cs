@@ -61,7 +61,7 @@ namespace AlphaFS.UnitTest
 
             Assert.IsTrue(System.IO.File.Exists(file), "The file does not exists, but is expected to.");
 
-            Assert.IsTrue(fileLength == ten, "The file is: {0} bytes, but is expected to be: {1} bytes.", fileLength, ten);
+            Assert.AreEqual(ten, fileLength, $"The file is: {fileLength} bytes, but is expected to be: {ten} bytes.");
          }
 
          Console.WriteLine();

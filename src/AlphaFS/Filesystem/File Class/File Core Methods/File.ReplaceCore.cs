@@ -76,7 +76,9 @@ namespace Alphaleonis.Win32.Filesystem
          var dwReplaceFlags = (FileSystemRights) replacefileWriteThrough;
 
          if (ignoreMetadataErrors)
+         {
             dwReplaceFlags |= (FileSystemRights) replacefileIgnoreMergeErrors;
+         }
 
 
          // ReplaceFile()
@@ -87,7 +89,9 @@ namespace Alphaleonis.Win32.Filesystem
 
          var lastError = (uint) Marshal.GetLastWin32Error();
          if (!success)
+         {
             NativeError.ThrowException(lastError, sourceFileNameLp, destinationFileNameLp);
+         }
       }
    }
 }

@@ -60,11 +60,13 @@ namespace AlphaFS.UnitTest
 
             if (!Alphaleonis.Utils.IsNullOrWhiteSpace(driveFormat))
 
+            {
                Assert.AreEqual(driveInfo.DriveFormat, driveFormat);
+            }
          }
 
 
-         Assert.IsTrue(logicalDriveCount > 0, "No logical drives enumerated, but it is expected.");
+         Assert.IsGreaterThan(logicalDriveCount, 0, "No logical drives enumerated, but it is expected.");
 
 
          Console.WriteLine();

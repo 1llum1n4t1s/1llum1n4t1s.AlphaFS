@@ -50,7 +50,9 @@ namespace Alphaleonis.Win32.Filesystem
       public Shell32Info(string fileName, PathFormat pathFormat)
       {
          if (Utils.IsNullOrWhiteSpace(fileName))
+         {
             throw new ArgumentNullException("fileName");
+         }
 
          // Shell32 is limited to <c>MAX_PATH</c> length.
          // Get a full path of regular format.
@@ -119,7 +121,9 @@ namespace Alphaleonis.Win32.Filesystem
       private void Initialize()
       {
          if (Initialized)
+         {
             return;
+         }
 
          var iidIQueryAssociations = new Guid(NativeMethods.QueryAssociationsGuid);
 
@@ -174,7 +178,9 @@ namespace Alphaleonis.Win32.Filesystem
          get
          {
             if (_association == null)
+            {
                _association = GetString(_iQaNone, Shell32.AssociationString.Executable, null);
+            }
 
             return _association;
          }
@@ -211,7 +217,9 @@ namespace Alphaleonis.Win32.Filesystem
          get
          {
             if (_command == null)
+            {
                _command = GetString(_iQaNone, Shell32.AssociationString.Command, null);
+            }
 
             return _command;
          }
@@ -228,7 +236,9 @@ namespace Alphaleonis.Win32.Filesystem
          get
          {
             if (_contentType == null)
+            {
                _contentType = GetString(_iQaNone, Shell32.AssociationString.ContentType, null);
+            }
 
             return _contentType;
          }
@@ -246,7 +256,9 @@ namespace Alphaleonis.Win32.Filesystem
          get
          {
             if (_ddeApplication == null)
+            {
                _ddeApplication = GetString(_iQaNone, Shell32.AssociationString.DdeApplication, null);
+            }
 
             return _ddeApplication;
          }
@@ -263,7 +275,9 @@ namespace Alphaleonis.Win32.Filesystem
          get
          {
             if (_defaultIcon == null)
+            {
                _defaultIcon = GetString(_iQaNone, Shell32.AssociationString.DefaultIcon, null);
+            }
 
             return _defaultIcon;
          }
@@ -284,7 +298,9 @@ namespace Alphaleonis.Win32.Filesystem
          get
          {
             if (_friendlyAppName == null)
+            {
                _friendlyAppName = GetString(_iQaByExe, Shell32.AssociationString.FriendlyAppName, null);
+            }
 
             return _friendlyAppName;
          }
@@ -301,7 +317,9 @@ namespace Alphaleonis.Win32.Filesystem
          get
          {
             if (_friendlyDocName == null)
+            {
                _friendlyDocName = GetString(_iQaNone, Shell32.AssociationString.FriendlyDocName, null);
+            }
 
             return _friendlyDocName;
          }
@@ -322,7 +340,9 @@ namespace Alphaleonis.Win32.Filesystem
          get
          {
             if (_openWithAppName == null)
+            {
                _openWithAppName = GetString(_iQaNone, Shell32.AssociationString.FriendlyAppName, null);
+            }
 
             return _openWithAppName;
          }

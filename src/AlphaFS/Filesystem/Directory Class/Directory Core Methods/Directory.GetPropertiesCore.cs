@@ -69,7 +69,9 @@ namespace Alphaleonis.Win32.Filesystem
             total++;
 
             if (!fsei.IsDirectory)
+            {
                size += fsei.FileSize;
+            }
 
             var fsei1 = fsei;
 

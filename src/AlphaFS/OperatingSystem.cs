@@ -125,7 +125,9 @@ namespace Alphaleonis.Win32
          get
          {
             if (null == _servicePackVersion)
+            {
                UpdateData();
+            }
 
             return _isServer;
          }
@@ -141,11 +143,12 @@ namespace Alphaleonis.Win32
          {
             if (null == _isWow64Process)
             {
-               bool value;
                var processHandle = Process.GetCurrentProcess().Handle;
 
-               if (!NativeMethods.IsWow64Process(processHandle, out value))
+               if (!NativeMethods.IsWow64Process(processHandle, out var value))
+               {
                   Marshal.ThrowExceptionForHR(Marshal.GetLastWin32Error());
+               }
 
                // A pointer to a value that is set to TRUE if the process is running under WOW64.
                // If the process is running under 32-bit Windows, the value is set to FALSE.
@@ -167,7 +170,9 @@ namespace Alphaleonis.Win32
          get
          {
             if (null == _osVersion)
+            {
                UpdateData();
+            }
 
             return _osVersion;
          }
@@ -182,7 +187,9 @@ namespace Alphaleonis.Win32
          get
          {
             if (null == _servicePackVersion)
+            {
                UpdateData();
+            }
 
             return _enumOsName;
          }
@@ -198,7 +205,9 @@ namespace Alphaleonis.Win32
          get
          {
             if (null == _servicePackVersion)
+            {
                UpdateData();
+            }
 
             return _processorArchitecture;
          }
@@ -214,7 +223,9 @@ namespace Alphaleonis.Win32
          get
          {
             if (null == _servicePackVersion)
+            {
                UpdateData();
+            }
 
             return _servicePackVersion;
          }
@@ -266,7 +277,9 @@ namespace Alphaleonis.Win32
          
          var lastError = Marshal.GetLastWin32Error();
          if (!success)
+         {
             throw new Win32Exception(lastError, "Function RtlGetVersion() failed to retrieve the operating system information.");
+         }
 
 
          _osVersion = new Version(verInfo.dwMajorVersion, verInfo.dwMinorVersion, verInfo.dwBuildNumber);
@@ -301,9 +314,12 @@ namespace Alphaleonis.Win32
 
          // 2017-01-07: 10 == The lastest MajorVersion of Windows.
          if (verInfo.dwMajorVersion > 10)
+         {
             _enumOsName = EnumOsName.Later;
+         }
 
          else
+         {
             switch (verInfo.dwMajorVersion)
             {
                #region Version 10
@@ -404,6 +420,7 @@ namespace Alphaleonis.Win32
                   _enumOsName = EnumOsName.Earlier;
                   break;
             }
+         }
       }
       
 

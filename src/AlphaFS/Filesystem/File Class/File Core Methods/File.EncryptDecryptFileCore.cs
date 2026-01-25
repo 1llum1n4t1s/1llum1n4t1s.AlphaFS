@@ -60,10 +60,14 @@ namespace Alphaleonis.Win32.Filesystem
          if (isReadOnly || isHidden)
          {
             if (isReadOnly)
+            {
                attrs.dwFileAttributes &= ~FileAttributes.ReadOnly;
+            }
 
             if (isHidden)
+            {
                attrs.dwFileAttributes &= ~FileAttributes.Hidden;
+            }
 
             SetAttributesCore(null, isFolder, path, attrs.dwFileAttributes, pathFormat);
          }
@@ -80,10 +84,14 @@ namespace Alphaleonis.Win32.Filesystem
          if (isReadOnly || isHidden)
          {
             if (isReadOnly)
+            {
                attrs.dwFileAttributes |= FileAttributes.ReadOnly;
+            }
 
             if (isHidden)
+            {
                attrs.dwFileAttributes |= FileAttributes.Hidden;
+            }
 
             SetAttributesCore(null, isFolder, path, attrs.dwFileAttributes, pathFormat);
          }
@@ -97,7 +105,9 @@ namespace Alphaleonis.Win32.Filesystem
 
                   if (!string.Equals("NTFS", new DriveInfo(path).DriveFormat, StringComparison.OrdinalIgnoreCase))
 
+                  {
                      throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, "The drive does not support NTFS encryption: [{0}]", Path.GetPathRoot(path, false)));
+                  }
 
                   break;
 
@@ -105,10 +115,14 @@ namespace Alphaleonis.Win32.Filesystem
                case Win32Errors.ERROR_FILE_READ_ONLY:
 
                   if (isFolder)
+                  {
                      throw new DirectoryReadOnlyException(path);
+                  }
 
                   else
+                  {
                      throw new FileReadOnlyException(path);
+                  }
 
 
                default:

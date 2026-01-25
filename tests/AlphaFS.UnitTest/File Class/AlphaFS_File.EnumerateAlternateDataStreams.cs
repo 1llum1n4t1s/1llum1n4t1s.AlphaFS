@@ -96,12 +96,12 @@ namespace AlphaFS.UnitTest
             {
                UnitTestConstants.Dump(stream);
 
-               Assert.IsNotNull(stream);
-
                // The default stream, a file as we know it.
 
                if (Alphaleonis.Utils.IsNullOrWhiteSpace(stream.StreamName))
+               {
                   Assert.AreEqual(fileSize, stream.Size);
+               }
             }
 
 

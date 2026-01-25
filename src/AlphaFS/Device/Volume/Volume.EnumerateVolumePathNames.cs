@@ -38,10 +38,14 @@ namespace Alphaleonis.Win32.Filesystem
       public static IEnumerable<string> EnumerateVolumePathNames(string volumeGuid)
       {
          if (Utils.IsNullOrWhiteSpace(volumeGuid))
+         {
             throw new ArgumentNullException("volumeGuid");
+         }
 
          if (!volumeGuid.StartsWith(Path.VolumePrefix + "{", StringComparison.OrdinalIgnoreCase))
+         {
             throw new ArgumentException(Resources.Not_A_Valid_Guid, "volumeGuid");
+         }
 
 
          var volName = Path.AddTrailingDirectorySeparator(volumeGuid, false);
@@ -74,7 +78,9 @@ namespace Alphaleonis.Win32.Filesystem
          foreach (var c in cBuffer)
          {
             if (c != Path.StringTerminatorChar)
+            {
                buffer.Append(c);
+            }
             else
             {
                if (buffer.Length > 0)

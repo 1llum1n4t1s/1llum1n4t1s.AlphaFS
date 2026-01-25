@@ -38,27 +38,28 @@ namespace Alphaleonis.Win32.Filesystem
       {
          var pathLp = Path.GetExtendedLengthPathCore(transaction, path, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.CheckInvalidPathChars | GetFullPathOptions.CheckAdditional);
 
-         using (var buffer = new SafeGlobalMemoryBufferHandle(Marshal.SizeOf(typeof(NativeMethods.WIN32_FIND_STREAM_DATA))))
-
-         using (var safeFindFileHandle = FindFirstStreamNative(transaction, pathLp, buffer))
+         using var buffer = new SafeGlobalMemoryBufferHandle(Marshal.SizeOf<NativeMethods.WIN32_FIND_STREAM_DATA>());
+         using var safeFindFileHandle = FindFirstStreamNative(transaction, pathLp, buffer);
+         if (null != safeFindFileHandle)
          {
-            if (null != safeFindFileHandle)
-               while (true)
+            while (true)
+            {
+               yield return new AlternateDataStreamInfo(pathLp, buffer.PtrToStructure<NativeMethods.WIN32_FIND_STREAM_DATA>(0));
+
+               var success = NativeMethods.FindNextStreamW(safeFindFileHandle, buffer);
+
+               var lastError = Marshal.GetLastWin32Error();
+
+               if (!success)
                {
-                  yield return new AlternateDataStreamInfo(pathLp, buffer.PtrToStructure<NativeMethods.WIN32_FIND_STREAM_DATA>(0));
-
-                  var success = NativeMethods.FindNextStreamW(safeFindFileHandle, buffer);
-
-                  var lastError = Marshal.GetLastWin32Error();
-
-                  if (!success)
+                  if (lastError == Win32Errors.ERROR_HANDLE_EOF)
                   {
-                     if (lastError == Win32Errors.ERROR_HANDLE_EOF)
-                        break;
-
-                     NativeError.ThrowException(lastError, isFolder, pathLp);
+                     break;
                   }
+
+                  NativeError.ThrowException(lastError, isFolder, pathLp);
                }
+            }
          }
       }
    }

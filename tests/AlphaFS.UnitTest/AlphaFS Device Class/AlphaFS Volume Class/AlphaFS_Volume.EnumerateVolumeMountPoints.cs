@@ -70,7 +70,9 @@ namespace AlphaFS.UnitTest
 
 
          if (cnt == 0)
+         {
             UnitTestAssert.InconclusiveBecauseResourcesAreUnavailable();
+         }
       }
    }
 }

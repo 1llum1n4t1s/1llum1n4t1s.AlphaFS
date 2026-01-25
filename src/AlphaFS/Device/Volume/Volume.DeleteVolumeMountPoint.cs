@@ -65,7 +65,9 @@ namespace Alphaleonis.Win32.Filesystem
       internal static void DeleteVolumeMountPointCore(KernelTransaction transaction, string volumeMountPoint, bool continueOnException, bool continueIfJunction, PathFormat pathFormat)
       {
          if (pathFormat != PathFormat.LongFullPath)
+         {
             Path.CheckSupportedPathFormat(volumeMountPoint, true, true);
+         }
 
          volumeMountPoint = Path.GetExtendedLengthPathCore(transaction, volumeMountPoint, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator);
 
@@ -82,10 +84,14 @@ namespace Alphaleonis.Win32.Filesystem
             if (!success && !continueOnException)
             {
                if (lastError == Win32Errors.ERROR_INVALID_PARAMETER && continueIfJunction)
+               {
                   return;
+               }
 
                if (lastError == Win32Errors.ERROR_FILE_NOT_FOUND)
+               {
                   lastError = (int)Win32Errors.ERROR_PATH_NOT_FOUND;
+               }
 
                NativeError.ThrowException(lastError, volumeMountPoint);
             }

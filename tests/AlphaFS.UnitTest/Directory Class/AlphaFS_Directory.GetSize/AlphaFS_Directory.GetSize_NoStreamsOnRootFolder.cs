@@ -78,9 +78,13 @@ namespace AlphaFS.UnitTest
 
 
             if (recurse)
+            {
                Assert.AreEqual(folderProps["Size"], folderSize);
+            }
             else
+            {
                Assert.AreNotEqual(folderProps["Size"], folderSize);
+            }
          }
 
          Console.WriteLine();

@@ -42,7 +42,9 @@ namespace Alphaleonis.Win32.Filesystem
       internal static string CombineCore(bool checkInvalidPathChars, params string[] paths)
       {
          if (null == paths)
+         {
             throw new ArgumentNullException("paths");
+         }
 
          var capacity = 0;
          var num = 0;
@@ -50,7 +52,9 @@ namespace Alphaleonis.Win32.Filesystem
          for (int index = 0, l = paths.Length; index < l; ++index)
          {
             if (null == paths[index])
+            {
                throw new ArgumentNullException("paths");
+            }
 
             if (paths[index].Length != 0)
             {
@@ -61,13 +65,17 @@ namespace Alphaleonis.Win32.Filesystem
                }
 
                else
+               {
                   capacity += paths[index].Length;
+               }
 
 
                var ch = paths[index][paths[index].Length - 1];
 
                if (!IsDVsc(ch, null))
+               {
                   ++capacity;
+               }
             }
          }
 
@@ -79,14 +87,18 @@ namespace Alphaleonis.Win32.Filesystem
             if (paths[index].Length != 0)
             {
                if (buffer.Length == 0)
+               {
                   buffer.Append(paths[index]);
+               }
 
                else
                {
                   var ch = buffer[buffer.Length - 1];
 
                   if (!IsDVsc(ch, null))
+                  {
                      buffer.Append(DirectorySeparatorChar);
+                  }
 
                   buffer.Append(paths[index]);
                }

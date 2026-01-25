@@ -39,7 +39,9 @@ namespace Alphaleonis.Win32.Filesystem
       public static string GetVolumePathName(string path)
       {
          if (Utils.IsNullOrWhiteSpace(path))
+         {
             throw new ArgumentNullException("path");
+         }
 
 
          using (new NativeMethods.ChangeErrorMode(NativeMethods.ErrorMode.FailCriticalErrors))
@@ -56,7 +58,9 @@ namespace Alphaleonis.Win32.Filesystem
             var lastError = Marshal.GetLastWin32Error();
 
             if (success)
+            {
                return Path.GetRegularPathCore(volumeRootPath.ToString(), GetFullPathOptions.None, false);
+            }
 
 
             switch ((uint) lastError)

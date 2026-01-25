@@ -32,7 +32,9 @@ namespace Alphaleonis.Win32.Filesystem
       public static bool IsValidName(string name)
       {
          if (null == name)
+         {
             throw new ArgumentNullException("name");
+         }
 
          return name.IndexOfAny(GetInvalidFileNameChars()) < 0;
       }

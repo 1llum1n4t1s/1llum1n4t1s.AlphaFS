@@ -58,7 +58,9 @@ namespace AlphaFS.UnitTest
       private void CompareFileInfos(System.IO.FileInfo expected, Alphaleonis.Win32.Filesystem.FileInfo actual, bool exists)
       {
          if (expected == null || actual == null)
-            Assert.AreEqual(expected, actual, "The two FileInfo instances are not the same, but are expected to be.");
+         {
+            Assert.IsTrue(expected == null && actual == null, "The two FileInfo instances are not the same, but are expected to be.");
+         }
 
          UnitTestConstants.Dump(expected);
          Console.WriteLine();
@@ -66,9 +68,13 @@ namespace AlphaFS.UnitTest
 
 
          if (exists)
+         {
             Assert.IsTrue(expected.Exists && actual.Exists, "The file does not exist, but is expected to.");
+         }
          else
+         {
             Assert.IsFalse(expected.Exists && actual.Exists, "The file exists, but is expected not to.");
+         }
 
 
          var cnt = -1;
@@ -122,7 +128,9 @@ namespace AlphaFS.UnitTest
                   break;
                case 13:
                   if (exists)
+                  {
                      Assert.AreEqual(expected.Length, actual.Length, "The property Length is not the same, but is expected to.");
+                  }
                   break;
                case 14:
                   Assert.AreEqual(expected.Name, actual.Name, "The property Name is not the same, but is expected to.");

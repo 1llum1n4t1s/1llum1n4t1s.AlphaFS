@@ -34,22 +34,27 @@ namespace Alphaleonis.Win32.Filesystem
          var mode = isExport ? NativeMethods.EncryptedFileRawMode.CreateForExport : NativeMethods.EncryptedFileRawMode.CreateForImport;
 
          if (isFolder)
+         {
             mode = mode | NativeMethods.EncryptedFileRawMode.CreateForDir;
+         }
 
          if (overwriteHidden)
+         {
             mode = mode | NativeMethods.EncryptedFileRawMode.OverwriteHidden;
+         }
 
 
          // OpenEncryptedFileRaw()
          // 2015-08-02: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
 
-         SafeEncryptedFileRawHandle context;
-         var lastError = NativeMethods.OpenEncryptedFileRaw(destinationPathLp, mode, out context);
+         var lastError = NativeMethods.OpenEncryptedFileRaw(destinationPathLp, mode, out var context);
 
          try
          {
             if (lastError != Win32Errors.NO_ERROR)
+            {
                NativeError.ThrowException((int) lastError, isFolder, destinationPathLp);
+            }
 
 
             lastError = isExport
@@ -82,7 +87,9 @@ namespace Alphaleonis.Win32.Filesystem
                      length = (uint) stream.Read(data, 0, (int) length);
 
                      if (length == 0)
+                     {
                         return (int) Win32Errors.NO_ERROR;
+                     }
 
                      Marshal.Copy(data, 0, pbData, (int) length);
                   }
@@ -97,12 +104,16 @@ namespace Alphaleonis.Win32.Filesystem
 
 
             if (lastError != Win32Errors.NO_ERROR)
+            {
                NativeError.ThrowException((int) lastError, isFolder, destinationPathLp);
+            }
          }
          finally
          {
             if (null != context && !context.IsClosed)
+            {
                context.Dispose();
+            }
          }
       }
    }

@@ -38,25 +38,27 @@ namespace Alphaleonis.Win32.Filesystem
       {
          byte[] buffer;
 
-         using (var fs = OpenReadTransacted(transaction, path, pathFormat))
+         using var fs = OpenReadTransacted(transaction, path, pathFormat);
+         var offset = 0;
+         var length = fs.Length;
+
+         if (length > int.MaxValue)
          {
-            var offset = 0;
-            var length = fs.Length;
+            throw new IOException(string.Format(CultureInfo.InvariantCulture, "File larger than 2GB: [{0}]", path));
+         }
 
-            if (length > int.MaxValue)
-               throw new IOException(string.Format(CultureInfo.InvariantCulture, "File larger than 2GB: [{0}]", path));
+         var count = (int) length;
+         buffer = new byte[count];
 
-            var count = (int) length;
-            buffer = new byte[count];
-
-            while (count > 0)
+         while (count > 0)
+         {
+            var n = fs.Read(buffer, offset, count);
+            if (n == 0)
             {
-               var n = fs.Read(buffer, offset, count);
-               if (n == 0)
-                  throw new IOException("UNEXPECTED end of file found");
-               offset += n;
-               count -= n;
+               throw new IOException("UNEXPECTED end of file found");
             }
+            offset += n;
+            count -= n;
          }
 
          return buffer;

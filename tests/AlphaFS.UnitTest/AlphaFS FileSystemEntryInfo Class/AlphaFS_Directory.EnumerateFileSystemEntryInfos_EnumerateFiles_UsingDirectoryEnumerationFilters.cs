@@ -48,7 +48,9 @@ namespace AlphaFS.UnitTest
          
          var inputPath = Environment.SystemDirectory;
          if (isNetwork)
+         {
             inputPath = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(inputPath);
+         }
 
          Console.WriteLine("Input Directory Path: [{0}]\n", inputPath);
          
@@ -223,7 +225,9 @@ namespace AlphaFS.UnitTest
 
                // Abort the enumeration.
                if (foundExt1Done && foundExt2Done && foundExt3Done)
+               {
                   cancelSource.Cancel();
+               }
 
 
                return gotMatch;
@@ -240,11 +244,11 @@ namespace AlphaFS.UnitTest
          Console.WriteLine("\n\tFile system objects counted: {0:N0}", fsoCount);
 
 
-         Assert.IsTrue(fsoCount > 0, "No files enumerated, but it is expected.");
+         Assert.IsGreaterThan(fsoCount, 0, "No files enumerated, but it is expected.");
 
-         Assert.IsTrue(foundExt1 > 0, "No " + findExtensions[0] + " files enumerated, but it is expected.");
-         Assert.IsTrue(foundExt2 > 0, "No " + findExtensions[1] + " files enumerated, but it is expected.");
-         Assert.IsTrue(foundExt3 > 0, "No " + findExtensions[2] + " files enumerated, but it is expected.");
+         Assert.IsGreaterThan(foundExt1, 0, "No " + findExtensions[0] + " files enumerated, but it is expected.");
+         Assert.IsGreaterThan(foundExt2, 0, "No " + findExtensions[1] + " files enumerated, but it is expected.");
+         Assert.IsGreaterThan(foundExt3, 0, "No " + findExtensions[2] + " files enumerated, but it is expected.");
 
 
          Console.WriteLine();

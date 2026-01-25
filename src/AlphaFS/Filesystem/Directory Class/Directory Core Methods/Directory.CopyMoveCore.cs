@@ -66,10 +66,14 @@ namespace Alphaleonis.Win32.Filesystem
          if (retry)
          {
             if (cma.DirectoryEnumerationFilters.ErrorRetry <= 0)
+            {
                cma.DirectoryEnumerationFilters.ErrorRetry = 2;
+            }
 
             if (cma.DirectoryEnumerationFilters.ErrorRetryTimeout <= 0)
+            {
                cma.DirectoryEnumerationFilters.ErrorRetryTimeout = 10;
+            }
          }
 
 
@@ -99,10 +103,14 @@ namespace Alphaleonis.Win32.Filesystem
             else
             {
                if (isFolder)
+               {
                   CopyMoveDirectoryCore(retry, cma, copyMoveResult);
+               }
 
                else
+               {
                   File.CopyMoveCore(retry, cma, true, false, cma.SourcePathLp, cma.DestinationPathLp, copyMoveResult);
+               }
             }
          }
 
@@ -116,7 +124,9 @@ namespace Alphaleonis.Win32.Filesystem
 
             if (isFolder && !cma.DelayUntilReboot && File.HasReplaceExisting(cma.MoveOptions))
 
+            {
                DeleteDirectoryCore(cma.Transaction, null, cma.DestinationPathLp, true, true, true, PathFormat.LongFullPath);
+            }
 
 
             // 2017-06-07: A large target directory will probably create a progress-less delay in UI.
@@ -133,7 +143,9 @@ namespace Alphaleonis.Win32.Filesystem
             // However, we do know that the one folder was moved successfully.
             
             if (copyMoveResult.ErrorCode == Win32Errors.NO_ERROR && isFolder)
+            {
                copyMoveResult.TotalFolders = 1;
+            }
          }
 
 

@@ -67,7 +67,9 @@ namespace AlphaFS.UnitTest
                actual = Alphaleonis.Win32.Filesystem.Path.GetDirectoryName(path);
 
                if (!skipAssert)
+               {
                   Assert.AreEqual(expected, actual);
+               }
             }
             catch (Exception ex)
             {

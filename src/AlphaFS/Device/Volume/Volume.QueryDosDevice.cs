@@ -49,7 +49,9 @@ namespace Alphaleonis.Win32.Filesystem
       public static string QueryDosDevice(string deviceName)
       {
          if (Utils.IsNullOrWhiteSpace(deviceName))
+         {
             throw new ArgumentNullException("deviceName");
+         }
 
 
          var devName = QueryDosDeviceCore(deviceName, false).ToArray()[0];
@@ -84,7 +86,9 @@ namespace Alphaleonis.Win32.Filesystem
             
             if (deviceName.StartsWith(Path.VolumePrefix, StringComparison.OrdinalIgnoreCase))
 
+            {
                deviceName = deviceName.Substring(Path.LongPathPrefix.Length);
+            }
 
 
             deviceName = Path.RemoveTrailingDirectorySeparator(deviceName);
@@ -110,6 +114,7 @@ namespace Alphaleonis.Win32.Filesystem
                var lastError = Marshal.GetLastWin32Error();
 
                if (returnedBufferSize == 0)
+               {
                   switch ((uint) lastError)
                   {
                      case Win32Errors.ERROR_MORE_DATA:
@@ -121,6 +126,7 @@ namespace Alphaleonis.Win32.Filesystem
                         NativeError.ThrowException(lastError, deviceName);
                         break;
                   }
+               }
 
 
                var buffer = new StringBuilder((int) returnedBufferSize);
@@ -130,7 +136,9 @@ namespace Alphaleonis.Win32.Filesystem
                {
                   if (cBuffer[i] != Path.StringTerminatorChar)
 
+                  {
                      buffer.Append(cBuffer[i]);
+                  }
 
 
                   else if (buffer.Length > 0)
@@ -141,10 +149,14 @@ namespace Alphaleonis.Win32.Filesystem
 
 
                      if (sort)
+                     {
                         sortedList.Add(assembledPath);
+                     }
 
                      else
+                     {
                         yield return assembledPath;
+                     }
 
 
                      buffer.Length = 0;

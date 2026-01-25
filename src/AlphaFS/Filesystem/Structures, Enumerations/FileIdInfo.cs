@@ -83,10 +83,14 @@ namespace Alphaleonis.Win32.Filesystem
       public int CompareTo(object obj)
       {
          if (null == obj)
+         {
             return 1;
+         }
 
          if (!(obj is FileIdInfo))
+         {
             throw new ArgumentException("Object must be of type FileIdInfo");
+         }
 
          return CompareTo((FileIdInfo) obj);
       }

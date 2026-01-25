@@ -1,4 +1,4 @@
-﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy 
  *  of this software and associated documentation files (the "Software"), to deal 
@@ -49,8 +49,6 @@ namespace AlphaFS.UnitTest
             var fid = Alphaleonis.Win32.Filesystem.File.GetFileIdInfo(file.FullName);
 
             Console.WriteLine("\n\tToString(): {0}", fid);
-
-            Assert.IsNotNull(fid);
          }
 
          Console.WriteLine();

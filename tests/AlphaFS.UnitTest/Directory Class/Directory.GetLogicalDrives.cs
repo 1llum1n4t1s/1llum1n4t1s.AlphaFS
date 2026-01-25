@@ -47,7 +47,7 @@ namespace AlphaFS.UnitTest
          var drivesAlphaFS = Alphaleonis.Win32.Filesystem.Directory.GetLogicalDrives().OrderBy(driveName => driveName).ToArray();
 
 
-         Assert.AreEqual(drivesSystemIO.Length, drivesAlphaFS.Length, "The number of logical drives does not match, but is expected to.");
+         Assert.HasCount(drivesSystemIO.Length, drivesAlphaFS, "The number of logical drives does not match, but is expected to.");
 
          
          var drivesCount = 0;

@@ -45,14 +45,18 @@ namespace Alphaleonis.Win32.Filesystem
          var pathLp = Path.GetExtendedLengthPathCore(transaction, path, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.FullCheck);
 
          if (sizeOfAllStreams)
+         {
             return FindAllStreamsCore(transaction, pathLp);
+         }
 
 
          var callerHandle = null != safeFileHandle;
 
          if (!callerHandle)
+         {
             safeFileHandle = CreateFileCore(transaction, false, pathLp, ExtendedFileAttributes.Normal, null, FileMode.Open, FileSystemRights.ReadData, FileShare.ReadWrite, true, false, PathFormat.LongFullPath);
-         
+         }
+
          long fileSize;
 
          try
@@ -62,13 +66,17 @@ namespace Alphaleonis.Win32.Filesystem
             var lastError = Marshal.GetLastWin32Error();
 
             if (!success && lastError != Win32Errors.ERROR_SUCCESS)
+            {
                NativeError.ThrowException(lastError, path);
+            }
          }
          finally
          {
             // Handle is ours, dispose.
             if (!callerHandle && null != safeFileHandle && !safeFileHandle.IsClosed)
+            {
                safeFileHandle.Close();
+            }
          }
 
          return fileSize;

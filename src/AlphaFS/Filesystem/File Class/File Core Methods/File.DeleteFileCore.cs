@@ -44,10 +44,14 @@ namespace Alphaleonis.Win32.Filesystem
       internal static void DeleteFileCore(KernelTransaction transaction, string path, bool ignoreReadOnly, FileAttributes attributes, PathFormat pathFormat)
       {
          if (null == path)
+         {
             throw new ArgumentNullException("path");
+         }
 
          if (pathFormat == PathFormat.RelativePath)
+         {
             Path.CheckSupportedPathFormat(path, true, true);
+         }
 
          var pathLp = Path.GetExtendedLengthPathCore(transaction, path, pathFormat, GetFullPathOptions.TrimEnd | GetFullPathOptions.RemoveTrailingDirectorySeparator);
 
@@ -56,10 +60,12 @@ namespace Alphaleonis.Win32.Filesystem
 
          if (ignoreReadOnly && IsReadOnlyOrHidden(attributes))
 
+         {
             SetAttributesCore(transaction, false, pathLp, FileAttributes.Normal, PathFormat.LongFullPath);
+         }
 
 
-      startDeleteFile:
+         startDeleteFile:
 
          if (!(null == transaction || !NativeMethods.IsAtLeastWindowsVista
 
@@ -102,13 +108,17 @@ namespace Alphaleonis.Win32.Filesystem
 
                      if (FillAttributeInfoCore(transaction, pathLp, ref attrs, false, true) == Win32Errors.NO_ERROR)
 
+                     {
                         attributes = attrs.dwFileAttributes;
+                     }
                   }
 
 
                   // MSDN: .NET 3.5+: UnauthorizedAccessException: Path is a directory.
                   if (IsDirectory(attributes))
+                  {
                      throw new UnauthorizedAccessException(string.Format(CultureInfo.InvariantCulture, "({0}) {1}", lastError.ToString(CultureInfo.InvariantCulture), string.Format(CultureInfo.InvariantCulture, Resources.Target_File_Is_A_Directory, pathLp)));
+                  }
 
 
                   if (IsReadOnlyOrHidden(attributes))
@@ -129,7 +139,9 @@ namespace Alphaleonis.Win32.Filesystem
                   
                   // MSDN: .NET 3.5+: UnauthorizedAccessException: The caller does not have the required permission.
                   if (attributes == 0)
+                  {
                      NativeError.ThrowException(lastError, pathLp);
+                  }
 
                   break;
             }

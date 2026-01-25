@@ -125,7 +125,9 @@ namespace Alphaleonis.Win32.Filesystem
             try
             {
                if (DataInitialised == -1)
+               {
                   Refresh();
+               }
 
                return DataInitialised == 0 && IsDirectory;
             }
@@ -159,7 +161,9 @@ namespace Alphaleonis.Win32.Filesystem
             var path = FullPath;
 
             if (path.Length > 3)
+            {
                path = Path.RemoveTrailingDirectorySeparator(FullPath);
+            }
 
             var dirName = Path.GetDirectoryName(path, false);
 

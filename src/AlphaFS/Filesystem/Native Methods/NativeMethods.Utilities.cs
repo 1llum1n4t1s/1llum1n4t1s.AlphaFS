@@ -75,7 +75,9 @@ namespace Alphaleonis.Win32.Filesystem
             CloseSafeHandle(handle);
 
             if (throwException)
+            {
                throw new ArgumentException(Resources.Handle_Is_Invalid, "handle");
+            }
 
             return false;
          }
@@ -97,7 +99,9 @@ namespace Alphaleonis.Win32.Filesystem
             CloseSafeHandle(handle);
 
             if (throwException)
+            {
                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, Resources.Handle_Is_Invalid_Win32Error, lastError), "handle");
+            }
 
             return false;
          }
@@ -121,7 +125,9 @@ namespace Alphaleonis.Win32.Filesystem
             CloseSafeHandle(handle);
 
             if (throwException)
+            {
                NativeError.ThrowException(lastError, path);
+            }
 
             return false;
          }
@@ -146,7 +152,9 @@ namespace Alphaleonis.Win32.Filesystem
             CloseSafeHandle(handle);
 
             if (throwException)
+            {
                NativeError.ThrowException(lastError, isFolder, path);
+            }
 
             return false;
          }
@@ -158,7 +166,9 @@ namespace Alphaleonis.Win32.Filesystem
       internal static void CloseSafeHandle(SafeHandle handle)
       {
          if (null != handle && !handle.IsClosed)
+         {
             handle.Close();
+         }
 
          handle = null;
       }

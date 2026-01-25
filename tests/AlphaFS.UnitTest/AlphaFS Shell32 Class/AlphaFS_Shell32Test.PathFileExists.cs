@@ -51,10 +51,14 @@ namespace AlphaFS.UnitTest
          var fileExists = Alphaleonis.Win32.Filesystem.Shell32.PathFileExists(path);
 
          if (doesExist)
+         {
             Assert.IsTrue(fileExists);
+         }
 
          if (!doesExist)
-            Assert.IsTrue(!fileExists);
+         {
+            Assert.IsFalse(fileExists);
+         }
       }
    }
 }

@@ -68,11 +68,15 @@ namespace Alphaleonis.Win32.Filesystem
       internal static IEnumerable<T> EnumerateFileSystemEntryInfosCore<T>(bool? onlyFolders, KernelTransaction transaction, string path, string searchPattern, SearchOption? searchOption, DirectoryEnumerationOptions? options, DirectoryEnumerationFilters filters, PathFormat pathFormat)
       {
          if (null == options)
+         {
             options = DirectoryEnumerationOptions.None;
+         }
 
 
          if (searchOption == SearchOption.AllDirectories)
+         {
             options |= DirectoryEnumerationOptions.Recursive;
+         }
 
 
          if (null != onlyFolders)

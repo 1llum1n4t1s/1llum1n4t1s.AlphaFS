@@ -49,9 +49,8 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public void MoveTo(string destinationPath)
       {
-         string destinationPathLp;
 
-         CopyToMoveToCore(destinationPath, null, MoveOptions.CopyAllowed, false, null, null, out destinationPathLp, PathFormat.RelativePath);
+         CopyToMoveToCore(destinationPath, null, MoveOptions.CopyAllowed, false, null, null, out var destinationPathLp, PathFormat.RelativePath);
 
          UpdateDestinationPath(destinationPath, destinationPathLp);
       }
@@ -80,9 +79,8 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public FileInfo MoveTo(string destinationPath, PathFormat pathFormat)
       {
-         string destinationPathLp;
 
-         CopyToMoveToCore(destinationPath, null, MoveOptions.CopyAllowed, false, null, null, out destinationPathLp, pathFormat);
+         CopyToMoveToCore(destinationPath, null, MoveOptions.CopyAllowed, false, null, null, out var destinationPathLp, pathFormat);
 
          UpdateDestinationPath(destinationPath, destinationPathLp);
 
@@ -111,9 +109,8 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public FileInfo MoveTo(string destinationPath, MoveOptions moveOptions)
       {
-         string destinationPathLp;
 
-         CopyToMoveToCore(destinationPath, null, moveOptions, false, null, null, out destinationPathLp, PathFormat.RelativePath);
+         CopyToMoveToCore(destinationPath, null, moveOptions, false, null, null, out var destinationPathLp, PathFormat.RelativePath);
 
          UpdateDestinationPath(destinationPath, destinationPathLp);
 
@@ -143,9 +140,8 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public FileInfo MoveTo(string destinationPath, MoveOptions moveOptions, PathFormat pathFormat)
       {
-         string destinationPathLp;
 
-         CopyToMoveToCore(destinationPath, null, moveOptions, false, null, null, out destinationPathLp, pathFormat);
+         CopyToMoveToCore(destinationPath, null, moveOptions, false, null, null, out var destinationPathLp, pathFormat);
 
          UpdateDestinationPath(destinationPath, destinationPathLp);
 
@@ -182,12 +178,12 @@ namespace Alphaleonis.Win32.Filesystem
 
          if ((moveOptions & MoveOptions.DelayUntilReboot) != 0)
 
+         {
             throw new ArgumentException("The DelayUntilReboot flag is invalid for this method.", "moveOptions");
+         }
 
 
-         string destinationPathLp;
-
-         var cmr = CopyToMoveToCore(destinationPath, null, moveOptions, false, progressHandler, userProgressData, out destinationPathLp, PathFormat.RelativePath);
+         var cmr = CopyToMoveToCore(destinationPath, null, moveOptions, false, progressHandler, userProgressData, out var destinationPathLp, PathFormat.RelativePath);
 
          UpdateDestinationPath(destinationPath, destinationPathLp);
 
@@ -223,12 +219,12 @@ namespace Alphaleonis.Win32.Filesystem
 
          if ((moveOptions & MoveOptions.DelayUntilReboot) != 0)
 
+         {
             throw new ArgumentException("The DelayUntilReboot flag is invalid for this method.", "moveOptions");
+         }
 
 
-         string destinationPathLp;
-
-         var cmr = CopyToMoveToCore(destinationPath, null, moveOptions, false, progressHandler, userProgressData, out destinationPathLp, pathFormat);
+         var cmr = CopyToMoveToCore(destinationPath, null, moveOptions, false, progressHandler, userProgressData, out var destinationPathLp, pathFormat);
 
          UpdateDestinationPath(destinationPath, destinationPathLp);
 

@@ -42,7 +42,9 @@ namespace AlphaFS.UnitTest
             // Skip mapped drives and network drives.
 
             if (drive.DriveType == System.IO.DriveType.NoRootDirectory || drive.DriveType == System.IO.DriveType.Network)
+            {
                continue;
+            }
 
 
             var driveName = drive.Name;
@@ -75,7 +77,9 @@ namespace AlphaFS.UnitTest
 
 
          if (logicalDriveCount == 0)
+         {
             UnitTestAssert.InconclusiveBecauseResourcesAreUnavailable();
+         }
       }
    }
 }

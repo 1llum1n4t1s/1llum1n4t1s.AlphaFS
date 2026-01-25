@@ -56,14 +56,18 @@ namespace Alphaleonis.Win32.Filesystem
          // Will be caught later and be thrown as an ArgumentException or ArgumentNullException.
          // Let's take a shorter route, preventing an Exception from being thrown altogether.
          if (Utils.IsNullOrWhiteSpace(path))
+         {
             return false;
+         }
 
 
          // Check for driveletter, such as: "C:"
          var pathRp = Path.GetRegularPathCore(path, GetFullPathOptions.None, false);
 
          if (pathRp.Length == 2 && Path.IsLogicalDriveCore(pathRp, true, PathFormat.LongFullPath))
+         {
             path = pathRp;
+         }
 
 
          try

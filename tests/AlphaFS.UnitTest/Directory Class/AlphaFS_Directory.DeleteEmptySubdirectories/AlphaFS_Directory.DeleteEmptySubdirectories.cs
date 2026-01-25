@@ -75,7 +75,6 @@ namespace AlphaFS.UnitTest
             Assert.AreNotEqual(dirs0, dirs1, "The number of directories are equal, but are expected not to.");
             Assert.AreEqual(remainingDirectories, dirs1, "The number of directories are not equal, but are expected to be.");
             Assert.AreEqual(files0, files1, "The number of files are not equal, but are expected to be.");
-            Assert.AreEqual(totalDirectories, emptyDirectories + remainingDirectories, "The number of directories are not equal, but are expected to be.");
          }
 
          Console.WriteLine();

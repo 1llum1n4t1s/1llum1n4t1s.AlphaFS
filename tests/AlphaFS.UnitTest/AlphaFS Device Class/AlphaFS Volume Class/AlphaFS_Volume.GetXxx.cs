@@ -69,7 +69,7 @@ namespace AlphaFS.UnitTest
 
             if (logicalDrive.DriveType != System.IO.DriveType.NoRootDirectory && logicalDrive.DriveType != System.IO.DriveType.Network)
             {
-               Assert.IsTrue(deviceNameFromLogicalDrive.StartsWith(deviceNamePrefix));
+               Assert.StartsWith(deviceNamePrefix, deviceNameFromLogicalDrive);
 
 
                // GetVolumeGuid: "C:\" --> "\\?\Volume{db5044f9-bd1f-4243-ab97-4b985eb29e80}\"
@@ -80,7 +80,7 @@ namespace AlphaFS.UnitTest
 
                Assert.IsNotNull(volumeGuidFromLogicalDrive);
 
-               Assert.IsTrue(volumeGuidFromLogicalDrive.StartsWith(volumePrefix));
+               Assert.StartsWith(volumePrefix, volumeGuidFromLogicalDrive);
 
 
 
@@ -93,7 +93,7 @@ namespace AlphaFS.UnitTest
 
                Assert.IsNotNull(uniqueVolumeNameFromlDriveInputPath);
 
-               Assert.IsTrue(uniqueVolumeNameFromlDriveInputPath.StartsWith(volumePrefix));
+               Assert.StartsWith(volumePrefix, uniqueVolumeNameFromlDriveInputPath);
             }
 
 
@@ -109,7 +109,9 @@ namespace AlphaFS.UnitTest
          }
 
          if (logicalDriveCount == 0)
+         {
             UnitTestAssert.InconclusiveBecauseResourcesAreUnavailable();
+         }
       }
    }
 }

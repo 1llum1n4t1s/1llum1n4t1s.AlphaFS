@@ -42,7 +42,9 @@ namespace AlphaFS.UnitTest
 
          var folder = Alphaleonis.Win32.Filesystem.DriveInfo.GetFreeDriveLetter() + @":\NonExistingDriveLetter";
          if (isNetwork)
+         {
             folder = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(folder);
+         }
 
          Console.WriteLine("Input File Path: [{0}]", folder);
 
@@ -56,7 +58,9 @@ namespace AlphaFS.UnitTest
          var caught = UnitTestAssert.TestException<System.IO.IOException>(() => Alphaleonis.Win32.Filesystem.File.Delete(folder));
 
          if (!caught)
+         {
             caught = UnitTestAssert.TestException<Alphaleonis.Win32.Filesystem.DeviceNotReadyException>(() => Alphaleonis.Win32.Filesystem.File.Delete(folder));
+         }
 
 
          Assert.IsTrue(caught);

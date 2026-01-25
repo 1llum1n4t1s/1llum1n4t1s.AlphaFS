@@ -59,7 +59,9 @@ namespace Alphaleonis.Win32.Filesystem
       {
          if (checkPath && pathFormat == PathFormat.RelativePath)
 
+         {
             Path.CheckSupportedPathFormat(path, true, true);
+         }
 
 
          // When isFile == null, we're working with a device.
@@ -80,7 +82,9 @@ namespace Alphaleonis.Win32.Filesystem
 
 
          if (null != fileSecurity)
+         {
             fileSystemRights |= (FileSystemRights) SECURITY_INFORMATION.UNPROTECTED_SACL_SECURITY_INFORMATION;
+         }
 
 
          using ((fileSystemRights & (FileSystemRights)SECURITY_INFORMATION.UNPROTECTED_SACL_SECURITY_INFORMATION) != 0 || (fileSystemRights & (FileSystemRights)SECURITY_INFORMATION.UNPROTECTED_DACL_SECURITY_INFORMATION) != 0 ? new PrivilegeEnabler(Privilege.Security) : null)

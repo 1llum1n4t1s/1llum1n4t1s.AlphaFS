@@ -48,14 +48,18 @@ namespace Alphaleonis.Win32.Filesystem
          if (pathFormat != PathFormat.LongFullPath)
          {
             if (Utils.IsNullOrWhiteSpace(path))
+            {
                throw new ArgumentNullException("path");
+            }
 
             CheckSupportedPathFormat(path, true, true);
          }
 
 
          if (!isRegularPath)
+         {
             path = GetRegularPathCore(path, GetFullPathOptions.None, false);
+         }
 
          var regularPath = path.StartsWith(LogicalDrivePrefix, StringComparison.OrdinalIgnoreCase) ? path.Substring(LogicalDrivePrefix.Length) : path;
          

@@ -42,8 +42,7 @@ namespace Alphaleonis.Win32.Security
       {
          get
          {
-            WindowsIdentity windowsIdentity;
-            var principal = GetWindowsPrincipal(out windowsIdentity);
+            var principal = GetWindowsPrincipal(out var windowsIdentity);
 
             using (windowsIdentity)
                return
@@ -78,9 +77,8 @@ namespace Alphaleonis.Win32.Security
       {
          get
          {
-            using (var uacKey = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Policies\System", false))
-
-               return null != uacKey && uacKey.GetValue("EnableLUA").Equals(1);
+            using var uacKey = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Policies\System", false);
+            return null != uacKey && uacKey.GetValue("EnableLUA").Equals(1);
          }
       }
 
@@ -91,8 +89,7 @@ namespace Alphaleonis.Win32.Security
       {
          get
          {
-            WindowsIdentity windowsIdentity;
-            var principal = GetWindowsPrincipal(out windowsIdentity);
+            var principal = GetWindowsPrincipal(out var windowsIdentity);
 
             using (windowsIdentity)
                return principal.IsInRole(new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null)) ||
@@ -108,7 +105,9 @@ namespace Alphaleonis.Win32.Security
          windowsIdentity = WindowsIdentity.GetCurrent();
 
          if (null == windowsIdentity)
+         {
             throw new InvalidOperationException(Resources.GetCurrentWindowsIdentityFailed);
+         }
 
          return new WindowsPrincipal(windowsIdentity);
       }
@@ -120,13 +119,14 @@ namespace Alphaleonis.Win32.Security
       [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "OpenProcessToken")]
       private static NativeMethods.TOKEN_ELEVATION_TYPE GetProcessElevationType()
       {
-         SafeTokenHandle tokenHandle;
 
-         var success = NativeMethods.OpenProcessToken(Process.GetCurrentProcess().Handle, NativeMethods.TOKEN.TOKEN_READ, out tokenHandle);
+         var success = NativeMethods.OpenProcessToken(Process.GetCurrentProcess().Handle, NativeMethods.TOKEN.TOKEN_READ, out var tokenHandle);
 
          var lastError = Marshal.GetLastWin32Error();
          if (!success)
+         {
             throw new Win32Exception(lastError, string.Format(CultureInfo.CurrentCulture, "{0}: OpenProcessToken failed with error: {1}", MethodBase.GetCurrentMethod().Name, lastError.ToString(CultureInfo.CurrentCulture)));
+         }
 
 
          using (tokenHandle)
@@ -138,7 +138,9 @@ namespace Alphaleonis.Win32.Security
             lastError = Marshal.GetLastWin32Error();
 
             if (!success)
+            {
                throw new Win32Exception(lastError, string.Format(CultureInfo.CurrentCulture, "{0}: GetTokenInformation failed with error: {1}", MethodBase.GetCurrentMethod().Name, lastError.ToString(CultureInfo.CurrentCulture)));
+            }
 
 
             return (NativeMethods.TOKEN_ELEVATION_TYPE) safeBuffer.ReadInt32();

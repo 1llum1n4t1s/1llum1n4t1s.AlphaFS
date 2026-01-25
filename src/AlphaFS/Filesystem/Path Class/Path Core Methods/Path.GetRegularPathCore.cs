@@ -43,25 +43,37 @@ namespace Alphaleonis.Win32.Filesystem
       internal static string GetRegularPathCore(string path, GetFullPathOptions options, bool allowEmpty)
       {
          if (null == path)
+         {
             throw new ArgumentNullException("path");
+         }
 
          if (!allowEmpty && (path.Trim().Length == 0 || Utils.IsNullOrWhiteSpace(path)))
+         {
             throw new ArgumentException(Resources.Path_Is_Zero_Length_Or_Only_White_Space, "path");
+         }
 
          if (options != GetFullPathOptions.None)
+         {
             path = ApplyFullPathOptions(path, options);
+         }
 
 
          if (path.StartsWith(DosDeviceUncPrefix, StringComparison.OrdinalIgnoreCase))
+         {
             return UncPrefix + path.Substring(DosDeviceUncPrefix.Length);
+         }
 
 
          if (path.StartsWith(LogicalDrivePrefix, StringComparison.Ordinal))
+         {
             return path.Substring(LogicalDrivePrefix.Length);
+         }
 
 
          if (path.StartsWith(NonInterpretedPathPrefix, StringComparison.Ordinal))
+         {
             return path.Substring(NonInterpretedPathPrefix.Length);
+         }
 
 
          return path.StartsWith(GlobalRootPrefix, StringComparison.OrdinalIgnoreCase) || path.StartsWith(VolumePrefix, StringComparison.OrdinalIgnoreCase) ||

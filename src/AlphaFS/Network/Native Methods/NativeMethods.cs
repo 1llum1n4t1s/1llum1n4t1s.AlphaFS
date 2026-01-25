@@ -43,8 +43,8 @@ namespace Alphaleonis.Win32.Network
       [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
       private static string GetComputerDomain(bool fdqn = false)
       {
-         string domain = Environment.UserDomainName;
-         string machine = Environment.MachineName.ToUpper(CultureInfo.InvariantCulture);
+         var domain = Environment.UserDomainName;
+         var machine = Environment.MachineName.ToUpper(CultureInfo.InvariantCulture);
 
          try
          {

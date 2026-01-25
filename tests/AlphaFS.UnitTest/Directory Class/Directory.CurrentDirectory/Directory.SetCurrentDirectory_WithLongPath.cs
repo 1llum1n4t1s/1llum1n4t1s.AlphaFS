@@ -43,7 +43,9 @@ namespace AlphaFS.UnitTest
 
          var tempPath = Environment.SystemDirectory;
          if (isNetwork)
+         {
             tempPath = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(tempPath);
+         }
 
 
          Console.WriteLine("\tNo compare with System.IO possible because of: \"System.ArgumentException: Illegal characters in path.\"\n");
@@ -67,7 +69,9 @@ namespace AlphaFS.UnitTest
             : Alphaleonis.Win32.Filesystem.Path.LongPathPrefix;
 
          if (isNetwork)
+         {
             tempPath = tempPath.TrimStart('\\');
+         }
 
          Assert.AreEqual(lpPrefix + tempPath, alphaFSCurrPath, "The current directories do not match, but are expected to.");
 

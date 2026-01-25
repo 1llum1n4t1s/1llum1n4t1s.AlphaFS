@@ -44,7 +44,7 @@ namespace AlphaFS.UnitTest
          Console.WriteLine("Input local path: [{0}]", uncPath);
          Console.WriteLine("\tResult == null: {0}", null == hostAndShare);
 
-         Assert.AreEqual(null, hostAndShare);
+         Assert.IsNull(hostAndShare);
 
 
          Console.WriteLine();
@@ -56,7 +56,7 @@ namespace AlphaFS.UnitTest
          Console.WriteLine("Input local path: [{0}]", uncPath);
          Console.WriteLine("\tResult == null: {0}", null == hostAndShare);
 
-         Assert.AreEqual(null, hostAndShare);
+         Assert.IsNull(hostAndShare);
 
 
          Console.WriteLine();
@@ -67,7 +67,7 @@ namespace AlphaFS.UnitTest
          hostAndShare = Host.GetHostShareFromPath(uncPath);
          Console.WriteLine("Input local path: [{0}]", uncPath);
          Console.WriteLine("\tResult == null: {0}", null == hostAndShare);
-         Assert.AreEqual(null, hostAndShare);
+         Assert.IsNull(hostAndShare);
 
 
          Console.WriteLine();
@@ -80,7 +80,7 @@ namespace AlphaFS.UnitTest
          Console.WriteLine("\tHost : [{0}]", hostAndShare[0]);
          Console.WriteLine("\tShare: [{0}]", hostAndShare[1]);
 
-         Assert.IsTrue(hostAndShare[1].EndsWith(Alphaleonis.Win32.Filesystem.Path.NetworkDriveSeparator));
+         Assert.EndsWith(Alphaleonis.Win32.Filesystem.Path.NetworkDriveSeparator, hostAndShare[1]);
          Assert.AreEqual(Environment.MachineName, hostAndShare[0].ToUpperInvariant());
 
          
@@ -94,7 +94,7 @@ namespace AlphaFS.UnitTest
          Console.WriteLine("\tHost : [{0}]", hostAndShare[0]);
          Console.WriteLine("\tShare: [{0}]", hostAndShare[1]);
 
-         Assert.IsTrue(hostAndShare[1].EndsWith(@"\"));
+         Assert.EndsWith(@"\", hostAndShare[1]);
          Assert.AreEqual(Environment.MachineName, hostAndShare[0].ToUpperInvariant());
 
 
@@ -121,7 +121,7 @@ namespace AlphaFS.UnitTest
          Console.WriteLine("\tHost : [{0}]", hostAndShare[0]);
          Console.WriteLine("\tShare: [{0}]", hostAndShare[1]);
 
-         Assert.IsFalse(hostAndShare[0].Contains("/"));
+         Assert.DoesNotContain("/", hostAndShare[0]);
          Assert.AreEqual(Environment.MachineName, hostAndShare[0].ToUpperInvariant());
       }
    }

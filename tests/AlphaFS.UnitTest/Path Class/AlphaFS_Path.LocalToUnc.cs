@@ -84,7 +84,9 @@ namespace AlphaFS.UnitTest
 
 
             if (i % 2 != 0)
-               Assert.IsTrue(uncPath.EndsWith(backslash), "The UNC path does not end with a " + backslash + " but is expected to.");
+            {
+               Assert.EndsWith(backslash, uncPath, "The UNC path does not end with a " + backslash + " but is expected to.");
+            }
 
 
             Console.WriteLine();

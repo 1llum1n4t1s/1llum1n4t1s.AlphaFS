@@ -82,7 +82,9 @@ namespace Alphaleonis.Win32.Filesystem
       internal static void DefineDosDeviceCore(bool isDefine, string deviceName, string targetPath, DosDeviceAttributes deviceAttributes, bool exactMatch)
       {
          if (Utils.IsNullOrWhiteSpace(deviceName))
+         {
             throw new ArgumentNullException("deviceName");
+         }
 
          if (isDefine)
          {
@@ -97,7 +99,9 @@ namespace Alphaleonis.Win32.Filesystem
 
                var lastError = Marshal.GetLastWin32Error();
                if (!success)
+               {
                   NativeError.ThrowException(lastError, deviceName, targetPath);
+               }
             }
          }
 
@@ -107,7 +111,9 @@ namespace Alphaleonis.Win32.Filesystem
             // The string is an MS-DOS path string unless the DDD_RAW_TARGET_PATH flag is specified, in which case this string is a path string.
 
             if (exactMatch && !Utils.IsNullOrWhiteSpace(targetPath))
+            {
                deviceAttributes = deviceAttributes | DosDeviceAttributes.ExactMatchOnRemove | DosDeviceAttributes.RawTargetPath;
+            }
 
             // Remove the MS-DOS device name. First, get the name of the Windows NT device
             // from the symbolic link and then delete the symbolic link from the namespace.

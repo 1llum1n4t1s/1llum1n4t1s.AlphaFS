@@ -67,21 +67,28 @@ namespace AlphaFS.UnitTest
       private static string Write(object value)
       {
          if (null == value)
+         {
             return null;
+         }
 
          if (value is string)
+         {
             return value as string;
+         }
 
 
-         long number;
-         if (long.TryParse(value.ToString(), out number))
+         if (long.TryParse(value.ToString(), out var number))
+         {
             return number.ToString("N0", CultureInfo.CurrentCulture);
+         }
 
 
          var objectType = value as IEnumerable;
 
          if (null == objectType)
+         {
             return value.ToString();
+         }
 
 
          var sb = new StringBuilder();

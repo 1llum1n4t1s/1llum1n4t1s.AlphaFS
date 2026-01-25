@@ -35,8 +35,10 @@ namespace AlphaFS.UnitTest
       {
          var isDisabled = (int) Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem", "NtfsDisable8dot3NameCreation", 0) > 0;
          if (isDisabled)
+         {
             UnitTestAssert.Inconclusive("NtfsDisable8dot3NameCreation is disabled in registry.");
-         
+         }
+
          AlphaFS_Path_GetShort83PathAndGetLongFrom83ShortPath_FromFile(false);
          AlphaFS_Path_GetShort83PathAndGetLongFrom83ShortPath_FromFile(true);
       }
@@ -56,9 +58,9 @@ namespace AlphaFS.UnitTest
 
             Console.WriteLine("Short 8.3 File Path: [{0}]", short83Path);
             
-            Assert.IsTrue(!short83Path.Equals(folder));
+            Assert.AreNotEqual(short83Path, folder);
 
-            Assert.IsTrue(short83Path.EndsWith(@"~1"));
+            Assert.EndsWith(@"~1", short83Path);
 
 
 
@@ -68,7 +70,7 @@ namespace AlphaFS.UnitTest
 
             Assert.IsTrue(longFrom83Path.Equals(folder));
 
-            Assert.IsFalse(longFrom83Path.EndsWith(@"~1"));
+            Assert.DoesNotEndWith(@"~1", longFrom83Path);
          }
 
          Console.WriteLine();

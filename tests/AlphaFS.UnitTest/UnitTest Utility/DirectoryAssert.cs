@@ -29,35 +29,45 @@ namespace AlphaFS.UnitTest
       public static void Exists(string directoryPath)
       {
          if (!System.IO.Directory.Exists(directoryPath))
+         {
             throw new AssertFailedException(string.Format(CultureInfo.CurrentCulture, "The directory: [{0}] does not exist, but is expected to.", directoryPath));
+         }
       }
 
 
       public static void IsEncrypted(string directoryPath)
       {
          if ((System.IO.File.GetAttributes(directoryPath) & System.IO.FileAttributes.Encrypted) == 0)
+         {
             throw new AssertFailedException(string.Format(CultureInfo.CurrentCulture, "The directory: [{0}] is not encrypted, but is expected to.", directoryPath));
+         }
       }
 
 
       public static void IsNotEncrypted(string directoryPath)
       {
          if ((System.IO.File.GetAttributes(directoryPath) & System.IO.FileAttributes.Encrypted) != 0)
+         {
             throw new AssertFailedException(string.Format(CultureInfo.CurrentCulture, "The directory: [{0}] is encrypted, but is expected not to.", directoryPath));
+         }
       }
 
 
       public static void IsCompressed(string directoryPath)
       {
          if ((System.IO.File.GetAttributes(directoryPath) & System.IO.FileAttributes.Compressed) == 0)
+         {
             throw new AssertFailedException(string.Format(CultureInfo.CurrentCulture, "The directory: [{0}] is not compressed, but is expected to.", directoryPath));
+         }
       }
 
 
       public static void IsNotCompressed(string directoryPath)
       {
          if ((System.IO.File.GetAttributes(directoryPath) & System.IO.FileAttributes.Compressed) != 0)
+         {
             throw new AssertFailedException(string.Format(CultureInfo.CurrentCulture, "The directory: [{0}] is compressed, but is expected not to.", directoryPath));
+         }
       }
    }
 }

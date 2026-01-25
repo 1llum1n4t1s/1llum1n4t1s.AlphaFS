@@ -41,13 +41,19 @@ namespace Alphaleonis.Win32.Filesystem
       public static void SetVolumeMountPoint(string volumeMountPoint, string volumeGuid)
       {
          if (Utils.IsNullOrWhiteSpace(volumeMountPoint))
+         {
             throw new ArgumentNullException("volumeMountPoint");
+         }
 
          if (Utils.IsNullOrWhiteSpace(volumeGuid))
+         {
             throw new ArgumentNullException("volumeGuid");
+         }
 
          if (!volumeGuid.StartsWith(Path.VolumePrefix + "{", StringComparison.OrdinalIgnoreCase))
+         {
             throw new ArgumentException(Resources.Not_A_Valid_Guid, "volumeGuid");
+         }
 
 
          volumeMountPoint = Path.GetFullPathCore(null, false, volumeMountPoint, GetFullPathOptions.AsLongPath | GetFullPathOptions.AddTrailingDirectorySeparator | GetFullPathOptions.FullCheck);
@@ -73,7 +79,9 @@ namespace Alphaleonis.Win32.Filesystem
                // GetLastError returns ERROR_DIR_NOT_EMPTY, even if the directory is empty.
 
                if (lastError != Win32Errors.ERROR_DIR_NOT_EMPTY)
+               {
                   NativeError.ThrowException(lastError, volumeGuid);
+               }
             }
          }
       }

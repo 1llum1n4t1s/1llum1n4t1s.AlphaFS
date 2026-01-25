@@ -60,7 +60,7 @@ namespace AlphaFS.UnitTest
                {
                   // Disable inheritance.
 
-                  acl = System.IO.Directory.GetAccessControl(dir);
+                  acl = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(dir);
                   acl.SetAccessRuleProtection(true, false);
                   Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(dir, acl, AccessControlSections.Access);
 
@@ -71,7 +71,7 @@ namespace AlphaFS.UnitTest
 
                   // Enable inheritance.
 
-                  acl = System.IO.Directory.GetAccessControl(dir);
+                  acl = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(dir);
                   acl.SetAccessRuleProtection(false, true);
                   Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(dir, acl, AccessControlSections.Access);
 

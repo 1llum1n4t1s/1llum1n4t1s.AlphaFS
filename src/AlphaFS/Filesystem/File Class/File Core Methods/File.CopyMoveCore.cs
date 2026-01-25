@@ -85,10 +85,14 @@ namespace Alphaleonis.Win32.Filesystem
             else
             {
                if (cma.Retry <= 0)
+               {
                   cma.Retry = 2;
+               }
 
                if (cma.RetryTimeout <= 0)
+               {
                   cma.RetryTimeout = 10;
+               }
 
                attempts += cma.Retry;
 
@@ -107,15 +111,12 @@ namespace Alphaleonis.Win32.Filesystem
          {
             // MSDN: If this flag is set to TRUE during the copy/move operation, the operation is canceled.
             // Otherwise, the copy/move operation will continue to completion.
-            bool cancel;
 
             copyMoveRes.ErrorCode = (int) Win32Errors.NO_ERROR;
 
             copyMoveRes.IsCanceled = false;
 
-            int lastError;
 
-            
             if (!cma.DelayUntilReboot)
             {
                // Ensure the file's parent directory exists.
@@ -123,17 +124,21 @@ namespace Alphaleonis.Win32.Filesystem
                var parentFolder = Directory.GetParentCore(cma.Transaction, destinationFilePath, PathFormat.LongFullPath);
 
                if (null != parentFolder)
+               {
                   parentFolder.Create();
+               }
             }
 
 
-            if (CopyMoveNative(cma, !cma.IsCopy, sourceFilePath, destinationFilePath, out cancel, out lastError))
+            if (CopyMoveNative(cma, !cma.IsCopy, sourceFilePath, destinationFilePath, out var cancel, out var lastError))
             {
                // We take an extra hit by getting the file size for a single file Copy or Move action.
 
                if (isSingleFileAction)
 
+               {
                   copyMoveRes.TotalBytes = GetSizeCore(null, cma.Transaction, destinationFilePath, true, PathFormat.LongFullPath);
+               }
 
 
                if (!isFolder)
@@ -144,7 +149,9 @@ namespace Alphaleonis.Win32.Filesystem
 
                   if (cma.CopyTimestamps)
 
+                  {
                      CopyTimestampsCore(cma.Transaction, false, sourceFilePath, destinationFilePath, false, PathFormat.LongFullPath);
+                  }
                }
                
                break;
@@ -174,7 +181,9 @@ namespace Alphaleonis.Win32.Filesystem
             if (!cancel)
             {
                if (retry)
+               {
                   copyMoveRes.Retries++;
+               }
 
                retry = attempts > 0 && retryTimeout > 0;
 
@@ -185,7 +194,7 @@ namespace Alphaleonis.Win32.Filesystem
 
                if (retry)
                {
-                  if (null != errorFilter && null != cma.DirectoryEnumerationFilters.CancellationToken)
+                  if (null != errorFilter && cma.DirectoryEnumerationFilters.CancellationToken.CanBeCanceled)
                   {
                      if (cma.DirectoryEnumerationFilters.CancellationToken.WaitHandle.WaitOne(retryTimeout * 1000))
                      {
@@ -195,15 +204,19 @@ namespace Alphaleonis.Win32.Filesystem
                   }
 
                   else
+                  {
                      using (var waitEvent = new ManualResetEvent(false))
                         waitEvent.WaitOne(retryTimeout * 1000);
+                  }
                }
             }
          }
 
          
          if (isSingleFileAction)
+         {
             copyMoveRes.Stopwatch.Stop();
+         }
 
          copyMoveResult = copyMoveRes;
 

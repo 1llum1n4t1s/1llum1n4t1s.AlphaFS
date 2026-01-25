@@ -102,18 +102,24 @@ namespace Alphaleonis.Win32.Network
 
          // Always remove backslash.
          if (!Utils.IsNullOrWhiteSpace(arguments.LocalName))
+         {
             arguments.LocalName = Path.RemoveTrailingDirectorySeparator(arguments.LocalName).ToUpperInvariant();
+         }
 
-         
+
          if (!Utils.IsNullOrWhiteSpace(arguments.RemoteName))
          {
             if (!arguments.RemoteName.StartsWith(Path.UncPrefix, StringComparison.Ordinal))
+            {
                arguments.RemoteName = Path.UncPrefix + arguments.RemoteName;
+            }
 
 
             // Always remove backslash.
             if (!Utils.IsNullOrWhiteSpace(arguments.RemoteName))
+            {
                arguments.RemoteName = Path.RemoveTrailingDirectorySeparator(arguments.RemoteName);
+            }
          }
 
          
@@ -125,13 +131,17 @@ namespace Alphaleonis.Win32.Network
             var target = arguments.IsDeviceMap ? arguments.LocalName : arguments.RemoteName;
 
             if (Utils.IsNullOrWhiteSpace(target))
+            {
                throw new ArgumentNullException(arguments.IsDeviceMap ? "localName" : "remoteName");
+            }
 
 
             lastError = NativeMethods.WNetCancelConnection(target, arguments.UpdateProfile ? NativeMethods.Connect.UpdateProfile : NativeMethods.Connect.None, force);
 
             if (lastError != Win32Errors.NO_ERROR)
+            {
                throw new NetworkInformationException((int) lastError);
+            }
 
             return null;
          }
@@ -142,8 +152,10 @@ namespace Alphaleonis.Win32.Network
          // arguments.LocalName is allowed to be null or empty.
 
          if (Utils.IsNullOrWhiteSpace(arguments.RemoteName) && !arguments.IsDeviceMap)
+         {
             throw new ArgumentNullException("arguments.RemoteName");
-         
+         }
+
 
          // When supplied, use data from NetworkCredential instance.
          if (arguments.Credential != null)
@@ -160,16 +172,24 @@ namespace Alphaleonis.Win32.Network
          var connect = NativeMethods.Connect.None;
 
          if (arguments.IsDeviceMap)
+         {
             connect = connect | NativeMethods.Connect.Redirect;
+         }
 
          if (arguments.Prompt)
+         {
             connect = connect | NativeMethods.Connect.Prompt | NativeMethods.Connect.Interactive;
+         }
 
          if (arguments.UpdateProfile)
+         {
             connect = connect | NativeMethods.Connect.UpdateProfile;
+         }
 
          if (arguments.SaveCredentials)
+         {
             connect = connect | NativeMethods.Connect.SaveCredentialManager;
+         }
 
 
          // Initialize structure.
@@ -210,7 +230,9 @@ namespace Alphaleonis.Win32.Network
 
 
          if (lastError != Win32Errors.NO_ERROR)
+         {
             throw new NetworkInformationException((int) lastError);
+         }
 
 
          return arguments.IsDeviceMap ? buffer.ToString() : null;
@@ -242,12 +264,10 @@ namespace Alphaleonis.Win32.Network
          uint lastError;
          do
          {
-            uint entriesRead;
             uint totalEntries;
             uint resumeHandle;
-            SafeGlobalMemoryBufferHandle buffer;
 
-            lastError = enumerateNetworkObject(functionData, out buffer, NativeMethods.MaxPreferredLength, out entriesRead, out totalEntries, out resumeHandle);
+            lastError = enumerateNetworkObject(functionData, out var buffer, NativeMethods.MaxPreferredLength, out var entriesRead, out totalEntries, out resumeHandle);
 
             using (buffer)
                switch (lastError)
@@ -271,7 +291,9 @@ namespace Alphaleonis.Win32.Network
 
                   default:
                      if (lastError != Win32Errors.NO_ERROR && !continueOnException)
+                     {
                         throw new NetworkInformationException((int) lastError);
+                     }
                      break;
                }
 
@@ -292,7 +314,9 @@ namespace Alphaleonis.Win32.Network
       internal static NativeMethods.REMOTE_NAME_INFO GetRemoteNameInfoCore(string path, bool continueOnException)
       {
          if (Utils.IsNullOrWhiteSpace(path))
+         {
             throw new ArgumentNullException("path");
+         }
 
 
          path = Path.GetRegularPathCore(path, GetFullPathOptions.CheckInvalidPathChars, false);
@@ -303,22 +327,24 @@ namespace Alphaleonis.Win32.Network
 
          do
          {
-            using (var buffer = new SafeGlobalMemoryBufferHandle((int) bufferSize))
+            using var buffer = new SafeGlobalMemoryBufferHandle((int) bufferSize);
+            // Structure: UNIVERSAL_NAME_INFO_LEVEL = 1 (not used in AlphaFS).
+            // Structure: REMOTE_NAME_INFO_LEVEL    = 2
+
+            lastError = NativeMethods.WNetGetUniversalName(path, 2, buffer, out bufferSize);
+
+            if (lastError == Win32Errors.NO_ERROR)
             {
-               // Structure: UNIVERSAL_NAME_INFO_LEVEL = 1 (not used in AlphaFS).
-               // Structure: REMOTE_NAME_INFO_LEVEL    = 2
-
-               lastError = NativeMethods.WNetGetUniversalName(path, 2, buffer, out bufferSize);
-
-               if (lastError == Win32Errors.NO_ERROR)
-                  return buffer.PtrToStructure<NativeMethods.REMOTE_NAME_INFO>(0);
+               return buffer.PtrToStructure<NativeMethods.REMOTE_NAME_INFO>(0);
             }
 
          } while (lastError == Win32Errors.ERROR_MORE_DATA);
 
 
          if (lastError != Win32Errors.NO_ERROR && !continueOnException)
+         {
             throw new NetworkInformationException((int) lastError);
+         }
 
 
          // Return an empty structure (all fields set to null).

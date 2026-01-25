@@ -61,7 +61,7 @@ namespace AlphaFS.UnitTest
 
             Console.WriteLine(template, drive, newLabel);
             Console.WriteLine("Set label.");
-            Assert.IsTrue(!currentLabel.Equals(newLabel));
+            Assert.AreNotEqual(newLabel, currentLabel);
          }
          catch (Exception ex)
          {

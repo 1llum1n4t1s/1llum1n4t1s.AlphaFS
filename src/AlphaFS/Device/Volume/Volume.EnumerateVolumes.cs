@@ -46,7 +46,9 @@ namespace Alphaleonis.Win32.Filesystem
             var throwException = lastError != Win32Errors.ERROR_NO_MORE_FILES && lastError != Win32Errors.ERROR_PATH_NOT_FOUND;
 
             if (!NativeMethods.IsValidHandle(handle, lastError, String.Empty, throwException))
+            {
                yield break;
+            }
 
             yield return buffer.ToString();
 
@@ -58,7 +60,9 @@ namespace Alphaleonis.Win32.Filesystem
                throwException = lastError != Win32Errors.ERROR_NO_MORE_FILES && lastError != Win32Errors.ERROR_PATH_NOT_FOUND && lastError != Win32Errors.ERROR_MORE_DATA;
 
                if (!NativeMethods.IsValidHandle(handle, lastError, String.Empty, throwException))
+               {
                   yield break;
+               }
 
                yield return buffer.ToString();
             }

@@ -38,10 +38,14 @@ namespace Alphaleonis.Win32.Filesystem
       public static IEnumerable<string> EnumerateVolumeMountPoints(string volumeGuid)
       {
          if (Utils.IsNullOrWhiteSpace(volumeGuid))
+         {
             throw new ArgumentNullException("volumeGuid");
+         }
 
          if (!volumeGuid.StartsWith(Path.VolumePrefix + "{", StringComparison.OrdinalIgnoreCase))
+         {
             throw new ArgumentException(Resources.Not_A_Valid_Guid, "volumeGuid");
+         }
 
 
          // A trailing backslash is required.
@@ -80,7 +84,9 @@ namespace Alphaleonis.Win32.Filesystem
                var throwException = lastError != Win32Errors.ERROR_NO_MORE_FILES && lastError != Win32Errors.ERROR_PATH_NOT_FOUND && lastError != Win32Errors.ERROR_MORE_DATA;
 
                if (!NativeMethods.IsValidHandle(handle, lastError, volumeGuid, throwException))
+               {
                   yield break;
+               }
 
                yield return buffer.ToString();
             }

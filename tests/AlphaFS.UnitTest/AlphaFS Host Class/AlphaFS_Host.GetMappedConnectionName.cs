@@ -32,27 +32,23 @@ namespace AlphaFS.UnitTest
       [TestMethod]
       public void AlphaFS_Host_GetMappedConnectionName_Success()
       {
-         using (var tempRoot = new TemporaryDirectory(true))
-         {
-            // Randomly test the share where the local folder possibly has the read-only and/or hidden attributes set.
+         using var tempRoot = new TemporaryDirectory(true);
+         // Randomly test the share where the local folder possibly has the read-only and/or hidden attributes set.
 
-            var folder = tempRoot.CreateDirectoryRandomizedAttributes();
-
-
-            using (var connection = new Alphaleonis.Win32.Network.DriveConnection(folder.FullName))
-            {
-               var driveName = connection.LocalName;
-
-               Console.WriteLine("Mapped drive letter [{0}] to [{1}]", driveName, folder.FullName);
-
-               UnitTestConstants.Dump(connection);
+         var folder = tempRoot.CreateDirectoryRandomizedAttributes();
 
 
-               var connectionName = Alphaleonis.Win32.Network.Host.GetMappedConnectionName(driveName);
+         using var connection = new Alphaleonis.Win32.Network.DriveConnection(folder.FullName);
+         var driveName = connection.LocalName;
 
-               Assert.AreEqual(folder.FullName, connectionName);
-            }
-         }
+         Console.WriteLine("Mapped drive letter [{0}] to [{1}]", driveName, folder.FullName);
+
+         UnitTestConstants.Dump(connection);
+
+
+         var connectionName = Alphaleonis.Win32.Network.Host.GetMappedConnectionName(driveName);
+
+         Assert.AreEqual(folder.FullName, connectionName);
       }
    }
 }

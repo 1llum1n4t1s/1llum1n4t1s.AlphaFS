@@ -81,9 +81,9 @@ namespace Alphaleonis.Win32.Network
       {
          get
          {
-            uint low, high, unused1, unused2;
+            uint unused1, unused2;
 
-            _network.GetTimeCreatedAndConnected(out unused1, out unused2, out low, out high);
+            _network.GetTimeCreatedAndConnected(out unused1, out unused2, out var low, out var high);
             
             long time = high;
 
@@ -116,9 +116,9 @@ namespace Alphaleonis.Win32.Network
       {
          get
          {
-            uint low, high, unused1, unused2;
+            uint unused1, unused2;
 
-            _network.GetTimeCreatedAndConnected(out low, out high, out unused1, out unused2);
+            _network.GetTimeCreatedAndConnected(out var low, out var high, out unused1, out unused2);
 
             long time = high;
 

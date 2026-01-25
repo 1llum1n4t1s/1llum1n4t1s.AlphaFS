@@ -1,4 +1,4 @@
-﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy 
  *  of this software and associated documentation files (the "Software"), to deal 
@@ -37,13 +37,19 @@ namespace AlphaFS.UnitTest
       public TemporaryDirectory(bool isNetwork, string folderPrefix = null, string root = null)
       {
          if (Alphaleonis.Utils.IsNullOrWhiteSpace(folderPrefix))
+         {
             folderPrefix = "AlphaFS.TempRoot";
+         }
 
          if (Alphaleonis.Utils.IsNullOrWhiteSpace(root))
+         {
             root = TempPath;
+         }
 
          if (isNetwork)
+         {
             root = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(root);
+         }
 
 
          UnitTestConstants.PrintUnitTestHeader(isNetwork);
@@ -245,23 +251,19 @@ namespace AlphaFS.UnitTest
 
          DirectorySecurity dirSecurity;
 
-         var dirInfo = CreateDirectoryCore(folderFullPath);
+         CreateDirectoryCore(folderFullPath);
 
-
-         // Set DENY for current User.
          if (enable)
          {
-            dirSecurity = dirInfo.GetAccessControl();
+            dirSecurity = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(folderFullPath);
             dirSecurity.AddAccessRule(rule);
-            dirInfo.SetAccessControl(dirSecurity);
+            Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(folderFullPath, dirSecurity);
          }
-
-         // Remove DENY for current User.
          else
          {
-            dirSecurity = dirInfo.GetAccessControl();
+            dirSecurity = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(folderFullPath);
             dirSecurity.RemoveAccessRule(rule);
-            dirInfo.SetAccessControl(dirSecurity);
+            Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(folderFullPath, dirSecurity);
          }
       }
 
@@ -358,10 +360,14 @@ namespace AlphaFS.UnitTest
       private static void SetReadOnlyAndOrHiddenAttributes(System.IO.FileSystemInfo fsi, bool readOnly = false, bool hidden = false)
       {
          if (readOnly && new Random(DateTime.UtcNow.Millisecond).Next(0, 1000) % 2 == 0)
+         {
             fsi.Attributes |= System.IO.FileAttributes.ReadOnly;
+         }
 
          if (hidden && new Random(DateTime.UtcNow.Millisecond).Next(0, 1000) % 2 == 0)
+         {
             fsi.Attributes |= System.IO.FileAttributes.Hidden;
+         }
       }
       
       #endregion Private Members
@@ -387,7 +393,9 @@ namespace AlphaFS.UnitTest
          try
          {
             if (isDisposing)
+            {
                System.IO.Directory.Delete(Directory.FullName, true);
+            }
          }
          catch
          {
@@ -396,7 +404,9 @@ namespace AlphaFS.UnitTest
                var dirInfo = new Alphaleonis.Win32.Filesystem.DirectoryInfo(Directory.FullName, Alphaleonis.Win32.Filesystem.PathFormat.FullPath);
 
                if (dirInfo.Exists)
+               {
                   dirInfo.Delete(true, true);
+               }
             }
             catch (Exception ex)
             {

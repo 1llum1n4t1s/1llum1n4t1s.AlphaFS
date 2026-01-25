@@ -49,7 +49,7 @@ namespace AlphaFS.UnitTest
 
             SetSecuritySystem(folder.FullName);
 
-            var dirsec = new System.IO.DirectoryInfo(folder.FullName + @"\inherited").GetAccessControl();
+            var dirsec = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(folder.FullName + @"\inherited");
 
             var accessRules = dirsec.GetAccessRules(true, true, typeof(System.Security.Principal.SecurityIdentifier));
 
@@ -82,7 +82,9 @@ namespace AlphaFS.UnitTest
       private static void SetSecurityAlpha(string directory)
       {
          if (System.IO.Directory.Exists(directory))
+         {
             System.IO.Directory.Delete(directory, true);
+         }
 
          Alphaleonis.Win32.Filesystem.Directory.CreateDirectory(directory);
          Alphaleonis.Win32.Filesystem.Directory.CreateDirectory(System.IO.Path.Combine(directory, "inherited"));
@@ -103,21 +105,20 @@ namespace AlphaFS.UnitTest
       private static void SetSecuritySystem(string directory)
       {
          if (System.IO.Directory.Exists(directory))
+         {
             System.IO.Directory.Delete(directory, true);
+         }
 
          System.IO.Directory.CreateDirectory(directory);
          System.IO.Directory.CreateDirectory(System.IO.Path.Combine(directory, "inherited"));
 
-
-         var testDirInfo = new System.IO.DirectoryInfo(directory);
-
-         var ds = testDirInfo.GetAccessControl(System.Security.AccessControl.AccessControlSections.Access);
+         var ds = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(directory, System.Security.AccessControl.AccessControlSections.Access);
 
          ds.SetAccessRuleProtection(true, false);
 
          ds.AddAccessRule(new System.Security.AccessControl.FileSystemAccessRule(new System.Security.Principal.SecurityIdentifier(System.Security.Principal.WellKnownSidType.WorldSid, null), System.Security.AccessControl.FileSystemRights.FullControl, System.Security.AccessControl.InheritanceFlags.ContainerInherit | System.Security.AccessControl.InheritanceFlags.ObjectInherit, System.Security.AccessControl.PropagationFlags.None, System.Security.AccessControl.AccessControlType.Allow));
 
-         testDirInfo.SetAccessControl(ds);
+         Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(directory, ds);
       }
       
 

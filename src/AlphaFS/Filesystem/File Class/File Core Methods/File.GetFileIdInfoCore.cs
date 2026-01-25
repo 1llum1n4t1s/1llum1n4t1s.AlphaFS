@@ -38,27 +38,25 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       internal static FileIdInfo GetFileIdInfoCore(KernelTransaction transaction, bool isFolder, string path, PathFormat pathFormat)
       {
-         using (var handle = CreateFileCore(transaction, isFolder, path, ExtendedFileAttributes.BackupSemantics, null, FileMode.Open, FileSystemRights.ReadData, FileShare.ReadWrite, true, false, pathFormat))
+         using var handle = CreateFileCore(transaction, isFolder, path, ExtendedFileAttributes.BackupSemantics, null, FileMode.Open, FileSystemRights.ReadData, FileShare.ReadWrite, true, false, pathFormat);
+         if (NativeMethods.IsAtLeastWindows8)
          {
-            if (NativeMethods.IsAtLeastWindows8)
+            // ReFS is supported.
+            using var safeBuffer = new SafeGlobalMemoryBufferHandle(Marshal.SizeOf<NativeMethods.FILE_ID_INFO>());
+            var success = NativeMethods.GetFileInformationByHandleEx(handle, NativeMethods.FILE_INFO_BY_HANDLE_CLASS.FILE_ID_INFO, safeBuffer, (uint) safeBuffer.Capacity);
+
+            var lastError = Marshal.GetLastWin32Error();
+            if (!success)
             {
-               // ReFS is supported.
-               using (var safeBuffer = new SafeGlobalMemoryBufferHandle(Marshal.SizeOf(typeof(NativeMethods.FILE_ID_INFO))))
-               {
-                  var success = NativeMethods.GetFileInformationByHandleEx(handle, NativeMethods.FILE_INFO_BY_HANDLE_CLASS.FILE_ID_INFO, safeBuffer, (uint) safeBuffer.Capacity);
-
-                  var lastError = Marshal.GetLastWin32Error();
-                  if (!success)
-                     NativeError.ThrowException(lastError, isFolder, path);
-
-                  return new FileIdInfo(safeBuffer.PtrToStructure<NativeMethods.FILE_ID_INFO>(0));
-               }
+               NativeError.ThrowException(lastError, isFolder, path);
             }
 
-
-            // Only NTFS is supported.
-            return GetFileIdInfo(handle);
+            return new FileIdInfo(safeBuffer.PtrToStructure<NativeMethods.FILE_ID_INFO>(0));
          }
+
+
+         // Only NTFS is supported.
+         return GetFileIdInfo(handle);
       }
    }
 }

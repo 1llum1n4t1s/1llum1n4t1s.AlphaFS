@@ -59,7 +59,7 @@ namespace AlphaFS.UnitTest
          }
 
 
-         Assert.IsTrue(drives.Length > 0, "Nothing is enumerated, but it is expected.");
+         Assert.IsNotEmpty(drives, "Nothing is enumerated, but it is expected.");
 
 
          // \\localhost\C$

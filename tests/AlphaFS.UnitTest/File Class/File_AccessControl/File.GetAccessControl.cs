@@ -41,41 +41,39 @@ namespace AlphaFS.UnitTest
 
       private void File_GetAccessControl(bool isNetwork)
       {
-         using (var tempRoot = new TemporaryDirectory(isNetwork))
+         using var tempRoot = new TemporaryDirectory(isNetwork);
+         var file = tempRoot.CreateFile();
+
+         Console.WriteLine("Input File Path: [{0}]", file.FullName);
+
+
+         var foundRules = false;
+
+         var sysIO = Alphaleonis.Win32.Filesystem.File.GetAccessControl(file.FullName);
+         var sysIOaccessRules = sysIO.GetAccessRules(true, true, typeof(NTAccount));
+
+
+         var alphaFS = Alphaleonis.Win32.Filesystem.File.GetAccessControl(file.FullName);
+         var alphaFSaccessRules = alphaFS.GetAccessRules(true, true, typeof(NTAccount));
+
+
+         Console.WriteLine("\n\tSystem.IO rules found: [{0}]\n\tAlphaFS rules found  : [{1}]", sysIOaccessRules.Count, alphaFSaccessRules.Count);
+
+
+         Assert.HasCount(sysIOaccessRules.Count, alphaFSaccessRules);
+
+
+         foreach (FileSystemAccessRule far in alphaFSaccessRules)
          {
-            var file = tempRoot.CreateFile();
+            UnitTestConstants.Dump(far);
 
-            Console.WriteLine("Input File Path: [{0}]", file.FullName);
+            UnitTestConstants.TestAccessRules(sysIO, alphaFS);
 
-
-            var foundRules = false;
-
-            var sysIO = System.IO.File.GetAccessControl(file.FullName);
-            var sysIOaccessRules = sysIO.GetAccessRules(true, true, typeof(NTAccount));
-
-
-            var alphaFS = Alphaleonis.Win32.Filesystem.File.GetAccessControl(file.FullName);
-            var alphaFSaccessRules = alphaFS.GetAccessRules(true, true, typeof(NTAccount));
-
-
-            Console.WriteLine("\n\tSystem.IO rules found: [{0}]\n\tAlphaFS rules found  : [{1}]", sysIOaccessRules.Count, alphaFSaccessRules.Count);
-
-
-            Assert.AreEqual(sysIOaccessRules.Count, alphaFSaccessRules.Count);
-
-
-            foreach (FileSystemAccessRule far in alphaFSaccessRules)
-            {
-               UnitTestConstants.Dump(far);
-
-               UnitTestConstants.TestAccessRules(sysIO, alphaFS);
-
-               foundRules = true;
-            }
-
-
-            Assert.IsTrue(foundRules);
+            foundRules = true;
          }
+
+
+         Assert.IsTrue(foundRules);
       }
    }
 }

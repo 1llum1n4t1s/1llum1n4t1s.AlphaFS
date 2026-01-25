@@ -49,9 +49,6 @@ namespace AlphaFS.UnitTest
             var fid = Alphaleonis.Win32.Filesystem.Directory.GetFileIdInfo(folder.FullName);
 
             Console.WriteLine("\n\tToString(): {0}", fid);
-
-
-            Assert.IsNotNull(fid);
          }
 
          Console.WriteLine();

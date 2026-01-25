@@ -58,11 +58,9 @@ namespace AlphaFS.UnitTest
                System.Security.AccessControl.AccessControlType.Deny);
 
 
-            // Set DENY for current user.
-            var dirSecurity = dstFolder.GetAccessControl();
+            var dirSecurity = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(dstFolder.FullName);
             dirSecurity.AddAccessRule(rule);
-            dstFolder.SetAccessControl(dirSecurity);
-
+            Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(dstFolder.FullName, dirSecurity);
 
             try
             {
@@ -70,10 +68,9 @@ namespace AlphaFS.UnitTest
             }
             finally
             {
-               // Remove DENY for current user.
-               dirSecurity = dstFolder.GetAccessControl();
+               dirSecurity = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(dstFolder.FullName);
                dirSecurity.RemoveAccessRule(rule);
-               dstFolder.SetAccessControl(dirSecurity);
+               Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(dstFolder.FullName, dirSecurity);
             }
          }
          

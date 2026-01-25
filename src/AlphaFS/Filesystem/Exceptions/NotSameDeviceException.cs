@@ -23,8 +23,6 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Runtime.Serialization;
-
 namespace Alphaleonis.Win32.Filesystem
 {
    /// <summary>[AlphaFS] The exception that is thrown when an attempt perform an operation across difference devices when this is not supported.</summary>
@@ -61,14 +59,6 @@ namespace Alphaleonis.Win32.Filesystem
       /// <param name="isPath">Always set to true when using this constructor.</param>
       [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "isPath")]
       public NotSameDeviceException(string path, bool isPath) : base(string.Format(CultureInfo.InvariantCulture, "{0}: [{1}]", ErrorText, path), ErrorCode)
-      {
-      }
-
-
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="NotSameDeviceException"/> class.</summary>
-      /// <param name="info">The data for serializing or deserializing the object.</param>
-      /// <param name="context">The source and destination for the object.</param>
-      protected NotSameDeviceException(SerializationInfo info, StreamingContext context) : base(info, context)
       {
       }
    }

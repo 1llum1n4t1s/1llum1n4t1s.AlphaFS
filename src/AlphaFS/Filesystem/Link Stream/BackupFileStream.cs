@@ -314,38 +314,47 @@ namespace Alphaleonis.Win32.Filesystem
       public int Read(byte[] buffer, int offset, int count, bool processSecurity)
       {
          if (buffer == null)
+         {
             throw new ArgumentNullException("buffer");
+         }
 
          if (!CanRead)
+         {
             throw new NotSupportedException("Stream does not support reading");
+         }
 
          if (offset + count > buffer.Length)
+         {
             throw new ArgumentException("The sum of offset and count is larger than the size of the buffer.", "offset");
+         }
 
          if (offset < 0)
+         {
             throw new ArgumentOutOfRangeException("offset", offset, Resources.Negative_Offset);
+         }
 
          if (count < 0)
-            throw new ArgumentOutOfRangeException("count", count, Resources.Negative_Count);
-
-
-         using (var safeBuffer = new SafeGlobalMemoryBufferHandle(count))
          {
-            uint numberOfBytesRead;
-
-            var success = NativeMethods.BackupRead(SafeFileHandle, safeBuffer, (uint) safeBuffer.Capacity, out numberOfBytesRead, false, processSecurity, ref _context);
-            
-            var lastError = Marshal.GetLastWin32Error();
-            if (!success)
-               NativeError.ThrowException(lastError);
-
-
-            // See File.GetAccessControlCore(): .CopyTo() does not work there?
-            // 2017-06-13: Is .CopyTo() doing anything useful here?
-            safeBuffer.CopyTo(buffer, offset, count);
-
-            return (int) numberOfBytesRead;
+            throw new ArgumentOutOfRangeException("count", count, Resources.Negative_Count);
          }
+
+
+         using var safeBuffer = new SafeGlobalMemoryBufferHandle(count);
+
+         var success = NativeMethods.BackupRead(SafeFileHandle, safeBuffer, (uint) safeBuffer.Capacity, out var numberOfBytesRead, false, processSecurity, ref _context);
+            
+         var lastError = Marshal.GetLastWin32Error();
+         if (!success)
+         {
+            NativeError.ThrowException(lastError);
+         }
+
+
+         // See File.GetAccessControlCore(): .CopyTo() does not work there?
+         // 2017-06-13: Is .CopyTo() doing anything useful here?
+         safeBuffer.CopyTo(buffer, offset, count);
+
+         return (int) numberOfBytesRead;
       }
 
 
@@ -386,29 +395,37 @@ namespace Alphaleonis.Win32.Filesystem
       public void Write(byte[] buffer, int offset, int count, bool processSecurity)
       {
          if (buffer == null)
+         {
             throw new ArgumentNullException("buffer");
+         }
 
          if (offset < 0)
+         {
             throw new ArgumentOutOfRangeException("offset", offset, Resources.Negative_Offset);
+         }
 
          if (count < 0)
+         {
             throw new ArgumentOutOfRangeException("count", count, Resources.Negative_Count);
+         }
 
          if (offset + count > buffer.Length)
-            throw new ArgumentException(Resources.Buffer_Not_Large_Enough, "offset");
-
-
-         using (var safeBuffer = new SafeGlobalMemoryBufferHandle(count))
          {
-            safeBuffer.CopyFrom(buffer, offset, count);
+            throw new ArgumentException(Resources.Buffer_Not_Large_Enough, "offset");
+         }
 
-            uint bytesWritten;
 
-            var success = NativeMethods.BackupWrite(SafeFileHandle, safeBuffer, (uint)safeBuffer.Capacity, out bytesWritten, false, processSecurity, ref _context);
+         using var safeBuffer = new SafeGlobalMemoryBufferHandle(count);
+         safeBuffer.CopyFrom(buffer, offset, count);
+
+         uint bytesWritten;
+
+         var success = NativeMethods.BackupWrite(SafeFileHandle, safeBuffer, (uint)safeBuffer.Capacity, out bytesWritten, false, processSecurity, ref _context);
             
-            var lastError = Marshal.GetLastWin32Error();
-            if (!success)
-               NativeError.ThrowException(lastError);
+         var lastError = Marshal.GetLastWin32Error();
+         if (!success)
+         {
+            NativeError.ThrowException(lastError);
          }
       }
 
@@ -420,7 +437,9 @@ namespace Alphaleonis.Win32.Filesystem
 
          var lastError = Marshal.GetLastWin32Error();
          if (!success)
+         {
             NativeError.ThrowException(lastError);
+         }
       }
 
 
@@ -438,9 +457,8 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public long Skip(long bytes)
       {
-         uint lowSought, highSought;
 
-         var success = NativeMethods.BackupSeek(SafeFileHandle, NativeMethods.GetLowOrderDword(bytes), NativeMethods.GetHighOrderDword(bytes), out lowSought, out highSought, ref _context);
+         var success = NativeMethods.BackupSeek(SafeFileHandle, NativeMethods.GetLowOrderDword(bytes), NativeMethods.GetHighOrderDword(bytes), out var lowSought, out var highSought, ref _context);
 
          var lastError = Marshal.GetLastWin32Error();
          if (!success && lastError != Win32Errors.ERROR_SEEK)
@@ -464,14 +482,15 @@ namespace Alphaleonis.Win32.Filesystem
       public FileSecurity GetAccessControl()
       {
          IntPtr pSidOwner, pSidGroup, pDacl, pSacl;
-         SafeGlobalMemoryBufferHandle pSecurityDescriptor;
 
-         var lastError = (int) SecurityNativeMethods.GetSecurityInfo(SafeFileHandle, SE_OBJECT_TYPE.SE_FILE_OBJECT, SECURITY_INFORMATION.GROUP_SECURITY_INFORMATION | SECURITY_INFORMATION.OWNER_SECURITY_INFORMATION | SECURITY_INFORMATION.LABEL_SECURITY_INFORMATION | SECURITY_INFORMATION.DACL_SECURITY_INFORMATION | SECURITY_INFORMATION.SACL_SECURITY_INFORMATION, out pSidOwner, out pSidGroup, out pDacl, out pSacl, out pSecurityDescriptor);
+         var lastError = (int) SecurityNativeMethods.GetSecurityInfo(SafeFileHandle, SE_OBJECT_TYPE.SE_FILE_OBJECT, SECURITY_INFORMATION.GROUP_SECURITY_INFORMATION | SECURITY_INFORMATION.OWNER_SECURITY_INFORMATION | SECURITY_INFORMATION.LABEL_SECURITY_INFORMATION | SECURITY_INFORMATION.DACL_SECURITY_INFORMATION | SECURITY_INFORMATION.SACL_SECURITY_INFORMATION, out pSidOwner, out pSidGroup, out pDacl, out pSacl, out var pSecurityDescriptor);
 
          try
          {
             if (lastError != Win32Errors.ERROR_SUCCESS)
+            {
                NativeError.ThrowException(lastError);
+            }
 
             if (null != pSecurityDescriptor && pSecurityDescriptor.IsInvalid)
             {
@@ -488,7 +507,9 @@ namespace Alphaleonis.Win32.Filesystem
             
             // .CopyTo() does not work there?
             if (null != pSecurityDescriptor)
+            {
                pSecurityDescriptor.CopyTo(managedBuffer, 0, (int) length);
+            }
 
 
             var fs = new FileSecurity();
@@ -499,7 +520,9 @@ namespace Alphaleonis.Win32.Filesystem
          finally
          {
             if (null != pSecurityDescriptor)
+            {
                pSecurityDescriptor.Close();
+            }
          }
       }
 
@@ -522,17 +545,23 @@ namespace Alphaleonis.Win32.Filesystem
       public void Lock(long position, long length)
       {
          if (position < 0)
+         {
             throw new ArgumentOutOfRangeException("position", position, new Win32Exception((int) Win32Errors.ERROR_NEGATIVE_SEEK).Message);
+         }
 
          if (length < 0)
+         {
             throw new ArgumentOutOfRangeException("length", length, Resources.Negative_Lock_Length);
+         }
 
 
          var success = NativeMethods.LockFile(SafeFileHandle, NativeMethods.GetLowOrderDword(position), NativeMethods.GetHighOrderDword(position), NativeMethods.GetLowOrderDword(length), NativeMethods.GetHighOrderDword(length));
 
          var lastError = Marshal.GetLastWin32Error();
          if (!success)
+         {
             NativeError.ThrowException(lastError);
+         }
       }
 
 
@@ -546,17 +575,23 @@ namespace Alphaleonis.Win32.Filesystem
       public void Unlock(long position, long length)
       {
          if (position < 0)
+         {
             throw new ArgumentOutOfRangeException("position", position, new Win32Exception((int) Win32Errors.ERROR_NEGATIVE_SEEK).Message);
+         }
 
          if (length < 0)
+         {
             throw new ArgumentOutOfRangeException("length", length, Resources.Negative_Lock_Length);
+         }
 
 
          var success = NativeMethods.UnlockFile(SafeFileHandle, NativeMethods.GetLowOrderDword(position), NativeMethods.GetHighOrderDword(position), NativeMethods.GetLowOrderDword(length), NativeMethods.GetHighOrderDword(length));
 
          var lastError = Marshal.GetLastWin32Error();
          if (!success)
+         {
             NativeError.ThrowException(lastError);
+         }
       }
 
 
@@ -569,42 +604,47 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public BackupStreamInfo ReadStreamInfo()
       {
-         var sizeOf = Marshal.SizeOf(typeof(NativeMethods.WIN32_STREAM_ID));
+         var sizeOf = Marshal.SizeOf<NativeMethods.WIN32_STREAM_ID>();
 
-         using (var hBuf = new SafeGlobalMemoryBufferHandle(sizeOf))
+         using var hBuf = new SafeGlobalMemoryBufferHandle(sizeOf);
+
+         var success = NativeMethods.BackupRead(SafeFileHandle, hBuf, (uint) sizeOf, out var numberOfBytesRead, false, _processSecurity, ref _context);
+
+         var lastError = Marshal.GetLastWin32Error();
+         if (!success)
          {
-            uint numberOfBytesRead;
-
-            var success = NativeMethods.BackupRead(SafeFileHandle, hBuf, (uint) sizeOf, out numberOfBytesRead, false, _processSecurity, ref _context);
-
-            var lastError = Marshal.GetLastWin32Error();
-            if (!success)
-               NativeError.ThrowException(lastError);
-
-
-            if (numberOfBytesRead == 0)
-               return null;
-
-
-            if (numberOfBytesRead < sizeOf)
-               throw new IOException(Resources.Read_Incomplete_Header);
-
-
-            var streamID = hBuf.PtrToStructure<NativeMethods.WIN32_STREAM_ID>(0);
-            var nameLength = (uint) Math.Min(streamID.dwStreamNameSize, hBuf.Capacity);
-
-
-            success = NativeMethods.BackupRead(SafeFileHandle, hBuf, nameLength, out numberOfBytesRead, false, _processSecurity, ref _context);
-
-            lastError = Marshal.GetLastWin32Error();
-            if (!success)
-               NativeError.ThrowException(lastError);
-
-
-            var name = hBuf.PtrToStringUni(0, (int) nameLength / UnicodeEncoding.CharSize);
-
-            return new BackupStreamInfo(streamID, name);
+            NativeError.ThrowException(lastError);
          }
+
+
+         if (numberOfBytesRead == 0)
+         {
+            return null;
+         }
+
+
+         if (numberOfBytesRead < sizeOf)
+         {
+            throw new IOException(Resources.Read_Incomplete_Header);
+         }
+
+
+         var streamID = hBuf.PtrToStructure<NativeMethods.WIN32_STREAM_ID>(0);
+         var nameLength = (uint) Math.Min(streamID.dwStreamNameSize, hBuf.Capacity);
+
+
+         success = NativeMethods.BackupRead(SafeFileHandle, hBuf, nameLength, out numberOfBytesRead, false, _processSecurity, ref _context);
+
+         lastError = Marshal.GetLastWin32Error();
+         if (!success)
+         {
+            NativeError.ThrowException(lastError);
+         }
+
+
+         var name = hBuf.PtrToStringUni(0, (int) nameLength / UnicodeEncoding.CharSize);
+
+         return new BackupStreamInfo(streamID, name);
       }
 
 
@@ -642,7 +682,9 @@ namespace Alphaleonis.Win32.Filesystem
 
                      var lastError = Marshal.GetLastWin32Error();
                      if (!success)
+                     {
                         NativeError.ThrowException(lastError);
+                     }
                   }
                   finally
                   {

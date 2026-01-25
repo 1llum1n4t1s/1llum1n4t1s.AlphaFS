@@ -20,8 +20,9 @@
  */
 using System.Reflection;
 using System.Runtime.InteropServices;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-
+[assembly: Parallelize(Scope = ExecutionScope.ClassLevel, Workers = 0)]
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]

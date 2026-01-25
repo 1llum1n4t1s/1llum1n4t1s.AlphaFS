@@ -23,7 +23,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security;
-using System.Security.AccessControl;
 
 namespace Alphaleonis.Win32.Filesystem
 {
@@ -51,12 +50,16 @@ namespace Alphaleonis.Win32.Filesystem
          if (null == fsEntryInfo)
          {
             if (null == path)
+            {
                throw new ArgumentNullException("path");
-            
+            }
+
             fsEntryInfo = File.GetFileSystemEntryInfoCore(transaction, true, Path.GetExtendedLengthPathCore(transaction, path, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator), continueOnNotFound, pathFormat);
 
             if (null == fsEntryInfo)
+            {
                return;
+            }
          }
 
 
@@ -78,10 +81,14 @@ namespace Alphaleonis.Win32.Filesystem
                PrepareDirectoryForDelete(transaction, fsei, ignoreReadOnly);
 
                if (fsei.IsDirectory)
+               {
                   dirs.Push(fsei.LongFullPath);
+               }
 
                else
+               {
                   File.DeleteFileCore(transaction, fsei.LongFullPath, ignoreReadOnly, fsei.Attributes, PathFormat.LongFullPath);
+               }
             }
 
 
@@ -100,14 +107,18 @@ namespace Alphaleonis.Win32.Filesystem
 
          if (fsei.IsMountPoint)
 
+         {
             DeleteJunctionCore(transaction, fsei, null, false, PathFormat.LongFullPath);
+         }
 
 
          // Reset attributes to Normal if we already know the facts.
 
          if (ignoreReadOnly && (fsei.IsReadOnly || fsei.IsHidden))
 
+         {
             File.SetAttributesCore(transaction, fsei.IsDirectory, fsei.LongFullPath, FileAttributes.Normal, PathFormat.LongFullPath);
+         }
       }
    }
 }

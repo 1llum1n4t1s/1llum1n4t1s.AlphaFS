@@ -43,7 +43,9 @@ namespace Alphaleonis.Win32.Filesystem
       public static string GetUniqueVolumeNameForPath(string volumePathName)
       {
          if (Utils.IsNullOrWhiteSpace(volumePathName))
+         {
             throw new ArgumentNullException("volumePathName");
+         }
 
          try
          {

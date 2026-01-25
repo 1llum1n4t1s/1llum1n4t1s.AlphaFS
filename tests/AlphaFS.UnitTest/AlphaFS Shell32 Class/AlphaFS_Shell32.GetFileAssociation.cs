@@ -40,7 +40,9 @@ namespace AlphaFS.UnitTest
 
          var inputPath = Environment.SystemDirectory;
          if (isNetwork)
+         {
             inputPath = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(inputPath);
+         }
 
          Console.WriteLine("Input Directory Path: [{0}]", inputPath);
 
@@ -56,12 +58,14 @@ namespace AlphaFS.UnitTest
             UnitTestConstants.Dump(shell32Info);
 
             if (++cnt == 5)
+            {
                break;
+            }
          }
 
          Console.WriteLine();
 
-         Assert.IsTrue(cnt > 0, "No entries enumerated.");
+         Assert.IsGreaterThan(cnt, 0, "No entries enumerated.");
       }
    }
 }

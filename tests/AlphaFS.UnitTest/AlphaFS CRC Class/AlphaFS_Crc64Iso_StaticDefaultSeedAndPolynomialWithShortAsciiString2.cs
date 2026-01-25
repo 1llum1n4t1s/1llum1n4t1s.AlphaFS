@@ -33,16 +33,14 @@ namespace AlphaFS.UnitTest
       [TestMethod]
       public void AlphaFS_Crc64Iso_StaticDefaultSeedAndPolynomialWithShortAsciiString2()
       {
-         using (var crc64 = new Alphaleonis.Win32.Security.Crc64())
-         {
-            var text = UnitTestConstants.StreamArrayContent[1];
-            var hash = crc64.ComputeHash(System.Text.Encoding.ASCII.GetBytes(text)).Aggregate(string.Empty, (current, b) => current + b.ToString("x2").ToLower());
+         using var crc64 = new Alphaleonis.Win32.Security.Crc64();
+         var text = UnitTestConstants.StreamArrayContent[1];
+         var hash = crc64.ComputeHash(System.Text.Encoding.ASCII.GetBytes(text)).Aggregate(string.Empty, (current, b) => current + b.ToString("x2").ToLower());
 
-            Console.WriteLine("Input text: {0}", text);
-            Console.WriteLine("\n\tCRC64: {0}", hash);
+         Console.WriteLine("Input text: {0}", text);
+         Console.WriteLine("\n\tCRC64: {0}", hash);
 
-            Assert.AreEqual("cff603319a3736cc", hash);
-         }
+         Assert.AreEqual("cff603319a3736cc", hash);
       }
    }
 }

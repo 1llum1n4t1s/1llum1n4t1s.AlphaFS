@@ -31,21 +31,19 @@ namespace AlphaFS.UnitTest
       [TestMethod]
       public void AlphaFS_Directory_CreateJunction_DirectoryContainsFile_ThrowsDirectoryNotEmptyException_Local_Success()
       {
-         using (var tempRoot = new TemporaryDirectory())
-         {
-            var target = tempRoot.Directory.CreateSubdirectory("JunctionTarget");
+         using var tempRoot = new TemporaryDirectory();
+         var target = tempRoot.Directory.CreateSubdirectory("JunctionTarget");
 
-            var toDelete = tempRoot.Directory.CreateSubdirectory("ToDelete");
+         var toDelete = tempRoot.Directory.CreateSubdirectory("ToDelete");
 
-            var junction = System.IO.Path.Combine(toDelete.FullName, "JunctionPoint");
+         var junction = System.IO.Path.Combine(toDelete.FullName, "JunctionPoint");
 
-            var dirInfo = new System.IO.DirectoryInfo(junction);
-            dirInfo.Create();
+         var dirInfo = new System.IO.DirectoryInfo(junction);
+         dirInfo.Create();
 
-            dirInfo.CreateSubdirectory("Extra Folder");
+         dirInfo.CreateSubdirectory("Extra Folder");
             
-            UnitTestAssert.ThrowsException<Alphaleonis.Win32.Filesystem.DirectoryNotEmptyException>(() => Alphaleonis.Win32.Filesystem.Directory.CreateJunction(junction, target.FullName));
-         }
+         UnitTestAssert.ThrowsException<Alphaleonis.Win32.Filesystem.DirectoryNotEmptyException>(() => Alphaleonis.Win32.Filesystem.Directory.CreateJunction(junction, target.FullName));
       }
    }
 }

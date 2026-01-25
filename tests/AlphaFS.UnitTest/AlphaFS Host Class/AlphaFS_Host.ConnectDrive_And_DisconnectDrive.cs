@@ -32,33 +32,31 @@ namespace AlphaFS.UnitTest
       [TestMethod]
       public void AlphaFS_Host_ConnectDrive_And_DisconnectDrive_Network_Success()
       {
-         using (var tempRoot = new TemporaryDirectory(true))
+         using var tempRoot = new TemporaryDirectory(true);
+         // Randomly test the share where the local folder possibly has the read-only and/or hidden attributes set.
+
+         var folder = tempRoot.CreateDirectoryRandomizedAttributes();
+
+         var drive = Alphaleonis.Win32.Filesystem.DriveInfo.GetFreeDriveLetter() + ":";
+
+
+         try
          {
-            // Randomly test the share where the local folder possibly has the read-only and/or hidden attributes set.
+            Console.WriteLine("Connect drive [{0}] to share [{1}]", drive, folder.FullName);
 
-            var folder = tempRoot.CreateDirectoryRandomizedAttributes();
+            Alphaleonis.Win32.Network.Host.ConnectDrive(drive, folder.FullName);
 
-            var drive = Alphaleonis.Win32.Filesystem.DriveInfo.GetFreeDriveLetter() + ":";
+            UnitTestConstants.Dump(new System.IO.DriveInfo(drive));
 
+            Assert.IsTrue(System.IO.Directory.Exists(drive), "The drive does not exists, but is expected to.");
+         }
+         finally
+         {
+            Console.WriteLine("\nDisconnect drive from share.");
 
-            try
-            {
-               Console.WriteLine("Connect drive [{0}] to share [{1}]", drive, folder.FullName);
+            Alphaleonis.Win32.Network.Host.DisconnectDrive(drive);
 
-               Alphaleonis.Win32.Network.Host.ConnectDrive(drive, folder.FullName);
-
-               UnitTestConstants.Dump(new System.IO.DriveInfo(drive));
-
-               Assert.IsTrue(System.IO.Directory.Exists(drive), "The drive does not exists, but is expected to.");
-            }
-            finally
-            {
-               Console.WriteLine("\nDisconnect drive from share.");
-
-               Alphaleonis.Win32.Network.Host.DisconnectDrive(drive);
-
-               Assert.IsFalse(System.IO.Directory.Exists(drive), "The drive exists, but is expected not to.");
-            }
+            Assert.IsFalse(System.IO.Directory.Exists(drive), "The drive exists, but is expected not to.");
          }
       }
    }

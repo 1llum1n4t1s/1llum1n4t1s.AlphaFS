@@ -74,7 +74,9 @@ namespace AlphaFS.UnitTest
                }
 
                else
+               {
                   countNamedFolders++;
+               }
             }
 
 

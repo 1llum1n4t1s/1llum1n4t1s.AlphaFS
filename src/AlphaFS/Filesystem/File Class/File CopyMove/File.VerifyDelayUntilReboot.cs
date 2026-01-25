@@ -32,14 +32,18 @@ namespace Alphaleonis.Win32.Filesystem
          if (delayUntilReboot)
          {
             if (HasCopyAllowed(moveOptions))
+            {
                throw new ArgumentException(Resources.MoveOptionsDelayUntilReboot_Not_Allowed_With_MoveOptionsCopyAllowed, "moveOptions");
+            }
 
 
             // MoveFileXxx: (lpExistingFileName) If dwFlags specifies MOVEFILE_DELAY_UNTIL_REBOOT,
             // the file cannot exist on a remote share, because delayed operations are performed before the network is available.
 
             if (Path.IsUncPathCore(sourcePath, pathFormat != PathFormat.LongFullPath, false))
+            {
                throw new ArgumentException(Resources.MoveOptionsDelayUntilReboot_Not_Allowed_With_NetworkPath, "moveOptions");
+            }
          }
 
          return delayUntilReboot;

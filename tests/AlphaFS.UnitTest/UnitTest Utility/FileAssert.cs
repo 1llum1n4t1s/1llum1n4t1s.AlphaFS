@@ -29,47 +29,53 @@ namespace AlphaFS.UnitTest
       public static void Exists(string filePath)
       {
          if (!System.IO.File.Exists(filePath))
+         {
             throw new AssertFailedException(string.Format(CultureInfo.CurrentCulture, "The file: [{0}] does not exist, but is expected to.", filePath));
+         }
       }
 
 
       public static void AreEqual(string expectedFilePath, string actualFilePath)
       {
          var position = 0;
-         using (var s1 = System.IO.File.OpenRead(expectedFilePath))
-         using (var s2 = System.IO.File.OpenRead(actualFilePath))
+         using var s1 = System.IO.File.OpenRead(expectedFilePath);
+         using var s2 = System.IO.File.OpenRead(actualFilePath);
+         if (s1.Length != s2.Length)
          {
-            if (s1.Length != s2.Length)
-               throw new AssertFailedException(string.Format(CultureInfo.CurrentCulture, "The files: [{0}] and \"{1}\" are not equal but are expected to be. Their size differs.", expectedFilePath, actualFilePath));
-
-            var a = s1.ReadByte();
-            var b = s2.ReadByte();
-
-            if (a != b)
-               throw new AssertFailedException(string.Format(CultureInfo.CurrentCulture, "The files: [{0}] and \"{1}\" are not equal but are expected to be. The first difference was at position: [{2}]", expectedFilePath, actualFilePath, position));
-
-            position++;
+            throw new AssertFailedException(string.Format(CultureInfo.CurrentCulture, "The files: [{0}] and \"{1}\" are not equal but are expected to be. Their size differs.", expectedFilePath, actualFilePath));
          }
+
+         var a = s1.ReadByte();
+         var b = s2.ReadByte();
+
+         if (a != b)
+         {
+            throw new AssertFailedException(string.Format(CultureInfo.CurrentCulture, "The files: [{0}] and \"{1}\" are not equal but are expected to be. The first difference was at position: [{2}]", expectedFilePath, actualFilePath, position));
+         }
+
+         position++;
       }
 
 
       public static void AreNotEqual(string expectedFilePath, string actualFilePath)
       {
          var position = 0;
-         using (var s1 = System.IO.File.OpenRead(expectedFilePath))
-         using (var s2 = System.IO.File.OpenRead(actualFilePath))
+         using var s1 = System.IO.File.OpenRead(expectedFilePath);
+         using var s2 = System.IO.File.OpenRead(actualFilePath);
+         if (s1.Length != s2.Length)
          {
-            if (s1.Length != s2.Length)
-               return;
-
-            var a = s1.ReadByte();
-            var b = s2.ReadByte();
-
-            if (a != b)
-               return;
-
-            position++;
+            return;
          }
+
+         var a = s1.ReadByte();
+         var b = s2.ReadByte();
+
+         if (a != b)
+         {
+            return;
+         }
+
+         position++;
 
          throw new AssertFailedException(string.Format(CultureInfo.CurrentCulture, "The files: [{0}] and \"{1}\" are equal but are not expected to be.", expectedFilePath, actualFilePath));
       }
@@ -78,28 +84,36 @@ namespace AlphaFS.UnitTest
       public static void IsEncrypted(string filePath)
       {
          if ((System.IO.File.GetAttributes(filePath) & System.IO.FileAttributes.Encrypted) == 0)
+         {
             throw new AssertFailedException(string.Format(CultureInfo.CurrentCulture, "The file: [{0}] is not encrypted, but is expected to.", filePath));
+         }
       }
 
 
       public static void IsNotEncrypted(string filePath)
       {
          if ((System.IO.File.GetAttributes(filePath) & System.IO.FileAttributes.Encrypted) != 0)
+         {
             throw new AssertFailedException(string.Format(CultureInfo.CurrentCulture, "The file: [{0}] is encrypted, but is expected not to.", filePath));
+         }
       }
 
 
       public static void IsCompressed(string filePath)
       {
          if ((System.IO.File.GetAttributes(filePath) & System.IO.FileAttributes.Compressed) == 0)
+         {
             throw new AssertFailedException(string.Format(CultureInfo.CurrentCulture, "The file: [{0}] is not compressed, but is expected to.", filePath));
+         }
       }
 
 
       public static void IsNotCompressed(string filePath)
       {
          if ((System.IO.File.GetAttributes(filePath) & System.IO.FileAttributes.Compressed) != 0)
+         {
             throw new AssertFailedException(string.Format(CultureInfo.CurrentCulture, "The file: [{0}] is compressed, but is expected not to.", filePath));
+         }
       }
    }
 }

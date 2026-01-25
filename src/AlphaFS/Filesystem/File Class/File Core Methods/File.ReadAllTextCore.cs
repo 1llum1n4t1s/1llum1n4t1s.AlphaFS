@@ -39,9 +39,8 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       internal static string ReadAllTextCore(KernelTransaction transaction, string path, Encoding encoding, PathFormat pathFormat)
       {
-         using (var sr = new StreamReader(OpenCore(transaction, path, FileMode.Open, FileAccess.Read, FileShare.Read, ExtendedFileAttributes.SequentialScan, null, null, pathFormat), encoding))
-
-            return sr.ReadToEnd();
+         using var sr = new StreamReader(OpenCore(transaction, path, FileMode.Open, FileAccess.Read, FileShare.Read, ExtendedFileAttributes.SequentialScan, null, null, pathFormat), encoding);
+         return sr.ReadToEnd();
       }
    }
 }

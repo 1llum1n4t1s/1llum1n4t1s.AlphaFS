@@ -55,14 +55,14 @@ namespace AlphaFS.UnitTest
 
 
                Assert.IsTrue(fsei.GetType().IsEquivalentTo(typeof(Alphaleonis.Win32.Filesystem.FileSystemEntryInfo)));
-               Assert.IsTrue((fsei.Attributes & System.IO.FileAttributes.Directory) != 0, "The Directory attribute is not found, but is expected.");
+               Assert.AreNotEqual((System.IO.FileAttributes)0, fsei.Attributes & System.IO.FileAttributes.Directory, "The Directory attribute is not found, but is expected.");
 
 
                // Fixed local drives should have these attributes.
                if (new Alphaleonis.Win32.Filesystem.DriveInfo(driveInfo.Name).DriveType == System.IO.DriveType.Fixed)
                {
-                  Assert.IsTrue((fsei.Attributes & System.IO.FileAttributes.Hidden) != 0, "The Hidden attribute is not found, but is expected.");
-                  Assert.IsTrue((fsei.Attributes & System.IO.FileAttributes.System) != 0, "The System attribute is not found, but is expected.");
+                  Assert.AreNotEqual((System.IO.FileAttributes)0, fsei.Attributes & System.IO.FileAttributes.Hidden, "The Hidden attribute is not found, but is expected.");
+                  Assert.AreNotEqual((System.IO.FileAttributes)0, fsei.Attributes & System.IO.FileAttributes.System, "The System attribute is not found, but is expected.");
                }
 
 

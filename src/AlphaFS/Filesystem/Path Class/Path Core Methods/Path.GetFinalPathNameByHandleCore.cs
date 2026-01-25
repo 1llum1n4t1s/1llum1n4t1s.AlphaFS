@@ -58,7 +58,9 @@ namespace Alphaleonis.Win32.Filesystem
 
                var lastError = Marshal.GetLastWin32Error();
                if (!success && lastError != Win32Errors.ERROR_SUCCESS)
+               {
                   NativeError.ThrowException(lastError);
+               }
 
 
                return buffer.ToString();
@@ -76,10 +78,13 @@ namespace Alphaleonis.Win32.Filesystem
          // Check for: FileTypes.DiskFile
 
          // Can't map a 0 byte file.
-         long fileSizeHi;
-         if (!NativeMethods.GetFileSizeEx(handle, out fileSizeHi))
+         if (!NativeMethods.GetFileSizeEx(handle, out var fileSizeHi))
+         {
             if (fileSizeHi == 0)
+            {
                return string.Empty;
+            }
+         }
 
 
          // PAGE_READONLY
@@ -95,8 +100,12 @@ namespace Alphaleonis.Win32.Filesystem
             using (var pMem = NativeMethods.MapViewOfFile(handle2, 4, 0, 0, (UIntPtr)1))
             {
                if (NativeMethods.IsValidHandle(pMem, Marshal.GetLastWin32Error()))
+               {
                   if (NativeMethods.GetMappedFileName(Process.GetCurrentProcess().Handle, pMem, buffer, (uint) buffer.Capacity))
+                  {
                      NativeMethods.UnmapViewOfFile(pMem);
+                  }
+               }
             }
          }
 
@@ -156,7 +165,9 @@ namespace Alphaleonis.Win32.Filesystem
       private static string DosDeviceToDosPath(string dosDevice, string deviceReplacement)
       {
          if (Utils.IsNullOrWhiteSpace(dosDevice))
+         {
             return string.Empty;
+         }
 
 
          foreach (var drive in Directory.EnumerateLogicalDrivesCore(false, false).Select(drv => drv.Name))

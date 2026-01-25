@@ -23,8 +23,6 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Runtime.Serialization;
-
 namespace Alphaleonis.Win32.Filesystem
 {
    /// <summary>[AlphaFS] The requested operation could not be completed because the device is not ready.</summary>
@@ -61,14 +59,6 @@ namespace Alphaleonis.Win32.Filesystem
       /// <param name="path">The path to the device.</param>
       /// <param name="innerException">The inner exception.</param>
       public DeviceNotReadyException(string path, Exception innerException) : base(string.Format(CultureInfo.InvariantCulture, "{0}: [{1}]", ErrorText, Path.GetCleanExceptionPath(path)), innerException)
-      {
-      }
-
-
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="DeviceNotReadyException"/> class.</summary>
-      /// <param name="info">The data for serializing or deserializing the object.</param>
-      /// <param name="context">The source and destination for the object.</param>
-      protected DeviceNotReadyException(SerializationInfo info, StreamingContext context) : base(info, context)
       {
       }
    }

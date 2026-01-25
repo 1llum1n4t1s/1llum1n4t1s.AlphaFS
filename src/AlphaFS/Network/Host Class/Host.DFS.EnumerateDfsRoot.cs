@@ -72,7 +72,9 @@ namespace Alphaleonis.Win32.Network
       internal static IEnumerable<string> EnumerateDfsRootCore(string host, bool continueOnException)
       {
          if (!Filesystem.NativeMethods.IsAtLeastWindowsVista)
+         {
             throw new PlatformNotSupportedException(new Win32Exception((int) Win32Errors.ERROR_OLD_WIN_VERSION).Message);
+         }
 
 
          return EnumerateNetworkObjectCore(new FunctionData(), (NativeMethods.DFS_INFO_300 structure, SafeGlobalMemoryBufferHandle buffer) => new DfsInfo {EntryPath = structure.DfsName},

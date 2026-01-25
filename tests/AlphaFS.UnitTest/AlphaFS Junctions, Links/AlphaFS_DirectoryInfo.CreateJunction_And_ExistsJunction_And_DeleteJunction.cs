@@ -32,97 +32,95 @@ namespace AlphaFS.UnitTest
       [TestMethod]
       public void AlphaFS_DirectoryInfo_CreateJunction_And_ExistsJunction_And_DeleteJunction_Local_Success()
       {
-         using (var tempRoot = new TemporaryDirectory())
-         {
-            var toDelete = tempRoot.Directory.CreateSubdirectory("ToDelete");
-            var junction = System.IO.Path.Combine(toDelete.FullName, "MyJunctionPoint");
-            var target = tempRoot.Directory.CreateSubdirectory("JunctionTarget");
+         using var tempRoot = new TemporaryDirectory();
+         var toDelete = tempRoot.Directory.CreateSubdirectory("ToDelete");
+         var junction = System.IO.Path.Combine(toDelete.FullName, "MyJunctionPoint");
+         var target = tempRoot.Directory.CreateSubdirectory("JunctionTarget");
 
-            Console.WriteLine("Input Directory JunctionPoint  Path: [{0}]", junction);
-            Console.WriteLine("Input Directory JunctionTarget Path: [{0}]", target);
+         Console.WriteLine("Input Directory JunctionPoint  Path: [{0}]", junction);
+         Console.WriteLine("Input Directory JunctionTarget Path: [{0}]", target);
 
 
             #region CreateJunction
 
-            var dirInfo = new Alphaleonis.Win32.Filesystem.DirectoryInfo(target.FullName);
+         var dirInfo = new Alphaleonis.Win32.Filesystem.DirectoryInfo(target.FullName);
 
 
-            // On success, dirInfo.FullName now points to the directory junction.
-            // The DirectoryInfo instance is updated.
-            dirInfo.CreateJunction(junction);
+         // On success, dirInfo.FullName now points to the directory junction.
+         // The DirectoryInfo instance is updated.
+         dirInfo.CreateJunction(junction);
 
-            Assert.AreEqual(dirInfo.FullName, junction, "It is expected that the DirectoryInfo points to the directory junction, but it is not.");
-
-
+         Assert.AreEqual(dirInfo.FullName, junction, "It is expected that the DirectoryInfo points to the directory junction, but it is not.");
 
 
-            var dirInfoSysIO = new System.IO.DirectoryInfo(junction);
-            UnitTestConstants.Dump(dirInfoSysIO);
 
-            Assert.IsTrue((dirInfoSysIO.Attributes & System.IO.FileAttributes.ReparsePoint) != 0);
+
+         var dirInfoSysIO = new System.IO.DirectoryInfo(junction);
+         UnitTestConstants.Dump(dirInfoSysIO);
+
+         Assert.AreNotEqual((System.IO.FileAttributes)0, dirInfoSysIO.Attributes & System.IO.FileAttributes.ReparsePoint);
 
 
             
 
-            var lvi = Alphaleonis.Win32.Filesystem.Directory.GetLinkTargetInfo(dirInfo.FullName);
-            UnitTestConstants.Dump(lvi);
-            UnitTestConstants.Dump(dirInfo.EntryInfo);
+         var lvi = Alphaleonis.Win32.Filesystem.Directory.GetLinkTargetInfo(dirInfo.FullName);
+         UnitTestConstants.Dump(lvi);
+         UnitTestConstants.Dump(dirInfo.EntryInfo);
 
-            Assert.AreEqual(System.IO.Directory.Exists(dirInfo.FullName), Alphaleonis.Win32.Filesystem.Directory.Exists(dirInfo.FullName));
-            Assert.AreEqual(junction, dirInfo.FullName);
-
-
-
-
-            Assert.IsTrue(dirInfo.EntryInfo.IsDirectory);
-            Assert.IsTrue(dirInfo.EntryInfo.IsMountPoint);
-            Assert.IsTrue(dirInfo.EntryInfo.IsReparsePoint);
-            Assert.IsFalse(dirInfo.EntryInfo.IsSymbolicLink);
-            Assert.AreEqual(dirInfo.EntryInfo.ReparsePointTag, Alphaleonis.Win32.Filesystem.ReparsePointTag.MountPoint);
+         Assert.AreEqual(Alphaleonis.Win32.Filesystem.Directory.Exists(dirInfo.FullName), System.IO.Directory.Exists(dirInfo.FullName));
+         Assert.AreEqual(junction, dirInfo.FullName);
 
 
 
 
-            // Create a folder in the junction and test the target.
-            const string subFolder = "Test folder";
-            dirInfo.CreateSubdirectory(subFolder);
+         Assert.IsTrue(dirInfo.EntryInfo.IsDirectory);
+         Assert.IsTrue(dirInfo.EntryInfo.IsMountPoint);
+         Assert.IsTrue(dirInfo.EntryInfo.IsReparsePoint);
+         Assert.IsFalse(dirInfo.EntryInfo.IsSymbolicLink);
+         Assert.AreEqual(Alphaleonis.Win32.Filesystem.ReparsePointTag.MountPoint, dirInfo.EntryInfo.ReparsePointTag);
 
-            Assert.IsTrue(System.IO.Directory.Exists(System.IO.Path.Combine(target.FullName, subFolder)));
+
+
+
+         // Create a folder in the junction and test the target.
+         const string subFolder = "Test folder";
+         dirInfo.CreateSubdirectory(subFolder);
+
+         Assert.IsTrue(System.IO.Directory.Exists(System.IO.Path.Combine(target.FullName, subFolder)));
 
             #endregion // CreateJunction
 
 
-            // ExistsJunction
+         // ExistsJunction
 
-            Assert.IsTrue(Alphaleonis.Win32.Filesystem.Directory.ExistsJunction(dirInfo.FullName), "It is expected that the directory junction exists, but is does not.");
+         Assert.IsTrue(Alphaleonis.Win32.Filesystem.Directory.ExistsJunction(dirInfo.FullName), "It is expected that the directory junction exists, but is does not.");
 
-            Assert.IsTrue(System.IO.Directory.Exists(dirInfo.FullName), "It is expected that the directory exists, but is does not.");
+         Assert.IsTrue(System.IO.Directory.Exists(dirInfo.FullName), "It is expected that the directory exists, but is does not.");
 
 
             #region DeleteJunction
 
-            // Remove directory junction, target directory should remain.
-            dirInfo.DeleteJunction();
+         // Remove directory junction, target directory should remain.
+         dirInfo.DeleteJunction();
 
 
-            Assert.IsTrue(System.IO.Directory.Exists(dirInfo.FullName));
-            Assert.IsTrue(System.IO.Directory.Exists(dirInfo.Parent.FullName));
+         Assert.IsTrue(System.IO.Directory.Exists(dirInfo.FullName));
+         Assert.IsTrue(System.IO.Directory.Exists(dirInfo.Parent.FullName));
 
-            Assert.IsTrue(dirInfo.EntryInfo.IsDirectory);
-            Assert.IsFalse(dirInfo.EntryInfo.IsMountPoint);
-            Assert.IsFalse(dirInfo.EntryInfo.IsReparsePoint);
-            Assert.IsFalse(dirInfo.EntryInfo.IsSymbolicLink);
-            Assert.AreNotEqual(dirInfo.EntryInfo.ReparsePointTag, Alphaleonis.Win32.Filesystem.ReparsePointTag.MountPoint);
+         Assert.IsTrue(dirInfo.EntryInfo.IsDirectory);
+         Assert.IsFalse(dirInfo.EntryInfo.IsMountPoint);
+         Assert.IsFalse(dirInfo.EntryInfo.IsReparsePoint);
+         Assert.IsFalse(dirInfo.EntryInfo.IsSymbolicLink);
+         Assert.AreNotEqual(Alphaleonis.Win32.Filesystem.ReparsePointTag.MountPoint, dirInfo.EntryInfo.ReparsePointTag);
 
             #endregion // DeleteJunction
 
 
-            // ExistsJunction
+         // ExistsJunction
 
-            Assert.IsFalse(Alphaleonis.Win32.Filesystem.Directory.ExistsJunction(dirInfo.FullName), "It is expected that the directory junction does not exist, but is does.");
+         Assert.IsFalse(Alphaleonis.Win32.Filesystem.Directory.ExistsJunction(dirInfo.FullName), "It is expected that the directory junction does not exist, but is does.");
 
-            Assert.IsTrue(System.IO.Directory.Exists(dirInfo.FullName), "It is expected that the directory exists, but is does not.");
-         }
+         Assert.IsTrue(System.IO.Directory.Exists(dirInfo.FullName), "It is expected that the directory exists, but is does not.");
       }
    }
 }

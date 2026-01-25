@@ -42,7 +42,9 @@ namespace Alphaleonis.Win32.Filesystem
       public static void DeleteVolumeLabel(string rootPathName)
       {
          if (Utils.IsNullOrWhiteSpace(rootPathName))
+         {
             throw new ArgumentNullException("rootPathName");
+         }
 
 
          SetVolumeLabel(rootPathName, null);
@@ -68,14 +70,18 @@ namespace Alphaleonis.Win32.Filesystem
       public static void SetCurrentVolumeLabel(string volumeName)
       {
          if (Utils.IsNullOrWhiteSpace(volumeName))
+         {
             throw new ArgumentNullException("volumeName");
+         }
 
 
          var success = NativeMethods.SetVolumeLabel(null, volumeName);
 
          var lastError = Marshal.GetLastWin32Error();
          if (!success)
+         {
             NativeError.ThrowException(lastError, volumeName);
+         }
       }
 
 
@@ -107,7 +113,9 @@ namespace Alphaleonis.Win32.Filesystem
 
             var lastError = Marshal.GetLastWin32Error();
             if (!success)
+            {
                NativeError.ThrowException(lastError, volumePath, volumeName);
+            }
          }
       }
    }

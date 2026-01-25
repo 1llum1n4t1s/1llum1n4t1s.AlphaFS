@@ -52,7 +52,9 @@ namespace Alphaleonis.Win32.Filesystem
       internal static void SetAttributesCore(KernelTransaction transaction, bool isFolder, string path, FileAttributes fileAttributes, PathFormat pathFormat)
       {
          if (pathFormat != PathFormat.LongFullPath)
+         {
             path = Path.GetExtendedLengthPathCore(transaction, path, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.FullCheck);
+         }
 
 
          var success = null == transaction || !NativeMethods.IsAtLeastWindowsVista
@@ -73,7 +75,9 @@ namespace Alphaleonis.Win32.Filesystem
 
             if (lastError == Win32Errors.ERROR_INVALID_PARAMETER)
 
+            {
                throw new ArgumentException(Resources.Invalid_File_Attribute, "fileAttributes");
+            }
 
 
             NativeError.ThrowException(lastError, isFolder, path);

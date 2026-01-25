@@ -51,7 +51,9 @@ namespace Alphaleonis.Win32.Filesystem
       internal static void CreateSymbolicLinkCore(KernelTransaction transaction, string symlinkFileName, string targetFileName, SymbolicLinkTarget targetType, PathFormat pathFormat)
       {
          if (!NativeMethods.IsAtLeastWindowsVista)
+         {
             throw new PlatformNotSupportedException(new Win32Exception((int) Win32Errors.ERROR_OLD_WIN_VERSION).Message);
+         }
 
 
          if (pathFormat != PathFormat.LongFullPath)
@@ -93,7 +95,9 @@ namespace Alphaleonis.Win32.Filesystem
 
          var lastError = (uint) Marshal.GetLastWin32Error();
          if (!success)
+         {
             NativeError.ThrowException(lastError, targetFileName, symlinkFileName);
+         }
       }
    }
 }

@@ -57,13 +57,14 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public static FileIdInfo GetFileIdInfo(SafeFileHandle handle)
       {
-         NativeMethods.BY_HANDLE_FILE_INFORMATION info;
 
-         var success = NativeMethods.GetFileInformationByHandle(handle, out info);
+         var success = NativeMethods.GetFileInformationByHandle(handle, out var info);
 
          var lastError = Marshal.GetLastWin32Error();
          if (!success)
+         {
             NativeError.ThrowException(lastError);
+         }
 
          return new FileIdInfo(info);
       }

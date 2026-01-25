@@ -35,42 +35,40 @@ namespace AlphaFS.UnitTest
       {
          UnitTestAssert.IsElevatedProcess();
 
-         using (var tempRoot = new TemporaryDirectory())
-         {
-            var folder = tempRoot.CreateDirectory();
+         using var tempRoot = new TemporaryDirectory();
+         var folder = tempRoot.CreateDirectory();
 
-            Console.WriteLine("Input Directory Path: [{0}]", folder.FullName);
+         Console.WriteLine("Input Directory Path: [{0}]", folder.FullName);
 
-            var guid = Alphaleonis.Win32.Filesystem.Volume.GetVolumeGuid(UnitTestConstants.SysDrive);
+         var guid = Alphaleonis.Win32.Filesystem.Volume.GetVolumeGuid(UnitTestConstants.SysDrive);
             
 
-            Console.WriteLine("\nCreate mount point.");
+         Console.WriteLine("\nCreate mount point.");
 
-            Alphaleonis.Win32.Filesystem.Volume.SetVolumeMountPoint(folder.FullName, guid);
-
-
-            Assert.IsTrue(Alphaleonis.Win32.Filesystem.Volume.EnumerateVolumeMountPoints(guid).Any(mountPoint => folder.FullName.EndsWith(mountPoint.TrimEnd('\\'))));
+         Alphaleonis.Win32.Filesystem.Volume.SetVolumeMountPoint(folder.FullName, guid);
 
 
-
-
-            var lvi = Alphaleonis.Win32.Filesystem.Directory.GetLinkTargetInfo(folder.FullName);
-
-            UnitTestConstants.Dump(lvi);
-
-            Assert.IsTrue(lvi.SubstituteName.StartsWith(Alphaleonis.Win32.Filesystem.Path.NonInterpretedPathPrefix));
-
-            Assert.IsTrue(lvi.SubstituteName.EndsWith(guid.Replace(Alphaleonis.Win32.Filesystem.Path.LongPathPrefix, string.Empty)));
+         Assert.IsTrue(Alphaleonis.Win32.Filesystem.Volume.EnumerateVolumeMountPoints(guid).Any(mountPoint => folder.FullName.EndsWith(mountPoint.TrimEnd('\\'))));
 
 
 
 
-            Console.WriteLine("\nRemove mount point.");
+         var lvi = Alphaleonis.Win32.Filesystem.Directory.GetLinkTargetInfo(folder.FullName);
 
-            Alphaleonis.Win32.Filesystem.Volume.DeleteVolumeMountPoint(folder.FullName);
+         UnitTestConstants.Dump(lvi);
 
-            Assert.IsFalse(Alphaleonis.Win32.Filesystem.Volume.EnumerateVolumeMountPoints(guid).Any(mountPoint => folder.FullName.EndsWith(mountPoint.TrimEnd('\\'))));
-         }
+         Assert.StartsWith(Alphaleonis.Win32.Filesystem.Path.NonInterpretedPathPrefix, lvi.SubstituteName);
+
+         Assert.EndsWith(guid.Replace(Alphaleonis.Win32.Filesystem.Path.LongPathPrefix, string.Empty), lvi.SubstituteName);
+
+
+
+
+         Console.WriteLine("\nRemove mount point.");
+
+         Alphaleonis.Win32.Filesystem.Volume.DeleteVolumeMountPoint(folder.FullName);
+
+         Assert.AreEqual(0, Alphaleonis.Win32.Filesystem.Volume.EnumerateVolumeMountPoints(guid).Count(mountPoint => folder.FullName.EndsWith(mountPoint.TrimEnd('\\'))));
       }
    }
 }

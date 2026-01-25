@@ -48,7 +48,9 @@ namespace Alphaleonis.Win32.Filesystem
 
          if (string.Compare(LongFullName, 0, pathLp, 0, LongFullName.Length, StringComparison.OrdinalIgnoreCase) != 0)
 
+         {
             throw new ArgumentException(Resources.Invalid_Subpath, "path");
+         }
 
 
          return Directory.CreateDirectoryCore(false, Transaction, pathLp, templatePathLp, directorySecurity, compress, PathFormat.LongFullPath);

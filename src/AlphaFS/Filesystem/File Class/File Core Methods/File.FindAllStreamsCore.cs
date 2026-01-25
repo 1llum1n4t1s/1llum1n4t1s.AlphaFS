@@ -33,10 +33,11 @@ namespace Alphaleonis.Win32.Filesystem
       {
          var streamSizes = new Collection<long>();
 
-         using (var buffer = new SafeGlobalMemoryBufferHandle(Marshal.SizeOf(typeof(NativeMethods.WIN32_FIND_STREAM_DATA))))
+         using (var buffer = new SafeGlobalMemoryBufferHandle(Marshal.SizeOf<NativeMethods.WIN32_FIND_STREAM_DATA>()))
          using (var safeFindFileHandle = FindFirstStreamNative(transaction, pathLp, buffer))
          {
             if (null != safeFindFileHandle)
+            {
                while (true)
                {
                   streamSizes.Add(buffer.PtrToStructure<NativeMethods.WIN32_FIND_STREAM_DATA>(0).StreamSize);
@@ -48,11 +49,14 @@ namespace Alphaleonis.Win32.Filesystem
                   if (!success)
                   {
                      if (lastError == Win32Errors.ERROR_HANDLE_EOF)
+                     {
                         break;
+                     }
 
                      NativeError.ThrowException(lastError, pathLp);
                   }
                }
+            }
          }
          
          return streamSizes.Sum();

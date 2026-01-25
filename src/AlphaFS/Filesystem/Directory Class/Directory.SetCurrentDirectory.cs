@@ -66,14 +66,18 @@ namespace Alphaleonis.Win32.Filesystem
       public static void SetCurrentDirectory(string path, PathFormat pathFormat)
       {
          if (Utils.IsNullOrWhiteSpace(path))
+         {
             throw new ArgumentNullException("path");
+         }
 
          var fullCheck = pathFormat == PathFormat.RelativePath;
          Path.CheckSupportedPathFormat(path, fullCheck, fullCheck);
          var pathLp = Path.GetExtendedLengthPathCore(null, path, pathFormat, GetFullPathOptions.AddTrailingDirectorySeparator);
 
          if (pathFormat == PathFormat.FullPath)
+         {
             pathLp = Path.GetRegularPathCore(pathLp, GetFullPathOptions.None, false);
+         }
 
 
          // SetCurrentDirectory()
@@ -84,7 +88,9 @@ namespace Alphaleonis.Win32.Filesystem
 
          var lastError = Marshal.GetLastWin32Error();
          if (!success)
+         {
             NativeError.ThrowException(lastError, pathLp);
+         }
       }
    }
 }

@@ -57,10 +57,14 @@ namespace Alphaleonis.Win32.Network
          HostName = !Utils.IsNullOrWhiteSpace(hostName) ? hostName : Environment.MachineName;
 
          if (workstationStat.HasValue)
+         {
             _workstationStat = (NativeMethods.STAT_WORKSTATION_0) workstationStat;
+         }
 
          else
+         {
             Refresh();
+         }
       }
 
       #endregion // Constructors

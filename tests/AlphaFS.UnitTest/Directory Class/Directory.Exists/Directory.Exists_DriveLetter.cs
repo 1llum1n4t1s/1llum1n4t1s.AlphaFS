@@ -44,7 +44,9 @@ namespace AlphaFS.UnitTest
          // Test Driveletter according to System.IO
          var driveSysIO = UnitTestConstants.SysDrive;
          if (isNetwork)
+         {
             driveSysIO = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(driveSysIO);
+         }
 
 
          // C:

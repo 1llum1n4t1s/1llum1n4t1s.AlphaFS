@@ -45,7 +45,7 @@ namespace AlphaFS.UnitTest
 
             var shell32Info = new Alphaleonis.Win32.Filesystem.Shell32Info(file);
             
-            Assert.IsTrue(null != shell32Info);
+            Assert.IsNotNull(shell32Info);
 
             UnitTestConstants.Dump(shell32Info);
          }

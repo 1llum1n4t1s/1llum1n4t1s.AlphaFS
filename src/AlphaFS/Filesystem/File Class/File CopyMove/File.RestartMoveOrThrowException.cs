@@ -51,10 +51,14 @@ namespace Alphaleonis.Win32.Filesystem
             case Win32Errors.ERROR_PATH_NOT_FOUND: // On folders.
 
                if (!srcExists)
+               {
                   Directory.ExistsDriveOrFolderOrFile(cma.Transaction, sourcePathLp, isFolder, lastError, false, true);
+               }
 
                if (!dstExists)
+               {
                   Directory.ExistsDriveOrFolderOrFile(cma.Transaction, destinationPathLp, isFolder, lastError, false, true);
+               }
 
                break;
 
@@ -72,7 +76,9 @@ namespace Alphaleonis.Win32.Filesystem
                lastError = (int) (isFolder ? Win32Errors.ERROR_ALREADY_EXISTS : Win32Errors.ERROR_FILE_EXISTS);
 
                if (!retry)
+               {
                   NativeError.ThrowException(lastError, isFolder, destinationPathLp);
+               }
 
                break;
 
@@ -93,7 +99,9 @@ namespace Alphaleonis.Win32.Filesystem
                // MSDN: .NET 3.5+: IOException: destDirName already exists.
 
                if (destIsFolder && dstExists && !retry)
+               {
                   NativeError.ThrowException(Win32Errors.ERROR_ALREADY_EXISTS, destinationPathLp);
+               }
 
 
 
@@ -105,7 +113,9 @@ namespace Alphaleonis.Win32.Filesystem
                   // MSDN: .NET 3.5+: DirectoryNotFoundException: The path specified by sourceDirName is invalid (for example, it is on an unmapped drive). 
 
                   if (!srcExists && !retry)
+                  {
                      NativeError.ThrowException(isFolder ? Win32Errors.ERROR_PATH_NOT_FOUND : Win32Errors.ERROR_FILE_NOT_FOUND, sourcePathLp);
+                  }
                }
 
 
@@ -114,9 +124,11 @@ namespace Alphaleonis.Win32.Filesystem
 
                if (!isFolder)
                {
-                  using (var safeHandle = CreateFileCore(cma.Transaction, false, sourcePathLp, ExtendedFileAttributes.Normal, null, FileMode.Open, 0, FileShare.Read, false, false, PathFormat.LongFullPath))
-                     if (null != safeHandle)
-                        fileNameLp = sourcePathLp;
+                  using var safeHandle = CreateFileCore(cma.Transaction, false, sourcePathLp, ExtendedFileAttributes.Normal, null, FileMode.Open, 0, FileShare.Read, false, false, PathFormat.LongFullPath);
+                  if (null != safeHandle)
+                  {
+                     fileNameLp = sourcePathLp;
+                  }
                }
 
 
@@ -131,9 +143,11 @@ namespace Alphaleonis.Win32.Filesystem
 
                   if (dstExists && !isFolder && destIsFolder && !retry)
 
+                  {
                      NativeError.ThrowException(lastError, false, string.Format(CultureInfo.InvariantCulture, Resources.Target_File_Is_A_Directory, destinationPathLp));
+                  }
 
-                  
+
                   // MSDN: .NET 3.5+: IOException: The directory specified by path is read-only.
 
                   if (isMove && IsReadOnlyOrHidden(attrs.dwFileAttributes))
@@ -154,7 +168,9 @@ namespace Alphaleonis.Win32.Filesystem
                      // and has the FILE_ATTRIBUTE_HIDDEN or FILE_ATTRIBUTE_READONLY attribute set.
 
                      if (!retry)
+                     {
                         throw new FileReadOnlyException(destinationPathLp);
+                     }
                   }
                }
 
@@ -164,7 +180,9 @@ namespace Alphaleonis.Win32.Filesystem
                // File.Move(): The destination file already exists or sourcePath was not found.
 
                if (!retry)
+               {
                   NativeError.ThrowException(lastError, isFolder, fileNameLp);
+               }
 
                break;
          }

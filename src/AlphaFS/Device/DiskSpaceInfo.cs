@@ -49,13 +49,17 @@ namespace Alphaleonis.Win32.Filesystem
       public DiskSpaceInfo(string drivePath)
       {
          if (Utils.IsNullOrWhiteSpace(drivePath))
+         {
             throw new ArgumentNullException("drivePath");
+         }
 
 
          drivePath = drivePath.Length == 1 ? drivePath + Path.VolumeSeparatorChar : Path.GetPathRoot(drivePath, false);
 
          if (Utils.IsNullOrWhiteSpace(drivePath))
+         {
             throw new ArgumentException(Resources.InvalidDriveLetterArgument, "drivePath");
+         }
 
 
          // MSDN:
@@ -89,7 +93,9 @@ namespace Alphaleonis.Win32.Filesystem
          _continueOnAccessError = continueOnException;
 
          if (refresh)
+         {
             Refresh();
+         }
       }
 
 
@@ -193,14 +199,15 @@ namespace Alphaleonis.Win32.Filesystem
 
             if (_initGetSpaceInfo)
             {
-               long freeBytesAvailable, totalNumberOfBytes, totalNumberOfFreeBytes;
 
-               var success = NativeMethods.GetDiskFreeSpaceEx(DriveName, out freeBytesAvailable, out totalNumberOfBytes, out totalNumberOfFreeBytes);
+               var success = NativeMethods.GetDiskFreeSpaceEx(DriveName, out var freeBytesAvailable, out var totalNumberOfBytes, out var totalNumberOfFreeBytes);
 
                lastError = Marshal.GetLastWin32Error();
 
                if (!success && !_continueOnAccessError && lastError != Win32Errors.ERROR_NOT_READY)
+               {
                   NativeError.ThrowException(lastError, DriveName);
+               }
 
 
                FreeBytesAvailable = freeBytesAvailable;
@@ -213,15 +220,15 @@ namespace Alphaleonis.Win32.Filesystem
 
             if (_initGetClusterInfo)
             {
-               int sectorsPerCluster, bytesPerSector, numberOfFreeClusters;
-               uint totalNumberOfClusters;
 
-               var success = NativeMethods.GetDiskFreeSpace(DriveName, out sectorsPerCluster, out bytesPerSector, out numberOfFreeClusters, out totalNumberOfClusters);
+               var success = NativeMethods.GetDiskFreeSpace(DriveName, out var sectorsPerCluster, out var bytesPerSector, out var numberOfFreeClusters, out var totalNumberOfClusters);
 
                lastError = Marshal.GetLastWin32Error();
 
                if (!success && !_continueOnAccessError && lastError != Win32Errors.ERROR_NOT_READY)
+               {
                   NativeError.ThrowException(lastError, DriveName);
+               }
 
 
                BytesPerSector = bytesPerSector;

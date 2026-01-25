@@ -33,16 +33,14 @@ namespace AlphaFS.UnitTest
       [TestMethod]
       public void AlphaFS_Crc32_StaticDefaultSeedAndPolynomialWithShortAsciiString()
       {
-         using (var crc32 = new Alphaleonis.Win32.Security.Crc32())
-         {
-            var text = UnitTestConstants.StreamArrayContent[0];
-            var hash = crc32.ComputeHash(System.Text.Encoding.ASCII.GetBytes(text)).Aggregate(string.Empty, (current, b) => current + b.ToString("x2").ToLower());
+         using var crc32 = new Alphaleonis.Win32.Security.Crc32();
+         var text = UnitTestConstants.StreamArrayContent[0];
+         var hash = crc32.ComputeHash(System.Text.Encoding.ASCII.GetBytes(text)).Aggregate(string.Empty, (current, b) => current + b.ToString("x2").ToLower());
                
-            Console.WriteLine("Input text: {0}", text);
-            Console.WriteLine("\n\tCRC32: {0}", hash);
+         Console.WriteLine("Input text: {0}", text);
+         Console.WriteLine("\n\tCRC32: {0}", hash);
 
-            Assert.AreEqual("742863eb", hash);
-         }
+         Assert.AreEqual("742863eb", hash);
       }
    }
 }

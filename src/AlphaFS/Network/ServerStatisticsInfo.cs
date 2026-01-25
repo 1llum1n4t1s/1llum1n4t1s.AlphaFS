@@ -63,7 +63,9 @@ namespace Alphaleonis.Win32.Network
          }
 
          else
+         {
             Refresh();
+         }
       }
 
       #endregion // Constructors

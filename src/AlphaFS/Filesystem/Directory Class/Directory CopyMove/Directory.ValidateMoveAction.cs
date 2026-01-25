@@ -57,7 +57,9 @@ namespace Alphaleonis.Win32.Filesystem
             // MSDN: .NET3.5+: IOException: An attempt was made to move a directory to a different volume.
 
             if (!isMove)
+            {
                NativeError.ThrowException(Win32Errors.ERROR_NOT_SAME_DEVICE, cma.SourcePathLp, cma.DestinationPathLp);
+            }
          }
 
 

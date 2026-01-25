@@ -43,7 +43,9 @@ namespace Alphaleonis.Win32.Filesystem
       internal static T GetAttributesExCore<T>(KernelTransaction transaction, string path, PathFormat pathFormat, bool returnErrorOnNotFound)
       {
          if (pathFormat == PathFormat.RelativePath)
+         {
             Path.CheckSupportedPathFormat(path, true, true);
+         }
 
          var pathLp = Path.GetExtendedLengthPathCore(transaction, path, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.CheckInvalidPathChars);
 
@@ -51,7 +53,9 @@ namespace Alphaleonis.Win32.Filesystem
          var dataInitialised = FillAttributeInfoCore(transaction, pathLp, ref data, false, returnErrorOnNotFound);
 
          if (dataInitialised != Win32Errors.ERROR_SUCCESS)
+         {
             NativeError.ThrowException(dataInitialised, pathLp);
+         }
 
          return (T) (typeof(T) == typeof(FileAttributes) ? (object) data.dwFileAttributes : data);
       }

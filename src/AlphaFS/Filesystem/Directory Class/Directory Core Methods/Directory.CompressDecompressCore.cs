@@ -51,7 +51,9 @@ namespace Alphaleonis.Win32.Filesystem
          var pathLp = Path.GetExtendedLengthPathCore(transaction, path, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.FullCheck);
 
          if (null == options)
+         {
             options = DirectoryEnumerationOptions.None;
+         }
 
 
          // Traverse the source folder, processing files and folders.

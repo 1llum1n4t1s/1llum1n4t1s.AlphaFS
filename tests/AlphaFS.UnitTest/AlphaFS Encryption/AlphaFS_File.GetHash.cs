@@ -64,13 +64,6 @@ namespace AlphaFS.UnitTest
             Console.WriteLine("\t{0,12} = {1}", type, hash);
             Assert.AreEqual("9F89C84A559F573636A47FF8DAED0D33", hash);
 
-
-            type = Alphaleonis.Win32.Security.HashType.RIPEMD160;
-            hash = Alphaleonis.Win32.Filesystem.File.GetHash(file, type);
-            Console.WriteLine("\t{0,12} = {1}", type, hash);
-            Assert.AreEqual("E38FD4F808D316C9671F0808AE1457330AD769AA", hash);
-
-
             type = Alphaleonis.Win32.Security.HashType.SHA1;
             hash = Alphaleonis.Win32.Filesystem.File.GetHash(file, type);
             Console.WriteLine("\t{0,12} = {1}", type, hash);

@@ -32,67 +32,67 @@ namespace AlphaFS.UnitTest
       [TestMethod]
       public void AlphaFS_Path_GetFinalPathNameByHandle_Local_Success()
       {
-         using (var tempRoot = new TemporaryDirectory())
+         using var tempRoot = new TemporaryDirectory();
+         var file = tempRoot.RandomDirectoryFullPath;
+
+         Console.WriteLine("Input File Path: [{0}]\n", file);
+
+
+         var longTempStream = Alphaleonis.Win32.Filesystem.Path.LongPathPrefix + file;
+         bool gotFileNameNormalized;
+         bool gotFileNameOpened;
+         bool gotVolumeNameDos;
+         bool gotVolumeNameGuid;
+         bool gotVolumeNameNt;
+         bool gotVolumeNameNone;
+
+
+         using (var stream = System.IO.File.Create(file))
          {
-            var file = tempRoot.RandomDirectoryFullPath;
-
-            Console.WriteLine("Input File Path: [{0}]\n", file);
-
-
-            var longTempStream = Alphaleonis.Win32.Filesystem.Path.LongPathPrefix + file;
-            bool gotFileNameNormalized;
-            bool gotFileNameOpened;
-            bool gotVolumeNameDos;
-            bool gotVolumeNameGuid;
-            bool gotVolumeNameNt;
-            bool gotVolumeNameNone;
-
-
-            using (var stream = System.IO.File.Create(file))
+            // For Windows versions < Vista, the file must be > 0 bytes.
+            if (!Alphaleonis.Win32.Filesystem.NativeMethods.IsAtLeastWindowsVista)
             {
-               // For Windows versions < Vista, the file must be > 0 bytes.
-               if (!Alphaleonis.Win32.Filesystem.NativeMethods.IsAtLeastWindowsVista)
-                  stream.WriteByte(1);
-
-
-               var handle = stream.SafeFileHandle;
-
-               var fileNameNormalized = Alphaleonis.Win32.Filesystem.Path.GetFinalPathNameByHandle(handle);
-               var fileNameOpened = Alphaleonis.Win32.Filesystem.Path.GetFinalPathNameByHandle(handle, Alphaleonis.Win32.Filesystem.FinalPathFormats.FileNameOpened);
-
-               var volumeNameDos = Alphaleonis.Win32.Filesystem.Path.GetFinalPathNameByHandle(handle, Alphaleonis.Win32.Filesystem.FinalPathFormats.None);
-               var volumeNameGuid = Alphaleonis.Win32.Filesystem.Path.GetFinalPathNameByHandle(handle, Alphaleonis.Win32.Filesystem.FinalPathFormats.VolumeNameGuid);
-               var volumeNameNt = Alphaleonis.Win32.Filesystem.Path.GetFinalPathNameByHandle(handle, Alphaleonis.Win32.Filesystem.FinalPathFormats.VolumeNameNT);
-               var volumeNameNone = Alphaleonis.Win32.Filesystem.Path.GetFinalPathNameByHandle(handle, Alphaleonis.Win32.Filesystem.FinalPathFormats.VolumeNameNone);
-
-
-               gotFileNameNormalized = !Alphaleonis.Utils.IsNullOrWhiteSpace(fileNameNormalized) && longTempStream.Equals(fileNameNormalized);
-               gotFileNameOpened = !Alphaleonis.Utils.IsNullOrWhiteSpace(fileNameOpened) && longTempStream.Equals(fileNameOpened);
-               gotVolumeNameDos = !Alphaleonis.Utils.IsNullOrWhiteSpace(volumeNameDos) && longTempStream.Equals(volumeNameDos);
-
-
-               gotVolumeNameGuid = !Alphaleonis.Utils.IsNullOrWhiteSpace(volumeNameGuid) && volumeNameGuid.StartsWith(Alphaleonis.Win32.Filesystem.Path.VolumePrefix) && volumeNameGuid.EndsWith(volumeNameNone);
-               gotVolumeNameNt = !Alphaleonis.Utils.IsNullOrWhiteSpace(volumeNameNt) && volumeNameNt.StartsWith(Alphaleonis.Win32.Filesystem.Path.DevicePrefix);
-               gotVolumeNameNone = !Alphaleonis.Utils.IsNullOrWhiteSpace(volumeNameNone) && file.EndsWith(volumeNameNone);
-
-
-               Console.WriteLine("\tFilestream.Name                : [{0}]", stream.Name);
-               Console.WriteLine("\tFinalPathFormats.None          : [{0}]", fileNameNormalized);
-               Console.WriteLine("\tFinalPathFormats.FileNameOpened: [{0}]", fileNameOpened);
-               Console.WriteLine("\tFinalPathFormats.VolumeNameDos : [{0}]", volumeNameDos);
-               Console.WriteLine("\tFinalPathFormats.VolumeNameGuid: [{0}]", volumeNameGuid);
-               Console.WriteLine("\tFinalPathFormats.VolumeNameNT  : [{0}]", volumeNameNt);
-               Console.WriteLine("\tFinalPathFormats.VolumeNameNone: [{0}]", volumeNameNone);
+               stream.WriteByte(1);
             }
 
 
-            Assert.IsTrue(gotFileNameNormalized);
-            Assert.IsTrue(gotFileNameOpened);
-            Assert.IsTrue(gotVolumeNameDos);
-            Assert.IsTrue(gotVolumeNameGuid);
-            Assert.IsTrue(gotVolumeNameNt);
-            Assert.IsTrue(gotVolumeNameNone);
+            var handle = stream.SafeFileHandle;
+
+            var fileNameNormalized = Alphaleonis.Win32.Filesystem.Path.GetFinalPathNameByHandle(handle);
+            var fileNameOpened = Alphaleonis.Win32.Filesystem.Path.GetFinalPathNameByHandle(handle, Alphaleonis.Win32.Filesystem.FinalPathFormats.FileNameOpened);
+
+            var volumeNameDos = Alphaleonis.Win32.Filesystem.Path.GetFinalPathNameByHandle(handle, Alphaleonis.Win32.Filesystem.FinalPathFormats.None);
+            var volumeNameGuid = Alphaleonis.Win32.Filesystem.Path.GetFinalPathNameByHandle(handle, Alphaleonis.Win32.Filesystem.FinalPathFormats.VolumeNameGuid);
+            var volumeNameNt = Alphaleonis.Win32.Filesystem.Path.GetFinalPathNameByHandle(handle, Alphaleonis.Win32.Filesystem.FinalPathFormats.VolumeNameNT);
+            var volumeNameNone = Alphaleonis.Win32.Filesystem.Path.GetFinalPathNameByHandle(handle, Alphaleonis.Win32.Filesystem.FinalPathFormats.VolumeNameNone);
+
+
+            gotFileNameNormalized = !Alphaleonis.Utils.IsNullOrWhiteSpace(fileNameNormalized) && longTempStream.Equals(fileNameNormalized);
+            gotFileNameOpened = !Alphaleonis.Utils.IsNullOrWhiteSpace(fileNameOpened) && longTempStream.Equals(fileNameOpened);
+            gotVolumeNameDos = !Alphaleonis.Utils.IsNullOrWhiteSpace(volumeNameDos) && longTempStream.Equals(volumeNameDos);
+
+
+            gotVolumeNameGuid = !Alphaleonis.Utils.IsNullOrWhiteSpace(volumeNameGuid) && volumeNameGuid.StartsWith(Alphaleonis.Win32.Filesystem.Path.VolumePrefix) && volumeNameGuid.EndsWith(volumeNameNone);
+            gotVolumeNameNt = !Alphaleonis.Utils.IsNullOrWhiteSpace(volumeNameNt) && volumeNameNt.StartsWith(Alphaleonis.Win32.Filesystem.Path.DevicePrefix);
+            gotVolumeNameNone = !Alphaleonis.Utils.IsNullOrWhiteSpace(volumeNameNone) && file.EndsWith(volumeNameNone);
+
+
+            Console.WriteLine("\tFilestream.Name                : [{0}]", stream.Name);
+            Console.WriteLine("\tFinalPathFormats.None          : [{0}]", fileNameNormalized);
+            Console.WriteLine("\tFinalPathFormats.FileNameOpened: [{0}]", fileNameOpened);
+            Console.WriteLine("\tFinalPathFormats.VolumeNameDos : [{0}]", volumeNameDos);
+            Console.WriteLine("\tFinalPathFormats.VolumeNameGuid: [{0}]", volumeNameGuid);
+            Console.WriteLine("\tFinalPathFormats.VolumeNameNT  : [{0}]", volumeNameNt);
+            Console.WriteLine("\tFinalPathFormats.VolumeNameNone: [{0}]", volumeNameNone);
          }
+
+
+         Assert.IsTrue(gotFileNameNormalized);
+         Assert.IsTrue(gotFileNameOpened);
+         Assert.IsTrue(gotVolumeNameDos);
+         Assert.IsTrue(gotVolumeNameGuid);
+         Assert.IsTrue(gotVolumeNameNt);
+         Assert.IsTrue(gotVolumeNameNone);
       }
    }
 }

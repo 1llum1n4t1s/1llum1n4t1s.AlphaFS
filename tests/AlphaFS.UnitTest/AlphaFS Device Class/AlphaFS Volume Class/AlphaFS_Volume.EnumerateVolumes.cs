@@ -57,7 +57,9 @@ namespace AlphaFS.UnitTest
 
 
          if (volumeCount == 0)
+         {
             UnitTestAssert.InconclusiveBecauseResourcesAreUnavailable();
+         }
       }
    }
 }

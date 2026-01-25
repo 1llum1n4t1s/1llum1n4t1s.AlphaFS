@@ -54,27 +54,33 @@ namespace Alphaleonis.Win32.Filesystem
       internal static void WriteAppendAllLinesCore(KernelTransaction transaction, string path, IEnumerable<string> contents, Encoding encoding, bool isAppend, bool addNewLine, PathFormat pathFormat)
       {
          if (null == contents)
+         {
             throw new ArgumentNullException("contents");
+         }
 
          if (null == encoding)
-            throw new ArgumentNullException("encoding");
-
-
-         using (var stream = OpenCore(transaction, path, isAppend ? FileMode.OpenOrCreate : FileMode.Create, FileSystemRights.AppendData, FileShare.ReadWrite, ExtendedFileAttributes.Normal, null, null, pathFormat))
          {
-            if (isAppend)
-               stream.Seek(0, SeekOrigin.End);
+            throw new ArgumentNullException("encoding");
+         }
 
-            using (var writer = new StreamWriter(stream, encoding))
-            {
-               if (addNewLine)
-                  foreach (var line in contents)
-                     writer.WriteLine(line);
 
-               else
-                  foreach (var line in contents)
-                     writer.Write(line);
-            }
+         using var stream = OpenCore(transaction, path, isAppend ? FileMode.OpenOrCreate : FileMode.Create, FileSystemRights.AppendData, FileShare.ReadWrite, ExtendedFileAttributes.Normal, null, null, pathFormat);
+         if (isAppend)
+         {
+            stream.Seek(0, SeekOrigin.End);
+         }
+
+         using var writer = new StreamWriter(stream, encoding);
+         if (addNewLine)
+         {
+            foreach (var line in contents)
+               writer.WriteLine(line);
+         }
+
+         else
+         {
+            foreach (var line in contents)
+               writer.Write(line);
          }
       }
    }

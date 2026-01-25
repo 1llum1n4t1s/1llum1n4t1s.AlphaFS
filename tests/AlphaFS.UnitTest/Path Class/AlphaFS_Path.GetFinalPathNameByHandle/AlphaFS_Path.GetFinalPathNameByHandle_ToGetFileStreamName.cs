@@ -37,33 +37,31 @@ namespace AlphaFS.UnitTest
          // System.IO returns the full path.
 
 
-         using (var tempRoot = new TemporaryDirectory())
-         {
-            var file = tempRoot.CreateFile();
+         using var tempRoot = new TemporaryDirectory();
+         var file = tempRoot.CreateFile();
 
-            Console.WriteLine("Input File Path: [{0}]\n", file.FullName);
+         Console.WriteLine("Input File Path: [{0}]\n", file.FullName);
 
-            string sysIoStreamName;
-            using (var fs = file.Create())
-               sysIoStreamName = fs.Name;
+         string sysIoStreamName;
+         using (var fs = file.Create())
+            sysIoStreamName = fs.Name;
             
 
-            using (var fs = Alphaleonis.Win32.Filesystem.File.Create(file.FullName))
-            {
-               var fileStreamName = Alphaleonis.Win32.Filesystem.Path.GetFinalPathNameByHandle(fs.SafeFileHandle);
+         using (var fs = Alphaleonis.Win32.Filesystem.File.Create(file.FullName))
+         {
+            var fileStreamName = Alphaleonis.Win32.Filesystem.Path.GetFinalPathNameByHandle(fs.SafeFileHandle);
 
-               fileStreamName = Alphaleonis.Win32.Filesystem.Path.GetRegularPath(fileStreamName);
-
-
-               Console.WriteLine("\tSystem.IO Filestream Name: " + sysIoStreamName);
-
-               Console.WriteLine("\tAlphaFS   Filestream Name: " + fileStreamName);
+            fileStreamName = Alphaleonis.Win32.Filesystem.Path.GetRegularPath(fileStreamName);
 
 
-               Assert.AreEqual("[Unknown]", fs.Name);
+            Console.WriteLine("\tSystem.IO Filestream Name: " + sysIoStreamName);
 
-               Assert.AreEqual(sysIoStreamName, fileStreamName);
-            }
+            Console.WriteLine("\tAlphaFS   Filestream Name: " + fileStreamName);
+
+
+            Assert.AreEqual("[Unknown]", fs.Name);
+
+            Assert.AreEqual(sysIoStreamName, fileStreamName);
          }
       }
    }

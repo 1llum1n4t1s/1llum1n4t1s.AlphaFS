@@ -59,13 +59,13 @@ namespace Alphaleonis.Win32.Filesystem
       {
          NativeMethods.IsValidHandle(handle);
 
-         NativeMethods.BY_HANDLE_FILE_INFORMATION info;
-
-         var success = NativeMethods.GetFileInformationByHandle(handle, out info);
+         var success = NativeMethods.GetFileInformationByHandle(handle, out var info);
 
          var lastError = Marshal.GetLastWin32Error();
          if (!success)
+         {
             NativeError.ThrowException(lastError);
+         }
 
 
          return new ByHandleFileInfo(info);

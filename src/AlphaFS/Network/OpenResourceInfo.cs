@@ -55,7 +55,9 @@ namespace Alphaleonis.Win32.Network
 
          if (lastError != Win32Errors.NERR_Success && lastError != Win32Errors.NERR_FileIdNotFound)
 
+         {
             NativeError.ThrowException(lastError, HostName, PathName);
+         }
       }
 
       /// <summary>Returns the full path to the share.</summary>

@@ -42,31 +42,29 @@ namespace AlphaFS.UnitTest
          // Assumption: Extention: .txt is associated with: C:\Windows\System32\notepad.exe
 
 
-         using (var tempRoot = new TemporaryDirectory(isNetwork))
-         {
-            var file = tempRoot.CreateFile();
+         using var tempRoot = new TemporaryDirectory(isNetwork);
+         var file = tempRoot.CreateFile();
 
-            Console.WriteLine("Input File Path: [{0}]\n", file.FullName);
+         Console.WriteLine("Input File Path: [{0}]\n", file.FullName);
 
 
-            var shell32Info = Alphaleonis.Win32.Filesystem.Shell32.GetShell32Info(file.FullName);
+         var shell32Info = Alphaleonis.Win32.Filesystem.Shell32.GetShell32Info(file.FullName);
             
 
-            var cmd = "open";
-            var result = shell32Info.GetVerbCommand(cmd);
-            Console.WriteLine("\tMethod: Shell32Info.GetVerbCommand(\"{0}\")  == [{1}]", cmd, result);
+         var cmd = "open";
+         var result = shell32Info.GetVerbCommand(cmd);
+         Console.WriteLine("\tMethod: Shell32Info.GetVerbCommand(\"{0}\")  == [{1}]", cmd, result);
 
 
-            Assert.IsTrue(result.StartsWith(System.IO.Path.Combine(Environment.SystemDirectory, "notepad.exe"), StringComparison.OrdinalIgnoreCase));
+         Assert.IsTrue(result.StartsWith(System.IO.Path.Combine(Environment.SystemDirectory, "notepad.exe"), StringComparison.OrdinalIgnoreCase));
             
 
-            cmd = "print";
-            result = shell32Info.GetVerbCommand(cmd);
-            Console.WriteLine("\tMethod: Shell32Info.GetVerbCommand(\"{0}\") == [{1}]\n", cmd, result);
+         cmd = "print";
+         result = shell32Info.GetVerbCommand(cmd);
+         Console.WriteLine("\tMethod: Shell32Info.GetVerbCommand(\"{0}\") == [{1}]\n", cmd, result);
 
 
-            Assert.IsTrue(result.StartsWith(System.IO.Path.Combine(Environment.SystemDirectory, "notepad.exe"), StringComparison.OrdinalIgnoreCase));
-         }
+         Assert.IsTrue(result.StartsWith(System.IO.Path.Combine(Environment.SystemDirectory, "notepad.exe"), StringComparison.OrdinalIgnoreCase));
       }
    }
 }

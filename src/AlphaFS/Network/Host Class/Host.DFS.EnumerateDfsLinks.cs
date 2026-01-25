@@ -42,11 +42,15 @@ namespace Alphaleonis.Win32.Network
       public static IEnumerable<DfsInfo> EnumerateDfsLinks(string dfsName)
       {
          if (!Filesystem.NativeMethods.IsAtLeastWindowsVista)
+         {
             throw new PlatformNotSupportedException(new Win32Exception((int) Win32Errors.ERROR_OLD_WIN_VERSION).Message);
+         }
 
 
          if (Utils.IsNullOrWhiteSpace(dfsName))
+         {
             throw new ArgumentNullException("dfsName");
+         }
 
 
          var fd = new FunctionData();

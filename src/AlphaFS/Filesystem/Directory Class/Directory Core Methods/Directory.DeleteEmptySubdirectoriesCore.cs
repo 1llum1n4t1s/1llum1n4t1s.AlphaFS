@@ -51,15 +51,21 @@ namespace Alphaleonis.Win32.Filesystem
          if (null == fsEntryInfo)
          {
             if (pathFormat == PathFormat.RelativePath)
+            {
                Path.CheckSupportedPathFormat(path, true, true);
+            }
 
             if (!File.ExistsCore(transaction, true, path, pathFormat))
+            {
                NativeError.ThrowException(Win32Errors.ERROR_PATH_NOT_FOUND, path);
+            }
 
             fsEntryInfo = File.GetFileSystemEntryInfoCore(transaction, true, Path.GetExtendedLengthPathCore(transaction, path, pathFormat, GetFullPathOptions.TrimEnd | GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.FullCheck), false, pathFormat);
 
             if (null == fsEntryInfo)
+            {
                return;
+            }
          }
 
          #endregion // Setup
@@ -67,7 +73,9 @@ namespace Alphaleonis.Win32.Filesystem
 
          // Ensure path is a directory.
          if (!fsEntryInfo.IsDirectory)
+         {
             throw new IOException(string.Format(CultureInfo.InvariantCulture, Resources.Target_Directory_Is_A_File, fsEntryInfo.LongFullPath));
+         }
 
 
          var dirs = new Stack<string>(1000);
@@ -79,10 +87,14 @@ namespace Alphaleonis.Win32.Filesystem
             {
                // Ensure the directory is empty.
                if (IsEmptyCore(transaction, fsei.LongFullPath, pathFormat))
+               {
                   DeleteDirectoryCore(transaction, fsei, null, false, ignoreReadOnly, true, PathFormat.LongFullPath);
+               }
 
                else if (recursive)
+               {
                   dirs.Push(fsei.LongFullPath);
+               }
             }
          }
       }

@@ -43,7 +43,9 @@ namespace AlphaFS.UnitTest
 
          var tempPath = Environment.SystemDirectory;
          if (isNetwork)
+         {
             tempPath = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(tempPath);
+         }
 
          Console.WriteLine("Input Directory Path: [{0}]\n", tempPath);
 
@@ -57,7 +59,7 @@ namespace AlphaFS.UnitTest
          }
 
 
-         Assert.IsTrue(count > 0, "Nothing is enumerated, but it is expected.");
+         Assert.IsGreaterThan(count, 0, "Nothing is enumerated, but it is expected.");
       }
    }
 }

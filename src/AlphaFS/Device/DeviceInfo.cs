@@ -23,12 +23,10 @@ using Alphaleonis.Win32.Network;
 using System;
 using System.Collections.Generic;
 using System.Security;
-using System.Security.Permissions;
 
 namespace Alphaleonis.Win32.Filesystem
 {
    /// <summary>Provides access to information of a device, on a local or remote host.</summary>
-   [SecurityPermission(SecurityAction.InheritanceDemand, UnmanagedCode = true)]
    [Serializable]
    [SecurityCritical]
    public sealed class DeviceInfo

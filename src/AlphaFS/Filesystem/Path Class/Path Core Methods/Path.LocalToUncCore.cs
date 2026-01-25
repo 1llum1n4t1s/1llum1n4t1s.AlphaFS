@@ -48,17 +48,23 @@ namespace Alphaleonis.Win32.Filesystem
       internal static string LocalToUncCore(string localPath, GetFullPathOptions fullPathOptions, PathFormat pathFormat)
       {
          if (Utils.IsNullOrWhiteSpace(localPath))
+         {
             return null;
+         }
 
          if (pathFormat == PathFormat.RelativePath)
+         {
             CheckSupportedPathFormat(localPath, true, true);
-         
+         }
+
 
          var addTrailingDirectorySeparator = (fullPathOptions & GetFullPathOptions.AddTrailingDirectorySeparator) != 0;
          var removeTrailingDirectorySeparator = (fullPathOptions & GetFullPathOptions.RemoveTrailingDirectorySeparator) != 0;
 
          if (addTrailingDirectorySeparator && removeTrailingDirectorySeparator)
+         {
             throw new ArgumentException(Resources.GetFullPathOptions_Add_And_Remove_DirectorySeparator_Invalid, "fullPathOptions");
+         }
 
 
          if (!removeTrailingDirectorySeparator && !addTrailingDirectorySeparator)
@@ -80,26 +86,34 @@ namespace Alphaleonis.Win32.Filesystem
          if (!IsUncPathCore(returnUncPath, true, false))
          {
             if (returnUncPath[0] == CurrentDirectoryPrefixChar || !IsPathRooted(returnUncPath, false))
+            {
                returnUncPath = GetFullPathCore(null, false, returnUncPath, GetFullPathOptions.None);
+            }
 
 
             var drive = GetPathRoot(returnUncPath, false);
 
             if (Utils.IsNullOrWhiteSpace(drive))
+            {
                return returnUncPath;
-            
+            }
+
 
             var remoteInfo = Host.GetRemoteNameInfoCore(returnUncPath, true);
 
 
             // Network share.
             if (!Utils.IsNullOrWhiteSpace(remoteInfo.lpUniversalName))
+            {
                return getAsLongPath ? GetLongPathCore(remoteInfo.lpUniversalName, fullPathOptions) : GetRegularPathCore(remoteInfo.lpUniversalName, fullPathOptions, false);
+            }
 
 
             // Network root.
             if (!Utils.IsNullOrWhiteSpace(remoteInfo.lpConnectionName))
+            {
                return getAsLongPath ? GetLongPathCore(remoteInfo.lpConnectionName, fullPathOptions) : GetRegularPathCore(remoteInfo.lpConnectionName, fullPathOptions, false);
+            }
 
 
             // Split: localDrive[0] = "C", localDrive[1] = "\Windows"

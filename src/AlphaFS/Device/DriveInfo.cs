@@ -62,13 +62,17 @@ namespace Alphaleonis.Win32.Filesystem
       public DriveInfo(string driveName)
       {
          if (Utils.IsNullOrWhiteSpace(driveName))
+         {
             throw new ArgumentNullException("driveName");
+         }
 
 
          driveName = driveName.Length == 1 ? driveName + Path.VolumeSeparatorChar : Path.GetPathRoot(driveName, false);
 
          if (Utils.IsNullOrWhiteSpace(driveName))
+         {
             throw new ArgumentException(Resources.InvalidDriveLetterArgument, "driveName");
+         }
 
 
          _name = Path.AddTrailingDirectorySeparator(driveName, false);
@@ -331,7 +335,9 @@ namespace Alphaleonis.Win32.Filesystem
                // VolumeInfo properties.
                case 0:
                   if (Utils.IsNullOrWhiteSpace(_volumeInfo.FullPath))
+                  {
                      _volumeInfo.Refresh();
+                  }
 
                   switch (mode)
                   {

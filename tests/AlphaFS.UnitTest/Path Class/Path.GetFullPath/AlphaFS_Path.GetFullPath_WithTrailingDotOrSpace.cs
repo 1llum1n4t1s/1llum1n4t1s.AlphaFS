@@ -65,8 +65,8 @@ namespace AlphaFS.UnitTest
          Console.WriteLine("Path (without dot)  : [{0}]", fileDot);
          Console.WriteLine("Path (without space): [{0}]", fileSpace);
 
-         Assert.IsFalse(fileDot.EndsWith(characterDot), "The path has a trailing dot, but is expected not to.");
-         Assert.IsFalse(fileSpace.EndsWith(characterSpace), "The path has a trailing space, but is expected not to.");
+         Assert.DoesNotEndWith(characterDot, fileDot, "The path has a trailing dot, but is expected not to.");
+         Assert.DoesNotEndWith(characterSpace, fileSpace, "The path has a trailing space, but is expected not to.");
 
 
 
@@ -82,8 +82,8 @@ namespace AlphaFS.UnitTest
          Console.WriteLine("Path (with dot)  : [{0}]", fileDot);
          Console.WriteLine("Path (with space): [{0}]", fileSpace);
 
-         Assert.IsTrue(fileDot.EndsWith(characterDot), "The path does not have a trailing dot, but is expected to.");
-         Assert.IsTrue(fileSpace.EndsWith(characterSpace), "The path does not have a trailing space, but is expected to.");
+         Assert.EndsWith(characterDot, fileDot, "The path does not have a trailing dot, but is expected to.");
+         Assert.EndsWith(characterSpace, fileSpace, "The path does not have a trailing space, but is expected to.");
 
          Console.WriteLine();
       }

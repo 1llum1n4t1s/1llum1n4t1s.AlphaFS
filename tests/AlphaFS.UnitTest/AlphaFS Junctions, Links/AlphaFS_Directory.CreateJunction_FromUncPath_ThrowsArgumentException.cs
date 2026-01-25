@@ -34,17 +34,15 @@ namespace AlphaFS.UnitTest
       {
          // Pass isNetwork to force Exception.
 
-         using (var tempRoot = new TemporaryDirectory(true))
-         {
-            var target = tempRoot.Directory.CreateSubdirectory("JunctionTarget");
+         using var tempRoot = new TemporaryDirectory(true);
+         var target = tempRoot.Directory.CreateSubdirectory("JunctionTarget");
 
-            var toDelete = tempRoot.Directory.CreateSubdirectory("ToDelete");
+         var toDelete = tempRoot.Directory.CreateSubdirectory("ToDelete");
 
-            var junction = System.IO.Path.Combine(toDelete.FullName, "JunctionPoint");
+         var junction = System.IO.Path.Combine(toDelete.FullName, "JunctionPoint");
 
 
-            UnitTestAssert.ThrowsException<ArgumentException>(() => Alphaleonis.Win32.Filesystem.Directory.CreateJunction(junction, target.FullName));
-         }
+         UnitTestAssert.ThrowsException<ArgumentException>(() => Alphaleonis.Win32.Filesystem.Directory.CreateJunction(junction, target.FullName));
       }
    }
 }

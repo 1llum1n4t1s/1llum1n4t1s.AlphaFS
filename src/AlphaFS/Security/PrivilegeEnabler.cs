@@ -44,8 +44,10 @@ namespace Alphaleonis.Win32.Security
          _enabledPrivileges.Add(new InternalPrivilegeEnabler(privilege));
 
          if (privileges != null)
-            foreach (Privilege priv in privileges)
+         {
+            foreach (var priv in privileges)
                _enabledPrivileges.Add(new InternalPrivilegeEnabler(priv));
+         }
       }
 
       #endregion // PrivilegeEnabler
@@ -56,7 +58,7 @@ namespace Alphaleonis.Win32.Security
       [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
       public void Dispose()
       {
-         foreach (InternalPrivilegeEnabler t in _enabledPrivileges)
+         foreach (var t in _enabledPrivileges)
          {
             try
             {

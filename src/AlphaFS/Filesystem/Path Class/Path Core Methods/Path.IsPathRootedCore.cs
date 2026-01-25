@@ -45,12 +45,16 @@ namespace Alphaleonis.Win32.Filesystem
          if (null != path)
          {
             if (checkInvalidPathChars)
+            {
                CheckInvalidPathChars(path, false, true);
+            }
 
             var length = path.Length;
 
             if (length >= 1 && IsDVsc(path[0], false) || length >= 2 && IsDVsc(path[1], true))
+            {
                return true;
+            }
          }
 
          return false;

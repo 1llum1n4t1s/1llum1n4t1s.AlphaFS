@@ -46,148 +46,169 @@ namespace Alphaleonis.Win32.Filesystem
       internal static void SetAccessControlCore(string path, SafeFileHandle handle, ObjectSecurity objectSecurity, AccessControlSections includeSections, PathFormat pathFormat)
       {
          if (pathFormat == PathFormat.RelativePath)
+         {
             Path.CheckSupportedPathFormat(path, true, true);
+         }
 
          if (objectSecurity == null)
+         {
             throw new ArgumentNullException("objectSecurity");
+         }
 
 
          var managedDescriptor = objectSecurity.GetSecurityDescriptorBinaryForm();
 
-         using (var safeBuffer = new SafeGlobalMemoryBufferHandle(managedDescriptor.Length))
+         using var safeBuffer = new SafeGlobalMemoryBufferHandle(managedDescriptor.Length);
+         var pathLp = Path.GetExtendedLengthPathCore(null, path, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.CheckInvalidPathChars);
+
+         safeBuffer.CopyFrom(managedDescriptor, 0, managedDescriptor.Length);
+
+         uint revision;
+
+
+         var success = Security.NativeMethods.GetSecurityDescriptorControl(safeBuffer, out var control, out revision);
+
+         var lastError = Marshal.GetLastWin32Error();
+         if (!success)
          {
-            var pathLp = Path.GetExtendedLengthPathCore(null, path, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.CheckInvalidPathChars);
-
-            safeBuffer.CopyFrom(managedDescriptor, 0, managedDescriptor.Length);
-
-            SECURITY_DESCRIPTOR_CONTROL control;
-            uint revision;
+            NativeError.ThrowException(lastError, pathLp);
+         }
 
 
-            var success = Security.NativeMethods.GetSecurityDescriptorControl(safeBuffer, out control, out revision);
+         PrivilegeEnabler privilegeEnabler = null;
 
-            var lastError = Marshal.GetLastWin32Error();
-            if (!success)
-               NativeError.ThrowException(lastError, pathLp);
+         try
+         {
+            var securityInfo = SECURITY_INFORMATION.None;
+            var pDacl = IntPtr.Zero;
 
-
-            PrivilegeEnabler privilegeEnabler = null;
-
-            try
+            if ((includeSections & AccessControlSections.Access) != 0)
             {
-               var securityInfo = SECURITY_INFORMATION.None;
-               var pDacl = IntPtr.Zero;
+               bool daclDefaulted;
 
-               if ((includeSections & AccessControlSections.Access) != 0)
+
+               success = Security.NativeMethods.GetSecurityDescriptorDacl(safeBuffer, out var daclPresent, out pDacl, out daclDefaulted);
+
+               lastError = Marshal.GetLastWin32Error();
+               if (!success)
                {
-                  bool daclDefaulted, daclPresent;
-
-
-                  success = Security.NativeMethods.GetSecurityDescriptorDacl(safeBuffer, out daclPresent, out pDacl, out daclDefaulted);
-
-                  lastError = Marshal.GetLastWin32Error();
-                  if (!success)
-                     NativeError.ThrowException(lastError, pathLp);
-
-
-                  if (daclPresent)
-                  {
-                     securityInfo |= SECURITY_INFORMATION.DACL_SECURITY_INFORMATION;
-                     securityInfo |= (control & SECURITY_DESCRIPTOR_CONTROL.SE_DACL_PROTECTED) != 0 ? SECURITY_INFORMATION.PROTECTED_DACL_SECURITY_INFORMATION : SECURITY_INFORMATION.UNPROTECTED_DACL_SECURITY_INFORMATION;
-                  }
+                  NativeError.ThrowException(lastError, pathLp);
                }
 
 
-               var pSacl = IntPtr.Zero;
-
-               if ((includeSections & AccessControlSections.Audit) != 0)
+               if (daclPresent)
                {
-                  bool saclDefaulted, saclPresent;
+                  securityInfo |= SECURITY_INFORMATION.DACL_SECURITY_INFORMATION;
+                  securityInfo |= (control & SECURITY_DESCRIPTOR_CONTROL.SE_DACL_PROTECTED) != 0 ? SECURITY_INFORMATION.PROTECTED_DACL_SECURITY_INFORMATION : SECURITY_INFORMATION.UNPROTECTED_DACL_SECURITY_INFORMATION;
+               }
+            }
 
 
-                  success = Security.NativeMethods.GetSecurityDescriptorSacl(safeBuffer, out saclPresent, out pSacl, out saclDefaulted);
+            var pSacl = IntPtr.Zero;
 
-                  lastError = Marshal.GetLastWin32Error();
-                  if (!success)
-                     NativeError.ThrowException(lastError, pathLp);
-                  
-                  
-                  if (saclPresent)
-                  {
-                     securityInfo |= SECURITY_INFORMATION.SACL_SECURITY_INFORMATION;
-                     securityInfo |= (control & SECURITY_DESCRIPTOR_CONTROL.SE_SACL_PROTECTED) != 0 ? SECURITY_INFORMATION.PROTECTED_SACL_SECURITY_INFORMATION : SECURITY_INFORMATION.UNPROTECTED_SACL_SECURITY_INFORMATION;
+            if ((includeSections & AccessControlSections.Audit) != 0)
+            {
+               bool saclDefaulted;
 
-                     privilegeEnabler = new PrivilegeEnabler(Privilege.Security);
-                  }
+
+               success = Security.NativeMethods.GetSecurityDescriptorSacl(safeBuffer, out var saclPresent, out pSacl, out saclDefaulted);
+
+               lastError = Marshal.GetLastWin32Error();
+               if (!success)
+               {
+                  NativeError.ThrowException(lastError, pathLp);
                }
 
 
-               var pOwner = IntPtr.Zero;
-
-               if ((includeSections & AccessControlSections.Owner) != 0)
+               if (saclPresent)
                {
-                  bool ownerDefaulted;
+                  securityInfo |= SECURITY_INFORMATION.SACL_SECURITY_INFORMATION;
+                  securityInfo |= (control & SECURITY_DESCRIPTOR_CONTROL.SE_SACL_PROTECTED) != 0 ? SECURITY_INFORMATION.PROTECTED_SACL_SECURITY_INFORMATION : SECURITY_INFORMATION.UNPROTECTED_SACL_SECURITY_INFORMATION;
+
+                  privilegeEnabler = new PrivilegeEnabler(Privilege.Security);
+               }
+            }
 
 
-                  success = Security.NativeMethods.GetSecurityDescriptorOwner(safeBuffer, out pOwner, out ownerDefaulted);
+            var pOwner = IntPtr.Zero;
 
-                  lastError = Marshal.GetLastWin32Error();
-                  if (!success)
-                     NativeError.ThrowException(lastError, pathLp);
+            if ((includeSections & AccessControlSections.Owner) != 0)
+            {
+               bool ownerDefaulted;
 
 
-                  if (pOwner != IntPtr.Zero)
-                     securityInfo |= SECURITY_INFORMATION.OWNER_SECURITY_INFORMATION;
+               success = Security.NativeMethods.GetSecurityDescriptorOwner(safeBuffer, out pOwner, out ownerDefaulted);
+
+               lastError = Marshal.GetLastWin32Error();
+               if (!success)
+               {
+                  NativeError.ThrowException(lastError, pathLp);
                }
 
 
-               var pGroup = IntPtr.Zero;
-
-               if ((includeSections & AccessControlSections.Group) != 0)
+               if (pOwner != IntPtr.Zero)
                {
-                  bool groupDefaulted;
+                  securityInfo |= SECURITY_INFORMATION.OWNER_SECURITY_INFORMATION;
+               }
+            }
 
 
-                  success = Security.NativeMethods.GetSecurityDescriptorGroup(safeBuffer, out pGroup, out groupDefaulted);
+            var pGroup = IntPtr.Zero;
 
-                  lastError = Marshal.GetLastWin32Error();
-                  if (!success)
-                     NativeError.ThrowException(lastError, pathLp);
+            if ((includeSections & AccessControlSections.Group) != 0)
+            {
+               bool groupDefaulted;
 
 
-                  if (pGroup != IntPtr.Zero)
-                     securityInfo |= SECURITY_INFORMATION.GROUP_SECURITY_INFORMATION;
+               success = Security.NativeMethods.GetSecurityDescriptorGroup(safeBuffer, out pGroup, out groupDefaulted);
+
+               lastError = Marshal.GetLastWin32Error();
+               if (!success)
+               {
+                  NativeError.ThrowException(lastError, pathLp);
                }
 
 
-
-
-               if (!Utils.IsNullOrWhiteSpace(pathLp))
+               if (pGroup != IntPtr.Zero)
                {
-                  // SetNamedSecurityInfo()
-                  // 2013-01-13: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
+                  securityInfo |= SECURITY_INFORMATION.GROUP_SECURITY_INFORMATION;
+               }
+            }
 
-                  lastError = (int) Security.NativeMethods.SetNamedSecurityInfo(pathLp, SE_OBJECT_TYPE.SE_FILE_OBJECT, securityInfo, pOwner, pGroup, pDacl, pSacl);
+
+
+
+            if (!Utils.IsNullOrWhiteSpace(pathLp))
+            {
+               // SetNamedSecurityInfo()
+               // 2013-01-13: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
+
+               lastError = (int) Security.NativeMethods.SetNamedSecurityInfo(pathLp, SE_OBJECT_TYPE.SE_FILE_OBJECT, securityInfo, pOwner, pGroup, pDacl, pSacl);
+
+               if (lastError != Win32Errors.ERROR_SUCCESS)
+               {
+                  NativeError.ThrowException(lastError, pathLp);
+               }
+            }
+
+            else
+            {
+               if (NativeMethods.IsValidHandle(handle))
+               {
+                  lastError = (int) Security.NativeMethods.SetSecurityInfo(handle, SE_OBJECT_TYPE.SE_FILE_OBJECT, securityInfo, pOwner, pGroup, pDacl, pSacl);
 
                   if (lastError != Win32Errors.ERROR_SUCCESS)
-                     NativeError.ThrowException(lastError, pathLp);
-               }
-
-               else
-               {
-                  if (NativeMethods.IsValidHandle(handle))
                   {
-                     lastError = (int) Security.NativeMethods.SetSecurityInfo(handle, SE_OBJECT_TYPE.SE_FILE_OBJECT, securityInfo, pOwner, pGroup, pDacl, pSacl);
-
-                     if (lastError != Win32Errors.ERROR_SUCCESS)
-                        NativeError.ThrowException(lastError);
+                     NativeError.ThrowException(lastError);
                   }
                }
             }
-            finally
+         }
+         finally
+         {
+            if (null != privilegeEnabler)
             {
-               if (null != privilegeEnabler)
-                  privilegeEnabler.Dispose();
+               privilegeEnabler.Dispose();
             }
          }
       }

@@ -48,7 +48,9 @@ namespace Alphaleonis.Win32.Filesystem
          {
             var lastError = Marshal.GetHRForException(ex) & NativeMethods.OverflowExceptionBitShift;
             if (lastError == Win32Errors.ERROR_SHARING_VIOLATION || lastError == Win32Errors.ERROR_LOCK_VIOLATION)
+            {
                return true;
+            }
 
             throw;
          }

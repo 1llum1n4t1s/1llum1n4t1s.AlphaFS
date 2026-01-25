@@ -40,7 +40,9 @@ namespace AlphaFS.UnitTest
          foreach (var driveInfo in System.IO.DriveInfo.GetDrives())
          {
             if (!driveInfo.IsReady)
+            {
                continue;
+            }
 
 
             Console.Write("#{0:000}\tInput Logical Drive Path: [{1}]", ++logicalDriveCount, driveInfo.Name);
@@ -55,7 +57,7 @@ namespace AlphaFS.UnitTest
          }
 
 
-         Assert.IsTrue(logicalDriveCount > 0, "No logical drives enumerated, but it is expected.");
+         Assert.IsGreaterThan(logicalDriveCount, 0, "No logical drives enumerated, but it is expected.");
       }
    }
 }

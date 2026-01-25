@@ -39,10 +39,11 @@ namespace Alphaleonis.Win32.Network
       public static string[] GetHostShareFromPath(string uncPath)
       {
          if (Utils.IsNullOrWhiteSpace(uncPath))
+         {
             return null;
+         }
 
-         Uri uri;
-         if (Uri.TryCreate(Path.GetRegularPathCore(uncPath, GetFullPathOptions.None, false), UriKind.Absolute, out uri) && uri.IsUnc)
+         if (Uri.TryCreate(Path.GetRegularPathCore(uncPath, GetFullPathOptions.None, false), UriKind.Absolute, out var uri) && uri.IsUnc)
          {
             return new[]
             {

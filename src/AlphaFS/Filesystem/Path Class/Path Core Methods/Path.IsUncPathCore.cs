@@ -35,15 +35,17 @@ namespace Alphaleonis.Win32.Filesystem
       internal static bool IsUncPathCore(string path, bool isRegularPath, bool checkInvalidPathChars)
       {
          if (!isRegularPath)
+         {
             path = GetRegularPathCore(path, checkInvalidPathChars ? GetFullPathOptions.CheckInvalidPathChars : GetFullPathOptions.None, false);
+         }
 
          else if (checkInvalidPathChars)
+         {
             CheckInvalidPathChars(path, false, false);
+         }
 
 
-         Uri uri;
-
-         return Uri.TryCreate(path, UriKind.Absolute, out uri) && uri.IsUnc;
+         return Uri.TryCreate(path, UriKind.Absolute, out var uri) && uri.IsUnc;
       }
    }
 }

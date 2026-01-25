@@ -50,7 +50,9 @@ namespace AlphaFS.UnitTest
 
          var fullPath = System.IO.Path.Combine(Environment.SystemDirectory, neDir);
          if (isNetwork)
+         {
             fullPath = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(fullPath);
+         }
 
          var suffixedDirectoryNameWithoutRoot = Alphaleonis.Win32.Filesystem.Path.GetSuffixedDirectoryNameWithoutRoot(fullPath);
 
@@ -65,7 +67,9 @@ namespace AlphaFS.UnitTest
          fullPath = System.IO.Path.Combine(fullPath, "Non-Existing file.txt");
          neDir = (System.IO.Path.Combine(Environment.SystemDirectory, neDir) + backslash).Replace(UnitTestConstants.SysDrive + backslash, string.Empty);
          if (isNetwork)
+         {
             fullPath = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(fullPath);
+         }
 
          suffixedDirectoryNameWithoutRoot = Alphaleonis.Win32.Filesystem.Path.GetSuffixedDirectoryNameWithoutRoot(fullPath);
 
@@ -79,7 +83,9 @@ namespace AlphaFS.UnitTest
 
          fullPath = Environment.SystemDirectory;
          if (isNetwork)
+         {
             fullPath = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(fullPath);
+         }
 
          suffixedDirectoryNameWithoutRoot = Alphaleonis.Win32.Filesystem.Path.GetSuffixedDirectoryNameWithoutRoot(fullPath);
 
@@ -90,7 +96,9 @@ namespace AlphaFS.UnitTest
          var windowsFolderName = System.IO.Path.GetDirectoryName(fullPath).Replace(System.IO.Directory.GetDirectoryRoot(fullPath), string.Empty) + backslash;
 
          if (isNetwork)
+         {
             windowsFolderName = windowsFolderName.TrimStart(Alphaleonis.Win32.Filesystem.Path.DirectorySeparatorChar);
+         }
 
          Assert.AreEqual(windowsFolderName, suffixedDirectoryNameWithoutRoot);
 
@@ -99,14 +107,16 @@ namespace AlphaFS.UnitTest
 
          fullPath = UnitTestConstants.SysDrive + backslash;
          if (isNetwork)
+         {
             fullPath = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(fullPath);
+         }
 
          suffixedDirectoryNameWithoutRoot = Alphaleonis.Win32.Filesystem.Path.GetSuffixedDirectoryNameWithoutRoot(fullPath);
 
          Console.WriteLine("\nFull Path                          : " + fullPath);
          Console.WriteLine("GetSuffixedDirectoryNameWithoutRoot: " + suffixedDirectoryNameWithoutRoot);
 
-         Assert.AreEqual(null, suffixedDirectoryNameWithoutRoot);
+         Assert.IsNull(suffixedDirectoryNameWithoutRoot);
 
 
          Console.WriteLine();

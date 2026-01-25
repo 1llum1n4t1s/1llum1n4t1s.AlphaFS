@@ -48,7 +48,9 @@ namespace AlphaFS.UnitTest
          
          var inputPath = System.IO.Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)).FullName;
          if (isNetwork)
+         {
             inputPath = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(inputPath);
+         }
 
          Console.WriteLine("Input Directory Path: [{0}]\n", inputPath);
          
@@ -125,7 +127,9 @@ namespace AlphaFS.UnitTest
                   exceptionCount++;
 
                   if (exceptionCount == exceptionCatch)
+                  {
                      cancelSource.Cancel();
+                  }
                }
 
 
@@ -148,7 +152,7 @@ namespace AlphaFS.UnitTest
          Console.WriteLine("\n\tFile system objects counted: {0:N0}", fsoCount);
 
 
-         Assert.IsTrue(fsoCount > 0, "No file system entries enumerated, but it is expected.");
+         Assert.IsGreaterThan(fsoCount, 0, "No file system entries enumerated, but it is expected.");
 
          Assert.IsTrue(gotException, "The Exception is not caught, but it is expected.");
 

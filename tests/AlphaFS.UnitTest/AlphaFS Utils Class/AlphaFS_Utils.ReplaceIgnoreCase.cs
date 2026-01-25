@@ -52,7 +52,7 @@ namespace AlphaFS.UnitTest
          var replaceResult = mixedCasePath.ReplaceIgnoreCase(globalRootMixedCase, string.Empty);
          Console.WriteLine(replaceResult);
 
-         Assert.IsTrue(replaceResult.StartsWith(device));
+         Assert.StartsWith(device, replaceResult);
 
 
 
@@ -62,7 +62,7 @@ namespace AlphaFS.UnitTest
          replaceResult = lowerCasePath.ReplaceIgnoreCase(globalRootLowerCase, string.Empty);
          Console.WriteLine(replaceResult);
 
-         Assert.IsTrue(replaceResult.StartsWith(device));
+         Assert.StartsWith(device, replaceResult);
 
 
 
@@ -72,7 +72,7 @@ namespace AlphaFS.UnitTest
          replaceResult = upperCasePath.ReplaceIgnoreCase(globalRootUpperCase, string.Empty);
          Console.WriteLine(replaceResult);
 
-         Assert.IsTrue(replaceResult.StartsWith(device));
+         Assert.StartsWith(device, replaceResult);
       }
    }
 }

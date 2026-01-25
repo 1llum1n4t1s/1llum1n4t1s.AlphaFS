@@ -1,9 +1,10 @@
-# AlphaFS
+# 1llum1n4t1s.AlphaFS
 
-[![Not Maintained](https://img.shields.io/badge/Maintenance%20Level-Not%20Maintained-yellow.svg)](https://gist.github.com/cheerfulstoic/d107229326a01ff0f333a1d3476e068d)
-[![Build status](https://ci.appveyor.com/api/projects/status/9kb175khv0k3rn7s?svg=true)](https://ci.appveyor.com/project/alphaleonis/alphafs/) [![Test status](https://img.shields.io/appveyor/tests/alphaleonis/alphafs.svg)](https://ci.appveyor.com/project/alphaleonis/alphafs/build/tests) 
+> **これは [AlphaFS](https://github.com/alphaleonis/AlphaFS) のフォークです。**  
+> 元リポジトリは 2024年12月にアーカイブされているため、本リポジトリで開発・保守を継続しています。  
+> **フォーク元:** [alphaleonis/AlphaFS](https://github.com/alphaleonis/AlphaFS) → [1llum1n4t1s/1llum1n4t1s.AlphaFS](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS)
 
-AlphaFS is a .NET library providing more complete Win32 file system functionality to the .NET platform than the standard `System.IO` classes.
+1llum1n4t1s.AlphaFS is a .NET library providing more complete Win32 file system functionality to the .NET platform than the standard `System.IO` classes.
 
 ## Introduction
 

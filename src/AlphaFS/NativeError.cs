@@ -51,7 +51,9 @@ namespace Alphaleonis.Win32
       public static void ThrowException(int errorCode, bool? isFolder, string readPath)
       {
          if (errorCode == Win32Errors.ERROR_FILE_NOT_FOUND && null != isFolder && (bool) isFolder)
+         {
             errorCode = (int) Win32Errors.ERROR_PATH_NOT_FOUND;
+         }
 
          ThrowException((uint) errorCode, readPath, null);
       }
@@ -73,22 +75,30 @@ namespace Alphaleonis.Win32
       public static void ThrowException(uint errorCode, string readPath, string writePath)
       {
          if (null != readPath)
+         {
             readPath = Path.GetCleanExceptionPath(readPath);
+         }
 
          if (null != writePath)
+         {
             writePath = Path.GetCleanExceptionPath(writePath);
+         }
 
          var errorMessage = string.Format(CultureInfo.InvariantCulture, "({0}) {1}.", errorCode, new Win32Exception((int) errorCode).Message.Trim().TrimEnd('.').Trim());
         
 
          if (!Utils.IsNullOrWhiteSpace(readPath) && !Utils.IsNullOrWhiteSpace(writePath))
+         {
             errorMessage = string.Format(CultureInfo.InvariantCulture, "{0} | Read: [{1}] | Write: [{2}]", errorMessage, readPath, writePath);
+         }
 
          else
          {
             // Prevent messages like: "(87) The parameter is incorrect: []"
             if (!Utils.IsNullOrWhiteSpace(readPath ?? writePath))
+            {
                errorMessage = string.Format(CultureInfo.InvariantCulture, "{0}: [{1}]", errorMessage.TrimEnd('.'), readPath ?? writePath);
+            }
          }
 
 

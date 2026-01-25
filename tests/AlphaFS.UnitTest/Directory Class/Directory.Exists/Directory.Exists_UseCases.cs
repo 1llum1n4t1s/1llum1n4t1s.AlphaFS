@@ -50,7 +50,9 @@ namespace AlphaFS.UnitTest
 
             var sysDrive = UnitTestConstants.SysDrive + @"\";
             if (isNetwork)
+            {
                sysDrive = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(sysDrive);
+            }
 
 
             var randomName = tempRoot.RandomDirectoryName;
@@ -127,7 +129,9 @@ namespace AlphaFS.UnitTest
             System.IO.Directory.Delete(existingFolder1);
 
             if (System.IO.Directory.Exists(existingFolder2))
+            {
                System.IO.Directory.Delete(existingFolder2);
+            }
          }
 
          Console.WriteLine();

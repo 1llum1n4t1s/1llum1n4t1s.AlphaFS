@@ -35,17 +35,19 @@ namespace Alphaleonis.Win32.Filesystem
       internal static FileEncryptionStatus GetEncryptionStatusCore(string path, PathFormat pathFormat)
       {
          if (pathFormat != PathFormat.LongFullPath && Utils.IsNullOrWhiteSpace(path))
+         {
             throw new ArgumentNullException("path");
+         }
 
          var pathLp = Path.GetExtendedLengthPathCore(null, path, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.FullCheck);
-
-         FileEncryptionStatus status;
 
          // FileEncryptionStatus()
          // 2013-01-13: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
 
-         if (!NativeMethods.FileEncryptionStatus(pathLp, out status))
+         if (!NativeMethods.FileEncryptionStatus(pathLp, out var status))
+         {
             NativeError.ThrowException(Marshal.GetLastWin32Error(), pathLp);
+         }
 
          return status;
       }

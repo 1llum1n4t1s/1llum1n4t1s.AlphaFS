@@ -74,10 +74,14 @@ namespace Alphaleonis.Win32.Filesystem
 
          // Check if drive letter is a mapped network drive.
          if (new DriveInfo(directoryPath).IsUnc)
+         {
             throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, Resources.Network_Path_Not_Allowed, directoryPath), "directoryPath");
+         }
 
          if (new DriveInfo(junctionPath).IsUnc)
+         {
             throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, Resources.Network_Path_Not_Allowed, junctionPath), "junctionPath");
+         }
 
 
          // Check for existing file.
@@ -99,7 +103,9 @@ namespace Alphaleonis.Win32.Filesystem
             {
                // Ensure the folder is empty.
                if (!IsEmptyCore(transaction, junctionPath, pathFormat))
+               {
                   throw new DirectoryNotEmptyException(junctionPath, true);
+               }
 
                throw new AlreadyExistsException(junctionPath, true);
             }
@@ -115,7 +121,9 @@ namespace Alphaleonis.Win32.Filesystem
 
          // Copy the target date and time stamps to the directory junction.
          if (copyTargetTimestamps)
+         {
             File.CopyTimestampsCore(transaction, true, directoryPath, junctionPath, true, pathFormat);
+         }
 
 
          return junctionPath;

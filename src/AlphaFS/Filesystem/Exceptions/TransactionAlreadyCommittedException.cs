@@ -20,7 +20,6 @@
  */
 
 using System;
-using System.Runtime.Serialization;
 
 namespace Alphaleonis.Win32.Filesystem
 {
@@ -45,14 +44,6 @@ namespace Alphaleonis.Win32.Filesystem
       /// <param name="message">The message.</param>
       /// <param name="innerException">The inner exception.</param>
       public TransactionAlreadyCommittedException(string message, Exception innerException) : base(message, innerException)
-      {
-      }
-
-
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="TransactionAlreadyCommittedException"/> class.</summary>
-      /// <param name="info">The object that holds the serialized object data.</param>
-      /// <param name="context">The contextual information about the source or destination.</param>
-      protected TransactionAlreadyCommittedException(SerializationInfo info, StreamingContext context) : base(info, context)
       {
       }
    }

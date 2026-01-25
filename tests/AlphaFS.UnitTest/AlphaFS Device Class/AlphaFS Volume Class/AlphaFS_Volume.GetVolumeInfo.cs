@@ -68,7 +68,9 @@ namespace AlphaFS.UnitTest
                // GetVolumeInfo fails when DriveType is not of type Network.
 
                if (driveInfo2.DriveType != System.IO.DriveType.Network)
+               {
                   continue;
+               }
 
 
                var volInfo = Alphaleonis.Win32.Filesystem.Volume.GetVolumeInfo(driveName);
@@ -80,7 +82,9 @@ namespace AlphaFS.UnitTest
                Assert.AreEqual(driveInfo2.DriveFormat, volInfo.FileSystemName);
 
                if (logicalDrive.DriveType != System.IO.DriveType.Network)
+               {
                   Assert.AreEqual(driveInfo2.Name, volInfo.FullPath);
+               }
 
                Assert.IsNull(volInfo.Guid);
             }
@@ -115,7 +119,7 @@ namespace AlphaFS.UnitTest
                {
                   Assert.IsNotNull(volInfo.Guid);
 
-                  Assert.IsTrue(volInfo.Guid.StartsWith(Alphaleonis.Win32.Filesystem.Path.VolumePrefix));
+                  Assert.StartsWith(Alphaleonis.Win32.Filesystem.Path.VolumePrefix, volInfo.Guid);
                }
             }
 
@@ -124,7 +128,7 @@ namespace AlphaFS.UnitTest
          }
 
 
-         Assert.IsTrue(logicalDriveCount > 0, "No logical drives enumerated, but it is expected.");
+         Assert.IsGreaterThan(logicalDriveCount, 0, "No logical drives enumerated, but it is expected.");
 
 
          Console.WriteLine();

@@ -237,12 +237,16 @@ namespace Alphaleonis.Win32.Security
       public Privilege(string systemName, Privilege privilege)
       {
          if (Utils.IsNullOrWhiteSpace(systemName))
+         {
             throw new ArgumentNullException("systemName", Resources.Privilege_Name_Cannot_Be_Empty);
+         }
 
          _systemName = systemName;
 
          if (null != privilege)
+         {
             _name = privilege._name;
+         }
       }
 
 
@@ -251,7 +255,9 @@ namespace Alphaleonis.Win32.Security
       private Privilege(string name)
       {
          if (Utils.IsNullOrWhiteSpace(name))
+         {
             throw new ArgumentNullException("name", Resources.Privilege_Name_Cannot_Be_Empty);
+         }
 
          _name = name;
       }
@@ -311,13 +317,14 @@ namespace Alphaleonis.Win32.Security
       [SecurityCritical]
       public long LookupLuid()
       {
-         LUID luid;
 
-         var success = NativeMethods.LookupPrivilegeValue(_systemName, _name, out luid);
+         var success = NativeMethods.LookupPrivilegeValue(_systemName, _name, out var luid);
 
          var lastError = Marshal.GetLastWin32Error();
          if (!success)
+         {
             NativeError.ThrowException(lastError, _name);
+         }
 
 
          return Filesystem.NativeMethods.LuidToLong(luid);

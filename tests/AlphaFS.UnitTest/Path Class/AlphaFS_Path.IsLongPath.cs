@@ -53,7 +53,9 @@ namespace AlphaFS.UnitTest
                Assert.AreEqual(expected, actual);
 
                if (actual)
+               {
                   longPathCnt++;
+               }
             }
             catch (Exception ex)
             {

@@ -39,11 +39,12 @@ namespace Alphaleonis.Win32.Filesystem
       internal static void WriteAllBytesCore(KernelTransaction transaction, string path, byte[] bytes, PathFormat pathFormat)
       {
          if (null == bytes)
+         {
             throw new ArgumentNullException("bytes");
+         }
 
-         using (var fs = OpenCore(transaction, path, FileMode.Create, FileAccess.Write, FileShare.Read, ExtendedFileAttributes.Normal, null, null, pathFormat))
-
-            fs.Write(bytes, 0, bytes.Length);
+         using var fs = OpenCore(transaction, path, FileMode.Create, FileAccess.Write, FileShare.Read, ExtendedFileAttributes.Normal, null, null, pathFormat);
+         fs.Write(bytes, 0, bytes.Length);
       }
    }
 }

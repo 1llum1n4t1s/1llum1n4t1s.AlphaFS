@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="src/AlphaFS/AlphaFS.csproj" />
+  <Project Path="tests/AlphaFS.UnitTest/AlphaFS.UnitTest.csproj" />
+  <Properties Name="TestCaseManagementSettings" Scope="PostLoad">
+    <Property Name="CategoryFile" Value="AlphaFS.vsmdi" />
+  </Properties>
+</Solution>

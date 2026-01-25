@@ -50,7 +50,9 @@ namespace AlphaFS.UnitTest
 
                if (actual.StartsWith(Alphaleonis.Win32.Filesystem.Path.GlobalRootPrefix, StringComparison.OrdinalIgnoreCase) ||
                    actual.StartsWith(Alphaleonis.Win32.Filesystem.Path.VolumePrefix, StringComparison.OrdinalIgnoreCase))
+               {
                   continue;
+               }
 
                Assert.IsFalse(actual.StartsWith(Alphaleonis.Win32.Filesystem.Path.LongPathPrefix, StringComparison.OrdinalIgnoreCase));
             }

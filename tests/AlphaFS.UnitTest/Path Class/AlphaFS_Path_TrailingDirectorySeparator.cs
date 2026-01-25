@@ -37,12 +37,12 @@ namespace AlphaFS.UnitTest
 
          aString = Alphaleonis.Win32.Filesystem.Path.AddTrailingDirectorySeparator(aString);
 
-         Assert.IsTrue(aString.EndsWith(backslash));
+         Assert.EndsWith(backslash, aString);
 
 
          aString = Alphaleonis.Win32.Filesystem.Path.RemoveTrailingDirectorySeparator(aString);
 
-         Assert.IsFalse(aString.EndsWith(backslash));
+         Assert.DoesNotEndWith(backslash, aString);
       }
    }
 }

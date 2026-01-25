@@ -21,6 +21,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Security.AccessControl;
 
 namespace AlphaFS.UnitTest
 {
@@ -48,29 +49,21 @@ namespace AlphaFS.UnitTest
             Console.WriteLine("Input Directory Path: [{0}]\n", folder);
 
 
-            var pathExpected = tempRoot.RandomDirectoryFullPath;
             var pathActual = tempRoot.RandomDirectoryFullPath;
-            
 
             var sid = new System.Security.Principal.SecurityIdentifier(System.Security.Principal.WellKnownSidType.WorldSid, null);
             var expectedDirectorySecurity = new System.Security.AccessControl.DirectorySecurity();
             expectedDirectorySecurity.AddAccessRule(new System.Security.AccessControl.FileSystemAccessRule(sid, System.Security.AccessControl.FileSystemRights.FullControl, System.Security.AccessControl.AccessControlType.Allow));
             expectedDirectorySecurity.AddAuditRule(new System.Security.AccessControl.FileSystemAuditRule(sid, System.Security.AccessControl.FileSystemRights.Read, System.Security.AccessControl.AuditFlags.Success));
 
-
             using (new Alphaleonis.Win32.Security.PrivilegeEnabler(Alphaleonis.Win32.Security.Privilege.Security))
             {
-               var s1 = System.IO.Directory.CreateDirectory(pathExpected, expectedDirectorySecurity);
+               var expected = expectedDirectorySecurity.GetSecurityDescriptorSddlForm(AccessControlSections.All);
                var s2 = Alphaleonis.Win32.Filesystem.Directory.CreateDirectory(pathActual, expectedDirectorySecurity);
+               var actual = s2.GetAccessControl().GetSecurityDescriptorSddlForm(AccessControlSections.All);
 
-
-               var expected = s1.GetAccessControl().GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections.All);
-               var actual = s2.GetAccessControl().GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections.All);
-
-
-               Console.WriteLine("\tSystem.IO: {0}", expected);
+               Console.WriteLine("\tExpected: {0}", expected);
                Console.WriteLine("\tAlphaFS  : {0}", actual);
-
 
                Assert.AreEqual(expected, actual);
             }

@@ -466,7 +466,9 @@ namespace Alphaleonis.Win32.Filesystem
       public static void DestroyIcon(IntPtr iconHandle)
       {
          if (IntPtr.Zero != iconHandle)
+         {
             NativeMethods.DestroyIcon(iconHandle);
+         }
       }
 
 
@@ -535,7 +537,9 @@ namespace Alphaleonis.Win32.Filesystem
       public static IntPtr GetFileIcon(string filePath, FileAttributes iconAttributes)
       {
          if (Utils.IsNullOrWhiteSpace(filePath))
+         {
             return IntPtr.Zero;
+         }
 
          var fileInfo = GetFileInfoCore(filePath, System.IO.FileAttributes.Normal, FileAttributes.Icon | iconAttributes, true, true);
          return fileInfo.IconHandle == IntPtr.Zero ? IntPtr.Zero : fileInfo.IconHandle;
@@ -613,7 +617,9 @@ namespace Alphaleonis.Win32.Filesystem
       internal static string PathCreateFromUrl(string urlPath)
       {
          if (urlPath == null)
+         {
             return null;
+         }
 
          var buffer = new StringBuilder(NativeMethods.MaxPathUnicode);
          var bufferSize = (uint)buffer.Capacity;
@@ -636,14 +642,17 @@ namespace Alphaleonis.Win32.Filesystem
       internal static string PathCreateFromUrlAlloc(string urlPath)
       {
          if (!NativeMethods.IsAtLeastWindowsVista)
+         {
             throw new PlatformNotSupportedException(new Win32Exception((int)Win32Errors.ERROR_OLD_WIN_VERSION).Message);
+         }
 
 
          if (urlPath == null)
+         {
             return null;
+         }
 
-         StringBuilder buffer;
-         var lastError = NativeMethods.PathCreateFromUrlAlloc(urlPath, out buffer, 0);
+         var lastError = NativeMethods.PathCreateFromUrlAlloc(urlPath, out var buffer, 0);
 
          // Don't throw exception, but return string.Empty;
          return lastError == Win32Errors.S_OK ? buffer.ToString() : string.Empty;
@@ -689,7 +698,9 @@ namespace Alphaleonis.Win32.Filesystem
       internal static string UrlCreateFromPath(string path)
       {
          if (path == null)
+         {
             return null;
+         }
 
          // UrlCreateFromPath does not support extended paths.
          var pathRp = Path.GetRegularPathCore(path, GetFullPathOptions.CheckInvalidPathChars, false);
@@ -702,7 +713,9 @@ namespace Alphaleonis.Win32.Filesystem
          // Don't throw exception, but return null;
          var url = buffer.ToString();
          if (Utils.IsNullOrWhiteSpace(url))
+         {
             url = string.Empty;
+         }
 
          return lastError == Win32Errors.S_OK ? url : string.Empty;
       }
@@ -750,7 +763,9 @@ namespace Alphaleonis.Win32.Filesystem
       private static string GetFileAssociationCore(string path, AssociationAttributes attributes, AssociationString associationType)
       {
          if (Utils.IsNullOrWhiteSpace(path))
+         {
             throw new ArgumentNullException("path");
+         }
 
          attributes = attributes | AssociationAttributes.NoTruncate | AssociationAttributes.RemapRunDll;
 
@@ -824,7 +839,9 @@ namespace Alphaleonis.Win32.Filesystem
             var shGetFileInfo = NativeMethods.ShGetFileInfo(Path.GetRegularPathCore(path, checkInvalidPathChars ? GetFullPathOptions.CheckInvalidPathChars : 0, false), attributes, out fileInfo, (uint)Marshal.SizeOf(fileInfo), fileAttributes);
 
             if (shGetFileInfo == IntPtr.Zero && !continueOnException)
+            {
                NativeError.ThrowException(Marshal.GetLastWin32Error(), path);
+            }
          }
 
          return fileInfo;

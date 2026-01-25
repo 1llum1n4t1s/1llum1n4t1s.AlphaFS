@@ -1,4 +1,4 @@
-﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy 
  *  of this software and associated documentation directorys (the "Software"), to deal 
@@ -51,24 +51,22 @@ namespace AlphaFS.UnitTest
             using (alphaFSFileInfo.Create())
             {
                alphaFSFileInfo.Attributes |= System.IO.FileAttributes.ReadOnly;
-               Assert.IsTrue((alphaFSFileInfo.Attributes & System.IO.FileAttributes.ReadOnly) != 0, "The file is not ReadOnly, but is expected to.");
+               Assert.AreNotEqual((System.IO.FileAttributes)0, alphaFSFileInfo.Attributes & System.IO.FileAttributes.ReadOnly, "The file is not ReadOnly, but is expected to.");
 
                alphaFSFileInfo.Attributes &= ~System.IO.FileAttributes.ReadOnly;
-               Assert.IsTrue((alphaFSFileInfo.Attributes & System.IO.FileAttributes.ReadOnly) == 0, "The file is ReadOnly, but is expected not to.");
-
+               Assert.AreEqual((System.IO.FileAttributes)0, alphaFSFileInfo.Attributes & System.IO.FileAttributes.ReadOnly, "The file is ReadOnly, but is expected not to.");
 
                alphaFSFileInfo.Attributes |= System.IO.FileAttributes.Hidden;
-               Assert.IsTrue((alphaFSFileInfo.Attributes & System.IO.FileAttributes.Hidden) != 0, "The file is not Hidden, but is expected to.");
+               Assert.AreNotEqual((System.IO.FileAttributes)0, alphaFSFileInfo.Attributes & System.IO.FileAttributes.Hidden, "The file is not Hidden, but is expected to.");
 
                alphaFSFileInfo.Attributes &= ~System.IO.FileAttributes.Hidden;
-               Assert.IsTrue((alphaFSFileInfo.Attributes & System.IO.FileAttributes.Hidden) == 0, "The file is Hidden, but is expected not to.");
-
+               Assert.AreEqual((System.IO.FileAttributes)0, alphaFSFileInfo.Attributes & System.IO.FileAttributes.Hidden, "The file is Hidden, but is expected not to.");
 
                alphaFSFileInfo.Attributes |= System.IO.FileAttributes.System;
-               Assert.IsTrue((alphaFSFileInfo.Attributes & System.IO.FileAttributes.System) != 0, "The file is not System, but is expected to.");
+               Assert.AreNotEqual((System.IO.FileAttributes)0, alphaFSFileInfo.Attributes & System.IO.FileAttributes.System, "The file is not System, but is expected to.");
 
                alphaFSFileInfo.Attributes &= ~System.IO.FileAttributes.System;
-               Assert.IsTrue((alphaFSFileInfo.Attributes & System.IO.FileAttributes.System) == 0, "The file is System, but is expected not to.");
+               Assert.AreEqual((System.IO.FileAttributes)0, alphaFSFileInfo.Attributes & System.IO.FileAttributes.System, "The file is System, but is expected not to.");
             }
          }
 

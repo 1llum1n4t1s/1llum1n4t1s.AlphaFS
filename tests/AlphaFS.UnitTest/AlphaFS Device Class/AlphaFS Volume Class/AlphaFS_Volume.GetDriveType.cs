@@ -68,12 +68,14 @@ namespace AlphaFS.UnitTest
             }
 
             else
+            {
                Assert.AreEqual(logicalDrive.DriveType, driveType);
+            }
 
          }
 
 
-         Assert.IsTrue(logicalDriveCount > 0, "No logical drives enumerated, but it is expected.");
+         Assert.IsGreaterThan(logicalDriveCount, 0, "No logical drives enumerated, but it is expected.");
 
 
          Console.WriteLine();

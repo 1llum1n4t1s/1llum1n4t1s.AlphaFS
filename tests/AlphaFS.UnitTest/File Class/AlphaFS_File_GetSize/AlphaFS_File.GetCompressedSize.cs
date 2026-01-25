@@ -77,7 +77,7 @@ namespace AlphaFS.UnitTest
             Console.WriteLine("\tFile size (compressed)  : {0:N0} bytes ({1})", fileLength, Alphaleonis.Utils.UnitSizeToText(fileLength));
 
 
-            Assert.IsTrue(fileLength == compressedSize && fileLength != streamLength, "File should be [{0:N0}] bytes in size.", compressedSize);
+            Assert.IsTrue(fileLength == compressedSize && fileLength != streamLength, $"File should be [{compressedSize:N0}] bytes in size.");
          }
 
          Console.WriteLine();

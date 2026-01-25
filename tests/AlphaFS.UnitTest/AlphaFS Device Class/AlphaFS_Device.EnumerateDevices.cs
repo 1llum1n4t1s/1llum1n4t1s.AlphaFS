@@ -59,7 +59,9 @@ namespace AlphaFS.UnitTest
          }
 
          if (classCnt == 0)
+         {
             UnitTestAssert.InconclusiveBecauseResourcesAreUnavailable();
+         }
       }
 
 
@@ -69,7 +71,9 @@ namespace AlphaFS.UnitTest
 
          // Can't use generic type constraints on value types, so have to do check like this.
          if (enumType.BaseType != typeof(Enum))
+         {
             throw new ArgumentException("T must be of type System.Enum", "T");
+         }
 
 
          var enumValArray = Enum.GetValues(enumType).Cast<T>().OrderBy(e => e.ToString()).ToList();

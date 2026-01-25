@@ -55,11 +55,13 @@ namespace AlphaFS.UnitTest
             foreach (var fsei in Alphaleonis.Win32.Filesystem.Directory.EnumerateFileSystemEntryInfos<Alphaleonis.Win32.Filesystem.FileSystemEntryInfo>(folder.FullName, Alphaleonis.Win32.Filesystem.DirectoryEnumerationOptions.Recursive))
             {
                cnt++;
-               Assert.IsTrue((fsei.Attributes & System.IO.FileAttributes.Encrypted) != 0, "It is expected that the file system object is encrypted, but it is not.");
+               Assert.AreNotEqual((System.IO.FileAttributes)0, fsei.Attributes & System.IO.FileAttributes.Encrypted, "It is expected that the file system object is encrypted, but it is not.");
             }
 
             if (cnt == 0)
+            {
                UnitTestAssert.InconclusiveBecauseResourcesAreUnavailable();
+            }
 
 
 
@@ -73,11 +75,13 @@ namespace AlphaFS.UnitTest
             foreach (var fsei in Alphaleonis.Win32.Filesystem.Directory.EnumerateFileSystemEntryInfos<Alphaleonis.Win32.Filesystem.FileSystemEntryInfo>(folder.FullName, Alphaleonis.Win32.Filesystem.DirectoryEnumerationOptions.Recursive))
             {
                cnt++;
-               Assert.IsTrue((fsei.Attributes & System.IO.FileAttributes.Encrypted) == 0, "It is expected that the file system object is decrypted, but it is not.");
+               Assert.AreEqual((System.IO.FileAttributes)0, fsei.Attributes & System.IO.FileAttributes.Encrypted, "It is expected that the file system object is decrypted, but it is not.");
             }
 
             if (cnt == 0)
+            {
                UnitTestAssert.InconclusiveBecauseResourcesAreUnavailable();
+            }
          }
 
          Console.WriteLine();

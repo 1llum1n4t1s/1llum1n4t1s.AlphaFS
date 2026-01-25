@@ -93,15 +93,21 @@ namespace Alphaleonis.Win32
       public void CopyTo(int sourceOffset, byte[] destination)
       {
          if (null == destination || destination.Length == 0)
+         {
             throw new ArgumentNullException("destination");
+         }
 
          var length = destination.Length;
 
          if (length > destination.Length)
+         {
             throw new ArgumentException(Resources.Destination_Buffer_Not_Large_Enough, "destination");
+         }
 
          if (length > Capacity)
+         {
             throw new ArgumentOutOfRangeException("destination", Resources.Source_OffsetAndLength_Outside_Bounds);
+         }
 
          Marshal.Copy(new IntPtr(handle.ToInt64() + sourceOffset), destination, 0, length);
       }
@@ -114,19 +120,29 @@ namespace Alphaleonis.Win32
       public void CopyTo(byte[] destination, int destinationOffset, int length)
       {
          if (null == destination)
+         {
             throw new ArgumentNullException("destination");
+         }
 
          if (destinationOffset < 0)
+         {
             throw new ArgumentOutOfRangeException("destinationOffset", Resources.Negative_Destination_Offset);
+         }
 
          if (length < 0)
+         {
             throw new ArgumentOutOfRangeException("length", Resources.Negative_Length);
+         }
 
          if (destinationOffset + length > destination.Length)
+         {
             throw new ArgumentException(Resources.Destination_Buffer_Not_Large_Enough, "length");
+         }
 
          if (length > Capacity)
+         {
             throw new ArgumentOutOfRangeException("length", Resources.Source_OffsetAndLength_Outside_Bounds);
+         }
 
          Marshal.Copy(handle, destination, destinationOffset, length);
       }
@@ -140,19 +156,29 @@ namespace Alphaleonis.Win32
       public void CopyTo(int sourceOffset, byte[] destination, int destinationOffset, int length)
       {
          if (null == destination)
+         {
             throw new ArgumentNullException("destination");
+         }
 
          if (destinationOffset < 0)
+         {
             throw new ArgumentOutOfRangeException("destinationOffset", Resources.Negative_Destination_Offset);
+         }
 
          if (length < 0)
+         {
             throw new ArgumentOutOfRangeException("length", Resources.Negative_Length);
+         }
 
          if (destinationOffset + length > destination.Length)
+         {
             throw new ArgumentException(Resources.Destination_Buffer_Not_Large_Enough, "length");
+         }
 
          if (length > Capacity)
+         {
             throw new ArgumentOutOfRangeException("length", Resources.Source_OffsetAndLength_Outside_Bounds);
+         }
 
          Marshal.Copy(new IntPtr(handle.ToInt64() + sourceOffset), destination, destinationOffset, length);
       }
@@ -161,7 +187,9 @@ namespace Alphaleonis.Win32
       public byte[] ToByteArray(int startIndex, int length)
       {
          if (IsInvalid)
+         {
             return null;
+         }
 
          var arr = new byte[length];
          Marshal.Copy(handle, arr, startIndex, length);
@@ -302,7 +330,7 @@ namespace Alphaleonis.Win32
       /// <returns>A managed object containing the data pointed to by the ptr parameter.</returns>
       public T PtrToStructure<T>(int offset)
       {
-         return (T) Marshal.PtrToStructure(new IntPtr(handle.ToInt64() + offset), typeof (T));
+         return Marshal.PtrToStructure<T>(new IntPtr(handle.ToInt64() + offset));
       }
 
 

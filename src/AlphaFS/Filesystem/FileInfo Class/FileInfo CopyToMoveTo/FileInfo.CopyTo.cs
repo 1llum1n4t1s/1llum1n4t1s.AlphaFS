@@ -47,9 +47,8 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public FileInfo CopyTo(string destinationPath)
       {
-         string destinationPathLp;
 
-         CopyToMoveToCore(destinationPath, CopyOptions.FailIfExists, null, false, null, null, out destinationPathLp, PathFormat.RelativePath);
+         CopyToMoveToCore(destinationPath, CopyOptions.FailIfExists, null, false, null, null, out var destinationPathLp, PathFormat.RelativePath);
 
          UpdateDestinationPath(destinationPath, destinationPathLp);
 
@@ -76,9 +75,8 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public FileInfo CopyTo(string destinationPath, bool overwrite)
       {
-         string destinationPathLp;
 
-         CopyToMoveToCore(destinationPath, overwrite ? CopyOptions.None : CopyOptions.FailIfExists, null, false, null, null, out destinationPathLp, PathFormat.RelativePath);
+         CopyToMoveToCore(destinationPath, overwrite ? CopyOptions.None : CopyOptions.FailIfExists, null, false, null, null, out var destinationPathLp, PathFormat.RelativePath);
 
          UpdateDestinationPath(destinationPath, destinationPathLp);
 
@@ -107,9 +105,8 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public FileInfo CopyTo(string destinationPath, PathFormat pathFormat)
       {
-         string destinationPathLp;
 
-         CopyToMoveToCore(destinationPath, CopyOptions.FailIfExists, null, false, null, null, out destinationPathLp, pathFormat);
+         CopyToMoveToCore(destinationPath, CopyOptions.FailIfExists, null, false, null, null, out var destinationPathLp, pathFormat);
 
          UpdateDestinationPath(destinationPath, destinationPathLp);
 
@@ -137,9 +134,8 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public FileInfo CopyTo(string destinationPath, bool overwrite, PathFormat pathFormat)
       {
-         string destinationPathLp;
 
-         CopyToMoveToCore(destinationPath, overwrite ? CopyOptions.None : CopyOptions.FailIfExists, null, false, null, null, out destinationPathLp, pathFormat);
+         CopyToMoveToCore(destinationPath, overwrite ? CopyOptions.None : CopyOptions.FailIfExists, null, false, null, null, out var destinationPathLp, pathFormat);
 
          UpdateDestinationPath(destinationPath, destinationPathLp);
 
@@ -167,9 +163,8 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public FileInfo CopyTo(string destinationPath, CopyOptions copyOptions)
       {
-         string destinationPathLp;
 
-         CopyToMoveToCore(destinationPath, copyOptions, null, false, null, null, out destinationPathLp, PathFormat.RelativePath);
+         CopyToMoveToCore(destinationPath, copyOptions, null, false, null, null, out var destinationPathLp, PathFormat.RelativePath);
 
          UpdateDestinationPath(destinationPath, destinationPathLp);
 
@@ -198,9 +193,8 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public FileInfo CopyTo(string destinationPath, CopyOptions copyOptions, PathFormat pathFormat)
       {
-         string destinationPathLp;
 
-         CopyToMoveToCore(destinationPath, copyOptions, null, false, null, null, out destinationPathLp, pathFormat);
+         CopyToMoveToCore(destinationPath, copyOptions, null, false, null, null, out var destinationPathLp, pathFormat);
 
          UpdateDestinationPath(destinationPath, destinationPathLp);
 
@@ -229,9 +223,8 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public FileInfo CopyTo(string destinationPath, CopyOptions copyOptions, bool preserveDates)
       {
-         string destinationPathLp;
 
-         CopyToMoveToCore(destinationPath, copyOptions, null, preserveDates, null, null, out destinationPathLp, PathFormat.RelativePath);
+         CopyToMoveToCore(destinationPath, copyOptions, null, preserveDates, null, null, out var destinationPathLp, PathFormat.RelativePath);
 
          UpdateDestinationPath(destinationPath, destinationPathLp);
 
@@ -261,9 +254,8 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public FileInfo CopyTo(string destinationPath, CopyOptions copyOptions, bool preserveDates, PathFormat pathFormat)
       {
-         string destinationPathLp;
 
-         CopyToMoveToCore(destinationPath, copyOptions, null, preserveDates, null, null, out destinationPathLp, pathFormat);
+         CopyToMoveToCore(destinationPath, copyOptions, null, preserveDates, null, null, out var destinationPathLp, pathFormat);
 
          UpdateDestinationPath(destinationPath, destinationPathLp);
 
@@ -294,9 +286,8 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public CopyMoveResult CopyTo(string destinationPath, CopyOptions copyOptions, CopyMoveProgressRoutine progressHandler, object userProgressData)
       {
-         string destinationPathLp;
 
-         var cmr = CopyToMoveToCore(destinationPath, copyOptions, null, false, progressHandler, userProgressData, out destinationPathLp, PathFormat.RelativePath);
+         var cmr = CopyToMoveToCore(destinationPath, copyOptions, null, false, progressHandler, userProgressData, out var destinationPathLp, PathFormat.RelativePath);
 
          UpdateDestinationPath(destinationPath, destinationPathLp);
 
@@ -327,9 +318,8 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public CopyMoveResult CopyTo(string destinationPath, CopyOptions copyOptions, CopyMoveProgressRoutine progressHandler, object userProgressData, PathFormat pathFormat)
       {
-         string destinationPathLp;
 
-         var cmr = CopyToMoveToCore(destinationPath, copyOptions, null, false, progressHandler, userProgressData, out destinationPathLp, pathFormat);
+         var cmr = CopyToMoveToCore(destinationPath, copyOptions, null, false, progressHandler, userProgressData, out var destinationPathLp, pathFormat);
 
          UpdateDestinationPath(destinationPath, destinationPathLp);
 
@@ -361,9 +351,8 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public CopyMoveResult CopyTo(string destinationPath, CopyOptions copyOptions, bool preserveDates, CopyMoveProgressRoutine progressHandler, object userProgressData)
       {
-         string destinationPathLp;
 
-         var cmr = CopyToMoveToCore(destinationPath, copyOptions, null, preserveDates, progressHandler, userProgressData, out destinationPathLp, PathFormat.RelativePath);
+         var cmr = CopyToMoveToCore(destinationPath, copyOptions, null, preserveDates, progressHandler, userProgressData, out var destinationPathLp, PathFormat.RelativePath);
 
          UpdateDestinationPath(destinationPath, destinationPathLp);
 
@@ -396,9 +385,8 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public CopyMoveResult CopyTo(string destinationPath, CopyOptions copyOptions, bool preserveDates, CopyMoveProgressRoutine progressHandler, object userProgressData, PathFormat pathFormat)
       {
-         string destinationPathLp;
 
-         var cmr = CopyToMoveToCore(destinationPath, copyOptions, null, preserveDates, progressHandler, userProgressData, out destinationPathLp, pathFormat);
+         var cmr = CopyToMoveToCore(destinationPath, copyOptions, null, preserveDates, progressHandler, userProgressData, out var destinationPathLp, pathFormat);
 
          UpdateDestinationPath(destinationPath, destinationPathLp);
 

@@ -45,7 +45,9 @@ namespace Alphaleonis.Win32.Network
       internal static IEnumerable<NetworkConnectionInfo> EnumerateNetworkConnectionsCore(Guid? networkConnectionID)
       {
          if (null != networkConnectionID)
+         {
             yield return new NetworkConnectionInfo(Manager.GetNetworkConnection((Guid) networkConnectionID));
+         }
 
          else
          {

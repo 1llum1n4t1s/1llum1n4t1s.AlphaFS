@@ -49,31 +49,40 @@ namespace Alphaleonis.Win32.Filesystem
       internal static Collection<Process> GetProcessForFileLockCore(KernelTransaction transaction, Collection<string> filePaths, PathFormat pathFormat)
       {
          if (!NativeMethods.IsAtLeastWindowsVista)
+         {
             throw new PlatformNotSupportedException(new Win32Exception((int) Win32Errors.ERROR_OLD_WIN_VERSION).Message);
-         
+         }
+
          if (null == filePaths)
+         {
             throw new ArgumentNullException("filePaths");
+         }
 
          if (filePaths.Count == 0)
+         {
             throw new ArgumentOutOfRangeException("filePaths", "No paths specified.");
+         }
 
 
          var isLongPath = pathFormat == PathFormat.LongFullPath;
          var allPaths = isLongPath ? new Collection<string>(filePaths) : new Collection<string>();
 
          if (!isLongPath)
+         {
             foreach (var path in filePaths)
                allPaths.Add(Path.GetExtendedLengthPathCore(transaction, path, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.FullCheck));
+         }
 
 
 
 
-         uint sessionHandle;
-         var success = NativeMethods.RmStartSession(out sessionHandle, 0, Guid.NewGuid().ToString()) == Win32Errors.ERROR_SUCCESS;
+         var success = NativeMethods.RmStartSession(out var sessionHandle, 0, Guid.NewGuid().ToString()) == Win32Errors.ERROR_SUCCESS;
 
          var lastError = Marshal.GetLastWin32Error();
          if (!success)
+         {
             NativeError.ThrowException(lastError);
+         }
 
 
 
@@ -91,10 +100,12 @@ namespace Alphaleonis.Win32.Filesystem
 
             lastError = Marshal.GetLastWin32Error();
             if (!success)
+            {
                NativeError.ThrowException(lastError);
+            }
 
 
-         GetList:
+            GetList:
 
             var processInfo = new NativeMethods.RM_PROCESS_INFO[processesFound];
             var processesTotal = processesFound;
@@ -105,11 +116,15 @@ namespace Alphaleonis.Win32.Filesystem
 
             // There would be no need for this because we already have a/the total number of running processes.
             if (lastError == Win32Errors.ERROR_MORE_DATA)
+            {
                goto GetList;
+            }
 
 
             if (lastError != Win32Errors.ERROR_SUCCESS)
+            {
                NativeError.ThrowException(lastError);
+            }
 
 
             for (var i = 0; i < processesTotal; i++)

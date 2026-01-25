@@ -85,7 +85,9 @@ namespace AlphaFS.UnitTest
 
          fullPath = Environment.SystemDirectory;
          if (isNetwork)
+         {
             fullPath = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(fullPath);
+         }
 
          suffixedDirectoryName = Alphaleonis.Win32.Filesystem.Path.GetSuffixedDirectoryName(fullPath);
 
@@ -99,14 +101,16 @@ namespace AlphaFS.UnitTest
 
          fullPath = UnitTestConstants.SysDrive + Alphaleonis.Win32.Filesystem.Path.DirectorySeparator;
          if (isNetwork)
+         {
             fullPath = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(fullPath);
+         }
 
          suffixedDirectoryName = Alphaleonis.Win32.Filesystem.Path.GetSuffixedDirectoryNameWithoutRoot(fullPath);
 
          Console.WriteLine("\nFull Path               : " + fullPath);
          Console.WriteLine("GetSuffixedDirectoryName: " + suffixedDirectoryName);
 
-         Assert.AreEqual(null, suffixedDirectoryName);
+         Assert.IsNull(suffixedDirectoryName);
 
 
          Console.WriteLine();

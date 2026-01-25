@@ -52,7 +52,9 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
          else
+         {
             enumOptions |= DirectoryEnumerationOptions.Files;
+         }
 
 
          foreach (var fsei in EnumerateFileSystemEntryInfosCore<FileSystemEntryInfo>(null, transaction, pathLp, Path.WildcardStarMatchAll, null, enumOptions, null, PathFormat.LongFullPath))

@@ -64,7 +64,7 @@ namespace AlphaFS.UnitTest
             var dirInfoSysIO = new System.IO.DirectoryInfo(folderLink);
             UnitTestConstants.Dump(dirInfoSysIO);
 
-            Assert.IsTrue((dirInfoSysIO.Attributes & System.IO.FileAttributes.ReparsePoint) != 0);
+            Assert.AreNotEqual((System.IO.FileAttributes)0, dirInfoSysIO.Attributes & System.IO.FileAttributes.ReparsePoint);
 
 
 
@@ -77,7 +77,7 @@ namespace AlphaFS.UnitTest
             Assert.IsFalse(alphaFSDirInfo.EntryInfo.IsMountPoint);
             Assert.IsTrue(alphaFSDirInfo.EntryInfo.IsReparsePoint);
             Assert.IsTrue(alphaFSDirInfo.EntryInfo.IsSymbolicLink);
-            Assert.AreEqual(alphaFSDirInfo.EntryInfo.ReparsePointTag, Alphaleonis.Win32.Filesystem.ReparsePointTag.SymLink);
+            Assert.AreEqual(Alphaleonis.Win32.Filesystem.ReparsePointTag.SymLink, alphaFSDirInfo.EntryInfo.ReparsePointTag);
          }
 
          Console.WriteLine();

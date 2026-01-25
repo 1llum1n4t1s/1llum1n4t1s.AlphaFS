@@ -38,10 +38,6 @@ namespace Alphaleonis.Win32.Security
       /// <summary>MD5 (Message digest)</summary>
       MD5,
 
-      /// <summary>RIPEMD-160 is a 160-bit cryptographic hash function. It is intended for use as a replacement for the 128-bit hash functions MD4, MD5, and RIPEMD.</summary>
-      [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "RIPEMD")]
-      RIPEMD160,
-
       /// <summary>SHA-1 (Secure Hash Algorithm)</summary>
       [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "SHA")]
       SHA1,

@@ -22,8 +22,6 @@
 using System;
 using System.ComponentModel;
 using System.Globalization;
-using System.Runtime.Serialization;
-
 namespace Alphaleonis.Win32.Filesystem
 {
    /// <summary>[AlphaFS] The operation could not be completed because the directory is read-only.</summary>
@@ -50,14 +48,6 @@ namespace Alphaleonis.Win32.Filesystem
       /// <param name="path">The path to the directory.</param>
       /// <param name="innerException">The inner exception.</param>
       public DirectoryReadOnlyException(string path, Exception innerException) : base(string.Format(CultureInfo.InvariantCulture, "{0}: [{1}]", ErrorText, path), innerException)
-      {
-      }
-
-
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="DirectoryReadOnlyException"/> class.</summary>
-      /// <param name="info">The data for serializing or deserializing the object.</param>
-      /// <param name="context">The source and destination for the object.</param>
-      protected DirectoryReadOnlyException(SerializationInfo info, StreamingContext context) : base(info, context)
       {
       }
    }

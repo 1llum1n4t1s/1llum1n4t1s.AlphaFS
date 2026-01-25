@@ -45,12 +45,16 @@ namespace Alphaleonis.Win32.Filesystem
       internal static void SetFsoDateTimeCore(KernelTransaction transaction, bool isFolder, string path, DateTime? creationTimeUtc, DateTime? lastAccessTimeUtc, DateTime? lastWriteTimeUtc, bool modifyReparsePoint, PathFormat pathFormat)
       {
          if (pathFormat == PathFormat.RelativePath)
+         {
             Path.CheckSupportedPathFormat(path, false, false);
+         }
 
          var eaAttributes = ExtendedFileAttributes.BackupSemantics;
 
          if (modifyReparsePoint)
+         {
             eaAttributes |= ExtendedFileAttributes.OpenReparsePoint;
+         }
 
 
          //// Prevent a System.UnauthorizedAccessException from being thrown by resetting attributes to Normal.
@@ -63,38 +67,35 @@ namespace Alphaleonis.Win32.Filesystem
          //   SetAttributesCore(transaction, isFolder, path, fileAttributes, PathFormat.LongFullPath);
 
 
-         using (var creationTime = SafeGlobalMemoryBufferHandle.FromLong(creationTimeUtc.HasValue ? creationTimeUtc.Value.ToFileTimeUtc() : (long?) null))
+         using var creationTime = SafeGlobalMemoryBufferHandle.FromLong(creationTimeUtc.HasValue ? creationTimeUtc.Value.ToFileTimeUtc() : (long?) null);
+         using var lastAccessTime = SafeGlobalMemoryBufferHandle.FromLong(lastAccessTimeUtc.HasValue ? lastAccessTimeUtc.Value.ToFileTimeUtc() : (long?) null);
+         using var lastWriteTime = SafeGlobalMemoryBufferHandle.FromLong(lastWriteTimeUtc.HasValue ? lastWriteTimeUtc.Value.ToFileTimeUtc() : (long?) null);
+         using var safeFileHandle = CreateFileCore(transaction, isFolder, path, eaAttributes, null, FileMode.Open, FileSystemRights.WriteAttributes, FileShare.Delete | FileShare.Write, false, false, pathFormat);
+         var success = NativeMethods.SetFileTime(safeFileHandle, creationTime, lastAccessTime, lastWriteTime);
 
-         using (var lastAccessTime = SafeGlobalMemoryBufferHandle.FromLong(lastAccessTimeUtc.HasValue ? lastAccessTimeUtc.Value.ToFileTimeUtc() : (long?) null))
-
-         using (var lastWriteTime = SafeGlobalMemoryBufferHandle.FromLong(lastWriteTimeUtc.HasValue ? lastWriteTimeUtc.Value.ToFileTimeUtc() : (long?) null))
-
-         using (var safeFileHandle = CreateFileCore(transaction, isFolder, path, eaAttributes, null, FileMode.Open, FileSystemRights.WriteAttributes, FileShare.Delete | FileShare.Write, false, false, pathFormat))
-         {
-            var success = NativeMethods.SetFileTime(safeFileHandle, creationTime, lastAccessTime, lastWriteTime);
-
-            var lastError = Marshal.GetLastWin32Error();
+         var lastError = Marshal.GetLastWin32Error();
             
-            // Reset file system object attributes.
+         // Reset file system object attributes.
 
-            if (success)
-            {
-               //if (isReadOnly || isHidden)
-               //{
-               //   if (isReadOnly)
-               //      fileAttributes |= FileAttributes.ReadOnly;
+         if (success)
+         {
+            //if (isReadOnly || isHidden)
+            //{
+            //   if (isReadOnly)
+            //      fileAttributes |= FileAttributes.ReadOnly;
 
-               //   if (isHidden)
-               //      fileAttributes |= FileAttributes.Hidden;
+            //   if (isHidden)
+            //      fileAttributes |= FileAttributes.Hidden;
 
-               //   fileAttributes &= ~FileAttributes.Normal;
+            //   fileAttributes &= ~FileAttributes.Normal;
 
-               //   SetAttributesCore(transaction, isFolder, path, fileAttributes, PathFormat.LongFullPath);
-               //}
-            }
+            //   SetAttributesCore(transaction, isFolder, path, fileAttributes, PathFormat.LongFullPath);
+            //}
+         }
 
-            else
-               NativeError.ThrowException(lastError, isFolder, path);
+         else
+         {
+            NativeError.ThrowException(lastError, isFolder, path);
          }
       }
    }

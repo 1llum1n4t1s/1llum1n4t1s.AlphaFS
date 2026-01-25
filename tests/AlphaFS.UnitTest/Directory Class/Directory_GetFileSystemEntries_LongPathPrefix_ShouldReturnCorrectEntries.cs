@@ -71,7 +71,7 @@ namespace AlphaFS.UnitTest
             var entries = Alphaleonis.Win32.Filesystem.Directory.GetFileSystemEntries(prefix + longDir).ToArray();
 
 
-            Assert.AreEqual(3, entries.Length);
+            Assert.HasCount(3, entries);
          }
 
          Console.WriteLine();

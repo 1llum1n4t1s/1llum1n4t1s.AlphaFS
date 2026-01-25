@@ -30,7 +30,9 @@ namespace AlphaFS.UnitTest
       public static void IsElevatedProcess()
       {
          if (!Alphaleonis.Win32.Security.ProcessContext.IsElevatedProcess)
+         {
             Inconclusive("This unit test must be run elevated.");
+         }
       }
 
       
@@ -77,17 +79,21 @@ namespace AlphaFS.UnitTest
 
 
          if (null != exception)
+         {
             Console.WriteLine("\n\t[{0}]{1} {2}: {3}", MethodBase.GetCurrentMethod().Name,
 
                gotException ? string.Empty : " Caught unexpected",
                gotException ? expectedException.Name : exception.GetType().Name, message.Trim());
+         }
 
 
-         Assert.IsTrue(gotException, "The {0} is not caught, but is expected to.", expectedException.Name);
+         Assert.IsTrue(gotException, $"The {expectedException.Name} is not caught, but is expected to.");
 
 
          if (gotException && !Alphaleonis.Utils.IsNullOrWhiteSpace(findString))
-            Assert.IsTrue(message.Contains(findString), "The findString is not found in the exception message, but is expected to.");
+         {
+            Assert.Contains(findString, message, "The findString is not found in the exception message, but is expected to.");
+         }
       }
 
 
@@ -112,10 +118,12 @@ namespace AlphaFS.UnitTest
 
 
          if (null != exception)
+         {
             Console.WriteLine("\n\t[{0}]{1} {2}: {3}", MethodBase.GetCurrentMethod().Name,
 
                gotException ? string.Empty : " Caught unexpected",
                gotException ? expectedException.Name : exception.GetType().Name, message.Trim());
+         }
 
 
          return gotException;

@@ -52,7 +52,7 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>Applies access control list (ACL) entries described by a <see cref="DirectorySecurity"/> object to the specified directory.</summary>
-      /// <remarks>Note that unlike <see cref="System.IO.File.SetAccessControl"/> this method does <b>not</b> automatically
+      /// <remarks>Note that unlike the BCL <c>System.IO.Directory.SetAccessControl</c> method, this method does <b>not</b> automatically
       /// determine what parts of the specified <see cref="DirectorySecurity"/> instance has been modified. Instead, the
       /// parameter <paramref name="includeSections"/> is used to specify what entries from <paramref name="directorySecurity"/> to apply to <paramref name="path"/>.</remarks>
       /// <param name="path">A directory to add or remove access control list (ACL) entries from.</param>
@@ -67,7 +67,7 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>[AlphaFS] Applies access control list (ACL) entries described by a <see cref="DirectorySecurity"/> object to the specified directory.</summary>
-      /// <remarks>Note that unlike <see cref="System.IO.File.SetAccessControl"/> this method does <b>not</b> automatically
+      /// <remarks>Note that unlike the BCL <c>System.IO.Directory.SetAccessControl</c> method, this method does <b>not</b> automatically
       /// determine what parts of the specified <see cref="DirectorySecurity"/> instance has been modified. Instead, the
       /// parameter <paramref name="includeSections"/> is used to specify what entries from <paramref name="directorySecurity"/> to apply to <paramref name="path"/>.</remarks>
       /// <param name="path">A directory to add or remove access control list (ACL) entries from.</param>

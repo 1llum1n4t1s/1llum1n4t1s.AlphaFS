@@ -62,7 +62,9 @@ namespace Alphaleonis.Win32.Filesystem
       internal static bool ExistsDriveOrFolderOrFile(KernelTransaction transaction, string path, bool isFolder, int lastError, bool throwIfDriveNotExists, bool throwIfFolderOrFileNotExists)
       {
          if (Utils.IsNullOrWhiteSpace(path))
+         {
             return false;
+         }
 
 
          var drive = GetDirectoryRootCore(transaction, path, Path.IsPathRooted(path) ? PathFormat.FullPath : PathFormat.RelativePath);
@@ -73,7 +75,9 @@ namespace Alphaleonis.Win32.Filesystem
 
 
          if (!driveExists && throwIfDriveNotExists || lastError == Win32Errors.ERROR_NOT_READY)
+         {
             throw new DeviceNotReadyException(drive, true);
+         }
 
 
          throwIfFolderOrFileNotExists = throwIfFolderOrFileNotExists && lastError != Win32Errors.NO_ERROR;
@@ -83,13 +87,17 @@ namespace Alphaleonis.Win32.Filesystem
             if (lastError != Win32Errors.NO_ERROR)
             {
                if (lastError == Win32Errors.ERROR_PATH_NOT_FOUND)
+               {
                   throw new DirectoryNotFoundException(regularPath);
+               }
 
 
                if (lastError == Win32Errors.ERROR_FILE_NOT_FOUND)
                {
                   if (isFolder)
+                  {
                      throw new DirectoryNotFoundException(regularPath);
+                  }
 
                   throw new FileNotFoundException(regularPath);
                }

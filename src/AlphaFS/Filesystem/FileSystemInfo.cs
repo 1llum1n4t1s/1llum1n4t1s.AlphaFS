@@ -90,7 +90,9 @@ namespace Alphaleonis.Win32.Filesystem
             // MSDN: .NET 3.5+: IOException: Refresh cannot initialize the data. 
 
             if (DataInitialised != 0)
+            {
                NativeError.ThrowException(DataInitialised, FullPath);
+            }
 
             return Win32AttributeData.dwFileAttributes;
          }
@@ -159,7 +161,9 @@ namespace Alphaleonis.Win32.Filesystem
 
             // MSDN: .NET 3.5+: IOException: Refresh cannot initialize the data. 
             if (DataInitialised != 0)
+            {
                NativeError.ThrowException(DataInitialised, LongFullName);
+            }
 
             return DateTime.FromFileTimeUtc(Win32AttributeData.ftCreationTime);
          }
@@ -253,7 +257,9 @@ namespace Alphaleonis.Win32.Filesystem
 
             // MSDN: .NET 3.5+: IOException: Refresh cannot initialize the data. 
             if (DataInitialised != 0)
+            {
                NativeError.ThrowException(DataInitialised, LongFullName);
+            }
 
             return DateTime.FromFileTimeUtc(Win32AttributeData.ftLastAccessTime);
          }
@@ -312,7 +318,9 @@ namespace Alphaleonis.Win32.Filesystem
 
             // MSDN: .NET 3.5+: IOException: Refresh cannot initialize the data. 
             if (DataInitialised != 0)
+            {
                NativeError.ThrowException(DataInitialised, LongFullName);
+            }
 
             return DateTime.FromFileTimeUtc(Win32AttributeData.ftLastWriteTime);
          }
@@ -368,7 +376,9 @@ namespace Alphaleonis.Win32.Filesystem
 
             // MSDN: .NET 3.5+: IOException: Refresh cannot initialize the data. 
             if (DataInitialised > 0)
+            {
                NativeError.ThrowException(DataInitialised, LongFullName);
+            }
 
             return _entryInfo;
          }
@@ -381,7 +391,9 @@ namespace Alphaleonis.Win32.Filesystem
             DataInitialised = value == null ? -1 : 0;
 
             if (DataInitialised == 0 && null != _entryInfo)
+            {
                Win32AttributeData = new NativeMethods.WIN32_FILE_ATTRIBUTE_DATA(_entryInfo.Win32FindData);
+            }
          }
       }
 
@@ -526,7 +538,9 @@ namespace Alphaleonis.Win32.Filesystem
          _entryInfo = File.GetFileSystemEntryInfoCore(Transaction, IsDirectory, LongFullName, true, PathFormat.LongFullPath);
 
          if (null == _entryInfo)
+         {
             DataInitialised = -1;
+         }
 
          else
          {
@@ -553,7 +567,9 @@ namespace Alphaleonis.Win32.Filesystem
       internal void InitializeCore(KernelTransaction transaction, bool isFolder, string path, PathFormat pathFormat)
       {
          if (pathFormat == PathFormat.RelativePath)
+         {
             Path.CheckSupportedPathFormat(path, true, true);
+         }
 
          LongFullName = Path.GetExtendedLengthPathCore(transaction, path, pathFormat, GetFullPathOptions.TrimEnd | (isFolder ? GetFullPathOptions.RemoveTrailingDirectorySeparator : 0) | GetFullPathOptions.ContinueOnNonExist);
          
@@ -586,7 +602,9 @@ namespace Alphaleonis.Win32.Filesystem
          lastError = Marshal.GetLastWin32Error();
 
          if (!NativeMethods.IsValidHandle(safeHandle, false))
+         {
             safeHandle = null;
+         }
 
 
          return safeHandle;

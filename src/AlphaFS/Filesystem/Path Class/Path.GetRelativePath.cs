@@ -36,10 +36,14 @@ namespace Alphaleonis.Win32.Filesystem
       public static string GetRelativePath(string startPath, string selectedPath)
       {
          if (string.IsNullOrEmpty(startPath))
+         {
             throw new ArgumentNullException("startPath");
+         }
 
          if (string.IsNullOrEmpty(selectedPath))
+         {
             throw new ArgumentNullException("selectedPath");
+         }
 
 
          var fromDirectories = startPath.Split(DirectorySeparatorChar);
@@ -56,14 +60,18 @@ namespace Alphaleonis.Win32.Filesystem
          for (var index = 0; index < length; index++)
          {
             if (string.Compare(fromDirectories[index], toDirectories[index], StringComparison.OrdinalIgnoreCase) != 0)
+            {
                break;
+            }
 
             lastCommonRoot = index;
          }
 
 
          if (lastCommonRoot == -1)
+         {
             return selectedPath;
+         }
 
          lastCommonRoot++;
 
@@ -78,7 +86,9 @@ namespace Alphaleonis.Win32.Filesystem
          for (var index = lastCommonRoot; index < fromLength; index++)
          {
             if (fromDirectories[index].Length > 0)
+            {
                relativePath.Append(ParentDirectoryPrefix + DirectorySeparator);
+            }
          }
 
 

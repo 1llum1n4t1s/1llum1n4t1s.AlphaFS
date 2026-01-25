@@ -43,7 +43,9 @@ namespace Alphaleonis.Win32.Filesystem
       public static string GetVolumeGuid(string volumeMountPoint)
       {
          if (Utils.IsNullOrWhiteSpace(volumeMountPoint))
+         {
             throw new ArgumentNullException("volumeMountPoint");
+         }
 
          // The string must end with a trailing backslash ('\').
          volumeMountPoint = Path.GetFullPathCore(null, false, volumeMountPoint, GetFullPathOptions.AsLongPath | GetFullPathOptions.AddTrailingDirectorySeparator | GetFullPathOptions.FullCheck);

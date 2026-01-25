@@ -107,7 +107,9 @@ namespace Alphaleonis.Win32.Security
       private static uint[] InitializeTable(uint polynomial)
       {
          if (polynomial == DefaultPolynomial && s_defaultTable != null)
+         {
             return s_defaultTable;
+         }
 
          var createTable = new uint[256];
 
@@ -122,7 +124,9 @@ namespace Alphaleonis.Win32.Security
          }
 
          if (polynomial == DefaultPolynomial)
+         {
             s_defaultTable = createTable;
+         }
 
          return createTable;
       }
@@ -154,7 +158,9 @@ namespace Alphaleonis.Win32.Security
          var result = BitConverter.GetBytes(uint32);
 
          if (BitConverter.IsLittleEndian)
+         {
             Array.Reverse(result);
+         }
 
          return result;
       }

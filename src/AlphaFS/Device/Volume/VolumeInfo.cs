@@ -47,23 +47,31 @@ namespace Alphaleonis.Win32.Filesystem
       public VolumeInfo(string volumeName)
       {
          if (Utils.IsNullOrWhiteSpace(volumeName))
+         {
             throw new ArgumentNullException("volumeName");
+         }
 
 
          if (!volumeName.StartsWith(Path.LongPathPrefix, StringComparison.Ordinal))
+         {
             volumeName = Path.IsUncPathCore(volumeName, false, false) ? Path.GetLongPathCore(volumeName, GetFullPathOptions.None) : Path.LongPathPrefix + volumeName;
+         }
 
          else
          {
             volumeName = volumeName.Length == 1 ? volumeName + Path.VolumeSeparatorChar : Path.GetPathRoot(volumeName, false);
 
             if (!volumeName.StartsWith(Path.GlobalRootPrefix, StringComparison.OrdinalIgnoreCase))
+            {
                volumeName = Path.GetPathRoot(volumeName, false);
+            }
          }
 
 
          if (Utils.IsNullOrWhiteSpace(volumeName))
+         {
             throw new ArgumentException(Resources.InvalidDriveLetterArgument, "volumeName");
+         }
 
 
          Name = Path.AddTrailingDirectorySeparator(volumeName, false);
@@ -82,7 +90,9 @@ namespace Alphaleonis.Win32.Filesystem
          _continueOnAccessError = continueOnException;
 
          if (refresh)
+         {
             Refresh();
+         }
       }
 
 
@@ -105,7 +115,9 @@ namespace Alphaleonis.Win32.Filesystem
          _continueOnAccessError = continueOnException;
 
          if (refresh)
+         {
             Refresh();
+         }
       }
 
 
@@ -146,7 +158,9 @@ namespace Alphaleonis.Win32.Filesystem
                   {
                      case Win32Errors.ERROR_NOT_READY:
                         if (!_continueOnAccessError)
+                        {
                            throw new DeviceNotReadyException(Name, true);
+                        }
                         break;
 
                      case Win32Errors.ERROR_MORE_DATA:
@@ -157,13 +171,17 @@ namespace Alphaleonis.Win32.Filesystem
 
                      default:
                         if (!_continueOnAccessError)
+                        {
                            NativeError.ThrowException(lastError, Name);
+                        }
                         break;
                   }
                }
 
                else
+               {
                   break;
+               }
 
             } while (lastError == Win32Errors.ERROR_MORE_DATA);
          }
@@ -233,7 +251,9 @@ namespace Alphaleonis.Win32.Filesystem
          get
          {
             if (Utils.IsNullOrWhiteSpace(_guid))
+            {
                _guid = !Utils.IsNullOrWhiteSpace(FullPath) ? Volume.GetUniqueVolumeNameForPath(FullPath) : null;
+            }
 
             return _guid;
          }

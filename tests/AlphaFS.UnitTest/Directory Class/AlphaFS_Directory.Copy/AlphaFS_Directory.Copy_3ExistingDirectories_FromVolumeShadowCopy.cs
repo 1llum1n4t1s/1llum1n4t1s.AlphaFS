@@ -51,7 +51,9 @@ namespace AlphaFS.UnitTest
             foreach (var dosDevice in dosDevices)
             {
                if (testOk)
+               {
                   break;
+               }
 
                var shadowSource = Alphaleonis.Win32.Filesystem.Path.GlobalRootDevicePrefix + dosDevice;
 
@@ -67,7 +69,9 @@ namespace AlphaFS.UnitTest
                Console.WriteLine("Input GlobalRoot Path: [{0}]\n", dirInfo.FullName);
 
                if (!dirInfo.Exists)
+               {
                   UnitTestAssert.InconclusiveBecauseFileNotFound("No volume shadow copy found.");
+               }
 
 
                var enumOptions = Alphaleonis.Win32.Filesystem.DirectoryEnumerationOptions.Recursive | Alphaleonis.Win32.Filesystem.DirectoryEnumerationOptions.SkipReparsePoints;
@@ -78,7 +82,9 @@ namespace AlphaFS.UnitTest
                foreach (var fsi in dirInfo.EnumerateDirectories(enumOptions))
                {
                   if (copyCount == 3)
+                  {
                      break;
+                  }
 
 
                   // Copy folders from "\Program Files".
@@ -110,7 +116,9 @@ namespace AlphaFS.UnitTest
 
 
          if (!testOk)
+         {
             UnitTestAssert.InconclusiveBecauseResourcesAreUnavailable();
+         }
       }
    }
 }

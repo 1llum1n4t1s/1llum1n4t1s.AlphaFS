@@ -46,7 +46,9 @@ namespace Alphaleonis.Win32.Filesystem
       internal static void EnableDisableEncryptionCore(string path, bool enable, PathFormat pathFormat)
       {
          if (Utils.IsNullOrWhiteSpace(path))
+         {
             throw new ArgumentNullException("path");
+         }
 
          var pathLp = Path.GetExtendedLengthPathCore(null, path, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.FullCheck);
 
@@ -57,7 +59,9 @@ namespace Alphaleonis.Win32.Filesystem
 
          var lastError = Marshal.GetLastWin32Error();
          if (!success)
+         {
             NativeError.ThrowException(lastError, true, pathLp);
+         }
       }
    }
 }

@@ -49,16 +49,24 @@ namespace Alphaleonis.Win32.Security
       public void CopyTo(byte[] destination, int destinationOffset, int length)
       {
          if (destination == null)
+         {
             throw new ArgumentNullException("destination");
+         }
 
          if (destinationOffset < 0)
+         {
             throw new ArgumentOutOfRangeException("destinationOffset", Resources.Negative_Destination_Offset);
+         }
 
          if (length < 0)
+         {
             throw new ArgumentOutOfRangeException("length", Resources.Negative_Length);
+         }
 
          if (destinationOffset + length > destination.Length)
+         {
             throw new ArgumentException(Resources.Destination_Buffer_Not_Large_Enough, "length");
+         }
 
          Marshal.Copy(handle, destination, destinationOffset, length);
       }
@@ -67,7 +75,9 @@ namespace Alphaleonis.Win32.Security
       public byte[] ToByteArray(int startIndex, int length)
       {
          if (IsInvalid)
+         {
             return null;
+         }
 
          var arr = new byte[length];
          Marshal.Copy(handle, arr, startIndex, length);

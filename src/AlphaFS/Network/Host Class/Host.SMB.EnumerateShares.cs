@@ -137,7 +137,9 @@ namespace Alphaleonis.Win32.Network
          }
 
          if (hasItems)
+         {
             yield break;
+         }
 
 
          // Fallback on SHARE_INFO_2 structure.
@@ -153,7 +155,9 @@ namespace Alphaleonis.Win32.Network
          }
 
          if (hasItems)
+         {
             yield break;
+         }
 
 
          // Fallback on SHARE_INFO_1 structure.

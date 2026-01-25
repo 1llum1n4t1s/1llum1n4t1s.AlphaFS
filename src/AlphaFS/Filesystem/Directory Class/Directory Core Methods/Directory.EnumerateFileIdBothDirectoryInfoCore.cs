@@ -54,7 +54,9 @@ namespace Alphaleonis.Win32.Filesystem
       internal static IEnumerable<FileIdBothDirectoryInfo> EnumerateFileIdBothDirectoryInfoCore(KernelTransaction transaction, SafeFileHandle safeFileHandle, string path, FileShare shareMode, bool continueOnException, PathFormat pathFormat)
       {
          if (!NativeMethods.IsAtLeastWindowsVista)
+         {
             throw new PlatformNotSupportedException(new Win32Exception((int) Win32Errors.ERROR_OLD_WIN_VERSION).Message);
+         }
 
 
          var pathLp = path;
@@ -63,7 +65,9 @@ namespace Alphaleonis.Win32.Filesystem
          if (!callerHandle)
          {
             if (Utils.IsNullOrWhiteSpace(path))
+            {
                throw new ArgumentNullException("path");
+            }
 
             pathLp = Path.GetExtendedLengthPathCore(transaction, path, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.FullCheck);
 
@@ -74,67 +78,71 @@ namespace Alphaleonis.Win32.Filesystem
          try
          {
             if (!NativeMethods.IsValidHandle(safeFileHandle, Marshal.GetLastWin32Error(), !continueOnException))
-               yield break;
-
-            var fileNameOffset = (int) Marshal.OffsetOf(typeof(NativeMethods.FILE_ID_BOTH_DIR_INFO), "FileName");
-
-            using (var safeBuffer = new SafeGlobalMemoryBufferHandle(NativeMethods.DefaultFileBufferSize))
             {
-               while (true)
+               yield break;
+            }
+
+            var fileNameOffset = (int) Marshal.OffsetOf<NativeMethods.FILE_ID_BOTH_DIR_INFO>("FileName");
+
+            using var safeBuffer = new SafeGlobalMemoryBufferHandle(NativeMethods.DefaultFileBufferSize);
+            while (true)
+            {
+               var success = NativeMethods.GetFileInformationByHandleEx(safeFileHandle, NativeMethods.FILE_INFO_BY_HANDLE_CLASS.FILE_ID_BOTH_DIR_INFO, safeBuffer, (uint) safeBuffer.Capacity);
+
+               var lastError = Marshal.GetLastWin32Error();
+               if (!success)
                {
-                  var success = NativeMethods.GetFileInformationByHandleEx(safeFileHandle, NativeMethods.FILE_INFO_BY_HANDLE_CLASS.FILE_ID_BOTH_DIR_INFO, safeBuffer, (uint) safeBuffer.Capacity);
-
-                  var lastError = Marshal.GetLastWin32Error();
-                  if (!success)
+                  switch ((uint) lastError)
                   {
-                     switch ((uint) lastError)
-                     {
-                        case Win32Errors.ERROR_SUCCESS:
-                        case Win32Errors.ERROR_NO_MORE_FILES:
-                        case Win32Errors.ERROR_HANDLE_EOF:
-                           yield break;
+                     case Win32Errors.ERROR_SUCCESS:
+                     case Win32Errors.ERROR_NO_MORE_FILES:
+                     case Win32Errors.ERROR_HANDLE_EOF:
+                        yield break;
 
-                        case Win32Errors.ERROR_MORE_DATA:
-                           continue;
-
-                        default:
-                           NativeError.ThrowException(lastError, pathLp);
-
-                           // Keep the compiler happy as we never get here.
-                           yield break;
-                     }
-                  }
-                  
-
-                  var offset = 0;
-                  NativeMethods.FILE_ID_BOTH_DIR_INFO fibdi;
-
-                  do
-                  {
-                     fibdi = safeBuffer.PtrToStructure<NativeMethods.FILE_ID_BOTH_DIR_INFO>(offset);
-
-                     var fileName = safeBuffer.PtrToStringUni(offset + fileNameOffset, (int) (fibdi.FileNameLength / UnicodeEncoding.CharSize));
-
-                     offset += fibdi.NextEntryOffset;
-
-
-                     if (File.IsDirectory(fibdi.FileAttributes) &&
-                         (fileName.Equals(Path.CurrentDirectoryPrefix, StringComparison.Ordinal) ||
-                          fileName.Equals(Path.ParentDirectoryPrefix, StringComparison.Ordinal)))
+                     case Win32Errors.ERROR_MORE_DATA:
                         continue;
 
+                     default:
+                        NativeError.ThrowException(lastError, pathLp);
 
-                     yield return new FileIdBothDirectoryInfo(fibdi, fileName);
+                        // Keep the compiler happy as we never get here.
+                        yield break;
+                  }
+               }
+                  
 
-                  } while (fibdi.NextEntryOffset != 0);
-               }                           
+               var offset = 0;
+               NativeMethods.FILE_ID_BOTH_DIR_INFO fibdi;
+
+               do
+               {
+                  fibdi = safeBuffer.PtrToStructure<NativeMethods.FILE_ID_BOTH_DIR_INFO>(offset);
+
+                  var fileName = safeBuffer.PtrToStringUni(offset + fileNameOffset, (int) (fibdi.FileNameLength / UnicodeEncoding.CharSize));
+
+                  offset += fibdi.NextEntryOffset;
+
+
+                  if (File.IsDirectory(fibdi.FileAttributes) &&
+                      (fileName.Equals(Path.CurrentDirectoryPrefix, StringComparison.Ordinal) ||
+                       fileName.Equals(Path.ParentDirectoryPrefix, StringComparison.Ordinal)))
+                  {
+                     continue;
+                  }
+
+
+                  yield return new FileIdBothDirectoryInfo(fibdi, fileName);
+
+               } while (fibdi.NextEntryOffset != 0);
             }
          }
          finally
          {
             // Handle is ours, dispose.
             if (!callerHandle && null != safeFileHandle && !safeFileHandle.IsClosed)
+            {
                safeFileHandle.Close();
+            }
          }
       }
    }

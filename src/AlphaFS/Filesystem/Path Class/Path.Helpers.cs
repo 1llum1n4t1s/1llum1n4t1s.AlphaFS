@@ -39,7 +39,9 @@ namespace Alphaleonis.Win32.Filesystem
 
             if (tackle.Length >= 2 && tackle[0] == CurrentDirectoryPrefixChar)
 
+            {
                throw new ArgumentException(Resources.UNC_Path_Should_Match_Format, "path");
+            }
          }
       }
 
@@ -55,7 +57,9 @@ namespace Alphaleonis.Win32.Filesystem
       {
          // "."
          if (Utils.IsNullOrWhiteSpace(path) || path.Length == 1)
+         {
             return;
+         }
 
          var regularPath = GetRegularPathCore(path, GetFullPathOptions.None, false);
 
@@ -66,13 +70,17 @@ namespace Alphaleonis.Win32.Filesystem
          if (throwException)
          {
             if (isArgumentException)
+            {
                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, Resources.Unsupported_Path_Format, regularPath), "path");
+            }
 
             throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, Resources.Unsupported_Path_Format, regularPath));
          }
 
          if (checkInvalidPathChars)
+         {
             CheckInvalidPathChars(path, checkAdditional, false);
+         }
       }
 
 
@@ -86,10 +94,14 @@ namespace Alphaleonis.Win32.Filesystem
       private static void CheckInvalidPathChars(string path, bool checkAdditional, bool allowEmpty)
       {
          if (null == path)
+         {
             throw new ArgumentNullException("path");
+         }
 
          if (!allowEmpty && (path.Trim().Length == 0 || Utils.IsNullOrWhiteSpace(path)))
+         {
             throw new ArgumentException(Resources.Path_Is_Zero_Length_Or_Only_White_Space, "path");
+         }
 
          // Will fail on a Unicode path.
          var pathRp = GetRegularPathCore(path, GetFullPathOptions.None, allowEmpty);
@@ -97,10 +109,14 @@ namespace Alphaleonis.Win32.Filesystem
 
          // Handle "\\?\GlobalRoot\" and "\\?\Volume" prefixes.
          if (pathRp.StartsWith(GlobalRootPrefix, StringComparison.OrdinalIgnoreCase))
+         {
             pathRp = pathRp.ReplaceIgnoreCase(GlobalRootPrefix, string.Empty);
+         }
 
          if (pathRp.StartsWith(VolumePrefix, StringComparison.OrdinalIgnoreCase))
+         {
             pathRp = pathRp.ReplaceIgnoreCase(VolumePrefix, string.Empty);
+         }
 
 
          for (int index = 0, l = pathRp.Length; index < l; ++index)
@@ -117,7 +133,9 @@ namespace Alphaleonis.Win32.Filesystem
                default:
                   // 32: space
                   if (num >= 32 && (!checkAdditional || num != WildcardQuestionChar && num != WildcardStarMatchAllChar))
+                  {
                      continue;
+                  }
 
                   goto case 34;
             }
@@ -144,7 +162,9 @@ namespace Alphaleonis.Win32.Filesystem
       internal static string GetExtendedLengthPathCore(KernelTransaction transaction, string path, PathFormat pathFormat, GetFullPathOptions options)
       {
          if (null == path)
+         {
             return null;
+         }
 
 
          switch (pathFormat)
@@ -186,7 +206,9 @@ namespace Alphaleonis.Win32.Filesystem
       internal static int GetRootLength(string path, bool checkInvalidPathChars)
       {
          if (checkInvalidPathChars)
+         {
             CheckInvalidPathChars(path, false, false);
+         }
 
          var index = 0;
          var length = path.Length;
@@ -210,7 +232,9 @@ namespace Alphaleonis.Win32.Filesystem
             index = 2;
 
             if (length >= 3 && IsDVsc(path[2], false))
+            {
                ++index;
+            }
          }
 
          return index;
@@ -327,7 +351,9 @@ namespace Alphaleonis.Win32.Filesystem
 
                      if (index + 1 < path.Length && (path[index + 1] == DirectorySeparatorChar || path[index + 1] == AltDirectorySeparatorChar))
 
+                     {
                         newBuffer.Append(DirectorySeparatorChar);
+                     }
                   }
                }
 
@@ -350,12 +376,15 @@ namespace Alphaleonis.Win32.Filesystem
                var thisPos = newBuffer.Length - 1;
 
                if (thisPos - lastDirectorySeparatorPos - 1 > NativeMethods.MaxDirectoryLength)
+               {
                   throw new PathTooLongException(path);
+               }
 
                lastDirectorySeparatorPos = thisPos;
             } // if (Found directory separator)
 
             else
+            {
                switch (currentChar)
                {
                   case CurrentDirectoryPrefixChar:
@@ -385,7 +414,9 @@ namespace Alphaleonis.Win32.Filesystem
                         var validPath = numDots == 0 && numSigChars >= 1 && driveLetter != ' ';
 
                         if (!validPath)
+                        {
                            throw new ArgumentException(path, "path");
+                        }
 
 
                         startedWithVolumeSeparator = true;
@@ -410,7 +441,9 @@ namespace Alphaleonis.Win32.Filesystem
                      }
 
                      else
+                     {
                         numSigChars += 1 + numDots + numSpaces;
+                     }
 
 
                      // Copy any spaces & dots since the last significant character to here.
@@ -435,13 +468,16 @@ namespace Alphaleonis.Win32.Filesystem
                      lastSigChar = index;
                      break;
                }
+            }
 
             index++;
          }
 
 
          if (newBuffer.Length - 1 - lastDirectorySeparatorPos > NativeMethods.MaxDirectoryLength)
+         {
             throw new PathTooLongException(path);
+         }
 
 
          // Drop any trailing dots and spaces from file & directory names, EXCEPT we MUST make sure that "C:\foo\.." is correctly handled.
@@ -451,14 +487,18 @@ namespace Alphaleonis.Win32.Filesystem
          {
             // Dot and space handling.
             if (numDots > 0)
+            {
                newBuffer.Append(NormalizePathDotSpaceHandler(path, lastSigChar, numDots, startedWithVolumeSeparator));
+            }
          }
 
 
          // If we ended up eating all the characters, bail out.
 
          if (newBuffer.Length == 0)
+         {
             throw new ArgumentException(path, "path");
+         }
 
 
          // Disallow URL's here.  Some of our other Win32 API calls will reject them later, so we might be better off rejecting them here.
@@ -471,7 +511,9 @@ namespace Alphaleonis.Win32.Filesystem
 
             if (newBufferString.StartsWith(Uri.UriSchemeHttp + ":", StringComparison.OrdinalIgnoreCase) ||
                 newBufferString.StartsWith(Uri.UriSchemeFile + ":", StringComparison.OrdinalIgnoreCase))
+            {
                throw new ArgumentException(path, "path");
+            }
          }
 
 
@@ -499,7 +541,9 @@ namespace Alphaleonis.Win32.Filesystem
             }
 
             if (startIndex == result)
+            {
                throw new ArgumentException(path, "path");
+            }
          }
 
 
@@ -517,7 +561,9 @@ namespace Alphaleonis.Win32.Filesystem
          var start = lastSigChar + 1;
 
          if (path[start] != CurrentDirectoryPrefixChar)
+         {
             throw new ArgumentException(path, "path");
+         }
 
 
          // Only allow "[dot]+[space]*", and normalize the legal ones to "." or "..".
@@ -527,7 +573,9 @@ namespace Alphaleonis.Win32.Filesystem
             // Reject "C:...".
 
             if (startedWithVolumeSeparator && numDots > 2)
+            {
                throw new ArgumentException(path, "path");
+            }
 
 
             if (path[start + 1] == CurrentDirectoryPrefixChar)
@@ -537,7 +585,9 @@ namespace Alphaleonis.Win32.Filesystem
                for (var i = start + 2; i < start + numDots; i++)
                {
                   if (path[i] != CurrentDirectoryPrefixChar)
+                  {
                      throw new ArgumentException(path, "path");
+                  }
                }
 
                numDots = 2;
@@ -546,7 +596,9 @@ namespace Alphaleonis.Win32.Filesystem
             else
             {
                if (numDots > 1)
+               {
                   throw new ArgumentException(path, "path");
+               }
 
                numDots = 1;
             }
@@ -554,7 +606,9 @@ namespace Alphaleonis.Win32.Filesystem
 
 
          if (numDots == 2)
+         {
             newBuffer.Append(CurrentDirectoryPrefixChar);
+         }
 
 
          newBuffer.Append(CurrentDirectoryPrefixChar);

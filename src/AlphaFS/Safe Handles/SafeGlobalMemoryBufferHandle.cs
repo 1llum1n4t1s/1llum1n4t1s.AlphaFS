@@ -53,7 +53,7 @@ namespace Alphaleonis.Win32
       {
          if (value.HasValue)
          {
-            var safeBuffer = new SafeGlobalMemoryBufferHandle(Marshal.SizeOf(typeof(long)));
+            var safeBuffer = new SafeGlobalMemoryBufferHandle(Marshal.SizeOf<long>());
 
             Marshal.WriteInt64(safeBuffer.handle, value.Value);
 
@@ -67,7 +67,9 @@ namespace Alphaleonis.Win32
       public static SafeGlobalMemoryBufferHandle FromStringUni(string str)
       {
          if (str == null)
+         {
             throw new ArgumentNullException("str");
+         }
 
          return new SafeGlobalMemoryBufferHandle(Marshal.StringToHGlobalUni(str), str.Length * UnicodeEncoding.CharSize + UnicodeEncoding.CharSize);
       }

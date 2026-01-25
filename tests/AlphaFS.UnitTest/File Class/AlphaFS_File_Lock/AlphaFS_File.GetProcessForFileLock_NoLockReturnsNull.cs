@@ -39,14 +39,12 @@ namespace AlphaFS.UnitTest
 
       private void AlphaFS_File_GetProcessForFileLock_NoLockReturnsNull(bool isNetwork)
       {
-         using (var tempRoot = new TemporaryDirectory(isNetwork))
-         {
-            var file = tempRoot.CreateFile();
+         using var tempRoot = new TemporaryDirectory(isNetwork);
+         var file = tempRoot.CreateFile();
 
-            Console.WriteLine("Input File Path: [{0}]\n", file.FullName);
+         Console.WriteLine("Input File Path: [{0}]\n", file.FullName);
 
-            Assert.IsNull(Alphaleonis.Win32.Filesystem.File.GetProcessForFileLock(file.FullName));
-         }
+         Assert.IsNull(Alphaleonis.Win32.Filesystem.File.GetProcessForFileLock(file.FullName));
       }
    }
 }

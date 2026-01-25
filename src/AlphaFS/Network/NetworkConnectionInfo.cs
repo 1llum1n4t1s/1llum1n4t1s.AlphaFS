@@ -97,7 +97,6 @@ namespace Alphaleonis.Win32.Network
       {
          get
          {
-            Guid guid;
             var adapterId = _networkConnection.GetAdapterId();
             
             
@@ -107,12 +106,16 @@ namespace Alphaleonis.Win32.Network
                guid = new Guid(nic.Id);
 
 #else
-               if (!Guid.TryParse(nic.Id, out guid))
+               if (!Guid.TryParse(nic.Id, out var guid))
+               {
                   continue;
+               }
 #endif
 
                if (Equals(adapterId, guid))
+               {
                   return nic;
+               }
             }
 
 
@@ -139,7 +142,9 @@ namespace Alphaleonis.Win32.Network
       public override bool Equals(object obj)
       {
          if (null == obj || GetType() != obj.GetType())
+         {
             return false;
+         }
 
          var other = obj as NetworkConnectionInfo;
 

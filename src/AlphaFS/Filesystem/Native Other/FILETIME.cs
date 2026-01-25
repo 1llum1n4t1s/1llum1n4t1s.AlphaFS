@@ -65,7 +65,9 @@ namespace Alphaleonis.Win32.Filesystem
          public override bool Equals(object obj)
          {
             if (null == obj || GetType() != obj.GetType())
+            {
                return false;
+            }
 
             var other = obj as FILETIME? ?? new FILETIME();
 

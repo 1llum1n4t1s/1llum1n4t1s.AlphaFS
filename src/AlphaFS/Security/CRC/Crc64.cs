@@ -101,12 +101,16 @@ namespace Alphaleonis.Win32.Security
       private static ulong[] InitializeTable(ulong polynomial)
       {
          if (polynomial == Iso3309Polynomial && s_defaultTable != null)
+         {
             return s_defaultTable;
+         }
 
          var createTable = CreateTable(polynomial);
 
          if (polynomial == Iso3309Polynomial)
+         {
             s_defaultTable = createTable;
+         }
 
          return createTable;
       }
@@ -162,7 +166,9 @@ namespace Alphaleonis.Win32.Security
          var result = BitConverter.GetBytes(value);
 
          if (BitConverter.IsLittleEndian)
+         {
             Array.Reverse(result);
+         }
 
          return result;
       }

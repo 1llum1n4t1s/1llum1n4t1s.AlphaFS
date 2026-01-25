@@ -83,7 +83,9 @@ namespace Alphaleonis.Win32.Network
       internal static IEnumerable<OpenConnectionInfo> EnumerateOpenConnectionsCore(string host, string share, bool continueOnException)
       {
          if (Utils.IsNullOrWhiteSpace(share))
+         {
             throw new ArgumentNullException("share");
+         }
 
          return EnumerateNetworkObjectCore(new FunctionData {ExtraData1 = share}, (NativeMethods.CONNECTION_INFO_1 structure, SafeGlobalMemoryBufferHandle buffer) => new OpenConnectionInfo(host, structure),
 

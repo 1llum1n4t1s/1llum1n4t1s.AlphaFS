@@ -49,14 +49,18 @@ namespace Alphaleonis.Win32.Filesystem
       internal static DateTime GetChangeTimeCore(KernelTransaction transaction, SafeFileHandle safeFileHandle, bool isFolder, string path, bool getUtc, PathFormat pathFormat)
       {
          if (!NativeMethods.IsAtLeastWindowsVista)
+         {
             throw new PlatformNotSupportedException(new Win32Exception((int) Win32Errors.ERROR_OLD_WIN_VERSION).Message);
+         }
 
 
          var callerHandle = null != safeFileHandle;
          if (!callerHandle)
          {
             if (pathFormat != PathFormat.LongFullPath && Utils.IsNullOrWhiteSpace(path))
+            {
                throw new ArgumentNullException("path");
+            }
 
             var pathLp = Path.GetExtendedLengthPathCore(transaction, path, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.CheckInvalidPathChars);
 
@@ -67,30 +71,31 @@ namespace Alphaleonis.Win32.Filesystem
          try
          {
             NativeMethods.IsValidHandle(safeFileHandle);
-            
-            using (var safeBuffer = new SafeGlobalMemoryBufferHandle(IntPtr.Size + Marshal.SizeOf(typeof(NativeMethods.FILE_BASIC_INFO))))
-            {
-               NativeMethods.FILE_BASIC_INFO fbi;
 
-               var success = NativeMethods.GetFileInformationByHandleEx_FileBasicInfo(safeFileHandle, NativeMethods.FILE_INFO_BY_HANDLE_CLASS.FILE_BASIC_INFO, out fbi, (uint) safeBuffer.Capacity);
+            using var safeBuffer = new SafeGlobalMemoryBufferHandle(IntPtr.Size + Marshal.SizeOf<NativeMethods.FILE_BASIC_INFO>());
+
+            var success = NativeMethods.GetFileInformationByHandleEx_FileBasicInfo(safeFileHandle, NativeMethods.FILE_INFO_BY_HANDLE_CLASS.FILE_BASIC_INFO, out var fbi, (uint) safeBuffer.Capacity);
                
-               var lastError = Marshal.GetLastWin32Error();
-               if (!success)
-                  NativeError.ThrowException(lastError, !Utils.IsNullOrWhiteSpace(path) ? path : null);
-
-
-               safeBuffer.StructureToPtr(fbi, true);
-               var changeTime = safeBuffer.PtrToStructure<NativeMethods.FILE_BASIC_INFO>(0).ChangeTime;
-
-
-               return getUtc ? DateTime.FromFileTimeUtc(changeTime) : DateTime.FromFileTime(changeTime);
+            var lastError = Marshal.GetLastWin32Error();
+            if (!success)
+            {
+               NativeError.ThrowException(lastError, !Utils.IsNullOrWhiteSpace(path) ? path : null);
             }
+
+
+            safeBuffer.StructureToPtr(fbi, true);
+            var changeTime = safeBuffer.PtrToStructure<NativeMethods.FILE_BASIC_INFO>(0).ChangeTime;
+
+
+            return getUtc ? DateTime.FromFileTimeUtc(changeTime) : DateTime.FromFileTime(changeTime);
          }
          finally
          {
             // Handle is ours, dispose.
             if (!callerHandle && null != safeFileHandle && !safeFileHandle.IsClosed)
+            {
                safeFileHandle.Close();
+            }
          }
       }
    }

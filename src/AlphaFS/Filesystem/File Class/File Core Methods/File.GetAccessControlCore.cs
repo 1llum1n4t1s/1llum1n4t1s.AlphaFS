@@ -54,12 +54,13 @@ namespace Alphaleonis.Win32.Filesystem
          PrivilegeEnabler privilege = null;
 
          if ((includeSections & AccessControlSections.Audit) != 0)
+         {
             privilege = new PrivilegeEnabler(Privilege.Security);
+         }
 
          using (privilege)
          {
             IntPtr pSidOwner, pSidGroup, pDacl, pSacl;
-            SafeGlobalMemoryBufferHandle pSecurityDescriptor;
 
             var pathLp = Path.GetExtendedLengthPathCore(null, path, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.FullCheck);
 
@@ -67,16 +68,15 @@ namespace Alphaleonis.Win32.Filesystem
             // Get/SetNamedSecurityInfo does not work with a handle but with a path, hence does not honor the privileges.
             // It magically does since Windows Server 2012 / 8 but not in previous OS versions.
 
-            var lastError = Security.NativeMethods.GetNamedSecurityInfo(pathLp, SE_OBJECT_TYPE.SE_FILE_OBJECT, securityInfo, out pSidOwner, out pSidGroup, out pDacl, out pSacl, out pSecurityDescriptor);
+            var lastError = Security.NativeMethods.GetNamedSecurityInfo(pathLp, SE_OBJECT_TYPE.SE_FILE_OBJECT, securityInfo, out pSidOwner, out pSidGroup, out pDacl, out pSacl, out var pSecurityDescriptor);
 
 
             // When GetNamedSecurityInfo() fails with ACCESS_DENIED, try again using GetSecurityInfo().
 
             if (lastError == Win32Errors.ERROR_ACCESS_DENIED)
             {
-               using (var handle = CreateFileCore(null, false, pathLp, ExtendedFileAttributes.BackupSemantics, null, FileMode.Open, FileSystemRights.Read, FileShare.Read, false, false, PathFormat.LongFullPath))
-
-                  return GetAccessControlHandleCore<T>(true, isFolder, handle, includeSections, securityInfo);
+               using var handle = CreateFileCore(null, false, pathLp, ExtendedFileAttributes.BackupSemantics, null, FileMode.Open, FileSystemRights.Read, FileShare.Read, false, false, PathFormat.LongFullPath);
+               return GetAccessControlHandleCore<T>(true, isFolder, handle, includeSections, securityInfo);
             }
 
             return GetSecurityDescriptor<T>(lastError, isFolder, pathLp, pSecurityDescriptor);
@@ -87,7 +87,9 @@ namespace Alphaleonis.Win32.Filesystem
       internal static T GetAccessControlHandleCore<T>(bool internalCall, bool isFolder, SafeFileHandle handle, AccessControlSections includeSections, SECURITY_INFORMATION securityInfo)
       {
          if (!internalCall)
+         {
             securityInfo = CreateSecurityInformation(includeSections);
+         }
 
 
          // We need the SE_SECURITY_NAME privilege enabled to be able to get the SACL descriptor.
@@ -96,14 +98,15 @@ namespace Alphaleonis.Win32.Filesystem
          PrivilegeEnabler privilege = null;
 
          if (!internalCall && (includeSections & AccessControlSections.Audit) != 0)
+         {
             privilege = new PrivilegeEnabler(Privilege.Security);
-         
+         }
+
          using (privilege)
          {
             IntPtr pSidOwner, pSidGroup, pDacl, pSacl;
-            SafeGlobalMemoryBufferHandle pSecurityDescriptor;
 
-            var lastError = Security.NativeMethods.GetSecurityInfo(handle, SE_OBJECT_TYPE.SE_FILE_OBJECT, securityInfo, out pSidOwner, out pSidGroup, out pDacl, out pSacl, out pSecurityDescriptor);
+            var lastError = Security.NativeMethods.GetSecurityInfo(handle, SE_OBJECT_TYPE.SE_FILE_OBJECT, securityInfo, out pSidOwner, out pSidGroup, out pDacl, out pSacl, out var pSecurityDescriptor);
 
             return GetSecurityDescriptor<T>(lastError, isFolder, null, pSecurityDescriptor);
          }
@@ -116,17 +119,25 @@ namespace Alphaleonis.Win32.Filesystem
 
 
          if ((includeSections & AccessControlSections.Access) != 0)
+         {
             securityInfo |= SECURITY_INFORMATION.DACL_SECURITY_INFORMATION;
+         }
 
          if ((includeSections & AccessControlSections.Audit) != 0)
+         {
             securityInfo |= SECURITY_INFORMATION.SACL_SECURITY_INFORMATION;
+         }
 
          if ((includeSections & AccessControlSections.Group) != 0)
+         {
             securityInfo |= SECURITY_INFORMATION.GROUP_SECURITY_INFORMATION;
+         }
 
          if ((includeSections & AccessControlSections.Owner) != 0)
+         {
             securityInfo |= SECURITY_INFORMATION.OWNER_SECURITY_INFORMATION;
-         
+         }
+
 
          return securityInfo;
       }
@@ -139,15 +150,21 @@ namespace Alphaleonis.Win32.Filesystem
          using (securityDescriptor)
          {
             if (lastError == Win32Errors.ERROR_FILE_NOT_FOUND || lastError == Win32Errors.ERROR_PATH_NOT_FOUND)
+            {
                lastError = isFolder ? Win32Errors.ERROR_PATH_NOT_FOUND : Win32Errors.ERROR_FILE_NOT_FOUND;
+            }
 
 
             // MSDN: GetNamedSecurityInfo() / GetSecurityInfo(): If the function fails, the return value is zero.
             if (lastError != Win32Errors.ERROR_SUCCESS)
+            {
                NativeError.ThrowException(lastError, !Utils.IsNullOrWhiteSpace(path) ? path : null);
+            }
 
             if (!NativeMethods.IsValidHandle(securityDescriptor, false))
+            {
                throw new IOException(Resources.Returned_Invalid_Security_Descriptor);
+            }
 
 
             var length = Security.NativeMethods.GetSecurityDescriptorLength(securityDescriptor);

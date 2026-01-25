@@ -60,7 +60,9 @@ namespace Alphaleonis.Win32.Filesystem
                 path.StartsWith(VolumePrefix, StringComparison.OrdinalIgnoreCase) ||
                 path.StartsWith(NonInterpretedPathPrefix, StringComparison.Ordinal))
 
+            {
                return path;
+            }
 
 
             if (checkSupported)
@@ -85,7 +87,9 @@ namespace Alphaleonis.Win32.Filesystem
                options &= ~GetFullPathOptions.CheckInvalidPathChars;
 
                if (checkAdditional)
+               {
                   options &= ~GetFullPathOptions.CheckAdditional;
+               }
             }
 
             // Do not remove trailing directory separator when path points to a drive like: "C:\"
@@ -93,7 +97,9 @@ namespace Alphaleonis.Win32.Filesystem
 
             // ".", "C:", "C:\"
             if (null == path || path.Length <= 3 || !path.StartsWith(LongPathPrefix, StringComparison.Ordinal) && path[1] != VolumeSeparatorChar)
+            {
                options &= ~GetFullPathOptions.RemoveTrailingDirectorySeparator;
+            }
          }
          
 
@@ -130,7 +136,9 @@ namespace Alphaleonis.Win32.Filesystem
             else
             {
                if ((options & GetFullPathOptions.ContinueOnNonExist) != 0)
+               {
                   return null;
+               }
 
                NativeError.ThrowException(returnLength, pathLp);
             }
@@ -145,14 +153,18 @@ namespace Alphaleonis.Win32.Filesystem
             {
                if (pathLp.EndsWith(CurrentDirectoryPrefix, StringComparison.Ordinal))
 
+               {
                   finalFullPath += CurrentDirectoryPrefix;
+               }
 
 
                var lastChar = pathLp[pathLp.Length - 1];
 
                if (char.IsWhiteSpace(lastChar))
 
+               {
                   finalFullPath += lastChar;
+               }
             }
 
 
@@ -170,22 +182,34 @@ namespace Alphaleonis.Win32.Filesystem
       private static string ApplyFullPathOptions(string path, GetFullPathOptions options)
       {
          if ((options & GetFullPathOptions.TrimEnd) != 0)
+         {
             if ((options & GetFullPathOptions.KeepDotOrSpace) == 0)
+            {
                path = path.TrimEnd();
+            }
+         }
 
          if ((options & GetFullPathOptions.AddTrailingDirectorySeparator) != 0)
+         {
             path = AddTrailingDirectorySeparator(path, false);
+         }
 
          if ((options & GetFullPathOptions.RemoveTrailingDirectorySeparator) != 0)
+         {
             path = RemoveTrailingDirectorySeparator(path);
+         }
 
          if ((options & GetFullPathOptions.CheckInvalidPathChars) != 0)
+         {
             CheckInvalidPathChars(path, (options & GetFullPathOptions.CheckAdditional) != 0, false);
+         }
 
 
          // Trim leading whitespace.
          if ((options & GetFullPathOptions.KeepDotOrSpace) == 0)
+         {
             path = path.TrimStart();
+         }
 
          return path;
       }

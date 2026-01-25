@@ -40,10 +40,14 @@ namespace Alphaleonis.Win32.Filesystem
       internal static string GetExtensionCore(string path, bool checkInvalidPathChars)
       {
          if (null == path)
+         {
             return null;
+         }
 
          if (checkInvalidPathChars)
+         {
             CheckInvalidPathChars(path, false, true);
+         }
 
          var length = path.Length;
          var index = length;
@@ -53,10 +57,14 @@ namespace Alphaleonis.Win32.Filesystem
             var ch = path[index];
 
             if (ch == ExtensionSeparatorChar)
+            {
                return index != length - 1 ? path.Substring(index, length - index) : string.Empty;
+            }
 
             if (IsDVsc(ch, null))
+            {
                break;
+            }
          }
 
          return string.Empty;

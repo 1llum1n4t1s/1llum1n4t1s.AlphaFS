@@ -37,9 +37,8 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       internal static ByHandleFileInfo GetFileInfoByHandleCore(KernelTransaction transaction, bool isFolder, string path, PathFormat pathFormat)
       {
-         using (var handle = CreateFileCore(transaction, isFolder, path, ExtendedFileAttributes.BackupSemantics, null, FileMode.Open, FileSystemRights.ReadData, FileShare.ReadWrite, true, false, pathFormat))
-
-            return GetFileInfoByHandle(handle);
+         using var handle = CreateFileCore(transaction, isFolder, path, ExtendedFileAttributes.BackupSemantics, null, FileMode.Open, FileSystemRights.ReadData, FileShare.ReadWrite, true, false, pathFormat);
+         return GetFileInfoByHandle(handle);
       }
    }
 }

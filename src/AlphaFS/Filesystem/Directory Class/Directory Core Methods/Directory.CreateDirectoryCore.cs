@@ -60,7 +60,9 @@ namespace Alphaleonis.Win32.Filesystem
          if (pathFormat != PathFormat.LongFullPath)
          {
             if (null == path)
+            {
                throw new ArgumentNullException("path");
+            }
 
 
             Path.CheckSupportedPathFormat(path, true, true);
@@ -79,13 +81,17 @@ namespace Alphaleonis.Win32.Filesystem
             if (File.ExistsCore(transaction, true, longPath, PathFormat.LongFullPath))
 
                // We are not always interested in a new DirectoryInfo instance.
+            {
                return returnNull ? null : new DirectoryInfo(transaction, longPath, PathFormat.LongFullPath);
+            }
          }
 
 
          // MSDN: .NET 3.5+: IOException: The directory specified by path is a file or the network name was not found.
          if (File.ExistsCore(transaction, false, longPath, PathFormat.LongFullPath))
+         {
             NativeError.ThrowException(Win32Errors.ERROR_ALREADY_EXISTS, longPath);
+         }
 
 
          var templatePathLp = Utils.IsNullOrWhiteSpace(templatePath)
@@ -96,74 +102,78 @@ namespace Alphaleonis.Win32.Filesystem
          var list = ConstructFullPath(transaction, longPath);
          
          // Directory security.
-         using (var securityAttributes = new Security.NativeMethods.SecurityAttributes(directorySecurity))
+         using var securityAttributes = new Security.NativeMethods.SecurityAttributes(directorySecurity);
+         // Create the directory paths.
+         while (list.Count > 0)
          {
-            // Create the directory paths.
-            while (list.Count > 0)
+            var folderLp = list.Pop();
+
+            // CreateDirectory() / CreateDirectoryEx()
+            // 2013-01-13: MSDN confirms LongPath usage.
+
+            if (!(transaction == null || !NativeMethods.IsAtLeastWindowsVista
+
+                   ? (templatePathLp == null
+
+                      ? NativeMethods.CreateDirectory(folderLp, securityAttributes)
+
+                      : NativeMethods.CreateDirectoryEx(templatePathLp, folderLp, securityAttributes))
+
+                   : NativeMethods.CreateDirectoryTransacted(templatePathLp, folderLp, securityAttributes, transaction.SafeHandle)))
             {
-               var folderLp = list.Pop();
+               var lastError = Marshal.GetLastWin32Error();
 
-               // CreateDirectory() / CreateDirectoryEx()
-               // 2013-01-13: MSDN confirms LongPath usage.
-
-               if (!(transaction == null || !NativeMethods.IsAtLeastWindowsVista
-
-                  ? (templatePathLp == null
-
-                     ? NativeMethods.CreateDirectory(folderLp, securityAttributes)
-
-                     : NativeMethods.CreateDirectoryEx(templatePathLp, folderLp, securityAttributes))
-
-                  : NativeMethods.CreateDirectoryTransacted(templatePathLp, folderLp, securityAttributes, transaction.SafeHandle)))
+               switch ((uint) lastError)
                {
-                  var lastError = Marshal.GetLastWin32Error();
+                  // MSDN: .NET 3.5+: If the directory already exists, this method does nothing.
+                  // MSDN: .NET 3.5+: IOException: The directory specified by path is a file.
+                  case Win32Errors.ERROR_ALREADY_EXISTS:
+                     if (File.ExistsCore(transaction, false, longPath, PathFormat.LongFullPath))
+                     {
+                        NativeError.ThrowException(lastError, longPath);
+                     }
 
-                  switch ((uint) lastError)
-                  {
-                     // MSDN: .NET 3.5+: If the directory already exists, this method does nothing.
-                     // MSDN: .NET 3.5+: IOException: The directory specified by path is a file.
-                     case Win32Errors.ERROR_ALREADY_EXISTS:
-                        if (File.ExistsCore(transaction, false, longPath, PathFormat.LongFullPath))
-                           NativeError.ThrowException(lastError, longPath);
-
-                        if (File.ExistsCore(transaction, false, folderLp, PathFormat.LongFullPath))
-                           NativeError.ThrowException(Win32Errors.ERROR_PATH_NOT_FOUND, null, folderLp);
-                        break;
-
-
-                     case Win32Errors.ERROR_BAD_NET_NAME:
-                        NativeError.ThrowException(Win32Errors.ERROR_BAD_NET_NAME, longPath);
-                        break;
+                     if (File.ExistsCore(transaction, false, folderLp, PathFormat.LongFullPath))
+                     {
+                        NativeError.ThrowException(Win32Errors.ERROR_PATH_NOT_FOUND, null, folderLp);
+                     }
+                     break;
 
 
-                     case Win32Errors.ERROR_DIRECTORY:
-                        // MSDN: .NET 3.5+: NotSupportedException: path contains a colon character (:) that is not part of a drive label ("C:\").
-                        throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, Resources.Unsupported_Path_Format, longPath));
+                  case Win32Errors.ERROR_BAD_NET_NAME:
+                     NativeError.ThrowException(Win32Errors.ERROR_BAD_NET_NAME, longPath);
+                     break;
 
 
-                     case Win32Errors.ERROR_ACCESS_DENIED:
-                        // Report the parent folder, the inaccessible folder.
-                        var parent = GetParent(folderLp);
-
-                        NativeError.ThrowException(lastError, null != parent ? parent.FullName : folderLp);
-                        break;
+                  case Win32Errors.ERROR_DIRECTORY:
+                     // MSDN: .NET 3.5+: NotSupportedException: path contains a colon character (:) that is not part of a drive label ("C:\").
+                     throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, Resources.Unsupported_Path_Format, longPath));
 
 
-                     default:
-                        NativeError.ThrowException(lastError, true, folderLp);
-                        break;
-                  }
+                  case Win32Errors.ERROR_ACCESS_DENIED:
+                     // Report the parent folder, the inaccessible folder.
+                     var parent = GetParent(folderLp);
+
+                     NativeError.ThrowException(lastError, null != parent ? parent.FullName : folderLp);
+                     break;
+
+
+                  default:
+                     NativeError.ThrowException(lastError, true, folderLp);
+                     break;
                }
-
-               else if (compress)
-                  Device.ToggleCompressionCore(transaction, true, folderLp, true, PathFormat.LongFullPath);
             }
 
-
-            // We are not always interested in a new DirectoryInfo instance.
-
-            return returnNull ? null : new DirectoryInfo(transaction, longPath, PathFormat.LongFullPath);
+            else if (compress)
+            {
+               Device.ToggleCompressionCore(transaction, true, folderLp, true, PathFormat.LongFullPath);
+            }
          }
+
+
+         // We are not always interested in a new DirectoryInfo instance.
+
+         return returnNull ? null : new DirectoryInfo(transaction, longPath, PathFormat.LongFullPath);
       }
 
 
@@ -174,11 +184,15 @@ namespace Alphaleonis.Win32.Filesystem
 
          var length = path.Length;
          if (length >= 2 && Path.IsDVsc(path[length - 1], false))
+         {
             --length;
+         }
 
          var rootLength = Path.GetRootLength(path, false);
          if (length == 2 && Path.IsDVsc(path[1], false))
+         {
             throw new ArgumentException(Resources.Cannot_Create_Directory, "path");
+         }
 
 
          // Check if directories are missing.
@@ -192,7 +206,9 @@ namespace Alphaleonis.Win32.Filesystem
                var path2 = longPathPrefix + path1.TrimStart('\\');
 
                if (!File.ExistsCore(transaction, true, path2, PathFormat.LongFullPath))
+               {
                   list.Push(path2);
+               }
 
                while (index > rootLength && !Path.IsDVsc(path[index], false))
                   --index;

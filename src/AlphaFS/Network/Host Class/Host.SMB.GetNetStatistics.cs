@@ -93,20 +93,21 @@ namespace Alphaleonis.Win32.Network
       [SecurityCritical]
       internal static T GetNetStatisticsNative<T>(bool isServer, string hostName)
       {
-         SafeGlobalMemoryBufferHandle safeBuffer;
 
 
          // hostName is allowed to be null.
 
          var stripUnc = !Utils.IsNullOrWhiteSpace(hostName) ? Path.GetRegularPathCore(hostName, GetFullPathOptions.CheckInvalidPathChars, false).Replace(Path.UncPrefix, string.Empty) : null;
 
-         var lastError = NativeMethods.NetStatisticsGet(stripUnc, isServer ? "LanmanServer" : "LanmanWorkstation", 0, 0, out safeBuffer);
+         var lastError = NativeMethods.NetStatisticsGet(stripUnc, isServer ? "LanmanServer" : "LanmanWorkstation", 0, 0, out var safeBuffer);
 
 
          using (safeBuffer)
          {
             if (lastError != Win32Errors.NERR_Success)
+            {
                throw new NetworkInformationException((int) lastError);
+            }
 
 
             return safeBuffer.PtrToStructure<T>(0);

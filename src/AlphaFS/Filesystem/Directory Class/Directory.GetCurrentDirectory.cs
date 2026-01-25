@@ -56,10 +56,14 @@ namespace Alphaleonis.Win32.Filesystem
          var lastError = Marshal.GetLastWin32Error();
 
          if (folderNameLength == 0)
+         {
             NativeError.ThrowException(lastError);
+         }
 
          if (folderNameLength > NativeMethods.MaxPathUnicode)
+         {
             throw new PathTooLongException(string.Format(CultureInfo.InvariantCulture, "Path is greater than {0} characters: {1}", NativeMethods.MaxPathUnicode, folderNameLength));
+         }
 
          return nameBuffer.ToString();
       }

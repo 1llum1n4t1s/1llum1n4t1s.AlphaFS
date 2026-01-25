@@ -25,7 +25,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.AccessControl;
-using System.Security.Permissions;
 using System.Transactions;
 
 namespace Alphaleonis.Win32.Filesystem
@@ -79,16 +78,15 @@ namespace Alphaleonis.Win32.Filesystem
       public KernelTransaction(ObjectSecurity securityDescriptor, int timeout, string description)
       {
          if (!NativeMethods.IsAtLeastWindowsVista)
-            throw new PlatformNotSupportedException(new Win32Exception((int) Win32Errors.ERROR_OLD_WIN_VERSION).Message);
-
-         using (var securityAttributes = new Security.NativeMethods.SecurityAttributes(securityDescriptor))
          {
-
-            _hTrans = NativeMethods.CreateTransaction(securityAttributes, IntPtr.Zero, 0, 0, 0, timeout, description);
-            int lastError = Marshal.GetLastWin32Error();            
-
-            NativeMethods.IsValidHandle(_hTrans, lastError);
+            throw new PlatformNotSupportedException(new Win32Exception((int) Win32Errors.ERROR_OLD_WIN_VERSION).Message);
          }
+
+         using var securityAttributes = new Security.NativeMethods.SecurityAttributes(securityDescriptor);
+         _hTrans = NativeMethods.CreateTransaction(securityAttributes, IntPtr.Zero, 0, 0, 0, timeout, description);
+         var lastError = Marshal.GetLastWin32Error();            
+
+         NativeMethods.IsValidHandle(_hTrans, lastError);
       }
 
       /// <summary>Requests that the specified transaction be committed.</summary>
@@ -100,10 +98,14 @@ namespace Alphaleonis.Win32.Filesystem
       public void Commit()
       {
          if (!NativeMethods.IsAtLeastWindowsVista)
+         {
             throw new PlatformNotSupportedException(new Win32Exception((int) Win32Errors.ERROR_OLD_WIN_VERSION).Message);
+         }
 
          if (!NativeMethods.CommitTransaction(_hTrans))
+         {
             CheckTransaction();
+         }
       }
 
       /// <summary>Requests that the specified transaction be rolled back. This function is synchronous.</summary>
@@ -114,16 +116,20 @@ namespace Alphaleonis.Win32.Filesystem
       public void Rollback()
       {
          if (!NativeMethods.IsAtLeastWindowsVista)
+         {
             throw new PlatformNotSupportedException(new Win32Exception((int) Win32Errors.ERROR_OLD_WIN_VERSION).Message);
+         }
 
          if (!NativeMethods.RollbackTransaction(_hTrans))
+         {
             CheckTransaction();
+         }
       }
 
       private static void CheckTransaction()
       {
-         uint error = (uint) Marshal.GetLastWin32Error();
-         int hr = Marshal.GetHRForLastWin32Error();
+         var error = (uint) Marshal.GetLastWin32Error();
+         var hr = Marshal.GetHRForLastWin32Error();
 
          switch (error)
          {
@@ -151,7 +157,6 @@ namespace Alphaleonis.Win32.Filesystem
       #region IDisposable Members
 
       /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
-      [SecurityPermissionAttribute(SecurityAction.Demand, UnmanagedCode = true)]
       public void Dispose()
       {
          _hTrans.Close();

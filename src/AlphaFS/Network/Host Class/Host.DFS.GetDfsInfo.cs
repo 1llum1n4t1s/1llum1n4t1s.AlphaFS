@@ -68,25 +68,29 @@ namespace Alphaleonis.Win32.Network
       internal static DfsInfo GetDfsInfoCore(bool getFromClient, string dfsName, string serverName, string shareName)
       {
          if (!Filesystem.NativeMethods.IsAtLeastWindowsVista)
+         {
             throw new PlatformNotSupportedException(new Win32Exception((int) Win32Errors.ERROR_OLD_WIN_VERSION).Message);
+         }
 
 
          if (Utils.IsNullOrWhiteSpace(dfsName))
+         {
             throw new ArgumentNullException("dfsName");
+         }
 
 
          serverName = !Utils.IsNullOrWhiteSpace(serverName) ? serverName : null;
          shareName = !Utils.IsNullOrWhiteSpace(shareName) ? shareName : null;
 
-         SafeGlobalMemoryBufferHandle safeBuffer;
-
 
          // Level 9 = DFS_INFO_9
 
-         var lastError = getFromClient ? NativeMethods.NetDfsGetClientInfo(dfsName, serverName, shareName, 9, out safeBuffer) : NativeMethods.NetDfsGetInfo(dfsName, null, null, 9, out safeBuffer);
+         var lastError = getFromClient ? NativeMethods.NetDfsGetClientInfo(dfsName, serverName, shareName, 9, out var safeBuffer) : NativeMethods.NetDfsGetInfo(dfsName, null, null, 9, out safeBuffer);
 
          if (lastError == Win32Errors.NERR_Success)
+         {
             return new DfsInfo(safeBuffer.PtrToStructure<NativeMethods.DFS_INFO_9>(0));
+         }
 
          throw new NetworkInformationException((int)lastError);
       }

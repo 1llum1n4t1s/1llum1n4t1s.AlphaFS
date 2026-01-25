@@ -69,7 +69,9 @@ namespace Alphaleonis.Win32.Security
          private static SafeGlobalMemoryBufferHandle ToUnmanagedSecurityAttributes(ObjectSecurity securityDescriptor)
          {
             if (null == securityDescriptor)
+            {
                return new SafeGlobalMemoryBufferHandle();
+            }
 
 
             var src = securityDescriptor.GetSecurityDescriptorBinaryForm();
@@ -91,7 +93,9 @@ namespace Alphaleonis.Win32.Security
          public void Dispose()
          {
             if (null != _securityDescriptor && !_securityDescriptor.IsClosed)
+            {
                _securityDescriptor.Close();
+            }
          }
       }
    }

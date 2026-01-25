@@ -87,7 +87,9 @@ namespace AlphaFS.UnitTest
       {
          if (callbackReason == Alphaleonis.Win32.Filesystem.CopyMoveProgressCallbackReason.StreamSwitch)
 
+         {
             Assert.AreEqual(0, totalBytesTransferred);
+         }
 
 
          else
@@ -96,7 +98,7 @@ namespace AlphaFS.UnitTest
 
             Console.WriteLine("\tCallback: Copied: [{0}%] --> [{1:N0}] bytes.", pct.ToString("N2", CultureInfo.CurrentCulture), totalBytesTransferred);
 
-            Assert.IsTrue(totalBytesTransferred > 0);
+            Assert.IsGreaterThan(totalBytesTransferred, 0);
 
 
             var bytes = Convert.ToInt64(userData);
@@ -108,7 +110,9 @@ namespace AlphaFS.UnitTest
             }
 
             else
-               Assert.IsTrue(totalBytesTransferred < bytes);
+            {
+               Assert.IsLessThan(totalBytesTransferred, bytes);
+            }
          }
 
 

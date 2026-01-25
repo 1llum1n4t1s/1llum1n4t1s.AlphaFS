@@ -45,7 +45,9 @@ namespace AlphaFS.UnitTest
 
          if (isNetwork)
             // Only using a drive letter results in a wrong UNC path.
+         {
             drive = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(UnitTestConstants.SysDrive);
+         }
 
          Console.WriteLine("Input Drive Path: [{0}]", drive);
 
@@ -56,9 +58,13 @@ namespace AlphaFS.UnitTest
          Assert.IsTrue(actual.IsVolume);
 
          if (isNetwork)
+         {
             Assert.IsTrue(actual.IsUnc);
+         }
          else
+         {
             Assert.IsFalse(actual.IsUnc);
+         }
 
 
          // System.IO.DriveInfo cannot handle UNC paths.

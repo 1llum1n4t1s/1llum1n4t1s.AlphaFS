@@ -60,13 +60,17 @@ namespace Alphaleonis.Win32.Filesystem
                case Win32Errors.ERROR_DIRECTORY:
                   // MSDN: .NET 3.5+: DirectoryNotFoundException: Path refers to a file instead of a directory.
                   if (File.ExistsCore(transaction, false, pathLp, PathFormat.LongFullPath))
+                  {
                      throw new DirectoryNotFoundException(string.Format(CultureInfo.InvariantCulture, "({0}) {1}", lastError, string.Format(CultureInfo.InvariantCulture, Resources.Target_Directory_Is_A_File, pathLp)));
+                  }
                   break;
 
 
                case Win32Errors.ERROR_PATH_NOT_FOUND:
                   if (continueOnNotFound)
+                  {
                      return;
+                  }
                   break;
 
 
@@ -84,7 +88,9 @@ namespace Alphaleonis.Win32.Filesystem
 
                      if (File.FillAttributeInfoCore(transaction, pathLp, ref attrs, false, true) == Win32Errors.NO_ERROR)
 
+                     {
                         attributes = attrs.dwFileAttributes;
+                     }
                   }
 
 
@@ -108,7 +114,9 @@ namespace Alphaleonis.Win32.Filesystem
 
                   // MSDN: .NET 3.5+: UnauthorizedAccessException: The caller does not have the required permission.
                   if (attributes == 0)
+                  {
                      NativeError.ThrowException(lastError, File.IsDirectory(attributes), pathLp);
+                  }
 
                   break;
             }

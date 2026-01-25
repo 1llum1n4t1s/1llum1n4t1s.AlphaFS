@@ -52,8 +52,10 @@ namespace AlphaFS.UnitTest
 
             if (isNetwork)
                // Trigger DelayUntilReboot.
+            {
                UnitTestAssert.ThrowsException<ArgumentException>(() => folder.MoveTo(null, Alphaleonis.Win32.Filesystem.MoveOptions.DelayUntilReboot));
-            
+            }
+
             else
             {
                // Trigger DelayUntilReboot.

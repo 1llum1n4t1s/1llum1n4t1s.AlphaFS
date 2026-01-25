@@ -47,7 +47,7 @@ namespace AlphaFS.UnitTest
          {
             var folder = tempRoot.CreateDirectory();
 
-            var sysIO = System.IO.Directory.GetAccessControl(folder.FullName);
+            var sysIO = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(folder.FullName);
             var sysIOaccessRules = sysIO.GetAccessRules(true, true, typeof(NTAccount));
 
             var alphaFS = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(folder.FullName);
@@ -56,7 +56,7 @@ namespace AlphaFS.UnitTest
 
             Console.WriteLine("Input Directory Path: [{0}]", folder.FullName);
             Console.WriteLine("\n\tSystem.IO rules found: [{0}]\n\tAlphaFS rules found  : [{1}]", sysIOaccessRules.Count, alphaFSaccessRules.Count);
-            Assert.AreEqual(sysIOaccessRules.Count, alphaFSaccessRules.Count);
+            Assert.HasCount(sysIOaccessRules.Count, alphaFSaccessRules);
 
 
             // Sanity check.
@@ -71,12 +71,8 @@ namespace AlphaFS.UnitTest
             Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(folder.FullName, alphaFS, AccessControlSections.Access);
 
 
-            // Re-read, using instance methods.
-            var sysIOdi = new System.IO.DirectoryInfo(folder.FullName);
-            var alphaFSdi = new Alphaleonis.Win32.Filesystem.DirectoryInfo(folder.FullName);
-
-            sysIO = sysIOdi.GetAccessControl(AccessControlSections.Access);
-            alphaFS = alphaFSdi.GetAccessControl(AccessControlSections.Access);
+            sysIO = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(folder.FullName, AccessControlSections.Access);
+            alphaFS = new Alphaleonis.Win32.Filesystem.DirectoryInfo(folder.FullName).GetAccessControl(AccessControlSections.Access);
 
             // Sanity check.
             UnitTestConstants.TestAccessRules(sysIO, alphaFS);
@@ -88,8 +84,7 @@ namespace AlphaFS.UnitTest
             Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(folder.FullName, alphaFS, AccessControlSections.Access);
 
 
-            // Re-read.
-            sysIO = System.IO.Directory.GetAccessControl(folder.FullName, AccessControlSections.Access);
+            sysIO = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(folder.FullName, AccessControlSections.Access);
             alphaFS = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(folder.FullName, AccessControlSections.Access);
 
             // Sanity check.

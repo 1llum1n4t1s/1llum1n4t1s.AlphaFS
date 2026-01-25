@@ -39,10 +39,14 @@ namespace Alphaleonis.Win32.Filesystem
       internal static string GetPathRootCore(string path, bool checkInvalidPathChars)
       {
          if (null == path)
+         {
             return null;
+         }
 
          if (path.Trim().Length == 0)
+         {
             throw new ArgumentException(Resources.Path_Is_Zero_Length_Or_Only_White_Space, "path");
+         }
 
 
          var pathRp = GetRegularPathCore(path,checkInvalidPathChars ? GetFullPathOptions.CheckInvalidPathChars : GetFullPathOptions.None, false);
@@ -56,7 +60,9 @@ namespace Alphaleonis.Win32.Filesystem
 
          if (rootLengthPathRp == 0 && path.StartsWith(LongPathPrefix, StringComparison.Ordinal))
 
+         {
             return GetLongPathCore(path.Substring(0, rootLengthPath), GetFullPathOptions.None);
+         }
 
 
          return path.StartsWith(LongPathUncPrefix, StringComparison.OrdinalIgnoreCase) ? GetLongPathCore(pathRp.Substring(0, rootLengthPathRp), GetFullPathOptions.None) : path.Substring(0, rootLengthPath);

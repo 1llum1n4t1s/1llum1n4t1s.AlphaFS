@@ -22,8 +22,6 @@
 using System;
 using System.ComponentModel;
 using System.Globalization;
-using System.Runtime.Serialization;
-
 namespace Alphaleonis.Win32.Filesystem
 {
    /// <summary>[AlphaFS] The file or directory was not a reparse point.</summary>
@@ -59,14 +57,6 @@ namespace Alphaleonis.Win32.Filesystem
       /// <param name="path">The path to the reparse point.</param>
       /// <param name="innerException">The inner exception.</param>
       public NotAReparsePointException(string path, Exception innerException) : base(string.Format(CultureInfo.InvariantCulture, "{0}: [{1}]", ErrorText, path), innerException)
-      {
-      }
-
-
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="NotAReparsePointException"/> class.</summary>
-      /// <param name="info">The info.</param>
-      /// <param name="context">The context.</param>
-      protected NotAReparsePointException(SerializationInfo info, StreamingContext context) : base(info, context)
       {
       }
    }

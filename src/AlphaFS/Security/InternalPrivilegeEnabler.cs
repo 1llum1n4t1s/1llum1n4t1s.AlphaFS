@@ -41,7 +41,9 @@ namespace Alphaleonis.Win32.Security
       public InternalPrivilegeEnabler(Privilege privilegeName)
       {
          if (null == privilegeName)
+         {
             throw new ArgumentNullException("privilegeName");
+         }
 
          EnabledPrivilege = privilegeName;
          AdjustPrivilege(true);
@@ -57,7 +59,9 @@ namespace Alphaleonis.Win32.Security
          try
          {
             if (null != EnabledPrivilege)
+            {
                AdjustPrivilege(false);
+            }
          }
          finally
          {
@@ -74,32 +78,34 @@ namespace Alphaleonis.Win32.Security
       [SecurityCritical]
       private void AdjustPrivilege(bool enable)
       {
-         using (var currentIdentity = WindowsIdentity.GetCurrent(TokenAccessLevels.Query | TokenAccessLevels.AdjustPrivileges))
+         using var currentIdentity = WindowsIdentity.GetCurrent(TokenAccessLevels.Query | TokenAccessLevels.AdjustPrivileges);
+         uint length;
+         var hToken = currentIdentity.Token;
+         var mOldPrivilege = new TOKEN_PRIVILEGES();
+
+         var newPrivilege = new TOKEN_PRIVILEGES
          {
-            uint length;
-            var hToken = currentIdentity.Token;
-            var mOldPrivilege = new TOKEN_PRIVILEGES();
+            PrivilegeCount = 1,
+            Luid = Filesystem.NativeMethods.LongToLuid(EnabledPrivilege.LookupLuid()),
 
-            var newPrivilege = new TOKEN_PRIVILEGES
-            {
-               PrivilegeCount = 1,
-               Luid = Filesystem.NativeMethods.LongToLuid(EnabledPrivilege.LookupLuid()),
-
-               // 2 = SePrivilegeEnabled;
-               Attributes = (uint) (enable ? 2 : 0)
-            };
+            // 2 = SePrivilegeEnabled;
+            Attributes = (uint) (enable ? 2 : 0)
+         };
 
 
-            var success = NativeMethods.AdjustTokenPrivileges(hToken, false, ref newPrivilege, (uint) Marshal.SizeOf(mOldPrivilege), out mOldPrivilege, out length);
+         var success = NativeMethods.AdjustTokenPrivileges(hToken, false, ref newPrivilege, (uint) Marshal.SizeOf(mOldPrivilege), out mOldPrivilege, out length);
 
-            var lastError = Marshal.GetLastWin32Error();
-            if (!success)
-               NativeError.ThrowException(lastError);
+         var lastError = Marshal.GetLastWin32Error();
+         if (!success)
+         {
+            NativeError.ThrowException(lastError);
+         }
 
 
-            // If no privilege was changed, we don't want to reset it.
-            if (mOldPrivilege.PrivilegeCount == 0)
-               EnabledPrivilege = null;
+         // If no privilege was changed, we don't want to reset it.
+         if (mOldPrivilege.PrivilegeCount == 0)
+         {
+            EnabledPrivilege = null;
          }
       }
    }

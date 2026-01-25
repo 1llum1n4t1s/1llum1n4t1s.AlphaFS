@@ -38,7 +38,9 @@ namespace Alphaleonis.Win32.Filesystem
       internal static IEnumerable<string> EnumerateHardLinksCore(KernelTransaction transaction, string path, PathFormat pathFormat)
       {
          if (!NativeMethods.IsAtLeastWindowsVista)
+         {
             throw new PlatformNotSupportedException(new Win32Exception((int) Win32Errors.ERROR_OLD_WIN_VERSION).Message);
+         }
 
          var pathLp = Path.GetExtendedLengthPathCore(transaction, path, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.FullCheck);
 
@@ -49,64 +51,61 @@ namespace Alphaleonis.Win32.Filesystem
 
       getFindFirstFileName:
 
-         using (var safeHandle = null == transaction
+      using (var safeHandle = null == transaction
 
-            // FindFirstFileNameW() / FindFirstFileNameTransactedW() / FindNextFileNameW()
-            // 2013-01-13: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
-            // 2017-05-30: FindFirstFileNameW() MSDN confirms LongPath usage: Starting with Windows 10, version 1607
+                // FindFirstFileNameW() / FindFirstFileNameTransactedW() / FindNextFileNameW()
+                // 2013-01-13: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
+                // 2017-05-30: FindFirstFileNameW() MSDN confirms LongPath usage: Starting with Windows 10, version 1607
+                ? NativeMethods.FindFirstFileNameW(pathLp, 0, out length, builder) : NativeMethods.FindFirstFileNameTransactedW(pathLp, 0, out length, builder, transaction.SafeHandle))
+      {
+         var lastError = Marshal.GetLastWin32Error();
 
-            ? NativeMethods.FindFirstFileNameW(pathLp, 0, out length, builder)
-
-            : NativeMethods.FindFirstFileNameTransactedW(pathLp, 0, out length, builder, transaction.SafeHandle))
+         if (!NativeMethods.IsValidHandle(safeHandle, false))
          {
-            var lastError = Marshal.GetLastWin32Error();
-
-            if (!NativeMethods.IsValidHandle(safeHandle, false))
+            switch ((uint)lastError)
             {
-               switch ((uint) lastError)
+               case Win32Errors.ERROR_MORE_DATA:
+                  builder = new StringBuilder((int)length);
+                  goto getFindFirstFileName;
+
+               default:
+                  // If the function fails, the return value is INVALID_HANDLE_VALUE.
+                  NativeError.ThrowException(lastError, pathLp);
+                  break;
+            }
+         }
+
+         yield return builder.ToString();
+
+
+         do
+         {
+            while (!NativeMethods.FindNextFileNameW(safeHandle, out length, builder))
+            {
+               lastError = Marshal.GetLastWin32Error();
+
+               switch ((uint)lastError)
                {
+                  // We've reached the end of the enumeration.
+                  case Win32Errors.ERROR_HANDLE_EOF:
+                     yield break;
+
                   case Win32Errors.ERROR_MORE_DATA:
-                     builder = new StringBuilder((int) length);
-                     goto getFindFirstFileName;
+                     builder = new StringBuilder((int)length);
+                     continue;
 
                   default:
-                     // If the function fails, the return value is INVALID_HANDLE_VALUE.
-                     NativeError.ThrowException(lastError, pathLp);
+                     // If the function fails, the return value is zero (0).
+                     NativeError.ThrowException(lastError);
                      break;
                }
             }
 
+
             yield return builder.ToString();
 
-
-            do
-            {
-               while (!NativeMethods.FindNextFileNameW(safeHandle, out length, builder))
-               {
-                  lastError = Marshal.GetLastWin32Error();
-
-                  switch ((uint) lastError)
-                  {
-                     // We've reached the end of the enumeration.
-                     case Win32Errors.ERROR_HANDLE_EOF:
-                        yield break;
-
-                     case Win32Errors.ERROR_MORE_DATA:
-                        builder = new StringBuilder((int) length);
-                        continue;
-
-                     default:
-                        // If the function fails, the return value is zero (0).
-                        NativeError.ThrowException(lastError);
-                        break;
-                  }
-               }
-
-
-               yield return builder.ToString();
-
-            } while (true);
-         }
+         } while (true);
+      }
       }
    }
 }

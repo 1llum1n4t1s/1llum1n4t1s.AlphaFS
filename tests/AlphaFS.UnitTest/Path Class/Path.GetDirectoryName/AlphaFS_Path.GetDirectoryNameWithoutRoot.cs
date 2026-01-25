@@ -49,7 +49,9 @@ namespace AlphaFS.UnitTest
 
          var fullPath = System.IO.Path.Combine(Environment.SystemDirectory, neDir);
          if (isNetwork)
+         {
             fullPath = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(fullPath);
+         }
 
          var directoryNameWithoutRoot = Alphaleonis.Win32.Filesystem.Path.GetDirectoryNameWithoutRoot(fullPath);
 
@@ -63,7 +65,9 @@ namespace AlphaFS.UnitTest
 
          fullPath = System.IO.Path.Combine(fullPath, "Non-Existing file.txt");
          if (isNetwork)
+         {
             fullPath = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(fullPath);
+         }
 
          directoryNameWithoutRoot = Alphaleonis.Win32.Filesystem.Path.GetDirectoryNameWithoutRoot(fullPath);
 
@@ -77,7 +81,9 @@ namespace AlphaFS.UnitTest
 
          fullPath = Environment.SystemDirectory;
          if (isNetwork)
+         {
             fullPath = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(fullPath);
+         }
 
          directoryNameWithoutRoot = Alphaleonis.Win32.Filesystem.Path.GetDirectoryNameWithoutRoot(fullPath);
 
@@ -88,7 +94,9 @@ namespace AlphaFS.UnitTest
          var windowsFolderName = System.IO.Path.GetDirectoryName(fullPath) .Replace(System.IO.Directory.GetDirectoryRoot(fullPath), string.Empty);
 
          if (isNetwork)
+         {
             windowsFolderName = windowsFolderName.TrimStart(Alphaleonis.Win32.Filesystem.Path.DirectorySeparatorChar);
+         }
 
          Assert.AreEqual(windowsFolderName, directoryNameWithoutRoot);
 

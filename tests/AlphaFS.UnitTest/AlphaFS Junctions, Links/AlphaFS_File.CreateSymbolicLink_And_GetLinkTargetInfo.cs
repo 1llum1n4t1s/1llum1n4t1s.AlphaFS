@@ -64,12 +64,12 @@ namespace AlphaFS.UnitTest
             var alphaFSFileInfo = new Alphaleonis.Win32.Filesystem.FileInfo(fileLink);
             UnitTestConstants.Dump(alphaFSFileInfo.EntryInfo);
 
-            Assert.AreEqual(System.IO.File.Exists(alphaFSFileInfo.FullName), alphaFSFileInfo.Exists);
+            Assert.AreEqual(alphaFSFileInfo.Exists, System.IO.File.Exists(alphaFSFileInfo.FullName));
             Assert.IsFalse(alphaFSFileInfo.EntryInfo.IsDirectory);
             Assert.IsFalse(alphaFSFileInfo.EntryInfo.IsMountPoint);
             Assert.IsTrue(alphaFSFileInfo.EntryInfo.IsReparsePoint);
             Assert.IsTrue(alphaFSFileInfo.EntryInfo.IsSymbolicLink);
-            Assert.AreEqual(alphaFSFileInfo.EntryInfo.ReparsePointTag, Alphaleonis.Win32.Filesystem.ReparsePointTag.SymLink);
+            Assert.AreEqual(Alphaleonis.Win32.Filesystem.ReparsePointTag.SymLink, alphaFSFileInfo.EntryInfo.ReparsePointTag);
          }
 
          Console.WriteLine();

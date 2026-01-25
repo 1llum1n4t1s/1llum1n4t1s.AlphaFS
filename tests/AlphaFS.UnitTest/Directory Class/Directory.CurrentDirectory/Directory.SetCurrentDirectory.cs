@@ -43,7 +43,9 @@ namespace AlphaFS.UnitTest
 
          var tempPath = Environment.SystemDirectory;
          if (isNetwork)
+         {
             tempPath = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(tempPath);
+         }
 
 
          Console.WriteLine("\tAlphaFS Set Current Directory Path: [{0}]\n", tempPath);

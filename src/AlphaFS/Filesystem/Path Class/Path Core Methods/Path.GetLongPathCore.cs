@@ -37,23 +37,33 @@ namespace Alphaleonis.Win32.Filesystem
       internal static string GetLongPathCore(string path, GetFullPathOptions options)
       {
          if (null == path)
+         {
             throw new ArgumentNullException("path");
+         }
 
          if (path.Trim().Length == 0)
+         {
             throw new ArgumentException(Resources.Path_Is_Zero_Length_Or_Only_White_Space, "path");
+         }
 
 
          if (options != GetFullPathOptions.None)
+         {
             path = ApplyFullPathOptions(path, options);
+         }
 
 
          // ".", "C:"
          if (path.Length <= 2 || path.StartsWith(LongPathPrefix, StringComparison.Ordinal) || path.StartsWith(LogicalDrivePrefix, StringComparison.Ordinal) || path.StartsWith(NonInterpretedPathPrefix, StringComparison.Ordinal))
+         {
             return path;
+         }
 
 
          if (path.StartsWith(UncPrefix, StringComparison.Ordinal))
+         {
             return LongPathUncPrefix + path.Substring(UncPrefix.Length);
+         }
 
 
          return IsPathRooted(path, false) && IsLogicalDriveCore(path, false, PathFormat.LongFullPath) ? LongPathPrefix + path : path;

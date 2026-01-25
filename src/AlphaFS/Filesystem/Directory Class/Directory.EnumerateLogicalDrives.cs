@@ -71,11 +71,15 @@ namespace Alphaleonis.Win32.Filesystem
                if (isReady)
                {
                   if (File.ExistsCore(null, true, drive, PathFormat.FullPath))
+                  {
                      yield return new DriveInfo(drive);
+                  }
                }
 
                else
+               {
                   yield return new DriveInfo(drive);
+               }
             }
 
             yield break;
@@ -88,7 +92,9 @@ namespace Alphaleonis.Win32.Filesystem
 
          // MSDN: GetLogicalDrives(): If the function fails, the return value is zero.
          if (lastError == Win32Errors.ERROR_SUCCESS)
+         {
             NativeError.ThrowException(lastError);
+         }
 
 
          var drives = lastError;
@@ -96,7 +102,9 @@ namespace Alphaleonis.Win32.Filesystem
          while (drives != 0)
          {
             if ((drives & 1) != 0)
+            {
                ++count;
+            }
 
             drives >>= 1;
          }
@@ -117,7 +125,9 @@ namespace Alphaleonis.Win32.Filesystem
                {
                   // Optionally check Drive .IsReady property.
                   if (File.ExistsCore(null, true, drive, PathFormat.FullPath))
+                  {
                      yield return new DriveInfo(drive);
+                  }
                }
                else
                {

@@ -65,7 +65,9 @@ namespace Alphaleonis.Win32.Filesystem
             var lastError = Marshal.GetLastWin32Error();
 
             if (actualLength == 0)
+            {
                NativeError.ThrowException(lastError, pathLp);
+            }
          }
 
          return GetRegularPathCore(buffer.ToString(), GetFullPathOptions.None, false);

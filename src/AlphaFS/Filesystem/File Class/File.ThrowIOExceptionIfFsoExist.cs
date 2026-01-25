@@ -35,9 +35,11 @@ namespace Alphaleonis.Win32.Filesystem
       {
          if (ExistsCore(transaction, isFolder, fsoPath, pathFormat))
 
+         {
             throw new IOException(string.Format(CultureInfo.InvariantCulture, "({0}) {1}", Win32Errors.ERROR_ALREADY_EXISTS,
 
                string.Format(CultureInfo.InvariantCulture, isFolder ? Resources.Target_File_Is_A_Directory : Resources.Target_Directory_Is_A_File, fsoPath)), (int) Win32Errors.ERROR_ALREADY_EXISTS);
+         }
       }
    }
 }

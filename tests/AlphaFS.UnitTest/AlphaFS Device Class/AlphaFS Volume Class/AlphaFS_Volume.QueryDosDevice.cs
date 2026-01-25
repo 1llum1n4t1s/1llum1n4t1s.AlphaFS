@@ -39,7 +39,7 @@ namespace AlphaFS.UnitTest
 
          Console.WriteLine("Retrieved {0} MS-DOS Device Names.\n", query.Length);
 
-         Assert.IsTrue(query.Length > 0, "No MS-DOS device names enumerated, but it is expected.");
+         Assert.IsNotEmpty(query, "No MS-DOS device names enumerated, but it is expected.");
 
 
          var deviceNameCount = 0;

@@ -34,7 +34,9 @@ namespace Alphaleonis.Win32.Filesystem
       internal static string GetDirectoryNameWithoutRootCore(KernelTransaction transaction, string path, PathFormat pathFormat)
       {
          if (null == path)
+         {
             return null;
+         }
 
          var parentFolder = Directory.GetParentCore(transaction, path, pathFormat);
 

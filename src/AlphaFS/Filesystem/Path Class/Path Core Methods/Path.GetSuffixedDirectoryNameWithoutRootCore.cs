@@ -39,7 +39,9 @@ namespace Alphaleonis.Win32.Filesystem
          var parentFolder = Directory.GetParentCore(transaction, path, pathFormat);
 
          if (null == parentFolder || null == parentFolder.Parent)
+         {
             return null;
+         }
 
 
          var tmpParent = parentFolder;
@@ -51,7 +53,9 @@ namespace Alphaleonis.Win32.Filesystem
             suffixedDirectoryNameWithoutRoot = tmpParent.DisplayPath.Replace(parentFolder.Root.ToString(), string.Empty);
 
             if (null != tmpParent.Parent)
+            {
                tmpParent = parentFolder.Parent.Parent;
+            }
 
          } while (null != tmpParent && null != tmpParent.Root.Parent && null != tmpParent.Parent && !Utils.IsNullOrWhiteSpace(tmpParent.Parent.ToString()));
 

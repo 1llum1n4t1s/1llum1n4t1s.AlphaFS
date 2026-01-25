@@ -42,7 +42,9 @@ namespace Alphaleonis.Win32.Filesystem
       public static bool HasInheritedPermissions(string path, PathFormat pathFormat)
       {
          if (Utils.IsNullOrWhiteSpace(path))
+         {
             throw new ArgumentNullException("path");
+         }
 
 
          var acl = File.GetAccessControlCore<DirectorySecurity>(true, path, AccessControlSections.Access | AccessControlSections.Group | AccessControlSections.Owner, pathFormat);

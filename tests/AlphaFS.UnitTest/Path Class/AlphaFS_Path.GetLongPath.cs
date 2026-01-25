@@ -50,7 +50,9 @@ namespace AlphaFS.UnitTest
                actual = Alphaleonis.Win32.Filesystem.Path.GetLongPath(path);
 
                if (Alphaleonis.Win32.Filesystem.Path.IsUncPath(path))
-                  Assert.IsTrue(actual.StartsWith(Alphaleonis.Win32.Filesystem.Path.LongPathUncPrefix), "Path should start with a long unc path prefix.");
+               {
+                  Assert.StartsWith(Alphaleonis.Win32.Filesystem.Path.LongPathUncPrefix, actual, "Path should start with a long unc path prefix.");
+               }
 
                else
                {
@@ -58,14 +60,18 @@ namespace AlphaFS.UnitTest
 
                   if (!System.IO.Path.IsPathRooted(path) && (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z'))
 
-                     Assert.IsFalse(actual.StartsWith(Alphaleonis.Win32.Filesystem.Path.LongPathPrefix), "Path should not start with a long path prefix.");
+                  {
+                     Assert.DoesNotStartWith(Alphaleonis.Win32.Filesystem.Path.LongPathPrefix, actual, "Path should not start with a long path prefix.");
+                  }
 
                   else
                   {
                      if (!System.IO.Path.IsPathRooted(path) &&
                          !Alphaleonis.Utils.IsNullOrWhiteSpace(System.IO.Path.GetDirectoryName(path)))
 
-                        Assert.IsTrue(actual.StartsWith(Alphaleonis.Win32.Filesystem.Path.LongPathUncPrefix), "Path should start with a long path prefix.");
+                     {
+                        Assert.StartsWith(Alphaleonis.Win32.Filesystem.Path.LongPathUncPrefix, actual, "Path should start with a long path prefix.");
+                     }
                   }
                }
             }

@@ -45,7 +45,9 @@ namespace AlphaFS.UnitTest
 
          var folder = nonExistingDriveLetter + @":\NonExisting Source Folder";
          if (isNetwork)
+         {
             folder = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(folder);
+         }
 
          Console.WriteLine("Input Directory Path: [{0}]", folder);
 
