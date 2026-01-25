@@ -18,8 +18,12 @@
     <PackageProjectUrl>https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS</PackageProjectUrl>
     <PackageOutputPath>../../artifacts</PackageOutputPath>
     <RepositoryUrl>https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS</RepositoryUrl>
-    <Version>1.0.8</Version>
+    <Version>1.0.10</Version>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="../../icon/app_icon.png" Pack="true" PackagePath="icon.png" Visible="false" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Update="Resources.Designer.cs">
       <DesignTime>True</DesignTime>
