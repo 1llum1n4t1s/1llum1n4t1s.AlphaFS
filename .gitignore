@@ -27,8 +27,9 @@ bld/
 [Ll]og/
 [Dd]ist/
 
-# Visual Studio 2015 cache/options directory
+# Visual Studio cache/options directory
 .vs/
+.vscode/
 .cr/
 
 # JetBrains Rider / IntelliJ IDEA
