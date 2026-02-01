@@ -155,14 +155,7 @@ namespace Alphaleonis.Win32.Security
       /// <param name="uint32">The second uint 3.</param>
       private static byte[] UInt32ToBigEndianBytes(uint uint32)
       {
-         var result = BitConverter.GetBytes(uint32);
-
-         if (BitConverter.IsLittleEndian)
-         {
-            Array.Reverse(result);
-         }
-
-         return result;
+         return new byte[] { (byte)(uint32 >> 24), (byte)(uint32 >> 16), (byte)(uint32 >> 8), (byte)uint32 };
       }
    }
 }

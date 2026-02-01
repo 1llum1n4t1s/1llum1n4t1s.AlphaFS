@@ -20,7 +20,6 @@
  */
 
 using System;
-using System.Globalization;
 using System.Security;
 
 namespace Alphaleonis.Win32.Filesystem
@@ -34,13 +33,22 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       internal static string AddTrailingDirectorySeparatorCore(string path, bool addAlternateSeparator)
       {
-         return null == path
+         if (null == path)
+         {
+            return null;
+         }
 
-            ? null
+         if (path.Length > 0)
+         {
+            var lastChar = path[path.Length - 1];
 
-            : (addAlternateSeparator ? (!path.EndsWith(AltDirectorySeparatorChar.ToString(CultureInfo.InvariantCulture), StringComparison.Ordinal) ? path + AltDirectorySeparatorChar : path)
+            if (lastChar == DirectorySeparatorChar || lastChar == AltDirectorySeparatorChar)
+            {
+               return path;
+            }
+         }
 
-               : (!path.EndsWith(DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture), StringComparison.Ordinal) ? path + DirectorySeparatorChar : path));
+         return path + (addAlternateSeparator ? AltDirectorySeparatorChar : DirectorySeparatorChar);
       }
    }
 }
