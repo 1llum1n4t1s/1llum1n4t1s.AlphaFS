@@ -88,7 +88,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>Indicates the duration of the Copy or Move action.</summary>
       public TimeSpan Duration
       {
-         get { return TimeSpan.FromMilliseconds(Stopwatch.Elapsed.TotalMilliseconds); }
+         get { return Stopwatch.Elapsed; }
       }
       
 

@@ -41,7 +41,7 @@ namespace Alphaleonis.Win32.Filesystem
             throw new ArgumentNullException("path");
          }
 
-         if (path.Trim().Length == 0)
+         if (Utils.IsNullOrWhiteSpace(path))
          {
             throw new ArgumentException(Resources.Path_Is_Zero_Length_Or_Only_White_Space, "path");
          }

@@ -163,14 +163,11 @@ namespace Alphaleonis.Win32.Security
       /// <param name="value">The value.</param>
       private static byte[] UInt64ToBigEndianBytes(ulong value)
       {
-         var result = BitConverter.GetBytes(value);
-
-         if (BitConverter.IsLittleEndian)
+         return new byte[]
          {
-            Array.Reverse(result);
-         }
-
-         return result;
+            (byte)(value >> 56), (byte)(value >> 48), (byte)(value >> 40), (byte)(value >> 32),
+            (byte)(value >> 24), (byte)(value >> 16), (byte)(value >> 8), (byte)value
+         };
       }
    }
 }

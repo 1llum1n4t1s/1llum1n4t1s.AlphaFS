@@ -98,7 +98,7 @@ namespace Alphaleonis.Win32.Filesystem
             throw new ArgumentNullException("path");
          }
 
-         if (!allowEmpty && (path.Trim().Length == 0 || Utils.IsNullOrWhiteSpace(path)))
+         if (!allowEmpty && Utils.IsNullOrWhiteSpace(path))
          {
             throw new ArgumentException(Resources.Path_Is_Zero_Length_Or_Only_White_Space, "path");
          }
@@ -296,7 +296,7 @@ namespace Alphaleonis.Win32.Filesystem
          // LEGACY: This code is here for backwards compatibility reasons.
          // It ensures that "\\foo.cs\bar.cs" stays "\\foo.cs\bar.cs" instead of being turned into "\foo.cs\bar.cs".
 
-         if (path.Trim().Length > 0 && (path[0] == DirectorySeparatorChar || path[0] == AltDirectorySeparatorChar))
+         if (!Utils.IsNullOrWhiteSpace(path) && (path[0] == DirectorySeparatorChar || path[0] == AltDirectorySeparatorChar))
          {
             newBuffer.Append(DirectorySeparatorChar);
             index++;
@@ -455,9 +455,7 @@ namespace Alphaleonis.Win32.Filesystem
 
                         if (numCharsToCopy > 0)
                         {
-                           for (var i = 0; i < numCharsToCopy; i++)
-
-                              newBuffer.Append(path[lastSigChar + 1 + i]);
+                           newBuffer.Append(path, lastSigChar + 1, numCharsToCopy);
                         }
 
                         numDots = 0;

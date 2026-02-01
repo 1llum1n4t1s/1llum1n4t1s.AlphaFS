@@ -19,11 +19,10 @@
  *  THE SOFTWARE. 
  */
 
-using System.Globalization;
+using System;
 using System.IO;
 using System.Security;
 using System.Security.Cryptography;
-using System.Text;
 using Alphaleonis.Win32.Security;
 
 namespace Alphaleonis.Win32.Filesystem
@@ -93,17 +92,7 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
-         if (null != hash)
-         {
-            var sb = new StringBuilder(hash.Length);
-
-            foreach (var b in hash)
-               sb.Append(b.ToString("X2", CultureInfo.InvariantCulture));
-
-            return sb.ToString().ToUpperInvariant();
-         }
-
-         return string.Empty;
+         return null != hash ? Convert.ToHexString(hash) : string.Empty;
       }
    }
 }

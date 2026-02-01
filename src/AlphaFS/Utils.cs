@@ -29,6 +29,8 @@ namespace Alphaleonis
 {
    internal static class Utils
    {
+      private static readonly string[] SizeFormats = {"B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"};
+
       // Source: https://stackoverflow.com/questions/6275980/string-replace-ignoring-case/45756981#45756981
 
 
@@ -40,7 +42,7 @@ namespace Alphaleonis
             throw new ArgumentNullException("str");
          }
 
-         if (str.Trim().Length == 0)
+         if (IsNullOrWhiteSpace(str))
          {
             return str;
          }
@@ -50,7 +52,7 @@ namespace Alphaleonis
             throw new ArgumentNullException("oldValue");
          }
 
-         if (oldValue.Trim().Length == 0)
+         if (IsNullOrWhiteSpace(oldValue))
          {
             throw new ArgumentException("String cannot be of zero length.");
          }
@@ -167,7 +169,6 @@ namespace Alphaleonis
       /// <summary>Converts a number of type T to string formated using the specified <paramref name="cultureInfo"/>, suffixed with a unit size.</summary>
       public static string UnitSizeToText<T>(T numberOfBytes, CultureInfo cultureInfo)
       {
-         var sizeFormats = new[] {"B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"};
          const int kb = 1024;
          var index = 0;
 
@@ -190,7 +191,7 @@ namespace Alphaleonis
 
          // Will return "512 B" instead of "512,00 B".
 
-         return string.Format(cultureInfo, "{0} {1}", bytes.ToString(index == 0 ? "0" : "0.##", cultureInfo), sizeFormats[index]);
+         return string.Format(cultureInfo, "{0} {1}", bytes.ToString(index == 0 ? "0" : "0.##", cultureInfo), SizeFormats[index]);
       }
 
 

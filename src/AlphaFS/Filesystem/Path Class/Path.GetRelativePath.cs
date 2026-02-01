@@ -87,7 +87,8 @@ namespace Alphaleonis.Win32.Filesystem
          {
             if (fromDirectories[index].Length > 0)
             {
-               relativePath.Append(ParentDirectoryPrefix + DirectorySeparator);
+               relativePath.Append(ParentDirectoryPrefix);
+               relativePath.Append(DirectorySeparator);
             }
          }
 
@@ -98,7 +99,8 @@ namespace Alphaleonis.Win32.Filesystem
 
          for (var index = lastCommonRoot; index < toLength; index++)
 
-            relativePath.Append(toDirectories[index] + DirectorySeparator);
+            relativePath.Append(toDirectories[index]);
+            relativePath.Append(DirectorySeparator);
 
 
          relativePath.Append(toDirectories[toLength]);
