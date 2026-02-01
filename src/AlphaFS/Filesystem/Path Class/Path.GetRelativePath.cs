@@ -98,9 +98,10 @@ namespace Alphaleonis.Win32.Filesystem
          toLength--;
 
          for (var index = lastCommonRoot; index < toLength; index++)
-
+         {
             relativePath.Append(toDirectories[index]);
             relativePath.Append(DirectorySeparator);
+         }
 
 
          relativePath.Append(toDirectories[toLength]);
