@@ -38,9 +38,17 @@ namespace Alphaleonis.Win32.Filesystem
             return null;
          }
 
-         var separator = addAlternateSeparator ? AltDirectorySeparatorChar : DirectorySeparatorChar;
+         if (path.Length > 0)
+         {
+            var lastChar = path[path.Length - 1];
 
-         return path.Length == 0 || path[path.Length - 1] != separator ? path + separator : path;
+            if (lastChar == DirectorySeparatorChar || lastChar == AltDirectorySeparatorChar)
+            {
+               return path;
+            }
+         }
+
+         return path + (addAlternateSeparator ? AltDirectorySeparatorChar : DirectorySeparatorChar);
       }
    }
 }
