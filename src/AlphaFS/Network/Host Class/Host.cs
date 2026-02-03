@@ -240,7 +240,7 @@ namespace Alphaleonis.Win32.Network
       
 
       [SecurityCritical]
-      internal static IEnumerable<TStruct> EnumerateNetworkObjectCore<TStruct, TNative>(FunctionData functionData, Func<TNative, SafeGlobalMemoryBufferHandle, TStruct> createTStruct, EnumerateNetworkObjectDelegate enumerateNetworkObject, bool continueOnException)
+      internal static IEnumerable<TStruct> EnumerateNetworkObjectCore<TStruct, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)] TNative>(FunctionData functionData, Func<TNative, SafeGlobalMemoryBufferHandle, TStruct> createTStruct, EnumerateNetworkObjectDelegate enumerateNetworkObject, bool continueOnException)
       {
          int objectSize;
          bool isString;
@@ -254,9 +254,8 @@ namespace Alphaleonis.Win32.Network
                break;
 
             default:
-               var objectType = typeof(TNative);
-               isString = objectType == typeof(string);
-               objectSize = isString ? 0 : Marshal.SizeOf(objectType);
+               isString = typeof(TNative) == typeof(string);
+               objectSize = isString ? 0 : Marshal.SizeOf<TNative>();
                break;
          }
 

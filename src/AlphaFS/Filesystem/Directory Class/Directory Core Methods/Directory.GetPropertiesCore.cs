@@ -58,9 +58,8 @@ namespace Alphaleonis.Win32.Filesystem
          const string propTotal = "Total";
          const string propSize = "Size";
          
-         var typeOfAttrs = typeof(FileAttributes);
-         var attributes = Enum.GetValues(typeOfAttrs);
-         var props = Enum.GetNames(typeOfAttrs).OrderBy(attrs => attrs).ToDictionary<string, string, long>(name => name, name => 0);
+         var attributes = Enum.GetValues<FileAttributes>();
+         var props = Enum.GetNames<FileAttributes>().OrderBy(attrs => attrs).ToDictionary<string, string, long>(name => name, name => 0);
          var pathLp = Path.GetExtendedLengthPathCore(transaction, path, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.FullCheck);
 
 

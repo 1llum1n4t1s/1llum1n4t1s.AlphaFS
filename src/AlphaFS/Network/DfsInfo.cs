@@ -56,11 +56,10 @@ namespace Alphaleonis.Win32.Network
 
          if (structure.NumberOfStorages > 0)
          {
-            var typeOfStruct = typeof (NativeMethods.DFS_STORAGE_INFO_1);
-            var sizeOfStruct = Marshal.SizeOf(typeOfStruct);
+            var sizeOfStruct = Marshal.SizeOf<NativeMethods.DFS_STORAGE_INFO_1>();
 
             for (var i = 0; i < structure.NumberOfStorages; i++)
-               _storageInfoCollection.Add(new DfsStorageInfo((NativeMethods.DFS_STORAGE_INFO_1) Marshal.PtrToStructure(new IntPtr(structure.Storage.ToInt64() + i*sizeOfStruct), typeOfStruct)));
+               _storageInfoCollection.Add(new DfsStorageInfo(Marshal.PtrToStructure<NativeMethods.DFS_STORAGE_INFO_1>(new IntPtr(structure.Storage.ToInt64() + i * sizeOfStruct))));
          }
       }
 

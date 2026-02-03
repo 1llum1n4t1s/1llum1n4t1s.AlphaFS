@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0-windows</TargetFramework>
+    <IsAotCompatible>true</IsAotCompatible>
     <PlatformTarget>x64</PlatformTarget>
     <ApplicationIcon>../../icon/app.ico</ApplicationIcon>
     <IsPackable>true</IsPackable>
@@ -18,7 +19,7 @@
     <PackageProjectUrl>https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS</PackageProjectUrl>
     <PackageOutputPath>../../artifacts</PackageOutputPath>
     <RepositoryUrl>https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS</RepositoryUrl>
-    <Version>1.0.16</Version>
+    <Version>1.0.18</Version>
     <PackageIcon>icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>

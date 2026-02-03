@@ -125,12 +125,12 @@ namespace Alphaleonis.Win32.Security
          var lastError = Marshal.GetLastWin32Error();
          if (!success)
          {
-            throw new Win32Exception(lastError, string.Format(CultureInfo.CurrentCulture, "{0}: OpenProcessToken failed with error: {1}", MethodBase.GetCurrentMethod().Name, lastError.ToString(CultureInfo.CurrentCulture)));
+            throw new Win32Exception(lastError, string.Format(CultureInfo.CurrentCulture, "{0}: OpenProcessToken failed with error: {1}", nameof(GetProcessElevationType), lastError.ToString(CultureInfo.CurrentCulture)));
          }
 
 
          using (tokenHandle)
-         using (var safeBuffer = new SafeGlobalMemoryBufferHandle(Marshal.SizeOf(Enum.GetUnderlyingType(typeof(NativeMethods.TOKEN_ELEVATION_TYPE)))))
+         using (var safeBuffer = new SafeGlobalMemoryBufferHandle(Marshal.SizeOf<int>()))
          {
             uint bytesReturned;
             success = NativeMethods.GetTokenInformation(tokenHandle, NativeMethods.TOKEN_INFORMATION_CLASS.TokenElevationType, safeBuffer, (uint) safeBuffer.Capacity, out bytesReturned);
@@ -139,7 +139,7 @@ namespace Alphaleonis.Win32.Security
 
             if (!success)
             {
-               throw new Win32Exception(lastError, string.Format(CultureInfo.CurrentCulture, "{0}: GetTokenInformation failed with error: {1}", MethodBase.GetCurrentMethod().Name, lastError.ToString(CultureInfo.CurrentCulture)));
+               throw new Win32Exception(lastError, string.Format(CultureInfo.CurrentCulture, "{0}: GetTokenInformation failed with error: {1}", nameof(GetProcessElevationType), lastError.ToString(CultureInfo.CurrentCulture)));
             }
 
 

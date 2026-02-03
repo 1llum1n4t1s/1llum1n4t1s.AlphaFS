@@ -20,6 +20,7 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.NetworkInformation;
 using System.Security;
 using Alphaleonis.Win32.Filesystem;
@@ -91,7 +92,7 @@ namespace Alphaleonis.Win32.Network
 
 
       [SecurityCritical]
-      internal static T GetNetStatisticsNative<T>(bool isServer, string hostName)
+      internal static T GetNetStatisticsNative<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)] T>(bool isServer, string hostName)
       {
 
 

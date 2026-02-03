@@ -22,6 +22,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
 
@@ -127,14 +128,20 @@ namespace Alphaleonis.Win32.Filesystem
 
          var iidIQueryAssociations = new Guid(NativeMethods.QueryAssociationsGuid);
 
-         if (NativeMethods.AssocCreate(NativeMethods.ClsidQueryAssociations, ref iidIQueryAssociations, out _iQaNone) == Win32Errors.S_OK)
+         if (NativeMethods.AssocCreate(NativeMethods.ClsidQueryAssociations, ref iidIQueryAssociations, out var ptrNone) == Win32Errors.S_OK)
          {
+            _iQaNone = (NativeMethods.IQueryAssociations)Marshal.GetTypedObjectForIUnknown(ptrNone, typeof(NativeMethods.IQueryAssociations));
+            Marshal.Release(ptrNone);
+
             try
             {
                _iQaNone.Init(Shell32.AssociationAttributes.None, FullPath, IntPtr.Zero, IntPtr.Zero);
 
-               if (NativeMethods.AssocCreate(NativeMethods.ClsidQueryAssociations, ref iidIQueryAssociations, out _iQaByExe) == Win32Errors.S_OK)
+               if (NativeMethods.AssocCreate(NativeMethods.ClsidQueryAssociations, ref iidIQueryAssociations, out var ptrByExe) == Win32Errors.S_OK)
                {
+                  _iQaByExe = (NativeMethods.IQueryAssociations)Marshal.GetTypedObjectForIUnknown(ptrByExe, typeof(NativeMethods.IQueryAssociations));
+                  Marshal.Release(ptrByExe);
+
                   _iQaByExe.Init(Shell32.AssociationAttributes.InitByExeName, FullPath, IntPtr.Zero, IntPtr.Zero);
 
                   Initialized = true;

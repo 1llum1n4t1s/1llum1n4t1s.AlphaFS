@@ -21,6 +21,7 @@
 
 using Microsoft.Win32.SafeHandles;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
 namespace Alphaleonis.Win32
@@ -320,15 +321,15 @@ namespace Alphaleonis.Win32
 
 
       /// <summary>Marshals data from a managed object to an unmanaged block of memory.</summary>
-      public void StructureToPtr(object structure, bool deleteOld)
+      public void StructureToPtr<T>(T structure, bool deleteOld) where T : notnull
       {
-         Marshal.StructureToPtr(structure, handle, deleteOld);
+         Marshal.StructureToPtr<T>(structure, handle, deleteOld);
       }
 
 
       /// <summary>Marshals data from an unmanaged block of memory to a newly allocated managed object of the specified type.</summary>
       /// <returns>A managed object containing the data pointed to by the ptr parameter.</returns>
-      public T PtrToStructure<T>(int offset)
+      public T PtrToStructure<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)] T>(int offset)
       {
          return Marshal.PtrToStructure<T>(new IntPtr(handle.ToInt64() + offset));
       }
