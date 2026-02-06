@@ -78,7 +78,8 @@ namespace Alphaleonis.Win32.Security
          get
          {
             using var uacKey = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Policies\System", false);
-            return null != uacKey && uacKey.GetValue("EnableLUA").Equals(1);
+            var enableLua = uacKey?.GetValue("EnableLUA");
+            return null != enableLua && enableLua.Equals(1);
          }
       }
 

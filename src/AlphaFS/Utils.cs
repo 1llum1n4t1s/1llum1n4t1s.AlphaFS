@@ -124,6 +124,11 @@ namespace Alphaleonis
 
          var fi = enumValue.GetType().GetField(enumValueString);
 
+         if (null == fi)
+         {
+            return enumValueString;
+         }
+
          var attributes = (DescriptionAttribute[]) fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
 
          return attributes.Length > 0 ? attributes[0].Description : enumValueString;

@@ -251,7 +251,7 @@ namespace Alphaleonis.Win32
       /// <param name="servicePackVersion">The major version of the service pack that must be installed on the minimum required version to return true. This can be 0 to indicate that no service pack is required.</param>
       public static bool IsAtLeast(EnumOsName version, int servicePackVersion)
       {
-         return IsAtLeast(version) && ServicePackVersion.Major >= servicePackVersion;
+         return VersionName > version || (VersionName >= version && ServicePackVersion.Major >= servicePackVersion);
       }
       
       #endregion // Methods

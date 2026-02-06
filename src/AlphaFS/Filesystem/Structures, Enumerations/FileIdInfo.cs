@@ -190,9 +190,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <returns>The result of the operator.</returns>
       public static bool operator <(FileIdInfo first, FileIdInfo second)
       {
-         // Note: Must be tested in this order.
-
-         return first._volumeSerialNumber < second._volumeSerialNumber || first._fileIdHighPart < second._fileIdHighPart || first._fileIdLowPart < second._fileIdLowPart;
+         return first.CompareTo(second) < 0;
       }
 
 
@@ -202,9 +200,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <returns>The result of the operator.</returns>
       public static bool operator >(FileIdInfo first, FileIdInfo second)
       {
-         // Note: Must be tested in this order.
-
-         return first._volumeSerialNumber > second._volumeSerialNumber || first._fileIdHighPart > second._fileIdHighPart || first._fileIdLowPart > second._fileIdLowPart;
+         return first.CompareTo(second) > 0;
       }
 
       #endregion // Methods

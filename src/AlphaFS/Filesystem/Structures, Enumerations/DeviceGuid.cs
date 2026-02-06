@@ -111,7 +111,7 @@ namespace Alphaleonis.Win32.Filesystem
       [Description("4D1E55B2-F16F-11CF-88CB-001111000030")] Hid,
 
       /// <summary>The GUID_DEVINTERFACE_KEYBOARD device interface class is defined for keyboard devices.</summary>
-      [Description("4D1E55B2-F16F-11CF-88CB-001111000030")] Keyboard,
+      [Description("884B96C3-56EF-11D1-BC8C-00A0C91405DD")] Keyboard,
 
       /// <summary>The GUID_DEVINTERFACE_MOUSE device interface class is defined for mouse devices.</summary>
       [Description("378DE44C-56EF-11D1-BC8C-00A0C91405DD")] Mouse,

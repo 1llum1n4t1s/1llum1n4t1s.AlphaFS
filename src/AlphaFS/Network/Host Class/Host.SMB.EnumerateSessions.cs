@@ -129,9 +129,9 @@ namespace Alphaleonis.Win32.Network
          }
 
 
-         // Fallback on SHARE_INFO_1 structure.
+         // Fallback on SESSION_INFO_1 structure.
 
-         foreach (var sessionInfo in EnumerateNetworkObjectCore(fd, (NativeMethods.SHARE_INFO_1 structure, SafeGlobalMemoryBufferHandle buffer) => new SessionInfo(stripUnc, SessionInfoLevel.Info1, structure),
+         foreach (var sessionInfo in EnumerateNetworkObjectCore(fd, (NativeMethods.SESSION_INFO_1 structure, SafeGlobalMemoryBufferHandle buffer) => new SessionInfo(stripUnc, SessionInfoLevel.Info1, structure),
 
             (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, out uint resumeHandle) =>
 

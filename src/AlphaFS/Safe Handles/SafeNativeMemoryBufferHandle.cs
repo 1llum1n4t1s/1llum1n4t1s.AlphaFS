@@ -100,14 +100,9 @@ namespace Alphaleonis.Win32
 
          var length = destination.Length;
 
-         if (length > destination.Length)
+         if (sourceOffset + length > Capacity)
          {
-            throw new ArgumentException(Resources.Destination_Buffer_Not_Large_Enough, "destination");
-         }
-
-         if (length > Capacity)
-         {
-            throw new ArgumentOutOfRangeException("destination", Resources.Source_OffsetAndLength_Outside_Bounds);
+            throw new ArgumentOutOfRangeException("sourceOffset", Resources.Source_OffsetAndLength_Outside_Bounds);
          }
 
          Marshal.Copy(new IntPtr(handle.ToInt64() + sourceOffset), destination, 0, length);
@@ -193,7 +188,7 @@ namespace Alphaleonis.Win32
          }
 
          var arr = new byte[length];
-         Marshal.Copy(handle, arr, startIndex, length);
+         Marshal.Copy(new IntPtr(handle.ToInt64() + startIndex), arr, 0, length);
 
          return arr;
       }

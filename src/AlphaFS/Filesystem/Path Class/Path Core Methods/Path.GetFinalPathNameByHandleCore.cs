@@ -54,12 +54,11 @@ namespace Alphaleonis.Win32.Filesystem
             {
                // MSDN: GetFinalPathNameByHandle(): If the function fails for any other reason, the return value is zero.
 
-               var success = NativeMethods.GetFinalPathNameByHandle(handle, buffer, (uint) buffer.Capacity, finalPath) == Win32Errors.ERROR_SUCCESS;
+               var returnValue = NativeMethods.GetFinalPathNameByHandle(handle, buffer, (uint) buffer.Capacity, finalPath);
 
-               var lastError = Marshal.GetLastWin32Error();
-               if (!success && lastError != Win32Errors.ERROR_SUCCESS)
+               if (returnValue == Win32Errors.ERROR_SUCCESS)
                {
-                  NativeError.ThrowException(lastError);
+                  NativeError.ThrowException(Marshal.GetLastWin32Error());
                }
 
 
@@ -78,12 +77,9 @@ namespace Alphaleonis.Win32.Filesystem
          // Check for: FileTypes.DiskFile
 
          // Can't map a 0 byte file.
-         if (!NativeMethods.GetFileSizeEx(handle, out var fileSizeHi))
+         if (NativeMethods.GetFileSizeEx(handle, out var fileSizeHi) && fileSizeHi == 0)
          {
-            if (fileSizeHi == 0)
-            {
-               return string.Empty;
-            }
+            return string.Empty;
          }
 
 
@@ -93,7 +89,7 @@ namespace Alphaleonis.Win32.Filesystem
          // PageReadOnly = 0x02,
          using (var handle2 = NativeMethods.CreateFileMapping(handle, null, 2, 0, 1, null))
          {
-            NativeMethods.IsValidHandle(handle, Marshal.GetLastWin32Error());
+            NativeMethods.IsValidHandle(handle2, Marshal.GetLastWin32Error());
 
             // FILE_MAP_READ
             // Read = 4
@@ -101,10 +97,7 @@ namespace Alphaleonis.Win32.Filesystem
             {
                if (NativeMethods.IsValidHandle(pMem, Marshal.GetLastWin32Error()))
                {
-                  if (NativeMethods.GetMappedFileName(Process.GetCurrentProcess().Handle, pMem, buffer, (uint) buffer.Capacity))
-                  {
-                     NativeMethods.UnmapViewOfFile(pMem);
-                  }
+                  NativeMethods.GetMappedFileName(Process.GetCurrentProcess().Handle, pMem, buffer, (uint) buffer.Capacity);
                }
             }
          }

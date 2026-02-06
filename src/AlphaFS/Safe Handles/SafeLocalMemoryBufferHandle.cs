@@ -80,7 +80,7 @@ namespace Alphaleonis.Win32.Security
          }
 
          var arr = new byte[length];
-         Marshal.Copy(handle, arr, startIndex, length);
+         Marshal.Copy(new IntPtr(handle.ToInt64() + startIndex), arr, 0, length);
          return arr;
       }
 

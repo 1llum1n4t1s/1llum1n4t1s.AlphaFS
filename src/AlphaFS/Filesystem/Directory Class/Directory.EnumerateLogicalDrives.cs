@@ -22,6 +22,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security;
 
 namespace Alphaleonis.Win32.Filesystem
@@ -88,16 +89,16 @@ namespace Alphaleonis.Win32.Filesystem
 
          // Get through NativeMethod.
 
-         var lastError = NativeMethods.GetLogicalDrives();
+         var driveBitmask = NativeMethods.GetLogicalDrives();
 
          // MSDN: GetLogicalDrives(): If the function fails, the return value is zero.
-         if (lastError == Win32Errors.ERROR_SUCCESS)
+         if (driveBitmask == Win32Errors.ERROR_SUCCESS)
          {
-            NativeError.ThrowException(lastError);
+            NativeError.ThrowException(Marshal.GetLastWin32Error());
          }
 
 
-         var drives = lastError;
+         var drives = driveBitmask;
          var count = 0;
          while (drives != 0)
          {
@@ -112,7 +113,7 @@ namespace Alphaleonis.Win32.Filesystem
          var result = new string[count];
          char[] root = {'A', Path.VolumeSeparatorChar};
 
-         drives = lastError;
+         drives = driveBitmask;
          count = 0;
 
          while (drives != 0)
