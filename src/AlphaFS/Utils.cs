@@ -181,7 +181,7 @@ namespace Alphaleonis
 
          else
          {
-            while (bytes > kb)
+            while (bytes > kb && index < SizeFormats.Length - 1)
             {
                bytes /= kb;
                index++;

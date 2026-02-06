@@ -144,7 +144,7 @@ namespace Alphaleonis.Win32.Security
          var hash = seed;
 
          for (var i = start; i < start + size; i++)
-            hash = (hash >> 8) ^ table[buffer[i] ^ hash & 0xff];
+            hash = (hash >> 8) ^ table[(buffer[i] ^ hash) & 0xff];
 
          return hash;
       }
