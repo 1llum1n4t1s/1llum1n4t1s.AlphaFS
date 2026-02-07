@@ -137,7 +137,7 @@ namespace Alphaleonis.Win32.Filesystem
                throw new TransactionAlreadyAbortedException("Transaction was already aborted", Marshal.GetExceptionForHR(hr));
 
             case Win32Errors.ERROR_TRANSACTION_ALREADY_COMMITTED:
-               throw new TransactionAlreadyAbortedException("Transaction was already committed", Marshal.GetExceptionForHR(hr));
+               throw new TransactionAlreadyCommittedException("Transaction was already committed", Marshal.GetExceptionForHR(hr));
 
             default:
                Marshal.ThrowExceptionForHR(Marshal.GetHRForLastWin32Error());

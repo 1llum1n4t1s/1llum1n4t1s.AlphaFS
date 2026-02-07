@@ -109,9 +109,9 @@ namespace Alphaleonis.Win32.Network
          // SESS_GUEST = 1,
          // SESS_NOENCRYPTION = 2
 
-         GuestSession = flags == 1;
+         GuestSession = (flags & 1) != 0;
 
-         EncryptedSession = !GuestSession && flags != 2;
+         EncryptedSession = (flags & 2) == 0;
       }
 
       #endregion // Constructor

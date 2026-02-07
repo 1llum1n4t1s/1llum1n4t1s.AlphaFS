@@ -19,6 +19,7 @@
  *  THE SOFTWARE. 
  */
 
+using System;
 using System.Collections.Generic;
 using System.Security;
 
@@ -38,8 +39,9 @@ namespace Alphaleonis.Win32.Filesystem
          {
             var srcLp = dirs.Dequeue();
 
-            // TODO 2018-01-09: Not 100% yet with local + UNC paths.
-            var dstLp = srcLp.ReplaceIgnoreCase(cma.SourcePathLp, cma.DestinationPathLp);
+            var dstLp = srcLp.StartsWith(cma.SourcePathLp, StringComparison.OrdinalIgnoreCase)
+               ? cma.DestinationPathLp + srcLp.Substring(cma.SourcePathLp.Length)
+               : srcLp.ReplaceIgnoreCase(cma.SourcePathLp, cma.DestinationPathLp);
             
 
             // Traverse the source folder, processing files and folders.

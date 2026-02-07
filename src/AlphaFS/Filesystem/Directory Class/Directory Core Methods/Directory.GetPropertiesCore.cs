@@ -53,11 +53,12 @@ namespace Alphaleonis.Win32.Filesystem
       {
          long total = 0;
          long size = 0;
+         long fileCount = 0;
 
          const string propFile = "File";
          const string propTotal = "Total";
          const string propSize = "Size";
-         
+
          var attributes = Enum.GetValues<FileAttributes>();
          var props = Enum.GetNames<FileAttributes>().OrderBy(attrs => attrs).ToDictionary<string, string, long>(name => name, name => 0);
          var pathLp = Path.GetExtendedLengthPathCore(transaction, path, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.FullCheck);
@@ -72,6 +73,12 @@ namespace Alphaleonis.Win32.Filesystem
                size += fsei.FileSize;
             }
 
+            // Count items that are neither Directory nor ReparsePoint as regular files.
+            if (!fsei.IsDirectory && !fsei.IsReparsePoint)
+            {
+               fileCount++;
+            }
+
             var fsei1 = fsei;
 
             foreach (var attributeMarker in attributes.Cast<FileAttributes>().Where(attributeMarker => (fsei1.Attributes & attributeMarker) != 0))
@@ -80,7 +87,7 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
          // Adjust regular files count.
-         props.Add(propFile, total - props[FileAttributes.Directory.ToString()] - props[FileAttributes.ReparsePoint.ToString()]);
+         props.Add(propFile, fileCount);
          props.Add(propTotal, total);
          props.Add(propSize, size);
 

@@ -60,9 +60,9 @@ namespace Alphaleonis.Win32.Filesystem
          var lastError = Marshal.GetLastWin32Error();
 
 
-         // If the function fails, and lpFileSizeHigh is NULL, the return value is INVALID_FILE_SIZE.
+         // MSDN: If the return value is INVALID_FILE_SIZE and GetLastError returns a value other than NO_ERROR, the function has failed.
 
-         if (fileSizeLow == Win32Errors.ERROR_INVALID_FILE_SIZE && fileSizeHigh == 0)
+         if (fileSizeLow == Win32Errors.ERROR_INVALID_FILE_SIZE && (uint) lastError != Win32Errors.NO_ERROR)
 
          {
             NativeError.ThrowException(lastError, pathLp);

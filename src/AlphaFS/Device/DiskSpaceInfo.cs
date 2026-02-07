@@ -104,7 +104,7 @@ namespace Alphaleonis.Win32.Filesystem
       {
          get
          {
-            return PercentCalculate(TotalNumberOfBytes - (TotalNumberOfBytes - TotalNumberOfFreeBytes), 0, TotalNumberOfBytes).ToString("0.##", _cultureInfo) + "%";
+            return PercentCalculate(FreeBytesAvailable, 0, TotalNumberOfBytes).ToString("0.##", _cultureInfo) + "%";
          }
       }
 
@@ -119,7 +119,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>Returns the Clusters size.</summary>
       public long ClusterSize
       {
-         get { return SectorsPerCluster * BytesPerSector; }
+         get { return (long) SectorsPerCluster * BytesPerSector; }
       }
 
 

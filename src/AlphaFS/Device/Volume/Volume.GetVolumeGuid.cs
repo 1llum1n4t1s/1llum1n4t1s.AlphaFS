@@ -53,40 +53,33 @@ namespace Alphaleonis.Win32.Filesystem
          var volumeGuid = new StringBuilder(100);
          var uniqueName = new StringBuilder(100);
 
-         try
+         using (new NativeMethods.ChangeErrorMode(NativeMethods.ErrorMode.FailCriticalErrors))
          {
-            using (new NativeMethods.ChangeErrorMode(NativeMethods.ErrorMode.FailCriticalErrors))
+            // GetVolumeNameForVolumeMountPoint()
+            // 2013-07-18: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
+
+            if (!NativeMethods.GetVolumeNameForVolumeMountPoint(volumeMountPoint, volumeGuid, (uint)volumeGuid.Capacity))
             {
-               // GetVolumeNameForVolumeMountPoint()
-               // 2013-07-18: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
+               var lastError = (uint) Marshal.GetLastWin32Error();
 
-               return NativeMethods.GetVolumeNameForVolumeMountPoint(volumeMountPoint, volumeGuid, (uint)volumeGuid.Capacity)
-
-                  // The string must end with a trailing backslash.
-                  ? NativeMethods.GetVolumeNameForVolumeMountPoint(Path.AddTrailingDirectorySeparator(volumeGuid.ToString(), false), uniqueName, (uint)uniqueName.Capacity)
-                     ? uniqueName.ToString()
-                     : null
-
-                  : null;
-            }
-         }
-         finally
-         {
-            var lastError = (uint) Marshal.GetLastWin32Error();
-
-            switch (lastError)
-            {
-               case Win32Errors.ERROR_MORE_DATA:
-                  // (1) When GetVolumeNameForVolumeMountPoint() succeeds, lastError is set to Win32Errors.ERROR_MORE_DATA.
-                  break;
-
-               default:
-                  // (2) When volumeMountPoint is a network drive mapping or UNC path, lastError is set to Win32Errors.ERROR_INVALID_PARAMETER.
-
-                  // Throw IOException.
+               if (lastError != Win32Errors.ERROR_MORE_DATA)
                   NativeError.ThrowException(lastError, volumeMountPoint);
-                  break;
+
+               return null;
             }
+
+            // The string must end with a trailing backslash.
+            if (!NativeMethods.GetVolumeNameForVolumeMountPoint(Path.AddTrailingDirectorySeparator(volumeGuid.ToString(), false), uniqueName, (uint)uniqueName.Capacity))
+            {
+               var lastError = (uint) Marshal.GetLastWin32Error();
+
+               if (lastError != Win32Errors.ERROR_MORE_DATA)
+                  NativeError.ThrowException(lastError, volumeMountPoint);
+
+               return null;
+            }
+
+            return uniqueName.ToString();
          }
       }
    }
