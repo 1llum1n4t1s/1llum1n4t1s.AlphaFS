@@ -62,10 +62,10 @@ namespace Alphaleonis.Win32.Filesystem
             nint pKtx;
             Marshal.ThrowExceptionForHR(queryFn(punk, &iid, &pKtx));
 
+            // IKernelTransaction vtable: IUnknown(3) + [3] GetHandle
+            nint* ktxVtable = *(nint**)pKtx;
             try
             {
-               // IKernelTransaction vtable: IUnknown(3) + [3] GetHandle
-               nint* ktxVtable = *(nint**)pKtx;
                var getHandleFn = (delegate* unmanaged[Stdcall]<nint, nint*, int>)ktxVtable[3];
                nint rawHandle;
                Marshal.ThrowExceptionForHR(getHandleFn(pKtx, &rawHandle));
@@ -74,8 +74,7 @@ namespace Alphaleonis.Win32.Filesystem
             finally
             {
                // Release IKernelTransaction
-               nint* ktxVtable2 = *(nint**)pKtx;
-               var releaseFn = (delegate* unmanaged[Stdcall]<nint, uint>)ktxVtable2[2];
+               var releaseFn = (delegate* unmanaged[Stdcall]<nint, uint>)ktxVtable[2];
                releaseFn(pKtx);
             }
          }
