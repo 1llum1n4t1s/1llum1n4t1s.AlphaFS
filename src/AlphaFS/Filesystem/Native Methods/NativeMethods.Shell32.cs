@@ -22,6 +22,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
@@ -56,23 +57,81 @@ namespace Alphaleonis.Win32.Filesystem
       internal static readonly Guid ClsidQueryAssociations = new Guid("A07034FD-6CAA-4954-AC3F-97A27216F98A");
       internal const string QueryAssociationsGuid = "C46CA590-3C3F-11D2-BEE6-0000F805CA57";
 
-      /// <summary>Exposes methods that simplify the process of retrieving information stored in the registry in association with defining a file type or protocol and associating it with an application.</summary>
-      [Guid(QueryAssociationsGuid), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-      [SuppressUnmanagedCodeSecurity]
-      internal interface IQueryAssociations
+      /// <summary>AOT-safe wrapper for the IQueryAssociations COM interface (IUnknown-based).
+      /// Uses raw vtable function pointer calls instead of runtime COM interop.</summary>
+      internal readonly unsafe struct QueryAssociationsWrapper : IDisposable
       {
-         /// <summary>Initializes the IQueryAssociations interface and sets the root key to the appropriate ProgID.</summary>
-         /// <returns>If this method succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code.</returns>
-         /// <remarks>Minimum supported client: Windows 2000 Professional, Windows XP [desktop apps only]</remarks>
-         /// <remarks>Minimum supported server: Windows 2000 Server [desktop apps only]</remarks>
-         void Init(Shell32.AssociationAttributes flags, [MarshalAs(UnmanagedType.LPWStr)] string pszAssoc, IntPtr hkProgid, IntPtr hwnd);
+         private readonly nint _ptr;
 
+         internal QueryAssociationsWrapper(nint comPtr)
+         {
+            _ptr = comPtr;
+         }
+
+         internal bool IsValid => _ptr != 0;
+
+         /// <summary>Initializes the IQueryAssociations interface and sets the root key to the appropriate ProgID.</summary>
+         internal void Init(Shell32.AssociationAttributes flags, string pszAssoc, nint hkProgid, nint hwnd)
+         {
+            // IUnknown vtable: [0] QueryInterface, [1] AddRef, [2] Release
+            // IQueryAssociations vtable: [3] Init, [4] GetKey, [5] GetString, [6] GetData
+            nint* vtable = *(nint**)_ptr;
+            var initFn = (delegate* unmanaged[Stdcall]<nint, Shell32.AssociationAttributes, char*, nint, nint, int>)vtable[3];
+
+            int hr;
+            fixed (char* pAssoc = pszAssoc)
+            {
+               hr = initFn(_ptr, flags, pAssoc, hkProgid, hwnd);
+            }
+
+            Marshal.ThrowExceptionForHR(hr);
+         }
 
          /// <summary>Searches for and retrieves a file or protocol association-related string from the registry.</summary>
-         /// <returns>A standard COM error value, including the following: S_OK, E_POINTER, S_FALSE</returns>
-         /// <remarks>Minimum supported client: Windows 2000 Professional, Windows XP [desktop apps only]</remarks>
-         /// <remarks>Minimum supported server: Windows 2000 Server [desktop apps only]</remarks>
-         void GetString(Shell32.AssociationAttributes flags, Shell32.AssociationString str, [MarshalAs(UnmanagedType.LPWStr)] string pwszExtra, StringBuilder pwszOut, [MarshalAs(UnmanagedType.I4)] out int pcchOut);
+         internal void GetString(Shell32.AssociationAttributes flags, Shell32.AssociationString str, string pwszExtra, StringBuilder pwszOut, out int pcchOut)
+         {
+            // IQueryAssociations vtable: [3] Init, [4] GetKey, [5] GetString
+            nint* vtable = *(nint**)_ptr;
+            var getStringFn = (delegate* unmanaged[Stdcall]<nint, Shell32.AssociationAttributes, Shell32.AssociationString, char*, char*, int*, int>)vtable[5];
+
+            int hr;
+            pcchOut = pwszOut.Capacity;
+            // Allocate a temporary buffer for the output
+            var buffer = new char[pcchOut];
+            fixed (char* pExtra = pwszExtra)
+            fixed (char* pOut = buffer)
+            fixed (int* pSize = &pcchOut)
+            {
+               hr = getStringFn(_ptr, flags, str, pExtra, pOut, pSize);
+            }
+
+            if (hr >= 0)
+            {
+               pwszOut.Clear();
+               pwszOut.Append(buffer, 0, pcchOut > 0 ? pcchOut - 1 : 0);
+            }
+
+            Marshal.ThrowExceptionForHR(hr);
+         }
+
+         /// <summary>Releases the COM object reference.</summary>
+         public void Dispose()
+         {
+            if (_ptr != 0)
+            {
+               nint* vtable = *(nint**)_ptr;
+               var releaseFn = (delegate* unmanaged[Stdcall]<nint, uint>)vtable[2];
+               releaseFn(_ptr);
+            }
+         }
+      }
+
+      /// <summary>Creates a new IQueryAssociations wrapper from AssocCreate.</summary>
+      internal static QueryAssociationsWrapper CreateQueryAssociations()
+      {
+         var iid = new Guid(QueryAssociationsGuid);
+         var hr = AssocCreate(ClsidQueryAssociations, ref iid, out var ptr);
+         return hr == Win32Errors.S_OK ? new QueryAssociationsWrapper(ptr) : new QueryAssociationsWrapper(0);
       }
 
       #endregion // IQueryAssociations

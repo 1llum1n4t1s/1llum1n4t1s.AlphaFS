@@ -46,15 +46,30 @@ namespace Alphaleonis.Win32.Network
       {
          if (null != networkConnectionID)
          {
-            yield return new NetworkConnectionInfo(Manager.GetNetworkConnection((Guid) networkConnectionID));
+            return new[] { new NetworkConnectionInfo(Manager.GetNetworkConnection((Guid) networkConnectionID)) };
          }
 
-         else
+         // Eagerly wrap all COM wrappers into NetworkConnectionInfo objects (which have finalizers)
+         // to prevent COM reference leaks if the caller partially enumerates.
+         var connections = Manager.GetNetworkConnections();
+         var result = new List<NetworkConnectionInfo>();
+
+         try
          {
-            foreach (NativeMethods.INetworkConnection networkConnection in Manager.GetNetworkConnections())
-
-               yield return new NetworkConnectionInfo(networkConnection);
+            foreach (var connection in connections)
+               result.Add(new NetworkConnectionInfo(connection));
          }
+         catch
+         {
+            // Dispose already-wrapped items; remaining unwrapped items in the list
+            // were already disposed by EnumerateComCollection's error handling.
+            foreach (var item in result)
+               item.Dispose();
+
+            throw;
+         }
+
+         return result;
       }
    }
 }

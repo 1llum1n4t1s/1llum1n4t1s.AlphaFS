@@ -35,9 +35,7 @@ namespace Alphaleonis.Win32.Network
       [SecurityCritical]
       public static NetworkConnectionInfo GetNetworkConnection(Guid networkConnectionID)
       {
-         var networkConnection = EnumerateNetworkConnectionsCore(networkConnectionID);
-
-         return null != networkConnection ? networkConnection.ToArray()[0] : null;
+         return EnumerateNetworkConnectionsCore(networkConnectionID).FirstOrDefault();
       }
    }
 }

@@ -31,8 +31,10 @@ namespace Alphaleonis.Win32.Filesystem
    /// <summary>Contains Shell32 information about a file.</summary>
    [Serializable]
    [SecurityCritical]
-   public sealed class Shell32Info
+   public sealed class Shell32Info : IDisposable
    {
+      [NonSerialized]
+      private bool _disposed;
       #region Constructors
 
       /// <summary>Initializes a Shell32Info instance.</summary>
@@ -94,8 +96,14 @@ namespace Alphaleonis.Win32.Filesystem
 
       [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
       [SecurityCritical]
-      private static string GetString(NativeMethods.IQueryAssociations iQa, Shell32.AssociationString assocString, string shellVerb)
+      private static string GetString(NativeMethods.QueryAssociationsWrapper iQa, Shell32.AssociationString assocString, string shellVerb)
       {
+         // Avoid null-pointer dereference if the COM wrapper was never initialized or has been disposed.
+         if (!iQa.IsValid)
+         {
+            return string.Empty;
+         }
+
          // GetString() throws Exceptions.
          try
          {
@@ -114,8 +122,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      private NativeMethods.IQueryAssociations _iQaNone;    // Retrieve info from Shell.
-      private NativeMethods.IQueryAssociations _iQaByExe;   // Retrieve info from exe file.
+      [NonSerialized]
+      private NativeMethods.QueryAssociationsWrapper _iQaNone;    // Retrieve info from Shell.
+      [NonSerialized]
+      private NativeMethods.QueryAssociationsWrapper _iQaByExe;   // Retrieve info from exe file.
 
       [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
       [SecurityCritical]
@@ -126,23 +136,19 @@ namespace Alphaleonis.Win32.Filesystem
             return;
          }
 
-         var iidIQueryAssociations = new Guid(NativeMethods.QueryAssociationsGuid);
+         _iQaNone = NativeMethods.CreateQueryAssociations();
 
-         if (NativeMethods.AssocCreate(NativeMethods.ClsidQueryAssociations, ref iidIQueryAssociations, out var ptrNone) == Win32Errors.S_OK)
+         if (_iQaNone.IsValid)
          {
-            _iQaNone = (NativeMethods.IQueryAssociations)Marshal.GetTypedObjectForIUnknown(ptrNone, typeof(NativeMethods.IQueryAssociations));
-            Marshal.Release(ptrNone);
-
             try
             {
-               _iQaNone.Init(Shell32.AssociationAttributes.None, FullPath, IntPtr.Zero, IntPtr.Zero);
+               _iQaNone.Init(Shell32.AssociationAttributes.None, FullPath, 0, 0);
 
-               if (NativeMethods.AssocCreate(NativeMethods.ClsidQueryAssociations, ref iidIQueryAssociations, out var ptrByExe) == Win32Errors.S_OK)
+               _iQaByExe = NativeMethods.CreateQueryAssociations();
+
+               if (_iQaByExe.IsValid)
                {
-                  _iQaByExe = (NativeMethods.IQueryAssociations)Marshal.GetTypedObjectForIUnknown(ptrByExe, typeof(NativeMethods.IQueryAssociations));
-                  Marshal.Release(ptrByExe);
-
-                  _iQaByExe.Init(Shell32.AssociationAttributes.InitByExeName, FullPath, IntPtr.Zero, IntPtr.Zero);
+                  _iQaByExe.Init(Shell32.AssociationAttributes.InitByExeName, FullPath, 0, 0);
 
                   Initialized = true;
                }
@@ -158,10 +164,44 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public void Refresh()
       {
+         // Dispose old COM wrappers and reset to default before re-initializing
+         // to avoid dangling pointers if Initialize() partially fails.
+         var oldNone = _iQaNone;
+         var oldByExe = _iQaByExe;
+         _iQaNone = default;
+         _iQaByExe = default;
+         oldNone.Dispose();
+         oldByExe.Dispose();
+
          Association = Command = ContentType = DdeApplication = DefaultIcon = FriendlyAppName = FriendlyDocName = OpenWithAppName = null;
          Attributes = Shell32.GetAttributesOf.None;
          Initialized = false;
          Initialize();
+      }
+
+
+      /// <summary>Releases the underlying COM references.</summary>
+      ~Shell32Info()
+      {
+         if (!_disposed)
+         {
+            _iQaNone.Dispose();
+            _iQaByExe.Dispose();
+            _disposed = true;
+         }
+      }
+
+      /// <summary>Releases the underlying COM references.</summary>
+      public void Dispose()
+      {
+         if (!_disposed)
+         {
+            _iQaNone.Dispose();
+            _iQaByExe.Dispose();
+            _disposed = true;
+         }
+
+         GC.SuppressFinalize(this);
       }
 
 
