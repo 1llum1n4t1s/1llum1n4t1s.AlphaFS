@@ -30,9 +30,9 @@ namespace Alphaleonis.Win32.Network
       /// <summary>AOT-safe wrapper for the INetworkListManager COM interface (IDispatch-based).
       /// INetworkListManager GUID: DCB00000-570F-4A9B-8D69-199FDBA5723B
       /// Vtable layout: IUnknown (3) + IDispatch (4) + INetworkListManager methods starting at slot 7.</summary>
-      internal readonly unsafe struct NetworkListManagerWrapper : IDisposable
+      internal sealed unsafe class NetworkListManagerWrapper : IDisposable
       {
-         private readonly nint _ptr;
+         private nint _ptr;
 
          internal NetworkListManagerWrapper(nint comPtr)
          {
@@ -43,11 +43,13 @@ namespace Alphaleonis.Win32.Network
 
          public void Dispose()
          {
-            if (_ptr != 0)
+            var ptr = _ptr;
+            _ptr = 0;
+            if (ptr != 0)
             {
-               nint* vtable = *(nint**)_ptr;
+               nint* vtable = *(nint**)ptr;
                var releaseFn = (delegate* unmanaged[Stdcall]<nint, uint>)vtable[2];
-               releaseFn(_ptr);
+               releaseFn(ptr);
             }
          }
 

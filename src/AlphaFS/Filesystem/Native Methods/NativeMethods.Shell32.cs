@@ -59,9 +59,9 @@ namespace Alphaleonis.Win32.Filesystem
 
       /// <summary>AOT-safe wrapper for the IQueryAssociations COM interface (IUnknown-based).
       /// Uses raw vtable function pointer calls instead of runtime COM interop.</summary>
-      internal readonly unsafe struct QueryAssociationsWrapper : IDisposable
+      internal sealed unsafe class QueryAssociationsWrapper : IDisposable
       {
-         private readonly nint _ptr;
+         private nint _ptr;
 
          internal QueryAssociationsWrapper(nint comPtr)
          {
@@ -117,11 +117,13 @@ namespace Alphaleonis.Win32.Filesystem
          /// <summary>Releases the COM object reference.</summary>
          public void Dispose()
          {
-            if (_ptr != 0)
+            var ptr = _ptr;
+            _ptr = 0;
+            if (ptr != 0)
             {
-               nint* vtable = *(nint**)_ptr;
+               nint* vtable = *(nint**)ptr;
                var releaseFn = (delegate* unmanaged[Stdcall]<nint, uint>)vtable[2];
-               releaseFn(_ptr);
+               releaseFn(ptr);
             }
          }
       }

@@ -33,8 +33,6 @@ namespace Alphaleonis.Win32.Filesystem
    [SecurityCritical]
    public sealed class Shell32Info : IDisposable
    {
-      [NonSerialized]
-      private bool _disposed;
       #region Constructors
 
       /// <summary>Initializes a Shell32Info instance.</summary>
@@ -99,7 +97,7 @@ namespace Alphaleonis.Win32.Filesystem
       private static string GetString(NativeMethods.QueryAssociationsWrapper iQa, Shell32.AssociationString assocString, string shellVerb)
       {
          // Avoid null-pointer dereference if the COM wrapper was never initialized or has been disposed.
-         if (!iQa.IsValid)
+         if (null == iQa || !iQa.IsValid)
          {
             return string.Empty;
          }
@@ -164,14 +162,10 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public void Refresh()
       {
-         // Dispose old COM wrappers and reset to default before re-initializing
-         // to avoid dangling pointers if Initialize() partially fails.
-         var oldNone = _iQaNone;
-         var oldByExe = _iQaByExe;
-         _iQaNone = default;
-         _iQaByExe = default;
-         oldNone.Dispose();
-         oldByExe.Dispose();
+         _iQaNone?.Dispose();
+         _iQaByExe?.Dispose();
+         _iQaNone = null;
+         _iQaByExe = null;
 
          Association = Command = ContentType = DdeApplication = DefaultIcon = FriendlyAppName = FriendlyDocName = OpenWithAppName = null;
          Attributes = Shell32.GetAttributesOf.None;
@@ -181,27 +175,12 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>Releases the underlying COM references.</summary>
-      ~Shell32Info()
-      {
-         if (!_disposed)
-         {
-            _iQaNone.Dispose();
-            _iQaByExe.Dispose();
-            _disposed = true;
-         }
-      }
-
-      /// <summary>Releases the underlying COM references.</summary>
       public void Dispose()
       {
-         if (!_disposed)
-         {
-            _iQaNone.Dispose();
-            _iQaByExe.Dispose();
-            _disposed = true;
-         }
-
-         GC.SuppressFinalize(this);
+         _iQaNone?.Dispose();
+         _iQaByExe?.Dispose();
+         _iQaNone = null;
+         _iQaByExe = null;
       }
 
 

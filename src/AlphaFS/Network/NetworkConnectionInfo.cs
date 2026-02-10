@@ -31,8 +31,7 @@ namespace Alphaleonis.Win32.Network
    {
       #region Private Fields
 
-      private readonly NativeMethods.NetworkConnectionWrapper _networkConnection;
-      private bool _disposed;
+      private NativeMethods.NetworkConnectionWrapper _networkConnection;
 
       #endregion // Private Fields
 
@@ -50,25 +49,10 @@ namespace Alphaleonis.Win32.Network
       #region IDisposable
 
       /// <summary>Releases the underlying COM references.</summary>
-      ~NetworkConnectionInfo()
-      {
-         if (!_disposed)
-         {
-            _networkConnection.Dispose();
-            _disposed = true;
-         }
-      }
-
-      /// <summary>Releases the underlying COM references.</summary>
       public void Dispose()
       {
-         if (!_disposed)
-         {
-            _networkConnection.Dispose();
-            _disposed = true;
-         }
-
-         GC.SuppressFinalize(this);
+         _networkConnection?.Dispose();
+         _networkConnection = null;
       }
 
       #endregion // IDisposable
@@ -78,7 +62,7 @@ namespace Alphaleonis.Win32.Network
 
       private void ThrowIfDisposed()
       {
-         if (_disposed)
+         if (null == _networkConnection)
             throw new ObjectDisposedException(GetType().FullName);
       }
 

@@ -31,9 +31,9 @@ namespace Alphaleonis.Win32.Network
       /// Vtable layout: IUnknown (3) + IDispatch (4) + INetworkConnection methods starting at slot 7.
       /// This wrapper takes ownership of the COM pointer passed to the constructor (no AddRef).
       /// The caller must call Dispose() to release the COM reference.</summary>
-      internal readonly unsafe struct NetworkConnectionWrapper : IDisposable
+      internal sealed unsafe class NetworkConnectionWrapper : IDisposable
       {
-         private readonly nint _ptr;
+         private nint _ptr;
 
          /// <summary>Takes ownership of the COM pointer. Does NOT call AddRef.</summary>
          internal NetworkConnectionWrapper(nint comPtr)
@@ -46,11 +46,13 @@ namespace Alphaleonis.Win32.Network
          /// <summary>Releases the COM reference.</summary>
          public void Dispose()
          {
-            if (_ptr != 0)
+            var ptr = _ptr;
+            _ptr = 0;
+            if (ptr != 0)
             {
-               nint* vtable = *(nint**)_ptr;
+               nint* vtable = *(nint**)ptr;
                var releaseFn = (delegate* unmanaged[Stdcall]<nint, uint>)vtable[2];
-               releaseFn(_ptr);
+               releaseFn(ptr);
             }
          }
 
