@@ -80,7 +80,7 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>Gets the network connections for the network. This value of this property is not cached.</summary>
+      /// <summary>Gets the network connections for the network. This value of this property is not cached. Each item in the returned collection must be disposed by the caller.</summary>
       public IEnumerable<NetworkConnectionInfo> Connections
       {
          get

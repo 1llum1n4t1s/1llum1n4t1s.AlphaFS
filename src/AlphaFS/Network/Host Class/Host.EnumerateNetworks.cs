@@ -28,7 +28,7 @@ namespace Alphaleonis.Win32.Network
    public static partial class Host
    {
       /// <summary>[AlphaFS] Returns an enumerable collection of networks available on the local host.</summary>
-      /// <returns>An <see cref="IEnumerable{NetworkInfo}"/> collection of connected and disconnected networks on the local host.</returns>
+      /// <returns>An <see cref="IEnumerable{NetworkInfo}"/> collection of connected and disconnected networks on the local host. Each item in the collection must be disposed by the caller.</returns>
       [SecurityCritical]
       public static IEnumerable<NetworkInfo> EnumerateNetworks()
       {
@@ -37,7 +37,7 @@ namespace Alphaleonis.Win32.Network
 
 
       /// <summary>[AlphaFS] Returns an enumerable collection of networks available on the local host.</summary>
-      /// <returns>An <see cref="IEnumerable{NetworkInfo}"/> collection of networks on the local host, as specified by <paramref name="networkConnectivityLevels"/>.</returns>
+      /// <returns>An <see cref="IEnumerable{NetworkInfo}"/> collection of networks on the local host, as specified by <paramref name="networkConnectivityLevels"/>. Each item in the collection must be disposed by the caller.</returns>
       /// <param name="networkConnectivityLevels">The <see cref="NetworkConnectivityLevels"/> that specify the connectivity level of the returned <see cref="NetworkInfo"/> instances.</param>
       [SecurityCritical]
       public static IEnumerable<NetworkInfo> EnumerateNetworks(NetworkConnectivityLevels networkConnectivityLevels)
