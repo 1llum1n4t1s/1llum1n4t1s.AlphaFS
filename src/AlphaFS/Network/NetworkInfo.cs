@@ -230,10 +230,13 @@ namespace Alphaleonis.Win32.Network
 
       #region Methods
       
-      /// <summary>Returns storage device as: "VendorId ProductId DeviceType DeviceNumber:PartitionNumber".</summary>
+      /// <summary>Returns the network name, description, and category.
+      /// <para>Note: This method performs COM calls to retrieve network properties.</para></summary>
       /// <returns>A string that represents this instance.</returns>
       public override string ToString()
       {
+         ThrowIfDisposed();
+
          var description = !Utils.IsNullOrWhiteSpace(Description) && !Equals(Name, Description) ? " (" + Description + ")" : string.Empty;
 
          return null != Name ? string.Format(CultureInfo.CurrentCulture, "{0}{1}, {2}", Name, description, Category) : GetType().Name;

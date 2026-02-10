@@ -155,7 +155,8 @@ namespace Alphaleonis.Win32.Network
 
       #region Methods
 
-      /// <summary>Returns storage device as: "VendorId ProductId DeviceType DeviceNumber:PartitionNumber".</summary>
+      /// <summary>Returns the network name and adapter name for this connection.
+      /// <para>Note: This method performs COM calls and enumerates all network interfaces, which may be expensive. Avoid calling in tight loops.</para></summary>
       /// <returns>A string that represents this instance.</returns>
       public override string ToString()
       {
