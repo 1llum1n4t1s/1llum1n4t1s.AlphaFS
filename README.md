@@ -46,3 +46,46 @@ network functionality to connect to SMB/DFS resources and easily access files an
 all with extended-length paths support.
 
 The library is Open Source, licensed under the MIT license.
+
+## Breaking Changes from Upstream (alphaleonis/AlphaFS)
+
+本フォークでは .NET 10 / NativeAOT 対応のために COM Interop 実装を刷新しました。
+これに伴い、以下の公開 API に破壊的変更があります。
+
+### 1. `NetworkConnectionInfo.NetworkInfo` プロパティ → `GetNetworkInfo()` メソッド
+
+| Before (upstream) | After (this fork) |
+|---|---|
+| `networkConnection.NetworkInfo` | `networkConnection.GetNetworkInfo()` |
+
+戻り値の `NetworkInfo` は `IDisposable` を実装しているため、`using` で囲んでください。
+
+```csharp
+// Before
+var name = networkConnection.NetworkInfo.Name;
+
+// After
+using var networkInfo = networkConnection.GetNetworkInfo();
+var name = networkInfo?.Name;
+```
+
+### 2. `NetworkInfo` が `IDisposable` を実装
+
+内部で COM 参照（`NetworkWrapper`）を保持するようになったため、使用後は `Dispose()` の呼び出しが必要です。
+
+### 3. `NetworkConnectionInfo` が `IDisposable` を実装
+
+同様に内部で COM 参照（`NetworkConnectionWrapper`）を保持するため、`Dispose()` が必要です。
+`Host.EnumerateNetworkConnections()` の列挙結果を使い終わったら Dispose してください。
+
+### 4. `Shell32Info` が `IDisposable` を実装
+
+内部で COM 参照（`QueryAssociationsWrapper`）を保持するようになったため、使用後は `Dispose()` の呼び出しが必要です。
+
+```csharp
+// Before
+var info = new Shell32Info(path);
+
+// After
+using var info = new Shell32Info(path);
+```

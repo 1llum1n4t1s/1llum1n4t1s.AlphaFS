@@ -20,7 +20,7 @@
     <PackageProjectUrl>https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS</PackageProjectUrl>
     <PackageOutputPath>../../artifacts</PackageOutputPath>
     <RepositoryUrl>https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS</RepositoryUrl>
-    <Version>1.0.28</Version>
+    <Version>1.0.30</Version>
     <PackageIcon>icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
