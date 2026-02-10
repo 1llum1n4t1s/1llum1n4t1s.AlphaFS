@@ -107,12 +107,13 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>Retrieves an instance that represents the network associated with this connection. This value of this property is not cached.
+      /// <summary>Creates a new <see cref="NetworkInfo"/> instance that represents the network associated with this connection.
       /// <para>Caller is responsible for disposing the returned <see cref="NetworkInfo"/> instance.</para></summary>
-      /// <returns>A <see cref="NetworkInfo"/> instance.</returns>
-      public NetworkInfo NetworkInfo
+      /// <returns>A new <see cref="NetworkInfo"/> instance. The caller must dispose this object when done.</returns>
+      public NetworkInfo GetNetworkInfo()
       {
-         get { ThrowIfDisposed(); return new NetworkInfo(_networkConnection.GetNetwork()); }
+         ThrowIfDisposed();
+         return new NetworkInfo(_networkConnection.GetNetwork());
       }
 
 
@@ -158,7 +159,7 @@ namespace Alphaleonis.Win32.Network
       /// <returns>A string that represents this instance.</returns>
       public override string ToString()
       {
-         using var netInfo = NetworkInfo;
+         using var netInfo = GetNetworkInfo();
          var nic = NetworkInterface;
 
          return null != netInfo && null != nic ? string.Format(CultureInfo.CurrentCulture, "{0} {1}", netInfo.Name, nic.Name) : GetType().Name;
