@@ -28,7 +28,7 @@ namespace Alphaleonis.Win32.Network
    public static partial class Host
    {
       /// <summary>[AlphaFS] Returns an enumerable collection of networks available on the local host.</summary>
-      /// <returns>An <see cref="IEnumerable{NetworkInfo}"/> collection of connected and disconnected networks on the local host.</returns>
+      /// <returns>An <see cref="IEnumerable{NetworkInfo}"/> collection of connected and disconnected networks on the local host. Each item in the collection must be disposed by the caller.</returns>
       [SecurityCritical]
       public static IEnumerable<NetworkInfo> EnumerateNetworks()
       {
@@ -37,7 +37,7 @@ namespace Alphaleonis.Win32.Network
 
 
       /// <summary>[AlphaFS] Returns an enumerable collection of networks available on the local host.</summary>
-      /// <returns>An <see cref="IEnumerable{NetworkInfo}"/> collection of networks on the local host, as specified by <paramref name="networkConnectivityLevels"/>.</returns>
+      /// <returns>An <see cref="IEnumerable{NetworkInfo}"/> collection of networks on the local host, as specified by <paramref name="networkConnectivityLevels"/>. Each item in the collection must be disposed by the caller.</returns>
       /// <param name="networkConnectivityLevels">The <see cref="NetworkConnectivityLevels"/> that specify the connectivity level of the returned <see cref="NetworkInfo"/> instances.</param>
       [SecurityCritical]
       public static IEnumerable<NetworkInfo> EnumerateNetworks(NetworkConnectivityLevels networkConnectivityLevels)
@@ -57,15 +57,30 @@ namespace Alphaleonis.Win32.Network
       {
          if (null != networkID)
          {
-            yield return new NetworkInfo(Manager.GetNetwork((Guid) networkID));
+            return new[] { new NetworkInfo(Manager.GetNetwork((Guid) networkID)) };
          }
 
-         else
+         // Eagerly wrap all COM wrappers into NetworkInfo objects (which have finalizers)
+         // to prevent COM reference leaks if the caller partially enumerates.
+         var networks = Manager.GetNetworks(networkConnectivityLevels);
+         var result = new List<NetworkInfo>();
+
+         try
          {
-            foreach (NativeMethods.INetwork network in Manager.GetNetworks(networkConnectivityLevels))
-
-               yield return new NetworkInfo(network);
+            foreach (var network in networks)
+               result.Add(new NetworkInfo(network));
          }
+         catch
+         {
+            // Dispose already-wrapped items; remaining unwrapped items in the list
+            // were already disposed by EnumerateComCollection's error handling.
+            foreach (var item in result)
+               item.Dispose();
+
+            throw;
+         }
+
+         return result;
       }
    }
 }

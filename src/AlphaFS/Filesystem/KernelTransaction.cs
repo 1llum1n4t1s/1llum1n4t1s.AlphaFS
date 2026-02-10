@@ -22,6 +22,7 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.AccessControl;
@@ -29,27 +30,58 @@ using System.Transactions;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   [ComImport]
-   [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-   [Guid("79427A2B-F895-40e0-BE79-B57DC82ED231")]
-   [SuppressUnmanagedCodeSecurity]
-   internal interface IKernelTransaction
-   {
-      void GetHandle([Out] out SafeKernelTransactionHandle handle);
-   }
-
    /// <summary>A KTM transaction object for use with the transacted operations in <see cref="Filesystem"/>.</summary>
    public sealed class KernelTransaction : MarshalByRefObject, IDisposable
    {
+      // IKernelTransaction IID: 79427A2B-F895-40e0-BE79-B57DC82ED231
+      private static readonly Guid IID_IKernelTransaction = new Guid("79427A2B-F895-40e0-BE79-B57DC82ED231");
+
       /// <summary>Initializes a new instance of the <see cref="KernelTransaction"/> class, internally using the specified <see cref="Transaction"/>.
       /// This method allows the usage of methods accepting a <see cref="KernelTransaction"/> with an instance of <see cref="System.Transactions.Transaction"/>.
       /// </summary>
+      /// <remarks>
+      /// <para>This constructor is NOT compatible with NativeAOT deployment because
+      /// <see cref="TransactionInterop.GetDtcTransaction"/> and <see cref="Marshal.GetIUnknownForObject"/>
+      /// internally rely on built-in COM interop which is not supported in NativeAOT.</para>
+      /// <para>For AOT-safe usage, use the other constructors that call CreateTransaction directly.</para>
+      /// </remarks>
       /// <param name="transaction">The transaction to use for any transactional operations.</param>
       [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands")]
       [SecurityCritical]
-      public KernelTransaction(Transaction transaction)
+      [RequiresUnreferencedCode("This constructor uses TransactionInterop.GetDtcTransaction and Marshal.GetIUnknownForObject which require COM interop not available in NativeAOT. Use the parameterless constructor or the constructor with timeout/description parameters instead.")]
+      public unsafe KernelTransaction(Transaction transaction)
       {
-         ((IKernelTransaction) TransactionInterop.GetDtcTransaction(transaction)).GetHandle(out _hTrans);
+         var dtcTransaction = TransactionInterop.GetDtcTransaction(transaction);
+         var punk = Marshal.GetIUnknownForObject(dtcTransaction);
+         try
+         {
+            // QueryInterface for IKernelTransaction
+            var iid = IID_IKernelTransaction;
+            nint* vtable = *(nint**)punk;
+            var queryFn = (delegate* unmanaged[Stdcall]<nint, Guid*, nint*, int>)vtable[0];
+            nint pKtx;
+            Marshal.ThrowExceptionForHR(queryFn(punk, &iid, &pKtx));
+
+            // IKernelTransaction vtable: IUnknown(3) + [3] GetHandle
+            nint* ktxVtable = *(nint**)pKtx;
+            try
+            {
+               var getHandleFn = (delegate* unmanaged[Stdcall]<nint, nint*, int>)ktxVtable[3];
+               nint rawHandle;
+               Marshal.ThrowExceptionForHR(getHandleFn(pKtx, &rawHandle));
+               _hTrans = new SafeKernelTransactionHandle(rawHandle);
+            }
+            finally
+            {
+               // Release IKernelTransaction
+               var releaseFn = (delegate* unmanaged[Stdcall]<nint, uint>)ktxVtable[2];
+               releaseFn(pKtx);
+            }
+         }
+         finally
+         {
+            Marshal.Release(punk);
+         }
       }
 
       /// <summary>Initializes a new instance of the <see cref="KernelTransaction"/> class with a default security descriptor, infinite timeout and no description.</summary>

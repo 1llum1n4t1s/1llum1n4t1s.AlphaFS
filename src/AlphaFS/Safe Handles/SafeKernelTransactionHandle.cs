@@ -27,9 +27,16 @@ namespace Alphaleonis.Win32.Filesystem
    /// <summary>Provides a concrete implementation of SafeHandle supporting transactions.</summary>
    internal class SafeKernelTransactionHandle : SafeHandleMinusOneIsInvalid
    {
-      /// <summary>Initializes a new instance of the <see cref="SafeKernelTransactionHandle"/> class.</summary>      
+      /// <summary>Initializes a new instance of the <see cref="SafeKernelTransactionHandle"/> class.</summary>
       public SafeKernelTransactionHandle() : base(true)
       {
+      }
+
+      /// <summary>Initializes a new instance of the <see cref="SafeKernelTransactionHandle"/> class with an existing handle value.</summary>
+      /// <param name="existingHandle">The pre-existing handle value to wrap.</param>
+      internal SafeKernelTransactionHandle(nint existingHandle) : base(true)
+      {
+         SetHandle(existingHandle);
       }
 
 
