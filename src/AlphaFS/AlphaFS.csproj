@@ -44,7 +44,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.Security.Permissions" Version="10.0.2" />
+    <PackageReference Include="System.Security.Permissions" Version="10.0.3" />
   </ItemGroup>
   <Target Name="CleanBinObjBeforeBuild" BeforeTargets="Restore">
     <RemoveDir Directories="$(MSBuildProjectDirectory)\bin;$(MSBuildProjectDirectory)\obj" />
