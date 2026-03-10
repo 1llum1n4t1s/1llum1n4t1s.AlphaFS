@@ -205,8 +205,7 @@ namespace Alphaleonis.Win32.Filesystem
 
                   else
                   {
-                     using (var waitEvent = new ManualResetEvent(false))
-                        waitEvent.WaitOne(retryTimeout * 1000);
+                     System.Threading.Thread.Sleep(retryTimeout * 1000);
                   }
                }
             }

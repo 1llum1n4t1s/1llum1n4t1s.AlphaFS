@@ -269,7 +269,7 @@ namespace Alphaleonis.Win32.Filesystem
       [SuppressMessage("Microsoft.Performance", "CA1809:AvoidExcessiveLocals")]
       private static string NormalizePath(string path, GetFullPathOptions options)
       {
-         var newBuffer = new StringBuilder(NativeMethods.MaxPathUnicode);
+         var newBuffer = new StringBuilder(NativeMethods.MaxPath);
          var index = 0;
          uint numSpaces = 0;
          uint numDots = 0;
@@ -552,7 +552,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>Dot and space handling.</summary>
       private static StringBuilder NormalizePathDotSpaceHandler(string path, int lastSigChar, uint numDots, bool startedWithVolumeSeparator)
       {
-         var newBuffer = new StringBuilder(NativeMethods.MaxPathUnicode);
+         var newBuffer = new StringBuilder(NativeMethods.MaxPath);
 
          // Look for ".[space]*" or "..[space]*".
 

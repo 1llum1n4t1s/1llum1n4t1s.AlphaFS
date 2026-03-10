@@ -74,7 +74,7 @@ namespace Alphaleonis.Win32.Filesystem
             // The stack will contain the entire folder structure to prevent any open directory handles because of enumeration.
             // The root folder is at the bottom of the stack.
 
-            var dirs = new Stack<string>(NativeMethods.DefaultFileBufferSize);
+            var dirs = new Stack<string>(128);
             
             foreach (var fsei in EnumerateFileSystemEntryInfosCore<FileSystemEntryInfo>(null, transaction, fsEntryInfo.LongFullPath, Path.WildcardStarMatchAll, null, DirectoryEnumerationOptions.Recursive, null, PathFormat.LongFullPath))
             {

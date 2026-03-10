@@ -37,7 +37,7 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       internal static long GetSizeCore(KernelTransaction transaction, string path, bool sizeOfAllStreams, bool recursive, PathFormat pathFormat)
       {
-         var streamSizes = new Collection<long>();
+         long totalSize = 0;
 
          var pathLp = Path.GetExtendedLengthPathCore(transaction, path, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.FullCheck);
 
@@ -48,7 +48,7 @@ namespace Alphaleonis.Win32.Filesystem
          {
             enumOptions |= DirectoryEnumerationOptions.FilesAndFolders;
 
-            streamSizes.Add(File.FindAllStreamsCore(transaction, pathLp));
+            totalSize += File.FindAllStreamsCore(transaction, pathLp);
          }
 
          else
@@ -62,14 +62,14 @@ namespace Alphaleonis.Win32.Filesystem
             // Although tempting, AlphaFS does not use the fsei.FileSize property.
             //
             // https://blogs.msdn.microsoft.com/oldnewthing/20111226-00/?p=8813/
-            // "The directory-enumeration functions report the last-updated metadata, which may not correspond to the actual metadata if the directory entry is stale. 
+            // "The directory-enumeration functions report the last-updated metadata, which may not correspond to the actual metadata if the directory entry is stale.
 
 
-            streamSizes.Add(sizeOfAllStreams ? File.FindAllStreamsCore(transaction, fsei.LongFullPath) : File.GetSizeCore(null, transaction, fsei.LongFullPath, false, PathFormat.LongFullPath));
+            totalSize += sizeOfAllStreams ? File.FindAllStreamsCore(transaction, fsei.LongFullPath) : File.GetSizeCore(null, transaction, fsei.LongFullPath, false, PathFormat.LongFullPath);
          }
 
 
-         return streamSizes.Sum();
+         return totalSize;
       }
    }
 }
