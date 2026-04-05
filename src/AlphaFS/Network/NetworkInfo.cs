@@ -237,9 +237,9 @@ namespace Alphaleonis.Win32.Network
       {
          ThrowIfDisposed();
 
-         var description = !Utils.IsNullOrWhiteSpace(Description) && !Equals(Name, Description) ? " (" + Description + ")" : string.Empty;
+         var description = !string.IsNullOrWhiteSpace(Description) && !Equals(Name, Description) ? $" ({Description})" : string.Empty;
 
-         return null != Name ? string.Format(CultureInfo.CurrentCulture, "{0}{1}, {2}", Name, description, Category) : GetType().Name;
+         return Name is not null ? $"{Name}{description}, {Category}" : GetType().Name;
       }
 
 

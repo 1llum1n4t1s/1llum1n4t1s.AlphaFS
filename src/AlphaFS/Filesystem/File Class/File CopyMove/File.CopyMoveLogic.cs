@@ -28,35 +28,35 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary><see cref="MoveOptions.CopyAllowed"/>フラグが指定されているかをチェックします。</summary>
       internal static bool HasCopyAllowed(MoveOptions? moveOptions)
       {
-         return Utils.IsNotNull(moveOptions) && (moveOptions & MoveOptions.CopyAllowed) != 0;
+         return moveOptions is not null && (moveOptions & MoveOptions.CopyAllowed) != 0;
       }
 
 
       /// <summary><see cref="CopyOptions.CopySymbolicLink"/>フラグが指定されているかをチェックします。</summary>
       internal static bool HasCopySymbolicLink(CopyOptions? copyOptions)
       {
-         return Utils.IsNotNull(copyOptions) && (copyOptions & CopyOptions.CopySymbolicLink) != 0;
+         return copyOptions is not null && (copyOptions & CopyOptions.CopySymbolicLink) != 0;
       }
 
 
       /// <summary><see cref="MoveOptions.DelayUntilReboot"/>フラグが指定されているかをチェックします。</summary>
       internal static bool HasDelayUntilReboot(MoveOptions? moveOptions)
       {
-         return Utils.IsNotNull(moveOptions) && (moveOptions & MoveOptions.DelayUntilReboot) != 0;
+         return moveOptions is not null && (moveOptions & MoveOptions.DelayUntilReboot) != 0;
       }
 
 
       /// <summary><see cref="CopyOptions.CopyTimestamp"/>フラグが指定されているかをチェックします。</summary>
       internal static bool HasCopyTimestamps(CopyOptions? copyOptions)
       {
-         return Utils.IsNotNull(copyOptions) && (copyOptions & CopyOptions.CopyTimestamp) != 0;
+         return copyOptions is not null && (copyOptions & CopyOptions.CopyTimestamp) != 0;
       }
 
 
       /// <summary><see cref="MoveOptions.ReplaceExisting"/>フラグが指定されているかをチェックします。</summary>
       internal static bool HasReplaceExisting(MoveOptions? moveOptions)
       {
-         return Utils.IsNotNull(moveOptions) && (moveOptions & MoveOptions.ReplaceExisting) != 0;
+         return moveOptions is not null && (moveOptions & MoveOptions.ReplaceExisting) != 0;
       }
 
 
@@ -66,9 +66,9 @@ namespace Alphaleonis.Win32.Filesystem
       {
          // コピーまたは移動アクションを判定する。
 
-         var isMove = Utils.IsNotNull(cma.MoveOptions) && Equals(null, cma.CopyOptions);
+         var isMove = cma.MoveOptions is not null && cma.CopyOptions is null;
 
-         var isCopy = !isMove && Utils.IsNotNull(cma.CopyOptions);
+         var isCopy = !isMove && cma.CopyOptions is not null;
 
          if (isCopy.Equals(isMove))
          {

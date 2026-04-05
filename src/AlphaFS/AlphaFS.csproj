@@ -20,7 +20,7 @@
     <PackageProjectUrl>https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS</PackageProjectUrl>
     <PackageOutputPath>../../artifacts</PackageOutputPath>
     <RepositoryUrl>https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS</RepositoryUrl>
-    <Version>1.0.34</Version>
+    <Version>1.0.36</Version>
     <PackageIcon>icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
@@ -44,7 +44,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.Security.Permissions" Version="10.0.3" />
+    <PackageReference Include="System.Security.Permissions" Version="10.0.5" />
   </ItemGroup>
   <Target Name="CleanBinObjBeforeBuild" BeforeTargets="Restore">
     <RemoveDir Directories="$(MSBuildProjectDirectory)\bin;$(MSBuildProjectDirectory)\obj" />

@@ -28,7 +28,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary><see cref="FileAttributes"/>インスタンスが有効かどうかをチェックします。</summary>
       internal static bool HasValidAttributes(FileAttributes fileAttributes)
       {
-         return Utils.IsNotNull(fileAttributes) && !fileAttributes.Equals(NativeMethods.InvalidFileAttributes);
+         return !fileAttributes.Equals(NativeMethods.InvalidFileAttributes);
       }
 
 

@@ -38,11 +38,13 @@ namespace Alphaleonis.Win32.Filesystem
 {
    /// <summary>Win32 API FindFirst()/FindNext()を使用してファイルシステムエントリ（ファイルやディレクトリ）を取得するクラス。</summary>
    [Serializable]
-   internal sealed class FindFileSystemEntryInfo
+   internal sealed partial class FindFileSystemEntryInfo
    {
       #region Fields
 
-      [NonSerialized] private static readonly Regex WildcardMatchAll = new Regex(@"^(\*)+(\.\*+)+$", RegexOptions.IgnoreCase); // *.* や *.** 等を認識する特殊ケース
+      // *.* や *.** 等を認識する特殊ケース（ソース生成により AOT/トリミング対応かつ起動時JITオーバーヘッドなし）
+      [GeneratedRegex(@"^(\*)+(\.\*+)+$", RegexOptions.IgnoreCase)]
+      private static partial Regex WildcardMatchAllRegex();
 
       /// <summary>コンパイル済み正規表現キャッシュの最大エントリ数。上限に達するとキャッシュをクリアして無制限なメモリ増加を防止する。</summary>
       private const int RegexCacheMaxSize = 64;
@@ -69,7 +71,7 @@ namespace Alphaleonis.Win32.Filesystem
             RegexCache.Clear();
 
          var regex = new Regex(
-            string.Format(CultureInfo.InvariantCulture, "^{0}$", Regex.Escape(searchPattern).Replace(@"\*", ".*").Replace(@"\?", ".")),
+            $"^{Regex.Escape(searchPattern).Replace(@"\*", ".*").Replace(@"\?", ".")}$",
             RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
          return RegexCache.GetOrAdd(searchPattern, regex);
@@ -260,7 +262,7 @@ namespace Alphaleonis.Win32.Filesystem
 
             _searchPattern = value;
 
-            _nameFilter = _searchPattern == Path.WildcardStarMatchAll || WildcardMatchAll.IsMatch(_searchPattern)
+            _nameFilter = _searchPattern == Path.WildcardStarMatchAll || WildcardMatchAllRegex().IsMatch(_searchPattern)
                ? null
                : GetOrAddRegex(_searchPattern);
          }
@@ -458,13 +460,13 @@ namespace Alphaleonis.Win32.Filesystem
          {
             if (!isFolder)
             {
-               throw new DirectoryNotFoundException(string.Format(CultureInfo.InvariantCulture, "({0}) {1}", Win32Errors.ERROR_PATH_NOT_FOUND, string.Format(CultureInfo.InvariantCulture, Resources.Target_Directory_Is_A_File, regularPath)));
+               throw new DirectoryNotFoundException($"({Win32Errors.ERROR_PATH_NOT_FOUND}) {string.Format(CultureInfo.InvariantCulture, Resources.Target_Directory_Is_A_File, regularPath)}");
             }
          }
 
          else if (isFolder)
          {
-            throw new FileNotFoundException(string.Format(CultureInfo.InvariantCulture, "({0}) {1}", Win32Errors.ERROR_FILE_NOT_FOUND, string.Format(CultureInfo.InvariantCulture, Resources.Target_File_Is_A_Directory, regularPath)));
+            throw new FileNotFoundException($"({Win32Errors.ERROR_FILE_NOT_FOUND}) {string.Format(CultureInfo.InvariantCulture, Resources.Target_File_Is_A_Directory, regularPath)}");
          }
       }
 

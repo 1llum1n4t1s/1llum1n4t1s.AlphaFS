@@ -22,7 +22,6 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
 using Alphaleonis.Win32.Filesystem;
@@ -50,7 +49,7 @@ namespace Alphaleonis.Win32
 
       public static void ThrowException(int errorCode, bool? isFolder, string readPath)
       {
-         if (errorCode == Win32Errors.ERROR_FILE_NOT_FOUND && null != isFolder && (bool) isFolder)
+         if (errorCode == Win32Errors.ERROR_FILE_NOT_FOUND && isFolder is true)
          {
             errorCode = (int) Win32Errors.ERROR_PATH_NOT_FOUND;
          }
@@ -74,30 +73,29 @@ namespace Alphaleonis.Win32
       [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
       public static void ThrowException(uint errorCode, string readPath, string writePath)
       {
-         if (null != readPath)
+         if (readPath is not null)
          {
             readPath = Path.GetCleanExceptionPath(readPath);
          }
 
-         if (null != writePath)
+         if (writePath is not null)
          {
             writePath = Path.GetCleanExceptionPath(writePath);
          }
 
-         var errorMessage = string.Format(CultureInfo.InvariantCulture, "({0}) {1}.", errorCode, new Win32Exception((int) errorCode).Message.Trim().TrimEnd('.').Trim());
-        
+         var errorMessage = $"({errorCode}) {new Win32Exception((int) errorCode).Message.Trim().TrimEnd('.').Trim()}.";
 
-         if (!Utils.IsNullOrWhiteSpace(readPath) && !Utils.IsNullOrWhiteSpace(writePath))
+         if (!string.IsNullOrWhiteSpace(readPath) && !string.IsNullOrWhiteSpace(writePath))
          {
-            errorMessage = string.Format(CultureInfo.InvariantCulture, "{0} | Read: [{1}] | Write: [{2}]", errorMessage, readPath, writePath);
+            errorMessage = $"{errorMessage} | Read: [{readPath}] | Write: [{writePath}]";
          }
 
          else
          {
-            // Prevent messages like: "(87) The parameter is incorrect: []"
-            if (!Utils.IsNullOrWhiteSpace(readPath ?? writePath))
+            // "(87) The parameter is incorrect: []" のようなメッセージを防止する。
+            if (!string.IsNullOrWhiteSpace(readPath ?? writePath))
             {
-               errorMessage = string.Format(CultureInfo.InvariantCulture, "{0}: [{1}]", errorMessage.TrimEnd('.'), readPath ?? writePath);
+               errorMessage = $"{errorMessage.TrimEnd('.')}: [{readPath ?? writePath}]";
             }
          }
 
@@ -181,7 +179,7 @@ namespace Alphaleonis.Win32
             case Win32Errors.ERROR_SUCCESS_REBOOT_REQUIRED:
             case Win32Errors.ERROR_SUCCESS_RESTART_REQUIRED:
                // We should really never get here, throwing an exception for a successful operation.
-               throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture, "{0} {1}", Resources.Exception_From_Successful_Operation, errorMessage));
+               throw new NotImplementedException($"{Resources.Exception_From_Successful_Operation} {errorMessage}");
 
             default:
                // We don't have a specific exception to generate for this error.               

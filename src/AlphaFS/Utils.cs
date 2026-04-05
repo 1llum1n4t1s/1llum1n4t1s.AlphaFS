@@ -21,7 +21,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
 
@@ -37,22 +36,16 @@ namespace Alphaleonis
       /// <summary>大文字と小文字の違いを無視して、現在のインスタンス内の指定された文字列のすべての出現箇所を別の指定された文字列で置き換えた新しい文字列を返します。</summary>
       internal static string ReplaceIgnoreCase(this string str, string oldValue, string newValue)
       {
-         if (null == str)
-         {
-            throw new ArgumentNullException("str");
-         }
+         ArgumentNullException.ThrowIfNull(str);
 
-         if (IsNullOrWhiteSpace(str))
+         if (string.IsNullOrWhiteSpace(str))
          {
             return str;
          }
 
-         if (null == oldValue)
-         {
-            throw new ArgumentNullException("oldValue");
-         }
+         ArgumentNullException.ThrowIfNull(oldValue);
 
-         if (IsNullOrWhiteSpace(oldValue))
+         if (string.IsNullOrWhiteSpace(oldValue))
          {
             throw new ArgumentException("String cannot be of zero length.");
          }
@@ -62,7 +55,7 @@ namespace Alphaleonis
          var resultStringBuilder = new StringBuilder(str.Length);
 
          // 置換を分析: 置換か削除か。
-         var isReplacementNullOrWhiteSpace = IsNullOrWhiteSpace(newValue);
+         var isReplacementNullOrWhiteSpace = string.IsNullOrWhiteSpace(newValue);
 
 
          int foundAt;
@@ -117,14 +110,13 @@ namespace Alphaleonis
       /// <summary>列挙フィールド値の属性を取得します。</summary>
       /// <returns>列挙オプションに属する説明（文字列として）。</returns>
       /// <param name="enumValue"><see cref="Alphaleonis.Win32.Filesystem.DeviceGuid"/> 列挙型のいずれか。</param>
-      [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
       public static string GetEnumDescription(Enum enumValue)
       {
          var enumValueString = enumValue.ToString();
 
          var fi = enumValue.GetType().GetField(enumValueString);
 
-         if (null == fi)
+         if (fi is null)
          {
             return enumValueString;
          }
@@ -135,30 +127,12 @@ namespace Alphaleonis
       }
 
 
-      /// <summary>オブジェクトが null でないことを確認します。</summary>
-      public static bool IsNotNull<T>(T obj)
-      {
-         return !Equals(null, obj);
-      }
-
-
       /// <summary>指定された文字列が null、空、または空白文字のみで構成されているかどうかを示します。</summary>
       /// <returns><paramref name="value"/> パラメーターが null または <see cref="string.Empty"/>、もしくは <paramref name="value"/> が空白文字のみで構成されている場合は <c>true</c>。</returns>
       /// <param name="value">テストする文字列。</param>
       public static bool IsNullOrWhiteSpace(string value)
       {
-#if NET35
-         if (null != value)
-         {
-            for (int index = 0, l = value.Length; index < l; ++index)
-               if (!char.IsWhiteSpace(value[index]))
-                  return false;
-         }
-
-         return true;
-#else
          return string.IsNullOrWhiteSpace(value);
-#endif
       }
 
 
@@ -196,40 +170,17 @@ namespace Alphaleonis
 
          // "512,00 B" の代わりに "512 B" を返す。
 
-         return string.Format(cultureInfo, "{0} {1}", bytes.ToString(index == 0 ? "0" : "0.##", cultureInfo), SizeFormats[index]);
+         return $"{bytes.ToString(index == 0 ? "0" : "0.##", cultureInfo)} {SizeFormats[index]}";
       }
 
 
-      public static int CombineHashCodesOf<T1, T2>(T1 arg1, T2 arg2)
-      {
-         unchecked
-         {
-            var hash = 17;
+      /// <summary>複数の値のハッシュコードを結合します。</summary>
+      public static int CombineHashCodesOf<T1, T2>(T1 arg1, T2 arg2) => HashCode.Combine(arg1, arg2);
 
-            hash = hash * 23 + (!Equals(arg1, default(T1)) ? arg1.GetHashCode() : 0);
-            hash = hash * 23 + (!Equals(arg2, default(T2)) ? arg2.GetHashCode() : 0);
+      /// <summary>複数の値のハッシュコードを結合します。</summary>
+      public static int CombineHashCodesOf<T1, T2, T3>(T1 arg1, T2 arg2, T3 arg3) => HashCode.Combine(arg1, arg2, arg3);
 
-            return hash;
-         }
-      }
-
-
-      public static int CombineHashCodesOf<T1, T2, T3>(T1 arg1, T2 arg2, T3 arg3)
-      {
-         unchecked
-         {
-            var hash = CombineHashCodesOf(arg1, arg2);
-
-            hash = hash * 23 + (!Equals(arg3, default(T3)) ? arg3.GetHashCode() : 0);
-
-            return hash;
-         }
-      }
-
-
-      public static int CombineHashCodesOf<T1, T2, T3, T4>(T1 arg1, T2 arg2, T3 arg3, T4 arg4)
-      {
-         return CombineHashCodesOf(CombineHashCodesOf(arg1, arg2), CombineHashCodesOf(arg3, arg4));
-      }
+      /// <summary>複数の値のハッシュコードを結合します。</summary>
+      public static int CombineHashCodesOf<T1, T2, T3, T4>(T1 arg1, T2 arg2, T3 arg3, T4 arg4) => HashCode.Combine(arg1, arg2, arg3, arg4);
    }
 }
