@@ -26,12 +26,12 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>[AlphaFS] Gets the regular path from long prefixed one. i.e.: "\\?\C:\Temp\file.txt" to C:\Temp\file.txt" or: "\\?\UNC\Server\share\file.txt" to "\\Server\share\file.txt".</summary>
-      /// <returns>Regular form path string.</returns>
-      /// <remarks>This method does not handle paths with volume names, eg. \\?\Volume{GUID}\Folder\file.txt.</remarks>
+      /// <summary>[AlphaFS] 長いプレフィックス付きパスから通常のパスを取得します。例: "\\?\C:\Temp\file.txt" を "C:\Temp\file.txt" に、"\\?\UNC\Server\share\file.txt" を "\\Server\share\file.txt" に変換します。</summary>
+      /// <returns>通常形式のパス文字列。</returns>
+      /// <remarks>このメソッドはボリューム名を含むパス（例: \\?\Volume{GUID}\Folder\file.txt）を処理しません。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="path">The path.</param>
+      /// <param name="path">パス。</param>
       [SecurityCritical]
       public static string GetRegularPath(string path)
       {

@@ -27,8 +27,8 @@ namespace Alphaleonis.Win32.Filesystem
    public static partial class File
    {
       /// <summary>Gets the creation date and time of the specified file.</summary>
-      /// <returns>A <see cref="DateTime"/> structure set to the creation date and time for the specified file. This value is expressed in local time.</returns>
-      /// <param name="path">The file for which to obtain creation date and time information.</param>
+      /// <returns>指定されたファイルの作成日時に設定された<see cref="DateTime"/>構造体。この値はローカル時刻で表されます。</returns>
+      /// <param name="path">作成日時情報を取得するファイル。</param>
       [SecurityCritical]
       public static DateTime GetCreationTime(string path)
       {
@@ -37,9 +37,9 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>[AlphaFS] Gets the creation date and time of the specified file.</summary>
-      /// <returns>A <see cref="DateTime"/> structure set to the creation date and time for the specified file. This value is expressed in local time.</returns>
-      /// <param name="path">The file for which to obtain creation date and time information.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <returns>指定されたファイルの作成日時に設定された<see cref="DateTime"/>構造体。この値はローカル時刻で表されます。</returns>
+      /// <param name="path">作成日時情報を取得するファイル。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static DateTime GetCreationTime(string path, PathFormat pathFormat)
       {

@@ -30,32 +30,39 @@ namespace Alphaleonis.Win32.Filesystem
       public static readonly bool IsAtLeastWindows7 = OperatingSystem.IsAtLeast(OperatingSystem.EnumOsName.Windows7);
       public static readonly bool IsAtLeastWindowsVista = OperatingSystem.IsAtLeast(OperatingSystem.EnumOsName.WindowsVista);
 
-      /// <summary>The FindFirstFileEx function does not query the short file name, improving overall enumeration speed.
+      /// <summary>FindFirstFileEx 関数がショートファイル名を照会せず、列挙速度全体を向上させます。
       /// <para>&#160;</para>
       /// <remarks>
-      /// <para>The data is returned in a <see cref="WIN32_FIND_DATA"/> structure,</para>
-      /// <para>and cAlternateFileName member is always a NULL string.</para>
-      /// <para>This value is not supported until Windows Server 2008 R2 and Windows 7.</para>
+      /// <para>データは <see cref="WIN32_FIND_DATA"/> 構造体で返され、</para>
+      /// <para>cAlternateFileName メンバーは常に NULL 文字列です。</para>
+      /// <para>この値は Windows Server 2008 R2 および Windows 7 以降でサポートされます。</para>
       /// </remarks>
       /// </summary>
       public static readonly FINDEX_INFO_LEVELS FindexInfoLevel = IsAtLeastWindows7 ? FINDEX_INFO_LEVELS.Basic : FINDEX_INFO_LEVELS.Standard;
 
-      /// <summary>Uses a larger buffer for directory queries, which can increase performance of the find operation.</summary>
-      /// <remarks>This value is not supported until Windows Server 2008 R2 and Windows 7.</remarks>
+      /// <summary>ディレクトリクエリにより大きなバッファを使用し、検索操作のパフォーマンスを向上させます。</summary>
+      /// <remarks>この値は Windows Server 2008 R2 および Windows 7 以降でサポートされます。</remarks>
       public static readonly FIND_FIRST_EX_FLAGS UseLargeCache = IsAtLeastWindows7 ? FIND_FIRST_EX_FLAGS.LARGE_FETCH : FIND_FIRST_EX_FLAGS.NONE;
 
-      /// <summary>DefaultFileBufferSize = 4096; Default type buffer size used for reading and writing files.</summary>
-      public const int DefaultFileBufferSize = 4096;
+      /// <summary>DefaultFileBufferSize = 65536; ファイルの読み書きに使用されるデフォルトのバッファサイズ。</summary>
+      public const int DefaultFileBufferSize = 65536;
 
-      /// <summary>DefaultFileEncoding = Encoding.UTF8; Default type of Encoding used for reading and writing files.</summary>
+      /// <summary>DefaultNativeQueryBufferSize = 4096; ネイティブAPIクエリ（デバイス情報、ボリューム、シェル等）用のスクラッチバッファサイズ。
+      /// ファイルI/Oには<see cref="DefaultFileBufferSize"/>を使用すること。</summary>
+      internal const int DefaultNativeQueryBufferSize = 4096;
+
+      /// <summary>ディレクトリ列挙キューの初期容量。</summary>
+      internal const int DefaultDirectoryQueueCapacity = 64;
+
+      /// <summary>DefaultFileEncoding = Encoding.UTF8; ファイルの読み書きに使用されるデフォルトのエンコーディング。</summary>
       public static readonly Encoding DefaultFileEncoding = Encoding.UTF8;
 
       /// <summary>MaxDirectoryLength = 255</summary>
       internal const int MaxDirectoryLength = 255;
 
       /// <summary>MaxPath = 260
-      /// The specified path, file name, or both exceed the system-defined maximum length.
-      /// For example, on Windows-based platforms, paths must be less than 248 characters, and file names must be less than 260 characters. 
+      /// 指定されたパス、ファイル名、またはその両方がシステム定義の最大長を超えています。
+      /// 例えば、Windows ベースのプラットフォームでは、パスは 248 文字未満、ファイル名は 260 文字未満でなければなりません。
       /// </summary>
       internal const int MaxPath = 260;
 
@@ -63,11 +70,11 @@ namespace Alphaleonis.Win32.Filesystem
       internal const int MaxPathUnicode = 32700;
 
 
-      /// <summary>When an exception is raised, bit shifting is needed to prevent: "System.OverflowException: Arithmetic operation resulted in an overflow."</summary>
+      /// <summary>例外発生時に "System.OverflowException: 算術演算でオーバーフローが発生しました。" を防ぐためにビットシフトが必要です。</summary>
       internal const int OverflowExceptionBitShift = 65535;
 
 
-      /// <summary>Invalid FileAttributes = -1</summary>
+      /// <summary>無効な FileAttributes = -1</summary>
       internal const FileAttributes InvalidFileAttributes = (FileAttributes) (-1);
 
 
@@ -83,16 +90,16 @@ namespace Alphaleonis.Win32.Filesystem
       private const int DeviceIoControlMethodBuffered = 0;
       private const int DeviceIoControlFileDeviceFileSystem = 9;
 
-      // <summary>Command to compression state of a file or directory on a volume whose file system supports per-file and per-directory compression.</summary>
+      // <summary>ファイルごと・ディレクトリごとの圧縮をサポートするファイルシステムのボリューム上で、ファイルまたはディレクトリの圧縮状態を設定するコマンド。</summary>
       internal const int FSCTL_SET_COMPRESSION = (DeviceIoControlFileDeviceFileSystem << 16) | (16 << 2) | DeviceIoControlMethodBuffered | (int) (FileAccess.Read | FileAccess.Write) << 14;
 
-      // <summary>Command to set the reparse point data block.</summary>
+      // <summary>リパースポイントデータブロックを設定するコマンド。</summary>
       internal const int FSCTL_SET_REPARSE_POINT = (DeviceIoControlFileDeviceFileSystem << 16) | (41 << 2) | DeviceIoControlMethodBuffered | (0 << 14);
       
-      /// <summary>Command to delete the reparse point data base.</summary>
+      /// <summary>リパースポイントデータベースを削除するコマンド。</summary>
       internal const int FSCTL_DELETE_REPARSE_POINT = (DeviceIoControlFileDeviceFileSystem << 16) | (43 << 2) | DeviceIoControlMethodBuffered | (0 << 14);
 
-      /// <summary>Command to get the reparse point data block.</summary>
+      /// <summary>リパースポイントデータブロックを取得するコマンド。</summary>
       internal const int FSCTL_GET_REPARSE_POINT = (DeviceIoControlFileDeviceFileSystem << 16) | (42 << 2) | DeviceIoControlMethodBuffered | (0 << 14);
    }
 }

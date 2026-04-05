@@ -27,8 +27,8 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Gets an array containing the characters that are not allowed in file names.</summary>
-      /// <returns>An array containing the characters that are not allowed in file names.</returns>
+      /// <summary>ファイル名に使用できない文字を含む配列を取得します。</summary>
+      /// <returns>ファイル名に使用できない文字を含む配列。</returns>
       [SecurityCritical]
       public static char[] GetInvalidFileNameChars()
       {

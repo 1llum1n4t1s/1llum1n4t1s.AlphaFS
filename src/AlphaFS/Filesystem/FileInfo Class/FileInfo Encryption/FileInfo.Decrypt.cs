@@ -27,7 +27,7 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Decrypts a file that was encrypted by the current account using the Encrypt method.</summary>      
+      /// <summary>Encrypt メソッドを使用して現在のアカウントで暗号化されたファイルを復号化します。</summary>      
       [SecurityCritical]
       public void Decrypt()
       {

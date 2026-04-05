@@ -28,8 +28,8 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Returns a random folder name or file name.</summary>
-      /// <returns>A random folder name or file name.</returns>
+      /// <summary>ランダムなフォルダ名またはファイル名を返します。</summary>
+      /// <returns>ランダムなフォルダ名またはファイル名。</returns>
       [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
       [SecurityCritical]
       public static string GetRandomFileName()

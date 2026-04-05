@@ -27,15 +27,15 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Enumerates the Distributed File System (DFS) namespaces hosted on a server or DFS links of a namespace hosted by a server.</summary>
+      /// <summary>サーバーにホストされている分散ファイルシステム (DFS) 名前空間を列挙します or DFS links of a namespace hosted by a server.</summary>
       /// <returns>
       /// If the function succeeds, the return value is NERR_Success.
       /// If the function fails, the return value is a system error code.
       /// </returns>
       /// <remarks>
       /// <para>No special group membership is required for using the NetDfsEnum function.</para>
-      /// <para>Minimum supported client: Windows Vista</para>
-      /// <para>Minimum supported server: Windows Server 2003</para>
+      /// <para>サポートされる最小クライアント: Windows Vista</para>
+      /// <para>サポートされる最小サーバー: Windows Server 2003</para>
       /// </remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("netapi32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
@@ -50,8 +50,8 @@ namespace Alphaleonis.Win32.Network
       /// </returns>
       /// <remarks>
       /// <para>No special group membership is required for using the NetDfsGetClientInfo function.</para>
-      /// <para>Minimum supported client: Windows Vista</para>
-      /// <para>Minimum supported server: Windows Server 2003</para>
+      /// <para>サポートされる最小クライアント: Windows Vista</para>
+      /// <para>サポートされる最小サーバー: Windows Server 2003</para>
       /// </remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("netapi32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
@@ -59,15 +59,15 @@ namespace Alphaleonis.Win32.Network
       internal static extern uint NetDfsGetClientInfo([MarshalAs(UnmanagedType.LPWStr)] string dfsEntryPath, [MarshalAs(UnmanagedType.LPWStr)] string serverName, [MarshalAs(UnmanagedType.LPWStr)] string shareName, [MarshalAs(UnmanagedType.U4)] uint level, out SafeGlobalMemoryBufferHandle buffer);
 
       
-      /// <summary>Retrieves information about a specified Distributed File System (DFS) root or link in a DFS namespace.</summary>
+      /// <summary>Retrieves information about a specified Distributed File System (DFS) root or link DFS 名前空間内の。</summary>
       /// <returns>
       /// If the function succeeds, the return value is NERR_Success.
       /// If the function fails, the return value is a system error code.
       /// </returns>
       /// <remarks>
       /// <para>No special group membership is required for using the NetDfsGetInfo function.</para>
-      /// <para>Minimum supported client: Windows Vista</para>
-      /// <para>Minimum supported server: Windows Server 2003</para>
+      /// <para>サポートされる最小クライアント: Windows Vista</para>
+      /// <para>サポートされる最小サーバー: Windows Server 2003</para>
       /// </remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("netapi32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]

@@ -29,7 +29,7 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Deletes an empty directory from a specified path.</summary>
+      /// <summary>指定されたパスから空のディレクトリを削除します。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -64,7 +64,7 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Deletes an empty directory from a specified path.</summary>
+      /// <summary>[AlphaFS] 指定されたパスから空のディレクトリを削除します。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -73,7 +73,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="DirectoryReadOnlyException"/>
       /// <param name="path">The name of the empty directory to remove. This directory must be writable and empty.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void Delete(string path, PathFormat pathFormat)
       {
@@ -91,7 +91,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryReadOnlyException"/>
       /// <param name="path">The name of the directory to remove.</param>
       /// <param name="recursive"><c>true</c> to remove directories, subdirectories, and files in <paramref name="path"/>. <c>false</c> otherwise.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void Delete(string path, bool recursive, PathFormat pathFormat)
       {
@@ -128,7 +128,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <param name="path">The name of the directory to remove.</param>
       /// <param name="recursive"><c>true</c> to remove directories, subdirectories, and files in <paramref name="path"/>. <c>false</c> otherwise.</param>
       /// <param name="ignoreReadOnly"><c>true</c> overrides read only <see cref="FileAttributes"/> of files and directories.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void Delete(string path, bool recursive, bool ignoreReadOnly, PathFormat pathFormat)
       {

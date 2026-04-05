@@ -27,10 +27,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Deletes the specified file.</summary>
-      /// <remarks>If the file to be deleted does not exist, no exception is thrown.</remarks>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The name of the file to be deleted. Wildcard characters are not supported.</param>
+      /// <summary>[AlphaFS] 指定されたファイルを削除します。</summary>
+      /// <remarks>削除するファイルが存在しない場合、例外はスローされません。</remarks>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">削除するファイルの名前。ワイルドカード文字はサポートされません。</param>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
@@ -42,11 +42,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Deletes the specified file.</summary>
-      /// <remarks>If the file to be deleted does not exist, no exception is thrown.</remarks>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The name of the file to be deleted. Wildcard characters are not supported.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <summary>[AlphaFS] 指定されたファイルを削除します。</summary>
+      /// <remarks>削除するファイルが存在しない場合、例外はスローされません。</remarks>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">削除するファイルの名前。ワイルドカード文字はサポートされません。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
@@ -58,11 +58,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Deletes the specified file.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The name of the file to be deleted. Wildcard characters are not supported.</param>
-      /// <param name="ignoreReadOnly"><c>true</c> overrides the read only <see cref="FileAttributes"/> of the file.</param>
-      /// <remarks>If the file to be deleted does not exist, no exception is thrown.</remarks>      
+      /// <summary>[AlphaFS] 指定されたファイルを削除します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">削除するファイルの名前。ワイルドカード文字はサポートされません。</param>
+      /// <param name="ignoreReadOnly"><c>true</c>の場合、ファイルの読み取り専用<see cref="FileAttributes"/>を上書きします。</param>
+      /// <remarks>削除するファイルが存在しない場合、例外はスローされません。</remarks>      
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
@@ -74,12 +74,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Deletes the specified file.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The name of the file to be deleted. Wildcard characters are not supported.</param>
-      /// <param name="ignoreReadOnly"><c>true</c> overrides the read only <see cref="FileAttributes"/> of the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <remarks>If the file to be deleted does not exist, no exception is thrown.</remarks>
+      /// <summary>[AlphaFS] 指定されたファイルを削除します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">削除するファイルの名前。ワイルドカード文字はサポートされません。</param>
+      /// <param name="ignoreReadOnly"><c>true</c>の場合、ファイルの読み取り専用<see cref="FileAttributes"/>を上書きします。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <remarks>削除するファイルが存在しない場合、例外はスローされません。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>

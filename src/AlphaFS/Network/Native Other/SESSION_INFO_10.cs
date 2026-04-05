@@ -25,18 +25,18 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Contains information about the session, including name of the computer; name of the user; and active and idle times for the session.</summary>
+      /// <summary>セッションに関する情報を含みます, コンピューター名を含むter; name of the user; and active and idle times for the session.</summary>
       /// <remarks>
-      /// <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      /// <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      /// <para>サポートされる最小クライアント: Windows XP [desktop apps only]</para>
+      /// <para>サポートされる最小サーバー: Windows Server 2003 [desktop apps only]</para>
       /// </remarks>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct SESSION_INFO_10
       {
-         /// <summary>Pointer to a Unicode string specifying the name of the computer that established the session. This string cannot contain a backslash (\).</summary>
+         /// <summary>セッションを確立したコンピューターの名前を指定する Unicode 文字列へのポインター。 This string cannot contain a backslash (\).</summary>
          [MarshalAs(UnmanagedType.LPWStr)] public readonly string sesi10_cname;
 
-         /// <summary>Pointer to a Unicode string specifying the name of the user who established the session.</summary>
+         /// <summary>セッションを確立したユーザーの名前を指定する Unicode 文字列へのポインター。</summary>
          [MarshalAs(UnmanagedType.LPWStr)] public readonly string sesi10_username;
 
          /// <summary>Specifies the number of seconds the session has been active.</summary>

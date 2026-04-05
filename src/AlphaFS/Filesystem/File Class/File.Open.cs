@@ -32,10 +32,10 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region .NET
 
-      /// <summary>Opens a <see cref="FileStream"/> on the specified path with read/write access.</summary>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A <see cref="FileMode"/> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten.</param>
-      /// <returns>A <see cref="FileStream"/> opened in the specified mode and path, with read/write access and not shared.</returns>
+      /// <summary>指定されたパスで読み取り/書き込みアクセスの<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルが存在しない場合に作成するかどうか、および既存ファイルの内容を保持するか上書きするかを指定する<see cref="FileMode"/>値。</param>
+      /// <returns>指定されたモードとパスで、読み取り/書き込みアクセスで非共有の<see cref="FileStream"/>。</returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode)
       {
@@ -43,11 +43,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Opens a <see cref="FileStream"/> on the specified path, with the specified mode and access.</summary>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A <see cref="FileMode"/> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten.</param>
-      /// <param name="access">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the file.</param>
-      /// <returns>An unshared <see cref="FileStream"/> that provides access to the specified file, with the specified mode and access.</returns>
+      /// <summary>指定されたパスで、指定されたモードとアクセスの<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルが存在しない場合に作成するかどうか、および既存ファイルの内容を保持するか上書きするかを指定する<see cref="FileMode"/>値。</param>
+      /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      /// <returns>指定されたモードとアクセスで指定されたファイルへのアクセスを提供する非共有<see cref="FileStream"/>。</returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, FileAccess access)
       {
@@ -55,12 +55,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Opens a <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write access and the specified sharing option.</summary>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A <see cref="FileMode"/> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten.</param>
-      /// <param name="access">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the file.</param>
-      /// <param name="share">A <see cref="FileShare"/> value specifying the type of access other threads have to the file.</param>
-      /// <returns>A <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write access and the specified sharing option.</returns>
+      /// <summary>指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、および指定された共有オプションの<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルが存在しない場合に作成するかどうか、および既存ファイルの内容を保持するか上書きするかを指定する<see cref="FileMode"/>値。</param>
+      /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      /// <param name="share">他のスレッドがファイルに対して持つアクセスの種類を指定する<see cref="FileShare"/>値。</param>
+      /// <returns>指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、 および指定された共有オプションの<see cref="FileStream"/>。</returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, FileAccess access, FileShare share)
       {
@@ -70,14 +70,14 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Opens a <see cref="FileStream"/> on the specified path with read/write access.</summary>
-      /// <param name="path">The file to open.</param>
+      /// <summary>[AlphaFS] 指定されたパスで読み取り/書き込みアクセスの<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
       /// <param name="mode">
-      ///   A <see cref="FileMode"/> value that specifies whether a file is created if one does not exist, and determines whether the contents
-      ///   of existing files are retained or overwritten.
+      ///   ファイルが存在しない場合に作成するかどうか、および既存ファイルの内容を
+      ///   保持するか上書きするかを指定する<see cref="FileMode"/>値。
       /// </param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>A <see cref="FileStream"/> opened in the specified mode and path, with read/write access and not shared.</returns>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>指定されたモードとパスで、読み取り/書き込みアクセスで非共有の<see cref="FileStream"/>。</returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, PathFormat pathFormat)
       {
@@ -85,14 +85,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens a <see cref="FileStream"/> on the specified path, with the specified mode and access.</summary>
-      /// <param name="path">The file to open.</param>
+      /// <summary>[AlphaFS] 指定されたパスで、指定されたモードとアクセスの<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
       /// <param name="mode">
-      ///   A <see cref="FileMode"/> value that specifies whether a file is created if one does not exist, and determines whether the contents
-      ///   of existing files are retained or overwritten.
+      ///   ファイルが存在しない場合に作成するかどうか、および既存ファイルの内容を
+      ///   保持するか上書きするかを指定する<see cref="FileMode"/>値。
       /// </param>
-      /// <param name="access">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
       ///   An unshared <see cref="FileStream"/> that provides access to the specified file, with the specified mode and access.
       /// </returns>
@@ -103,18 +103,18 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens a <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write access and the specified sharing option.</summary>
-      /// <param name="path">The file to open.</param>
+      /// <summary>[AlphaFS] 指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、および指定された共有オプションの<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
       /// <param name="mode">
-      ///   A <see cref="FileMode"/> value that specifies whether a file is created if one does not exist, and determines whether the contents
-      ///   of existing files are retained or overwritten.
+      ///   ファイルが存在しない場合に作成するかどうか、および既存ファイルの内容を
+      ///   保持するか上書きするかを指定する<see cref="FileMode"/>値。
       /// </param>
-      /// <param name="access">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the file.</param>
-      /// <param name="share">A <see cref="FileShare"/> value specifying the type of access other threads have to the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      /// <param name="share">他のスレッドがファイルに対して持つアクセスの種類を指定する<see cref="FileShare"/>値。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
-      ///   A <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write access and the
-      ///   specified sharing option.
+      ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、 access and the
+      ///   および指定された共有オプション。
       /// </returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, FileAccess access, FileShare share, PathFormat pathFormat)
@@ -123,19 +123,19 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens a <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write access and the specified sharing option.</summary>
-      /// <param name="path">The file to open.</param>
+      /// <summary>[AlphaFS] 指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、および指定された共有オプションの<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
       /// <param name="mode">
-      ///   A <see cref="FileMode"/> value that specifies whether a file is created if one does not exist, and determines whether the contents
-      ///   of existing files are retained or overwritten.
+      ///   ファイルが存在しない場合に作成するかどうか、および既存ファイルの内容を
+      ///   保持するか上書きするかを指定する<see cref="FileMode"/>値。
       /// </param>
-      /// <param name="access">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the file.</param>
-      /// <param name="share">A <see cref="FileShare"/> value specifying the type of access other threads have to the file.</param>
+      /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      /// <param name="share">他のスレッドがファイルに対して持つアクセスの種類を指定する<see cref="FileShare"/>値。</param>
       /// <param name="extendedAttributes">The extended attributes.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
-      ///   A <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write access and the
-      ///   specified sharing option.
+      ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、 access and the
+      ///   および指定された共有オプション。
       /// </returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, FileAccess access, FileShare share, ExtendedFileAttributes extendedAttributes, PathFormat pathFormat)
@@ -144,16 +144,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
       
 
-      /// <summary>[AlphaFS] Opens a <see cref="FileStream"/> on the specified path using the specified creation mode, read/write and sharing permission, and buffer size.</summary>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A constant that determines how to open or create the file.</param>
-      /// <param name="access">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the
-      /// file.</param>
-      /// <param name="share">A constant that determines how the file will be shared by processes.</param>
-      /// <param name="bufferSize">A positive <see cref="System.Int32"/> value greater than 0 indicating the buffer size. The default buffer size is 4096. </param>
+      /// <summary>[AlphaFS] 指定されたパスで、指定された作成モード、読み取り/書き込みおよび���有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      
+      /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
+      /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。 default buffer size is 4096. </param>
       /// <returns>
-      ///   A <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write
-      ///   access and the specified sharing option.
+      ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
+      ///   および指定された共有オプションの<see cref="FileStream"/>。
       /// </returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize)
@@ -162,24 +162,24 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens a <see cref="FileStream"/> on the specified path using the specified creation mode, read/write and sharing permission, and buffer size.</summary>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A constant that determines how to open or create the file.</param>
-      /// <param name="access">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the
-      /// file.</param>
-      /// <param name="share">A constant that determines how the file will be shared by processes.</param>
-      /// <param name="bufferSize">A positive <see cref="System.Int32"/> value greater than 0 indicating the buffer size. The
-      /// default buffer size is 4096.</param>
-      /// <param name="useAsync">Specifies whether to use asynchronous I/O or synchronous I/O. However, note that the
-      /// underlying operating system might not support asynchronous I/O, so when specifying true, the handle might be
-      /// opened synchronously depending on the platform. When opened asynchronously, the BeginRead and BeginWrite methods
-      /// perform better on large reads or writes, but they might be much slower for small reads or writes. If the
-      /// application is designed to take advantage of asynchronous I/O, set the useAsync parameter to true. Using
-      /// asynchronous I/O correctly can speed up applications by as much as a factor of 10, but using it without
-      /// redesigning the application for asynchronous I/O can decrease performance by as much as a factor of 10.</param>
+      /// <summary>[AlphaFS] 指定されたパスで、指定された作成モード、読み取り/書き込みおよび���有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      
+      /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
+      /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
+      /// デフォルトのバッファサイズは4096です。</param>
+      /// <param name="useAsync">非同期I/Oまたは同期I/Oを使用するかどうかを指定します。ただし、
+      /// 基盤となるオペレーティングシステムが非同期I/Oをサポートしていない場合があるため、trueを指定しても
+      /// プラットフォームによっては同期的に開かれる場合があります。非同期で開いた場合、BeginReadとBeginWriteメソッドは
+      /// 大きな読み取りまたは書き込みでパフォーマンスが向上しますが、小さな読み取りまたは書き込みでは大幅に遅くなる可能性があります。
+      /// アプリケーションが非同期I/Oを活用するように設計されている場合は、useAsyncパラメータをtrueに設定してください。
+      /// 非同期I/Oを正しく使用すると、アプリケーションを最大10倍高速化できますが、
+      /// 非同期I/O用にアプリケーションを再設計せずに使用すると、パフォーマンスが最大10分の1に低下する可能性があります。</param>
       /// <returns>
-      ///   A <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write
-      ///   access and the specified sharing option.
+      ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
+      ///   および指定された共有オプションの<see cref="FileStream"/>。
       /// </returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, bool useAsync)
@@ -188,18 +188,18 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens a <see cref="FileStream"/> on the specified path using the specified creation mode, read/write and sharing permission, and buffer size.</summary>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A constant that determines how to open or create the file.</param>
-      /// <param name="access">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the
-      /// file.</param>
-      /// <param name="share">A constant that determines how the file will be shared by processes.</param>
-      /// <param name="bufferSize">A positive <see cref="System.Int32"/> value greater than 0 indicating the buffer size. The
-      /// default buffer size is 4096.</param>
-      /// <param name="options">A value that specifies additional file options.</param>
+      /// <summary>[AlphaFS] 指定されたパスで、指定された作成モード、読み取り/書き込みおよび���有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      
+      /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
+      /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
+      /// デフォルトのバッファサイズは4096です。</param>
+      /// <param name="options">追加のファイルオプション���指定する値。</param>
       /// <returns>
-      ///   A <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write
-      ///   access and the specified sharing option.
+      ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
+      ///   および指定された共有オプションの<see cref="FileStream"/>。
       /// </returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options)
@@ -208,18 +208,18 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens a <see cref="FileStream"/> on the specified path using the specified creation mode, read/write and sharing permission, and buffer size.</summary>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A constant that determines how to open or create the file.</param>
-      /// <param name="access">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the
-      /// file.</param>
-      /// <param name="share">A constant that determines how the file will be shared by processes.</param>
-      /// <param name="bufferSize">A positive <see cref="System.Int32"/> value greater than 0 indicating the buffer size. The
-      /// default buffer size is 4096.</param>
-      /// <param name="extendedAttributes">The extended attributes specifying additional options.</param>
+      /// <summary>[AlphaFS] 指定されたパスで、指定された作成モード、読み取り/書き込みおよび���有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      
+      /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
+      /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
+      /// デフォルトのバッファサイズは4096です。</param>
+      /// <param name="extendedAttributes">追加オプションを指定する拡張属性。</param>
       /// <returns>
-      ///   A <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write
-      ///   access and the specified sharing option.
+      ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
+      ///   および指定された共有オプションの<see cref="FileStream"/>。
       /// </returns>      
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, ExtendedFileAttributes extendedAttributes)
@@ -228,18 +228,18 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens a <see cref="FileStream"/> on the specified path using the specified creation mode, read/write and sharing permission, and buffer size.</summary>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A constant that determines how to open or create the file.</param>
-      /// <param name="access">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the
-      /// file.</param>
-      /// <param name="share">A constant that determines how the file will be shared by processes.</param>
-      /// <param name="bufferSize">A positive <see cref="System.Int32"/> value greater than 0 indicating the buffer size. The
-      /// default buffer size is 4096.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter.</param>
+      /// <summary>[AlphaFS] 指定されたパスで、指定された作成モード、読み取り/書き込みおよび���有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      
+      /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
+      /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
+      /// デフォルトのバッファサイズは4096です。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
-      ///   A <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write
-      ///   access and the specified sharing option.
+      ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
+      ///   および指定された共有オプションの<see cref="FileStream"/>。
       /// </returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, PathFormat pathFormat)
@@ -248,25 +248,25 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens a <see cref="FileStream"/> on the specified path using the specified creation mode, read/write and sharing permission, and buffer size.</summary>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A constant that determines how to open or create the file.</param>
-      /// <param name="access">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the
-      /// file.</param>
-      /// <param name="share">A constant that determines how the file will be shared by processes.</param>
-      /// <param name="bufferSize">A positive <see cref="System.Int32"/> value greater than 0 indicating the buffer size. The
-      /// default buffer size is 4096.</param>
-      /// <param name="useAsync">Specifies whether to use asynchronous I/O or synchronous I/O. However, note that the
-      /// underlying operating system might not support asynchronous I/O, so when specifying true, the handle might be
-      /// opened synchronously depending on the platform. When opened asynchronously, the BeginRead and BeginWrite methods
-      /// perform better on large reads or writes, but they might be much slower for small reads or writes. If the
-      /// application is designed to take advantage of asynchronous I/O, set the useAsync parameter to true. Using
-      /// asynchronous I/O correctly can speed up applications by as much as a factor of 10, but using it without
-      /// redesigning the application for asynchronous I/O can decrease performance by as much as a factor of 10.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter.</param>
+      /// <summary>[AlphaFS] 指定されたパスで、指定された作成モード、読み取り/書き込みおよび���有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      
+      /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
+      /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
+      /// デフォルトのバッファサイズは4096です。</param>
+      /// <param name="useAsync">非同期I/Oまたは同期I/Oを使用するかどうかを指定します。ただし、
+      /// 基盤となるオペレーティングシステムが非同期I/Oをサポートしていない場合があるため、trueを指定しても
+      /// プラットフォームによっては同期的に開かれる場合があります。非同期で開いた場合、BeginReadとBeginWriteメソッドは
+      /// 大きな読み取りまたは書き込みでパフォーマンスが向上しますが、小さな読み取りまたは書き込みでは大幅に遅くなる可能性があります。
+      /// アプリケーションが非同期I/Oを活用するように設計されている場合は、useAsyncパラメータをtrueに設定してください。
+      /// 非同期I/Oを正しく使用すると、アプリケーションを最大10倍高速化できますが、
+      /// 非同期I/O用にアプリケーションを再設計せずに使用すると、パフォーマンスが最大10分の1に低下する可能性があります。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
-      ///   A <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write
-      ///   access and the specified sharing option.
+      ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
+      ///   および指定された共有オプションの<see cref="FileStream"/>。
       /// </returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, bool useAsync, PathFormat pathFormat)
@@ -275,19 +275,19 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens a <see cref="FileStream"/> on the specified path using the specified creation mode, read/write and sharing permission, and buffer size.</summary>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A constant that determines how to open or create the file.</param>
-      /// <param name="access">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the
-      /// file.</param>
-      /// <param name="share">A constant that determines how the file will be shared by processes.</param>
-      /// <param name="bufferSize">A positive <see cref="System.Int32"/> value greater than 0 indicating the buffer size. The
-      /// default buffer size is 4096.</param>
-      /// <param name="options">A value that specifies additional file options.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter.</param>
+      /// <summary>[AlphaFS] 指定されたパスで、指定された作成モード、読み取り/書き込みおよび���有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      
+      /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
+      /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
+      /// デフォルトのバッファサイズは4096です。</param>
+      /// <param name="options">追加のファイルオプション���指定する値。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
-      ///   A <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write
-      ///   access and the specified sharing option.
+      ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
+      ///   および指定された共有オプションの<see cref="FileStream"/>。
       /// </returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options, PathFormat pathFormat)
@@ -296,19 +296,19 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens a <see cref="FileStream"/> on the specified path using the specified creation mode, read/write and sharing permission, and buffer size.</summary>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A constant that determines how to open or create the file.</param>
-      /// <param name="access">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the
-      /// file.</param>
-      /// <param name="share">A constant that determines how the file will be shared by processes.</param>
-      /// <param name="bufferSize">A positive <see cref="System.Int32"/> value greater than 0 indicating the buffer size. The
-      /// default buffer size is 4096.</param>
-      /// <param name="extendedAttributes">The extended attributes specifying additional options.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter.</param>
+      /// <summary>[AlphaFS] 指定されたパスで、指定された作成モード、読み取り/書き込みおよび���有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      
+      /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
+      /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
+      /// デフォルトのバッファサイズは4096です。</param>
+      /// <param name="extendedAttributes">追加オプションを指定する拡張属性。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
-      ///   A <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write
-      ///   access and the specified sharing option.
+      ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
+      ///   および指定された共有オプションの<see cref="FileStream"/>。
       /// </returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, ExtendedFileAttributes extendedAttributes, PathFormat pathFormat)
@@ -321,18 +321,18 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region Using FileSystemRights
 
-      /// <summary>[AlphaFS] Opens a <see cref="FileStream"/> on the specified path using the specified creation mode, read/write and sharing permission, and buffer size.</summary>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A constant that determines how to open or create the file.</param>
-      /// <param name="rights">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the
-      /// file.</param>
-      /// <param name="share">A constant that determines how the file will be shared by processes.</param>
-      /// <param name="bufferSize">A positive <see cref="System.Int32"/> value greater than 0 indicating the buffer size. The
-      /// default buffer size is 4096.</param>
-      /// <param name="options">A value that specifies additional file options.</param>
+      /// <summary>[AlphaFS] 指定されたパスで、指定された作成モード、読み取り/書き込みおよび���有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="rights">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      
+      /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
+      /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
+      /// デフォルトのバッファサイズは4096です。</param>
+      /// <param name="options">追加のファイルオプション���指定する値。</param>
       /// <returns>
-      ///   A <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write
-      ///   access and the specified sharing option.
+      ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
+      ///   および指定された共有オプションの<see cref="FileStream"/>。
       /// </returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, FileSystemRights rights, FileShare share, int bufferSize, FileOptions options)
@@ -341,18 +341,18 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens a <see cref="FileStream"/> on the specified path using the specified creation mode, read/write and sharing permission, and buffer size.</summary>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A constant that determines how to open or create the file.</param>
-      /// <param name="rights">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the
-      /// file.</param>
-      /// <param name="share">A constant that determines how the file will be shared by processes.</param>
-      /// <param name="bufferSize">A positive <see cref="System.Int32"/> value greater than 0 indicating the buffer size. The
-      /// default buffer size is 4096.</param>
-      /// <param name="extendedAttributes">Extended attributes specifying additional options.</param>
+      /// <summary>[AlphaFS] 指定されたパスで、指定された作成モード、読み取り/書き込みおよび���有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="rights">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      
+      /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
+      /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
+      /// デフォルトのバッファサイズは4096です。</param>
+      /// <param name="extendedAttributes">追加オプションを指定する拡張属性。</param>
       /// <returns>
-      ///   A <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write
-      ///   access and the specified sharing option.
+      ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
+      ///   および指定された共有オプションの<see cref="FileStream"/>。
       /// </returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, FileSystemRights rights, FileShare share, int bufferSize, ExtendedFileAttributes extendedAttributes)
@@ -361,19 +361,19 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens a <see cref="FileStream"/> on the specified path using the specified creation mode, read/write and sharing permission, and buffer size.</summary>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A constant that determines how to open or create the file.</param>
-      /// <param name="rights">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the
-      /// file.</param>
-      /// <param name="share">A constant that determines how the file will be shared by processes.</param>
-      /// <param name="bufferSize">A positive <see cref="System.Int32"/> value greater than 0 indicating the buffer size. The
-      /// default buffer size is 4096.</param>
-      /// <param name="options">A value that specifies additional file options.</param>
-      /// <param name="security">A value that determines the access control and audit security for the file.</param>
+      /// <summary>[AlphaFS] 指定されたパスで、指定された作成モード、読み取り/書き込みおよび���有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="rights">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      
+      /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
+      /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
+      /// デフォルトのバッファサイズは4096です。</param>
+      /// <param name="options">追加のファイルオプション���指定する値。</param>
+      /// <param name="security">ファイルのアクセス制御と監査セキュリティを決定する値。</param>
       /// <returns>
-      ///   A <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write
-      ///   access and the specified sharing option.
+      ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
+      ///   および指定された共有オプションの<see cref="FileStream"/>。
       /// </returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, FileSystemRights rights, FileShare share, int bufferSize, FileOptions options, FileSecurity security)
@@ -382,19 +382,19 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens a <see cref="FileStream"/> on the specified path using the specified creation mode, read/write and sharing permission, and buffer size.</summary>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A constant that determines how to open or create the file.</param>
-      /// <param name="rights">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the
-      /// file.</param>
-      /// <param name="share">A constant that determines how the file will be shared by processes.</param>
-      /// <param name="bufferSize">A positive <see cref="System.Int32"/> value greater than 0 indicating the buffer size. The
-      /// default buffer size is 4096.</param>
-      /// <param name="extendedAttributes">Extended attributes specifying additional options.</param>
-      /// <param name="security">A value that determines the access control and audit security for the file.</param>
+      /// <summary>[AlphaFS] 指定されたパスで、指定された作成モード、読み取り/書き込みおよび���有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="rights">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      
+      /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
+      /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
+      /// デフォルトのバッファサイズは4096です。</param>
+      /// <param name="extendedAttributes">追加オプションを指定する拡張属性。</param>
+      /// <param name="security">ファイルのアクセス制御と監査セキュリティを決定する値。</param>
       /// <returns>
-      ///   A <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write
-      ///   access and the specified sharing option.
+      ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
+      ///   および指定された共有オプションの<see cref="FileStream"/>。
       /// </returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, FileSystemRights rights, FileShare share, int bufferSize, ExtendedFileAttributes extendedAttributes, FileSecurity security)
@@ -403,19 +403,19 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens a <see cref="FileStream"/> on the specified path using the specified creation mode, read/write and sharing permission, and buffer size.</summary>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A constant that determines how to open or create the file.</param>
-      /// <param name="rights">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the
-      /// file.</param>
-      /// <param name="share">A constant that determines how the file will be shared by processes.</param>
-      /// <param name="bufferSize">A positive <see cref="System.Int32"/> value greater than 0 indicating the buffer size. The
-      /// default buffer size is 4096.</param>
-      /// <param name="options">A value that specifies additional file options.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter.</param>
+      /// <summary>[AlphaFS] 指定されたパスで、指定された作成モード、読み取り/書き込みおよび���有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="rights">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      
+      /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
+      /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
+      /// デフォルトのバッファサイズは4096です。</param>
+      /// <param name="options">追加のファイルオプション���指定する値。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
-      ///   A <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write
-      ///   access and the specified sharing option.
+      ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
+      ///   および指定された共有オプションの<see cref="FileStream"/>。
       /// </returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, FileSystemRights rights, FileShare share, int bufferSize, FileOptions options, PathFormat pathFormat)
@@ -424,19 +424,19 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens a <see cref="FileStream"/> on the specified path using the specified creation mode, read/write and sharing permission, and buffer size.</summary>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A constant that determines how to open or create the file.</param>
-      /// <param name="rights">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the
-      /// file.</param>
-      /// <param name="share">A constant that determines how the file will be shared by processes.</param>
-      /// <param name="bufferSize">A positive <see cref="System.Int32"/> value greater than 0 indicating the buffer size. The
-      /// default buffer size is 4096.</param>
-      /// <param name="extendedAttributes">Extended attributes specifying additional options.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter.</param>
+      /// <summary>[AlphaFS] 指定されたパスで、指定された作成モード、読み取り/書き込みおよび���有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="rights">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      
+      /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
+      /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
+      /// デフォルトのバッファサイズは4096です。</param>
+      /// <param name="extendedAttributes">追加オプションを指定する拡張属性。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
-      ///   A <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write
-      ///   access and the specified sharing option.
+      ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
+      ///   および指定された共有オプションの<see cref="FileStream"/>。
       /// </returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, FileSystemRights rights, FileShare share, int bufferSize, ExtendedFileAttributes extendedAttributes, PathFormat pathFormat)
@@ -446,19 +446,19 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>[AlphaFS] Opens a <see cref="FileStream"/> on the specified path using the specified  creation mode, access rights and sharing permission, the buffer size, additional file options, access control and audit security.</summary>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A constant that determines how to open or create the file.</param>
-      /// <param name="rights">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the
-      /// file.</param>
-      /// <param name="share">A constant that determines how the file will be shared by processes.</param>
-      /// <param name="bufferSize">A positive <see cref="System.Int32"/> value greater than 0 indicating the buffer size. The
-      /// default buffer size is 4096.</param>
-      /// <param name="options">A value that specifies additional file options.</param>
-      /// <param name="security">A value that determines the access control and audit security for the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter.</param>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="rights">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      
+      /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
+      /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
+      /// デフォルトのバッファサイズは4096です。</param>
+      /// <param name="options">追加のファイルオプション���指定する値。</param>
+      /// <param name="security">ファイルのアクセス制御と監査セキュリティを決定する値。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
-      ///   A <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write
-      ///   access and the specified sharing option.
+      ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
+      ///   および指定された共有オプションの<see cref="FileStream"/>。
       /// </returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, FileSystemRights rights, FileShare share, int bufferSize, FileOptions options, FileSecurity security, PathFormat pathFormat)
@@ -468,19 +468,19 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>[AlphaFS] Opens a <see cref="FileStream"/> on the specified path using the specified  creation mode, access rights and sharing permission, the buffer size, additional file options, access control and audit security.</summary>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A constant that determines how to open or create the file.</param>
-      /// <param name="rights">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the
-      /// file.</param>
-      /// <param name="share">A constant that determines how the file will be shared by processes.</param>
-      /// <param name="bufferSize">A positive <see cref="System.Int32"/> value greater than 0 indicating the buffer size. The
-      /// default buffer size is 4096.</param>
-      /// <param name="extendedAttributes">Extended attributes specifying additional options.</param>
-      /// <param name="security">A value that determines the access control and audit security for the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter.</param>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="rights">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      
+      /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
+      /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
+      /// デフォルトのバッファサイズは4096です。</param>
+      /// <param name="extendedAttributes">追加オプションを指定する拡張属性。</param>
+      /// <param name="security">ファイルのアクセス制御と監査セキュリティを決定する値。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
-      ///   A <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write
-      ///   access and the specified sharing option.
+      ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
+      ///   および指定された共有オプションの<see cref="FileStream"/>。
       /// </returns>
       [SecurityCritical]
       public static FileStream Open(string path, FileMode mode, FileSystemRights rights, FileShare share, int bufferSize, ExtendedFileAttributes extendedAttributes, FileSecurity security, PathFormat pathFormat)

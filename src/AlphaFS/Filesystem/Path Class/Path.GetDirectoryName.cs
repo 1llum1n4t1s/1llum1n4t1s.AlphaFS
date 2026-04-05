@@ -28,14 +28,14 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Returns the directory information for the specified path string.</summary>
+      /// <summary>指定されたパス文字列のディレクトリ情報を返します。</summary>
       /// <returns>
-      ///   <para>Directory information for <paramref name="path"/>, or <c>null</c> if <paramref name="path"/> denotes a root directory or is
-      ///   <c>null</c>.</para>
-      ///   <para>Returns <see cref="string.Empty"/> if <paramref name="path"/> does not contain directory information.</para>
+      ///   <para><paramref name="path"/> のディレクトリ情報。<paramref name="path"/> がルートディレクトリを示す場合、または
+      ///   <c>null</c> の場合は <c>null</c>。</para>
+      ///   <para><paramref name="path"/> にディレクトリ情報が含まれていない場合は <see cref="string.Empty"/> を返します。</para>
       /// </returns>
       /// <exception cref="ArgumentException"/>
-      /// <param name="path">The path of a file or directory.</param>
+      /// <param name="path">ファイルまたはディレクトリのパス。</param>
       [SecurityCritical]
       public static string GetDirectoryName(string path)
       {
@@ -45,14 +45,14 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Returns the directory information for the specified path string.</summary>
+      /// <summary>[AlphaFS] 指定されたパス文字列のディレクトリ情報を返します。</summary>
       /// <returns>
-      ///   Directory information for <paramref name="path"/>, or <c>null</c> if <paramref name="path"/> denotes a root directory or is
-      ///   <c>null</c>. Returns <see cref="string.Empty"/> if <paramref name="path"/> does not contain directory information.
+      ///   <paramref name="path"/> のディレクトリ情報。<paramref name="path"/> がルートディレクトリを示す場合、または
+      ///   <c>null</c> の場合は <c>null</c>。<paramref name="path"/> にディレクトリ情報が含まれていない場合は <see cref="string.Empty"/> を返します。
       /// </returns>
       /// <exception cref="ArgumentException"/>
-      /// <param name="path">The path of a file or directory.</param>
-      /// <param name="checkInvalidPathChars"><c>true</c> will check <paramref name="path"/> for invalid path characters.</param>
+      /// <param name="path">ファイルまたはディレクトリのパス。</param>
+      /// <param name="checkInvalidPathChars"><c>true</c> の場合、<paramref name="path"/> の無効なパス文字をチェックします。</param>
       [SecurityCritical]
       public static string GetDirectoryName(string path, bool checkInvalidPathChars)
       {

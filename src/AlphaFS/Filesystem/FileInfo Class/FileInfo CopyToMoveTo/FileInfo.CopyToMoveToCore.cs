@@ -27,21 +27,21 @@ namespace Alphaleonis.Win32.Filesystem
 {
    partial class FileInfo
    {
-      /// <summary>Copy/move an existing file to a new file, allowing the overwriting of an existing file.</summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Copy or Move action.</returns>
+      /// <summary>既存のファイルを新しいファイルにコピー/移動します。既存のファイルの上書きを許可します。</summary>
+      /// <returns>コピーまたは移動操作のステータスを含む <see cref="CopyMoveResult"/> クラス。</returns>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には、<see cref="CopyOptions.NoBuffering"/> オプションが推奨されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2 つのファイルに同等の短いファイル名がある場合、このメソッドが失敗して例外がスローされるか、望ましくない動作が発生する可能性があります。</para>
       /// </remarks>
-      /// <param name="destinationPath"><para>A full path string to the destination directory</para></param>
-      /// <param name="copyOptions"><para>This parameter can be <c>null</c>. Use <see cref="CopyOptions"/> to specify how the file is to be copied.</para></param>
-      /// <param name="moveOptions"><para>This parameter can be <c>null</c>. Use <see cref="MoveOptions"/> that specify how the file is to be moved.</para></param>
-      /// <param name="preserveDates"><c>true</c> if original Timestamps must be preserved, <c>false</c> otherwise.</param>
-      /// <param name="progressHandler"><para>This parameter can be <c>null</c>. A callback function that is called each time another portion of the file has been copied.</para></param>
-      /// <param name="userProgressData"><para>This parameter can be <c>null</c>. The argument to be passed to the callback function.</para></param>
-      /// <param name="longFullPath">[out] Returns the retrieved long full path.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="destinationPath"><para>コピー先ディレクトリの完全パス文字列。</para></param>
+      /// <param name="copyOptions"><para>このパラメーターは <c>null</c> にできます。ファイルのコピー方法を指定するには <see cref="CopyOptions"/> を使用します。</para></param>
+      /// <param name="moveOptions"><para>このパラメーターは <c>null</c> にできます。ファイルの移動方法を指定するには <see cref="MoveOptions"/> を使用します。</para></param>
+      /// <param name="preserveDates">元のタイムスタンプを保持する場合は <c>true</c>、それ以外の場合は <c>false</c>。</param>
+      /// <param name="progressHandler"><para>このパラメーターは <c>null</c> にできます。ファイルの別の部分がコピーされるたびに呼び出されるコールバック関数。</para></param>
+      /// <param name="userProgressData"><para>このパラメーターは <c>null</c> にできます。コールバック関数に渡される引数。</para></param>
+      /// <param name="longFullPath">[out] 取得された長い完全パスを返します。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -66,7 +66,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Refreshes the current <see cref="FileInfo"/> instance with a new destination path.</summary>
+      /// <summary>現在の <see cref="FileInfo"/> インスタンスを新しいコピー先パスで更新します。</summary>
       private void UpdateDestinationPath(string destinationPath, string destinationPathLp)
       {
          _name = Path.GetFileName(destinationPathLp, true);

@@ -28,11 +28,11 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Volume
    {
-      /// <summary>[AlphaFS] Gets the shortest display name for the specified <paramref name="volumeName"/>.</summary>
-      /// <remarks>This method basically returns the shortest string returned by <see cref="EnumerateVolumePathNames"/></remarks>
-      /// <param name="volumeName">A volume <see cref="Guid"/> path: \\?\Volume{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}\.</param>
+      /// <summary>[AlphaFS] 指定された <paramref name="volumeName"/> の最短の表示名を取得します。</summary>
+      /// <remarks>このメソッドは基本的に <see cref="EnumerateVolumePathNames"/> が返す最短の文字列を返します。</remarks>
+      /// <param name="volumeName">ボリューム <see cref="Guid"/> パス: \\?\Volume{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}\。</param>
       /// <returns>
-      ///   The shortest display name for the specified volume found, or <c>null</c> if no display names were found.
+      ///   指定されたボリュームで見つかった最短の表示名。表示名が見つからない場合は <c>null</c>。
       /// </returns>
       [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
       [SecurityCritical]

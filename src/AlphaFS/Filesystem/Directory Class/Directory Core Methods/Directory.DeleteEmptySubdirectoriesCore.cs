@@ -38,11 +38,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="DirectoryReadOnlyException"/>
       /// <param name="fsEntryInfo">A FileSystemEntryInfo instance. Use either <paramref name="fsEntryInfo"/> or <paramref name="path"/>, not both.</param>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The name of the directory to remove empty subdirectories from. Use either <paramref name="path"/> or <paramref name="fsEntryInfo"/>, not both.</param>
       /// <param name="recursive"><c>true</c> deletes empty subdirectories from this directory and its subdirectories.</param>
       /// <param name="ignoreReadOnly"><c>true</c> overrides read only <see cref="FileAttributes"/> of empty directories.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       internal static void DeleteEmptySubdirectoriesCore(FileSystemEntryInfo fsEntryInfo, KernelTransaction transaction, string path, bool recursive, bool ignoreReadOnly, PathFormat pathFormat)
       {

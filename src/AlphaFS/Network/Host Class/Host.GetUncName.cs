@@ -27,7 +27,7 @@ using Path = Alphaleonis.Win32.Filesystem.Path;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>Provides static methods to retrieve network resource information from a local- or remote host.</summary>
+   /// <summary>ローカルまたはリモートホストからネットワークリソース情報を取得するための静的メソッドを提供します.</summary>
    public static partial class Host
    {
       /// <summary>Return the host name in UNC format, for example: \\hostname</summary>

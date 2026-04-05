@@ -28,11 +28,11 @@ using System.Security;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>Provides access to information on a local or remote drive.</summary>
+   /// <summary>ローカルまたはリモートドライブの情報へのアクセスを提供します。</summary>
    /// <remarks>
-   /// This class models a drive and provides methods and properties to query for drive information.
-   /// Use DriveInfo to determine what drives are available, and what type of drives they are.
-   /// You can also query to determine the capacity and available free space on the drive.
+   /// このクラスはドライブをモデル化し、ドライブ情報を照会するためのメソッドとプロパティを提供します。
+   /// DriveInfo を使用して、利用可能なドライブとその種類を判断できます。
+   /// ドライブの容量と利用可能な空き領域を照会することもできます。
    /// </remarks>
    [Serializable]
    [SecurityCritical]
@@ -47,15 +47,15 @@ namespace Alphaleonis.Win32.Filesystem
       [NonSerialized] private readonly string _name;
 
 
-      #region Constructors
+      #region コンストラクター
 
-      /// <summary>Provides access to information on the specified drive.</summary>
+      /// <summary>指定されたドライブの情報へのアクセスを提供します。</summary>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
       /// <param name="driveName">
-      ///   A valid drive path or drive letter.
-      ///   <para>This can be either uppercase or lowercase,</para>
-      ///   <para>'a' to 'z' or a network share in the format: \\server\share</para>
+      ///   有効なドライブパスまたはドライブ文字。
+      ///   <para>大文字または小文字のいずれかを使用できます。</para>
+      ///   <para>'a' ～ 'z' または \\server\share 形式のネットワーク共有を指定できます。</para>
       /// </param>
       [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Utils.IsNullOrWhiteSpace validates arguments.")]
       [SecurityCritical]
@@ -77,21 +77,21 @@ namespace Alphaleonis.Win32.Filesystem
 
          _name = Path.AddTrailingDirectorySeparator(driveName, false);
 
-         // Initiate VolumeInfo() lazyload instance.
+         // VolumeInfo() の遅延読み込みインスタンスを初期化します。
          _volumeInfo = new VolumeInfo(_name, false, true);
 
-         // Initiate DiskSpaceInfo() lazyload instance.
+         // DiskSpaceInfo() の遅延読み込みインスタンスを初期化します。
          _dsi = new DiskSpaceInfo(_name, null, false, true);
       }
 
-      #endregion // Constructors
+      #endregion // コンストラクター
 
 
-      #region Properties
+      #region プロパティ
 
-      /// <summary>Indicates the amount of available free space on a drive.</summary>
-      /// <returns>The amount of free space available on the drive, in bytes.</returns>
-      /// <remarks>This property indicates the amount of free space available on the drive. Note that this number may be different from the <see cref="TotalFreeSpace"/> number because this property takes into account disk quotas.</remarks>
+      /// <summary>ドライブの利用可能な空き領域の量を示します。</summary>
+      /// <returns>ドライブで利用可能な空き領域の量（バイト単位）。</returns>
+      /// <remarks>このプロパティはドライブの利用可能な空き領域の量を示します。このプロパティはディスククォータを考慮するため、<see cref="TotalFreeSpace"/> の値とは異なる場合があることに注意してください。</remarks>
       public long AvailableFreeSpace
       {
          get
@@ -101,19 +101,19 @@ namespace Alphaleonis.Win32.Filesystem
          }
       }
 
-      /// <summary>Gets the name of the file system, such as NTFS or FAT32.</summary>
-      /// <remarks>Use DriveFormat to determine what formatting a drive uses.</remarks>
+      /// <summary>NTFS や FAT32 などのファイルシステムの名前を取得します。</summary>
+      /// <remarks>ドライブが使用するフォーマットを判断するには DriveFormat を使用してください。</remarks>
       public string DriveFormat
       {
          get { return (string) GetDeviceInfo(0, 1); }
       }
 
 
-      /// <summary>Gets the drive type.</summary>
-      /// <returns>One of the <see cref="System.IO.DriveType"/> values.</returns>
+      /// <summary>ドライブの種類を取得します。</summary>
+      /// <returns><see cref="System.IO.DriveType"/> 値のいずれか。</returns>
       /// <remarks>
-      /// The DriveType property indicates whether a drive is any of: CDRom, Fixed, Unknown, Network, NoRootDirectory,
-      /// Ram, Removable, or Unknown. Values are listed in the <see cref="System.IO.DriveType"/> enumeration.
+      /// DriveType プロパティは、ドライブが CDRom、Fixed、Unknown、Network、NoRootDirectory、
+      /// Ram、Removable、Unknown のいずれかであるかを示します。値は <see cref="System.IO.DriveType"/> 列挙体に一覧されています。
       /// </remarks>
       public DriveType DriveType
       {
@@ -121,16 +121,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets a value indicating whether a drive is ready.</summary>
-      /// <returns><c>true</c> if the drive is ready; otherwise, <c>false</c>.</returns>
+      /// <summary>ドライブの準備ができているかどうかを示す値を取得します。</summary>
+      /// <returns>ドライブの準備ができている場合は <c>true</c>、それ以外の場合は <c>false</c>。</returns>
       /// <remarks>
-      /// IsReady indicates whether a drive is ready. For example, it indicates whether a CD is in a CD drive or whether
-      /// a removable storage device is ready for read/write operations. If you do not test whether a drive is ready, and
-      /// it is not ready, querying the drive using DriveInfo will raise an IOException.
-      /// 
-      /// Do not rely on IsReady() to avoid catching exceptions from other members such as TotalSize, TotalFreeSpace, and DriveFormat.
-      /// Between the time that your code checks IsReady and then accesses one of the other properties
-      /// (even if the access occurs immediately after the check), a drive may have been disconnected or a disk may have been removed.
+      /// IsReady はドライブの準備ができているかどうかを示します。たとえば、CD ドライブに CD が入っているか、
+      /// リムーバブルストレージデバイスが読み書き操作の準備ができているかを示します。ドライブの準備ができているかテストせずに
+      /// DriveInfo でドライブを照会すると、IOException が発生します。
+      ///
+      /// TotalSize、TotalFreeSpace、DriveFormat などの他のメンバーからの例外をキャッチする代わりに IsReady() に依存しないでください。
+      /// コードが IsReady をチェックしてから他のプロパティにアクセスするまでの間に
+      /// （アクセスがチェック直後であっても）、ドライブが切断されたりディスクが取り外されたりする可能性があります。
       /// </remarks>
       public bool IsReady
       {
@@ -138,25 +138,25 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets the name of the drive.</summary>
-      /// <returns>The name of the drive.</returns>
-      /// <remarks>This property is the name assigned to the drive, such as C:\ or E:\</remarks>
+      /// <summary>ドライブの名前を取得します。</summary>
+      /// <returns>ドライブの名前。</returns>
+      /// <remarks>このプロパティは、C:\ や E:\ などのドライブに割り当てられた名前です。</remarks>
       public string Name
       {
          get { return _name; }
       }
 
 
-      /// <summary>Gets the root directory of a drive.</summary>
-      /// <returns>A DirectoryInfo object that contains the root directory of the drive.</returns>
+      /// <summary>ドライブのルートディレクトリを取得します。</summary>
+      /// <returns>ドライブのルートディレクトリを含む DirectoryInfo オブジェクト。</returns>
       public DirectoryInfo RootDirectory
       {
          get { return (DirectoryInfo) GetDeviceInfo(2, 1); }
       }
 
-      /// <summary>Gets the total amount of free space available on a drive.</summary>
-      /// <returns>The total free space available on a drive, in bytes.</returns>
-      /// <remarks>This property indicates the total amount of free space available on the drive, not just what is available to the current user.</remarks>
+      /// <summary>ドライブで利用可能な空き領域の総量を取得します。</summary>
+      /// <returns>ドライブで利用可能な空き領域の合計（バイト単位）。</returns>
+      /// <remarks>このプロパティは、現在のユーザーが利用可能な量だけでなく、ドライブの空き領域の総量を示します。</remarks>
       public long TotalFreeSpace
       {
          get
@@ -167,9 +167,9 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets the total size of storage space on a drive.</summary>
-      /// <returns>The total size of the drive, in bytes.</returns>
-      /// <remarks>This property indicates the total size of the drive in bytes, not just what is available to the current user.</remarks>
+      /// <summary>ドライブのストレージ領域の総サイズを取得します。</summary>
+      /// <returns>ドライブの総サイズ（バイト単位）。</returns>
+      /// <remarks>このプロパティは、現在のユーザーが利用可能な量だけでなく、ドライブの総サイズ（バイト単位）を示します。</remarks>
       public long TotalSize
       {
          get
@@ -180,11 +180,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets or sets the volume label of a drive.</summary>
-      /// <returns>The volume label.</returns>
+      /// <summary>ドライブのボリュームラベルを取得または設定します。</summary>
+      /// <returns>ボリュームラベル。</returns>
       /// <remarks>
-      /// The label length is determined by the operating system. For example, NTFS allows a volume label
-      /// to be up to 32 characters long. Note that <c>null</c> is a valid VolumeLabel.
+      /// ラベルの長さはオペレーティングシステムによって決まります。たとえば、NTFS ではボリュームラベルを
+      /// 最大 32 文字にすることができます。<c>null</c> は有効な VolumeLabel であることに注意してください。
       /// </remarks>
       public string VolumeLabel
       {
@@ -192,7 +192,7 @@ namespace Alphaleonis.Win32.Filesystem
          set { Volume.SetVolumeLabel(Name, value); }
       }
 
-      /// <summary>[AlphaFS] Returns the <see ref="Alphaleonis.Win32.Filesystem.DiskSpaceInfo"/> instance.</summary>
+      /// <summary>[AlphaFS] <see ref="Alphaleonis.Win32.Filesystem.DiskSpaceInfo"/> インスタンスを返します。</summary>
       public DiskSpaceInfo DiskSpaceInfo
       {
          get
@@ -203,57 +203,57 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] The MS-DOS device name.</summary>
+      /// <summary>[AlphaFS] MS-DOS デバイス名。</summary>
       public string DosDeviceName
       {
          get { return (string) GetDeviceInfo(1, 0); }
       }
 
 
-      /// <summary>[AlphaFS] Indicates if this drive is a SUBST.EXE / DefineDosDevice drive mapping.</summary>
+      /// <summary>[AlphaFS] このドライブが SUBST.EXE / DefineDosDevice ドライブマッピングかどうかを示します。</summary>
       public bool IsDosDeviceSubstitute
       {
          get { return !Utils.IsNullOrWhiteSpace(DosDeviceName) && DosDeviceName.StartsWith(Path.NonInterpretedPathPrefix, StringComparison.OrdinalIgnoreCase); }
       }
 
 
-      /// <summary>[AlphaFS] Indicates if this drive is a UNC path.</summary>
+      /// <summary>[AlphaFS] このドライブが UNC パスかどうかを示します。</summary>
       public bool IsUnc
       {
          get
          {
             return !IsDosDeviceSubstitute && DriveType == DriveType.Network ||
                
-                   // Handle Host devices with file systems: FAT/FAT32, UDF (CDRom), ...
+                   // ファイルシステムを持つホストデバイスの処理: FAT/FAT32、UDF (CDRom) など
                    Name.StartsWith(Path.UncPrefix, StringComparison.Ordinal) && DriveType == DriveType.NoRootDirectory && DriveFormat.Equals(DriveType.Unknown.ToString(), StringComparison.OrdinalIgnoreCase);
          }
       }
 
 
-      /// <summary>[AlphaFS] Determines whether the specified volume name is a defined volume on the current computer.</summary>
+      /// <summary>[AlphaFS] 指定されたボリューム名が現在のコンピューター上の定義済みボリュームかどうかを判断します。</summary>
       public bool IsVolume
       {
          get { return null != GetDeviceInfo(0, 0); }
       }
 
 
-      /// <summary>[AlphaFS] Contains information about a file-system volume.</summary>
-      /// <returns>A VolumeInfo object that contains file-system volume information of the drive.</returns>
+      /// <summary>[AlphaFS] ファイルシステムボリュームに関する情報を含みます。</summary>
+      /// <returns>ドライブのファイルシステムボリューム情報を含む VolumeInfo オブジェクト。</returns>
       public VolumeInfo VolumeInfo
       {
          get { return (VolumeInfo) GetDeviceInfo(0, 0); }
       }
 
 
-      #endregion // Properties
+      #endregion // プロパティ
 
 
-      #region Methods
+      #region メソッド
 
       #region .NET
 
-      /// <summary>Retrieves the <see cref="DriveInfo"/> of all logical drives on the Computer.</summary>
-      /// <returns>An array of type <see cref="Alphaleonis.Win32.Filesystem.DriveInfo"/> that represents the logical drives on the Computer.</returns>
+      /// <summary>コンピューター上のすべての論理ドライブの <see cref="DriveInfo"/> を取得します。</summary>
+      /// <returns>コンピューター上の論理ドライブを表す <see cref="Alphaleonis.Win32.Filesystem.DriveInfo"/> 型の配列。</returns>
       [SecurityCritical]
       public static DriveInfo[] GetDrives()
       {
@@ -261,9 +261,9 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Returns a drive name as a string.</summary>
-      /// <returns>The name of the drive.</returns>
-      /// <remarks>This method returns the Name property.</remarks>
+      /// <summary>ドライブ名を文字列として返します。</summary>
+      /// <returns>ドライブの名前。</returns>
+      /// <remarks>このメソッドは Name プロパティを返します。</remarks>
       public override string ToString()
       {
          return _name;
@@ -272,12 +272,11 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Enumerates the drive names of all logical drives on the Computer.</summary>
-      /// <param name="fromEnvironment">Retrieve logical drives as known by the Environment.</param>
-      /// <param name="isReady">Retrieve only when accessible (IsReady) logical drives.</param>
+      /// <summary>[AlphaFS] コンピューター上のすべての論理ドライブのドライブ名を列挙します。</summary>
+      /// <param name="fromEnvironment">Environment が認識している論理ドライブを取得します。</param>
+      /// <param name="isReady">アクセス可能な（IsReady な）論理ドライブのみを取得します。</param>
       /// <returns>
-      ///   An IEnumerable of type <see cref="Alphaleonis.Win32.Filesystem.DriveInfo"/> that represents
-      ///   the logical drives on the Computer.
+      ///   コンピューター上の論理ドライブを表す <see cref="Alphaleonis.Win32.Filesystem.DriveInfo"/> 型の IEnumerable。
       /// </returns>      
       [SecurityCritical]
       public static IEnumerable<DriveInfo> EnumerateDrives(bool fromEnvironment, bool isReady)
@@ -286,20 +285,20 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Gets the first available drive letter on the local system.</summary>
-      /// <returns>A drive letter as <see cref="char"/>. When no drive letters are available, an exception is thrown.</returns>
-      /// <remarks>The letters "A" and "B" are reserved for floppy drives and will never be returned by this function.</remarks>
+      /// <summary>[AlphaFS] ローカルシステムで最初に利用可能なドライブ文字を取得します。</summary>
+      /// <returns><see cref="char"/> としてのドライブ文字。利用可能なドライブ文字がない場合、例外がスローされます。</returns>
+      /// <remarks>文字 "A" と "B" はフロッピードライブ用に予約されており、この関数では返されません。</remarks>
       public static char GetFreeDriveLetter()
       {
          return GetFreeDriveLetter(false);
       }
 
 
-      /// <summary>Gets an available drive letter on the local system.</summary>
-      /// <param name="getLastAvailable">When <c>true</c> get the last available drive letter. When <c>false</c> gets the first available drive letter.</param>
-      /// <returns>A drive letter as <see cref="char"/>. When no drive letters are available, an exception is thrown.</returns>
-      /// <remarks>The letters "A" and "B" are reserved for floppy drives and will never be returned by this function.</remarks>
-      /// <exception cref="ArgumentOutOfRangeException">No drive letters available.</exception>
+      /// <summary>ローカルシステムで利用可能なドライブ文字を取得します。</summary>
+      /// <param name="getLastAvailable"><c>true</c> の場合、最後に利用可能なドライブ文字を取得します。<c>false</c> の場合、最初に利用可能なドライブ文字を取得します。</param>
+      /// <returns><see cref="char"/> としてのドライブ文字。利用可能なドライブ文字がない場合、例外がスローされます。</returns>
+      /// <remarks>文字 "A" と "B" はフロッピードライブ用に予約されており、この関数では返されません。</remarks>
+      /// <exception cref="ArgumentOutOfRangeException">利用可能なドライブ文字がありません。</exception>
       [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
       public static char GetFreeDriveLetter(bool getLastAvailable)
       {
@@ -315,12 +314,12 @@ namespace Alphaleonis.Win32.Filesystem
          }
       }
 
-      #endregion // Methods
+      #endregion // メソッド
 
 
-      #region Private Methods
+      #region プライベートメソッド
 
-      /// <summary>Retrieves information about the file system and volume associated with the specified root file or directorystream.</summary>
+      /// <summary>指定されたルートファイルまたはディレクトリストリームに関連付けられたファイルシステムとボリュームに関する情報を取得します。</summary>
       [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
       [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
       [SecurityCritical]
@@ -330,9 +329,9 @@ namespace Alphaleonis.Win32.Filesystem
          {
             switch (type)
             {
-               #region Volume
+               #region ボリューム
 
-               // VolumeInfo properties.
+               // VolumeInfo プロパティ。
                case 0:
                   if (Utils.IsNullOrWhiteSpace(_volumeInfo.FullPath))
                   {
@@ -357,7 +356,7 @@ namespace Alphaleonis.Win32.Filesystem
                   break;
 
 
-               // Volume related.
+               // ボリューム関連。
                case 1:
                   switch (mode)
                   {
@@ -368,12 +367,12 @@ namespace Alphaleonis.Win32.Filesystem
 
                   break;
 
-               #endregion // Volume
+               #endregion // ボリューム
 
 
-               #region Drive
+               #region ドライブ
 
-               // Drive related.
+               // ドライブ関連。
                case 2:
                   switch (mode)
                   {
@@ -388,7 +387,7 @@ namespace Alphaleonis.Win32.Filesystem
 
                   break;
 
-               // DiskSpaceInfo related.
+               // DiskSpaceInfo 関連。
                case 3:
                   switch (mode)
                   {
@@ -405,7 +404,7 @@ namespace Alphaleonis.Win32.Filesystem
 
                   break;
 
-               #endregion // Drive
+               #endregion // ドライブ
             }
          }
          catch
@@ -415,6 +414,6 @@ namespace Alphaleonis.Win32.Filesystem
          return type == 0 && mode > 0 ? string.Empty : null;
       }
       
-      #endregion // Private
+      #endregion // プライベート
    }
 }

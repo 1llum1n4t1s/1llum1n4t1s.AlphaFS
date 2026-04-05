@@ -28,16 +28,16 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Returns the extension of the specified path string.</summary>
+      /// <summary>指定されたパス文字列の拡張子を返します。</summary>
       /// <returns>
-      ///   <para>The extension of the specified path (including the period "."), or null, or <see cref="string.Empty"/>.</para>
-      ///   <para>If <paramref name="path"/> is null, this method returns null.</para>
-      ///   <para>If <paramref name="path"/> does not have extension information,
-      ///   this method returns <see cref="string.Empty"/>.</para>
+      ///   <para>指定されたパスの拡張子（ピリオド "." を含む）、null、または <see cref="string.Empty"/>。</para>
+      ///   <para><paramref name="path"/> が null の場合、このメソッドは null を返します。</para>
+      ///   <para><paramref name="path"/> に拡張子情報がない場合、
+      ///   このメソッドは <see cref="string.Empty"/> を返します。</para>
       /// </returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="path">The path string from which to get the extension. The path cannot contain any of the characters defined in <see cref="GetInvalidPathChars"/>.</param>
+      /// <param name="path">拡張子を取得するパス文字列。パスには <see cref="GetInvalidPathChars"/> で定義されている文字を含めることはできません。</param>
       [SecurityCritical]
       public static string GetExtension(string path)
       {
@@ -47,16 +47,16 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Returns the extension of the specified path string.</summary>
+      /// <summary>[AlphaFS] 指定されたパス文字列の拡張子を返します。</summary>
       /// <returns>
-      ///   <para>The extension of the specified path (including the period "."), or null, or <see cref="string.Empty"/>.</para>
-      ///   <para>If <paramref name="path"/> is null, this method returns null.</para>
-      ///   <para>If <paramref name="path"/> does not have extension information,
-      ///   this method returns <see cref="string.Empty"/>.</para>
+      ///   <para>指定されたパスの拡張子（ピリオド "." を含む）、null、または <see cref="string.Empty"/>。</para>
+      ///   <para><paramref name="path"/> が null の場合、このメソッドは null を返します。</para>
+      ///   <para><paramref name="path"/> に拡張子情報がない場合、
+      ///   このメソッドは <see cref="string.Empty"/> を返します。</para>
       /// </returns>
       /// <exception cref="ArgumentException"/>
-      /// <param name="path">The path string from which to get the extension. The path cannot contain any of the characters defined in <see cref="GetInvalidPathChars"/>.</param>
-      /// <param name="checkInvalidPathChars"><c>true</c> will check <paramref name="path"/> for invalid path characters.</param>
+      /// <param name="path">拡張子を取得するパス文字列。パスには <see cref="GetInvalidPathChars"/> で定義されている文字を含めることはできません。</param>
+      /// <param name="checkInvalidPathChars"><c>true</c> の場合、<paramref name="path"/> の無効なパス文字をチェックします。</param>
       [SecurityCritical]
       public static string GetExtension(string path, bool checkInvalidPathChars)
       {

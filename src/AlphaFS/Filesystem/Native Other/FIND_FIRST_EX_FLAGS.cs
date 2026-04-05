@@ -25,18 +25,18 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Additional flags that control the search.</summary>
+      /// <summary>検索を制御する追加フラグ。</summary>
       [Flags]
       internal enum FIND_FIRST_EX_FLAGS
       {
-         /// <summary>No additional flags used.</summary>
+         /// <summary>追加フラグなし。</summary>
          NONE = 0,
 
-         /// <summary>Searches are case-sensitive.</summary>
+         /// <summary>検索は大文字と小文字を区別します。</summary>
          CASE_SENSITIVE = 1,
 
-         /// <summary>Uses a larger buffer for directory queries, which can increase performance of the find operation.</summary>
-         /// <remarks>This value is not supported until Windows Server 2008 R2 and Windows 7.</remarks>
+         /// <summary>ディレクトリクエリにより大きなバッファーを使用し、検索操作のパフォーマンスを向上させることができます。</summary>
+         /// <remarks>この値は Windows Server 2008 R2 および Windows 7 までサポートされていません。</remarks>
          LARGE_FETCH = 2
       }
    }

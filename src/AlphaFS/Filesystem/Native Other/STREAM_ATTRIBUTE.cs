@@ -23,22 +23,22 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>WIN32_STREAM_ID structure attributes of data to facilitate cross-operating system transfer. This member can be one or more of the following values.</summary>
+      /// <summary>異なるオペレーティングシステム間の転送を容易にする WIN32_STREAM_ID 構造体のデータ属性。このメンバーは次の値の 1 つ以上を指定できます。</summary>
       internal enum STREAM_ATTRIBUTE
       {
-         /// <summary>This backup stream has no special attributes.</summary>
+         /// <summary>このバックアップストリームには特別な属性がありません。</summary>
          NONE = 0,
 
-         /// <summary>Attribute set if the stream contains data that is modified when read. Allows the backup application to know that verification of data will fail.</summary>
+         /// <summary>ストリームが読み取り時に変更されるデータを含む場合に設定される属性。バックアップアプリケーションがデータの検証が失敗することを認識できるようにします。</summary>
          STREAM_MODIFIED_WHEN_READ = 1,
 
-         /// <summary>The backup stream contains security information. This attribute applies only to backup stream of type <see cref="STREAM_ID.BACKUP_SECURITY_DATA"/>.</summary>
+         /// <summary>バックアップストリームにセキュリティ情報が含まれています。この属性は <see cref="STREAM_ID.BACKUP_SECURITY_DATA"/> 型のバックアップストリームにのみ適用されます。</summary>
          STREAM_CONTAINS_SECURITY = 2,
 
-         /// <summary>Reserved.</summary>
+         /// <summary>予約済み。</summary>
          STREAM_CONTAINS_PROPERTIES = 4,
 
-         /// <summary>The backup stream is part of a sparse file stream. This attribute applies only to backup stream of type <see cref="STREAM_ID.BACKUP_DATA"/>, <see cref="STREAM_ID.BACKUP_ALTERNATE_DATA"/>, and <see cref="STREAM_ID.BACKUP_SPARSE_BLOCK"/>.</summary>
+         /// <summary>バックアップストリームがスパースファイルストリームの一部です。この属性は <see cref="STREAM_ID.BACKUP_DATA"/>、<see cref="STREAM_ID.BACKUP_ALTERNATE_DATA"/>、および <see cref="STREAM_ID.BACKUP_SPARSE_BLOCK"/> 型のバックアップストリームにのみ適用されます。</summary>
          STREAM_SPARSE_ATTRIBUTE = 8
       }
    }

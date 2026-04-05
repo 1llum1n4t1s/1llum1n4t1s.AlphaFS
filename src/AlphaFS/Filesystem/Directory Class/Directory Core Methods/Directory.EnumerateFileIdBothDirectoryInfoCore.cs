@@ -33,7 +33,7 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>Returns an enumerable collection of information about files in the directory handle specified.</summary>
+      /// <summary>の列挙可能なコレクションを返します。 information about files in the directory handle specified.</summary>
       /// <returns>An IEnumerable of <see cref="FileIdBothDirectoryInfo"/> records for each file system entry in the specified diretory.</returns>    
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
       /// <remarks>
@@ -44,12 +44,12 @@ namespace Alphaleonis.Win32.Filesystem
       /// </para>
       /// </remarks>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="safeFileHandle">An open handle to the directory from which to retrieve information.</param>
       /// <param name="path">A path to the directory.</param>
       /// <param name="shareMode">The <see cref="FileShare"/> mode with which to open a handle to the directory.</param>
       /// <param name="continueOnException"><c>true</c> suppress any Exception that might be thrown as a result from a failure, such as ACLs protected directories or non-accessible reparse points.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       internal static IEnumerable<FileIdBothDirectoryInfo> EnumerateFileIdBothDirectoryInfoCore(KernelTransaction transaction, SafeFileHandle safeFileHandle, string path, FileShare shareMode, bool continueOnException, PathFormat pathFormat)
       {
@@ -84,7 +84,7 @@ namespace Alphaleonis.Win32.Filesystem
 
             var fileNameOffset = (int) Marshal.OffsetOf<NativeMethods.FILE_ID_BOTH_DIR_INFO>("FileName");
 
-            using var safeBuffer = new SafeGlobalMemoryBufferHandle(NativeMethods.DefaultFileBufferSize);
+            using var safeBuffer = new SafeGlobalMemoryBufferHandle(NativeMethods.DefaultNativeQueryBufferSize);
             while (true)
             {
                var success = NativeMethods.GetFileInformationByHandleEx(safeFileHandle, NativeMethods.FILE_INFO_BY_HANDLE_CLASS.FILE_ID_BOTH_DIR_INFO, safeBuffer, (uint) safeBuffer.Capacity);

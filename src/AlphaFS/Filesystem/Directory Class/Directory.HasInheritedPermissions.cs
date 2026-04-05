@@ -38,7 +38,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] Checks if the directory has permission inheritance enabled.</summary>
       /// <returns><c>true</c> if permission inheritance is enabled, <c>false</c> if permission inheritance is disabled.</returns>
       /// <param name="path">The full path to the directory to check.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       public static bool HasInheritedPermissions(string path, PathFormat pathFormat)
       {
          if (Utils.IsNullOrWhiteSpace(path))

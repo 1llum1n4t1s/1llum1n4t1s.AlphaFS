@@ -29,13 +29,13 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region Obsolete
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is allowed.</summary>
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きが許可されます。</summary>
       /// <remarks>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -43,10 +43,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy. </param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
-      /// <param name="overwrite"><c>true</c> if the destination file should ignoring the read-only and hidden attributes and overwrite; otherwise, <c>false</c>.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。 </param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリは指定できません。</param>
+      /// <param name="overwrite"><c>true</c>の場合、コピー先ファイルの読み取り専用属性と隠し属性を無視して上書きします。それ以外の場合は<c>false</c>。</param>
       [Obsolete("To disable/enable overwrite, use other overload and use CopyOptions.None enum flag or remove CopyOptions.FailIfExists enum flag.")]
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, bool overwrite)
@@ -60,13 +60,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is allowed.</summary>
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きが許可されます。</summary>
       /// <remarks>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -74,11 +74,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy. </param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
-      /// <param name="overwrite"><c>true</c> if the destination file should ignoring the read-only and hidden attributes and overwrite; otherwise, <c>false</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。 </param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリは指定できません。</param>
+      /// <param name="overwrite"><c>true</c>の場合、コピー先ファイルの読み取り専用属性と隠し属性を無視して上書きします。それ以外の場合は<c>false</c>。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [Obsolete("To disable/enable overwrite, use other overload and use CopyOptions.None enum flag or remove CopyOptions.FailIfExists enum flag.")]
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, bool overwrite, PathFormat pathFormat)
@@ -93,14 +93,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is allowed. <see cref="CopyOptions"/> can be specified.</summary>
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きが許可されます。 <see cref="CopyOptions"/> can be specified.</summary>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には<see cref="CopyOptions.NoBuffering"/>オプションが推奨されます。</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -108,11 +108,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy.</param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the file is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="preserveDates"><c>true</c> if original Timestamps must be preserved; otherwise, <c>false</c>.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。</param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリは指定できません。</param>
+      /// <param name="copyOptions">ファイルのコピー方法を指定する<see cref="CopyOptions"/>。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="preserveDates">元のタイムスタンプを保持する必要がある場合は<c>true</c>。それ以外の場合は<c>false</c>。</param>
       [Obsolete("Use other overload and add CopyOptions.CopyTimestamp enum flag.")]
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, CopyOptions copyOptions, bool preserveDates)
@@ -126,14 +126,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is allowed. <see cref="CopyOptions"/> can be specified.</summary>
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きが許可されます。 <see cref="CopyOptions"/> can be specified.</summary>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には<see cref="CopyOptions.NoBuffering"/>オプションが推奨されます。</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -141,12 +141,12 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy.</param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the file is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="preserveDates"><c>true</c> if original Timestamps must be preserved; otherwise, <c>false</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。</param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリは指定できません。</param>
+      /// <param name="copyOptions">ファイルのコピー方法を指定する<see cref="CopyOptions"/>。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="preserveDates">元のタイムスタンプを保持する必要がある場合は<c>true</c>。それ以外の場合は<c>false</c>。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [Obsolete("Use other overload and add CopyOptions.CopyTimestamp enum flag.")]
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, CopyOptions copyOptions, bool preserveDates, PathFormat pathFormat)
@@ -161,16 +161,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is allowed.  <see cref="CopyOptions"/> can be specified,
-      /// and the possibility of notifying the application of its progress through a callback function.
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きが許可されます。  <see cref="CopyOptions"/> can be specified,
+      /// およびコールバック関数を通じてアプリケーショ��に進行状況を通知する可能性があります。
       /// </summary>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には<see cref="CopyOptions.NoBuffering"/>オプションが推奨されます。</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -178,13 +178,13 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy.</param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the file is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="preserveDates"><c>true</c> if original Timestamps must be preserved; otherwise, <c>false</c>.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the file has been copied. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。</param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリは指定できません。</param>
+      /// <param name="copyOptions">ファイルのコピー方法を指定する<see cref="CopyOptions"/>。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="preserveDates">元のタイムスタンプを保持する必要がある場合は<c>true</c>。それ以外の場合は<c>false</c>。</param>
+      /// <param name="progressHandler">ファイルの別の部分がコピーされるたびに呼び出されるコールバック関数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメータは<c>null</c>にできます。</param>
       [Obsolete("Use other overload and add CopyOptions.CopyTimestamp enum flag.")]
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, CopyOptions copyOptions, bool preserveDates, CopyMoveProgressRoutine progressHandler, object userProgressData)
@@ -200,24 +200,24 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is allowed.  <see cref="CopyOptions"/> can be specified,
-      /// and the possibility of notifying the application of its progress through a callback function.
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きが許可されます。  <see cref="CopyOptions"/> can be specified,
+      /// およびコールバック関数を通じてアプリケーショ��に進行状況を通知する可能性があります。
       /// </summary>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には<see cref="CopyOptions.NoBuffering"/>オプションが推奨されます。</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy.</param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the file is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="preserveDates"><c>true</c> if original Timestamps must be preserved; otherwise, <c>false</c>.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the file has been copied. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。</param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリは指定できません。</param>
+      /// <param name="copyOptions">ファイルのコピー方法を指定する<see cref="CopyOptions"/>。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="preserveDates">元のタイムスタンプを保持する必要がある場合は<c>true</c>。それ以外の場合は<c>false</c>。</param>
+      /// <param name="progressHandler">ファイルの別の部分がコピーされるたびに呼び出されるコールバック関数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -243,13 +243,13 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // Obsolete
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is not allowed.</summary>
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きは許可されません。</summary>
       /// <remarks>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -257,9 +257,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy.</param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory or an existing file.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。</param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリまたは既存のファイルは指定できません。</param>
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath)
       {
@@ -272,13 +272,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is not allowed.</summary>
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きは許可されません。</summary>
       /// <remarks>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -286,10 +286,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy. </param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。 </param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリは指定できません。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, PathFormat pathFormat)
       {
@@ -303,13 +303,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is not allowed.</summary>
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きは許可されません。</summary>
       /// <remarks>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -317,11 +317,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy.</param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory or an existing file.</param>
-      /// <param name="retry">The number of retries on failed copies.</param>
-      /// <param name="retryTimeout">The wait time in seconds between retries.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。</param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリまたは既存のファイルは指定できません。</param>
+      /// <param name="retry">コピー失敗時のリトライ回数。</param>
+      /// <param name="retryTimeout">リトライ間の待機時間(秒)。</param>
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, int retry, int retryTimeout)
       {
@@ -336,13 +336,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is not allowed.</summary>
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きは許可されません。</summary>
       /// <remarks>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -350,12 +350,12 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy. </param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
-      /// <param name="retry">The number of retries on failed copies.</param>
-      /// <param name="retryTimeout">The wait time in seconds between retries.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。 </param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリは指定できません。</param>
+      /// <param name="retry">コピー失敗時のリトライ回数。</param>
+      /// <param name="retryTimeout">リトライ間の待機時間(秒)。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, int retry, int retryTimeout, PathFormat pathFormat)
       {
@@ -371,12 +371,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is not allowed. Possibility of notifying the application of its progress through a callback function.</summary>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きは許可されません。 Possibility of notifying the application of its progress through a callback function.</summary>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <remarks>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -385,11 +385,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy. </param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the file has been copied. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。 </param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリは指定できません。</param>
+      /// <param name="progressHandler">ファイルの別の部分がコピーされるたびに呼び出されるコールバック関数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメータは<c>null</c>にできます。</param>
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, CopyMoveProgressRoutine progressHandler, object userProgressData)
       {
@@ -404,12 +404,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is not allowed. Possibility of notifying the application of its progress through a callback function.</summary>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きは許可されません。 Possibility of notifying the application of its progress through a callback function.</summary>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <remarks>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -418,12 +418,12 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy. </param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the file has been copied. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。 </param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリは指定できません。</param>
+      /// <param name="progressHandler">ファイルの別の部分がコピーされるたびに呼び出されるコールバック関数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, CopyMoveProgressRoutine progressHandler, object userProgressData, PathFormat pathFormat)
       {
@@ -439,12 +439,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is not allowed. Possibility of notifying the application of its progress through a callback function.</summary>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きは許可されません。 Possibility of notifying the application of its progress through a callback function.</summary>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <remarks>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -453,13 +453,13 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy. </param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
-      /// <param name="retry">The number of retries on failed copies.</param>
-      /// <param name="retryTimeout">The wait time in seconds between retries.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the file has been copied. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。 </param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリは指定できません。</param>
+      /// <param name="retry">コピー失敗時のリトライ回数。</param>
+      /// <param name="retryTimeout">リトライ間の待機時間(秒)。</param>
+      /// <param name="progressHandler">ファイルの別の部分がコピーされるたびに呼び出されるコールバック関数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメータは<c>null</c>にできます。</param>
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, int retry, int retryTimeout, CopyMoveProgressRoutine progressHandler, object userProgressData)
       {
@@ -476,12 +476,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is not allowed. Possibility of notifying the application of its progress through a callback function.</summary>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きは許可されません。 Possibility of notifying the application of its progress through a callback function.</summary>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <remarks>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -490,14 +490,14 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy. </param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
-      /// <param name="retry">The number of retries on failed copies.</param>
-      /// <param name="retryTimeout">The wait time in seconds between retries.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the file has been copied. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。 </param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリは指定できません。</param>
+      /// <param name="retry">コピー失敗時のリトライ回数。</param>
+      /// <param name="retryTimeout">リトライ間の待機時間(秒)。</param>
+      /// <param name="progressHandler">ファイルの別の部分がコピーされるたびに呼び出されるコールバック関数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, int retry, int retryTimeout, CopyMoveProgressRoutine progressHandler, object userProgressData, PathFormat pathFormat)
       {
@@ -517,14 +517,14 @@ namespace Alphaleonis.Win32.Filesystem
 
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is allowed. <see cref="CopyOptions"/> can be specified.</summary>
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きが許可されます。 <see cref="CopyOptions"/> can be specified.</summary>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には<see cref="CopyOptions.NoBuffering"/>オプションが推奨されます。</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -532,10 +532,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy.</param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the file is to be copied. This parameter can be <c>null</c>.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。</param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリは指定できません。</param>
+      /// <param name="copyOptions">ファイルのコピー方法を指定する<see cref="CopyOptions"/>。このパラメータは<c>null</c>にできます。</param>
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, CopyOptions copyOptions)
       {
@@ -548,14 +548,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is allowed. <see cref="CopyOptions"/> can be specified.</summary>
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きが許可されます。 <see cref="CopyOptions"/> can be specified.</summary>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には<see cref="CopyOptions.NoBuffering"/>オプションが推奨されます。</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -563,11 +563,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy.</param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the file is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。</param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリは指定できません。</param>
+      /// <param name="copyOptions">ファイルのコピー方法を指定する<see cref="CopyOptions"/>。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, CopyOptions copyOptions, PathFormat pathFormat)
       {
@@ -581,14 +581,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is allowed. <see cref="CopyOptions"/> can be specified.</summary>
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きが許可されます。 <see cref="CopyOptions"/> can be specified.</summary>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には<see cref="CopyOptions.NoBuffering"/>オプションが推奨されます。</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -596,12 +596,12 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy.</param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the file is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="retry">The number of retries on failed copies.</param>
-      /// <param name="retryTimeout">The wait time in seconds between retries.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。</param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリは指定できません。</param>
+      /// <param name="copyOptions">ファイルのコピー方法を指定する<see cref="CopyOptions"/>。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="retry">コピー失敗時のリトライ回数。</param>
+      /// <param name="retryTimeout">リトライ間の待機時間(秒)。</param>
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, CopyOptions copyOptions, int retry, int retryTimeout)
       {
@@ -616,14 +616,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is allowed. <see cref="CopyOptions"/> can be specified.</summary>
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きが許可されます。 <see cref="CopyOptions"/> can be specified.</summary>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には<see cref="CopyOptions.NoBuffering"/>オプションが推奨されます。</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -631,13 +631,13 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy.</param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the file is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="retry">The number of retries on failed copies.</param>
-      /// <param name="retryTimeout">The wait time in seconds between retries.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。</param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリは指定できません。</param>
+      /// <param name="copyOptions">ファイルのコピー方法を指定する<see cref="CopyOptions"/>。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="retry">コピー失敗時のリトライ回数。</param>
+      /// <param name="retryTimeout">リトライ間の待機時間(秒)。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, CopyOptions copyOptions, int retry, int retryTimeout, PathFormat pathFormat)
       {
@@ -653,16 +653,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is allowed.  <see cref="CopyOptions"/> can be specified,
-      /// and the possibility of notifying the application of its progress through a callback function.
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きが許可されます。  <see cref="CopyOptions"/> can be specified,
+      /// およびコールバック関数を通じてアプリケーショ��に進行状況を通知する可能性があります。
       /// </summary>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には<see cref="CopyOptions.NoBuffering"/>オプションが推奨されます。</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -670,12 +670,12 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy.</param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the file is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the file has been copied. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。</param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリは指定できません。</param>
+      /// <param name="copyOptions">ファイルのコピー方法を指定する<see cref="CopyOptions"/>。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="progressHandler">ファイルの別の部分がコピーされるたびに呼び出されるコールバック関数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメータは<c>null</c>にできます。</param>
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, CopyOptions copyOptions, CopyMoveProgressRoutine progressHandler, object userProgressData)
       {
@@ -690,16 +690,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is allowed.  <see cref="CopyOptions"/> can be specified,
-      /// and the possibility of notifying the application of its progress through a callback function.
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きが許可されます。  <see cref="CopyOptions"/> can be specified,
+      /// およびコールバック関数を通じてアプリケーショ��に進行状況を通知する可能性があります。
       /// </summary>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には<see cref="CopyOptions.NoBuffering"/>オプションが推奨されます。</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -707,13 +707,13 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy.</param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the file is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the file has been copied. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。</param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリは指定できません。</param>
+      /// <param name="copyOptions">ファイルのコピー方法を指定する<see cref="CopyOptions"/>。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="progressHandler">ファイルの別の部分がコピーされるたびに呼び出されるコールバック関数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, CopyOptions copyOptions, CopyMoveProgressRoutine progressHandler, object userProgressData, PathFormat pathFormat)
       {
@@ -729,16 +729,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is allowed.  <see cref="CopyOptions"/> can be specified,
-      /// and the possibility of notifying the application of its progress through a callback function.
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きが許可されます。  <see cref="CopyOptions"/> can be specified,
+      /// およびコールバック関数を通じてアプリケーショ��に進行状況を通知する可能性があります。
       /// </summary>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には<see cref="CopyOptions.NoBuffering"/>オプションが推奨されます。</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -746,14 +746,14 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy.</param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the file is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="retry">The number of retries on failed copies.</param>
-      /// <param name="retryTimeout">The wait time in seconds between retries.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the file has been copied. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。</param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリは指定できません。</param>
+      /// <param name="copyOptions">ファイルのコピー方法を指定する<see cref="CopyOptions"/>。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="retry">コピー失敗時のリトライ回数。</param>
+      /// <param name="retryTimeout">リトライ間の待機時間(秒)。</param>
+      /// <param name="progressHandler">ファイルの別の部分がコピーされるたびに呼び出されるコールバック関数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメータは<c>null</c>にできます。</param>
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, CopyOptions copyOptions, int retry, int retryTimeout, CopyMoveProgressRoutine progressHandler, object userProgressData)
       {
@@ -770,16 +770,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing file to a new file. Overwriting a file of the same name is allowed.  <see cref="CopyOptions"/> can be specified,
-      /// and the possibility of notifying the application of its progress through a callback function.
+      /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きが許可されます。  <see cref="CopyOptions"/> can be specified,
+      /// およびコールバック関数を通じてアプリケーショ��に進行状況を通知する可能性があります。
       /// </summary>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>The attributes of the original file are retained in the copied file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には<see cref="CopyOptions.NoBuffering"/>オプションが推奨されます。</para>
+      ///   <para>元のファイルの属性はコピーされたファイルに保持されます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <returns>コピー操作の詳細を含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -787,15 +787,15 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The file to copy.</param>
-      /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the file is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="retry">The number of retries on failed copies.</param>
-      /// <param name="retryTimeout">The wait time in seconds between retries.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the file has been copied. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">コピーするファイル。</param>
+      /// <param name="destinationPath">コピー先ファイルの名前。ディレクトリは指定できません。</param>
+      /// <param name="copyOptions">ファイルのコピー方法を指定する<see cref="CopyOptions"/>。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="retry">コピー失敗時のリトライ回数。</param>
+      /// <param name="retryTimeout">リトライ間の待機時間(秒)。</param>
+      /// <param name="progressHandler">ファイルの別の部分がコピーされるたびに呼び出されるコールバック関数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static CopyMoveResult CopyTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, CopyOptions copyOptions, int retry, int retryTimeout, CopyMoveProgressRoutine progressHandler, object userProgressData, PathFormat pathFormat)
       {

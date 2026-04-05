@@ -26,20 +26,20 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>An SP_DEVICE_INTERFACE_DATA structure defines a device interface in a device information set.</summary>
+      /// <summary>SP_DEVICE_INTERFACE_DATA 構造体は、デバイス情報セット内のデバイスインターフェイスを定義します。</summary>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct SP_DEVICE_INTERFACE_DATA
       {
-         /// <summary>The size, in bytes, of the SP_DEVICE_INTERFACE_DATA structure.</summary>
+         /// <summary>SP_DEVICE_INTERFACE_DATA 構造体のサイズ（バイト単位）。</summary>
          [MarshalAs(UnmanagedType.U4)] public uint cbSize;
 
-         /// <summary>The GUID for the class to which the device interface belongs.</summary>
+         /// <summary>デバイスインターフェイスが属するクラスの GUID。</summary>
          public readonly Guid InterfaceClassGuid;
 
-         /// <summary>Can be one or more of the following: SPINT_ACTIVE (1), SPINT_DEFAULT (2), SPINT_REMOVED (3).</summary>
+         /// <summary>次のいずれかの値: SPINT_ACTIVE (1)、SPINT_DEFAULT (2)、SPINT_REMOVED (3)。</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint Flags;
 
-         /// <summary>Reserved. Do not use.</summary>
+         /// <summary>予約済み。使用しないでください。</summary>
          private readonly IntPtr Reserved;
       }
    }

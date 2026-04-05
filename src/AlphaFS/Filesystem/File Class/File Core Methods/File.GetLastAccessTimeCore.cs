@@ -27,10 +27,10 @@ namespace Alphaleonis.Win32.Filesystem
    public static partial class File
    {
       /// <summary>[AlphaFS] Gets the date and time, in coordinated universal time (UTC) or local time, that the specified file or directory was last accessed.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file or directory for which to obtain access date and time information.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">アクセス日時情報を取得するファイルまたはディレクトリ。</param>
       /// <param name="returnUtc"><c>true</c> gets the Coordinated Universal Time (UTC), <c>false</c> gets the local time.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
       ///   A <see cref="DateTime"/> structure set to the date and time that the specified file or directory was last accessed.
       ///   Depending on <paramref name="returnUtc"/> this value is expressed in UTC- or local time.

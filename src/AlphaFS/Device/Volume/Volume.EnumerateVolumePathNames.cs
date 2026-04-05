@@ -29,11 +29,11 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Volume
    {
-      /// <summary>[AlphaFS] Returns an enumerable collection of <see cref="string"/> drive letters and mounted folder paths for the specified volume.</summary>
-      /// <returns>An enumerable collection of <see cref="string"/> containing the path names for the specified volume.</returns>
+      /// <summary>[AlphaFS] 指定されたボリュームのドライブ文字とマウントフォルダーパスの <see cref="string"/> の列挙可能なコレクションを返します。</summary>
+      /// <returns>指定されたボリュームのパス名を含む <see cref="string"/> の列挙可能なコレクション。</returns>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
-      /// <param name="volumeGuid">A volume <see cref="Guid"/> path: \\?\Volume{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}\.</param>
+      /// <param name="volumeGuid">ボリューム <see cref="Guid"/> パス: \\?\Volume{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}\。</param>
       [SecurityCritical]
       public static IEnumerable<string> EnumerateVolumePathNames(string volumeGuid)
       {

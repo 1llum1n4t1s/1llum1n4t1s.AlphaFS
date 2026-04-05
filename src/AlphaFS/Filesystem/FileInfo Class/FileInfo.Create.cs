@@ -28,8 +28,8 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Creates a file.</summary>
-      /// <returns><see cref="FileStream"/>A new file.</returns>
+      /// <summary>ファイルを作成します。</summary>
+      /// <returns><see cref="FileStream"/> 新しいファイル。</returns>
       [SecurityCritical]
       public FileStream Create()
       {

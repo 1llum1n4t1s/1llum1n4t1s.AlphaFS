@@ -24,10 +24,10 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>Contains information about the shared resource.</summary>
+   /// <summary>共有リソースに関する情報を含みます.</summary>
    /// <remarks>
-   /// <para>Minimum supported client: Windows XP [desktop apps only]</para>
-   /// <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+   /// <para>サポートされる最小クライアント: Windows XP [desktop apps only]</para>
+   /// <para>サポートされる最小サーバー: Windows Server 2003 [desktop apps only]</para>
    /// </remarks>
    [Flags]
    public enum ShareResourceTypes

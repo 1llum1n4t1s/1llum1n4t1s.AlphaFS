@@ -24,7 +24,7 @@ using System.ComponentModel;
 using System.Globalization;
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>[AlphaFS] The file or directory was not a reparse point.</summary>
+   /// <summary>[AlphaFS] ファイルまたはディレクトリがリパースポイントではありませんでした。</summary>
    [Serializable]
    public class NotAReparsePointException : System.IO.IOException
    {
@@ -32,30 +32,30 @@ namespace Alphaleonis.Win32.Filesystem
       private static readonly string ErrorText = string.Format(CultureInfo.InvariantCulture, "({0}) {1}", Win32Errors.ERROR_NOT_A_REPARSE_POINT, new Win32Exception((int) Win32Errors.ERROR_NOT_A_REPARSE_POINT).Message.Trim().TrimEnd('.').Trim());
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="NotAReparsePointException"/> class.</summary>
+      /// <summary>[AlphaFS] <see cref="NotAReparsePointException"/>クラスの新しいインスタンスを初期化します。</summary>
       public NotAReparsePointException() : base(string.Format(CultureInfo.InvariantCulture, "{0}.", ErrorText), ErrorCode)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="NotAReparsePointException"/> class.</summary>
-      /// <param name="message">The custom error message..</param>
-      /// <param name="lastError">The GetLastWin32Error.</param>
+      /// <summary>[AlphaFS] <see cref="NotAReparsePointException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="message">カスタムエラーメッセージ。</param>
+      /// <param name="lastError">GetLastWin32Errorの値。</param>
       public NotAReparsePointException(string message, int lastError) : base(message, lastError)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="NotAReparsePointException"/> class.</summary>
-      /// <param name="path">The path to the reparse point.</param>
+      /// <summary>[AlphaFS] <see cref="NotAReparsePointException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="path">リパースポイントへのパス。</param>
       public NotAReparsePointException(string path) : base(string.Format(CultureInfo.InvariantCulture, "{0}: [{1}]", ErrorText, path), ErrorCode)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="NotAReparsePointException"/> class.</summary>
-      /// <param name="path">The path to the reparse point.</param>
-      /// <param name="innerException">The inner exception.</param>
+      /// <summary>[AlphaFS] <see cref="NotAReparsePointException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="path">リパースポイントへのパス。</param>
+      /// <param name="innerException">内部例外。</param>
       public NotAReparsePointException(string path, Exception innerException) : base(string.Format(CultureInfo.InvariantCulture, "{0}: [{1}]", ErrorText, path), innerException)
       {
       }

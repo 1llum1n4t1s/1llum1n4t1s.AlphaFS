@@ -25,8 +25,8 @@ namespace Alphaleonis.Win32.Filesystem
 {
    partial class FileInfo
    {
-      /// <summary>[AlphaFS] Compresses a file using NTFS compression.</summary>      
-      /// <returns>Returns <c>true</c> if the specified file is in use (locked); otherwise, <c>false</c></returns>
+      /// <summary>[AlphaFS] 指定されたファイルが使用中（ロック中）かどうかを判断します。</summary>
+      /// <returns>指定されたファイルが使用中（ロック中）の場合は <c>true</c>、それ以外の場合は <c>false</c>。</returns>
       [SecurityCritical]
       public bool IsLocked()
       {

@@ -25,9 +25,9 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>[AlphaFS] Returns the directory information for the specified path string without the root information, for example: "C:\Windows\system32" returns: "Windows".</summary>
-      /// <returns>The <paramref name="path"/>without the file name part and without the root information (if any), or <c>null</c> if <paramref name="path"/> is <c>null</c> or if <paramref name="path"/> denotes a root (such as "\", "C:", or * "\\server\share").</returns>
-      /// <param name="path">The path.</param>
+      /// <summary>[AlphaFS] 指定されたパス文字列からルート情報を除いたディレクトリ情報を返します。例: "C:\Windows\system32" は "Windows" を返します。</summary>
+      /// <returns>ファイル名部分とルート情報（存在する場合）を除いた <paramref name="path"/>。<paramref name="path"/> が <c>null</c> の場合、またはルートを示す場合（"\"、"C:"、"\\server\share" など）は <c>null</c> を返します。</returns>
+      /// <param name="path">パス。</param>
       [SecurityCritical]
       public static string GetDirectoryNameWithoutRoot(string path)
       {
@@ -35,10 +35,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Returns the directory information for the specified path string without the root information, for example: "C:\Windows\system32" returns: "Windows".</summary>
-      /// <returns>The <paramref name="path"/>without the file name part and without the root information (if any), or <c>null</c> if <paramref name="path"/> is <c>null</c> or if <paramref name="path"/> denotes a root (such as "\", "C:", or * "\\server\share").</returns>
-      /// <param name="path">The path.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <summary>[AlphaFS] 指定されたパス文字列からルート情報を除いたディレクトリ情報を返します。例: "C:\Windows\system32" は "Windows" を返します。</summary>
+      /// <returns>ファイル名部分とルート情報（存在する場合）を除いた <paramref name="path"/>。<paramref name="path"/> が <c>null</c> の場合、またはルートを示す場合（"\"、"C:"、"\\server\share" など）は <c>null</c> を返します。</returns>
+      /// <param name="path">パス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static string GetDirectoryNameWithoutRoot(string path, PathFormat pathFormat)
       {

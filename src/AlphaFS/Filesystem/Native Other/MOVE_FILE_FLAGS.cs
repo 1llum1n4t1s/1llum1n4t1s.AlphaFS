@@ -25,56 +25,56 @@ namespace Alphaleonis.Win32.Filesystem
    {
       public enum MOVE_FILE_FLAGS
       {
-         /// <summary>No MoveOptions used, this fails when the file name already exists.</summary>
+         /// <summary>MoveOptions を使用しません。ファイル名が既に存在する場合、失敗します。</summary>
          None = 0,
 
          /// <summary>MOVE_FILE_REPLACE_EXISTSING
-         /// <para>If the destination file name already exists, the function replaces its contents with the contents of the source file.</para>
-         /// <para>This value cannot be used if lpNewFileName or lpExistingFileName names a directory.</para>
-         /// <para>This value cannot be used if either source or destination names a directory.</para>
+         /// <para>コピー先のファイル名が既に存在する場合、関数はその内容をソ���スファイルの内容で置き換えます。</para>
+         /// <para>lpNewFileName または lpExistingFileName がディレクトリを指定する場合、この値は使用できません。</para>
+         /// <para>ソースまたはコピー先のいずれかがディレクトリを指定する場合、この値は使用できません。</para>
          /// </summary>
          MOVE_FILE_REPLACE_EXISTSING = 1,
 
          /// <summary>MOVE_FILE_COPY_ALLOWED
-         /// <para>If the file is to be moved to a different volume, the function simulates the move by using the CopyFile and DeleteFile functions.</para>
-         /// <para>This value cannot be used with <see cref="MOVE_FILE_FLAGS.MOVE_FILE_DELAY_UNTIL_REBOOT"/>.</para>
+         /// <para>ファイルが別のボリュームに移動される場合、関数は CopyFile および DeleteFile 関数を使用して移動をシミュレートします。</para>
+         /// <para>この値は <see cref="MOVE_FILE_FLAGS.MOVE_FILE_DELAY_UNTIL_REBOOT"/> と併用できません。</para>
          /// </summary>
          MOVE_FILE_COPY_ALLOWED = 2,
 
          /// <summary>MOVE_FILE_DELAY_UNTIL_REBOOT
          /// <para>
-         /// The system does not move the file until the operating system is restarted.
-         /// The system moves the file immediately after AUTOCHK is executed, but before creating any paging files.
+         /// オペレーティングシステムが再起動されるまで��システムはファイルを移動しません。
+         /// システムは AUTOCHK が実行された直後、ページングファイルの作成前にファイルを移動します。
          /// </para>
          /// <para>
-         /// Consequently, this parameter enables the function to delete paging files from previous startups.
-         /// This value can only be used if the process is in the context of a user who belongs to the administrators group or the LocalSystem account.
+         /// これにより、このパラメーターは以前の起動からのページングファイ��を削除する機能を有効にします。
+         /// この値は、プロセスが管理者グループまたは LocalSystem アカウントに属するユーザ��のコンテキスト内にある場合にのみ使用できます。
          /// </para>
-         /// <para>This value cannot be used with <see cref="MOVE_FILE_FLAGS.MOVE_FILE_COPY_ALLOWED"/>.</para>
+         /// <para>この値は <see cref="MOVE_FILE_FLAGS.MOVE_FILE_COPY_ALLOWED"/> と併用できません。</para>
          /// </summary>
          MOVE_FILE_DELAY_UNTIL_REBOOT = 4,
 
 
          /// <summary>MOVE_FILE_WRITE_THROUGH
-         /// <para>The function does not return until the file has actually been moved on the disk.</para>
+         /// <para>ファイルが実際にディスク上で移動されるまで、関数は戻りません。</para>
          /// <para>
-         /// Setting this value guarantees that a move performed as a copy and delete operation is flushed to disk before the function returns.
-         /// The flush occurs at the end of the copy operation.
+         /// この値を設定すると、コピーと削除操作として実行される移動が、関数が戻る前にディスクにフラッシュされることが保証されます。
+         /// フラッシュはコピー操作の終了時に行われます。
          /// </para>
-         /// <para>This value has no effect if <see cref="MOVE_FILE_FLAGS.MOVE_FILE_DELAY_UNTIL_REBOOT"/> is set.</para>
+         /// <para><see cref="MOVE_FILE_FLAGS.MOVE_FILE_DELAY_UNTIL_REBOOT"/> が設定されている場合、この値は効果がありません。</para>
          /// </summary>
          MOVE_FILE_WRITE_THROUGH = 8,
 
 
          /// <summary>MOVE_FILE_CREATE_HARDLINK
-         /// <para>Reserved for future use.</para>
+         /// <para>将来の使用のために予約されています。</para>
          /// </summary>
          MOVE_FILE_CREATE_HARDLINK = 16,
 
 
          /// <summary>MOVE_FILE_FAIL_IF_NOT_TRACKABLE
-         /// <para>The function fails if the source file is a link source, but the file cannot be tracked after the move.</para>
-         /// <para>This situation can occur if the destination is a volume formatted with the FAT file system.</para>
+         /// <para>ソースファイルがリンクソースであるが、移動後��ファイルを追跡できない場合、関数は失敗します。</para>
+         /// <para>この状況は、コピー先が FAT ファイルシステムでフォーマットされたボリュームである場合に発生する可能性があります。</para>
          /// </summary>
          MOVE_FILE_FAIL_IF_NOT_TRACKABLE = 32
       }

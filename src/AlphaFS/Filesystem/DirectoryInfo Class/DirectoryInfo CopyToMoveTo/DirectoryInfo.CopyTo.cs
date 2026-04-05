@@ -27,18 +27,18 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public sealed partial class DirectoryInfo
    {
-      // .NET: Directory class does not contain the Copy() method, so mimic .NET File.Copy() methods.
+      // .NET: Directory クラスには Copy() メソッドが含まれていないため、.NET File.Copy() メソッドを模倣します。
 
 
       #region Obsolete
 
-      /// <summary>[AlphaFS] Copies a <see cref="DirectoryInfo"/> instance and its contents to a new path.</summary>
-      /// <returns>Returns a new <see cref="DirectoryInfo"/> instance.</returns>
+      /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> インスタンスとその内容を新しいパスにコピーします。</summary>
+      /// <returns>新しい <see cref="DirectoryInfo"/> イ���スタンスを返します。</returns>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>Use this method to allow or prevent overwriting of an existing directory.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には、<see cref="CopyOptions.NoBuffering"/> オプションが推奨されます。</para>
+      ///   <para>このメソッドを使用して、既存のディレクトリの上書きを許可または防止します。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2 つのディレクトリに同等の短いファイル名がある場合、このメソッドが失敗して例外がスローされるか、望ましくない動作が発生する可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -46,8 +46,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="preserveDates"><c>true</c> if original Timestamps must be preserved, <c>false</c> otherwise.</param>
+      /// <param name="destinationPath">コピー先のディレクトリパス。</param>
+      /// <param name="preserveDates">元のタイムスタンプを保持する場合は <c>true</c>、それ以外の場合は <c>false</c>。</param>
       [Obsolete("Use other overload and add CopyOptions.CopyTimestamp enum flag.")]
       [SecurityCritical]
       public DirectoryInfo CopyTo(string destinationPath, bool preserveDates)
@@ -75,9 +75,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="preserveDates"><c>true</c> if original Timestamps must be preserved, <c>false</c> otherwise.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="destinationPath">コピー先のディレクトリパス。</param>
+      /// <param name="preserveDates">元のタイムスタンプを保持する場合は <c>true</c>、それ以外の場合は <c>false</c>。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [Obsolete("Use other overload and add CopyOptions.CopyTimestamp enum flag.")]
       [SecurityCritical]
       public DirectoryInfo CopyTo(string destinationPath, bool preserveDates, PathFormat pathFormat)
@@ -91,16 +91,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing directory to a new directory, allowing the overwriting of an existing directory, <see cref="CopyOptions"/> can be specified.</summary>
+      /// <summary>[AlphaFS] 既存のディレクトリを新しいディレクトリにコピーします。既存のディレクトリの上書きを許可し、<see cref="CopyOptions"/> を指定できます。</summary>
       /// <returns>
-      ///   <para>Returns a new directory, or an overwrite of an existing directory if <paramref name="copyOptions"/> is not <see cref="CopyOptions.FailIfExists"/>.</para>
-      ///   <para>If the directory exists and <paramref name="copyOptions"/> contains <see cref="CopyOptions.FailIfExists"/>, an <see cref="IOException"/> is thrown.</para>
+      ///   <para><paramref name="copyOptions"/> が <see cref="CopyOptions.FailIfExists"/> でない場合、新しいディレクトリまたは既存のディレクトリの上書きを返します。</para>
+      ///   <para>ディレクトリが存在し、<paramref name="copyOptions"/> に <see cref="CopyOptions.FailIfExists"/> が含まれている場合、<see cref="IOException"/> がスローされます。</para>
       /// </returns>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>Use this method to allow or prevent overwriting of an existing directory.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には、<see cref="CopyOptions.NoBuffering"/> オプションが推奨されます。</para>
+      ///   <para>このメソッドを使用して、既存のディレクトリの上書きを許可または防止します。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2 つのディレクトリに同等の短いファイル名がある場合、このメソッドが失敗して例外がスローされるか、望ましくない動作が発生する可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -108,9 +108,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the directory is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="preserveDates"><c>true</c> if original Timestamps must be preserved, <c>false</c> otherwise.</param>
+      /// <param name="destinationPath">コピー先のディレクトリパス。</param>
+      /// <param name="copyOptions">ディレクトリのコピー方法を指定する <see cref="CopyOptions"/>。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="preserveDates">元のタイムスタンプを保持する場合は <c>true</c>、それ以外の場合は <c>false</c>。</param>
       [Obsolete("Use other overload and add CopyOptions.CopyTimestamp enum flag.")]
       [SecurityCritical]
       public DirectoryInfo CopyTo(string destinationPath, CopyOptions copyOptions, bool preserveDates)
@@ -124,16 +124,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing directory to a new directory, allowing the overwriting of an existing directory, <see cref="CopyOptions"/> can be specified.</summary>
+      /// <summary>[AlphaFS] 既存のディレクトリを新しいディレクトリにコピーします。既存のディレクトリの上書きを許可し、<see cref="CopyOptions"/> を指定できます。</summary>
       /// <returns>
-      ///   <para>Returns a new directory, or an overwrite of an existing directory if <paramref name="copyOptions"/> is not <see cref="CopyOptions.FailIfExists"/>.</para>
-      ///   <para>If the directory exists and <paramref name="copyOptions"/> contains <see cref="CopyOptions.FailIfExists"/>, an <see cref="IOException"/> is thrown.</para>
+      ///   <para><paramref name="copyOptions"/> が <see cref="CopyOptions.FailIfExists"/> でない場合、新しいディレクトリまたは既存のディレクトリの上書きを返します。</para>
+      ///   <para>ディレクトリが存在し、<paramref name="copyOptions"/> に <see cref="CopyOptions.FailIfExists"/> が含まれている場合、<see cref="IOException"/> がスローされます。</para>
       /// </returns>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>Use this method to allow or prevent overwriting of an existing directory.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には、<see cref="CopyOptions.NoBuffering"/> オプションが推奨されます。</para>
+      ///   <para>このメソッドを使用して、既存のディレクトリの上書きを許可または防止します。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2 つのディレクトリに同等の短いファイル名がある場合、このメソッドが失敗して例外がスローされるか、望ましくない動作が発生する可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -141,10 +141,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the directory is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="preserveDates"><c>true</c> if original Timestamps must be preserved, <c>false</c> otherwise.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="destinationPath">コピー先のディレクトリパス。</param>
+      /// <param name="copyOptions">ディレクトリのコピー方法を指定する <see cref="CopyOptions"/>。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="preserveDates">元のタイムスタンプを保持する場合は <c>true</c>、それ以外の場合は <c>false</c>。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [Obsolete("Use other overload and add CopyOptions.CopyTimestamp enum flag.")]
       [SecurityCritical]
       public DirectoryInfo CopyTo(string destinationPath, CopyOptions copyOptions, bool preserveDates, PathFormat pathFormat)
@@ -158,14 +158,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing directory to a new directory, allowing the overwriting of an existing directory, <see cref="CopyOptions"/> can be specified.
-      /// and the possibility of notifying the application of its progress through a callback function.</summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <summary>[AlphaFS] 既存のディレクトリを新しいディレクトリにコピーします。既存のディレクトリの上書きを許可し、<see cref="CopyOptions"/> を指定でき、
+      /// コールバック関数を通じてアプリケーションに進行状況を通知できます。</summary>
+      /// <returns>コピー操作の詳細を含む <see cref="CopyMoveResult"/> クラス。</returns>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>Use this method to allow or prevent overwriting of an existing directory.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には、<see cref="CopyOptions.NoBuffering"/> オプションが推奨されます。</para>
+      ///   <para>このメソッドを使用して、既存のディレクトリの上書きを許可または防止します。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2 つのディレクトリに同等の短いファイル名がある場合、このメソッドが失敗して例外がスローされるか、望ましくない動作が発生する可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -173,11 +173,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the directory is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="preserveDates"><c>true</c> if original Timestamps must be preserved, <c>false</c> otherwise.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the directory has been copied. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
+      /// <param name="destinationPath">コピー先のディレクトリパス。</param>
+      /// <param name="copyOptions">ディレクトリのコピー方法を指定する <see cref="CopyOptions"/>。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="preserveDates">元のタイムスタンプを保持する場合は <c>true</c>、それ以外の場合は <c>false</c>。</param>
+      /// <param name="progressHandler">ディレクトリの別の部分がコピーされるたびに呼び出されるコールバック関数。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメーターは <c>null</c> にできます。</param>
       [Obsolete("Use other overload and add CopyOptions.CopyTimestamp enum flag.")]
       [SecurityCritical]
       public CopyMoveResult CopyTo(string destinationPath, CopyOptions copyOptions, bool preserveDates, CopyMoveProgressRoutine progressHandler, object userProgressData)
@@ -191,14 +191,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing directory to a new directory, allowing the overwriting of an existing directory, <see cref="CopyOptions"/> can be specified.
-      /// and the possibility of notifying the application of its progress through a callback function.</summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <summary>[AlphaFS] 既存のディレクトリを新しいディレクトリにコピーします。既存のディレクトリの上書きを許可し、<see cref="CopyOptions"/> を指定でき、
+      /// コールバック関数を通じてアプリケーションに進行状況を通知できます。</summary>
+      /// <returns>コピー操作の詳細を含む <see cref="CopyMoveResult"/> クラス。</returns>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>Use this method to allow or prevent overwriting of an existing directory.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には、<see cref="CopyOptions.NoBuffering"/> オプションが推奨されます。</para>
+      ///   <para>このメソッドを使用して、既存のディレクトリの上書きを許可または防止します。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2 つのディレクトリに同等の短いファイル名がある場合、このメソッドが失敗して例外がスローされるか、望ましくない動作が発生する可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -206,12 +206,12 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the directory is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="preserveDates"><c>true</c> if original Timestamps must be preserved, <c>false</c> otherwise.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the directory has been copied. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="destinationPath">コピー先のディレクトリパス。</param>
+      /// <param name="copyOptions">ディレクトリのコピー方法を指定する <see cref="CopyOptions"/>。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="preserveDates">元のタイムスタンプを保持する場合は <c>true</c>、それ以外の場合は <c>false</c>。</param>
+      /// <param name="progressHandler">ディレクトリの別の部分がコピーされるたびに呼び出されるコールバック関数。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [Obsolete("Use other overload and add CopyOptions.CopyTimestamp enum flag.")]
       [SecurityCritical]
       public CopyMoveResult CopyTo(string destinationPath, CopyOptions copyOptions, bool preserveDates, CopyMoveProgressRoutine progressHandler, object userProgressData, PathFormat pathFormat)
@@ -227,12 +227,12 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // Obsolete
 
 
-      /// <summary>[AlphaFS] Copies a <see cref="DirectoryInfo"/> instance and its contents to a new path.</summary>
-      /// <returns>A new <see cref="DirectoryInfo"/> instance if the directory was completely copied.</returns>
+      /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> インスタンスとその内容を新しいパスにコピーします。</summary>
+      /// <returns>ディレクトリが完全にコピーされた場合の新しい <see cref="DirectoryInfo"/> インスタンス。</returns>
       /// <remarks>
-      ///   <para>Use this method to prevent overwriting of an existing directory by default.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>デフォルトで既存のディレクトリの上書きを防止するには、このメソッドを使用します。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2 つのディレクトリに同等の短いファイル名がある場合、このメソッドが失敗して例外がスローされるか、望ましくない動作が発生する可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -240,7 +240,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The destination directory path.</param>
+      /// <param name="destinationPath">コピー先のディレクトリパス。</param>
       [SecurityCritical]
       public DirectoryInfo CopyTo(string destinationPath)
       {
@@ -253,12 +253,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies a <see cref="DirectoryInfo"/> instance and its contents to a new path.</summary>
-      /// <returns>A new <see cref="DirectoryInfo"/> instance if the directory was completely copied.</returns>
+      /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> インスタンスとその内容を新しいパスにコピーします。</summary>
+      /// <returns>ディレクトリが完全にコピーされた場合の新しい <see cref="DirectoryInfo"/> インスタンス。</returns>
       /// <remarks>
-      ///   <para>Use this method to prevent overwriting of an existing directory by default.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>デフォルトで既存のディレクトリの上書きを防止するには、このメソッドを使用します。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2 つのディレクトリに同等の短いファイル名がある場合、このメソッドが失敗して例外がスローされるか、望ましくない動作が発生する可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -266,8 +266,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="destinationPath">コピー先のディレクトリパス。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [SecurityCritical]
       public DirectoryInfo CopyTo(string destinationPath, PathFormat pathFormat)
       {
@@ -280,16 +280,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
       
 
-      /// <summary>[AlphaFS] Copies an existing directory to a new directory, allowing the overwriting of an existing directory, <see cref="CopyOptions"/> can be specified.</summary>
+      /// <summary>[AlphaFS] 既存のディレクトリを新しいディレクトリにコピーします。既存のディレクトリの上書きを許可し、<see cref="CopyOptions"/> を指定できます。</summary>
       /// <returns>
-      ///   <para>Returns a new directory, or an overwrite of an existing directory if <paramref name="copyOptions"/> is not <see cref="CopyOptions.FailIfExists"/>.</para>
-      ///   <para>If the directory exists and <paramref name="copyOptions"/> contains <see cref="CopyOptions.FailIfExists"/>, an <see cref="IOException"/> is thrown.</para>
+      ///   <para><paramref name="copyOptions"/> が <see cref="CopyOptions.FailIfExists"/> でない場合、新しいディレクトリまたは既存のディレクトリの上書きを返します。</para>
+      ///   <para>ディレクトリが存在し、<paramref name="copyOptions"/> に <see cref="CopyOptions.FailIfExists"/> が含まれている場合、<see cref="IOException"/> がスローされます。</para>
       /// </returns>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>Use this method to allow or prevent overwriting of an existing directory.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には、<see cref="CopyOptions.NoBuffering"/> オプションが推奨されます。</para>
+      ///   <para>このメソッドを使用して、既存のディレクトリの上書きを許可または防止します。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2 つのディレクトリに同等の短いファイル名がある場合、このメソッドが失敗して例外がスローされるか、望ましくない動作が発生する可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -297,8 +297,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the directory is to be copied. This parameter can be <c>null</c>.</param>
+      /// <param name="destinationPath">コピー先のディレクトリパス。</param>
+      /// <param name="copyOptions">ディレクトリのコピー方法を指定する <see cref="CopyOptions"/>。このパラメーターは <c>null</c> にできます。</param>
       [SecurityCritical]
       public DirectoryInfo CopyTo(string destinationPath, CopyOptions copyOptions)
       {
@@ -311,16 +311,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing directory to a new directory, allowing the overwriting of an existing directory, <see cref="CopyOptions"/> can be specified.</summary>
+      /// <summary>[AlphaFS] 既存のディレクトリを新しいディレクトリにコピーします。既存のディレクトリの上書きを許可し、<see cref="CopyOptions"/> を指定できます。</summary>
       /// <returns>
-      ///   <para>Returns a new directory, or an overwrite of an existing directory if <paramref name="copyOptions"/> is not <see cref="CopyOptions.FailIfExists"/>.</para>
-      ///   <para>If the directory exists and <paramref name="copyOptions"/> contains <see cref="CopyOptions.FailIfExists"/>, an <see cref="IOException"/> is thrown.</para>
+      ///   <para><paramref name="copyOptions"/> が <see cref="CopyOptions.FailIfExists"/> でない場合、新しいディレクトリまたは既存のディレクトリの上書きを返します。</para>
+      ///   <para>ディレクトリが存在し、<paramref name="copyOptions"/> に <see cref="CopyOptions.FailIfExists"/> が含まれている場合、<see cref="IOException"/> がスローされます。</para>
       /// </returns>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>Use this method to allow or prevent overwriting of an existing directory.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には、<see cref="CopyOptions.NoBuffering"/> オプションが推奨されます。</para>
+      ///   <para>このメソッドを使用して、既存のディレクトリの上書きを許可または防止します。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2 つのディレクトリに同等の短いファイル名がある場合、このメソッドが失敗して例外がスローされるか、望ましくない動作が発生する可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -328,9 +328,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the directory is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="destinationPath">コピー先のディレクトリパス。</param>
+      /// <param name="copyOptions">ディレクトリのコピー方法を指定する <see cref="CopyOptions"/>。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [SecurityCritical]
       public DirectoryInfo CopyTo(string destinationPath, CopyOptions copyOptions, PathFormat pathFormat)
       {
@@ -343,15 +343,15 @@ namespace Alphaleonis.Win32.Filesystem
       }
       
 
-      /// <summary>[AlphaFS] Copies an existing directory to a new directory, allowing the overwriting of an existing directory, <see cref="CopyOptions"/> can be specified
-      /// and the possibility of notifying the application of its progress through a callback function.
+      /// <summary>[AlphaFS] 既存のディレクトリを新しいディレクトリにコピーします。既存のディレクトリの上書きを許可し、<see cref="CopyOptions"/> を指定でき、
+      /// コールバック関数を通じてアプリケーションに進行状況を通知できます。
       /// </summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with details of the Copy action.</returns>
+      /// <returns>コピー操作の詳細を含む <see cref="CopyMoveResult"/> クラス。</returns>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>Use this method to allow or prevent overwriting of an existing directory.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には、<see cref="CopyOptions.NoBuffering"/> オプションが推奨されます。</para>
+      ///   <para>このメソッドを使用して、既存のディレクトリの上書きを許可または防止します。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2 つのディレクトリに同等の短いファイル名がある場合、このメソッドが失敗して例外がスローされるか、望ましくない動作が発生する可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -359,10 +359,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the directory is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the directory has been copied. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
+      /// <param name="destinationPath">コピー先のディレクトリパス。</param>
+      /// <param name="copyOptions">ディレクトリのコピー方法を指定する <see cref="CopyOptions"/>。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="progressHandler">ディレクトリの別の部分がコピーされるたびに呼び出されるコールバック関数。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメーターは <c>null</c> にできます。</param>
       [SecurityCritical]
       public CopyMoveResult CopyTo(string destinationPath, CopyOptions copyOptions, CopyMoveProgressRoutine progressHandler, object userProgressData)
       {
@@ -390,11 +390,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the directory is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the directory has been copied. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="destinationPath">コピー先のディレクトリパス。</param>
+      /// <param name="copyOptions">ディレクトリのコピー方法を指定する <see cref="CopyOptions"/>。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="progressHandler">ディレクトリの別の部分がコピーされるたびに呼び出されるコールバック関数。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [SecurityCritical]
       public CopyMoveResult CopyTo(string destinationPath, CopyOptions copyOptions, CopyMoveProgressRoutine progressHandler, object userProgressData, PathFormat pathFormat)
       {
@@ -407,16 +407,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing directory to a new directory, allowing the overwriting of an existing directory, <see cref="CopyOptions"/> can be specified.</summary>
+      /// <summary>[AlphaFS] 既存のディレクトリを新しいディレクトリにコピーします。既存のディレクトリの上書きを許可し、<see cref="CopyOptions"/> を指定できます。</summary>
       /// <returns>
-      ///   <para>Returns a new directory, or an overwrite of an existing directory if <paramref name="copyOptions"/> is not <see cref="CopyOptions.FailIfExists"/>.</para>
-      ///   <para>If the directory exists and <paramref name="copyOptions"/> contains <see cref="CopyOptions.FailIfExists"/>, an <see cref="IOException"/> is thrown.</para>
+      ///   <para><paramref name="copyOptions"/> が <see cref="CopyOptions.FailIfExists"/> でない場合、新しいディレクトリまたは既存のディレクトリの上書きを返します。</para>
+      ///   <para>ディレクトリが存在し、<paramref name="copyOptions"/> に <see cref="CopyOptions.FailIfExists"/> が含まれている場合、<see cref="IOException"/> がスローされます。</para>
       /// </returns>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>Use this method to allow or prevent overwriting of an existing directory.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には、<see cref="CopyOptions.NoBuffering"/> オプションが推奨されます。</para>
+      ///   <para>このメソッドを使用して、既存のディレクトリの上書きを許可または防止します。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2 つのディレクトリに同等の短いファイル名がある場合、このメソッドが失敗して例外がスローされるか、望ましくない動作が発生する可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -424,9 +424,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the directory is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="filters">The specification of custom filters to be used in the process.</param>
+      /// <param name="destinationPath">コピー先のディレクトリパス。</param>
+      /// <param name="copyOptions">ディレクトリのコピー方法を指定する <see cref="CopyOptions"/>。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="filters">処理で使用するカスタムフィルターの仕様。</param>
       [SecurityCritical]
       public DirectoryInfo CopyTo(string destinationPath, CopyOptions copyOptions, DirectoryEnumerationFilters filters)
       {
@@ -439,16 +439,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies an existing directory to a new directory, allowing the overwriting of an existing directory, <see cref="CopyOptions"/> can be specified.</summary>
+      /// <summary>[AlphaFS] 既存のディレクトリを新しいディレクトリにコピーします。既存のディレクトリの上書きを許可し、<see cref="CopyOptions"/> を指定できます。</summary>
       /// <returns>
-      ///   <para>Returns a new directory, or an overwrite of an existing directory if <paramref name="copyOptions"/> is not <see cref="CopyOptions.FailIfExists"/>.</para>
-      ///   <para>If the directory exists and <paramref name="copyOptions"/> contains <see cref="CopyOptions.FailIfExists"/>, an <see cref="IOException"/> is thrown.</para>
+      ///   <para><paramref name="copyOptions"/> が <see cref="CopyOptions.FailIfExists"/> でない場合、新しいディレクトリまたは既存のディレクトリの上書きを返します。</para>
+      ///   <para>ディレクトリが存在し、<paramref name="copyOptions"/> に <see cref="CopyOptions.FailIfExists"/> が含まれている場合、<see cref="IOException"/> がスローされます。</para>
       /// </returns>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>Use this method to allow or prevent overwriting of an existing directory.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>非常に大きなファイル転送には、<see cref="CopyOptions.NoBuffering"/> オプションが推奨されます。</para>
+      ///   <para>このメソッドを使用して、既存のディレクトリの上書きを許可または防止します。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2 つのディレクトリに同等の短いファイル名がある場合、このメソッドが失敗して例外がスローされるか、望ましくない動作が発生する可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -456,10 +456,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the directory is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="filters">The specification of custom filters to be used in the process.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="destinationPath">コピー先のディレクトリパス。</param>
+      /// <param name="copyOptions">ディレクトリのコピー方法を指定する <see cref="CopyOptions"/>。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="filters">処理で使用するカスタムフィルターの仕様。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [SecurityCritical]
       public DirectoryInfo CopyTo(string destinationPath, CopyOptions copyOptions, DirectoryEnumerationFilters filters, PathFormat pathFormat)
       {
@@ -490,11 +490,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the directory is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="filters">The specification of custom filters to be used in the process.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the directory has been copied. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
+      /// <param name="destinationPath">コピー先のディレクトリパス。</param>
+      /// <param name="copyOptions">ディレクトリのコピー方法を指定する <see cref="CopyOptions"/>。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="filters">処理で使用するカスタムフィルターの仕様。</param>
+      /// <param name="progressHandler">ディレクトリの別の部分がコピーされるたびに呼び出されるコールバック関数。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメーターは <c>null</c> にできます。</param>
       [SecurityCritical]
       public DirectoryInfo CopyTo(string destinationPath, CopyOptions copyOptions, DirectoryEnumerationFilters filters, CopyMoveProgressRoutine progressHandler, object userProgressData)
       {
@@ -525,12 +525,12 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the directory is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="filters">The specification of custom filters to be used in the process.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the directory has been copied. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="destinationPath">コピー先のディレクトリパス。</param>
+      /// <param name="copyOptions">ディレクトリのコピー方法を指定する <see cref="CopyOptions"/>。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="filters">処理で使用するカスタムフィルターの仕様。</param>
+      /// <param name="progressHandler">ディレクトリの別の部分がコピーされるたびに呼び出されるコールバック関数。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [SecurityCritical]
       public DirectoryInfo CopyTo(string destinationPath, CopyOptions copyOptions, DirectoryEnumerationFilters filters, CopyMoveProgressRoutine progressHandler, object userProgressData, PathFormat pathFormat)
       {

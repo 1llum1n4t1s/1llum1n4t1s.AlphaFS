@@ -41,12 +41,12 @@ namespace Alphaleonis.Win32.Filesystem
          {
             // File.Copy()
             // File.Move()
-            // MSDN: .NET 3.5+: FileNotFoundException: sourcePath was not found. 
+            // MSDN: .NET 3.5+: FileNotFoundException: sourcePathが見つかりませんでした。 
             //
             // File.Copy()
             // File.Move()
             // Directory.Move()
-            // MSDN: .NET 3.5+: DirectoryNotFoundException: The path specified in sourcePath or destinationPath is invalid (for example, it is on an unmapped drive).
+            // MSDN: .NET 3.5+: DirectoryNotFoundException: sourcePathまたはdestinationPathで指定されたパスが無効です(マッピングされていないドライブ上にあるなど)。
             case Win32Errors.ERROR_FILE_NOT_FOUND: // On files.
             case Win32Errors.ERROR_PATH_NOT_FOUND: // On folders.
 
@@ -91,7 +91,7 @@ namespace Alphaleonis.Win32.Filesystem
                var destIsFolder = IsDirectory(attrs.dwFileAttributes);
 
 
-               // For a number of error codes (sharing violation, path not found, etc)
+               // いくつかのエラーコード(共有違反、パスが見つからないなど)の場合
                // we don't know if the problem was with the source or destination file.
 
                // Check if destination directory already exists.
@@ -110,7 +110,7 @@ namespace Alphaleonis.Win32.Filesystem
                {
                   // Ensure that the source file or folder exists.
                   // Directory.Move()
-                  // MSDN: .NET 3.5+: DirectoryNotFoundException: The path specified by sourceDirName is invalid (for example, it is on an unmapped drive). 
+                  // MSDN: .NET 3.5+: DirectoryNotFoundException: sourceDirNameで指定されたパスが無効です(マッピングされていないドライブ上にあるなど)。 
 
                   if (!srcExists && !retry)
                   {
@@ -139,7 +139,7 @@ namespace Alphaleonis.Win32.Filesystem
                   // MSDN: .NET 3.5+: IOException: An I/O error has occurred.
 
 
-                  // Directory exists with the same name as the file.
+                  // Directory exists with the same name as 閉じます。
 
                   if (dstExists && !isFolder && destIsFolder && !retry)
 
@@ -163,9 +163,9 @@ namespace Alphaleonis.Win32.Filesystem
                      }
 
 
-                     // MSDN: .NET 3.5+: UnauthorizedAccessException: destinationPath is read-only.
-                     // MSDN: Win32 CopyFileXxx: This function fails with ERROR_ACCESS_DENIED if the destination file already exists
-                     // and has the FILE_ATTRIBUTE_HIDDEN or FILE_ATTRIBUTE_READONLY attribute set.
+                     // MSDN: .NET 3.5+: UnauthorizedAccessException: destinationPathは読み取り専用です。
+                     // MSDN: Win32 CopyFileXxx: コピー先ファイルが既に存在し、
+                     // FILE_ATTRIBUTE_HIDDENまたはFILE_ATTRIBUTE_READONLY属性が設定されている場合、この関数はERROR_ACCESS_DENIEDで失敗します。
 
                      if (!retry)
                      {

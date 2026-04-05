@@ -31,7 +31,7 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>Creates/appends a new file by using the specified encoding, writes a collection of strings to the file, and then closes the file.</summary>
+      /// <summary>Creates/appends a new file by using the specified encoding, writes a collection of strings to the file, and then closes 閉じます。</summary>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
@@ -42,13 +42,13 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to write to.</param>
-      /// <param name="contents">The lines to write to the file.</param>
-      /// <param name="encoding">The character <see cref="Encoding"/> to use.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">書き込むファイル。</param>
+      /// <param name="contents">ファイルに書き込む行。</param>
+      /// <param name="encoding">使用する文字<see cref="Encoding"/>。</param>
       /// <param name="isAppend"><c>true</c> for file Append, <c>false</c> for file Write.</param>
       /// <param name="addNewLine"><c>true</c> to add a line terminator, <c>false</c> to ommit the line terminator.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times", Justification = "Disposing is controlled.")]
       [SecurityCritical]
       internal static void WriteAppendAllLinesCore(KernelTransaction transaction, string path, IEnumerable<string> contents, Encoding encoding, bool isAppend, bool addNewLine, PathFormat pathFormat)

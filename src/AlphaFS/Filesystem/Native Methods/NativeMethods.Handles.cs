@@ -27,22 +27,22 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Closes an open object handle.</summary>
+      /// <summary>開いているオブジェクトハンドルを閉じます。</summary>
       /// <remarks>
-      ///   <para>The CloseHandle function closes handles to the following objects:</para>
-      ///   <para>Access token, Communications device, Console input, Console screen buffer, Event, File, File mapping, I/O completion port,
-      ///   Job, Mailslot, Memory resource notification, Mutex, Named pipe, Pipe, Process, Semaphore, Thread, Transaction, Waitable
-      ///   timer.</para>
-      ///   <para>SetLastError is set to <c>false</c>.</para>
-      ///   <para>Minimum supported client: Windows 2000 Professional [desktop apps | Windows Store apps]</para>
-      ///   <para>Minimum supported server: Windows 2000 Server [desktop apps | Windows Store apps]</para>
+      ///   <para>CloseHandle 関数は以下のオブジェクトのハンドルを閉じます:</para>
+      ///   <para>アクセストークン、通信デバイス、コンソール入力、コンソールスクリーンバッファ、イベント、ファイル、ファイルマッピング、I/O 完了ポート、
+      ///   ジョブ、メールスロット、メモリリソース通知、ミューテックス、名前付きパイプ、パイプ、プロセス、セマフォ、スレッド、トランザクション、
+      ///   待機可能タイマー。</para>
+      ///   <para>SetLastError は <c>false</c> に設定されています。</para>
+      ///   <para>サポートされる最小クライアント: Windows 2000 Professional [デスクトップアプリ | Windows ストアアプリ]</para>
+      ///   <para>サポートされる最小サーバー: Windows 2000 Server [デスクトップアプリ | Windows ストアアプリ]</para>
       /// </remarks>
       /// <returns>
-      ///   <para>If the function succeeds, the return value is nonzero.</para>
-      ///   <para>If the function fails, the return value is zero. To get extended error information, call GetLastError.</para>
-      ///   <para>If the application is running under a debugger, the function will throw an exception if it receives either a handle value
-      ///   that is not valid or a pseudo-handle value.This can happen if you close a handle twice, or if you call CloseHandle on a handle
-      ///   returned by the FindFirstFile function instead of calling the FindClose function.</para>
+      ///   <para>関数が成功した場合、戻り値はゼロ以外です。</para>
+      ///   <para>関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。</para>
+      ///   <para>アプリケーションがデバッガーの下で実行されている場合、無効なハンドル値または疑似ハンドル値を受け取ると例外をスローします。
+      ///   これは、ハンドルを二重に閉じた場合、または FindClose 関数を呼び出す代わりに FindFirstFile 関数が返したハンドルに対して
+      ///   CloseHandle を呼び出した場合に発生する可能性があります。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = false, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]

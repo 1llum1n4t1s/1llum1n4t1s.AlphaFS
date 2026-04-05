@@ -25,9 +25,9 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Contains the priority class and rank of a specific DFS target.</summary>
-      /// <remarks>Minimum supported client: Windows Vista</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2008, Windows Server 2003 with SP1</remarks>
+      /// <summary>特定の DFS ターゲットの優先度クラスとランクを含みます.</summary>
+      /// <remarks>サポートされる最小クライアント: Windows Vista</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2008, Windows Server 2003 with SP1</remarks>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct DFS_TARGET_PRIORITY
       {

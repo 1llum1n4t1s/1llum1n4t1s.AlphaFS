@@ -27,12 +27,12 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>Opens a binary file, reads the contents of the file into a byte array, and then closes the file.</summary>
+      /// <summary>バイナリファイルを開き、ファイルの内容をバイト配列に読み込み、ファイルを閉じます。</summary>
       /// <exception cref="IOException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to open for reading.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>A byte array containing the contents of the file.</returns>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">読み取り用に開くファイル。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>ファイルの内容を含むバイト配列。</returns>
       [SecurityCritical]
       internal static byte[] ReadAllBytesCore(KernelTransaction transaction, string path, PathFormat pathFormat)
       {

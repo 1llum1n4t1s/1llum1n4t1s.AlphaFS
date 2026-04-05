@@ -25,7 +25,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>[AlphaFS] The exception that is thrown when an attempt perform an operation across difference devices when this is not supported.</summary>
+   /// <summary>[AlphaFS] サポートされていない異なるデバイス間での操作を実行しようとしたときにスローされる例外。</summary>
    [Serializable]
    public class NotSameDeviceException : System.IO.IOException
    {
@@ -33,30 +33,30 @@ namespace Alphaleonis.Win32.Filesystem
       private static readonly string ErrorText = string.Format(CultureInfo.InvariantCulture, "({0}) {1}", Win32Errors.ERROR_NOT_SAME_DEVICE, new Win32Exception((int)Win32Errors.ERROR_NOT_SAME_DEVICE).Message.Trim().TrimEnd('.').Trim());
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="NotSameDeviceException"/> class.</summary>
+      /// <summary>[AlphaFS] <see cref="NotSameDeviceException"/>クラスの新しいインスタンスを初期化します。</summary>
       public NotSameDeviceException() : base(Resources.File_Or_Directory_Already_Exists, ErrorCode)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="NotSameDeviceException"/> class.</summary>
-      /// <param name="message">The message.</param>
+      /// <summary>[AlphaFS] <see cref="NotSameDeviceException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="message">メッセージ。</param>
       public NotSameDeviceException(string message) : base(message, ErrorCode)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="NotSameDeviceException"/> class.</summary>
-      /// <param name="message">The message.</param>
-      /// <param name="innerException">The inner exception.</param>
+      /// <summary>[AlphaFS] <see cref="NotSameDeviceException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="message">メッセージ。</param>
+      /// <param name="innerException">内部例外。</param>
       public NotSameDeviceException(string message, Exception innerException) : base(message, innerException)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="NotSameDeviceException"/> class.</summary>
-      /// <param name="path">The path to the device.</param>
-      /// <param name="isPath">Always set to true when using this constructor.</param>
+      /// <summary>[AlphaFS] <see cref="NotSameDeviceException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="path">デバイスへのパス。</param>
+      /// <param name="isPath">このコンストラクタを使用する場合は常にtrueに設定します。</param>
       [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "isPath")]
       public NotSameDeviceException(string path, bool isPath) : base(string.Format(CultureInfo.InvariantCulture, "{0}: [{1}]", ErrorText, path), ErrorCode)
       {

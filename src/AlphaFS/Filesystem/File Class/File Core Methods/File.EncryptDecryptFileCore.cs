@@ -29,16 +29,16 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>Decrypts/encrypts a file or directory so that only the account used to encrypt the file can decrypt it.</summary>
+      /// <summary>ファイルまたはディレクトリを復号化/暗号化し、暗号化に使用したアカウントのみが復号化できるようにします。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryReadOnlyException"/>
       /// <exception cref="FileReadOnlyException"/>
       /// <exception cref="NotSupportedException"/>
-      /// <param name="isFolder">Specifies that <paramref name="path"/> is a file or directory.</param>
-      /// <param name="path">A path that describes a file to encrypt.</param>
-      /// <param name="encrypt"><c>true</c> encrypt, <c>false</c> decrypt.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="isFolder"><paramref name="path"/>がファイルかディレクトリかを指定します。</param>
+      /// <param name="path">暗号化するファイルを示すパス。</param>
+      /// <param name="encrypt"><c>true</c>で暗号化、<c>false</c>で復号化。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       internal static void EncryptDecryptFileCore(bool isFolder, string path, bool encrypt, PathFormat pathFormat)
       {
@@ -50,7 +50,7 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
-         // MSDN: If lpFileName specifies a read-only file, the function fails and GetLastError returns ERROR_FILE_READ_ONLY.
+         // MSDN: lpFileNameが読み取り専用ファイルを指定した場合、関数は失敗し、GetLastErrorはERROR_FILE_READ_ONLYを返します。
 
          var attrs = GetAttributesExCore<NativeMethods.WIN32_FILE_ATTRIBUTE_DATA>(null, path, pathFormat, true);
 
@@ -74,7 +74,7 @@ namespace Alphaleonis.Win32.Filesystem
 
 
          // EncryptFile() / DecryptFile()
-         // 2013-01-13: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
+         // 2013-01-13: MSDNはLongPathの使用を確認していませんが、この関数のUnicodeバージョンが存在します。
 
          var success = encrypt ? NativeMethods.EncryptFile(path) : NativeMethods.DecryptFile(path, 0);
 

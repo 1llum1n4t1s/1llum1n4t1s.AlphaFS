@@ -24,17 +24,17 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>Represents a wrapper class for a handle used by the CM_Connect_Machine/CM_Disconnect_Machine Win32 API functions.</summary>
+   /// <summary>CM_Connect_Machine/CM_Disconnect_Machine Win32 API関数で使用されるハンドルのラッパークラスを表します。</summary>
    [SecurityCritical]
    internal sealed class SafeCmConnectMachineHandle : SafeHandleZeroOrMinusOneIsInvalid
    {
-      /// <summary>Initializes a new instance of the <see cref="SafeCmConnectMachineHandle"/> class.</summary>
+      /// <summary><see cref="SafeCmConnectMachineHandle"/>クラスの新しいインスタンスを初期化します。</summary>
       public SafeCmConnectMachineHandle() : base(true)
       {
       }
 
 
-      /// <summary>When overridden in a derived class, executes the code required to free the handle.</summary>
+      /// <summary>派生クラスでオーバーライドされた場合、ハンドルを解放するために必要なコードを実行します。</summary>
       protected override bool ReleaseHandle()
       {
          return NativeMethods.CM_Disconnect_Machine(handle) == Win32Errors.NO_ERROR;

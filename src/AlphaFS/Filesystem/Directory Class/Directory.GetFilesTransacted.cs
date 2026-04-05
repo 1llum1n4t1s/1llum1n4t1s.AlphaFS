@@ -29,14 +29,14 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>[AlphaFS] Returns the names of files (including their paths) in the specified directory.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリ内のファイルの名前（パスを含む）を返します。</summary>
       /// <returns>An array of the full names (including paths) for the files in the specified directory, or an empty array if no files are found.</returns>
       /// <remarks>
-      ///   <para>The returned file names are appended to the supplied <paramref name="path"/> parameter.</para>
+      ///   <para>返されたファイル名は、指定された <paramref name="path"/> パラメータに追加されます。</para>
       ///   <para>The order of the returned file names is not guaranteed; use the Sort() method if a specific sort order is required.</para>
-      ///   <para>The EnumerateFiles and GetFiles methods differ as follows: When you use EnumerateFiles, you can start enumerating the collection of names
-      ///     before the whole collection is returned; when you use GetFiles, you must wait for the whole array of names to be returned before you can access the array.
-      ///     Therefore, when you are working with many files and directories, EnumerateFiles can be more efficient.
+      ///   <para>EnumerateFilesとGetFilesメソッドは次のように異なります: EnumerateFilesを使用すると、 enumerating the collection of names
+      ///     before the whole collection is returned; when you use GetFiles, 配列にアクセスする前に名前の配列全体が返されるのを待つ必要があります。
+      ///     したがって、多くのファイルとディレクトリを操作する場合、EnumerateFilesの方が効率的です。
       ///   </para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
@@ -45,8 +45,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The directory to search.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">検索するディレクトリ。</param>
       [SecurityCritical]
       public static string[] GetFilesTransacted(KernelTransaction transaction, string path)
       {
@@ -54,14 +54,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Returns the names of files (including their paths) that match the specified search pattern in the specified directory.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリ内で、指定された検索パターンに一致するファイルの名前（パスを含む）を返します。</summary>
       /// <returns>An array of the full names (including paths) for the files in the specified directory that match the specified search pattern, or an empty array if no files are found.</returns>
       /// <remarks>
-      ///   <para>The returned file names are appended to the supplied <paramref name="path"/> parameter.</para>
+      ///   <para>返されたファイル名は、指定された <paramref name="path"/> パラメータに追加されます。</para>
       ///   <para>The order of the returned file names is not guaranteed; use the Sort() method if a specific sort order is required.</para>
-      ///   <para>The EnumerateFiles and GetFiles methods differ as follows: When you use EnumerateFiles, you can start enumerating the collection of names
-      ///     before the whole collection is returned; when you use GetFiles, you must wait for the whole array of names to be returned before you can access the array.
-      ///     Therefore, when you are working with many files and directories, EnumerateFiles can be more efficient.
+      ///   <para>EnumerateFilesとGetFilesメソッドは次のように異なります: EnumerateFilesを使用すると、 enumerating the collection of names
+      ///     before the whole collection is returned; when you use GetFiles, 配列にアクセスする前に名前の配列全体が返されるのを待つ必要があります。
+      ///     したがって、多くのファイルとディレクトリを操作する場合、EnumerateFilesの方が効率的です。
       ///   </para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
@@ -70,11 +70,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The directory to search.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">検索するディレクトリ。</param>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in <paramref name="path"/>.
-      ///   This parameter can contain a combination of valid literal path and wildcard
+      ///   ディレクトリ名と照合する検索文字列。対象: <paramref name="path"/>.
+      ///   このパラメータには、有効なリテラルパスとワイルドカードの組み合わせを含めることができますが、
       ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
       /// </param>
       [SecurityCritical]
@@ -87,11 +87,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] Returns the names of files (including their paths) that match the specified search pattern in the current directory, and optionally searches subdirectories.</summary>
       /// <returns>An array of the full names (including paths) for the files in the specified directory that match the specified search pattern and option, or an empty array if no files are found.</returns>
       /// <remarks>
-      ///   <para>The returned file names are appended to the supplied <paramref name="path"/> parameter.</para>
+      ///   <para>返されたファイル名は、指定された <paramref name="path"/> パラメータに追加されます。</para>
       ///   <para>The order of the returned file names is not guaranteed; use the Sort() method if a specific sort order is required.</para>
-      ///   <para>The EnumerateFiles and GetFiles methods differ as follows: When you use EnumerateFiles, you can start enumerating the collection of names
-      ///     before the whole collection is returned; when you use GetFiles, you must wait for the whole array of names to be returned before you can access the array.
-      ///     Therefore, when you are working with many files and directories, EnumerateFiles can be more efficient.
+      ///   <para>EnumerateFilesとGetFilesメソッドは次のように異なります: EnumerateFilesを使用すると、 enumerating the collection of names
+      ///     before the whole collection is returned; when you use GetFiles, 配列にアクセスする前に名前の配列全体が返されるのを待つ必要があります。
+      ///     したがって、多くのファイルとディレクトリを操作する場合、EnumerateFilesの方が効率的です。
       ///   </para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
@@ -100,16 +100,16 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The directory to search.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">検索するディレクトリ。</param>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in <paramref name="path"/>.
-      ///   This parameter can contain a combination of valid literal path and wildcard
+      ///   ディレクトリ名と照合する検索文字列。対象: <paramref name="path"/>.
+      ///   このパラメータには、有効なリテラルパスとワイルドカードの組み合わせを含めることができますが、
       ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
       /// </param>
       /// <param name="searchOption">
       ///   One of the <see cref="SearchOption"/> enumeration values that specifies whether the <paramref name="searchOption"/>
-      ///   should include only the current directory or should include all subdirectories.
+      ///   現在のディレクトリのみを含むか、すべてのサブディレクトリを含むかを指定します。
       /// </param>
       [SecurityCritical]
       public static string[] GetFilesTransacted(KernelTransaction transaction, string path, string searchPattern, SearchOption searchOption)

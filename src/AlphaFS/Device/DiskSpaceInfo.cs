@@ -27,9 +27,9 @@ using System.Security;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>Retrieves information about the amount of space that is available on a disk volume, which is the total amount of space,
-   /// the total amount of free space, and the total amount of free space available to the user that is associated with the calling thread.
-   /// <para>This class cannot be inherited.</para>
+   /// <summary>ディスクボリュームで利用可能な領域の量に関する情報を取得します。これには、総領域量、
+   /// 総空き領域量、および呼び出しスレッドに関連付けられたユーザーが利用可能な総空き領域量が含まれます。
+   /// <para>このクラスは継承できません。</para>
    /// </summary>
    [Serializable]
    [SecurityCritical]
@@ -41,9 +41,9 @@ namespace Alphaleonis.Win32.Filesystem
       [NonSerialized] private readonly bool _continueOnAccessError;
 
 
-      /// <summary>Initializes a DiskSpaceInfo instance.</summary>
-      /// <param name="drivePath">A valid drive path or drive letter. This can be either uppercase or lowercase, 'a' to 'z' or a network share in the format: \\server\share</param>
-      /// <Remark>This is a Lazyloading object; call <see cref="Refresh()"/> to populate all properties first before accessing.</Remark>
+      /// <summary>DiskSpaceInfo インスタンスを初期化します。</summary>
+      /// <param name="drivePath">有効なドライブパスまたはドライブ文字。大文字または小文字の 'a' ～ 'z'、または \\server\share 形式のネットワーク共有を指定できます。</param>
+      /// <Remark>これは遅延読み込みオブジェクトです。プロパティにアクセスする前に <see cref="Refresh()"/> を呼び出して全プロパティを設定してください。</Remark>
       [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Utils.IsNullOrWhiteSpace validates arguments.")]
       [SecurityCritical]
       public DiskSpaceInfo(string drivePath)
@@ -63,18 +63,18 @@ namespace Alphaleonis.Win32.Filesystem
 
 
          // MSDN:
-         // If this parameter is a UNC name, it must include a trailing backslash (for example, "\\MyServer\MyShare\").
-         // Furthermore, a drive specification must have a trailing backslash (for example, "C:\").
-         // The calling application must have FILE_LIST_DIRECTORY access rights for this directory.
+         // このパラメーターが UNC 名の場合、末尾にバックスラッシュを含める必要があります（例: "\\MyServer\MyShare\"）。
+         // また、ドライブ指定には末尾にバックスラッシュが必要です（例: "C:\"）。
+         // 呼び出し元アプリケーションには、このディレクトリに対する FILE_LIST_DIRECTORY アクセス権が必要です。
          DriveName = Path.AddTrailingDirectorySeparator(drivePath, false);
       }
 
       
-      /// <summary>Initializes a DiskSpaceInfo instance.</summary>
-      /// <param name="drivePath">A valid drive path or drive letter. This can be either uppercase or lowercase, 'a' to 'z' or a network share in the format: \\server\share</param>
-      /// <param name="spaceInfoType"><c>null</c> gets both size- and disk cluster information. <c>true</c> Get only disk cluster information, <c>false</c> Get only size information.</param>
-      /// <param name="refresh">Refreshes the state of the object.</param>
-      /// <param name="continueOnException"><c>true</c> suppress any Exception that might be thrown as a result from a failure, such as unavailable resources.</param>
+      /// <summary>DiskSpaceInfo インスタンスを初期化します。</summary>
+      /// <param name="drivePath">有効なドライブパスまたはドライブ文字。大文字または小文字の 'a' ～ 'z'、または \\server\share 形式のネットワーク共有を指定できます。</param>
+      /// <param name="spaceInfoType"><c>null</c> はサイズ情報とディスククラスター情報の両方を取得します。<c>true</c> はディスククラスター情報のみを取得、<c>false</c> はサイズ情報のみを取得します。</param>
+      /// <param name="refresh">オブジェクトの状態を更新します。</param>
+      /// <param name="continueOnException"><c>true</c> はリソース不足などの失敗から発生する可能性のある例外を抑制します。</param>
       [SecurityCritical]
       public DiskSpaceInfo(string drivePath, bool? spaceInfoType, bool refresh, bool continueOnException) : this(drivePath)
       {
@@ -99,7 +99,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Indicates the amount of available free space on a drive, formatted as percentage.</summary>
+      /// <summary>ドライブの利用可能な空き領域の量をパーセンテージで示します。</summary>
       public string AvailableFreeSpacePercent
       {
          get
@@ -109,34 +109,34 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Indicates the amount of available free space on a drive, formatted as a unit size.</summary>
+      /// <summary>ドライブの利用可能な空き領域の量を単位サイズで示します。</summary>
       public string AvailableFreeSpaceUnitSize
       {
          get { return Utils.UnitSizeToText(TotalNumberOfFreeBytes, _cultureInfo); }
       }
 
 
-      /// <summary>Returns the Clusters size.</summary>
+      /// <summary>クラスターサイズを返します。</summary>
       public long ClusterSize
       {
          get { return (long) SectorsPerCluster * BytesPerSector; }
       }
 
 
-      /// <summary>Gets the name of a drive.</summary>
-      /// <returns>The name of the drive.</returns>
-      /// <remarks>This property is the name assigned to the drive, such as C:\ or E:\</remarks>
+      /// <summary>ドライブの名前を取得します。</summary>
+      /// <returns>ドライブの名前。</returns>
+      /// <remarks>このプロパティは、C:\ や E:\ などのドライブに割り当てられた名前です。</remarks>
       public string DriveName { get; private set; }
 
 
-      /// <summary>The total number of bytes on a disk that are available to the user who is associated with the calling thread, formatted as a unit size.</summary>
+      /// <summary>呼び出しスレッドに関連付けられたユーザーが利用可能なディスクの総バイト数を単位サイズで示します。</summary>
       public string TotalSizeUnitSize
       {
          get { return Utils.UnitSizeToText(TotalNumberOfBytes, _cultureInfo); }
       }
 
 
-      /// <summary>Indicates the amount of used space on a drive, formatted as percentage.</summary>
+      /// <summary>ドライブの使用済み領域の量をパーセンテージで示します。</summary>
       public string UsedSpacePercent
       {
          get
@@ -146,46 +146,46 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Indicates the amount of used space on a drive, formatted as a unit size.</summary>
+      /// <summary>ドライブの使用済み領域の量を単位サイズで示します。</summary>
       public string UsedSpaceUnitSize
       {
          get { return Utils.UnitSizeToText(TotalNumberOfBytes - FreeBytesAvailable, _cultureInfo); }
       }
 
 
-      /// <summary>The total number of free bytes on a disk that are available to the user who is associated with the calling thread.</summary>
+      /// <summary>呼び出しスレッドに関連付けられたユーザーが利用可能なディスクの空きバイト数の合計。</summary>
       public long FreeBytesAvailable { get; private set; }
 
 
-      /// <summary>The total number of bytes on a disk that are available to the user who is associated with the calling thread.</summary>
+      /// <summary>呼び出しスレッドに関連付けられたユーザーが利用可能なディスクの総バイト数。</summary>
       public long TotalNumberOfBytes { get; private set; }
 
 
-      /// <summary>The total number of free bytes on a disk.</summary>
+      /// <summary>ディスクの空きバイト数の合計。</summary>
       public long TotalNumberOfFreeBytes { get; private set; }
 
 
-      /// <summary>The number of bytes per sector.</summary>
+      /// <summary>セクターあたりのバイト数。</summary>
       public int BytesPerSector { get; private set; }
 
 
-      /// <summary>The total number of free clusters on the disk that are available to the user who is associated with the calling thread.</summary>
+      /// <summary>呼び出しスレッドに関連付けられたユーザーが利用可能なディスクの空きクラスター数の合計。</summary>
       public int NumberOfFreeClusters { get; private set; }
 
 
-      /// <summary>The number of sectors per cluster.</summary>
+      /// <summary>クラスターあたりのセクター数。</summary>
       public int SectorsPerCluster { get; private set; }
 
 
-      /// <summary>The total number of clusters on the disk that are available to the user who is associated with the calling thread.
-      /// If per-user disk quotas are in use, this value may be less than the total number of clusters on the disk.
+      /// <summary>呼び出しスレッドに関連付けられたユーザーが利用可能なディスクのクラスター数の合計。
+      /// ユーザーごとのディスククォータが使用されている場合、この値はディスクのクラスター総数より少ない場合があります。
       /// </summary>
       public long TotalNumberOfClusters { get; private set; }
 
 
 
 
-      /// <summary>Refreshes the state of the object.</summary>
+      /// <summary>オブジェクトの状態を更新します。</summary>
       public void Refresh()
       {
          Reset();
@@ -195,7 +195,7 @@ namespace Alphaleonis.Win32.Filesystem
             int lastError;
 
 
-            // Get size information.
+            // サイズ情報を取得します。
 
             if (_initGetSpaceInfo)
             {
@@ -216,7 +216,7 @@ namespace Alphaleonis.Win32.Filesystem
             }
 
 
-            // Get cluster information.
+            // クラスター情報を取得します。
 
             if (_initGetClusterInfo)
             {
@@ -240,7 +240,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Initializes all <see ref="Alphaleonis.Win32.Filesystem.DiskSpaceInfo"/> properties to 0.</summary>
+      /// <summary>すべての <see ref="Alphaleonis.Win32.Filesystem.DiskSpaceInfo"/> プロパティを 0 に初期化します。</summary>
       private void Reset()
       {
          if (_initGetSpaceInfo)
@@ -261,15 +261,15 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Returns the drive name.</summary>
-      /// <returns>A string that represents this object.</returns>
+      /// <summary>ドライブ名を返します。</summary>
+      /// <returns>このオブジェクトを表す文字列。</returns>
       public override string ToString()
       {
          return DriveName;
       }
 
 
-      /// <summary>Calculates a percentage value.</summary>
+      /// <summary>パーセンテージ値を計算します。</summary>
       private static double PercentCalculate(double currentValue, double minimumValue, double maximumValue)
       {
          return currentValue < 0 || maximumValue <= 0 ? 0 : currentValue * 100 / (maximumValue - minimumValue);

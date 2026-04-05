@@ -28,19 +28,19 @@ using System.Security;
 
 namespace Alphaleonis.Win32
 {
-   /// <summary>Static class providing access to information about the operating system under which the assembly is executing.</summary>
+   /// <summary>アセンブリが実行されているオペレーティングシステムに関する情報へのアクセスを提供する静的クラス。</summary>
    public static class OperatingSystem
    {
-      /// <summary>A set of flags that describe the named Windows versions.</summary>
-      /// <remarks>The values of the enumeration are ordered. A later released operating system version has a higher number, so comparisons between named versions are meaningful.</remarks>
+      /// <summary>名前付き Windows バージョンを記述するフラグのセット。</summary>
+      /// <remarks>列挙の値は順序付けられています。より後にリリースされたオペレーティングシステムバージョンはより大きな数値を持つため、名前付きバージョン間の比較は意味があります。</remarks>
       [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Os")]
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Os")]
       public enum EnumOsName
       {
-         /// <summary>A Windows version earlier than Windows 2000.</summary>
+         /// <summary>Windows 2000 より前の Windows バージョン。</summary>
          Earlier = -1,
 
-         /// <summary>Windows 2000 (Server or Professional).</summary>
+         /// <summary>Windows 2000 (Server または Professional)。</summary>
          Windows2000 = 0,
 
          /// <summary>Windows XP.</summary>
@@ -79,35 +79,35 @@ namespace Alphaleonis.Win32
          /// <summary>Windows Server 2016</summary>
          WindowsServer2016 = 12,
 
-         /// <summary>A later version of Windows than currently installed.</summary>
+         /// <summary>現在インストールされているものより後のバージョンの Windows。</summary>
          Later = 65535
       }
 
 
-      /// <summary>A set of flags to indicate the current processor architecture for which the operating system is targeted and running.</summary>
+      /// <summary>オペレーティングシステムが対象とし実行されている現在のプロセッサアーキテクチャを示すフラグのセット。</summary>
       [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Pa")]
       [SuppressMessage("Microsoft.Design", "CA1028:EnumStorageShouldBeInt32")]      
       public enum EnumProcessorArchitecture 
       {
          /// <summary>PROCESSOR_ARCHITECTURE_INTEL
-         /// <para>The system is running a 32-bit version of Windows.</para>
+         /// <para>システムは 32 ビット版の Windows を実行しています。</para>
          /// </summary>
          X86 = 0,
 
          /// <summary>PROCESSOR_ARCHITECTURE_IA64
-         /// <para>The system is running on a Itanium processor.</para>
+         /// <para>システムは Itanium プロセッサ上で実行されています。</para>
          /// </summary>
          [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ia")]
          [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Ia")]
          IA64 = 6,
 
          /// <summary>PROCESSOR_ARCHITECTURE_AMD64
-         /// <para>The system is running a 64-bit version of Windows.</para>
+         /// <para>システムは 64 ビット版の Windows を実行しています。</para>
          /// </summary>
          X64 = 9,
 
          /// <summary>PROCESSOR_ARCHITECTURE_UNKNOWN
-         /// <para>Unknown architecture.</para>
+         /// <para>不明なアーキテクチャ。</para>
          /// </summary>
          Unknown = 65535
       }
@@ -118,8 +118,8 @@ namespace Alphaleonis.Win32
       #region Properties
 
       private static bool _isServer;
-      /// <summary>Gets a value indicating whether the operating system is a server operating system.</summary>
-      /// <value><c>true</c> if the current operating system is a server operating system; otherwise, <c>false</c>.</value>
+      /// <summary>オペレーティングシステムがサーバーオペレーティングシステムであるかどうかを示す値を取得します。</summary>
+      /// <value>現在のオペレーティングシステムがサーバーオペレーティングシステムの場合は <c>true</c>、それ以外の場合は <c>false</c>。</value>
       public static bool IsServer
       {
          get
@@ -135,8 +135,8 @@ namespace Alphaleonis.Win32
 
 
       private static bool? _isWow64Process;
-      /// <summary>Gets a value indicating whether the current process is running under WOW64.</summary>
-      /// <value><c>true</c> if the current process is running under WOW64; otherwise, <c>false</c>.</value>
+      /// <summary>現在のプロセスが WOW64 で実行されているかどうかを示す値を取得します。</summary>
+      /// <value>現在のプロセスが WOW64 で実行されている場合は <c>true</c>、それ以外の場合は <c>false</c>。</value>
       public static bool IsWow64Process
       {
          get
@@ -150,9 +150,9 @@ namespace Alphaleonis.Win32
                   throw new Win32Exception(Marshal.GetLastWin32Error());
                }
 
-               // A pointer to a value that is set to TRUE if the process is running under WOW64.
-               // If the process is running under 32-bit Windows, the value is set to FALSE.
-               // If the process is a 64-bit application running under 64-bit Windows, the value is also set to FALSE.
+               // プロセスが WOW64 で実行されている場合に TRUE に設定される値へのポインター。
+               // プロセスが 32 ビット Windows で実行されている場合、値は FALSE に設定される。
+               // プロセスが 64 ビット Windows で実行されている 64 ビットアプリケーションの場合も、値は FALSE に設定される。
 
                _isWow64Process = value;
             }
@@ -163,8 +163,8 @@ namespace Alphaleonis.Win32
 
 
       private static Version _osVersion;
-      /// <summary>Gets the numeric version of the operating system.</summary>            
-      /// <value>The numeric version of the operating system.</value>
+      /// <summary>オペレーティングシステムの数値バージョンを取得します。</summary>
+      /// <value>オペレーティングシステムの数値バージョン。</value>
       public static Version OSVersion
       {
          get
@@ -180,8 +180,8 @@ namespace Alphaleonis.Win32
 
 
       private static EnumOsName _enumOsName = EnumOsName.Later;
-      /// <summary>Gets the named version of the operating system.</summary>
-      /// <value>The named version of the operating system.</value>
+      /// <summary>オペレーティングシステムの名前付きバージョンを取得します。</summary>
+      /// <value>オペレーティングシステムの名前付きバージョン。</value>
       public static EnumOsName VersionName
       {
          get
@@ -197,9 +197,9 @@ namespace Alphaleonis.Win32
 
 
       private static EnumProcessorArchitecture _processorArchitecture;
-      /// <summary>Gets the processor architecture for which the operating system is targeted.</summary>
-      /// <value>The processor architecture for which the operating system is targeted.</value>
-      /// <remarks>If running under WOW64 this will return a 32-bit processor. Use <see cref="IsWow64Process"/> to determine if this is the case.</remarks>      
+      /// <summary>オペレーティングシステムが対象とするプロセッサアーキテクチャを取得します。</summary>
+      /// <value>オペレーティングシステムが対象とするプロセッサアーキテクチャ。</value>
+      /// <remarks>WOW64 で実行されている場合、32 ビットプロセッサが返されます。これに該当するかどうかを判定するには <see cref="IsWow64Process"/> を使用してください。</remarks>
       public static EnumProcessorArchitecture ProcessorArchitecture
       {
          get
@@ -215,9 +215,9 @@ namespace Alphaleonis.Win32
 
 
       private static Version _servicePackVersion;
-      /// <summary>Gets the version of the service pack currently installed on the operating system.</summary>
-      /// <value>The version of the service pack currently installed on the operating system.</value>
-      /// <remarks>Only the <see cref="System.Version.Major"/> and <see cref="System.Version.Minor"/> fields are used.</remarks>
+      /// <summary>オペレーティングシステムに現在インストールされているサービスパックのバージョンを取得します。</summary>
+      /// <value>オペレーティングシステムに現在インストールされているサービスパックのバージョン。</value>
+      /// <remarks><see cref="System.Version.Major"/> および <see cref="System.Version.Minor"/> フィールドのみが使用されます。</remarks>
       public static Version ServicePackVersion
       {
          get
@@ -236,19 +236,19 @@ namespace Alphaleonis.Win32
 
       #region Methods
 
-      /// <summary>Determines whether the operating system is of the specified version or later.</summary>
-      /// <returns><c>true</c> if the operating system is of the specified <paramref name="version"/> or later; otherwise, <c>false</c>.</returns>      
-      /// <param name="version">The lowest version for which to return true.</param>
+      /// <summary>オペレーティングシステムが指定されたバージョン以降であるかどうかを判定します。</summary>
+      /// <returns>オペレーティングシステムが指定された <paramref name="version"/> 以降の場合は <c>true</c>、それ以外の場合は <c>false</c>。</returns>
+      /// <param name="version">true を返す最小バージョン。</param>
       public static bool IsAtLeast(EnumOsName version)
       {
          return VersionName >= version;
       }
 
       
-      /// <summary>Determines whether the operating system is of the specified version or later, allowing specification of a minimum service pack that must be installed on the lowest version.</summary>
-      /// <returns><c>true</c> if the operating system matches the specified <paramref name="version"/> with the specified service pack, or if the operating system is of a later version; otherwise, <c>false</c>.</returns>      
-      /// <param name="version">The minimum required version.</param>
-      /// <param name="servicePackVersion">The major version of the service pack that must be installed on the minimum required version to return true. This can be 0 to indicate that no service pack is required.</param>
+      /// <summary>オペレーティングシステムが指定されたバージョン以降であるかどうかを判定し、最小バージョンにインストールされている必要がある最小サービスパックの指定を可能にします。</summary>
+      /// <returns>オペレーティングシステムが指定されたサービスパックを持つ指定された <paramref name="version"/> に一致する場合、またはオペレーティングシステムがそれ以降のバージョンの場合は <c>true</c>、それ以外の場合は <c>false</c>。</returns>
+      /// <param name="version">必要な最小バージョン。</param>
+      /// <param name="servicePackVersion">true を返すために必要な最小バージョンにインストールされている必要があるサービスパックのメジャーバージョン。サービスパックが不要であることを示すには 0 を指定できます。</param>
       public static bool IsAtLeast(EnumOsName version, int servicePackVersion)
       {
          return VersionName > version || (VersionName >= version && ServicePackVersion.Major >= servicePackVersion);
@@ -264,15 +264,15 @@ namespace Alphaleonis.Win32
       {
          var verInfo = new NativeMethods.RTL_OSVERSIONINFOEXW();
 
-         // Needed to prevent: System.Runtime.InteropServices.COMException:
-         // The data area passed to a system call is too small. (Exception from HRESULT: 0x8007007A)
+         // 次のエラーを防ぐために必要: System.Runtime.InteropServices.COMException:
+         // システムコールに渡されたデータ領域が小さすぎます。(HRESULT からの例外: 0x8007007A)
          verInfo.dwOSVersionInfoSize = Marshal.SizeOf(verInfo);
 
          var sysInfo = new NativeMethods.SYSTEM_INFO();
          NativeMethods.GetNativeSystemInfo(ref sysInfo);
 
 
-         // RtlGetVersion returns STATUS_SUCCESS (0).
+         // RtlGetVersion は STATUS_SUCCESS (0) を返す。
          var success = !NativeMethods.RtlGetVersion(ref verInfo);
          
          var lastError = Marshal.GetLastWin32Error();
@@ -312,7 +312,7 @@ namespace Alphaleonis.Win32
          //    Windows 2000	               5.0               Not applicable
 
 
-         // 2017-01-07: 10 == The lastest MajorVersion of Windows.
+         // 2017-01-07: 10 == Windows の最新 MajorVersion。
          if (verInfo.dwMajorVersion > 10)
          {
             _enumOsName = EnumOsName.Later;
@@ -466,33 +466,33 @@ namespace Alphaleonis.Win32
          }
 
 
-         /// <summary>The RtlGetVersion routine returns version information about the currently running operating system.</summary>
-         /// <returns>RtlGetVersion returns STATUS_SUCCESS.</returns>
-         /// <remarks>Available starting with Windows 2000.</remarks>
+         /// <summary>RtlGetVersion ルーチンは、現在実行中のオペレーティングシステムに関するバージョン情報を返します。</summary>
+         /// <returns>RtlGetVersion は STATUS_SUCCESS を返します。</returns>
+         /// <remarks>Windows 2000 以降で利用可能です。</remarks>
          [SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule"), DllImport("ntdll.dll", SetLastError = true, CharSet = CharSet.Unicode)]
          [return: MarshalAs(UnmanagedType.Bool)]
          internal static extern bool RtlGetVersion([MarshalAs(UnmanagedType.Struct)] ref RTL_OSVERSIONINFOEXW lpVersionInformation);
 
 
-         /// <summary>Retrieves information about the current system to an application running under WOW64.
-         /// If the function is called from a 64-bit application, it is equivalent to the GetSystemInfo function.
+         /// <summary>WOW64 で実行されているアプリケーションに現在のシステムに関する情報を取得します。
+         /// 64 ビットアプリケーションから呼び出された場合、GetSystemInfo 関数と同等です。
          /// </summary>
-         /// <returns>This function does not return a value.</returns>
-         /// <remarks>To determine whether a Win32-based application is running under WOW64, call the <see cref="IsWow64Process"/> function.</remarks>
-         /// <remarks>Minimum supported client: Windows XP [desktop apps | Windows Store apps]</remarks>
-         /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps | Windows Store apps]</remarks>
+         /// <returns>この関数は値を返しません。</returns>
+         /// <remarks>Win32 ベースのアプリケーションが WOW64 で実行されているかどうかを判定するには、<see cref="IsWow64Process"/> 関数を呼び出してください。</remarks>
+         /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリ | Windows ストアアプリ]</remarks>
+         /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリ | Windows ストアアプリ]</remarks>
          [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
          [DllImport("kernel32.dll", SetLastError = false, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
          internal static extern void GetNativeSystemInfo([MarshalAs(UnmanagedType.Struct)] ref SYSTEM_INFO lpSystemInfo);
 
 
-         /// <summary>Determines whether the specified process is running under WOW64.</summary>
+         /// <summary>指定されたプロセスが WOW64 で実行されているかどうかを判定します。</summary>
          /// <returns>
-         /// If the function succeeds, the return value is a nonzero value.
-         /// If the function fails, the return value is zero. To get extended error information, call GetLastError.
+         /// 関数が成功した場合、戻り値はゼロ以外の値です。
+         /// 関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには、GetLastError を呼び出してください。
          /// </returns>
-         /// <remarks>Minimum supported client: Windows Vista, Windows XP with SP2 [desktop apps only]</remarks>
-         /// <remarks>Minimum supported server: Windows Server 2008, Windows Server 2003 with SP1 [desktop apps only]</remarks>
+         /// <remarks>サポートされる最小クライアント: Windows Vista、Windows XP SP2 [デスクトップアプリのみ]</remarks>
+         /// <remarks>サポートされる最小サーバー: Windows Server 2008、Windows Server 2003 SP1 [デスクトップアプリのみ]</remarks>
          [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
          [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
          [return: MarshalAs(UnmanagedType.Bool)]

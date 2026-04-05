@@ -25,10 +25,10 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Contains the name of a domain-based Distributed File System (DFS) namespace.</summary>
+      /// <summary>ドメインベースの分散ファイルシステム (DFS) 名前空間の名前を含みます.</summary>
       /// <remarks>This structure is only for use with the NetDfsEnum, NetDfsGetClientInfo, and NetDfsGetInfo functions.</remarks>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [desktop apps only]</remarks>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct DFS_INFO_200
       {

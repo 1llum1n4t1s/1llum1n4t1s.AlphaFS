@@ -26,20 +26,20 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Represents a wrapper class for a handle used by the SetupDiGetClassDevs/SetupDiDestroyDeviceInfoList Win32 API functions.</summary>
+      /// <summary>SetupDiGetClassDevs/SetupDiDestroyDeviceInfoList Win32 API関数で使用されるハンドルのラッパークラスを表します。</summary>
       [SecurityCritical]
       public sealed class SafeSetupDiClassDevsExHandle : SafeHandleZeroOrMinusOneIsInvalid
       {
-         /// <summary>Initializes a new instance of the <see cref="SafeSetupDiClassDevsExHandle"/> class.</summary>
+         /// <summary><see cref="SafeSetupDiClassDevsExHandle"/>クラスの新しいインスタンスを初期化します。</summary>
          public SafeSetupDiClassDevsExHandle() : base(true)
          {
          }
 
 
-         /// <summary>When overridden in a derived class, executes the code required to free the handle.</summary>
+         /// <summary>派生クラスでオーバーライドされた場合、ハンドルを解放するために必要なコードを実行します。</summary>
          /// <returns>
-         /// <c>true</c> if the handle is released successfully; otherwise, in the event of a catastrophic failure,
-         /// <c>false</c>. In this case, it generates a ReleaseHandleFailed Managed Debugging Assistant.
+         /// ハンドルが正常に解放された場合は<c>true</c>、致命的な障害が発生した場合は
+         /// <c>false</c>。この場合、ReleaseHandleFailed マネージデバッグアシスタントが生成されます。
          /// </returns>
          protected override bool ReleaseHandle()
          {

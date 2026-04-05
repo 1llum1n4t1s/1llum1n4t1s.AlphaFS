@@ -31,17 +31,17 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region CM_Xxx
 
-      /// <summary>The CM_Connect_Machine function creates a connection to a remote machine.</summary>
+      /// <summary>CM_Connect_Machine 関数はリモートマシンへの接続を作成します。</summary>
       /// <remarks>
-      ///   <para>Beginning in Windows 8 and Windows Server 2012 functionality to access remote machines has been removed.</para>
-      ///   <para>You cannot access remote machines when running on these versions of Windows.</para>
-      ///   <para>Available in Microsoft Windows 2000 and later versions of Windows.</para>
+      ///   <para>Windows 8 および Windows Server 2012 以降、リモートマシンへのアクセス機能は削除されました。</para>
+      ///   <para>これらのバージョンの Windows で実行している場合、リモートマシンにアクセスできません。</para>
+      ///   <para>Microsoft Windows 2000 以降のバージョンの Windows で利用可能です。</para>
       /// </remarks>
-      /// <param name="uncServerName">Name of the unc server.</param>
-      /// <param name="phMachine">[out] The ph machine.</param>
+      /// <param name="uncServerName">UNC サーバー名。</param>
+      /// <param name="phMachine">[out] マシンハンドル。</param>
       /// <returns>
-      ///   <para>If the operation succeeds, the function returns CR_SUCCESS.</para>
-      ///   <para>Otherwise, it returns one of the CR_-prefixed error codes defined in Cfgmgr32.h.</para>
+      ///   <para>操作が成功した場合、関数は CR_SUCCESS を返します。</para>
+      ///   <para>それ以外の場合、Cfgmgr32.h で定義された CR_ プレフィックス付きのエラーコードの1つを返します。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("setupapi.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "CM_Connect_MachineW"), SuppressUnmanagedCodeSecurity]
@@ -49,22 +49,22 @@ namespace Alphaleonis.Win32.Filesystem
       public static extern int CM_Connect_Machine([MarshalAs(UnmanagedType.LPWStr)] string uncServerName, out SafeCmConnectMachineHandle phMachine);
 
       /// <summary>
-      ///   The CM_Get_Device_ID_Ex function retrieves the device instance ID for a specified device instance on a local or a remote machine.
+      ///   CM_Get_Device_ID_Ex 関数は、ローカルまたはリモートマシン上の指定されたデバイスインスタンスのデバイスインスタンス ID を取得します。
       /// </summary>
       /// <remarks>
-      ///   <para>Beginning in Windows 8 and Windows Server 2012 functionality to access remote machines has been removed.</para>
-      ///   <para>You cannot access remote machines when running on these versions of Windows.</para>
+      ///   <para>Windows 8 および Windows Server 2012 以降、リモートマシンへのアクセス機能は削除されました。</para>
+      ///   <para>これらのバージョンの Windows で実行している場合、リモートマシンにアクセスできません。</para>
       ///   <para>&#160;</para>
-      ///   <para>Available in Microsoft Windows 2000 and later versions of Windows.</para>
+      ///   <para>Microsoft Windows 2000 以降のバージョンの Windows で利用可能です。</para>
       /// </remarks>
-      /// <param name="dnDevInst">The dn development instance.</param>
-      /// <param name="buffer">The buffer.</param>
-      /// <param name="bufferLen">Length of the buffer.</param>
-      /// <param name="ulFlags">The ul flags.</param>
-      /// <param name="hMachine">The machine.</param>
+      /// <param name="dnDevInst">デバイスインスタンス。</param>
+      /// <param name="buffer">バッファ。</param>
+      /// <param name="bufferLen">バッファの長さ。</param>
+      /// <param name="ulFlags">フラグ。</param>
+      /// <param name="hMachine">マシン。</param>
       /// <returns>
-      ///   <para>If the operation succeeds, the function returns CR_SUCCESS.</para>
-      ///   <para>Otherwise, it returns one of the CR_-prefixed error codes defined in Cfgmgr32.h.</para>
+      ///   <para>操作が成功した場合、関数は CR_SUCCESS を返します。</para>
+      ///   <para>それ以外の場合、Cfgmgr32.h で定義された CR_ プレフィックス付きのエラーコードの1つを返します。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("setupapi.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "CM_Get_Device_ID_ExW"), SuppressUnmanagedCodeSecurity]
@@ -72,18 +72,18 @@ namespace Alphaleonis.Win32.Filesystem
       public static extern int CM_Get_Device_ID_Ex([MarshalAs(UnmanagedType.U4)] uint dnDevInst, SafeGlobalMemoryBufferHandle buffer, [MarshalAs(UnmanagedType.U4)] uint bufferLen, [MarshalAs(UnmanagedType.U4)] uint ulFlags, SafeCmConnectMachineHandle hMachine);
 
       /// <summary>
-      ///   The CM_Disconnect_Machine function removes a connection to a remote machine.
+      ///   CM_Disconnect_Machine 関数はリモートマシンへの接続を削除します。
       /// </summary>
       /// <remarks>
-      ///   <para>Beginning in Windows 8 and Windows Server 2012 functionality to access remote machines has been removed.</para>
-      ///   <para>You cannot access remote machines when running on these versions of Windows.</para>
-      ///   <para>SetLastError is set to <c>false</c>.</para>
-      ///   <para>Available in Microsoft Windows 2000 and later versions of Windows.</para>
+      ///   <para>Windows 8 および Windows Server 2012 以降、リモートマシンへのアクセス機能は削除されました。</para>
+      ///   <para>これらのバージョンの Windows で実行している場合、リモートマシンにアクセスできません。</para>
+      ///   <para>SetLastError は <c>false</c> に設定されています。</para>
+      ///   <para>Microsoft Windows 2000 以降のバージョンの Windows で利用可能です。</para>
       /// </remarks>
-      /// <param name="hMachine">The machine.</param>
+      /// <param name="hMachine">マシン。</param>
       /// <returns>
-      ///   <para>If the operation succeeds, the function returns CR_SUCCESS.</para>
-      ///   <para>Otherwise, it returns one of the CR_-prefixed error codes defined in Cfgmgr32.h.</para>
+      ///   <para>操作が成功した場合、関数は CR_SUCCESS を返します。</para>
+      ///   <para>それ以外の場合、Cfgmgr32.h で定義された CR_ プレフィックス付きのエラーコードの1つを返します。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("setupapi.dll", SetLastError = false, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
@@ -91,21 +91,21 @@ namespace Alphaleonis.Win32.Filesystem
       internal static extern int CM_Disconnect_Machine(IntPtr hMachine);
 
       /// <summary>
-      ///   The CM_Get_Parent_Ex function obtains a device instance handle to the parent node of a specified device node (devnode) in a local
-      ///   or a remote machine's device tree.
+      ///   CM_Get_Parent_Ex 関数は、ローカルまたはリモートマシンのデバイスツリー内の指定されたデバイスノード (devnode) の
+      ///   親ノードへのデバイスインスタンスハンドルを取得します。
       /// </summary>
       /// <remarks>
-      ///   <para>Beginning in Windows 8 and Windows Server 2012 functionality to access remote machines has been removed.</para>
-      ///   <para>You cannot access remote machines when running on these versions of Windows.</para>
-      ///   <para>Available in Microsoft Windows 2000 and later versions of Windows.</para>
+      ///   <para>Windows 8 および Windows Server 2012 以降、リモートマシンへのアクセス機能は削除されました。</para>
+      ///   <para>これらのバージョンの Windows で実行している場合、リモートマシンにアクセスできません。</para>
+      ///   <para>Microsoft Windows 2000 以降のバージョンの Windows で利用可能です。</para>
       /// </remarks>
-      /// <param name="pdnDevInst">[out] The pdn development instance.</param>
-      /// <param name="dnDevInst">The dn development instance.</param>
-      /// <param name="ulFlags">The ul flags.</param>
-      /// <param name="hMachine">The machine.</param>
+      /// <param name="pdnDevInst">[out] 親デバイスインスタンス。</param>
+      /// <param name="dnDevInst">デバイスインスタンス。</param>
+      /// <param name="ulFlags">フラグ。</param>
+      /// <param name="hMachine">マシン。</param>
       /// <returns>
-      ///   <para>If the operation succeeds, the function returns CR_SUCCESS.</para>
-      ///   <para>Otherwise, it returns one of the CR_-prefixed error codes defined in Cfgmgr32.h.</para>
+      ///   <para>操作が成功した場合、関数は CR_SUCCESS を返します。</para>
+      ///   <para>それ以外の場合、Cfgmgr32.h で定義された CR_ プレフィックス付きのエラーコードの1つを返します。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("setupapi.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
@@ -116,76 +116,76 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region DeviceIoControl
 
-      /// <summary>Sends a control code directly to a specified device driver, causing the corresponding device to perform the corresponding operation.</summary>
+      /// <summary>指定されたデバイスドライバに直接制御コードを送信し、対応するデバイスに対応する操作を実行させます。</summary>
       /// <returns>
-      ///   <para>If the operation completes successfully, the return value is nonzero.</para>
-      ///   <para>If the operation fails or is pending, the return value is zero. To get extended error information, call GetLastError.</para>
+      ///   <para>操作が正常に完了した場合、戻り値はゼロ以外です。</para>
+      ///   <para>操作が失敗したか保留中の場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。</para>
       /// </returns>
       /// <remarks>
-      ///   <para>To retrieve a handle to the device, you must call the <see cref="CreateFile"/> function with either the name of a device or
-      ///   the name of the driver associated with a device.</para>
-      ///   <para>To specify a device name, use the following format: <c>\\.\DeviceName</c></para>
-      ///   <para>Minimum supported client: Windows XP</para>
-      ///   <para>Minimum supported server: Windows Server 2003</para>
+      ///   <para>デバイスへのハンドルを取得するには、デバイスの名前またはデバイスに関連付けられたドライバの名前を指定して
+      ///   <see cref="CreateFile"/> 関数を呼び出す必要があります。</para>
+      ///   <para>デバイス名を指定するには、次の形式を使用します: <c>\\.\DeviceName</c></para>
+      ///   <para>サポートされる最小クライアント: Windows XP</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2003</para>
       /// </remarks>
-      /// <param name="hDevice">The device.</param>
-      /// <param name="dwIoControlCode">The i/o control code.</param>
-      /// <param name="lpInBuffer">Buffer for in data.</param>
-      /// <param name="nInBufferSize">Size of the in buffer.</param>
-      /// <param name="lpOutBuffer">Buffer for out data.</param>
-      /// <param name="nOutBufferSize">Size of the out buffer.</param>
-      /// <param name="lpBytesReturned">[out] The bytes returned.</param>
-      /// <param name="lpOverlapped">The overlapped.</param>
+      /// <param name="hDevice">デバイス。</param>
+      /// <param name="dwIoControlCode">I/O 制御コード。</param>
+      /// <param name="lpInBuffer">入力データ用バッファ。</param>
+      /// <param name="nInBufferSize">入力バッファのサイズ。</param>
+      /// <param name="lpOutBuffer">出力データ用バッファ。</param>
+      /// <param name="nOutBufferSize">出力バッファのサイズ。</param>
+      /// <param name="lpBytesReturned">[out] 返されたバイト数。</param>
+      /// <param name="lpOverlapped">オーバーラップ構造体。</param>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]
       internal static extern bool DeviceIoControl(SafeFileHandle hDevice, [MarshalAs(UnmanagedType.U4)] uint dwIoControlCode, IntPtr lpInBuffer, [MarshalAs(UnmanagedType.U4)] uint nInBufferSize, SafeGlobalMemoryBufferHandle lpOutBuffer, [MarshalAs(UnmanagedType.U4)] uint nOutBufferSize, [MarshalAs(UnmanagedType.U4)] out uint lpBytesReturned, IntPtr lpOverlapped);
 
-      /// <summary>Sends a control code directly to a specified device driver, causing the corresponding device to perform the corresponding operation.</summary>
+      /// <summary>指定されたデバイスドライバに直接制御コードを送信し、対応するデバイスに対応する操作を実行させます。</summary>
       /// <returns>
-      ///   <para>If the operation completes successfully, the return value is nonzero.</para>
-      ///   <para>If the operation fails or is pending, the return value is zero. To get extended error information, call GetLastError.</para>
+      ///   <para>操作が正常に完了した場合、戻り値はゼロ以外です。</para>
+      ///   <para>操作が失敗したか保留中の場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。</para>
       /// </returns>
       /// <remarks>
-      ///   <para>To retrieve a handle to the device, you must call the <see cref="CreateFile"/> function with either the name of a device or
-      ///   the name of the driver associated with a device.</para>
-      ///   <para>To specify a device name, use the following format: <c>\\.\DeviceName</c></para>
-      ///   <para>Minimum supported client: Windows XP</para>
-      ///   <para>Minimum supported server: Windows Server 2003</para>
+      ///   <para>デバイスへのハンドルを取得するには、デバイスの名前またはデバイスに関連付けられたドライバの名前を指定して
+      ///   <see cref="CreateFile"/> 関数を呼び出す必要があります。</para>
+      ///   <para>デバイス名を指定するには、次の形式を使用します: <c>\\.\DeviceName</c></para>
+      ///   <para>サポートされる最小クライアント: Windows XP</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2003</para>
       /// </remarks>
-      /// <param name="hDevice">The device.</param>
-      /// <param name="dwIoControlCode">The i/o control code.</param>
-      /// <param name="lpInBuffer">Buffer for in data.</param>
-      /// <param name="nInBufferSize">Size of the in buffer.</param>
-      /// <param name="lpOutBuffer">Buffer for out data.</param>
-      /// <param name="nOutBufferSize">Size of the out buffer.</param>
-      /// <param name="lpBytesReturned">[out] The bytes returned.</param>
-      /// <param name="lpOverlapped">The overlapped.</param>
+      /// <param name="hDevice">デバイス。</param>
+      /// <param name="dwIoControlCode">I/O 制御コード。</param>
+      /// <param name="lpInBuffer">入力データ用バッファ。</param>
+      /// <param name="nInBufferSize">入力バッファのサイズ。</param>
+      /// <param name="lpOutBuffer">出力データ用バッファ。</param>
+      /// <param name="nOutBufferSize">出力バッファのサイズ。</param>
+      /// <param name="lpBytesReturned">[out] 返されたバイト数。</param>
+      /// <param name="lpOverlapped">オーバーラップ構造体。</param>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "DeviceIoControl"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]
       internal static extern bool DeviceIoControl2(SafeFileHandle hDevice, [MarshalAs(UnmanagedType.U4)] uint dwIoControlCode, SafeGlobalMemoryBufferHandle lpInBuffer, [MarshalAs(UnmanagedType.U4)] uint nInBufferSize, IntPtr lpOutBuffer, [MarshalAs(UnmanagedType.U4)] uint nOutBufferSize, [MarshalAs(UnmanagedType.U4)] out uint lpBytesReturned, IntPtr lpOverlapped);
 
-      /// <summary>Sends a control code directly to a specified device driver, causing the corresponding device to perform the corresponding operation.</summary>
+      /// <summary>指定されたデバイスドライバに直接制御コードを送信し、対応するデバイスに対応する操作を実行させます。</summary>
       /// <returns>
-      ///   <para>If the operation completes successfully, the return value is nonzero.</para>
-      ///   <para>If the operation fails or is pending, the return value is zero. To get extended error information, call GetLastError.</para>
+      ///   <para>操作が正常に完了した場合、戻り値はゼロ以外です。</para>
+      ///   <para>操作が失敗したか保留中の場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。</para>
       /// </returns>
       /// <remarks>
-      ///   <para>To retrieve a handle to the device, you must call the <see cref="CreateFile"/> function with either the name of a device or
-      ///   the name of the driver associated with a device.</para>
-      ///   <para>To specify a device name, use the following format: <c>\\.\DeviceName</c></para>
-      ///   <para>Minimum supported client: Windows XP</para>
-      ///   <para>Minimum supported server: Windows Server 2003</para>
+      ///   <para>デバイスへのハンドルを取得するには、デバイスの名前またはデバイスに関連付けられたドライバの名前を指定して
+      ///   <see cref="CreateFile"/> 関数を呼び出す必要があります。</para>
+      ///   <para>デバイス名を指定するには、次の形式を使用します: <c>\\.\DeviceName</c></para>
+      ///   <para>サポートされる最小クライアント: Windows XP</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2003</para>
       /// </remarks>
-      /// <param name="hDevice">The device.</param>
-      /// <param name="dwIoControlCode">The i/o control code.</param>
-      /// <param name="lpInBuffer">Buffer for in data.</param>
-      /// <param name="nInBufferSize">Size of the in buffer.</param>
-      /// <param name="lpOutBuffer">Buffer for out data.</param>
-      /// <param name="nOutBufferSize">Size of the out buffer.</param>
-      /// <param name="lpBytesReturned">[out] The bytes returned.</param>
-      /// <param name="lpOverlapped">The overlapped.</param>
+      /// <param name="hDevice">デバイス。</param>
+      /// <param name="dwIoControlCode">I/O 制御コード。</param>
+      /// <param name="lpInBuffer">入力データ用バッファ。</param>
+      /// <param name="nInBufferSize">入力バッファのサイズ。</param>
+      /// <param name="lpOutBuffer">出力データ用バッファ。</param>
+      /// <param name="nOutBufferSize">出力バッファのサイズ。</param>
+      /// <param name="lpBytesReturned">[out] 返されたバイト数。</param>
+      /// <param name="lpOverlapped">オーバーラップ構造体。</param>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "DeviceIoControl"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]
@@ -196,16 +196,16 @@ namespace Alphaleonis.Win32.Filesystem
       #region SetupDiXxx
 
       /// <summary>
-      ///   The SetupDiDestroyDeviceInfoList function deletes a device information set and frees all associated memory.
+      ///   SetupDiDestroyDeviceInfoList 関数はデバイス情報セットを削除し、関連するすべてのメモリを解放します。
       /// </summary>
       /// <remarks>
-      ///   <para>SetLastError is set to <c>false</c>.</para>
-      ///   <para>Available in Microsoft Windows 2000 and later versions of Windows.</para>
+      ///   <para>SetLastError は <c>false</c> に設定されています。</para>
+      ///   <para>Microsoft Windows 2000 以降のバージョンの Windows で利用可能です。</para>
       /// </remarks>
-      /// <param name="hDevInfo">Information describing the development.</param>
+      /// <param name="hDevInfo">デバイス情報。</param>
       /// <returns>
-      ///   <para>The function returns TRUE if it is successful.</para>
-      ///   <para>Otherwise, it returns FALSE and the logged error can be retrieved with a call to GetLastError.</para>
+      ///   <para>関数が成功した場合、TRUE を返します。</para>
+      ///   <para>それ以外の場合、FALSE を返し、記録されたエラーは GetLastError の呼び出しで取得できます。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("setupapi.dll", SetLastError = false, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
@@ -213,25 +213,22 @@ namespace Alphaleonis.Win32.Filesystem
       private static extern bool SetupDiDestroyDeviceInfoList(IntPtr hDevInfo);
 
       /// <summary>
-      ///   The SetupDiEnumDeviceInterfaces function enumerates the device interfaces that are contained in a device information set.
+      ///   SetupDiEnumDeviceInterfaces 関数はデバイス情報セットに含まれるデバイスインターフェイスを列挙します。
       /// </summary>
       /// <remarks>
-      ///   <para>Repeated calls to this function return an <see cref="SP_DEVICE_INTERFACE_DATA"/> structure for a different device
-      ///   interface.</para>
-      ///   <para>This function can be called repeatedly to get information about interfaces in a device information set that are
-      ///   associated</para>
-      ///   <para>with a particular device information element or that are associated with all device information elements.</para>
-      ///   <para>Available in Microsoft Windows 2000 and later versions of Windows.</para>
+      ///   <para>この関数を繰り返し呼び出すと、異なるデバイスインターフェイスの <see cref="SP_DEVICE_INTERFACE_DATA"/> 構造体が返されます。</para>
+      ///   <para>この関数を繰り返し呼び出すことで、デバイス情報セット内の特定のデバイス情報要素に関連付けられたインターフェイス、</para>
+      ///   <para>またはすべてのデバイス情報要素に関連付けられたインターフェイスに関する情報を取得できます。</para>
+      ///   <para>Microsoft Windows 2000 以降のバージョンの Windows で利用可能です。</para>
       /// </remarks>
-      /// <param name="hDevInfo">Information describing the development.</param>
-      /// <param name="devInfo">Information describing the development.</param>
-      /// <param name="interfaceClassGuid">[in,out] Unique identifier for the interface class.</param>
-      /// <param name="memberIndex">Zero-based index of the member.</param>
-      /// <param name="deviceInterfaceData">[in,out] Information describing the device interface.</param>
+      /// <param name="hDevInfo">デバイス情報。</param>
+      /// <param name="devInfo">デバイス情報。</param>
+      /// <param name="interfaceClassGuid">[in,out] インターフェイスクラスの一意識別子。</param>
+      /// <param name="memberIndex">メンバーのゼロベースインデックス。</param>
+      /// <param name="deviceInterfaceData">[in,out] デバイスインターフェイス情報。</param>
       /// <returns>
-      ///   <para>SetupDiEnumDeviceInterfaces returns TRUE if the function completed without error.</para>
-      ///   <para>If the function completed with an error, FALSE is returned and the error code for the failure can be retrieved by calling
-      ///   GetLastError.</para>
+      ///   <para>関数がエラーなしで完了した場合、SetupDiEnumDeviceInterfaces は TRUE を返します。</para>
+      ///   <para>関数がエラーで完了した場合、FALSE が返され、GetLastError を呼び出すことで失敗のエラーコードを取得できます。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("setupapi.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
@@ -239,50 +236,48 @@ namespace Alphaleonis.Win32.Filesystem
       internal static extern bool SetupDiEnumDeviceInterfaces(SafeHandle hDevInfo, IntPtr devInfo, ref Guid interfaceClassGuid, [MarshalAs(UnmanagedType.U4)] uint memberIndex, ref SP_DEVICE_INTERFACE_DATA deviceInterfaceData);
 
       /// <summary>
-      ///   The SetupDiGetClassDevsEx function returns a handle to a device information set that contains requested device information elements
-      ///   for a local or a remote computer.
+      ///   SetupDiGetClassDevsEx 関数は、ローカルまたはリモートコンピュータの要求されたデバイス情報要素を含む
+      ///   デバイス情報セットへのハンドルを返します。
       /// </summary>
       /// <remarks>
-      ///   <para>The caller of SetupDiGetClassDevsEx must delete the returned device information set when it is no longer needed by calling
-      ///   <see cref="SetupDiDestroyDeviceInfoList"/>.</para>
-      ///   <para>Available in Microsoft Windows 2000 and later versions of Windows.</para>
+      ///   <para>SetupDiGetClassDevsEx の呼び出し元は、不要になった返されたデバイス情報セットを
+      ///   <see cref="SetupDiDestroyDeviceInfoList"/> を呼び出して削除する必要があります。</para>
+      ///   <para>Microsoft Windows 2000 以降のバージョンの Windows で利用可能です。</para>
       /// </remarks>
-      /// <param name="classGuid">[in,out] Unique identifier for the class.</param>
-      /// <param name="enumerator">The enumerator.</param>
-      /// <param name="hwndParent">The parent.</param>
-      /// <param name="devsExFlags">The devs ex flags.</param>
-      /// <param name="deviceInfoSet">Set the device information belongs to.</param>
-      /// <param name="machineName">Name of the machine.</param>
-      /// <param name="reserved">The reserved.</param>
+      /// <param name="classGuid">[in,out] クラスの一意識別子。</param>
+      /// <param name="enumerator">列挙子。</param>
+      /// <param name="hwndParent">親ウィンドウ。</param>
+      /// <param name="devsExFlags">デバイス拡張フラグ。</param>
+      /// <param name="deviceInfoSet">デバイス情報が属するセット。</param>
+      /// <param name="machineName">マシン名。</param>
+      /// <param name="reserved">予約済み。</param>
       /// <returns>
-      ///   <para>If the operation succeeds, SetupDiGetClassDevsEx returns a handle to a device information set that contains all installed
-      ///   devices that matched the supplied parameters.</para>
-      ///   <para>If the operation fails, the function returns INVALID_HANDLE_VALUE. To get extended error information, call
-      ///   GetLastError.</para>
+      ///   <para>操作が成功した場合、SetupDiGetClassDevsEx は指定されたパラメータに一致するすべてのインストール済みデバイスを含む
+      ///   デバイス情報セットへのハンドルを返します。</para>
+      ///   <para>操作が失敗した場合、関数は INVALID_HANDLE_VALUE を返します。拡張エラー情報を取得するには
+      ///   GetLastError を呼び出してください。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("setupapi.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
       internal static extern SafeSetupDiClassDevsExHandle SetupDiGetClassDevsEx(ref Guid classGuid, IntPtr enumerator, IntPtr hwndParent, [MarshalAs(UnmanagedType.U4)] SetupDiGetClassDevsExFlags devsExFlags, IntPtr deviceInfoSet, [MarshalAs(UnmanagedType.LPWStr)] string machineName, IntPtr reserved);
 
       /// <summary>
-      ///   The SetupDiGetDeviceInterfaceDetail function returns details about a device interface.
+      ///   SetupDiGetDeviceInterfaceDetail 関数はデバイスインターフェイスの詳細を返します。
       /// </summary>
       /// <remarks>
-      ///   <para>The interface detail returned by this function consists of a device path that can be passed to Win32 functions such as
-      ///   CreateFile.</para>
-      ///   <para>Do not attempt to parse the device path symbolic name. The device path can be reused across system starts.</para>
-      ///   <para>Available in Microsoft Windows 2000 and later versions of Windows.</para>
+      ///   <para>この関数が返すインターフェイスの詳細は、CreateFile などの Win32 関数に渡すことができるデバイスパスで構成されます。</para>
+      ///   <para>デバイスパスのシンボリック名を解析しようとしないでください。デバイスパスはシステムの再起動をまたいで再利用できます。</para>
+      ///   <para>Microsoft Windows 2000 以降のバージョンの Windows で利用可能です。</para>
       /// </remarks>
-      /// <param name="hDevInfo">Information describing the development.</param>
-      /// <param name="deviceInterfaceData">[in,out] Information describing the device interface.</param>
-      /// <param name="deviceInterfaceDetailData">[in,out] Information describing the device interface detail.</param>
-      /// <param name="deviceInterfaceDetailDataSize">Size of the device interface detail data.</param>
-      /// <param name="requiredSize">Size of the required.</param>
-      /// <param name="deviceInfoData">[in,out] Information describing the device information.</param>
+      /// <param name="hDevInfo">デバイス情報。</param>
+      /// <param name="deviceInterfaceData">[in,out] デバイスインターフェイス情報。</param>
+      /// <param name="deviceInterfaceDetailData">[in,out] デバイスインターフェイスの詳細情報。</param>
+      /// <param name="deviceInterfaceDetailDataSize">デバイスインターフェイスの詳細データのサイズ。</param>
+      /// <param name="requiredSize">必要なサイズ。</param>
+      /// <param name="deviceInfoData">[in,out] デバイス情報データ。</param>
       /// <returns>
-      ///   <para>SetupDiGetDeviceInterfaceDetail returns TRUE if the function completed without error.</para>
-      ///   <para>If the function completed with an error, FALSE is returned and the error code for the failure can be retrieved by calling
-      ///   GetLastError.</para>
+      ///   <para>関数がエラーなしで完了した場合、SetupDiGetDeviceInterfaceDetail は TRUE を返します。</para>
+      ///   <para>関数がエラーで完了した場合、FALSE が返され、GetLastError を呼び出すことで失敗のエラーコードを取得できます。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("setupapi.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
@@ -290,21 +285,21 @@ namespace Alphaleonis.Win32.Filesystem
       internal static extern bool SetupDiGetDeviceInterfaceDetail(SafeHandle hDevInfo, ref SP_DEVICE_INTERFACE_DATA deviceInterfaceData, ref SP_DEVICE_INTERFACE_DETAIL_DATA deviceInterfaceDetailData, [MarshalAs(UnmanagedType.U4)] uint deviceInterfaceDetailDataSize, IntPtr requiredSize, ref SP_DEVINFO_DATA deviceInfoData);
 
       /// <summary>
-      ///   The SetupDiGetDeviceRegistryProperty function retrieves a specified Plug and Play device property.
+      ///   SetupDiGetDeviceRegistryProperty 関数は指定されたプラグアンドプレイデバイスプロパティを取得します。
       /// </summary>
-      /// <remarks><para>Available in Microsoft Windows 2000 and later versions of Windows.</para></remarks>
-      /// <param name="deviceInfoSet">Set the device information belongs to.</param>
-      /// <param name="deviceInfoData">[in,out] Information describing the device information.</param>
-      /// <param name="property">The property.</param>
-      /// <param name="propertyRegDataType">[out] Type of the property register data.</param>
-      /// <param name="propertyBuffer">Buffer for property data.</param>
-      /// <param name="propertyBufferSize">Size of the property buffer.</param>
-      /// <param name="requiredSize">Size of the required.</param>
+      /// <remarks><para>Microsoft Windows 2000 以降のバージョンの Windows で利用可能です。</para></remarks>
+      /// <param name="deviceInfoSet">デバイス情報が属するセット。</param>
+      /// <param name="deviceInfoData">[in,out] デバイス情報データ。</param>
+      /// <param name="property">プロパティ。</param>
+      /// <param name="propertyRegDataType">[out] プロパティレジストリデータの型。</param>
+      /// <param name="propertyBuffer">プロパティデータ用バッファ。</param>
+      /// <param name="propertyBufferSize">プロパティバッファのサイズ。</param>
+      /// <param name="requiredSize">必要なサイズ。</param>
       /// <returns>
-      ///   <para>SetupDiGetDeviceRegistryProperty returns TRUE if the call was successful.</para>
-      ///   <para>Otherwise, it returns FALSE and the logged error can be retrieved by making a call to GetLastError.</para>
-      ///   <para>SetupDiGetDeviceRegistryProperty returns the ERROR_INVALID_DATA error code if the requested property does not exist for a
-      ///   device or if the property data is not valid.</para>
+      ///   <para>呼び出しが成功した場合、SetupDiGetDeviceRegistryProperty は TRUE を返します。</para>
+      ///   <para>それ以外の場合、FALSE を返し、記録されたエラーは GetLastError の呼び出しで取得できます。</para>
+      ///   <para>要求されたプロパティがデバイスに存在しない場合、またはプロパティデータが有効でない場合、
+      ///   SetupDiGetDeviceRegistryProperty は ERROR_INVALID_DATA エラーコードを返します。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("setupapi.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]

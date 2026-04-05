@@ -26,55 +26,54 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Volume
    {
-      /// <summary>[AlphaFS] Deletes an MS-DOS device name.</summary>
-      /// <param name="deviceName">An MS-DOS device name specifying the device to delete.</param>      
+      /// <summary>[AlphaFS] MS-DOS デバイス名を削除します。</summary>
+      /// <param name="deviceName">削除するデバイスを指定する MS-DOS デバイス名。</param>
       [SecurityCritical]
       public static void DeleteDosDevice(string deviceName)
       {
          DefineDosDeviceCore(false, deviceName, null, DosDeviceAttributes.RemoveDefinition, false);
       }
 
-      /// <summary>[AlphaFS] Deletes an MS-DOS device name.</summary>
-      /// <param name="deviceName">An MS-DOS device name string specifying the device to delete.</param>
+      /// <summary>[AlphaFS] MS-DOS デバイス名を削除します。</summary>
+      /// <param name="deviceName">削除するデバイスを指定する MS-DOS デバイス名文字列。</param>
       /// <param name="targetPath">
-      ///   A pointer to a path string that will implement this device. The string is an MS-DOS path string unless the
-      ///   <see cref="DosDeviceAttributes.RawTargetPath"/> flag is specified, in which case this string is a path string.
-      /// </param>      
+      ///   このデバイスを実装するパス文字列へのポインター。<see cref="DosDeviceAttributes.RawTargetPath"/> フラグが指定されていない限り、
+      ///   文字列は MS-DOS パス文字列です。指定されている場合、この文字列はパス文字列です。
+      /// </param>
       [SecurityCritical]
       public static void DeleteDosDevice(string deviceName, string targetPath)
       {
          DefineDosDeviceCore(false, deviceName, targetPath, DosDeviceAttributes.RemoveDefinition, false);
       }
 
-      /// <summary>[AlphaFS] Deletes an MS-DOS device name.</summary>
-      /// <param name="deviceName">An MS-DOS device name string specifying the device to delete.</param>
+      /// <summary>[AlphaFS] MS-DOS デバイス名を削除します。</summary>
+      /// <param name="deviceName">削除するデバイスを指定する MS-DOS デバイス名文字列。</param>
       /// <param name="targetPath">
-      ///   A pointer to a path string that will implement this device. The string is an MS-DOS path string unless the
-      ///   <see cref="DosDeviceAttributes.RawTargetPath"/> flag is specified, in which case this string is a path string.
+      ///   このデバイスを実装するパス文字列へのポインター。<see cref="DosDeviceAttributes.RawTargetPath"/> フラグが指定されていない限り、
+      ///   文字列は MS-DOS パス文字列です。指定されている場合、この文字列はパス文字列です。
       /// </param>
       /// <param name="exactMatch">
-      ///   Only delete MS-DOS device on an exact name match. If <paramref name="exactMatch"/> is <c>true</c>,
-      ///   <paramref name="targetPath"/> must be the same path used to create the mapping.
-      /// </param>      
+      ///   正確な名前一致の場合のみ MS-DOS デバイスを削除します。<paramref name="exactMatch"/> が <c>true</c> の場合、
+      ///   <paramref name="targetPath"/> はマッピングの作成に使用されたパスと同じでなければなりません。
+      /// </param>
       [SecurityCritical]
       public static void DeleteDosDevice(string deviceName, string targetPath, bool exactMatch)
       {
          DefineDosDeviceCore(false, deviceName, targetPath, DosDeviceAttributes.RemoveDefinition, exactMatch);
       }
 
-      /// <summary>[AlphaFS] Deletes an MS-DOS device name.</summary>
-      /// <param name="deviceName">An MS-DOS device name string specifying the device to delete.</param>
+      /// <summary>[AlphaFS] MS-DOS デバイス名を削除します。</summary>
+      /// <param name="deviceName">削除するデバイスを指定する MS-DOS デバイス名文字列。</param>
       /// <param name="targetPath">
-      ///   A pointer to a path string that will implement this device. The string is an MS-DOS path string unless the
-      ///   <see cref="DosDeviceAttributes.RawTargetPath"/> flag is specified, in which case this string is a path string.
+      ///   このデバイスを実装するパス文字列へのポインター。<see cref="DosDeviceAttributes.RawTargetPath"/> フラグが指定されていない限り、
+      ///   文字列は MS-DOS パス文字列です。指定されている場合、この文字列はパス文字列です。
       /// </param>
       /// <param name="deviceAttributes">
-      ///   The controllable aspects of the DefineDosDevice function <see cref="DosDeviceAttributes"/> flags which will be combined with the
-      ///   default.
+      ///   DefineDosDevice 関数の制御可能な側面。デフォルトと組み合わされる <see cref="DosDeviceAttributes"/> フラグ。
       /// </param>
       /// <param name="exactMatch">
-      ///   Only delete MS-DOS device on an exact name match. If <paramref name="exactMatch"/> is <c>true</c>,
-      ///   <paramref name="targetPath"/> must be the same path used to create the mapping.
+      ///   正確な名前一致の場合のみ MS-DOS デバイスを削除します。<paramref name="exactMatch"/> が <c>true</c> の場合、
+      ///   <paramref name="targetPath"/> はマッピングの作成に使用されたパスと同じでなければなりません。
       /// </param>      
       [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
       [SecurityCritical]

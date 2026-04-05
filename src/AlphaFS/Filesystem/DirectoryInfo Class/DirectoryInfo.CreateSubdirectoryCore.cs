@@ -27,17 +27,17 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public sealed partial class DirectoryInfo
    {
-      /// <summary>Creates a subdirectory or subdirectories on the specified path. The specified path can be relative to this instance of the DirectoryInfo class.</summary>
-      /// <returns>The last directory specified in path as an <see cref="DirectoryInfo"/> object.</returns>
+      /// <summary>指定されたパスにサブディレクトリを作成します。指定されたパスは、この DirectoryInfo クラスのインスタンスに対する相対パスにできます。</summary>
+      /// <returns>パスで指定された最後のディレクトリを <see cref="DirectoryInfo"/> オブジェクトとして返します。</returns>
       /// <remarks>
-      /// Any and all directories specified in path are created, unless some part of path is invalid.
-      /// The path parameter specifies a directory path, not a file path.
-      /// If the subdirectory already exists, this method does nothing.
+      /// パスの一部が無効でない限り、パスに指定されたすべてのディレクトリが作成されます。
+      /// path パラメーターはディレクトリパスを指定するもので、ファイルパスではありません。
+      /// サブディレクトリが既に存在する場合、このメソッドは何もしません。
       /// </remarks>
-      /// <param name="path">The specified path. This cannot be a different disk volume or Universal Naming Convention (UNC) name.</param>
-      /// <param name="templatePath">The path of the directory to use as a template when creating the new directory.</param>
-      /// <param name="directorySecurity">The <see cref="DirectorySecurity"/> security to apply.</param>
-      /// <param name="compress">When <c>true</c> compresses the directory using NTFS compression.</param>
+      /// <param name="path">指定されたパス。別のディスクボリュームまたは UNC (Universal Naming Convention) 名にすることはできません。</param>
+      /// <param name="templatePath">新しいディレクトリの作成時にテンプレートとして使用するディレクトリのパス。</param>
+      /// <param name="directorySecurity">適用する <see cref="DirectorySecurity"/> セキュリティ。</param>
+      /// <param name="compress"><c>true</c> の場合、NTFS 圧縮を使用してディレクトリを圧縮します。</param>
       [SecurityCritical]
       private DirectoryInfo CreateSubdirectoryCore(string path, string templatePath, ObjectSecurity directorySecurity, bool compress)
       {

@@ -27,16 +27,16 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>[AlphaFS] Compresses a directory using NTFS compression.</summary>
-      /// <remarks>This will only compress the root items (non recursive).</remarks>
+      /// <summary>[AlphaFS] NTFS圧縮を使用してディレクトリを圧縮します。</summary>
+      /// <remarks>ルート項目のみを圧縮します（非再帰）。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">A path that describes a directory to compress.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">圧縮するディレクトリを示すパス。</param>
       [SecurityCritical]
       public static void CompressTransacted(KernelTransaction transaction, string path)
       {
@@ -44,17 +44,17 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Compresses a directory using NTFS compression.</summary>
-      /// <remarks>This will only compress the root items (non recursive).</remarks>
+      /// <summary>[AlphaFS] NTFS圧縮を使用してディレクトリを圧縮します。</summary>
+      /// <remarks>ルート項目のみを圧縮します（非再帰）。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">A path that describes a directory to compress.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">圧縮するディレクトリを示すパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void CompressTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)
       {
@@ -62,16 +62,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Compresses a directory using NTFS compression.</summary>
+      /// <summary>[AlphaFS] NTFS圧縮を使用してディレクトリを圧縮します。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">A path that describes a directory to compress.</param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">圧縮するディレクトリを示すパス。</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
       [SecurityCritical]
       public static void CompressTransacted(KernelTransaction transaction, string path, DirectoryEnumerationOptions options)
       {
@@ -79,17 +79,17 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Compresses a directory using NTFS compression.</summary>
+      /// <summary>[AlphaFS] NTFS圧縮を使用してディレクトリを圧縮します。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">A path that describes a directory to compress.</param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">圧縮するディレクトリを示すパス。</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void CompressTransacted(KernelTransaction transaction, string path, DirectoryEnumerationOptions options, PathFormat pathFormat)
       {
@@ -97,17 +97,17 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Compresses a directory using NTFS compression.</summary>
-      /// <remarks>This will only compress the root items (non recursive).</remarks>
+      /// <summary>[AlphaFS] NTFS圧縮を使用してディレクトリを圧縮します。</summary>
+      /// <remarks>ルート項目のみを圧縮します（非再帰）。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">A path that describes a directory to compress.</param>
-      /// <param name="filters">The specification of custom filters to be used in the process.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">圧縮するディレクトリを示すパス。</param>
+      /// <param name="filters">処理で使用するカスタムフィルタの指定。</param>
       [SecurityCritical]
       public static void CompressTransacted(KernelTransaction transaction, string path, DirectoryEnumerationFilters filters)
       {
@@ -115,18 +115,18 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Compresses a directory using NTFS compression.</summary>
-      /// <remarks>This will only compress the root items (non recursive).</remarks>
+      /// <summary>[AlphaFS] NTFS圧縮を使用してディレクトリを圧縮します。</summary>
+      /// <remarks>ルート項目のみを圧縮します（非再帰）。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">A path that describes a directory to compress.</param>
-      /// <param name="filters">The specification of custom filters to be used in the process.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">圧縮するディレクトリを示すパス。</param>
+      /// <param name="filters">処理で使用するカスタムフィルタの指定。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void CompressTransacted(KernelTransaction transaction, string path, DirectoryEnumerationFilters filters, PathFormat pathFormat)
       {
@@ -134,18 +134,18 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Compresses a directory using NTFS compression.</summary>
-      /// <remarks>This will only compress the root items (non recursive).</remarks>
+      /// <summary>[AlphaFS] NTFS圧縮を使用してディレクトリを圧縮します。</summary>
+      /// <remarks>ルート項目のみを圧縮します（非再帰）。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">A path that describes a directory to compress.</param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
-      /// <param name="filters">The specification of custom filters to be used in the process.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">圧縮するディレクトリを示すパス。</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
+      /// <param name="filters">処理で使用するカスタムフィルタの指定。</param>
       [SecurityCritical]
       public static void CompressTransacted(KernelTransaction transaction, string path, DirectoryEnumerationOptions options, DirectoryEnumerationFilters filters)
       {
@@ -153,19 +153,19 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Compresses a directory using NTFS compression.</summary>
-      /// <remarks>This will only compress the root items (non recursive).</remarks>
+      /// <summary>[AlphaFS] NTFS圧縮を使用してディレクトリを圧縮します。</summary>
+      /// <remarks>ルート項目のみを圧縮します（非再帰）。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">A path that describes a directory to compress.</param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
-      /// <param name="filters">The specification of custom filters to be used in the process.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">圧縮するディレクトリを示すパス。</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
+      /// <param name="filters">処理で使用するカスタムフィルタの指定。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void CompressTransacted(KernelTransaction transaction, string path, DirectoryEnumerationOptions options, DirectoryEnumerationFilters filters, PathFormat pathFormat)
       {

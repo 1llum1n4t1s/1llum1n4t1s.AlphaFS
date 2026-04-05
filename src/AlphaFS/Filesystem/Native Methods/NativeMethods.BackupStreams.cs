@@ -29,27 +29,27 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>The BackupRead function can be used to back up a file or directory, including the security information.
-      ///   <para>The function reads data associated with a specified file or directory into a buffer,</para>
-      ///   <para>which can then be written to the backup medium using the WriteFile function.</para>
+      /// <summary>BackupRead 関数は、セキュリティ情報を含むファイルまたはディレクトリのバックアップに使用できます。
+      ///   <para>この関数は、指定されたファイルまたはディレクトリに関連付けられたデータをバッファに読み込みます。</para>
+      ///   <para>その後、WriteFile 関数を使用してバックアップメディアに書き込むことができます。</para>
       /// </summary>
       /// <remarks>
-      ///   <para>This function is not intended for use in backing up files encrypted under the Encrypted File System.</para>
-      ///   <para>Use ReadEncryptedFileRaw for that purpose.</para>
-      ///   <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      ///   <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      ///   <para>この関数は、暗号化ファイルシステム (EFS) で暗号化されたファイルのバックアップには使用しないでください。</para>
+      ///   <para>その目的には ReadEncryptedFileRaw を使用してください。</para>
+      ///   <para>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</para>
       /// </remarks>
-      /// <param name="hFile">The file.</param>
-      /// <param name="lpBuffer">The buffer.</param>
-      /// <param name="nNumberOfBytesToRead">Number of bytes to reads.</param>
-      /// <param name="lpNumberOfBytesRead">[out] Number of bytes reads.</param>
-      /// <param name="bAbort">true to abort.</param>
-      /// <param name="bProcessSecurity">true to process security.</param>
-      /// <param name="lpContext">[out] The context.</param>
+      /// <param name="hFile">ファイルハンドル。</param>
+      /// <param name="lpBuffer">バッファ。</param>
+      /// <param name="nNumberOfBytesToRead">読み取るバイト数。</param>
+      /// <param name="lpNumberOfBytesRead">[out] 読み取られたバイト数。</param>
+      /// <param name="bAbort">中断する場合は true。</param>
+      /// <param name="bProcessSecurity">セキュリティを処理する場合は true。</param>
+      /// <param name="lpContext">[out] コンテキスト。</param>
       /// <returns>
-      ///   <para>If the function succeeds, the return value is nonzero.</para>
-      ///   <para>If the function fails, the return value is zero, indicating that an I/O error occurred. To get extended error information,
-      ///   call GetLastError.</para>
+      ///   <para>関数が成功した場合、戻り値はゼロ以外です。</para>
+      ///   <para>関数が失敗した場合、戻り値はゼロで、I/O エラーが発生したことを示します。拡張エラー情報を取得するには
+      ///   GetLastError を呼び出してください。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
@@ -57,32 +57,31 @@ namespace Alphaleonis.Win32.Filesystem
       internal static extern bool BackupRead(SafeFileHandle hFile, SafeGlobalMemoryBufferHandle lpBuffer, [MarshalAs(UnmanagedType.U4)] uint nNumberOfBytesToRead, [MarshalAs(UnmanagedType.U4)] out uint lpNumberOfBytesRead, [MarshalAs(UnmanagedType.Bool)] bool bAbort, [MarshalAs(UnmanagedType.Bool)] bool bProcessSecurity, ref IntPtr lpContext);
 
 
-      /// <summary>The BackupSeek function seeks forward in a data stream initially accessed by using the <see cref="BackupRead"/> or
-      ///   <see cref="BackupWrite"/> function.
-      ///   <para>The function reads data associated with a specified file or directory into a buffer, which can then be written to the backup
-      ///   medium using the WriteFile function.</para>
+      /// <summary>BackupSeek 関数は、<see cref="BackupRead"/> または <see cref="BackupWrite"/> 関数で最初にアクセスされた
+      ///   データストリーム内を前方にシークします。
+      ///   <para>この関数は、指定されたファイルまたはディレクトリに関連付けられたデータをバッファに読み込み、WriteFile 関数を使用して
+      ///   バックアップメディアに書き込むことができます。</para>
       /// </summary>
       /// <remarks>
-      ///   <para>Applications use the BackupSeek function to skip portions of a data stream that cause errors.</para>
-      ///   <para>This function does not seek across stream headers. For example, this function cannot be used to skip the stream name.</para>
-      ///   <para>If an application attempts to seek past the end of a substream, the function fails, the lpdwLowByteSeeked and
-      ///   lpdwHighByteSeeked parameters</para>
-      ///   <para>indicate the actual number of bytes the function seeks, and the file position is placed at the start of the next stream
-      ///   header.</para>
+      ///   <para>アプリケーションは BackupSeek 関数を使用して、エラーを引き起こすデータストリームの部分をスキップします。</para>
+      ///   <para>この関数はストリームヘッダーをまたいでシークしません。例えば、この関数はストリーム名のスキップには使用できません。</para>
+      ///   <para>アプリケーションがサブストリームの終端を超えてシークしようとすると、関数は失敗し、lpdwLowByteSeeked および
+      ///   lpdwHighByteSeeked パラメータは</para>
+      ///   <para>関数が実際にシークしたバイト数を示し、ファイル位置は次のストリームヘッダーの先頭に配置されます。</para>
       ///   <para>&#160;</para>
-      ///   <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      ///   <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      ///   <para>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</para>
       /// </remarks>
-      /// <param name="hFile">The file.</param>
-      /// <param name="dwLowBytesToSeek">The low bytes to seek.</param>
-      /// <param name="dwHighBytesToSeek">The high bytes to seek.</param>
-      /// <param name="lpdwLowBytesSeeked">[out] The lpdw low bytes seeked.</param>
-      /// <param name="lpdwHighBytesSeeked">[out] The lpdw high bytes seeked.</param>
-      /// <param name="lpContext">[out] The context.</param>
+      /// <param name="hFile">ファイルハンドル。</param>
+      /// <param name="dwLowBytesToSeek">シークする下位バイト数。</param>
+      /// <param name="dwHighBytesToSeek">シークする上位バイト数。</param>
+      /// <param name="lpdwLowBytesSeeked">[out] 実際にシークされた下位バイト数。</param>
+      /// <param name="lpdwHighBytesSeeked">[out] 実際にシークされた上位バイト数。</param>
+      /// <param name="lpContext">[out] コンテキスト。</param>
       /// <returns>
-      ///   <para>If the function could seek the requested amount, the function returns a nonzero value.</para>
-      ///   <para>If the function could not seek the requested amount, the function returns zero. To get extended error information, call
-      ///   GetLastError.</para>
+      ///   <para>関数が要求された量をシークできた場合、ゼロ以外の値を返します。</para>
+      ///   <para>関数が要求された量をシークできなかった場合、ゼロを返します。拡張エラー情報を取得するには
+      ///   GetLastError を呼び出してください。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
@@ -90,28 +89,28 @@ namespace Alphaleonis.Win32.Filesystem
       internal static extern bool BackupSeek(SafeFileHandle hFile, [MarshalAs(UnmanagedType.U4)] uint dwLowBytesToSeek, [MarshalAs(UnmanagedType.U4)] uint dwHighBytesToSeek, [MarshalAs(UnmanagedType.U4)] out uint lpdwLowBytesSeeked, [MarshalAs(UnmanagedType.U4)] out uint lpdwHighBytesSeeked, ref IntPtr lpContext);
 
 
-      /// <summary>The BackupWrite function can be used to restore a file or directory that was backed up using <see cref="BackupRead"/>.
-      ///   <para>Use the ReadFile function to get a stream of data from the backup medium, then use BackupWrite to write the data to the
-      ///   specified file or directory.</para>
+      /// <summary>BackupWrite 関数は、<see cref="BackupRead"/> を使用してバックアップされたファイルまたはディレクトリの復元に使用できます。
+      ///   <para>ReadFile 関数を使用してバックアップメディアからデータストリームを取得し、BackupWrite を使用して
+      ///   指定されたファイルまたはディレクトリにデータを書き込みます。</para>
       ///   <para>&#160;</para>
       /// </summary>
       /// <remarks>
-      ///   <para>This function is not intended for use in restoring files encrypted under the Encrypted File System. Use WriteEncryptedFileRaw
-      ///   for that purpose.</para>
-      ///   <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      ///   <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      ///   <para>この関数は、暗号化ファイルシステム (EFS) で暗号化されたファイルの復元には使用しないでください。
+      ///   その目的には WriteEncryptedFileRaw を使用してください。</para>
+      ///   <para>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</para>
       /// </remarks>
-      /// <param name="hFile">The file.</param>
-      /// <param name="lpBuffer">The buffer.</param>
-      /// <param name="nNumberOfBytesToWrite">Number of bytes to writes.</param>
-      /// <param name="lpNumberOfBytesWritten">[out] Number of bytes writtens.</param>
-      /// <param name="bAbort">true to abort.</param>
-      /// <param name="bProcessSecurity">true to process security.</param>
-      /// <param name="lpContext">[out] The context.</param>
+      /// <param name="hFile">ファイルハンドル。</param>
+      /// <param name="lpBuffer">バッファ。</param>
+      /// <param name="nNumberOfBytesToWrite">書き込むバイト数。</param>
+      /// <param name="lpNumberOfBytesWritten">[out] 書き込まれたバイト数。</param>
+      /// <param name="bAbort">中断する場合は true。</param>
+      /// <param name="bProcessSecurity">セキュリティを処理する場合は true。</param>
+      /// <param name="lpContext">[out] コンテキスト。</param>
       /// <returns>
-      ///   <para>If the function succeeds, the return value is nonzero.</para>
-      ///   <para>If the function fails, the return value is zero, indicating that an I/O error occurred. To get extended error information,
-      ///   call GetLastError.</para>
+      ///   <para>関数が成功した場合、戻り値はゼロ以外です。</para>
+      ///   <para>関数が失敗した場合、戻り値はゼロで、I/O エラーが発生したことを示します。拡張エラー情報を取得するには
+      ///   GetLastError を呼び出してください。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]

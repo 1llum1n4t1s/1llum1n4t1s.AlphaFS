@@ -27,9 +27,9 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Retrieves the parent directory of the specified path, including both absolute and relative paths.</summary>
-      /// <param name="path">The path for which to retrieve the parent directory.</param>
-      /// <returns>The parent directory, or <c>null</c> if <paramref name="path"/> is the root directory, including the root of a UNC server or share name.</returns>
+      /// <summary>絶対パスと相対パスの両方を含む、指定されたパスの親ディレクトリを取得します。</summary>
+      /// <param name="path">親ディレクトリを取得するパス。</param>
+      /// <returns>親ディレクトリ。<paramref name="path"/> がルートディレクトリ（UNCサーバーまたは共有名のルートを含む）の場合は <c>null</c>。</returns>
       [SecurityCritical]
       public static DirectoryInfo GetParent(string path)
       {
@@ -37,10 +37,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Retrieves the parent directory of the specified path, including both absolute and relative paths.</summary>
-      /// <returns>The parent directory, or <c>null</c> if <paramref name="path"/> is the root directory, including the root of a UNC server or share name.</returns>
-      /// <param name="path">The path for which to retrieve the parent directory.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <summary>[AlphaFS] 絶対パスと相対パスの両方を含む、指定されたパスの親ディレクトリを取得します。</summary>
+      /// <returns>親ディレクトリ。<paramref name="path"/> がルートディレクトリ（UNCサーバーまたは共有名のルートを含む）の場合は <c>null</c>。</returns>
+      /// <param name="path">親ディレクトリを取得するパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static DirectoryInfo GetParent(string path, PathFormat pathFormat)
       {

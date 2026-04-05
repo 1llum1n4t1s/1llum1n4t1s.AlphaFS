@@ -29,12 +29,12 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Creates an enumeration of all the hard links to the specified <paramref name="path"/>.</summary>
-      /// <returns>An enumerable collection of <see cref="string"/> of all the hard links to the specified <paramref name="path"/></returns>
+      /// <summary>[AlphaFS] 指定された<paramref name="path"/>へのすべてのハードリンクの列挙を作成します。</summary>
+      /// <returns>指定された<paramref name="path"/>へのすべてのハードリンクの<see cref="string"/>の列挙可能なコレクション</returns>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The name of the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルの名前。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       internal static IEnumerable<string> EnumerateHardLinksCore(KernelTransaction transaction, string path, PathFormat pathFormat)
       {
          if (!NativeMethods.IsAtLeastWindowsVista)
@@ -44,7 +44,7 @@ namespace Alphaleonis.Win32.Filesystem
 
          var pathLp = Path.GetExtendedLengthPathCore(transaction, path, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.FullCheck);
 
-         // Default buffer length, will be extended if needed, although this should not happen.
+         // デフォルトのバッファ長。必要に応じて拡張されますが、通常は発生しません。
          uint length = NativeMethods.MaxPathUnicode;
          var builder = new StringBuilder((int) length);
 
@@ -54,8 +54,8 @@ namespace Alphaleonis.Win32.Filesystem
       using (var safeHandle = null == transaction
 
                 // FindFirstFileNameW() / FindFirstFileNameTransactedW() / FindNextFileNameW()
-                // 2013-01-13: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
-                // 2017-05-30: FindFirstFileNameW() MSDN confirms LongPath usage: Starting with Windows 10, version 1607
+                // 2013-01-13: MSDNはLongPathの使用を確認していませんが、この関数のUnicodeバージョンが存在します。
+                // 2017-05-30: FindFirstFileNameW() MSDNはLongPathの使用を確認: Windows 10 バージョン1607以降
                 ? NativeMethods.FindFirstFileNameW(pathLp, 0, out length, builder) : NativeMethods.FindFirstFileNameTransactedW(pathLp, 0, out length, builder, transaction.SafeHandle))
       {
          var lastError = Marshal.GetLastWin32Error();
@@ -69,7 +69,7 @@ namespace Alphaleonis.Win32.Filesystem
                   goto getFindFirstFileName;
 
                default:
-                  // If the function fails, the return value is INVALID_HANDLE_VALUE.
+                  // 関数が失敗した場合、戻り値はINVALID_HANDLE_VALUEです。
                   NativeError.ThrowException(lastError, pathLp);
                   break;
             }
@@ -86,7 +86,7 @@ namespace Alphaleonis.Win32.Filesystem
 
                switch ((uint)lastError)
                {
-                  // We've reached the end of the enumeration.
+                  // 列挙の終端に到達しました。
                   case Win32Errors.ERROR_HANDLE_EOF:
                      yield break;
 
@@ -95,7 +95,7 @@ namespace Alphaleonis.Win32.Filesystem
                      continue;
 
                   default:
-                     // If the function fails, the return value is zero (0).
+                     // 関数が失敗した場合、戻り値はゼロ(0)です。
                      NativeError.ThrowException(lastError);
                      break;
                }

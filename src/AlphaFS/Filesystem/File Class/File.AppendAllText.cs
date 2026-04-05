@@ -41,8 +41,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="path">The file to append the specified string to.</param>
-      /// <param name="contents">The string to append to the file.</param>
+      /// <param name="path">指定された文字列を追記するファイル。</param>
+      /// <param name="contents">ファイルに追記する文字列。</param>
       [SecurityCritical]
       public static void AppendAllText(string path, string contents)
       {
@@ -61,9 +61,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="path">The file to append the specified string to.</param>
-      /// <param name="contents">The string to append to the file.</param>
-      /// <param name="encoding">The character <see cref="Encoding"/> to use.</param>
+      /// <param name="path">指定された文字列を追記するファイル。</param>
+      /// <param name="contents">ファイルに追記する文字列。</param>
+      /// <param name="encoding">使用する文字<see cref="Encoding"/>。</param>
       [SecurityCritical]
       public static void AppendAllText(string path, string contents, Encoding encoding)
       {
@@ -73,7 +73,7 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Appends the specified string to the file, creating the file if it does not already exist.</summary>
+      /// <summary>[AlphaFS] 指定された文字列をファイルに追記します。ファイルが存在しない場合は作成します。</summary>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
@@ -84,9 +84,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="path">The file to append the specified string to.</param>
-      /// <param name="contents">The string to append to the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="path">指定された文字列を追記するファイル。</param>
+      /// <param name="contents">ファイルに追記する文字列。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void AppendAllText(string path, string contents, PathFormat pathFormat)
       {
@@ -94,7 +94,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Appends the specified string to the file, creating the file if it does not already exist.</summary>
+      /// <summary>[AlphaFS] 指定された文字列をファイルに追記します。ファイルが存在しない場合は作成します。</summary>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
@@ -105,10 +105,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="path">The file to append the specified string to.</param>
-      /// <param name="contents">The string to append to the file.</param>
-      /// <param name="encoding">The character <see cref="Encoding"/> to use.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="path">指定された文字列を追記するファイル。</param>
+      /// <param name="contents">ファイルに追記する文字列。</param>
+      /// <param name="encoding">使用する文字<see cref="Encoding"/>。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void AppendAllText(string path, string contents, Encoding encoding, PathFormat pathFormat)
       {

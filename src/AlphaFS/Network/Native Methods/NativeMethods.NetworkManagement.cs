@@ -27,7 +27,7 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>The NetServerDiskEnum function retrieves a list of disk drives on a server.</summary>
+      /// <summary>NetServerDiskEnum 関数はサーバー上のディスクドライブのリストを取得します.</summary>
       /// <returns>
       /// If the function succeeds, the return value is NERR_Success.
       /// If the function fails, the return value is a system error code.
@@ -35,8 +35,8 @@ namespace Alphaleonis.Win32.Network
       /// <remarks>
       /// <para>The function returns an array of three-character strings (a drive letter, a colon, and a terminating null character).</para>
       /// <para>Only members of the Administrators or Server Operators local group can successfully execute the NetServerDiskEnum function on a remote computer.</para>
-      /// <para>Minimum supported client: Windows 2000 Professional [desktop apps only]</para>
-      /// <para>Minimum supported server: Windows 2000 Server [desktop apps only]</para>
+      /// <para>サポートされる最小クライアント: Windows 2000 Professional [desktop apps only]</para>
+      /// <para>サポートされる最小サーバー: Windows 2000 Server [desktop apps only]</para>
       /// </remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("netapi32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]

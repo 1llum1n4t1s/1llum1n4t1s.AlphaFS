@@ -33,16 +33,16 @@ namespace Alphaleonis.Win32.Network
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct NETRESOURCE
       {
-         /// <summary>The scope of the enumeration.</summary>
+         /// <summary>列挙のスコープ.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly ResourceScope dwScope;
 
          /// <summary>The type of resource</summary>
          [MarshalAs(UnmanagedType.U4)] public ResourceType dwType;
 
-         /// <summary>The display options for the network object in a network browsing user interface.</summary>
+         /// <summary>ネットワーク参照ユーザーインターフェースでのネットワークオブジェクトの表示オプション.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly ResourceDisplayType dwDisplayType;
 
-         /// <summary>A set of bit flags describing how the resource can be used.</summary>
+         /// <summary>リソースの使用方法を記述するビットフラグのセット。</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly ResourceUsage dwUsage;
 
          /// <summary>If the <see cref="dwScope"/> member is equal to <see cref="ResourceScope.Connected"/> or <see cref="ResourceScope.Remembered"/>,

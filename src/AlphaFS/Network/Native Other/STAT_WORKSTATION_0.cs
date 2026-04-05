@@ -25,10 +25,10 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Contains statistical information about the specified workstation.</summary>
+      /// <summary>指定されたワークステーションに関する統計情報を含みます.</summary>
       /// <remarks>
-      /// <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      /// <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      /// <para>サポートされる最小クライアント: Windows XP [desktop apps only]</para>
+      /// <para>サポートされる最小サーバー: Windows Server 2003 [desktop apps only]</para>
       /// </remarks>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct STAT_WORKSTATION_0
@@ -64,16 +64,16 @@ namespace Alphaleonis.Win32.Network
          /// <summary>Specifies the total number of SMBs transmitted by the workstation.</summary>
          [MarshalAs(UnmanagedType.U8)] public readonly long SmbsTransmitted;
 
-         /// <summary>Specifies the total number of bytes that have been written by paging I/O requests.</summary>
+         /// <summary>書き込まれたバイトの合計数を指定します by paging I/O requests.</summary>
          [MarshalAs(UnmanagedType.U8)] public readonly long PagingWriteBytesRequested;
 
-         /// <summary>Specifies the total number of bytes that have been written by non-paging I/O requests.</summary>
+         /// <summary>書き込まれたバイトの合計数を指定します by non-paging I/O requests.</summary>
          [MarshalAs(UnmanagedType.U8)] public readonly long NonPagingWriteBytesRequested;
 
-         /// <summary>Specifies the total number of bytes that have been written by cache I/O requests.</summary>
+         /// <summary>書き込まれたバイトの合計数を指定します by cache I/O requests.</summary>
          [MarshalAs(UnmanagedType.U8)] public readonly long CacheWriteBytesRequested;
 
-         /// <summary>Specifies the total number of bytes that have been written by disk I/O requests.</summary>
+         /// <summary>書き込まれたバイトの合計数を指定します by disk I/O requests.</summary>
          [MarshalAs(UnmanagedType.U8)] public readonly long NetworkWriteBytesRequested;
 
          /// <summary>Specifies the total number of network operations that failed to begin.</summary>
@@ -130,16 +130,16 @@ namespace Alphaleonis.Win32.Network
          /// <summary>Specifies the total number of connections that have failed.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint Reconnects;
 
-         /// <summary>Specifies the total number of connections to servers supporting the PCNET dialect that have succeeded.</summary>
+         /// <summary>サーバーへの接続の合計数を指定します supporting the PCNET dialect that have succeeded.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint CoreConnects;
 
-         /// <summary>Specifies the total number of connections to servers supporting the LanManager 2.0 dialect that have succeeded.</summary>
+         /// <summary>サーバーへの接続の合計数を指定します supporting the LanManager 2.0 dialect that have succeeded.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint Lanman20Connects;
 
-         /// <summary>Specifies the total number of connections to servers supporting the LanManager 2.1 dialect that have succeeded.</summary>
+         /// <summary>サーバーへの接続の合計数を指定します supporting the LanManager 2.1 dialect that have succeeded.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint Lanman21Connects;
 
-         /// <summary>Specifies the total number of connections to servers supporting the NTLM dialect that have succeeded.</summary>
+         /// <summary>サーバーへの接続の合計数を指定します supporting the NTLM dialect that have succeeded.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint LanmanNtConnects;
 
          /// <summary>Specifies the number of times the workstation was disconnected by a network server.</summary>

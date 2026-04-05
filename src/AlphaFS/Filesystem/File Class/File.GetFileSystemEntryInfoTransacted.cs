@@ -25,10 +25,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Gets the <see cref="FileSystemEntryInfo"/> of the file on the path.</summary>
-      /// <returns>The <see cref="FileSystemEntryInfo"/> instance of the file.</returns>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the file.</param>
+      /// <summary>[AlphaFS] パス上のファイルの<see cref="FileSystemEntryInfo"/>を取得します。</summary>
+      /// <returns>ファイルの<see cref="FileSystemEntryInfo"/>インスタンス。</returns>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルへのパス。</param>
       [SecurityCritical]
       public static FileSystemEntryInfo GetFileSystemEntryInfoTransacted(KernelTransaction transaction, string path)
       {
@@ -36,11 +36,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Gets the <see cref="FileSystemEntryInfo"/> of the file on the path.</summary>
-      /// <returns>The <see cref="FileSystemEntryInfo"/> instance of the file.</returns>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <summary>[AlphaFS] パス上のファイルの<see cref="FileSystemEntryInfo"/>を取得します。</summary>
+      /// <returns>ファイルの<see cref="FileSystemEntryInfo"/>インスタンス。</returns>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルへのパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static FileSystemEntryInfo GetFileSystemEntryInfoTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)
       {
@@ -48,13 +48,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Gets the <see cref="FileSystemEntryInfo"/> of the file on the path.</summary>
-      /// <returns>The <see cref="FileSystemEntryInfo"/> instance of the file or null on failure.</returns>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the file.</param>
+      /// <summary>[AlphaFS] パス上のファイルの<see cref="FileSystemEntryInfo"/>を取得します。</summary>
+      /// <returns>ファイルの<see cref="FileSystemEntryInfo"/>インスタンス、または失敗時はnull。</returns>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルへのパス。</param>
       /// <param name="continueOnException">
-      ///    <para><c>true</c> suppress any Exception that might be thrown as a result from a failure,</para>
-      ///    <para>such as ACLs protected filesor non-accessible reparse points.</para>
+      ///    <para><c>true</c>の場合、失敗の結果としてスローされる可能性のある例外を抑制します。</para>
+      ///    <para>ACLで保護されたファイルやアクセスできないリパースポイントなど。</para>
       /// </param>
       [SecurityCritical]
       public static FileSystemEntryInfo GetFileSystemEntryInfoTransacted(KernelTransaction transaction, string path, bool continueOnException)
@@ -63,14 +63,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Gets the <see cref="FileSystemEntryInfo"/> of the file on the path.</summary>
-      /// <returns>The <see cref="FileSystemEntryInfo"/> instance of the file or null on failure.</returns>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <summary>[AlphaFS] パス上のファイルの<see cref="FileSystemEntryInfo"/>を取得します。</summary>
+      /// <returns>ファイルの<see cref="FileSystemEntryInfo"/>インスタンス、または失敗時はnull。</returns>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルへのパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <param name="continueOnException">
-      ///    <para><c>true</c> suppress any Exception that might be thrown as a result from a failure,</para>
-      ///    <para>such as ACLs protected filesor non-accessible reparse points.</para>
+      ///    <para><c>true</c>の場合、失敗の結果としてスローされる可能性のある例外を抑制します。</para>
+      ///    <para>ACLで保護されたファイルやアクセスできないリパースポイントなど。</para>
       /// </param>
       [SecurityCritical]
       public static FileSystemEntryInfo GetFileSystemEntryInfoTransacted(KernelTransaction transaction, string path, bool continueOnException, PathFormat pathFormat)

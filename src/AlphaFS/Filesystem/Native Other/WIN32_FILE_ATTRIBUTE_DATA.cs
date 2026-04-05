@@ -26,12 +26,12 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>WIN32_FILE_ATTRIBUTE_DATA structure contains attribute information for a file or directory. The GetFileAttributesEx function uses this structure.</summary>
+      /// <summary>WIN32_FILE_ATTRIBUTE_DATA 構造体は、ファイルまたはディレクトリの属性情報を格納します。GetFileAttributesEx 関数がこの構造体を使用します。</summary>
       /// <remarks>
-      /// Not all file systems can record creation and last access time, and not all file systems record them in the same manner.
-      /// For example, on the FAT file system, create time has a resolution of 10 milliseconds, write time has a resolution of 2 seconds,
-      /// and access time has a resolution of 1 day. On the NTFS file system, access time has a resolution of 1 hour. 
-      /// For more information, see File Times.
+      /// すべてのファイルシステムが作成日時と最終アクセス日時を記録できるわけではなく、同じ方法で記録するわけでもありません。
+      /// 例えば、FAT ファイルシステムでは、作成日時の解像度は 10 ミリ秒、書き込み日時の解像度は 2 秒、
+      /// アクセス日時の解像度は 1 日です。NTFS ファイルシステムでは、アクセス日時の解像度は 1 時間です。
+      /// 詳細については、File Times を参照してください。
       /// </remarks>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct WIN32_FILE_ATTRIBUTE_DATA
@@ -46,37 +46,37 @@ namespace Alphaleonis.Win32.Filesystem
             nFileSizeLow = findData.nFileSizeLow;
          }
 
-         /// <summary>The file attributes of a file.</summary>
+         /// <summary>ファイルのファイル属性。</summary>
          [MarshalAs(UnmanagedType.I4)] public FileAttributes dwFileAttributes;
 
-         /// <summary>A <see cref="FILETIME"/> structure that specifies when a file or directory was created.
-         /// If the underlying file system does not support creation time, this member is zero.</summary>
+         /// <summary>ファイルまたはディレクトリが作成された日時を指定する <see cref="FILETIME"/> 構造体。
+         /// 基になるファイルシステムが作成日時をサポートしない場合、このメンバーはゼロです。</summary>
          public readonly FILETIME ftCreationTime;
 
-         /// <summary>A <see cref="FILETIME"/> structure.
-         /// For a file, the structure specifies when the file was last read from, written to, or for executable files, run.
-         /// For a directory, the structure specifies when the directory is created. If the underlying file system does not support last access time, this member is zero.
-         /// On the FAT file system, the specified date for both files and directories is correct, but the time of day is always set to midnight.
+         /// <summary><see cref="FILETIME"/> 構造体。
+         /// ファイルの場合、最後にファイルが読み取り、書き込み、または実行可能ファイルでは実行された日時を指定します。
+         /// ディレクトリの場合、ディレクトリが作成された日時を指定します。基になるファイルシステムが最終アクセス日時をサポートしない場合、このメンバーはゼロです。
+         /// FAT ファイルシステムでは、ファイルとディレクトリの両方で指定された日付は正しいですが、時刻は常に午前0時に設定されます。
          /// </summary>
          public readonly FILETIME ftLastAccessTime;
 
-         /// <summary>A <see cref="FILETIME"/> structure.
-         /// For a file, the structure specifies when the file was last written to, truncated, or overwritten, for example, when WriteFile or SetEndOfFile are used.
-         /// The date and time are not updated when file attributes or security descriptors are changed.
-         /// For a directory, the structure specifies when the directory is created. If the underlying file system does not support last write time, this member is zero.
+         /// <summary><see cref="FILETIME"/> 構造体。
+         /// ファイルの場合、最後にファイルが書き込み、切り詰め、または上書きされた日時を指定します（例: WriteFile や SetEndOfFile が使用された場合）。
+         /// ファイル属性やセキュリティ記述子が変更された場合、日付と時刻は更新されません。
+         /// ディレクトリの場合、ディレクトリが作成された日時を指定します。基になるファイルシステムが最終書き込み日時をサポートしない場合、このメンバーはゼロです。
          /// </summary>
          public readonly FILETIME ftLastWriteTime;
 
-         /// <summary>The high-order DWORD of the file size. This member does not have a meaning for directories.
-         /// This value is zero unless the file size is greater than MAXDWORD.
-         /// The size of the file is equal to (nFileSizeHigh * (MAXDWORD+1)) + nFileSizeLow.
+         /// <summary>ファイルサイズの上位 DWORD。このメンバーはディレクトリには意味がありません。
+         /// ファイルサイズが MAXDWORD より大きい場合を除き、この値はゼロです。
+         /// ファイルのサイズは (nFileSizeHigh * (MAXDWORD+1)) + nFileSizeLow に等しくなります。
          /// </summary>
          public readonly uint nFileSizeHigh;
 
-         /// <summary>The low-order DWORD of the file size. This member does not have a meaning for directories.</summary>
+         /// <summary>ファイルサイズの下位 DWORD。このメンバーはディレクトリには意味がありません。</summary>
          public readonly uint nFileSizeLow;
 
-         /// <summary>The file size.</summary>
+         /// <summary>ファイルサイズ。</summary>
          public long FileSize
          {
             get { return ToLong(nFileSizeHigh, nFileSizeLow); }

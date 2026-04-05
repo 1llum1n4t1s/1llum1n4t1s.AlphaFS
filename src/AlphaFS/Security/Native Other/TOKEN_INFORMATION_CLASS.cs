@@ -23,13 +23,13 @@ namespace Alphaleonis.Win32.Security
 {
    internal static partial class NativeMethods
    {
-      /// <summary>The TOKEN_INFORMATION_CLASS enumeration contains values that specify the type of information being assigned to or retrieved from an access token.
-      /// <para>The GetTokenInformation function uses these values to indicate the type of token information to retrieve.</para>
-      /// <para>The SetTokenInformation function uses these values to set the token information.</para>
+      /// <summary>TOKEN_INFORMATION_CLASS列挙型は、アクセストークンに割り当てられるまたはアクセストークンから取得される情報の種類を指定する値を含みます。
+      /// <para>GetTokenInformation関数は、取得するトークン情報の種類を示すためにこれらの値を使用します。</para>
+      /// <para>SetTokenInformation関数は、トークン情報を設定するためにこれらの値を使用します。</para>
       /// </summary>
       /// <remarks>
-      /// <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      /// <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      /// <para>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</para>
+      /// <para>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</para>
       /// </remarks>
       internal enum TOKEN_INFORMATION_CLASS
       {
@@ -84,7 +84,7 @@ namespace Alphaleonis.Win32.Security
          ///// <summary>The buffer receives a TOKEN_ORIGIN value.</summary>
          //TokenOrigin = 17,
 
-         /// <summary>The buffer receives a TOKEN_ELEVATION_TYPE value that specifies the elevation level of the token.</summary>
+         /// <summary>バッファはトークンの昇格レベルを指定するTOKEN_ELEVATION_TYPE値を受け取ります。</summary>
          TokenElevationType = 18,
 
          ///// <summary>The buffer receives a TOKEN_LINKED_TOKEN structure that contains a handle to another token that is linked to this token.</summary>

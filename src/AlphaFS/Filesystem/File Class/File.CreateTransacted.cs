@@ -28,10 +28,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Creates or overwrites a file in the specified path.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path and name of the file to create.</param>
-      /// <returns>A <see cref="FileStream"/> that provides read/write access to the file specified in <paramref name="path"/>.</returns>
+      /// <summary>[AlphaFS] 指定されたパスにファイルを作成するか、上書きします。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">作成するファイルのパスと名前。</param>
+      /// <returns><paramref name="path"/>で指定されたファイルへの読み取り/書き込みアクセスを提供する<see cref="FileStream"/>。</returns>
       [SecurityCritical]
       public static FileStream CreateTransacted(KernelTransaction transaction, string path)
       {
@@ -39,11 +39,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates or overwrites the specified file.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The name of the file.</param>
-      /// <param name="bufferSize">The number of bytes buffered for reads and writes to the file.</param>
-      /// <returns>A <see cref="FileStream"/> with the specified buffer size that provides read/write access to the file specified in <paramref name="path"/>.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを作成するか、上書きします。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルの名前。</param>
+      /// <param name="bufferSize">ファイルの読み取りと書き込みのためにバッファリングされるバイト数。</param>
+      /// <returns><paramref name="path"/>で指定されたファイルへの読み取り/書き込みアクセスを提供する、指定されたバッファサイズの<see cref="FileStream"/>。</returns>
       [SecurityCritical]
       public static FileStream CreateTransacted(KernelTransaction transaction, string path, int bufferSize)
       {
@@ -51,12 +51,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates or overwrites the specified file, specifying a buffer size and a <see cref="FileOptions"/> value that describes how to create or overwrite the file.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The name of the file.</param>
-      /// <param name="bufferSize">The number of bytes buffered for reads and writes to the file.</param>
-      /// <param name="options">One of the <see cref="FileOptions"/> values that describes how to create or overwrite the file.</param>
-      /// <returns>A new file with the specified buffer size.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを作成または上書きし、バッファサイズとファイルの作成または上書き方法を記述する<see cref="FileOptions"/>値を指定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルの名前。</param>
+      /// <param name="bufferSize">ファイルの読み取りと書き込みのためにバッファリングされるバイト数。</param>
+      /// <param name="options">ファイルの作成または上書き方法を記述する<see cref="FileOptions"/>値の1つ。</param>
+      /// <returns>指定されたバッファサイズの新しいファイル。</returns>
       [SecurityCritical]
       public static FileStream CreateTransacted(KernelTransaction transaction, string path, int bufferSize, FileOptions options)
       {
@@ -64,13 +64,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates or overwrites the specified file, specifying a buffer size and a <see cref="FileOptions"/> value that describes how to create or overwrite the file.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The name of the file.</param>
-      /// <param name="bufferSize">The number of bytes buffered for reads and writes to the file.</param>
-      /// <param name="options">One of the <see cref="FileOptions"/> values that describes how to create or overwrite the file.</param>
-      /// <param name="fileSecurity">One of the <see cref="FileSecurity"/> values that determines the access control and audit security for the file.</param>
-      /// <returns>A new file with the specified buffer size, file options, and file security.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを作成または上書きし、バッファサイズとファイルの作成または上書き方法を記述する<see cref="FileOptions"/>値を指定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルの名前。</param>
+      /// <param name="bufferSize">ファイルの読み取りと書き込みのためにバッファリングされるバイト数。</param>
+      /// <param name="options">ファイルの作成または上書き方法を記述する<see cref="FileOptions"/>値の1つ。</param>
+      /// <param name="fileSecurity">ファイルのアクセス制御と監査セキュリティを決定する<see cref="FileSecurity"/>値の1つ。</param>
+      /// <returns>指定されたバッファサイズ、ファイルオプション、およびファイルセキュリティの新しいファイル。</returns>
       [SecurityCritical]
       public static FileStream CreateTransacted(KernelTransaction transaction, string path, int bufferSize, FileOptions options, FileSecurity fileSecurity)
       {
@@ -78,11 +78,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates or overwrites a file in the specified path.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path and name of the file to create.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>A <see cref="FileStream"/> that provides read/write access to the file specified in <paramref name="path"/>.</returns>
+      /// <summary>[AlphaFS] 指定されたパスにファイルを作成するか、上書きします。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">作成するファイルのパスと名前。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns><paramref name="path"/>で指定されたファイルへの読み取り/書き込みアクセスを提供する<see cref="FileStream"/>。</returns>
       [SecurityCritical]
       public static FileStream CreateTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)
       {
@@ -90,12 +90,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates or overwrites the specified file.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The name of the file.</param>
-      /// <param name="bufferSize">The number of bytes buffered for reads and writes to the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>A <see cref="FileStream"/> with the specified buffer size that provides read/write access to the file specified in <paramref name="path"/>.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを作成するか、上書きします。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルの名前。</param>
+      /// <param name="bufferSize">ファイルの読み取りと書き込みのためにバッファリングされるバイト数。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns><paramref name="path"/>で指定されたファイルへの読み取り/書き込みアクセスを提供する、指定されたバッファサイズの<see cref="FileStream"/>。</returns>
       [SecurityCritical]
       public static FileStream CreateTransacted(KernelTransaction transaction, string path, int bufferSize, PathFormat pathFormat)
       {
@@ -103,13 +103,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates or overwrites the specified file, specifying a buffer size and a <see cref="FileOptions"/> value that describes how to create or overwrite the file.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The name of the file.</param>
-      /// <param name="bufferSize">The number of bytes buffered for reads and writes to the file.</param>
-      /// <param name="options">One of the <see cref="FileOptions"/> values that describes how to create or overwrite the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>A new file with the specified buffer size.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを作成または上書きし、バッファサイズとファイルの作成または上書き方法を記述する<see cref="FileOptions"/>値を指定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルの名前。</param>
+      /// <param name="bufferSize">ファイルの読み取りと書き込みのためにバッファリングされるバイト数。</param>
+      /// <param name="options">ファイルの作成または上書き方法を記述する<see cref="FileOptions"/>値の1つ。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>指定されたバッファサイズの新しいファイル。</returns>
       [SecurityCritical]
       public static FileStream CreateTransacted(KernelTransaction transaction, string path, int bufferSize, FileOptions options, PathFormat pathFormat)
       {
@@ -117,14 +117,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates or overwrites the specified file, specifying a buffer size and a <see cref="FileOptions"/> value that describes how to create or overwrite the file.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The name of the file.</param>
-      /// <param name="bufferSize">The number of bytes buffered for reads and writes to the file.</param>
-      /// <param name="options">One of the <see cref="FileOptions"/> values that describes how to create or overwrite the file.</param>
-      /// <param name="fileSecurity">One of the <see cref="FileSecurity"/> values that determines the access control and audit security for the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>A new file with the specified buffer size, file options, and file security.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを作成または上書きし、バッファサイズとファイルの作成または上書き方法を記述する<see cref="FileOptions"/>値を指定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルの名前。</param>
+      /// <param name="bufferSize">ファイルの読み取りと書き込みのためにバッファリングされるバイト数。</param>
+      /// <param name="options">ファイルの作成または上書き方法を記述する<see cref="FileOptions"/>値の1つ。</param>
+      /// <param name="fileSecurity">ファイルのアクセス制御と監査セキュリティを決定する<see cref="FileSecurity"/>値の1つ。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>指定されたバッファサイズ、ファイルオプション、およびファイルセキュリティの新しいファイル。</returns>
       [SecurityCritical]
       public static FileStream CreateTransacted(KernelTransaction transaction, string path, int bufferSize, FileOptions options, FileSecurity fileSecurity, PathFormat pathFormat)
       {

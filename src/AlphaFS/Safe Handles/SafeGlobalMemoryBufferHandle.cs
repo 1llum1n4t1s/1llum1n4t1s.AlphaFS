@@ -26,17 +26,17 @@ using System.Text;
 
 namespace Alphaleonis.Win32
 {
-   /// <summary>Represents a block of native memory of a specified size allocated using the LocalAlloc function from Kernel32.dll.</summary>
+   /// <summary>Kernel32.dllのLocalAlloc関数を使用して割り当てられた、指定されたサイズのネイティブメモリブロックを表します。</summary>
    internal sealed class SafeGlobalMemoryBufferHandle : SafeNativeMemoryBufferHandle
    {
-      /// <summary>Initializes a new instance of the <see cref="SafeGlobalMemoryBufferHandle"/> class, with zero IntPtr.</summary>
+      /// <summary>ゼロIntPtrで<see cref="SafeGlobalMemoryBufferHandle"/>クラスの新しいインスタンスを初期化します。</summary>
       public SafeGlobalMemoryBufferHandle() : base(true)
       {
       }
 
 
-      /// <summary>Initializes a new instance of the <see cref="SafeGlobalMemoryBufferHandle"/> class allocating the specified number of bytes of unmanaged memory.</summary>
-      /// <param name="capacity">The capacity.</param>
+      /// <summary>指定されたバイト数のアンマネージメモリを割り当てて、<see cref="SafeGlobalMemoryBufferHandle"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="capacity">容量。</param>
       public SafeGlobalMemoryBufferHandle(int capacity) : base(capacity)
       {
          SetHandle(Marshal.AllocHGlobal(capacity));
@@ -75,10 +75,10 @@ namespace Alphaleonis.Win32
       }
 
 
-      /// <summary>When overridden in a derived class, executes the code required to free the handle.</summary>
+      /// <summary>派生クラスでオーバーライドされた場合、ハンドルを解放するために必要なコードを実行します。</summary>
       /// <returns>
-      /// <c>true</c> if the handle is released successfully; otherwise, in the event of a catastrophic failure,
-      /// <c>false</c>. In this case, it generates a ReleaseHandleFailed Managed Debugging Assistant.
+      /// ハンドルが正常に解放された場合は<c>true</c>、致命的な障害が発生した場合は
+      /// <c>false</c>。この場合、ReleaseHandleFailed マネージデバッグアシスタントが生成されます。
       /// </returns>
       protected override bool ReleaseHandle()
       {

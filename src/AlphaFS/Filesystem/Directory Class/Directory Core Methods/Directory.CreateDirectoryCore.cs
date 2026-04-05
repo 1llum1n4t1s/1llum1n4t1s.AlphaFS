@@ -31,7 +31,7 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>Creates a new directory with the attributes of a specified template directory (if one is specified). 
+      /// <summary>指定されたテンプレートディレクトリの属性を使用して新しいディレクトリを作成します（指定された場合）。 
       ///   If the underlying file system supports security on files and directories, the function applies the specified security descriptor to the new directory.
       ///   The new directory retains the other attributes of the specified template directory.
       /// </summary>
@@ -46,12 +46,12 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <param name="returnNull">When <c>true</c> returns <c>null</c> instead of a <see cref="DirectoryInfo"/> instance.</param>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The directory to create.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">作成するディレクトリ。</param>
       /// <param name="templatePath">The path of the directory to use as a template when creating the new directory. May be <c>null</c> to indicate that no template should be used.</param>
       /// <param name="directorySecurity">The <see cref="DirectorySecurity"/> access control to apply to the directory, may be null.</param>
       /// <param name="compress">When <c>true</c> compresses the directory using NTFS compression.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       internal static DirectoryInfo CreateDirectoryCore(bool returnNull, KernelTransaction transaction, string path, string templatePath, ObjectSecurity directorySecurity, bool compress, PathFormat pathFormat)
       {
@@ -76,7 +76,7 @@ namespace Alphaleonis.Win32.Filesystem
 
          if (!char.IsWhiteSpace(longPath[longPath.Length - 1]))
          {
-            // Return DirectoryInfo instance if the directory specified by path already exists.
+            // pathで指定されたディレクトリが既に存在する場合、DirectoryInfoインスタンスを返す。
 
             if (File.ExistsCore(transaction, true, longPath, PathFormat.LongFullPath))
 

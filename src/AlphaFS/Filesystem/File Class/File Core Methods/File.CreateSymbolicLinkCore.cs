@@ -29,24 +29,24 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Creates a symbolic link (similar to CMD command: "MKLINK") to a file or directory as a transacted operation.</summary>
+      /// <summary>[AlphaFS] トランザクション操作として、ファイルまたはディレクトリへのシンボリックリンク(CMDコマンド"MKLINK"と同様)を作成します。</summary>
       /// <para>&#160;</para>
       /// <remarks>
-      /// <para>Symbolic links can point to a non-existent target.</para>
-      /// <para>When creating a symbolic link, the operating system does not check to see if the target exists.</para>
-      /// <para>Symbolic links are reparse points.</para>
-      /// <para>There is a maximum of 31 reparse points (and therefore symbolic links) allowed in a particular path.</para>
-      /// <para>See <see cref="Security.Privilege.CreateSymbolicLink"/> to run this method in an elevated state.</para>
+      /// <para>シンボリックリンクは存在しないターゲットを指すことができます。</para>
+      /// <para>シンボリックリンクを作成するとき、オペレーティングシステムはターゲットが存在するかどうかをチェックしません。</para>
+      /// <para>シンボリックリンクはリパースポイントです。</para>
+      /// <para>特定のパスで許可されるリパースポイント(したがってシンボリックリンク)は最大31個です。</para>
+      /// <para>このメソッドを昇格された状態で実行するには、<see cref="Security.Privilege.CreateSymbolicLink"/>を参照してください。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="symlinkFileName">The name of the target for the symbolic link to be created.</param>
-      /// <param name="targetFileName">The symbolic link to be created.</param>
-      /// <param name="targetType">Indicates whether the link target, <paramref name="targetFileName"/>, is a file or directory.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="symlinkFileName">作成するシンボリックリンクのターゲット名。</param>
+      /// <param name="targetFileName">作成するシンボリックリンク。</param>
+      /// <param name="targetType">リンクターゲット<paramref name="targetFileName"/>がファイルかディレクトリかを示します。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       internal static void CreateSymbolicLinkCore(KernelTransaction transaction, string symlinkFileName, string targetFileName, SymbolicLinkTarget targetType, PathFormat pathFormat)
       {
@@ -65,7 +65,7 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
-         // Don't use long path notation, as it will be empty upon creation.
+         // ロングパス表記は使用しない。作成時に空になるため。
          targetFileName = Path.GetRegularPathCore(targetFileName, GetFullPathOptions.None, false);
 
 
@@ -85,9 +85,9 @@ namespace Alphaleonis.Win32.Filesystem
          var success = null == transaction
 
             // CreateSymbolicLink() / CreateSymbolicLinkTransacted()
-            // 2017-05-30: CreateSymbolicLink() MSDN confirms LongPath usage: Starting with Windows 10, version 1607
-            // 2015-07-17: This function does not support long paths.
-            // 2014-02-14: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
+            // 2017-05-30: CreateSymbolicLink() MSDNはLongPathの使用を確認: Windows 10 バージョン1607以降
+            // 2015-07-17: この関数はロングパスをサポートしていません。
+            // 2014-02-14: MSDNはLongPathの使用を確認していませんが、この関数のUnicodeバージョンが存在します。
             
             ? NativeMethods.CreateSymbolicLink(symlinkFileName, targetFileName, targetType)
             : NativeMethods.CreateSymbolicLinkTransacted(symlinkFileName, targetFileName, targetType, transaction.SafeHandle);

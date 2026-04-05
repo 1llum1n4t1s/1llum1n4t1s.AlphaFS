@@ -27,13 +27,13 @@ namespace Alphaleonis.Win32.Security
 {
    internal static partial class NativeMethods
    {
-      /// <summary>The GetSecurityDescriptorLength function returns the length, in bytes, of a structurally valid security descriptor. The length includes the length of all associated structures.</summary>
+      /// <summary>GetSecurityDescriptorLength関数は、構造的に有効なセキュリティ記述子の長さをバイト単位で返します。長さにはすべての関連構造体の長さが含まれます。</summary>
       /// <returns>
-      /// If the function succeeds, the function returns the length, in bytes, of the SECURITY_DESCRIPTOR structure.
-      /// If the SECURITY_DESCRIPTOR structure is not valid, the return value is undefined.
+      /// 関数が成功した場合、SECURITY_DESCRIPTOR構造体の長さをバイト単位で返します。
+      /// SECURITY_DESCRIPTOR構造体が有効でない場合、戻り値は未定義です。
       /// </returns>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.U4)]

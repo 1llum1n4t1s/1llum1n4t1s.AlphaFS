@@ -26,9 +26,9 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Volume
    {
-      /// <summary>[AlphaFS] Retrieves information about the file system and volume associated with the specified root file or directorystream.</summary>
-      /// <param name="volumePath">A path that contains the root directory.</param>
-      /// <returns>A <see cref="VolumeInfo"/> instance describing the volume associatied with the specified root directory.</returns>
+      /// <summary>[AlphaFS] 指定されたルートファイルまたはディレクトリストリームに関連付けられたファイルシステムとボリュームに関する情報を取得します。</summary>
+      /// <param name="volumePath">ルートディレクトリを含むパス。</param>
+      /// <returns>指定されたルートディレクトリに関連付けられたボリュームを記述する <see cref="VolumeInfo"/> インスタンス。</returns>
       [SecurityCritical]
       public static VolumeInfo GetVolumeInfo(string volumePath)
       {
@@ -36,9 +36,9 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Retrieves information about the file system and volume associated with the specified root file or directorystream.</summary>
-      /// <param name="volumeHandle">An instance to a <see cref="SafeFileHandle"/> handle.</param>
-      /// <returns>A <see cref="VolumeInfo"/> instance describing the volume associatied with the specified root directory.</returns>
+      /// <summary>[AlphaFS] 指定されたルートファイルまたはディレクトリストリームに関連付けられたファイルシステムとボリュームに関する情報を取得します。</summary>
+      /// <param name="volumeHandle"><see cref="SafeFileHandle"/> ハンドルのインスタンス。</param>
+      /// <returns>指定されたルートディレクトリに関連付けられたボリュームを記述する <see cref="VolumeInfo"/> インスタンス。</returns>
       [SecurityCritical]
       public static VolumeInfo GetVolumeInfo(SafeFileHandle volumeHandle)
       {

@@ -25,22 +25,22 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>Determines whether the specified file exists.</summary>
+      /// <summary>指定されたファイルが存在するかどうかを判定します。</summary>
       /// <remarks>
-      ///   <para>MSDN: .NET 3.5+: Trailing spaces are removed from the end of the
-      ///   <paramref name="path"/> parameter before checking whether the directory exists.</para>
-      ///   <para>The Exists method returns <c>false</c> if any error occurs while trying to
-      ///   determine if the specified file exists.</para>
-      ///   <para>This can occur in situations that raise exceptions such as passing a file name with
-      ///   invalid characters or too many characters, a failing or missing disk, or if the caller does not have permission to read the
-      ///   file.</para>
+      ///   <para>MSDN: .NET 3.5+: ファイルまたはディレクトリが存在するかどうかを
+      ///   チェックする前に、<paramref name="path"/>パラメータの末尾のスペースが削除されます。</para>
+      ///   <para>指定されたファイルが存在するかどうかを判定中にエラーが発生した場合、
+      ///   Existsメソッドは<c>false</c>を返します。</para>
+      ///   <para>これは、無効な文字を含むファイル名を渡す、
+      ///   無効な文字が多すぎるか、ディスクの障害または欠落、あるいは呼び出し元にファイルの読み取り権限がない場合、
+      ///   ファイル。</para>
       ///   <para>The Exists method should not be used for path validation,
-      ///   this method merely checks if the file specified in path exists.</para>
-      ///   <para>Passing an invalid path to Exists returns false.</para>
-      ///   <para>Be aware that another process can potentially do something with the file in
-      ///   between the time you call the Exists method and perform another operation on the file, such as Delete.</para>
+      ///   this method merely checks pathで指定されたファイルが存在するかどうかをチェックするだけです。</para>
+      ///   <para>無効なパスをExistsに渡すと、falseが返されます。</para>
+      ///   <para>Existsメソッドの呼び出しからファイルに対する別の操作の実行までの間に、
+      ///   Existsメソッドの呼び出しからファイルに対する別の操作(Deleteなど)の実行までの間に、</para>
       /// </remarks>
-      /// <param name="path">The file to check.</param>
+      /// <param name="path">チェックするファイル。</param>
       /// <returns>
       ///   Returns <c>true</c> if the caller has the required permissions and
       ///   <paramref name="path"/> contains the name of an existing file; otherwise,
@@ -53,25 +53,25 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Determines whether the specified file exists.</summary>
+      /// <summary>[AlphaFS] 指定されたファイルが存在するかどうかを判定します。</summary>
       /// <remarks>
-      ///   <para>MSDN: .NET 3.5+: Trailing spaces are removed from the end of the
-      ///   <paramref name="path"/> parameter before checking whether the directory exists.</para>
-      ///   <para>The Exists method returns <c>false</c> if any error occurs while trying to
-      ///   determine if the specified file exists.</para>
-      ///   <para>This can occur in situations that raise exceptions such as passing a file name with
-      ///   invalid characters or too many characters,</para>
+      ///   <para>MSDN: .NET 3.5+: ファイルまたはディレクトリが存在するかどうかを
+      ///   チェックする前に、<paramref name="path"/>パラメータの末尾のスペースが削除されます。</para>
+      ///   <para>指定されたファイルが存在するかどうかを判定中にエラーが発生した場合、
+      ///   Existsメソッドは<c>false</c>を返します。</para>
+      ///   <para>これは、無効な文字を含むファイル名を渡す、
+      ///   無効な文字が多すぎるなどの状況で発生する可能性があります。</para>
       ///   <para>a failing or missing disk, or if the caller does not have permission to read the
-      ///   file.</para>
-      ///   <para>The Exists method should not be used for path validation, this method merely checks
-      ///   if the file specified in path exists.</para>
-      ///   <para>Passing an invalid path to Exists returns false.</para>
-      ///   <para>Be aware that another process can potentially do something with the file in
-      ///   between the time you call the Exists method and perform another operation on the file, such
+      ///   ファイル。</para>
+      ///   <para>Existsメソッドはパスの検証に使用すべきではありません。このメソッドは単に
+      ///   pathで指定されたファイルが存在するかどうかをチェックするだけです。</para>
+      ///   <para>無効なパスをExistsに渡すと、falseが返されます。</para>
+      ///   <para>Existsメソッドの呼び出しからファイルに対する別の操作の実行までの間に、
+      ///   Existsメソッドの呼び出しからファイルに対する別の操作(Deleteなど)の実行
       ///   as Delete.</para>
       /// </remarks>
-      /// <param name="path">The file to check.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="path">チェックするファイル。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
       ///   <para>Returns <c>true</c> if the caller has the required permissions and
       ///   <paramref name="path"/> contains the name of an existing file; otherwise,

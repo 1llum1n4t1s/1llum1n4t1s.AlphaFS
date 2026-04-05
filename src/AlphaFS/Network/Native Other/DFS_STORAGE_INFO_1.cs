@@ -25,9 +25,9 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Contains information about a DFS target, including the DFS target server name and share name as well as the target's state and priority.</summary>
-      /// <remarks>Minimum supported client: Windows Vista</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2008, Windows Server 2003 with SP1</remarks>
+      /// <summary>DFS ターゲットに関する情報を含みます, DFS ターゲットのスerver name and share name as well as the target's state and priority.</summary>
+      /// <remarks>サポートされる最小クライアント: Windows Vista</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2008, Windows Server 2003 with SP1</remarks>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct DFS_STORAGE_INFO_1
       {

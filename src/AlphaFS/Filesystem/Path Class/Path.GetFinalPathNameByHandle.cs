@@ -26,13 +26,13 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>[AlphaFS] Retrieves the final path for the specified file, formatted as <see cref="FinalPathFormats"/>.</summary>
-      /// <returns>The final path as a string.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルの最終パスを <see cref="FinalPathFormats"/> 形式で取得します。</summary>
+      /// <returns>文字列としての最終パス。</returns>
       /// <remarks>
-      ///   A final path is the path that is returned when a path is fully resolved. For example, for a symbolic link named "C:\tmp\mydir" that
-      ///   points to "D:\yourdir", the final path would be "D:\yourdir".
+      ///   最終パスとは、パスが完全に解決された際に返されるパスです。例えば、"D:\yourdir" を指すシンボリックリンク "C:\tmp\mydir" の場合、
+      ///   最終パスは "D:\yourdir" となります。
       /// </remarks>
-      /// <param name="handle">Then handle to a <see cref="SafeFileHandle"/> instance.</param>
+      /// <param name="handle"><see cref="SafeFileHandle"/> インスタンスへのハンドル。</param>
       [SecurityCritical]
       public static string GetFinalPathNameByHandle(SafeFileHandle handle)
       {
@@ -40,14 +40,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Retrieves the final path for the specified file, formatted as <see cref="FinalPathFormats"/>.</summary>
-      /// <returns>The final path as a string.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルの最終パスを <see cref="FinalPathFormats"/> 形式で取得します。</summary>
+      /// <returns>文字列としての最終パス。</returns>
       /// <remarks>
-      ///   A final path is the path that is returned when a path is fully resolved. For example, for a symbolic link named "C:\tmp\mydir" that
-      ///   points to "D:\yourdir", the final path would be "D:\yourdir".
+      ///   最終パスとは、パスが完全に解決された際に返されるパスです。例えば、"D:\yourdir" を指すシンボリックリンク "C:\tmp\mydir" の場合、
+      ///   最終パスは "D:\yourdir" となります。
       /// </remarks>
-      /// <param name="handle">Then handle to a <see cref="SafeFileHandle"/> instance.</param>
-      /// <param name="finalPath">The final path, formatted as <see cref="FinalPathFormats"/></param>
+      /// <param name="handle"><see cref="SafeFileHandle"/> インスタンスへのハンドル。</param>
+      /// <param name="finalPath"><see cref="FinalPathFormats"/> 形式の最終パス。</param>
       [SecurityCritical]
       public static string GetFinalPathNameByHandle(SafeFileHandle handle, FinalPathFormats finalPath)
       {

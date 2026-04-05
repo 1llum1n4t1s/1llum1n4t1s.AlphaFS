@@ -28,26 +28,26 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Returns the absolute path for the specified path string.</summary>
-      /// <returns>The fully qualified location of path, such as "C:\MyFile.txt".</returns>
+      /// <summary>指定されたパス文字列の絶対パスを返します。</summary>
+      /// <returns>"C:\MyFile.txt" のような完全修飾パス。</returns>
       /// <remarks>
-      /// <para>GetFullPathName merges the name of the current drive and directory with a specified file name to determine the full path and file name of a specified file.</para>
-      /// <para>It also calculates the address of the file name portion of the full path and file name.</para>
+      /// <para>GetFullPathName は、現在のドライブとディレクトリの名前を指定されたファイル名と結合して、指定されたファイルの完全パスとファイル名を決定します。</para>
+      /// <para>また、完全パスとファイル名のファイル名部分のアドレスも計算します。</para>
       /// <para>&#160;</para>
-      /// <para>This method does not verify that the resulting path and file name are valid, or that they see an existing file on the associated volume.</para>
-      /// <para>The .NET Framework does not support direct access to physical disks through paths that are device names, such as <c>\\.\PhysicalDrive0</c>.</para>
+      /// <para>このメソッドは、結果のパスとファイル名が有効であるか、関連するボリューム上に既存のファイルが存在するかを検証しません。</para>
+      /// <para>.NET Framework は、<c>\\.\PhysicalDrive0</c> のようなデバイス名のパスを通じた物理ディスクへの直接アクセスをサポートしていません。</para>
       /// <para>&#160;</para>
-      /// <para>MSDN: Multithreaded applications and shared library code should not use the GetFullPathName function and</para>
-      /// <para>should avoid using relative path names. The current directory state written by the SetCurrentDirectory function is stored as a global variable in each process,</para>
-      /// <para>therefore multithreaded applications cannot reliably use this value without possible data corruption from other threads that may also be reading or setting this value.</para>
-      /// <para>This limitation also applies to the SetCurrentDirectory and GetCurrentDirectory functions. The exception being when the application is guaranteed to be running in a single thread,</para>
-      /// <para>for example parsing file names from the command line argument string in the main thread prior to creating any additional threads.</para>
-      /// <para>Using relative path names in multithreaded applications or shared library code can yield unpredictable results and is not supported.</para>
+      /// <para>MSDN: マルチスレッドアプリケーションと共有ライブラリコードは GetFullPathName 関数を使用すべきではなく、</para>
+      /// <para>相対パス名の使用を避けるべきです。SetCurrentDirectory 関数によって書き込まれるカレントディレクトリの状態は、各プロセスのグローバル変数として格納されるため、</para>
+      /// <para>マルチスレッドアプリケーションは、この値を読み取りまたは設定している他のスレッドからのデータ破損の可能性なしにこの値を確実に使用することはできません。</para>
+      /// <para>この制限は SetCurrentDirectory および GetCurrentDirectory 関数にも適用されます。例外は、アプリケーションが単一スレッドで実行されることが保証されている場合です。</para>
+      /// <para>例えば、追加のスレッドを作成する前にメインスレッドでコマンドライン引数文字列からファイル名を解析する場合です。</para>
+      /// <para>マルチスレッドアプリケーションや共有ライブラリコードで相対パス名を使用すると、予測不可能な結果が生じる可能性があり、サポートされていません。</para>
       /// </remarks>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
-      /// <param name="path">The file or directory for which to obtain absolute path information.</param>
+      /// <param name="path">絶対パス情報を取得するファイルまたはディレクトリ。</param>
       [SecurityCritical]
       public static string GetFullPath(string path)
       {
@@ -57,27 +57,27 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Returns the absolute path for the specified path string.</summary>
-      /// <returns>The fully qualified location of path, such as "C:\MyFile.txt".</returns>
+      /// <summary>[AlphaFS] 指定されたパス文字列の絶対パスを返します。</summary>
+      /// <returns>"C:\MyFile.txt" のような完全修飾パス。</returns>
       /// <remarks>
-      /// <para>GetFullPathName merges the name of the current drive and directory with a specified file name to determine the full path and file name of a specified file.</para>
-      /// <para>It also calculates the address of the file name portion of the full path and file name.</para>
+      /// <para>GetFullPathName は、現在のドライブとディレクトリの名前を指定されたファイル名と結合して、指定されたファイルの完全パスとファイル名を決定します。</para>
+      /// <para>また、完全パスとファイル名のファイル名部分のアドレスも計算します。</para>
       /// <para>&#160;</para>
-      /// <para>This method does not verify that the resulting path and file name are valid, or that they see an existing file on the associated volume.</para>
-      /// <para>The .NET Framework does not support direct access to physical disks through paths that are device names, such as <c>\\.\PhysicalDrive0</c>.</para>
+      /// <para>このメソッドは、結果のパスとファイル名が有効であるか、関連するボリューム上に既存のファイルが存在するかを検証しません。</para>
+      /// <para>.NET Framework は、<c>\\.\PhysicalDrive0</c> のようなデバイス名のパスを通じた物理ディスクへの直接アクセスをサポートしていません。</para>
       /// <para>&#160;</para>
-      /// <para>MSDN: Multithreaded applications and shared library code should not use the GetFullPathName function and</para>
-      /// <para>should avoid using relative path names. The current directory state written by the SetCurrentDirectory function is stored as a global variable in each process,</para>
-      /// <para>therefore multithreaded applications cannot reliably use this value without possible data corruption from other threads that may also be reading or setting this value.</para>
-      /// <para>This limitation also applies to the SetCurrentDirectory and GetCurrentDirectory functions. The exception being when the application is guaranteed to be running in a single thread,</para>
-      /// <para>for example parsing file names from the command line argument string in the main thread prior to creating any additional threads.</para>
-      /// <para>Using relative path names in multithreaded applications or shared library code can yield unpredictable results and is not supported.</para>
+      /// <para>MSDN: マルチスレッドアプリケーションと共有ライブラリコードは GetFullPathName 関数を使用すべきではなく、</para>
+      /// <para>相対パス名の使用を避けるべきです。SetCurrentDirectory 関数によって書き込まれるカレントディレクトリの状態は、各プロセスのグローバル変数として格納されるため、</para>
+      /// <para>マルチスレッドアプリケーションは、この値を読み取りまたは設定している他のスレッドからのデータ破損の可能性なしにこの値を確実に使用することはできません。</para>
+      /// <para>この制限は SetCurrentDirectory および GetCurrentDirectory 関数にも適用されます。例外は、アプリケーションが単一スレッドで実行されることが保証されている場合です。</para>
+      /// <para>例えば、追加のスレッドを作成する前にメインスレッドでコマンドライン引数文字列からファイル名を解析する場合です。</para>
+      /// <para>マルチスレッドアプリケーションや共有ライブラリコードで相対パス名を使用すると、予測不可能な結果が生じる可能性があり、サポートされていません。</para>
       /// </remarks>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
-      /// <param name="path">The file or directory for which to obtain absolute path information.</param>
-      /// <param name="options">Options for controlling the full path retrieval.</param>
+      /// <param name="path">絶対パス情報を取得するファイルまたはディレクトリ。</param>
+      /// <param name="options">完全パス取得を制御するオプション。</param>
       [SecurityCritical]
       public static string GetFullPath(string path, GetFullPathOptions options)
       {

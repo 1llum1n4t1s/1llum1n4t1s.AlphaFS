@@ -28,9 +28,8 @@ using System.Text;
 
 namespace Alphaleonis.Win32.Security
 {
-   /// <summary>Represents a privilege for an access token. The privileges available on the local machine are available as 
-   /// static instances from this class. To create a <see cref="Privilege"/> representing a privilege on another system,
-   /// use the constructor specifying a system name together with one of these static instances.
+   /// <summary>アクセストークンの特権を表します。ローカルマシンで利用可能な特権は、このクラスの静的インスタンスとして利用できます。
+   /// 別のシステムの特権を表す<see cref="Privilege"/>を作成するには、これらの静的インスタンスの1つと共にシステム名を指定するコンストラクタを使用します。
    /// </summary>
    /// <seealso cref="PrivilegeEnabler"/>
    [ImmutableObject(true)]
@@ -38,183 +37,183 @@ namespace Alphaleonis.Win32.Security
    {
       #region System Privileges
 
-      /// <summary>Required to assign the primary token of a process. User Right: Replace a process-level token.</summary>
+      /// <summary>プロセスのプライマリトークンの割り当てに必要です。ユーザー権利: プロセスレベルのトークンの置換。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege AssignPrimaryToken = new Privilege("SeAssignPrimaryTokenPrivilege");
 
 
-      /// <summary>Required to generate audit-log entries. Give this privilege to secure servers. User Right: Generate security audits.</summary>
+      /// <summary>監査ログエントリの生成に必要です。この特権をセキュアサーバーに付与します。ユーザー権利: セキュリティ監査の生成。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege Audit = new Privilege("SeAuditPrivilege");
 
 
-      /// <summary>Required to perform backup operations. This privilege causes the system to grant all read access control to any file, regardless of the access control list (ACL) specified for the file. Any access request other than read is still evaluated with the ACL. User Right: Back up files and directories.</summary>
+      /// <summary>バックアップ操作の実行に必要です。この特権により、ファイルに指定されたACLに関係なく、すべてのファイルへの読み取りアクセス制御が付与されます。読み取り以外のアクセス要求は引き続きACLで評価されます。ユーザー権利: ファイルとディレクトリのバックアップ。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege Backup = new Privilege("SeBackupPrivilege");
 
 
-      /// <summary>Required to receive notifications of changes to files or directories. This privilege also causes the system to skip all traversal access checks. It is enabled by default for all users. User Right: Bypass traverse checking.</summary>
+      /// <summary>ファイルまたはディレクトリの変更通知の受信に必要です。この特権により、すべてのトラバーサルアクセスチェックもスキップされます。デフォルトですべてのユーザーに有効です。ユーザー権利: トラバースチェックのバイパス。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege ChangeNotify = new Privilege("SeChangeNotifyPrivilege");
 
 
-      /// <summary>Required to create named file mapping objects in the global namespace during Terminal Services sessions. This privilege is enabled by default for administrators, services, and the local system account. User Right: Create global objects.</summary>
-      /// <remarks>Windows XP/2000:  This privilege is not supported. Note that this value is supported starting with Windows Server 2003, Windows XP SP2, and Windows 2000 SP4.</remarks>
+      /// <summary>ターミナルサービスセッション中にグローバル名前空間で名前付きファイルマッピングオブジェクトの作成に必要です。この特権は管理者、サービス、およびローカルシステムアカウントにデフォルトで有効です。ユーザー権利: グローバルオブジェクトの作成。</summary>
+      /// <remarks>Windows XP/2000: この特権はサポートされていません。この値はWindows Server 2003、Windows XP SP2、およびWindows 2000 SP4以降でサポートされています。</remarks>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege CreateGlobal = new Privilege("SeCreateGlobalPrivilege");
 
 
-      /// <summary>Required to create a paging file. User Right: Create a pagefile.</summary>
+      /// <summary>ページングファイルの作成に必要です。ユーザー権利: ページファイルの作成。</summary>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pagefile")]
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege CreatePagefile = new Privilege("SeCreatePagefilePrivilege");
 
 
-      /// <summary>Required to create a permanent object. User Right: Create permanent shared objects.</summary>
+      /// <summary>永続オブジェクトの作成に必要です。ユーザー権利: 永続共有オブジェクトの作成。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege CreatePermanent = new Privilege("SeCreatePermanentPrivilege");
 
 
-      /// <summary>Required to create a symbolic link. User Right: Create symbolic links.</summary>           
+      /// <summary>シンボリックリンクの作成に必要です。ユーザー権利: シンボリックリンクの作成。</summary>           
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege CreateSymbolicLink = new Privilege("SeCreateSymbolicLinkPrivilege");
 
 
-      /// <summary>Required to create a primary token. User Right: Create a token object.</summary>
+      /// <summary>プライマリトークンの作成に必要です。ユーザー権利: トークンオブジェクトの作成。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege CreateToken = new Privilege("SeCreateTokenPrivilege");
 
 
-      /// <summary>Required to debug and adjust the memory of a process owned by another account. User Right: Debug programs.</summary>
+      /// <summary>別のアカウントが所有するプロセスのメモリのデバッグと調整に必要です。ユーザー権利: プログラムのデバッグ。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege Debug = new Privilege("SeDebugPrivilege");
 
 
-      /// <summary>Required to mark user and computer accounts as trusted for delegation. User Right: Enable computer and user accounts to be trusted for delegation.</summary>
+      /// <summary>ユーザーアカウントとコンピューターアカウントを委任に対して信頼済みとしてマークするために必要です。ユーザー権利: コンピューターとユーザーアカウントの委任の信頼を有効にする。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege EnableDelegation = new Privilege("SeEnableDelegationPrivilege");
 
 
-      /// <summary>Required to impersonate. User Right: Impersonate a client after authentication.</summary>
-      /// <remarks>Windows XP/2000:  This privilege is not supported. Note that this value is supported starting with Windows Server 2003, Windows XP SP2, and Windows 2000 SP4.</remarks>
+      /// <summary>偽装に必要です。ユーザー権利: 認証後にクライアントを偽装する。</summary>
+      /// <remarks>Windows XP/2000: この特権はサポートされていません。この値はWindows Server 2003、Windows XP SP2、およびWindows 2000 SP4以降でサポートされています。</remarks>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege Impersonate = new Privilege("SeImpersonatePrivilege");
 
 
-      /// <summary>Required to increase the base priority of a process. User Right: Increase scheduling priority.</summary>
+      /// <summary>プロセスの基本優先度の引き上げに必要です。ユーザー権利: スケジュールの優先順位の引き上げ。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege IncreaseBasePriority = new Privilege("SeIncreaseBasePriorityPrivilege");
 
 
-      /// <summary>Required to increase the quota assigned to a process. User Right: Adjust memory quotas for a process.</summary>
+      /// <summary>プロセスに割り当てられたクォータの引き上げに必要です。ユーザー権利: プロセスのメモリクォータの調整。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege IncreaseQuota = new Privilege("SeIncreaseQuotaPrivilege");
 
 
-      /// <summary>Required to allocate more memory for applications that run in the context of users. User Right: Increase a process working set.</summary>
+      /// <summary>ユーザーのコンテキストで実行されるアプリケーションにより多くのメモリを割り当てるために必要です。ユーザー権利: プロセスワーキングセットの引き上げ。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege IncreaseWorkingSet = new Privilege("SeIncreaseWorkingSetPrivilege");
 
 
-      /// <summary>Required to load or unload a device driver. User Right: Load and unload device drivers.</summary>
+      /// <summary>デバイスドライバーの読み込みまたはアンロードに必要です。ユーザー権利: デバイスドライバーの読み込みとアンロード。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege LoadDriver = new Privilege("SeLoadDriverPrivilege");
 
 
-      /// <summary>Required to lock physical pages in memory. User Right: Lock pages in memory.</summary>
+      /// <summary>メモリ内の物理ページのロックに必要です。ユーザー権利: メモリ内のページのロック。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege LockMemory = new Privilege("SeLockMemoryPrivilege");
 
 
-      /// <summary>Required to create a computer account. User Right: Add workstations to domain.</summary>
+      /// <summary>コンピューターアカウントの作成に必要です。ユーザー権利: ドメインにワークステーションを追加。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege MachineAccount = new Privilege("SeMachineAccountPrivilege");
 
 
-      /// <summary>Required to enable volume management privileges. User Right: Manage the files on a volume.</summary>
+      /// <summary>ボリューム管理特権の有効化に必要です。ユーザー権利: ボリューム上のファイルの管理。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege ManageVolume = new Privilege("SeManageVolumePrivilege");
 
 
-      /// <summary>Required to gather profiling information for a single process. User Right: Profile single process.</summary>
+      /// <summary>単一プロセスのプロファイリング情報の収集に必要です。ユーザー権利: 単一プロセスのプロファイル。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege ProfileSingleProcess = new Privilege("SeProfileSingleProcessPrivilege");
 
 
-      /// <summary>Required to modify the mandatory integrity level of an object. User Right: Modify an object label.</summary>
+      /// <summary>オブジェクトの必須整合性レベルの変更に必要です。ユーザー権利: オブジェクトラベルの変更。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Relabel")]
       public static readonly Privilege Relabel = new Privilege("SeRelabelPrivilege");
 
 
-      /// <summary>Required to shut down a system using a network request. User Right: Force shutdown from a remote system.</summary>
+      /// <summary>ネットワーク要求を使用したシステムのシャットダウンに必要です。ユーザー権利: リモートシステムからの強制シャットダウン。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege RemoteShutdown = new Privilege("SeRemoteShutdownPrivilege");
 
 
-      /// <summary>Required to perform restore operations. This privilege causes the system to grant all write access control to any file, regardless of the ACL specified for the file. Any access request other than write is still evaluated with the ACL. Additionally, this privilege enables you to set any valid user or group SID as the owner of a file. User Right: Restore files and directories.</summary>
+      /// <summary>復元操作の実行に必要です。この特権により、ファイルに指定されたACLに関係なく、すべてのファイルへの書き込みアクセス制御が付与されます。書き込み以外のアクセス要求は引き続きACLで評価されます。さらに、この特権により、任意の有効なユーザーまたはグループSIDをファイルの所有者として設定できます。ユーザー権利: ファイルとディレクトリの復元。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege Restore = new Privilege("SeRestorePrivilege");
 
 
-      /// <summary>Required to perform a number of security-related functions, such as controlling and viewing audit messages. This privilege identifies its holder as a security operator. User Right: Manage auditing and security log.</summary>
+      /// <summary>監査メッセージの制御と表示など、セキュリティ関連の機能の実行に必要です。この特権は保持者をセキュリティオペレーターとして識別します。ユーザー権利: 監査とセキュリティログの管理。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege Security = new Privilege("SeSecurityPrivilege");
 
 
-      /// <summary>Required to shut down a local system. User Right: Shut down the system.</summary>
+      /// <summary>ローカルシステムのシャットダウンに必要です。ユーザー権利: システムのシャットダウン。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege Shutdown = new Privilege("SeShutdownPrivilege");
 
 
-      /// <summary>Required for a domain controller to use the LDAP directory synchronization services. This privilege enables the holder to read all objects and properties in the directory, regardless of the protection on the objects and properties. By default, it is assigned to the Administrator and LocalSystem accounts on domain controllers. User Right: Synchronize directory service data.</summary>
+      /// <summary>ドメインコントローラーがLDAPディレクトリ同期サービスを使用するために必要です。この特権により、オブジェクトとプロパティの保護に関係なく、ディレクトリ内のすべてのオブジェクトとプロパティの読み取りが可能になります。デフォルトでは、ドメインコントローラーのAdministratorおよびLocalSystemアカウントに割り当てられます。ユーザー権利: ディレクトリサービスデータの同期。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege SyncAgent = new Privilege("SeSyncAgentPrivilege");
 
 
-      /// <summary>Required to modify the nonvolatile RAM of systems that use this type of memory to store configuration information. User Right: Modify firmware environment values.</summary>
+      /// <summary>構成情報を格納するためにこのタイプのメモリを使用するシステムの不揮発性RAMの変更に必要です。ユーザー権利: ファームウェア環境値の変更。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege SystemEnvironment = new Privilege("SeSystemEnvironmentPrivilege");
 
 
-      /// <summary>Required to gather profiling information for the entire system. User Right: Profile system performance.</summary>
+      /// <summary>システム全体のプロファイリング情報の収集に必要です。ユーザー権利: システムパフォーマンスのプロファイル。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege SystemProfile = new Privilege("SeSystemProfilePrivilege");
 
 
-      /// <summary>Required to modify the system time. User Right: Change the system time.</summary>
+      /// <summary>システム時刻の変更に必要です。ユーザー権利: システム時刻の変更。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege SystemTime = new Privilege("SeSystemtimePrivilege");
 
 
-      /// <summary>Required to take ownership of an object without being granted discretionary access. This privilege allows the owner value to be set only to those values that the holder may legitimately assign as the owner of an object. User Right: Take ownership of files or other objects.</summary>
+      /// <summary>随意アクセスを付与されずにオブジェクトの所有権を取得するために必要です。この特権により、所有者の値は保持者が正当にオブジェクトの所有者として割り当てることができる値にのみ設定できます。ユーザー権利: ファイルまたはその他のオブジェクトの所有権の取得。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege TakeOwnership = new Privilege("SeTakeOwnershipPrivilege");
 
 
-      /// <summary>This privilege identifies its holder as part of the trusted computer base. Some trusted protected subsystems are granted this privilege. User Right: Act as part of the operating system.</summary>
+      /// <summary>この特権は保持者を信頼されたコンピューターベースの一部として識別します。一部の信頼された保護サブシステムにこの特権が付与されます。ユーザー権利: オペレーティングシステムの一部として動作。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Tcb")]
       public static readonly Privilege Tcb = new Privilege("SeTcbPrivilege");
 
 
-      /// <summary>Required to adjust the time zone associated with the computer's internal clock. User Right: Change the time zone.</summary>
+      /// <summary>コンピューターの内部時計に関連付けられたタイムゾーンの調整に必要です。ユーザー権利: タイムゾーンの変更。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege TimeZone = new Privilege("SeTimeZonePrivilege");
 
 
-      /// <summary>Required to access Credential Manager as a trusted caller. User Right: Access Credential Manager as a trusted caller.</summary>
+      /// <summary>信頼された呼び出し元として資格情報マネージャーへのアクセスに必要です。ユーザー権利: 信頼された呼び出し元として資格情報マネージャーにアクセス。</summary>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Cred")]
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege TrustedCredManAccess = new Privilege("SeTrustedCredManAccessPrivilege");
 
 
-      /// <summary>Required to undock a laptop. User Right: Remove computer from docking station.</summary>
+      /// <summary>ラップトップのドッキング解除に必要です。ユーザー権利: ドッキングステーションからコンピューターを取り外す。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege Undock = new Privilege("SeUndockPrivilege");
 
 
-      /// <summary>Required to read unsolicited input from a terminal device. User Right: Not applicable.</summary>
+      /// <summary>ターミナルデバイスからの未要請入力の読み取りに必要です。ユーザー権利: 該当なし。</summary>
       [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
       public static readonly Privilege UnsolicitedInput = new Privilege("SeUnsolicitedInputPrivilege");
 
@@ -231,9 +230,9 @@ namespace Alphaleonis.Win32.Security
 
       #region Constructors
 
-      /// <summary>Create a new <see cref="Privilege"/> instance, representing the specified privilege on the specified system.</summary>
-      /// <param name="systemName">Name of the system.</param>
-      /// <param name="privilege">The privilege to copy the privilege name from.</param>
+      /// <summary>指定されたシステム上の指定された特権を表す新しい<see cref="Privilege"/>インスタンスを作成します。</summary>
+      /// <param name="systemName">システムの名前。</param>
+      /// <param name="privilege">特権名のコピー元となる特権。</param>
       public Privilege(string systemName, Privilege privilege)
       {
          if (Utils.IsNullOrWhiteSpace(systemName))
@@ -250,8 +249,8 @@ namespace Alphaleonis.Win32.Security
       }
 
 
-      /// <summary>Create a new <see cref="Privilege"/> instance, representing a privilege with the specified name on the local system.</summary>
-      /// <param name="name">The name.</param>
+      /// <summary>ローカルシステム上の指定された名前の特権を表す新しい<see cref="Privilege"/>インスタンスを作成します。</summary>
+      /// <param name="name">特権の名前。</param>
       private Privilege(string name)
       {
          if (Utils.IsNullOrWhiteSpace(name))
@@ -267,8 +266,8 @@ namespace Alphaleonis.Win32.Security
 
       #region Properties
 
-      /// <summary>Gets the system name identifying this privilege.</summary>
-      /// <value>The system name identifying this privilege.</value>
+      /// <summary>この特権を識別するシステム名を取得します。</summary>
+      /// <value>この特権を識別するシステム名。</value>
       public string Name
       {
          get { return _name; }
@@ -279,8 +278,8 @@ namespace Alphaleonis.Win32.Security
       
       #region Methods
 
-      /// <summary>Retrieves the display name that represents this privilege.</summary>
-      /// <returns>The display name that represents this privilege.</returns>
+      /// <summary>この特権を表す表示名を取得します。</summary>
+      /// <returns>この特権を表す表示名。</returns>
       [SecurityCritical]
       public string LookupDisplayName()
       {
@@ -311,8 +310,8 @@ namespace Alphaleonis.Win32.Security
       }
 
 
-      /// <summary>Retrieves the locally unique identifier (LUID) used on to represent this privilege (on the system from which it originates).</summary>
-      /// <returns>the locally unique identifier (LUID) used on to represent this privilege (on the system from which it originates).</returns>
+      /// <summary>この特権を表すために使用されるローカル一意識別子（LUID）を取得します（元のシステム上）。</summary>
+      /// <returns>この特権を表すために使用されるローカル一意識別子（LUID）（元のシステム上）。</returns>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Luid")]
       [SecurityCritical]
       public long LookupLuid()
@@ -331,26 +330,26 @@ namespace Alphaleonis.Win32.Security
       }
 
 
-      /// <summary>Serves as a hash function for a particular type.</summary>
-      /// <returns>A hash code for the current Object.</returns>
+      /// <summary>特定の型のハッシュ関数として機能します。</summary>
+      /// <returns>現在のオブジェクトのハッシュコード。</returns>
       public override int GetHashCode()
       {
          return !Utils.IsNullOrWhiteSpace(Name) ? Name.GetHashCode() : 0;
       }
 
 
-      /// <summary>Returns the system name for this privilege.</summary>
-      /// <remarks>This is equivalent to <see cref="Privilege.Name"/>.</remarks>
-      /// <returns>A <see cref="System.String"/> that represents the current <see cref="object"/>.</returns>
+      /// <summary>この特権のシステム名を返します。</summary>
+      /// <remarks>これは<see cref="Privilege.Name"/>と同等です。</remarks>
+      /// <returns>現在の<see cref="object"/>を表す<see cref="System.String"/>。</returns>
       public override string ToString()
       {
          return Name;
       }
 
 
-      /// <summary>Indicates whether the current object is equal to another object of the same type.</summary>
-      /// <param name="other">An object to compare with this object.</param>
-      /// <returns><c>true</c> if the current object is equal to the <paramref name="other"/> parameter; otherwise, <c>false</c>.</returns>
+      /// <summary>現在のオブジェクトが同じ型の別のオブジェクトと等しいかどうかを示します。</summary>
+      /// <param name="other">このオブジェクトと比較するオブジェクト。</param>
+      /// <returns>現在のオブジェクトが<paramref name="other"/>パラメーターと等しい場合は<c>true</c>、それ以外の場合は<c>false</c>。</returns>
       public bool Equals(Privilege other)
       {
          return null != other && GetType() == other.GetType() &&
@@ -359,9 +358,9 @@ namespace Alphaleonis.Win32.Security
       }
 
 
-      /// <summary>Determines whether the specified <see cref="object"/> is equal to the current <see cref="object"/>.</summary>
-      /// <param name="obj">The <see cref="object"/> to compare with the current <see cref="object"/>.</param>
-      /// <returns><c>true</c> if the specified <see cref="object"/> is equal to the current <see cref="object"/>; otherwise, <c>false</c>.</returns>
+      /// <summary>指定された<see cref="object"/>が現在の<see cref="object"/>と等しいかどうかを判断します。</summary>
+      /// <param name="obj">現在の<see cref="object"/>と比較する<see cref="object"/>。</param>
+      /// <returns>指定された<see cref="object"/>が現在の<see cref="object"/>と等しい場合は<c>true</c>、それ以外の場合は<c>false</c>。</returns>
       /// <exception cref="NullReferenceException"/>
       public override bool Equals(object obj)
       {
@@ -371,10 +370,10 @@ namespace Alphaleonis.Win32.Security
       }
 
 
-      /// <summary>Implements the operator ==</summary>
-      /// <param name="left">A.</param>
-      /// <param name="right">B.</param>
-      /// <returns>The result of the operator.</returns>
+      /// <summary>==演算子を実装します。</summary>
+      /// <param name="left">左辺の値。</param>
+      /// <param name="right">右辺の値。</param>
+      /// <returns>演算子の結果。</returns>
       public static bool operator ==(Privilege left, Privilege right)
       {
          return ReferenceEquals(left, null) && ReferenceEquals(right, null) ||
@@ -382,10 +381,10 @@ namespace Alphaleonis.Win32.Security
       }
 
 
-      /// <summary>Implements the operator !=</summary>
-      /// <param name="left">A.</param>
-      /// <param name="right">B.</param>
-      /// <returns>The result of the operator.</returns>
+      /// <summary>!=演算子を実装します。</summary>
+      /// <param name="left">左辺の値。</param>
+      /// <param name="right">右辺の値。</param>
+      /// <returns>演算子の結果。</returns>
       public static bool operator !=(Privilege left, Privilege right)
       {
          return !(left == right);

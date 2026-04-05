@@ -25,7 +25,7 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Used by function WNetUseConnection(); Set of bit flags describing the connection. This parameter can be any combination of the following values.</summary>
+      /// <summary>WNetUseConnection() 関数で使用されます; 接続を記述するビットフラグのセット. This parameter can be any combination of the following values.</summary>
       [Flags]
       internal enum Connect
       {
@@ -35,13 +35,13 @@ namespace Alphaleonis.Win32.Network
          /// <summary>This flag instructs the operating system to store the network resource connection. If this bit flag is set, the operating system automatically attempts to restore the connection when the user logs on. The system remembers only successful connections that redirect local devices. It does not remember connections that are unsuccessful or deviceless connections.</summary>
          UpdateProfile = 1,
 
-         /// <summary>If this flag is set, the operating system may interact with the user for authentication purposes.</summary>
+         /// <summary>このフラグが設定されている場合、オペレーティングシステムは認証のためにユーザーと対話する場合があります.</summary>
          Interactive = 8,
 
-         /// <summary>This flag instructs the system not to use any default settings for user names or passwords without offering the user the opportunity to supply an alternative. This flag is ignored unless <see cref="Interactive"/> is also set.</summary>
+         /// <summary>このフラグは、ユーザーに代替を提供する機会なしにユーザー名やパスワードのデフォルト設定を使用しないようにシステムに指示します. This flag is ignored unless <see cref="Interactive"/> is also set.</summary>
          Prompt = 16,
 
-         /// <summary>This flag forces the redirection of a local device when making the connection.</summary>
+         /// <summary>このフラグは接続の確立時にローカルデバイスのリダイレクトを強制します.</summary>
          Redirect = 128,
 
          ///// <summary>If this flag is set, the connection was made using a local device redirection. If the lpAccessName parameter points to a buffer, the local device name is copied to the buffer.</summary>
@@ -50,7 +50,7 @@ namespace Alphaleonis.Win32.Network
          // <summary>If this flag is set, the operating system prompts the user for authentication using the command line instead of a graphical user interface (GUI). This flag is ignored unless <see cref="Interactive"/> is also set.</summary>
          //CommandLine = 2048,
 
-         /// <summary>If this flag is set, and the operating system prompts for a credential, the credential should be saved by the credential manager. If the credential manager is disabled for the caller's logon session, or if the network provider does not support saving credentials, this flag is ignored. This flag is also ignored unless you set the "CommandLine" flag.</summary>
+         /// <summary>このフラグが設定されている場合、オペレーティングシステムが資格情報を要求すると, the credential should be saved by the credential manager. If the credential manager is disabled for the caller's logon session, or if the network provider does not support saving credentials, this flag is ignored. This flag is also ignored unless you set the "CommandLine" flag.</summary>
          SaveCredentialManager = 4096
       }
    }

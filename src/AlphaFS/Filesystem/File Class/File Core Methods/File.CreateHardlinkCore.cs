@@ -28,14 +28,14 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Establishes a hard link (similar to CMD command: "MKLINK /H") between an existing file and a new file as a transacted operation. This function is only supported on the NTFS file system, and only for files, not directories.</summary>
+      /// <summary>[AlphaFS] トランザクション操作として、既存のファイルと新しいファイルの間にハードリンク(CMDコマンド"MKLINK /H"と同様)を確立します。この機能はNTFSファイルシステムでのみサポートされ、ディレクトリではなくファイルのみが対象です。</summary>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="fileName">The name of the new file. This parameter cannot specify the name of a directory.</param>
-      /// <param name="existingFileName">The name of the existing file. This parameter cannot specify the name of a directory.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>      
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="fileName">新しいファイルの名前。このパラメータではディレクトリの名前を指定できません。</param>
+      /// <param name="existingFileName">既存のファイルの名前。このパラメータではディレクトリの名前を指定できません。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>      
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Hardlink")]
       [SecurityCritical]
       internal static void CreateHardLinkCore(KernelTransaction transaction, string fileName, string existingFileName, PathFormat pathFormat)
@@ -52,8 +52,8 @@ namespace Alphaleonis.Win32.Filesystem
          if (!(transaction == null || !NativeMethods.IsAtLeastWindowsVista
 
             // CreateHardLink() / CreateHardLinkTransacted()
-            // 2013-01-13: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
-            // 2017-05-30: CreateHardLink() MSDN confirms LongPath usage: Starting with Windows 10, version 1607
+            // 2013-01-13: MSDNはLongPathの使用を確認していませんが、この関数のUnicodeバージョンが存在します。
+            // 2017-05-30: CreateHardLink() MSDNはLongPathの使用を確認: Windows 10 バージョン1607以降
 
             ? NativeMethods.CreateHardLink(fileName, existingFileName, IntPtr.Zero)
             : NativeMethods.CreateHardLinkTransacted(fileName, existingFileName, IntPtr.Zero, transaction.SafeHandle)))

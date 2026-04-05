@@ -27,13 +27,13 @@ namespace Alphaleonis.Win32.Filesystem
    public static partial class File
    {
       /// <summary>[AlphaFS] Gets the date and time, in coordinated universal time (UTC) or local time, that the specified file or directory was last written to.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file or directory for which to obtain write date and time information.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">書き込み日時情報を取得するファイルまたはディレクトリ。</param>
       /// <param name="getUtc"><c>true</c> gets the Coordinated Universal Time (UTC), <c>false</c> gets the local time.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
       ///   A <see cref="DateTime"/> structure set to the date and time that the specified file or directory was last written to.
-      ///   Depending on <paramref name="getUtc"/> this value is expressed in UTC- or local time.
+      ///   <paramref name="getUtc"/>に応じて、この値はUTC時刻またはローカル時刻で表されます。
       /// </returns>
       [SecurityCritical]
       internal static DateTime GetLastWriteTimeCore(KernelTransaction transaction, string path, bool getUtc, PathFormat pathFormat)

@@ -28,13 +28,13 @@ namespace Alphaleonis.Win32.Security
 {
    internal static partial class NativeMethods
    {
-      /// <summary>The AdjustTokenPrivileges function enables or disables privileges in the specified access token. Enabling or disabling privileges in an access token requires TOKEN_ADJUST_PRIVILEGES access.</summary>
+      /// <summary>AdjustTokenPrivileges関数は、指定されたアクセストークン内の特権を有効または無効にします。アクセストークン内の特権の有効化または無効化にはTOKEN_ADJUST_PRIVILEGESアクセスが必要です。</summary>
       /// <returns>
-      /// If the function succeeds, the return value is nonzero.
-      /// To determine whether the function adjusted all of the specified privileges, call GetLastError.
+      /// 関数が成功した場合、戻り値は0以外です。
+      /// 関数が指定されたすべての特権を調整したかどうかを判定するには、GetLastErrorを呼び出します。
       /// </returns>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]

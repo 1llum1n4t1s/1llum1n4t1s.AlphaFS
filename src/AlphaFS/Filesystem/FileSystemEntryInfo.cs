@@ -25,8 +25,8 @@ using System.Security;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>Represents information about a file system entry.
-   /// <para>This class cannot be inherited.</para>
+   /// <summary>ファイルシステムエントリに関する情報を表します。
+   /// <para>このクラスは継承できません。</para>
    /// </summary>
    [Serializable]
    [SecurityCritical]
@@ -42,8 +42,8 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region Constructor
 
-      /// <summary>Initializes a new instance of the <see cref="FileSystemEntryInfo"/> class.</summary>
-      /// <param name="findData">The NativeMethods.WIN32_FIND_DATA structure.</param>
+      /// <summary><see cref="FileSystemEntryInfo"/> クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="findData">NativeMethods.WIN32_FIND_DATA構造体。</param>
       internal FileSystemEntryInfo(NativeMethods.WIN32_FIND_DATA findData)
       {
          Win32FindData = findData;
@@ -54,58 +54,58 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region Properties
 
-      /// <summary>The instance 8.3 version of the filename.</summary>
+      /// <summary>ファイル名の8.3形式バージョン。</summary>
       public string AlternateFileName
       {
-         // This property is always empty when NativeMethods.FINDEX_INFO_LEVELS.Basic is used.
+         // NativeMethods.FINDEX_INFO_LEVELS.Basicが使用されている場合、このプロパティは常に空です。
 
          get { return Win32FindData.cAlternateFileName; }
       }
 
 
-      /// <summary>The instance attributes.</summary>
+      /// <summary>インスタンスの属性。</summary>
       public FileAttributes Attributes
       {
          get { return Win32FindData.dwFileAttributes; }
       }
 
 
-      /// <summary>The instance creation time.</summary>
+      /// <summary>インスタンスの作成時刻。</summary>
       public DateTime CreationTime
       {
          get { return CreationTimeUtc.ToLocalTime(); }
       }
 
 
-      /// <summary>The instance creation time, in coordinated universal time (UTC).</summary>
+      /// <summary>インスタンスの協定世界時（UTC）での作成時刻。</summary>
       public DateTime CreationTimeUtc
       {
          get { return DateTime.FromFileTimeUtc(Win32FindData.ftCreationTime); }
       }
 
 
-      /// <summary>The instance file extension.</summary>
+      /// <summary>インスタンスのファイル拡張子。</summary>
       public string Extension
       {
          get { return Path.GetExtension(Win32FindData.cFileName, false); }
       }
 
 
-      /// <summary>The instance file name.</summary>
+      /// <summary>インスタンスのファイル名。</summary>
       public string FileName
       {
          get { return Win32FindData.cFileName; }
       }
 
 
-      /// <summary>The instance file size.</summary>
+      /// <summary>インスタンスのファイルサイズ。</summary>
       public long FileSize
       {
          get { return NativeMethods.ToLong(Win32FindData.nFileSizeHigh, Win32FindData.nFileSizeLow); }
       }
 
       
-      /// <summary>The instance full path.</summary>
+      /// <summary>インスタンスのフルパス。</summary>
       public string FullPath
       {
          get { return _fullPath; }
@@ -118,149 +118,149 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>The instance is a candidate for backup or removal. </summary>
+      /// <summary>インスタンスがバックアップまたは削除の候補であるかどうか。</summary>
       public bool IsArchive
       {
          get { return File.HasValidAttributes(Attributes) && (Attributes & FileAttributes.Archive) != 0; }
       }
 
 
-      /// <summary>The instance is compressed.</summary>
+      /// <summary>インスタンスが圧縮されているかどうか。</summary>
       public bool IsCompressed
       {
          get { return File.HasValidAttributes(Attributes) && (Attributes & FileAttributes.Compressed) != 0; }
       }
 
 
-      /// <summary>Reserved for future use.</summary>
+      /// <summary>将来の使用のために予約されています。</summary>
       public bool IsDevice
       {
          get { return File.HasValidAttributes(Attributes) && (Attributes & FileAttributes.Device) != 0; }
       }
 
 
-      /// <summary>The instance is a directory.</summary>
+      /// <summary>インスタンスがディレクトリであるかどうか。</summary>
       public bool IsDirectory
       {
          get { return File.IsDirectory(Attributes); }
       }
 
 
-      /// <summary>The instance is encrypted. For a file, this means that all data in the file is encrypted. For a directory, this means that encryption is the default for newly created files and directories.</summary>
+      /// <summary>インスタンスが暗号化されているかどうか。ファイルの場合、ファイル内の全データが暗号化されていることを意味します。ディレクトリの場合、新しく作成されるファイルとディレクトリのデフォルトが暗号化であることを意味します。</summary>
       public bool IsEncrypted
       {
          get { return File.HasValidAttributes(Attributes) && (Attributes & FileAttributes.Encrypted) != 0; }
       }
 
 
-      /// <summary>The instance is hidden, and thus is not included in an ordinary directory listing.</summary>
+      /// <summary>インスタンスが隠しファイルであり、通常のディレクトリ一覧には含まれないかどうか。</summary>
       public bool IsHidden
       {
          get { return File.IsHidden(Attributes); }
       }
 
 
-      /// <summary>The instance is a mount point. Applicable to local directories and local volumes.</summary>
+      /// <summary>インスタンスがマウントポイントであるかどうか。ローカルディレクトリおよびローカルボリュームに適用されます。</summary>
       public bool IsMountPoint
       {
          get { return ReparsePointTag == ReparsePointTag.MountPoint; }
       }
 
 
-      /// <summary>The instance is a standard file that has no special attributes. This attribute is valid only if it is used alone.</summary>
+      /// <summary>インスタンスが特別な属性を持たない標準ファイルであるかどうか。この属性は単独で使用された場合にのみ有効です。</summary>
       public bool IsNormal
       {
          get { return File.HasValidAttributes(Attributes) && (Attributes & FileAttributes.Normal) != 0; }
       }
 
 
-      /// <summary>The instance will not be indexed by the operating system's content indexing service.</summary>
+      /// <summary>インスタンスがオペレーティングシステムのコンテンツインデックスサービスによってインデックスされないかどうか。</summary>
       public bool IsNotContentIndexed
       {
          get { return File.HasValidAttributes(Attributes) && (Attributes & FileAttributes.NotContentIndexed) != 0; }
       }
 
 
-      /// <summary>The instance is offline. The data of the file is not immediately available.</summary>
+      /// <summary>インスタンスがオフラインであるかどうか。ファイルのデータはすぐには利用できません。</summary>
       public bool IsOffline
       {
          get { return File.HasValidAttributes(Attributes) && (Attributes & FileAttributes.Offline) != 0; }
       }
 
 
-      /// <summary>The instance is read-only.</summary>
+      /// <summary>インスタンスが読み取り専用であるかどうか。</summary>
       public bool IsReadOnly
       {
          get { return File.IsReadOnly(Attributes); }
       }
 
 
-      /// <summary>The instance contains a reparse point, which is a block of user-defined data associated with a file or a directory.</summary>
+      /// <summary>インスタンスがリパースポイントを含むかどうか。リパースポイントはファイルまたはディレクトリに関連付けられたユーザー定義データのブロックです。</summary>
       public bool IsReparsePoint
       {
          get { return File.HasValidAttributes(Attributes) && (Attributes & FileAttributes.ReparsePoint) != 0; }
       }
 
 
-      /// <summary>The instance is a sparse file. Sparse files are typically large files whose data consists of mostly zeros.</summary>
+      /// <summary>インスタンスがスパースファイルであるかどうか。スパースファイルは通常、データの大部分がゼロで構成される大きなファイルです。</summary>
       public bool IsSparseFile
       {
          get { return File.HasValidAttributes(Attributes) && (Attributes & FileAttributes.SparseFile) != 0; }
       }
 
 
-      /// <summary>The instance is a symbolic link.</summary>
+      /// <summary>インスタンスがシンボリックリンクであるかどうか。</summary>
       public bool IsSymbolicLink
       {
          get { return ReparsePointTag == ReparsePointTag.SymLink; }
       }
 
 
-      /// <summary>The instance is a system file. That is, the file is part of the operating system or is used exclusively by the operating system.</summary>
+      /// <summary>インスタンスがシステムファイルであるかどうか。つまり、ファイルがオペレーティングシステムの一部であるか、オペレーティングシステムによって排他的に使用されます。</summary>
       public bool IsSystem
       {
          get { return File.HasValidAttributes(Attributes) && (Attributes & FileAttributes.System) != 0; }
       }
 
 
-      /// <summary>The instance is temporary. A temporary file contains data that is needed while an application is executing but is not needed after the application is finished.
-      /// File systems try to keep all the data in memory for quicker access rather than flushing the data back to mass storage.
-      /// A temporary file should be deleted by the application as soon as it is no longer needed.</summary>
+      /// <summary>インスタンスが一時ファイルであるかどうか。一時ファイルにはアプリケーション実行中に必要だが、終了後は不要になるデータが含まれます。
+      /// ファイルシステムは、大容量ストレージにフラッシュするのではなく、すべてのデータをメモリに保持してアクセスを高速化しようとします。
+      /// 一時ファイルは不要になった時点でアプリケーションが削除する必要があります。</summary>
       public bool IsTemporary
       {
          get { return File.HasValidAttributes(Attributes) && (Attributes & FileAttributes.Temporary) != 0; }
       }
 
 
-      /// <summary>The instance time this entry was last accessed.</summary>
+      /// <summary>このエントリに最後にアクセスした時刻。</summary>
       public DateTime LastAccessTime
       {
          get { return LastAccessTimeUtc.ToLocalTime(); }
       }
 
 
-      /// <summary>The instance time, in coordinated universal time (UTC), this entry was last accessed.</summary>
+      /// <summary>このエントリに最後にアクセスした協定世界時（UTC）での時刻。</summary>
       public DateTime LastAccessTimeUtc
       {
          get { return DateTime.FromFileTimeUtc(Win32FindData.ftLastAccessTime); }
       }
 
 
-      /// <summary>The instance time this entry was last modified.</summary>
+      /// <summary>このエントリが最後に変更された時刻。</summary>
       public DateTime LastWriteTime
       {
          get { return LastWriteTimeUtc.ToLocalTime(); }
       }
 
 
-      /// <summary>The instance time, in coordinated universal time (UTC), this entry was last modified.</summary>
+      /// <summary>このエントリが最後に変更された協定世界時（UTC）での時刻。</summary>
       public DateTime LastWriteTimeUtc
       {
          get { return DateTime.FromFileTimeUtc(Win32FindData.ftLastWriteTime); }
       }
 
 
-      /// <summary>The instance full path in long path format.</summary>
+      /// <summary>長いパス形式でのインスタンスのフルパス。</summary>
       public string LongFullPath
       {
          get { return _longFullPath; }
@@ -269,14 +269,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>The instance reparse point tag.</summary>
+      /// <summary>インスタンスのリパースポイントタグ。</summary>
       public ReparsePointTag ReparsePointTag
       {
          get { return IsReparsePoint ? Win32FindData.dwReserved0 : ReparsePointTag.None; }
       }
 
 
-      /// <summary>The instance internal WIN32 FIND Data</summary>
+      /// <summary>インスタンスの内部WIN32 FINDデータ。</summary>
       internal NativeMethods.WIN32_FIND_DATA Win32FindData { get; private set; }
 
       #endregion // Properties
@@ -284,25 +284,25 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region Methods
 
-      /// <summary>Returns the <see cref="FullPath"/> of the FileSystemEntryInfo instance.</summary>
-      /// <returns>Returns the <see cref="FullPath"/> of the FileSystemEntryInfo instance.</returns>
+      /// <summary>FileSystemEntryInfoインスタンスの<see cref="FullPath"/>を返します。</summary>
+      /// <returns>FileSystemEntryInfoインスタンスの<see cref="FullPath"/>。</returns>
       public override string ToString()
       {
          return FullPath;
       }
 
 
-      /// <summary>Serves as a hash function for a particular type.</summary>
-      /// <returns>A hash code for the current Object.</returns>
+      /// <summary>特定の型のハッシュ関数として機能します。</summary>
+      /// <returns>現在のオブジェクトのハッシュコード。</returns>
       public override int GetHashCode()
       {
          return Utils.CombineHashCodesOf(FullPath, LongFullPath);
       }
 
 
-      /// <summary>Determines whether the specified Object is equal to the current Object.</summary>
-      /// <param name="other">Another <see cref="FileSystemInfo"/> instance to compare to.</param>
-      /// <returns><c>true</c> if the specified Object is equal to the current Object; otherwise, <c>false</c>.</returns>
+      /// <summary>指定されたオブジェクトが現在のオブジェクトと等しいかどうかを判断します。</summary>
+      /// <param name="other">比較する別の<see cref="FileSystemInfo"/>インスタンス。</param>
+      /// <returns>指定されたオブジェクトが現在のオブジェクトと等しい場合は<c>true</c>、それ以外の場合は<c>false</c>。</returns>
       public bool Equals(FileSystemEntryInfo other)
       {
          return null != other && GetType() == other.GetType() &&
@@ -314,9 +314,9 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Determines whether the specified Object is equal to the current Object.</summary>
-      /// <param name="obj">Another object to compare to.</param>
-      /// <returns><c>true</c> if the specified Object is equal to the current Object; otherwise, <c>false</c>.</returns>
+      /// <summary>指定されたオブジェクトが現在のオブジェクトと等しいかどうかを判断します。</summary>
+      /// <param name="obj">比較する別のオブジェクト。</param>
+      /// <returns>指定されたオブジェクトが現在のオブジェクトと等しい場合は<c>true</c>、それ以外の場合は<c>false</c>。</returns>
       public override bool Equals(object obj)
       {
          var other = obj as FileSystemEntryInfo;
@@ -325,10 +325,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Implements the operator ==</summary>
-      /// <param name="left">A.</param>
-      /// <param name="right">B.</param>
-      /// <returns>The result of the operator.</returns>
+      /// <summary>==演算子を実装します。</summary>
+      /// <param name="left">左辺。</param>
+      /// <param name="right">右辺。</param>
+      /// <returns>演算子の結果。</returns>
       public static bool operator ==(FileSystemEntryInfo left, FileSystemEntryInfo right)
       {
          return ReferenceEquals(left, null) && ReferenceEquals(right, null) ||
@@ -336,10 +336,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Implements the operator !=</summary>
-      /// <param name="left">A.</param>
-      /// <param name="right">B.</param>
-      /// <returns>The result of the operator.</returns>
+      /// <summary>!=演算子を実装します。</summary>
+      /// <param name="left">左辺。</param>
+      /// <param name="right">右辺。</param>
+      /// <returns>演算子の結果。</returns>
       public static bool operator !=(FileSystemEntryInfo left, FileSystemEntryInfo right)
       {
          return !(left == right);

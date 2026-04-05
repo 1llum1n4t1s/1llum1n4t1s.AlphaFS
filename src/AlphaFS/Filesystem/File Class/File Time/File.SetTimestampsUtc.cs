@@ -26,36 +26,36 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Sets all the date and time stamps, in coordinated universal time (UTC), for the specified file, at once.</summary>
-      /// <param name="path">The file for which to set the dates and times information.</param>
-      /// <param name="creationTimeUtc">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastAccessTimeUtc">A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>      
+      /// <summary>[AlphaFS] 指定されたファイルのすべての日時スタンプを協定世界時(UTC)で一度に設定します。</summary>
+      /// <param name="path">日時情報を設定するファイル。</param>
+      /// <param name="creationTimeUtc"><paramref name="path"/>の作成日時に設定する値を含む<see cref="DateTime"/>。この値はUTC時刻で表されます。</param>
+      /// <param name="lastAccessTimeUtc"><paramref name="path"/>の最終アクセス日時に設定する値を含む<see cref="DateTime"/>。この値はUTC時刻で表されます。</param>
+      /// <param name="lastWriteTimeUtc"><paramref name="path"/>の最終書き込み日時に設定する値を含む<see cref="DateTime"/>。この値はUTC時刻で表されます。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>      
       [SecurityCritical]
       public static void SetTimestampsUtc(string path, DateTime creationTimeUtc, DateTime lastAccessTimeUtc, DateTime lastWriteTimeUtc, PathFormat pathFormat)
       {
          SetFsoDateTimeCore(null, false, path, creationTimeUtc, lastAccessTimeUtc, lastWriteTimeUtc, false, pathFormat);
       }
 
-      /// <summary>[AlphaFS] Sets all the date and time stamps, in coordinated universal time (UTC), for the specified file, at once.</summary>
-      /// <param name="path">The file for which to set the dates and times information.</param>
-      /// <param name="creationTimeUtc">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastAccessTimeUtc">A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
+      /// <summary>[AlphaFS] 指定されたファイルのすべての日時スタンプを協定世界時(UTC)で一度に設定します。</summary>
+      /// <param name="path">日時情報を設定するファイル。</param>
+      /// <param name="creationTimeUtc"><paramref name="path"/>の作成日時に設定する値を含む<see cref="DateTime"/>。この値はUTC時刻で表されます。</param>
+      /// <param name="lastAccessTimeUtc"><paramref name="path"/>の最終アクセス日時に設定する値を含む<see cref="DateTime"/>。この値はUTC時刻で表されます。</param>
+      /// <param name="lastWriteTimeUtc"><paramref name="path"/>の最終書き込み日時に設定する値を含む<see cref="DateTime"/>。この値はUTC時刻で表されます。</param>
       [SecurityCritical]
       public static void SetTimestampsUtc(string path, DateTime creationTimeUtc, DateTime lastAccessTimeUtc, DateTime lastWriteTimeUtc)
       {
          SetFsoDateTimeCore(null, false, path, creationTimeUtc, lastAccessTimeUtc, lastWriteTimeUtc, false, PathFormat.RelativePath);
       }
 
-      /// <summary>[AlphaFS] Sets all the date and time stamps, in coordinated universal time (UTC), for the specified file, at once.</summary>
-      /// <param name="path">The file for which to set the dates and times information.</param>
-      /// <param name="creationTimeUtc">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastAccessTimeUtc">A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the file or directory linked to. No effect if <paramref name="path"/> does not refer to a reparse point.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>      
+      /// <summary>[AlphaFS] 指定されたファイルのすべての日時スタンプを協定世界時(UTC)で一度に設定します。</summary>
+      /// <param name="path">日時情報を設定するファイル。</param>
+      /// <param name="creationTimeUtc"><paramref name="path"/>の作成日時に設定する値を含む<see cref="DateTime"/>。この値はUTC時刻で表されます。</param>
+      /// <param name="lastAccessTimeUtc"><paramref name="path"/>の最終アクセス日時に設定する値を含む<see cref="DateTime"/>。この値はUTC時刻で表されます。</param>
+      /// <param name="lastWriteTimeUtc"><paramref name="path"/>の最終書き込み日時に設定する値を含む<see cref="DateTime"/>。この値はUTC時刻で表されます。</param>
+      /// <param name="modifyReparsePoint"><c>true</c>の場合、日時情報はリパースポイント(シンボリックリンクまたはジャンクション)に適用され、リンク先のファイルまたはディレクトリには適用されません。<paramref name="path"/>がリパースポイントを参照していない場合は効果がありません。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>      
       [SecurityCritical]
       public static void SetTimestampsUtc(string path, DateTime creationTimeUtc, DateTime lastAccessTimeUtc, DateTime lastWriteTimeUtc, bool modifyReparsePoint, PathFormat pathFormat)
       {

@@ -25,15 +25,15 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Volume
    {
-      /// <summary>[AlphaFS] 
-      ///   Retrieves information about the amount of space that is available on a disk volume, which is the total amount of space, the total
-      ///   amount of free space, and the total amount of free space available to the user that is associated with the calling thread.
+      /// <summary>[AlphaFS]
+      ///   ディスクボリュームで利用可能な領域の量に関する情報を取得します。これには、総領域量、総空き領域量、
+      ///   および呼び出しスレッドに関連付けられたユーザーが利用可能な総空き領域量が含まれます。
       /// </summary>
-      /// <remarks>The calling application must have FILE_LIST_DIRECTORY access rights for this directory.</remarks>
+      /// <remarks>呼び出し元アプリケーションには、このディレクトリに対する FILE_LIST_DIRECTORY アクセス権が必要です。</remarks>
       /// <param name="drivePath">
-      ///   A path to a drive. For example: "C:\", "\\server\share", or "\\?\Volume{c0580d5e-2ad6-11dc-9924-806e6f6e6963}\".
+      ///   ドライブへのパス。例: "C:\"、"\\server\share"、または "\\?\Volume{c0580d5e-2ad6-11dc-9924-806e6f6e6963}\"。
       /// </param>
-      /// <returns>A <see ref="Alphaleonis.Win32.Filesystem.DiskSpaceInfo"/> class instance.</returns>
+      /// <returns><see ref="Alphaleonis.Win32.Filesystem.DiskSpaceInfo"/> クラスインスタンス。</returns>
       [SecurityCritical]
       public static DiskSpaceInfo GetDiskFreeSpace(string drivePath)
       {
@@ -41,19 +41,19 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] 
-      ///   Retrieves information about the amount of space that is available on a disk volume, which is the total amount of space, the total
-      ///   amount of free space, and the total amount of free space available to the user that is associated with the calling thread.
+      /// <summary>[AlphaFS]
+      ///   ディスクボリュームで利用可能な領域の量に関する情報を取得します。これには、総領域量、総空き領域量、
+      ///   および呼び出しスレッドに関連付けられたユーザーが利用可能な総空き領域量が含まれます。
       /// </summary>
-      /// <remarks>The calling application must have FILE_LIST_DIRECTORY access rights for this directory.</remarks>
+      /// <remarks>呼び出し元アプリケーションには、このディレクトリに対する FILE_LIST_DIRECTORY アクセス権が必要です。</remarks>
       /// <param name="drivePath">
-      ///   A path to a drive. For example: "C:\", "\\server\share", or "\\?\Volume{c0580d5e-2ad6-11dc-9924-806e6f6e6963}\".
+      ///   ドライブへのパス。例: "C:\"、"\\server\share"、または "\\?\Volume{c0580d5e-2ad6-11dc-9924-806e6f6e6963}\"。
       /// </param>
       /// <param name="spaceInfoType">
-      ///   <c>null</c> gets both size- and disk cluster information. <c>true</c> Get only disk cluster information,
-      ///   <c>false</c> Get only size information.
+      ///   <c>null</c> はサイズ情報とディスククラスター情報の両方を取得します。<c>true</c> はディスククラスター情報のみを取得、
+      ///   <c>false</c> はサイズ情報のみを取得します。
       /// </param>
-      /// <returns>A <see ref="Alphaleonis.Win32.Filesystem.DiskSpaceInfo"/> class instance.</returns>
+      /// <returns><see ref="Alphaleonis.Win32.Filesystem.DiskSpaceInfo"/> クラスインスタンス。</returns>
       [SecurityCritical]
       public static DiskSpaceInfo GetDiskFreeSpace(string drivePath, bool? spaceInfoType)
       {

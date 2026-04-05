@@ -33,10 +33,10 @@ namespace Alphaleonis.Win32.Filesystem
       ///   the file is a sparse file, the value obtained is the sparse size of the specified file.
       /// </summary>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path"><para>The name of the file.</para></param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>The actual number of bytes of disk storage used to store the specified file.</returns>      
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path"><para>ファイルの名前。</para></param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>指定されたファイルの格納に使用されているディスクストレージの実際のバイト数。</returns>      
       [SecurityCritical]
       internal static long GetCompressedSizeCore(KernelTransaction transaction, string path, PathFormat pathFormat)
       {
@@ -50,7 +50,7 @@ namespace Alphaleonis.Win32.Filesystem
          var fileSizeLow = null == transaction || !NativeMethods.IsAtLeastWindowsVista
 
             // GetCompressedFileSize() / GetCompressedFileSizeTransacted()
-            // 2013-01-13: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
+            // 2013-01-13: MSDNはLongPathの使用を確認していませんが、この関数のUnicodeバージョンが存在します。
             // 2017-05-30: GetCompressedFileSize() MSDN confirms LongPath usage: Starting with Windows 10, version 1607
 
             ? NativeMethods.GetCompressedFileSize(pathLp, out var fileSizeHigh)

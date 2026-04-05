@@ -23,10 +23,10 @@ namespace Alphaleonis.Win32.Security
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Combines DELETE, READ_CONTROL, WRITE_DAC, and WRITE_OWNER access.</summary>
+      /// <summary>DELETE、READ_CONTROL、WRITE_DAC、およびWRITE_OWNERアクセスを組み合わせたものです。</summary>
       public const uint STANDARD_RIGHTS_REQUIRED = 983040;
 
-      /// <summary>The right to read the information in the object's security descriptor, not including the information in the system access control list (SACL).</summary>
+      /// <summary>システムアクセス制御リスト（SACL）の情報を除く、オブジェクトのセキュリティ記述子の情報を読み取る権利。</summary>
       public const uint STANDARD_RIGHTS_READ = 131072;
    }
 }

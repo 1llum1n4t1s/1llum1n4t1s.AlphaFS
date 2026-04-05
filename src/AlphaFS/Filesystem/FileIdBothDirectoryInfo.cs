@@ -27,7 +27,7 @@ using System.Text;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>[AlphaFS] Contains information about files in the specified directory. Used for directory handles.</summary>
+   /// <summary>[AlphaFS] 指定されたディレクトリ内のファイルに関する情報を格納します。ディレクトリハンドルに使用されます。</summary>
    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Dir")]
    [Serializable]
    [SecurityCritical]
@@ -49,99 +49,99 @@ namespace Alphaleonis.Win32.Filesystem
          FileIndex = fibdi.FileIndex;
          FileName = fileName;
 
-         // ShortNameLength is the number of bytes in the short name; since we have a unicode string we must divide that by 2.
+         // ShortNameLengthは短い名前のバイト数です。Unicode文字列なので2で除算する必要があります。
          ShortName = new string(fibdi.ShortName, 0, fibdi.ShortNameLength / UnicodeEncoding.CharSize);
       }
 
 
 
 
-      /// <summary>The number of bytes that are allocated for the file. This value is usually a multiple of the sector or cluster size of the underlying physical device.</summary>
+      /// <summary>ファイルに割り当てられたバイト数。この値は通常、基盤となる物理デバイスのセクターまたはクラスターサイズの倍数です。</summary>
       public long AllocationSize { get; set; }
 
 
-      /// <summary>Gets the time this entry was changed.</summary>
-      /// <value>The time this entry was changed.</value>
+      /// <summary>このエントリが変更された時刻を取得します。</summary>
+      /// <value>このエントリが変更された時刻。</value>
       public DateTime ChangeTime
       {
          get { return ChangeTimeUtc.ToLocalTime(); }
       }
 
 
-      /// <summary>Gets the time, in coordinated universal time (UTC), this entry was changed.</summary>
-      /// <value>The time, in coordinated universal time (UTC), this entry was changed.</value>
+      /// <summary>このエントリが変更された協定世界時（UTC）での時刻を取得します。</summary>
+      /// <value>このエントリが変更されたUTC時刻。</value>
       public DateTime ChangeTimeUtc { get; set; }
 
 
-      /// <summary>Gets the time this entry was created.</summary>
-      /// <value>The time this entry was created.</value>
+      /// <summary>このエントリが作成された時刻を取得します。</summary>
+      /// <value>このエントリが作成された時刻。</value>
       public DateTime CreationTime
       {
          get { return CreationTimeUtc.ToLocalTime(); }
       }
 
 
-      /// <summary>Gets the time, in coordinated universal time (UTC), this entry was created.</summary>
-      /// <value>The time, in coordinated universal time (UTC), this entry was created.</value>
+      /// <summary>このエントリが作成された協定世界時（UTC）での時刻を取得します。</summary>
+      /// <value>このエントリが作成されたUTC時刻。</value>
       public DateTime CreationTimeUtc { get; set; }
 
 
-      /// <summary>The size of the extended attributes for the file.</summary>
+      /// <summary>ファイルの拡張属性のサイズ。</summary>
       public int ExtendedAttributesSize { get; set; }
 
 
-      /// <summary>The absolute new end-of-file position as a byte offset from the start of the file to the end of the file. 
-      /// Because this value is zero-based, it actually refers to the first free byte in the file. In other words, <b>EndOfFile</b> is the offset to 
-      /// the byte that immediately follows the last valid byte in the file.
+      /// <summary>ファイルの先頭から末尾までのバイトオフセットとして表される、ファイル終端の絶対位置。
+      /// この値はゼロベースであるため、実際にはファイル内の最初の空きバイトを指します。つまり、<b>EndOfFile</b>は
+      /// ファイル内の最後の有効なバイトの直後のバイトへのオフセットです。
       /// </summary>
       public long EndOfFile { get; set; }
 
 
-      /// <summary>The file attributes.</summary>
+      /// <summary>ファイル属性。</summary>
       public FileAttributes FileAttributes { get; set; }
 
 
-      /// <summary>The file ID.</summary>
+      /// <summary>ファイルID。</summary>
       public long FileId { get; set; }
 
 
-      /// <summary>The byte offset of the file within the parent directory. This member is undefined for file systems, such as NTFS,
-      /// in which the position of a file within the parent directory is not fixed and can be changed at any time to maintain sort order.
+      /// <summary>親ディレクトリ内でのファイルのバイトオフセット。NTFSなど、親ディレクトリ内でのファイルの位置が
+      /// 固定されておらず、ソート順序を維持するためにいつでも変更される可能性があるファイルシステムでは、このメンバーは未定義です。
       /// </summary>
       public long FileIndex { get; set; }
 
 
-      /// <summary>The name of the file.</summary>
+      /// <summary>ファイル名。</summary>
       public string FileName { get; set; }
 
 
-      /// <summary>Gets the time this entry was last accessed.</summary>
-      /// <value>The time this entry was last accessed.</value>
+      /// <summary>このエントリに最後にアクセスした時刻を取得します。</summary>
+      /// <value>このエントリに最後にアクセスした時刻。</value>
       public DateTime LastAccessTime
       {
          get { return LastAccessTimeUtc.ToLocalTime(); }
       }
 
 
-      /// <summary>Gets the time, in coordinated universal time (UTC), this entry was last accessed.</summary>
-      /// <value>The time, in coordinated universal time (UTC), this entry was last accessed.</value>
+      /// <summary>このエントリに最後にアクセスした協定世界時（UTC）での時刻を取得します。</summary>
+      /// <value>このエントリに最後にアクセスしたUTC時刻。</value>
       public DateTime LastAccessTimeUtc { get; set; }
 
 
-      /// <summary>Gets the time this entry was last modified.</summary>
-      /// <value>The time this entry was last modified.</value>
+      /// <summary>このエントリが最後に変更された時刻を取得します。</summary>
+      /// <value>このエントリが最後に変更された時刻。</value>
       public DateTime LastWriteTime
       {
          get { return LastWriteTimeUtc.ToLocalTime(); }
       }
 
 
-      /// <summary>Gets the time, in coordinated universal time (UTC), this entry was last modified.</summary>
-      /// <value>The time, in coordinated universal time (UTC), this entry was last modified.</value>
+      /// <summary>このエントリが最後に変更された協定世界時（UTC）での時刻を取得します。</summary>
+      /// <value>このエントリが最後に変更されたUTC時刻。</value>
       public DateTime LastWriteTimeUtc { get; set; }
 
 
-      /// <summary>The short 8.3 file naming convention (for example, FILENAME.TXT) name of the file.</summary>
+      /// <summary>ファイルの8.3形式の短い名前（例: FILENAME.TXT）。</summary>
       public string ShortName { get; set; }
    }
 }

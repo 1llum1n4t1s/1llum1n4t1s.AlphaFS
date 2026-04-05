@@ -30,16 +30,16 @@ namespace Alphaleonis.Win32.Filesystem
    public static partial class File
    {
       /// <summary>Deletes a Non-/Transacted file.</summary>
-      /// <remarks>If the file to be deleted does not exist, no exception is thrown.</remarks>
+      /// <remarks>削除するファイルが存在しない場合、例外はスローされません。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="FileReadOnlyException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The name of the file to be deleted.</param>
-      /// <param name="ignoreReadOnly"><c>true</c> overrides the read only <see cref="FileAttributes"/> of the file.</param>
-      /// <param name="attributes"></param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">削除するファイルの名前。</param>
+      /// <param name="ignoreReadOnly"><c>true</c>の場合、ファイルの読み取り専用<see cref="FileAttributes"/>を上書きします。</param>
+      /// <param name="attributes">属性。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       internal static void DeleteFileCore(KernelTransaction transaction, string path, bool ignoreReadOnly, FileAttributes attributes, PathFormat pathFormat)
       {
@@ -56,7 +56,7 @@ namespace Alphaleonis.Win32.Filesystem
          var pathLp = Path.GetExtendedLengthPathCore(transaction, path, pathFormat, GetFullPathOptions.TrimEnd | GetFullPathOptions.RemoveTrailingDirectorySeparator);
 
 
-         // Reset attributes to Normal if we already know the facts.
+         // 既に事実がわかっている場合、属性をNormalにリセットする。
 
          if (ignoreReadOnly && IsReadOnlyOrHidden(attributes))
 
@@ -70,9 +70,9 @@ namespace Alphaleonis.Win32.Filesystem
          if (!(null == transaction || !NativeMethods.IsAtLeastWindowsVista
 
             // DeleteFile() / DeleteFileTransacted()
-            // 2013-01-13: MSDN confirms LongPath usage.
+            // 2013-01-13: MSDNはLongPathの使用を確認しています。
             //
-            // If the path points to a symbolic link, the symbolic link is deleted, not the target.
+            // パスがシンボリックリンクを指している場合、ターゲットではなくシンボリックリンクが削除されます。
 
             ? NativeMethods.DeleteFile(pathLp)
 
@@ -84,18 +84,18 @@ namespace Alphaleonis.Win32.Filesystem
             switch ((uint) lastError)
             {
                case Win32Errors.ERROR_FILE_NOT_FOUND:
-                  // MSDN: .NET 3.5+: If the file to be deleted does not exist, no exception is thrown.
+                  // MSDN: .NET 3.5+: 削除するファイルが存在しない場合、例外はスローされません。
                   return;
 
 
                case Win32Errors.ERROR_PATH_NOT_FOUND:
-                  // MSDN: .NET 3.5+: DirectoryNotFoundException: The specified path is invalid (for example, it is on an unmapped drive).
+                  // MSDN: .NET 3.5+: DirectoryNotFoundException: 指定されたパスが無効です(マッピングされていないドライブ上にあるなど)。
                   NativeError.ThrowException(lastError, pathLp);
                   return;
 
 
                case Win32Errors.ERROR_SHARING_VIOLATION:
-                  // MSDN: .NET 3.5+: IOException: The specified file is in use or there is an open handle on the file.
+                  // MSDN: .NET 3.5+: IOException: 指定されたファイルが使用中であるか、ファイルにオープンハンドルがあります。
                   NativeError.ThrowException(lastError, pathLp);
                   break;
 
@@ -114,7 +114,7 @@ namespace Alphaleonis.Win32.Filesystem
                   }
 
 
-                  // MSDN: .NET 3.5+: UnauthorizedAccessException: Path is a directory.
+                  // MSDN: .NET 3.5+: UnauthorizedAccessException: Pathはディレクトリです。
                   if (IsDirectory(attributes))
                   {
                      throw new UnauthorizedAccessException(string.Format(CultureInfo.InvariantCulture, "({0}) {1}", lastError.ToString(CultureInfo.InvariantCulture), string.Format(CultureInfo.InvariantCulture, Resources.Target_File_Is_A_Directory, pathLp)));
@@ -132,12 +132,12 @@ namespace Alphaleonis.Win32.Filesystem
                      }
 
 
-                     // MSDN: .NET 3.5+: UnauthorizedAccessException: Path specified a read-only file.
+                     // MSDN: .NET 3.5+: UnauthorizedAccessException: Pathは読み取り専用ファイルを指定しました。
                      throw new FileReadOnlyException(pathLp);
                   }
 
                   
-                  // MSDN: .NET 3.5+: UnauthorizedAccessException: The caller does not have the required permission.
+                  // MSDN: .NET 3.5+: UnauthorizedAccessException: 呼び出し元に必要なアクセス許可がありません。
                   if (attributes == 0)
                   {
                      NativeError.ThrowException(lastError, pathLp);
@@ -147,8 +147,8 @@ namespace Alphaleonis.Win32.Filesystem
             }
 
             // MSDN: .NET 3.5+: IOException:
-            // The specified file is in use.
-            // There is an open handle on the file, and the operating system is Windows XP or earlier.
+            // 指定されたファイルが使用中です。
+            // ファイルにオープンハンドルがあり、オペレーティングシステムがWindows XP以前です。
 
             NativeError.ThrowException(lastError, IsDirectory(attributes), pathLp);
          }

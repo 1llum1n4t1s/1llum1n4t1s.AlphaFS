@@ -27,68 +27,68 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Contains information about files in the specified directory. Used for directory handles. Use only when calling GetFileInformationByHandleEx.</summary>
+      /// <summary>指定されたディレクトリ内のファイルに関する情報を格納します。ディレクトリハンドルに使用されます。GetFileInformationByHandleEx の呼び出し時にのみ使用してください。</summary>
       /// <remarks>
-      /// The number of files that are returned for each call to GetFileInformationByHandleEx depends on the size of the buffer that is passed to the function.
-      /// Any subsequent calls to GetFileInformationByHandleEx on the same handle will resume the enumeration operation after the last file is returned.
+      /// GetFileInformationByHandleEx の各呼び出しで返されるファイル数は、関数に渡されるバッファーのサイズに依存します。
+      /// 同じハンドルでの後続の GetFileInformationByHandleEx 呼び出しは、最後に返されたファイルの後から列挙操作を再開します。
       /// </remarks>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct FILE_ID_BOTH_DIR_INFO
       {
-         /// <summary>The offset for the next FILE_ID_BOTH_DIR_INFO structure that is returned. Contains zero (0) if no other entries follow this one.</summary>
+         /// <summary>次に返される FILE_ID_BOTH_DIR_INFO 構造体へのオフセット。他のエントリが続かない場合はゼロ (0) を格納します。</summary>
          [MarshalAs(UnmanagedType.U4)]
          public readonly int NextEntryOffset;
 
-         /// <summary>The byte offset of the file within the parent directory. This member is undefined for file systems, such as NTFS,
-         /// in which the position of a file within the parent directory is not fixed and can be changed at any time to maintain sort order.
+         /// <summary>親ディレクトリ内のファイルのバイトオフセット。NTFS などのファイルシステムでは、
+         /// 親ディレクトリ内のファイル位置が固定されておらず、ソート順を維持するためにいつでも変更される可能性があるため、このメンバーは未定義です。
          /// </summary>
          [MarshalAs(UnmanagedType.U4)]
          public readonly uint FileIndex;
 
-         /// <summary>The time that the file was created.</summary>
+         /// <summary>ファイルが作成された日時。</summary>
          public FILETIME CreationTime;
 
-         /// <summary>The time that the file was last accessed.</summary>
+         /// <summary>ファイルが最後にアクセスされた日時。</summary>
          public FILETIME LastAccessTime;
 
-         /// <summary>The time that the file was last written to.</summary>
+         /// <summary>ファイルが最後に書き込まれた日時。</summary>
          public FILETIME LastWriteTime;
 
-         /// <summary>The time that the file was last changed.</summary>
+         /// <summary>ファイルが最後に変更された日時。</summary>
          public FILETIME ChangeTime;
 
-         /// <summary>The absolute new end-of-file position as a byte offset from the start of the file to the end of the file.
-         /// Because this value is zero-based, it actually refers to the first free byte in the file.
-         /// In other words, EndOfFile is the offset to the byte that immediately follows the last valid byte in the file.
+         /// <summary>ファイルの先頭からファイルの末尾までのバイトオフセットとしての、絶対的な新しいファイル終端位置。
+         /// この値はゼロベースであるため、実際にはファイル内の最初の空きバイトを指します。
+         /// つまり、EndOfFile はファイル内の最後の有効なバイトの直後のバイトへのオフセットです。
          /// </summary>
          public readonly long EndOfFile;
 
-         /// <summary>The number of bytes that are allocated for the file. This value is usually a multiple of the sector or cluster size of the underlying physical device.</summary>
+         /// <summary>ファイルに割り当てられたバイト数。この値は通常、基になる物理デバイスのセクターまたはクラスターサイズの倍数です。</summary>
          public readonly long AllocationSize;
 
-         /// <summary>The file attributes.</summary>
+         /// <summary>ファイル属性。</summary>
          public readonly FileAttributes FileAttributes;
 
-         /// <summary>The length of the file name.</summary>
+         /// <summary>ファイル名の長さ。</summary>
          [MarshalAs(UnmanagedType.U4)]
          public readonly uint FileNameLength;
 
-         /// <summary>The size of the extended attributes for the file.</summary>
+         /// <summary>ファイルの拡張属性のサイズ。</summary>
          [MarshalAs(UnmanagedType.U4)]
          public readonly int EaSize;
 
-         /// <summary>The length of ShortName.</summary>
+         /// <summary>ShortName の長さ。</summary>
          [MarshalAs(UnmanagedType.U1)]
          public readonly byte ShortNameLength;
 
-         /// <summary>The short 8.3 file naming convention (for example, "FILENAME.TXT") name of the file.</summary>
+         /// <summary>8.3 ファイル命名規則（例: "FILENAME.TXT"）によるファイルの短い名前。</summary>
          [MarshalAs(UnmanagedType.ByValArray, SizeConst = 12, ArraySubType = UnmanagedType.U2)]
          public readonly char[] ShortName;
 
-         /// <summary>The file ID.</summary>
+         /// <summary>ファイルID。</summary>
          public readonly long FileId;
 
-         /// <summary>The first character of the file name string. This is followed in memory by the remainder of the string.</summary>
+         /// <summary>ファイル名文字列の最初の文字。メモリ上ではこの後に文字列の残りの部分が続きます。</summary>
          public IntPtr FileName;
       }
    }

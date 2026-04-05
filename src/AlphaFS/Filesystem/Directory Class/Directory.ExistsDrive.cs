@@ -36,7 +36,7 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>[AlphaFS] Checks if specified <paramref name="path"/> is a local- or network drive.</summary>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The path to check, such as: "C:" or "\\server\c$".</param>
       /// <returns><c>true</c> if the drive exists, <c>false</c> otherwise.</returns>
       public static bool ExistsDrive(KernelTransaction transaction, string path)
@@ -46,7 +46,7 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>[AlphaFS] Checks if specified <paramref name="path"/> is a local- or network drive.</summary>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The path to check, such as: "C:" or "\\server\c$".</param>
       /// <param name="throwIfDriveNotExists">Throws DeviceNotReadyException when drive is not found.</param>
       /// <returns><c>true</c> if the drive exists, <c>false</c> otherwise.</returns>

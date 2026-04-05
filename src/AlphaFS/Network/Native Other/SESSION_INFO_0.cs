@@ -25,10 +25,10 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Contains the name of the computer that established the session.</summary>
+      /// <summary>セッションを確立したコンピューターの名前を含みます.</summary>
       /// <remarks>
-      /// <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      /// <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      /// <para>サポートされる最小クライアント: Windows XP [desktop apps only]</para>
+      /// <para>サポートされる最小サーバー: Windows Server 2003 [desktop apps only]</para>
       /// </remarks>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct SESSION_INFO_0

@@ -23,7 +23,7 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>The display options for the network object in a network browsing user interface.</summary>
+      /// <summary>ネットワーク参照ユーザーインターフェースでのネットワークオブジェクトの表示オプション.</summary>
       internal enum ResourceDisplayType
       {
          /// <summary>RESOURCEDISPLAYTYPE_GENERIC
@@ -32,12 +32,12 @@ namespace Alphaleonis.Win32.Network
          Generic = 0,
 
          /// <summary>RESOURCEDISPLAYTYPE_DOMAIN
-         /// <para>The object should be displayed as a domain.</para>
+         /// <para>オブジェクトはドメインとして表示されるべきです。</para>
          /// </summary>
          Domain = 1,
 
          /// <summary>RESOURCEDISPLAYTYPE_SERVER
-         /// <para>The object should be displayed as a server.</para>
+         /// <para>オブジェクトはサーバーとして表示されるべきです。</para>
          /// </summary>
          Server = 2,
 
@@ -57,7 +57,7 @@ namespace Alphaleonis.Win32.Network
          Group = 5,
 
          /// <summary>RESOURCEDISPLAYTYPE_NETWORK
-         /// <para>The object should be displayed as a network.</para>
+         /// <para>オブジェクトはネットワークとして表示されるべきです。</para>
          /// </summary>
          Network = 6,
 

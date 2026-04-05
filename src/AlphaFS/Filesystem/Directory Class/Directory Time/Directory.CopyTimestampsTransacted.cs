@@ -27,12 +27,12 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>[AlphaFS] Copies the date and timestamps for the specified existing directories.</summary>
-      /// <remarks>This method uses BackupSemantics flag to get Timestamp changed for directories.</remarks>
+      /// <summary>[AlphaFS] 指定された既存のディレクトリの日付とタイムスタンプをコピーします。</summary>
+      /// <remarks>このメソッドはBackupSemanticsフラグを使用して、ディレクトリのタイムスタンプ変更を取得します。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="NotSupportedException"/>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="sourcePath">The source directory to get the date and time stamps from.</param>
       /// <param name="destinationPath">The destination directory to set the date and time stamps.</param>
       [SecurityCritical]
@@ -42,15 +42,15 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies the date and timestamps for the specified existing directories.</summary>
-      /// <remarks>This method uses BackupSemantics flag to get Timestamp changed for directories.</remarks>
+      /// <summary>[AlphaFS] 指定された既存のディレクトリの日付とタイムスタンプをコピーします。</summary>
+      /// <remarks>このメソッドはBackupSemanticsフラグを使用して、ディレクトリのタイムスタンプ変更を取得します。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="NotSupportedException"/>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="sourcePath">The source directory to get the date and time stamps from.</param>
       /// <param name="destinationPath">The destination directory to set the date and time stamps.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void CopyTimestampsTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, PathFormat pathFormat)
       {
@@ -58,12 +58,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies the date and timestamps for the specified existing directories.</summary>
-      /// <remarks>This method uses BackupSemantics flag to get Timestamp changed for directories.</remarks>
+      /// <summary>[AlphaFS] 指定された既存のディレクトリの日付とタイムスタンプをコピーします。</summary>
+      /// <remarks>このメソッドはBackupSemanticsフラグを使用して、ディレクトリのタイムスタンプ変更を取得します。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="NotSupportedException"/>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="sourcePath">The source directory to get the date and time stamps from.</param>
       /// <param name="destinationPath">The destination directory to set the date and time stamps.</param>
       /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the directory linked to. No effect if <paramref name="destinationPath"/> does not refer to a reparse point.</param>
@@ -74,16 +74,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies the date and timestamps for the specified existing directories.</summary>
-      /// <remarks>This method uses BackupSemantics flag to get Timestamp changed for directories.</remarks>
+      /// <summary>[AlphaFS] 指定された既存のディレクトリの日付とタイムスタンプをコピーします。</summary>
+      /// <remarks>このメソッドはBackupSemanticsフラグを使用して、ディレクトリのタイムスタンプ変更を取得します。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="NotSupportedException"/>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="sourcePath">The source directory to get the date and time stamps from.</param>
       /// <param name="destinationPath">The destination directory to set the date and time stamps.</param>
       /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the directory linked to. No effect if <paramref name="destinationPath"/> does not refer to a reparse point.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void CopyTimestampsTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, bool modifyReparsePoint, PathFormat pathFormat)
       {

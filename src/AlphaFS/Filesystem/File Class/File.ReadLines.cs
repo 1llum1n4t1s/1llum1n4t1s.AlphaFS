@@ -29,9 +29,9 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Reads the lines of a file.</summary>
-      /// <param name="path">The file to read.</param>
-      /// <returns>All the lines of the file, or the lines that are the result of a query.</returns>
+      /// <summary>ファイルの行を読み取ります。</summary>
+      /// <param name="path">読み取るファイル。</param>
+      /// <returns>ファイルのすべての行、またはクエリの結果である行。</returns>
       [SecurityCritical]
       public static IEnumerable<string> ReadLines(string path)
       {
@@ -41,10 +41,10 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Reads the lines of a file.</summary>
-      /// <param name="path">The file to read.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>All the lines of the file, or the lines that are the result of a query.</returns>
+      /// <summary>[AlphaFS] ファイルの行を読み取ります。</summary>
+      /// <param name="path">読み取るファイル。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>ファイルのすべての行、またはクエリの結果である行。</returns>
       [SecurityCritical]
       public static IEnumerable<string> ReadLines(string path, PathFormat pathFormat)
       {
@@ -52,10 +52,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Read the lines of a file that has a specified encoding.</summary>
-      /// <param name="path">The file to read.</param>
-      /// <param name="encoding">The encoding that is applied to the contents of the file.</param>
-      /// <returns>All the lines of the file, or the lines that are the result of a query.</returns>
+      /// <summary>指定されたエンコーディングのファイルの行を読み取ります。</summary>
+      /// <param name="path">読み取るファイル。</param>
+      /// <param name="encoding">ファイルの内容に適用されるエンコーディング。</param>
+      /// <returns>ファイルのすべての行、またはクエリの結果である行。</returns>
       [SecurityCritical]
       public static IEnumerable<string> ReadLines(string path, Encoding encoding)
       {
@@ -64,10 +64,10 @@ namespace Alphaleonis.Win32.Filesystem
       
 
       /// <summary>[AlphaFS] Read the lines of a file that has a specified encoding.</summary>
-      /// <param name="path">The file to read.</param>
-      /// <param name="encoding">The encoding that is applied to the contents of the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>All the lines of the file, or the lines that are the result of a query.</returns>
+      /// <param name="path">読み取るファイル。</param>
+      /// <param name="encoding">ファイルの内容に適用されるエンコーディング。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>ファイルのすべての行、またはクエリの結果である行。</returns>
       [SecurityCritical]
       public static IEnumerable<string> ReadLines(string path, Encoding encoding, PathFormat pathFormat)
       {

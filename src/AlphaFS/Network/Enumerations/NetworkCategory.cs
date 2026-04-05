@@ -21,16 +21,16 @@
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>Specifies the category type of a network.</summary>
+   /// <summary>ネットワークのカテゴリ種類を指定します.</summary>
    public enum NetworkCategory
    {
-      /// <summary>The network is a public (untrusted) network.</summary>
+      /// <summary>ネットワークはパブリック（信頼されていない）ネットワークです.</summary>
       Public,
 
-      /// <summary>The network is a private (trusted) network.</summary>
+      /// <summary>ネットワークはプライベート（信頼された）ネットワークです.</summary>
       Private,
 
-      /// <summary>The network is authenticated against an Active Directory domain.</summary>
+      /// <summary>ネットワークは Active Directory ドメインに対して認証されています.</summary>
       Authenticated
    }
 }

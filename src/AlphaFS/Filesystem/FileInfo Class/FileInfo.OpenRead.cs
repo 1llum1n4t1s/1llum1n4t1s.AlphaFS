@@ -26,9 +26,9 @@ namespace Alphaleonis.Win32.Filesystem
 {
    partial class FileInfo
    {
-      /// <summary>Creates a read-only <see cref="FileStream"/>.</summary>
-      /// <returns>A new read-only <see cref="FileStream"/> object.</returns>
-      /// <remarks>This method returns a read-only <see cref="FileStream"/> object with the <see cref="FileShare"/> mode set to Read.</remarks>
+      /// <summary>読み取り専用の <see cref="FileStream"/> を作成します。</summary>
+      /// <returns>新しい読み取り専用の <see cref="FileStream"/> オブジェクト。</returns>
+      /// <remarks>このメソッドは、<see cref="FileShare"/> モードが Read に設定された読み取り専用の <see cref="FileStream"/> オブジェクトを返します。</remarks>
       [SecurityCritical]
       public FileStream OpenRead()
       {

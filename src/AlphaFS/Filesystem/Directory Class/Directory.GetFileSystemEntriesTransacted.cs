@@ -32,10 +32,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] Returns the names of all files and subdirectories in the specified directory.</summary>
       /// <returns>An string[] array of the names of files and subdirectories in the specified directory.</returns>
       /// <remarks>
-      ///   <para>The EnumerateFileSystemEntries and GetFileSystemEntries methods differ as follows: When you use EnumerateFileSystemEntries,
-      ///     you can start enumerating the collection of entries before the whole collection is returned; when you use GetFileSystemEntries,
-      ///     you must wait for the whole array of entries to be returned before you can access the array.
-      ///     Therefore, when you are working with many files and directories, EnumerateFiles can be more efficient.
+      ///   <para>EnumerateFileSystemEntriesとGetFileSystemEntriesメソッドは次のように異なります:  EnumerateFileSystemEntries,
+      ///     コレクション全体が返される前にエントリの列挙を開始できます。 GetFileSystemEntries,
+      ///     配列にアクセスする前にエントリの配列全体が返されるのを待つ必要があります。
+      ///     したがって、多くのファイルとディレクトリを操作する場合、EnumerateFilesの方が効率的です。
       ///   </para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
@@ -44,7 +44,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The directory for which file and subdirectory names are returned.</param>
       [SecurityCritical]
       public static string[] GetFileSystemEntriesTransacted(KernelTransaction transaction, string path)
@@ -54,12 +54,12 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>[AlphaFS] Returns an array of file system entries that match the specified search criteria.</summary>
-      /// <returns>An string[] array of file system entries that match the specified search criteria.</returns>
+      /// <returns>指定された検索条件に一致するファイルシステムエントリの string[] 配列。</returns>
       /// <remarks>
-      ///   <para>The EnumerateFileSystemEntries and GetFileSystemEntries methods differ as follows: When you use EnumerateFileSystemEntries,
-      ///     you can start enumerating the collection of entries before the whole collection is returned; when you use GetFileSystemEntries,
-      ///     you must wait for the whole array of entries to be returned before you can access the array.
-      ///     Therefore, when you are working with many files and directories, EnumerateFiles can be more efficient.
+      ///   <para>EnumerateFileSystemEntriesとGetFileSystemEntriesメソッドは次のように異なります:  EnumerateFileSystemEntries,
+      ///     コレクション全体が返される前にエントリの列挙を開始できます。 GetFileSystemEntries,
+      ///     配列にアクセスする前にエントリの配列全体が返されるのを待つ必要があります。
+      ///     したがって、多くのファイルとディレクトリを操作する場合、EnumerateFilesの方が効率的です。
       ///   </para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
@@ -68,11 +68,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The path to be searched.</param>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in <paramref name="path"/>.
-      ///   This parameter can contain a combination of valid literal path and wildcard
+      ///   ディレクトリ名と照合する検索文字列。対象: <paramref name="path"/>.
+      ///   このパラメータには、有効なリテラルパスとワイルドカードの組み合わせを含めることができますが、
       ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
       /// </param>
       [SecurityCritical]
@@ -83,12 +83,12 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>[AlphaFS] Gets an array of all the file names and directory names that match a <paramref name="searchPattern"/> in a specified path, and optionally searches subdirectories.</summary>
-      /// <returns>An string[] array of file system entries that match the specified search criteria.</returns>
+      /// <returns>指定された検索条件に一致するファイルシステムエントリの string[] 配列。</returns>
       /// <remarks>
-      ///   <para>The EnumerateFileSystemEntries and GetFileSystemEntries methods differ as follows: When you use EnumerateFileSystemEntries,
-      ///     you can start enumerating the collection of entries before the whole collection is returned; when you use GetFileSystemEntries,
-      ///     you must wait for the whole array of entries to be returned before you can access the array.
-      ///     Therefore, when you are working with many files and directories, EnumerateFiles can be more efficient.
+      ///   <para>EnumerateFileSystemEntriesとGetFileSystemEntriesメソッドは次のように異なります:  EnumerateFileSystemEntries,
+      ///     コレクション全体が返される前にエントリの列挙を開始できます。 GetFileSystemEntries,
+      ///     配列にアクセスする前にエントリの配列全体が返されるのを待つ必要があります。
+      ///     したがって、多くのファイルとディレクトリを操作する場合、EnumerateFilesの方が効率的です。
       ///   </para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
@@ -97,16 +97,16 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The directory to search.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">検索するディレクトリ。</param>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in <paramref name="path"/>.
-      ///   This parameter can contain a combination of valid literal path and wildcard
+      ///   ディレクトリ名と照合する検索文字列。対象: <paramref name="path"/>.
+      ///   このパラメータには、有効なリテラルパスとワイルドカードの組み合わせを含めることができますが、
       ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
       /// </param>
       /// <param name="searchOption">
       ///   One of the <see cref="SearchOption"/> enumeration values that specifies whether the <paramref name="searchOption"/>
-      ///   should include only the current directory or should include all subdirectories.
+      ///   現在のディレクトリのみを含むか、すべてのサブディレクトリを含むかを指定します。
       /// </param>
       [SecurityCritical]
       public static string[] GetFileSystemEntriesTransacted(KernelTransaction transaction, string path, string searchPattern, SearchOption searchOption)

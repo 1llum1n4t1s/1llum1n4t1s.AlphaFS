@@ -25,15 +25,15 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Contains identification information for a file.</summary>
+      /// <summary>ファイルの識別情報を格納します。</summary>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct FILE_ID_INFO
       {
-         /// <summary>The serial number of the volume that contains a file.</summary>
+         /// <summary>ファイルを含むボリュームのシリアル番号。</summary>
          public readonly long VolumeSerialNumber;
 
-         /// <summary>The 128-bit file identifier for the file. The file identifier and the volume serial number uniquely identify a file on a single computer.
-         /// To determine whether two open handles represent the same file, combine the identifier and the volume serial number for each file and compare them.
+         /// <summary>ファイルの 128 ビットファイル識別子。ファイル識別子とボリュームシリアル番号により、単一のコンピューター上でファイルを一意に識別します。
+         /// 2 つのオープンハンドルが同じファイルを表すかどうかを判定するには、各ファイルの識別子とボリュームシリアル番号を組み合わせて比較します。
          /// </summary>
          [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
          public readonly byte[] FileId;

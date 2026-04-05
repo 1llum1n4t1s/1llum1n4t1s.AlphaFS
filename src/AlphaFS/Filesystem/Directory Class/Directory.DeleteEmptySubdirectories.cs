@@ -27,7 +27,7 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>[AlphaFS] Deletes empty subdirectories from the specified directory.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリから空のサブディレクトリを削除します。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -35,7 +35,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="DirectoryReadOnlyException"/>
-      /// <param name="path">The name of the directory to remove empty subdirectories from.</param>
+      /// <param name="path">空のサブディレクトリを削除するディレクトリの名前。</param>
       [SecurityCritical]
       public static void DeleteEmptySubdirectories(string path)
       {
@@ -43,7 +43,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Deletes empty subdirectories from the specified directory.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリから空のサブディレクトリを削除します。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -51,7 +51,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="DirectoryReadOnlyException"/>
-      /// <param name="path">The name of the directory to remove empty subdirectories from.</param>
+      /// <param name="path">空のサブディレクトリを削除するディレクトリの名前。</param>
       /// <param name="recursive"><c>true</c> deletes empty subdirectories from this directory and its subdirectories.</param>
       [SecurityCritical]
       public static void DeleteEmptySubdirectories(string path, bool recursive)
@@ -60,7 +60,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Deletes empty subdirectories from the specified directory.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリから空のサブディレクトリを削除します。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -68,9 +68,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="DirectoryReadOnlyException"/>
-      /// <param name="path">The name of the directory to remove empty subdirectories from.</param>
+      /// <param name="path">空のサブディレクトリを削除するディレクトリの名前。</param>
       /// <param name="recursive"><c>true</c> deletes empty subdirectories from this directory and its subdirectories.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void DeleteEmptySubdirectories(string path, bool recursive, PathFormat pathFormat)
       {
@@ -78,7 +78,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Deletes empty subdirectories from the specified directory.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリから空のサブディレクトリを削除します。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -86,7 +86,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="DirectoryReadOnlyException"/>
-      /// <param name="path">The name of the directory to remove empty subdirectories from.</param>
+      /// <param name="path">空のサブディレクトリを削除するディレクトリの名前。</param>
       /// <param name="recursive"><c>true</c> deletes empty subdirectories from this directory and its subdirectories.</param>
       /// <param name="ignoreReadOnly"><c>true</c> overrides read only <see cref="FileAttributes"/> of empty directories.</param>
       [SecurityCritical]
@@ -96,7 +96,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Deletes empty subdirectories from the specified directory.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリから空のサブディレクトリを削除します。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -104,10 +104,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="DirectoryReadOnlyException"/>
-      /// <param name="path">The name of the directory to remove empty subdirectories from.</param>
+      /// <param name="path">空のサブディレクトリを削除するディレクトリの名前。</param>
       /// <param name="recursive"><c>true</c> deletes empty subdirectories from this directory and its subdirectories.</param>
       /// <param name="ignoreReadOnly"><c>true</c> overrides read only <see cref="FileAttributes"/> of empty directories.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void DeleteEmptySubdirectories(string path, bool recursive, bool ignoreReadOnly, PathFormat pathFormat)
       {

@@ -25,7 +25,7 @@ namespace Alphaleonis.Win32.Network
 {
    public static partial class Host
    {
-      /// <summary>Cancels an existing network connection. You can also call the function to remove remembered network connections that are not currently connected.</summary>
+      /// <summary>既存のネットワーク接続をキャンセルします. You can also call the function to remove remembered network connections that are not currently connected.</summary>
       /// <param name="localName">The name of a local device to be disconnected, such as "F:".</param>
       [SecurityCritical]
       public static void DisconnectDrive(string localName)
@@ -39,7 +39,7 @@ namespace Alphaleonis.Win32.Network
       }
 
       
-      /// <summary>Cancels an existing network connection. You can also call the function to remove remembered network connections that are not currently connected.</summary>
+      /// <summary>既存のネットワーク接続をキャンセルします. You can also call the function to remove remembered network connections that are not currently connected.</summary>
       /// <param name="localName">The name of a local device to be disconnected, such as "F:".</param>
       /// <param name="force">
       ///   Specifies whether the disconnection should occur if there are open files or jobs on the connection.

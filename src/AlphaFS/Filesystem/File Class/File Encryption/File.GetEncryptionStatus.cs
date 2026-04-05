@@ -25,9 +25,9 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Retrieves the encryption status of the specified file.</summary>
-      /// <param name="path">The name of the file.</param>
-      /// <returns>The <see cref="FileEncryptionStatus"/> of the specified <paramref name="path"/>.</returns>      
+      /// <summary>[AlphaFS] 指定されたファイルの暗号化ステータスを取得します。</summary>
+      /// <param name="path">ファイルの名前。</param>
+      /// <returns>指定された<paramref name="path"/>の<see cref="FileEncryptionStatus"/>。</returns>      
       [SecurityCritical]
       public static FileEncryptionStatus GetEncryptionStatus(string path)
       {
@@ -35,10 +35,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Retrieves the encryption status of the specified file.</summary>
-      /// <param name="path">The name of the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>The <see cref="FileEncryptionStatus"/> of the specified <paramref name="path"/>.</returns>      
+      /// <summary>[AlphaFS] 指定されたファイルの暗号化ステータスを取得します。</summary>
+      /// <param name="path">ファイルの名前。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>指定された<paramref name="path"/>の<see cref="FileEncryptionStatus"/>。</returns>      
       [SecurityCritical]
       public static FileEncryptionStatus GetEncryptionStatus(string path, PathFormat pathFormat)
       {

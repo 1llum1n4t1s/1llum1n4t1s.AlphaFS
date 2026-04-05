@@ -25,9 +25,9 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Compresses a file using NTFS compression.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">A path that describes a file to compress.</param>      
+      /// <summary>[AlphaFS] NTFS圧縮を使用してファイルを圧縮します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">圧縮するファイルを示すパス。</param>
       [SecurityCritical]
       public static void CompressTransacted(KernelTransaction transaction, string path)
       {
@@ -35,10 +35,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Compresses a file using NTFS compression.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">A path that describes a file to compress.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>      
+      /// <summary>[AlphaFS] NTFS圧縮を使用してファイルを圧縮します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">圧縮するファイルを示すパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>      
       [SecurityCritical]
       public static void CompressTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)
       {

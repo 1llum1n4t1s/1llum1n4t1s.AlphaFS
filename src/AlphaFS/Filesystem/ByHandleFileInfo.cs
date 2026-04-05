@@ -25,7 +25,7 @@ using System.Security;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>Contains information that the GetFileInformationByHandle function retrieves.</summary>
+   /// <summary>GetFileInformationByHandle関数が取得する情報を格納します。</summary>
    [Serializable]
    [SecurityCritical]
    public sealed class ByHandleFileInfo
@@ -44,89 +44,89 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets the file attributes.</summary>
-      /// <value>The file attributes.</value>
+      /// <summary>ファイル属性を取得します。</summary>
+      /// <value>ファイル属性。</value>
       public FileAttributes Attributes { get; private set; }
 
 
-      /// <summary>Gets the time this entry was created.</summary>
-      /// <value>The time this entry was created.</value>
+      /// <summary>このエントリが作成された時刻を取得します。</summary>
+      /// <value>このエントリが作成された時刻。</value>
       public DateTime CreationTime
       {
          get { return CreationTimeUtc.ToLocalTime(); }
       }
 
 
-      /// <summary>Gets the time, in coordinated universal time (UTC), this entry was created.</summary>
-      /// <value>The time, in coordinated universal time (UTC), this entry was created.</value>
+      /// <summary>このエントリが作成された協定世界時（UTC）での時刻を取得します。</summary>
+      /// <value>このエントリが作成されたUTC時刻。</value>
       public DateTime CreationTimeUtc { get; private set; }
 
 
-      /// <summary>Gets the time this entry was last accessed.
-      /// For a file, the structure specifies the last time that a file is read from or written to. 
-      /// For a directory, the structure specifies when the directory is created. 
-      /// For both files and directories, the specified date is correct, but the time of day is always set to midnight. 
-      /// If the underlying file system does not support the last access time, this member is zero (0).
+      /// <summary>このエントリに最後にアクセスした時刻を取得します。
+      /// ファイルの場合、ファイルが最後に読み取りまたは書き込みされた時刻を示します。
+      /// ディレクトリの場合、ディレクトリが作成された時刻を示します。
+      /// ファイルとディレクトリの両方で、日付は正しいですが、時刻は常に午前0時に設定されます。
+      /// 基盤のファイルシステムが最終アクセス時刻をサポートしない場合、このメンバーはゼロ（0）です。
       /// </summary>
-      /// <value>The time this entry was last accessed.</value>
+      /// <value>このエントリに最後にアクセスした時刻。</value>
       public DateTime LastAccessTime
       {
          get { return LastAccessTimeUtc.ToLocalTime(); }
       }
 
 
-      /// <summary>Gets the time, in coordinated universal time (UTC), this entry was last accessed.
-      /// For a file, the structure specifies the last time that a file is read from or written to. 
-      /// For a directory, the structure specifies when the directory is created. 
-      /// For both files and directories, the specified date is correct, but the time of day is always set to midnight. 
-      /// If the underlying file system does not support the last access time, this member is zero (0).
+      /// <summary>このエントリに最後にアクセスした協定世界時（UTC）での時刻を取得します。
+      /// ファイルの場合、ファイルが最後に読み取りまたは書き込みされた時刻を示します。
+      /// ディレクトリの場合、ディレクトリが作成された時刻を示します。
+      /// ファイルとディレクトリの両方で、日付は正しいですが、時刻は常に午前0時に設定されます。
+      /// 基盤のファイルシステムが最終アクセス時刻をサポートしない場合、このメンバーはゼロ（0）です。
       /// </summary>
-      /// <value>The time, in coordinated universal time (UTC), this entry was last accessed.</value>
+      /// <value>このエントリに最後にアクセスしたUTC時刻。</value>
       public DateTime LastAccessTimeUtc { get; private set; }
 
 
-      /// <summary>Gets the time this entry was last modified.
-      /// For a file, the structure specifies the last time that a file is written to. 
-      /// For a directory, the structure specifies when the directory is created. 
-      /// If the underlying file system does not support the last access time, this member is zero (0).
+      /// <summary>このエントリが最後に変更された時刻を取得します。
+      /// ファイルの場合、ファイルが最後に書き込まれた時刻を示します。
+      /// ディレクトリの場合、ディレクトリが作成された時刻を示します。
+      /// 基盤のファイルシステムが最終アクセス時刻をサポートしない場合、このメンバーはゼロ（0）です。
       /// </summary>
-      /// <value>The time this entry was last modified.</value>
+      /// <value>このエントリが最後に変更された時刻。</value>
       public DateTime LastWriteTime
       {
          get { return LastWriteTimeUtc.ToLocalTime(); }
       }
 
 
-      /// <summary>Gets the time, in coordinated universal time (UTC), this entry was last modified.
-      /// For a file, the structure specifies the last time that a file is written to. 
-      /// For a directory, the structure specifies when the directory is created. 
-      /// If the underlying file system does not support the last access time, this member is zero (0).
+      /// <summary>このエントリが最後に変更された協定世界時（UTC）での時刻を取得します。
+      /// ファイルの場合、ファイルが最後に書き込まれた時刻を示します。
+      /// ディレクトリの場合、ディレクトリが作成された時刻を示します。
+      /// 基盤のファイルシステムが最終アクセス時刻をサポートしない場合、このメンバーはゼロ（0）です。
       /// </summary>
-      /// <value>The time, in coordinated universal time (UTC), this entry was last modified.</value>
+      /// <value>このエントリが最後に変更されたUTC時刻。</value>
       public DateTime LastWriteTimeUtc { get; private set; }
 
 
-      /// <summary>Gets the serial number of the volume that contains a file.</summary>
-      /// <value>The serial number of the volume that contains a file.</value>
+      /// <summary>ファイルが含まれるボリュームのシリアル番号を取得します。</summary>
+      /// <value>ファイルが含まれるボリュームのシリアル番号。</value>
       public long VolumeSerialNumber { get; private set; }
 
 
-      /// <summary>Gets the size of the file.</summary>
-      /// <value>The size of the file.</value>
+      /// <summary>ファイルサイズを取得します。</summary>
+      /// <value>ファイルサイズ。</value>
       public long FileSize { get; private set; }
 
 
-      /// <summary>Gets the number of links to this file. For the FAT file system this member is always 1. For the NTFS file system, it can be more than 1.</summary>
-      /// <value>The number of links to this file. </value>
+      /// <summary>このファイルへのリンク数を取得します。FATファイルシステムではこのメンバーは常に1です。NTFSファイルシステムでは1より大きい場合があります。</summary>
+      /// <value>このファイルへのリンク数。</value>
       public int NumberOfLinks { get; private set; }
 
 
       /// <summary>
-      /// Gets the unique identifier associated with the file. The identifier and the volume serial number uniquely identify a 
-      /// file on a single computer. To determine whether two open handles represent the same file, combine the identifier 
-      /// and the volume serial number for each file and compare them.
+      /// ファイルに関連付けられた一意の識別子を取得します。この識別子とボリュームシリアル番号の組み合わせにより、
+      /// 単一のコンピューター上でファイルを一意に識別できます。2つのオープンハンドルが同じファイルを表すかどうかを
+      /// 判断するには、各ファイルの識別子とボリュームシリアル番号を組み合わせて比較します。
       /// </summary>
-      /// <value>The unique identifier of the file.</value>
+      /// <value>ファイルの一意の識別子。</value>
       public long FileIndex { get; private set; }
    }
 }

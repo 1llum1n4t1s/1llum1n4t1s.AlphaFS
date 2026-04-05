@@ -27,10 +27,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Volume
    {
-      /// <summary>[AlphaFS] Determines whether the volume of two file system objects is the same, by comparing their serial numbers.</summary>
-      /// <param name="path1">The first filesystem object with full path information.</param>
-      /// <param name="path2">The second file system object with full path information.</param>
-      /// <returns><c>true</c> if both filesytem objects reside on the same volume, <c>false</c> otherwise.</returns>
+      /// <summary>[AlphaFS] シリアル番号を比較して、2 つのファイルシステムオブジェクトのボリュームが同じかどうかを判断します。</summary>
+      /// <param name="path1">フルパス情報を持つ最初のファイルシステムオブジェクト。</param>
+      /// <param name="path2">フルパス情報を持つ 2 番目のファイルシステムオブジェクト。</param>
+      /// <returns>両方のファイルシステムオブジェクトが同じボリュームにある場合は <c>true</c>、それ以外の場合は <c>false</c>。</returns>
       [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
       [SecurityCritical]
       public static bool IsSameVolume(string path1, string path2)

@@ -21,7 +21,7 @@
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>Represents information about a symbolic link.</summary>
+   /// <summary>シンボリックリンクに関する情報を表します。</summary>
    public class SymbolicLinkTargetInfo : LinkTargetInfo
    {
       internal SymbolicLinkTargetInfo(string substituteName, string printName, SymbolicLinkType type) : base(substituteName, printName)
@@ -29,8 +29,8 @@ namespace Alphaleonis.Win32.Filesystem
          LinkType = type;
       }
 
-      /// <summary>Gets the type of the link.</summary>
-      /// <value>The type of the link.</value>
+      /// <summary>リンクの種類を取得します。</summary>
+      /// <value>リンクの種類。</value>
       public SymbolicLinkType LinkType { get; private set; }
    }
 }

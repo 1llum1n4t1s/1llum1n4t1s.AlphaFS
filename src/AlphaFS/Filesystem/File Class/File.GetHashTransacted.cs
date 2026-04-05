@@ -29,10 +29,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>
       /// [AlphaFS] Calculates the hash/checksum for the given <paramref name="fileFullPath"/>.
       /// </summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="fileFullPath">The path to the file.</param>
-      /// <param name="hashType">One of the <see cref="HashType"/> values.</param>
-      /// <returns>The hash.</returns>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="fileFullPath">ファイルへのパス。</param>
+      /// <param name="hashType"><see cref="HashType"/>値の1つ。</param>
+      /// <returns>ハッシュ値。</returns>
       [SecurityCritical]
       public static string GetHashTransacted(KernelTransaction transaction, string fileFullPath, HashType hashType)
       {
@@ -43,11 +43,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>
       /// [AlphaFS] Calculates the hash/checksum for the given <paramref name="fileFullPath"/>.
       /// </summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="fileFullPath">The path to the file.</param>
-      /// <param name="hashType">One of the <see cref="HashType"/> values.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>The hash.</returns>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="fileFullPath">ファイルへのパス。</param>
+      /// <param name="hashType"><see cref="HashType"/>値の1つ。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>ハッシュ値。</returns>
       [SecurityCritical]
       public static string GetHashTransacted(KernelTransaction transaction, string fileFullPath, HashType hashType, PathFormat pathFormat)
       {

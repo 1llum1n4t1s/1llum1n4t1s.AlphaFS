@@ -31,11 +31,11 @@ namespace Alphaleonis.Win32.Filesystem
    public static partial class File
    {
       /// <summary>Gets a <see cref="FileSecurity"/> object that encapsulates the access control list (ACL) entries for a specified file.</summary>
-      /// <returns>A <see cref="FileSecurity"/> object that encapsulates the access control rules for the file described by the <paramref name="path"/> parameter.</returns>      
+      /// <returns><paramref name="path"/>パラメータで記述されたファイルのアクセス制御ルールをカプセル化する<see cref="FileSecurity"/>オブジェクト。</returns>      
       /// <exception cref="IOException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="path">The path to a file containing a <see cref="FileSecurity"/> object that describes the file's access control list (ACL) information.</param>
+      /// <param name="path">ファイルのアクセス制御リスト(ACL)情報を記述する<see cref="FileSecurity"/>オブジェクトを含むファイルのパス。</param>
       [SecurityCritical]
       public static FileSecurity GetAccessControl(string path)
       {
@@ -44,12 +44,12 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>[AlphaFS] Gets a <see cref="FileSecurity"/> object that encapsulates the access control list (ACL) entries for a specified file.</summary>
-      /// <returns>A <see cref="FileSecurity"/> object that encapsulates the access control rules for the file described by the <paramref name="path"/> parameter.</returns>      
+      /// <returns><paramref name="path"/>パラメータで記述されたファイルのアクセス制御ルールをカプセル化する<see cref="FileSecurity"/>オブジェクト。</returns>      
       /// <exception cref="IOException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="path">The path to a file containing a <see cref="FileSecurity"/> object that describes the file's access control list (ACL) information.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="path">ファイルのアクセス制御リスト(ACL)情報を記述する<see cref="FileSecurity"/>オブジェクトを含むファイルのパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static FileSecurity GetAccessControl(string path, PathFormat pathFormat)
       {
@@ -58,12 +58,12 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>Gets a <see cref="FileSecurity"/> object that encapsulates the access control list (ACL) entries for a specified file.</summary>
-      /// <returns>A <see cref="FileSecurity"/> object that encapsulates the access control rules for the file described by the <paramref name="path"/> parameter.</returns>      
+      /// <returns><paramref name="path"/>パラメータで記述されたファイルのアクセス制御ルールをカプセル化する<see cref="FileSecurity"/>オブジェクト。</returns>      
       /// <exception cref="IOException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="path">The path to a file containing a <see cref="FileSecurity"/> object that describes the file's access control list (ACL) information.</param>
-      /// <param name="includeSections">One (or more) of the <see cref="AccessControlSections"/> values that specifies the type of access control list (ACL) information to receive.</param>
+      /// <param name="path">ファイルのアクセス制御リスト(ACL)情報を記述する<see cref="FileSecurity"/>オブジェクトを含むファイルのパス。</param>
+      /// <param name="includeSections">受信するアクセス制御リスト(ACL)情報の種類を指定する<see cref="AccessControlSections"/>値の1つ(または複数)。</param>
       [SecurityCritical]
       public static FileSecurity GetAccessControl(string path, AccessControlSections includeSections)
       {
@@ -72,13 +72,13 @@ namespace Alphaleonis.Win32.Filesystem
       
 
       /// <summary>[AlphaFS] Gets a <see cref="FileSecurity"/> object that encapsulates the access control list (ACL) entries for a specified file.</summary>
-      /// <returns>A <see cref="FileSecurity"/> object that encapsulates the access control rules for the file described by the <paramref name="path"/> parameter.</returns>
+      /// <returns><paramref name="path"/>パラメータで記述されたファイルのアクセス制御ルールをカプセル化する<see cref="FileSecurity"/>オブジェクト。</returns>
       /// <exception cref="IOException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="path">The path to a file containing a <see cref="FileSecurity"/> object that describes the file's access control list (ACL) information.</param>
-      /// <param name="includeSections">One (or more) of the <see cref="AccessControlSections"/> values that specifies the type of access control list (ACL) information to receive.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="path">ファイルのアクセス制御リスト(ACL)情報を記述する<see cref="FileSecurity"/>オブジェクトを含むファイルのパス。</param>
+      /// <param name="includeSections">受信するアクセス制御リスト(ACL)情報の種類を指定する<see cref="AccessControlSections"/>値の1つ(または複数)。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static FileSecurity GetAccessControl(string path, AccessControlSections includeSections, PathFormat pathFormat)
       {
@@ -105,7 +105,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <param name="handle">A <see cref="SafeFileHandle"/> to a file containing a <see cref="FileSecurity"/> object that describes the file's access control list (ACL) information.</param>
-      /// <param name="includeSections">One (or more) of the <see cref="AccessControlSections"/> values that specifies the type of access control list (ACL) information to receive.</param>
+      /// <param name="includeSections">受信するアクセス制御リスト(ACL)情報の種類を指定する<see cref="AccessControlSections"/>値の1つ(または複数)。</param>
       [SecurityCritical]
       public static FileSecurity GetAccessControl(SafeFileHandle handle, AccessControlSections includeSections)
       {

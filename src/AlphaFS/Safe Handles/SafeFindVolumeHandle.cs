@@ -25,28 +25,28 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>Represents a wrapper class for a handle used by the FindFirstVolume/FindNextVolume methods of the Win32 API.</summary>
+   /// <summary>Win32 APIのFindFirstVolume/FindNextVolumeメソッドで使用されるハンドルのラッパークラスを表します。</summary>
    [SecurityCritical]
    public sealed class SafeFindVolumeHandle : SafeHandleZeroOrMinusOneIsInvalid
    {
-      /// <summary>Constructor that prevents a default instance of this class from being created.</summary>
+      /// <summary>このクラスのデフォルトインスタンスの作成を防止するコンストラクタ。</summary>
       private SafeFindVolumeHandle() : base(true)
       {
       }
 
-      /// <summary>Initializes a new instance of the <see cref="SafeFindVolumeHandle"/> class.</summary>
-      /// <param name="handle">The handle.</param>
-      /// <param name="callerHandle"><c>true</c> to reliably release the handle during the finalization phase; <c>false</c> to prevent reliable release (not recommended).</param>
+      /// <summary><see cref="SafeFindVolumeHandle"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="handle">ハンドル。</param>
+      /// <param name="callerHandle">ファイナライズ段階でハンドルを確実に解放する場合は<c>true</c>、確実な解放を防止する場合は<c>false</c>（非推奨）。</param>
       public SafeFindVolumeHandle(IntPtr handle, bool callerHandle) : base(callerHandle)
       {
          SetHandle(handle);
       }
 
 
-      /// <summary>When overridden in a derived class, executes the code required to free the handle.</summary>
+      /// <summary>派生クラスでオーバーライドされた場合、ハンドルを解放するために必要なコードを実行します。</summary>
       /// <returns>
-      /// <c>true</c> if the handle is released successfully; otherwise, in the event of a catastrophic failure,
-      /// <c>false</c>. In this case, it generates a ReleaseHandleFailed Managed Debugging Assistant.
+      /// ハンドルが正常に解放された場合は<c>true</c>、致命的な障害が発生した場合は
+      /// <c>false</c>。この場合、ReleaseHandleFailed マネージデバッグアシスタントが生成されます。
       /// </returns>
       protected override bool ReleaseHandle()
       {

@@ -29,8 +29,8 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Creates a <see cref="StreamWriter"/> that appends text to the file represented by this instance of the <see cref="FileInfo"/>.</summary>
-      /// <returns>A new <see cref="StreamWriter"/></returns>
+      /// <summary>この <see cref="FileInfo"/> インスタンスが表すファイルにテキストを追加する <see cref="StreamWriter"/> を作成します。</summary>
+      /// <returns>新しい <see cref="StreamWriter"/>。</returns>
       [SecurityCritical]
       public StreamWriter AppendText()
       {
@@ -39,7 +39,7 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>Creates a <see cref="StreamWriter"/> that appends text to the file represented by this instance of the <see cref="FileInfo"/>.</summary>
-      /// <param name="encoding">The character <see cref="Encoding"/> to use.</param>
+      /// <param name="encoding">使用する文字 <see cref="Encoding"/>。</param>
       /// <returns>A new <see cref="StreamWriter"/></returns>
       [SecurityCritical]
       public StreamWriter AppendText(Encoding encoding)

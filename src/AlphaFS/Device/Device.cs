@@ -33,14 +33,14 @@ using System.Text;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>Provides static methods to retrieve device resource information from a local or remote host.</summary>
+   /// <summary>ローカルまたはリモートホストからデバイスリソース情報を取得するための静的メソッドを提供します。</summary>
    public static class Device
    {
-      #region Enumerate Devices
+      #region デバイスの列挙
 
-      /// <summary>[AlphaFS] Enumerates all available devices on the local host.</summary>
-      /// <returns><see cref="IEnumerable{DeviceInfo}"/> instances of type <see cref="DeviceGuid"/> from the local host.</returns>
-      /// <param name="deviceGuid">One of the <see cref="DeviceGuid"/> devices.</param>
+      /// <summary>[AlphaFS] ローカルホスト上の利用可能な全デバイスを列挙します。</summary>
+      /// <returns>ローカルホストからの <see cref="DeviceGuid"/> 型の <see cref="IEnumerable{DeviceInfo}"/> インスタンス。</returns>
+      /// <param name="deviceGuid"><see cref="DeviceGuid"/> デバイスのいずれか。</param>
       [SecurityCritical]
       public static IEnumerable<DeviceInfo> EnumerateDevices(DeviceGuid deviceGuid)
       {
@@ -48,10 +48,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Enumerates all available devices of type <see cref="DeviceGuid"/> on the local or remote host.</summary>
-      /// <returns><see cref="IEnumerable{DeviceInfo}"/> instances of type <see cref="DeviceGuid"/> for the specified <paramref name="hostName"/>.</returns>
-      /// <param name="hostName">The name of the local or remote host on which the device resides. <c>null</c> refers to the local host.</param>
-      /// <param name="deviceGuid">One of the <see cref="DeviceGuid"/> devices.</param>
+      /// <summary>[AlphaFS] ローカルまたはリモートホスト上の <see cref="DeviceGuid"/> 型の利用可能な全デバイスを列挙します。</summary>
+      /// <returns>指定された <paramref name="hostName"/> に対する <see cref="DeviceGuid"/> 型の <see cref="IEnumerable{DeviceInfo}"/> インスタンス。</returns>
+      /// <param name="hostName">デバイスが存在するローカルまたはリモートホストの名前。<c>null</c> はローカルホストを参照します。</param>
+      /// <param name="deviceGuid"><see cref="DeviceGuid"/> デバイスのいずれか。</param>
       [SecurityCritical]
       public static IEnumerable<DeviceInfo> EnumerateDevices(string hostName, DeviceGuid deviceGuid)
       {
@@ -61,7 +61,7 @@ namespace Alphaleonis.Win32.Filesystem
 
 
 
-      /// <summary>[AlphaFS] Enumerates all available devices on the local or remote host.</summary>
+      /// <summary>[AlphaFS] ローカルまたはリモートホスト上の利用可能な全デバイスを列挙します。</summary>
       [SecurityCritical]
       internal static IEnumerable<DeviceInfo> EnumerateDevicesCore(string hostName, DeviceGuid deviceGuid, bool getAllProperties)
       {
@@ -72,8 +72,8 @@ namespace Alphaleonis.Win32.Filesystem
 
 
          // CM_Connect_Machine()
-         // MSDN Note: Beginning in Windows 8 and Windows Server 2012 functionality to access remote machines has been removed.
-         // You cannot access remote machines when running on these versions of Windows. 
+         // MSDN注記: Windows 8 および Windows Server 2012 以降、リモートマシンへのアクセス機能は削除されました。
+         // これらのバージョンの Windows では、リモートマシンにアクセスできません。
          // http://msdn.microsoft.com/en-us/library/windows/hardware/ff537948%28v=vs.85%29.aspx
 
 
@@ -85,7 +85,7 @@ namespace Alphaleonis.Win32.Filesystem
          var classGuid = new Guid(Utils.GetEnumDescription(deviceGuid));
 
 
-         // Start at the "Root" of the device tree of the specified machine.
+         // 指定されたマシンのデバイスツリーの「ルート」から開始します。
 
          using (safeMachineHandle)
          using (var safeHandle = NativeMethods.SetupDiGetClassDevsEx(ref classGuid, IntPtr.Zero, IntPtr.Zero, NativeMethods.SetupDiGetClassDevsExFlags.Present | NativeMethods.SetupDiGetClassDevsExFlags.DeviceInterface, IntPtr.Zero, hostName, IntPtr.Zero))
@@ -97,7 +97,7 @@ namespace Alphaleonis.Win32.Filesystem
             var dataStructSize = (uint)Marshal.SizeOf<NativeMethods.SP_DEVINFO_DATA>();
 
 
-            // Start enumerating device interfaces.
+            // デバイスインターフェースの列挙を開始します。
 
             while (true)
             {
@@ -118,7 +118,7 @@ namespace Alphaleonis.Win32.Filesystem
                }
 
 
-               // Create DeviceInfo instance.
+               // DeviceInfo インスタンスを作成します。
 
                var diData = new NativeMethods.SP_DEVINFO_DATA {cbSize = dataStructSize};
 
@@ -144,7 +144,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      #region Private Helpers
+      #region プライベートヘルパー
 
       [SecurityCritical]
       private static string GetDeviceInstanceId(SafeCmConnectMachineHandle safeMachineHandle, string hostName, NativeMethods.SP_DEVINFO_DATA diData)
@@ -159,7 +159,7 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
-         using var safeBuffer = new SafeGlobalMemoryBufferHandle(NativeMethods.DefaultFileBufferSize / 8);
+         using var safeBuffer = new SafeGlobalMemoryBufferHandle(NativeMethods.DefaultNativeQueryBufferSize / 8);
          lastError = NativeMethods.CM_Get_Device_ID_Ex(diData.DevInst, safeBuffer, (uint) safeBuffer.Capacity, 0, safeMachineHandle);
 
          if (lastError != Win32Errors.CR_SUCCESS)
@@ -168,14 +168,14 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
-         // Device InstanceID, such as: "USB\VID_8087&PID_0A2B\5&2EDA7E1E&0&7", "SCSI\DISK&VEN_SANDISK&PROD_X400\4&288ED25&0&000200", ...
+         // デバイス InstanceID。例: "USB\VID_8087&PID_0A2B\5&2EDA7E1E&0&7", "SCSI\DISK&VEN_SANDISK&PROD_X400\4&288ED25&0&000200" など
 
          return safeBuffer.PtrToStringUni();
       }
 
 
-      /// <summary>Builds a Device Interface Detail Data structure.</summary>
-      /// <returns>An initialized NativeMethods.SP_DEVICE_INTERFACE_DETAIL_DATA instance.</returns>
+      /// <summary>デバイスインターフェース詳細データ構造体を構築します。</summary>
+      /// <returns>初期化された NativeMethods.SP_DEVICE_INTERFACE_DETAIL_DATA インスタンス。</returns>
       [SecurityCritical]
       private static NativeMethods.SP_DEVICE_INTERFACE_DETAIL_DATA GetDeviceInterfaceDetail(SafeHandle safeHandle, ref NativeMethods.SP_DEVICE_INTERFACE_DATA interfaceData, ref NativeMethods.SP_DEVINFO_DATA infoData)
       {
@@ -197,7 +197,7 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       private static string GetDeviceRegistryProperty(SafeHandle safeHandle, NativeMethods.SP_DEVINFO_DATA infoData, NativeMethods.SetupDiGetDeviceRegistryPropertyEnum property)
       {
-         var bufferSize = NativeMethods.DefaultFileBufferSize / 8; // 512
+         var bufferSize = NativeMethods.DefaultNativeQueryBufferSize / 8; // 512
 
          while (true)
          {
@@ -214,8 +214,8 @@ namespace Alphaleonis.Win32.Filesystem
             }
 
 
-            // MSDN: SetupDiGetDeviceRegistryProperty returns ERROR_INVALID_DATA error code if
-            // the requested property does not exist for a device or if the property data is not valid.
+            // MSDN: SetupDiGetDeviceRegistryProperty は、要求されたプロパティがデバイスに存在しない場合、
+            // またはプロパティデータが無効な場合に ERROR_INVALID_DATA エラーコードを返します。
 
             if (lastError == Win32Errors.ERROR_INVALID_DATA)
             {
@@ -297,7 +297,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
       
 
-      /// <summary>Repeatedly invokes InvokeIoControl with the specified input until enough memory has been allocated.</summary>
+      /// <summary>十分なメモリが割り当てられるまで、指定された入力で InvokeIoControl を繰り返し呼び出します。</summary>
       [SecurityCritical]
       private static void InvokeIoControlUnknownSize<T>(SafeFileHandle handle, uint controlCode, T input, uint increment = 128) where T : struct
       {
@@ -350,20 +350,20 @@ namespace Alphaleonis.Win32.Filesystem
          }
       }
 
-      #endregion // Private Helpers
+      #endregion // プライベートヘルパー
 
 
-      #endregion // Enumerate Devices
+      #endregion // デバイスの列挙
 
 
-      #region Compression
+      #region 圧縮
 
-      /// <summary>[AlphaFS] Sets the NTFS compression state of a file or directory on a volume whose file system supports per-file and per-directory compression.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="isFolder">Specifies that <paramref name="path"/> is a file or directory.</param>
-      /// <param name="path">A path that describes a folder or file to compress or decompress.</param>
-      /// <param name="compress"><c>true</c> = compress, <c>false</c> = decompress</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <summary>[AlphaFS] ファイル単位およびディレクトリ単位の圧縮をサポートするボリューム上のファイルまたはディレクトリの NTFS 圧縮状態を設定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="isFolder"><paramref name="path"/> がファイルかディレクトリかを指定します。</param>
+      /// <param name="path">圧縮または展開するフォルダーまたはファイルを記述するパス。</param>
+      /// <param name="compress"><c>true</c> = 圧縮、<c>false</c> = 展開</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [SecurityCritical]
       internal static void ToggleCompressionCore(KernelTransaction transaction, bool isFolder, string path, bool compress, PathFormat pathFormat)
       {
@@ -371,12 +371,12 @@ namespace Alphaleonis.Win32.Filesystem
          InvokeIoControlUnknownSize(handle, NativeMethods.FSCTL_SET_COMPRESSION, compress ? 1 : 0);
       }
 
-      #endregion // Compression
+      #endregion // 圧縮
 
 
-      #region Link
+      #region リンク
 
-      /// <summary>[AlphaFS] Creates an NTFS directory junction (similar to CMD command: "MKLINK /J").</summary>
+      /// <summary>[AlphaFS] NTFS ディレクトリジャンクションを作成します（CMD コマンド "MKLINK /J" と同等）。</summary>
       internal static void CreateDirectoryJunction(SafeFileHandle safeHandle, string directoryPath)
       {
          var targetDirBytes = Encoding.Unicode.GetBytes(Path.NonInterpretedPathPrefix + Path.GetRegularPathCore(directoryPath, GetFullPathOptions.AddTrailingDirectorySeparator, false));
@@ -425,7 +425,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Deletes an NTFS directory junction.</summary>
+      /// <summary>[AlphaFS] NTFS ディレクトリジャンクションを削除します。</summary>
       internal static void DeleteDirectoryJunction(SafeFileHandle safeHandle)
       {
          var reparseDataBuffer = new NativeMethods.REPARSE_DATA_BUFFER
@@ -450,7 +450,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Get information about the target of a mount point or symbolic link on an NTFS file system.</summary>
+      /// <summary>[AlphaFS] NTFS ファイルシステム上のマウントポイントまたはシンボリックリンクのターゲットに関する情報を取得します。</summary>
       /// <exception cref="NotAReparsePointException"/>
       /// <exception cref="UnrecognizedReparsePointException"/>
       [SecurityCritical]
@@ -470,7 +470,7 @@ namespace Alphaleonis.Win32.Filesystem
 
          switch (header.ReparseTag)
          {
-            // MountPoint can be a junction or mounted drive (mounted drive starts with "\??\Volume").
+            // MountPoint はジャンクションまたはマウントされたドライブです（マウントされたドライブは "\??\Volume" で始まります）。
 
             case ReparsePointTag.MountPoint:
                var mountPoint = safeBuffer.PtrToStructure<NativeMethods.MountPointReparseBuffer>(marshalReparseBuffer);
@@ -498,7 +498,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Get information about the target of a mount point or symbolic link on an NTFS file system.</summary>
+      /// <summary>[AlphaFS] NTFS ファイルシステム上のマウントポイントまたはシンボリックリンクのターゲットに関する情報を取得します。</summary>
       /// <exception cref="NotAReparsePointException"/>
       /// <exception cref="UnrecognizedReparsePointException"/>
       [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
@@ -520,7 +520,7 @@ namespace Alphaleonis.Win32.Filesystem
                   case Win32Errors.ERROR_MORE_DATA:
                   case Win32Errors.ERROR_INSUFFICIENT_BUFFER:
 
-                     // Should not happen since we already use the maximum size.
+                     // 最大サイズを既に使用しているため、通常は発生しません。
 
                      if (safeBuffer.Capacity < bytesReturned)
                      {
@@ -548,6 +548,6 @@ namespace Alphaleonis.Win32.Filesystem
          return safeBuffer;
       }
 
-      #endregion // Link
+      #endregion // リンク
    }
 }

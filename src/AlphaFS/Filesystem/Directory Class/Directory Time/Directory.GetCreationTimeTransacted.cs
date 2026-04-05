@@ -26,9 +26,9 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>[AlphaFS] Gets the creation date and time of the specified directory.</summary>
-      /// <returns>A <see cref="DateTime"/> structure set to the creation date and time for the specified directory. This value is expressed in local time.</returns>
-      /// <param name="transaction">The transaction.</param>
+      /// <summary>[AlphaFS] 指定されたディレクトリの作成日時を取得します。</summary>
+      /// <returns>指定されたディレクトリの作成日時に設定された <see cref="DateTime"/> 構造体。 この値はローカル時刻で表されます。</returns>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The directory for which to obtain creation date and time information.</param>
       [SecurityCritical]
       public static DateTime GetCreationTimeTransacted(KernelTransaction transaction, string path)
@@ -37,11 +37,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Gets the creation date and time of the specified directory.</summary>
-      /// <returns>A <see cref="DateTime"/> structure set to the creation date and time for the specified directory. This value is expressed in local time.</returns>
-      /// <param name="transaction">The transaction.</param>
+      /// <summary>[AlphaFS] 指定されたディレクトリの作成日時を取得します。</summary>
+      /// <returns>指定されたディレクトリの作成日時に設定された <see cref="DateTime"/> 構造体。 この値はローカル時刻で表されます。</returns>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The directory for which to obtain creation date and time information.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static DateTime GetCreationTimeTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)
       {

@@ -27,8 +27,8 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Returns the path of the current user's temporary folder.</summary>
-      /// <returns>The path to the temporary folder, ending with a backslash.</returns>
+      /// <summary>現在のユーザーの一時フォルダのパスを返します。</summary>
+      /// <returns>バックスラッシュで終わる一時フォルダへのパス。</returns>
       [SecurityCritical]
       public static string GetTempPath()
       {
@@ -38,9 +38,9 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Returns the path of the current user's temporary folder.</summary>
-      /// <param name="combinePath">The folder name to append to the temporary folder.</param>
-      /// <returns>The path to the temporary folder, combined with <paramref name="combinePath"/>.</returns>
+      /// <summary>[AlphaFS] 現在のユーザーの一時フォルダのパスを返します。</summary>
+      /// <param name="combinePath">一時フォルダに追加するフォルダ名。</param>
+      /// <returns><paramref name="combinePath"/> と結合された一時フォルダへのパス。</returns>
       [SecurityCritical]
       public static string GetTempPath(string combinePath)
       {

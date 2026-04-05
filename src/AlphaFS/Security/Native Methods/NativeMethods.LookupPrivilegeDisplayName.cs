@@ -28,13 +28,13 @@ namespace Alphaleonis.Win32.Security
 {
    internal static partial class NativeMethods
    {
-      /// <summary>The LookupPrivilegeDisplayName function retrieves the display name that represents a specified privilege.</summary>
+      /// <summary>LookupPrivilegeDisplayName関数は、指定された特権を表す表示名を取得します。</summary>
       /// <returns>
-      /// If the function succeeds, the return value is nonzero.
-      /// If the function fails, it returns zero. To get extended error information, call GetLastError.
+      /// 関数が成功した場合、戻り値は0以外です。
+      /// 関数が失敗した場合、0を返します。拡張エラー情報を取得するには、GetLastErrorを呼び出します。
       /// </returns>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "LookupPrivilegeDisplayNameW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]

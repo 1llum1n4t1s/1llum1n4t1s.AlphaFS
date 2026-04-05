@@ -28,8 +28,8 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Gets a <see cref="FileSecurity"/> object that encapsulates the access control list (ACL) entries for the file described by the current <see cref="FileInfo"/> object.</summary>
-      /// <returns><see cref="FileSecurity"/>A FileSecurity object that encapsulates the access control rules for the current file.</returns>
+      /// <summary>現在の <see cref="FileInfo"/> オブジェクトで記述されたファイルのアクセス制御リスト (ACL) エントリをカプセル化する <see cref="FileSecurity"/> オブジェクトを取得します。</summary>
+      /// <returns>現在のファイルのアクセス制御規則をカプセル化する <see cref="FileSecurity"/> オブジェクト。</returns>
       [SecurityCritical]
       public FileSecurity GetAccessControl()
       {
@@ -37,9 +37,9 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets a <see cref="FileSecurity"/> object that encapsulates the specified type of access control list (ACL) entries for the file described by the current FileInfo object.</summary>
-      /// <returns><see cref="FileSecurity"/> object that encapsulates the specified type of access control list (ACL) entries for the file described by the current FileInfo object.</returns>
-      /// <param name="includeSections">One of the <see cref="System.Security"/> values that specifies which group of access control entries to retrieve.</param>
+      /// <summary>現在の FileInfo オブジェクトで記述されたファイルの指定された種類のアクセス制御リスト (ACL) エントリをカプセル化する <see cref="FileSecurity"/> オブジェクトを取得します。</summary>
+      /// <returns>現在の FileInfo オブジェクトで記述されたファイルの指定された種類のアクセス制御リスト (ACL) エントリをカプセル化する <see cref="FileSecurity"/> オブジェクト。</returns>
+      /// <param name="includeSections">取得するアクセス制御エントリのグループを指定する <see cref="System.Security"/> 値の 1 つ。</param>
       [SecurityCritical]
       public FileSecurity GetAccessControl(AccessControlSections includeSections)
       {

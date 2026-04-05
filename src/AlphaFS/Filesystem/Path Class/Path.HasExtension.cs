@@ -28,10 +28,10 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Determines whether a path includes a file name extension.</summary>
-      /// <returns><c>true</c> if the characters that follow the last directory separator (\\ or /) or volume separator (:) in the path include a period (.) followed by one or more characters; otherwise, <c>false</c>.</returns>
+      /// <summary>パスにファイル名の拡張子が含まれているかどうかを判定します。</summary>
+      /// <returns>パス内の最後のディレクトリ区切り文字（\\ または /）またはボリューム区切り文字（:）の後の文字にピリオド（.）とそれに続く1文字以上が含まれている場合は <c>true</c>、それ以外は <c>false</c>。</returns>
       /// <exception cref="ArgumentException"/>
-      /// <param name="path">The path to search for an extension. The path cannot contain any of the characters defined in <see cref="GetInvalidPathChars"/>.</param>
+      /// <param name="path">拡張子を検索するパス。パスには <see cref="GetInvalidPathChars"/> で定義されている文字を含めることはできません。</param>
       [SecurityCritical]
       public static bool HasExtension(string path)
       {

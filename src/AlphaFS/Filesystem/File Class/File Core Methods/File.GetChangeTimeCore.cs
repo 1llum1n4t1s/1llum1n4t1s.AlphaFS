@@ -33,17 +33,17 @@ namespace Alphaleonis.Win32.Filesystem
    public static partial class File
    {
       /// <summary>Gets the change date and time of the specified file.</summary>
-      /// <returns>A <see cref="DateTime"/> structure set to the change date and time for the specified file. This value is expressed in local time.</returns>
+      /// <returns>指定されたファイルの変更日時に設定された<see cref="DateTime"/>構造体。この値はローカル時刻で表されます。</returns>
       /// <remarks><para>Use either <paramref name="path"/> or <paramref name="safeFileHandle"/>, not both.</para></remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="safeFileHandle">An open handle to the file or directory from which to retrieve information.</param>
-      /// <param name="isFolder">Specifies that <paramref name="path"/> is a file or directory.</param>
-      /// <param name="path">The file or directory for which to obtain creation date and time information.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="safeFileHandle">情報を取得するファイルまたはディレクトリへのオープンハンドル。</param>
+      /// <param name="isFolder"><paramref name="path"/>がファイルかディレクトリかを指定します。</param>
+      /// <param name="path">作成日時情報を取得するファイルまたはディレクトリ。</param>
       /// <param name="getUtc"><c>true</c> gets the Coordinated Universal Time (UTC), <c>false</c> gets the local time.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Disposing is controlled.")]
       [SecurityCritical]
       internal static DateTime GetChangeTimeCore(KernelTransaction transaction, SafeFileHandle safeFileHandle, bool isFolder, string path, bool getUtc, PathFormat pathFormat)

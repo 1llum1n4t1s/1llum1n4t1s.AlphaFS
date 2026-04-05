@@ -25,21 +25,21 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Alphaleonis.Win32.Security
 {
-   /// <summary>An IntPtr wrapper which can be used as the result of a Marshal.AllocHGlobal operation.
-   /// <para>Calls Marshal.FreeHGlobal when disposed or finalized.</para>
+   /// <summary>Marshal.AllocHGlobal操作の結果として使用できるIntPtrラッパー。
+   /// <para>破棄またはファイナライズ時にMarshal.FreeHGlobalを呼び出します。</para>
    /// </summary>
    internal sealed class SafeLocalMemoryBufferHandle : SafeHandleZeroOrMinusOneIsInvalid
    {
-      /// <summary>Initializes a new instance of the <see cref="SafeLocalMemoryBufferHandle"/> class, with zero IntPtr.</summary>
+      /// <summary>ゼロIntPtrで<see cref="SafeLocalMemoryBufferHandle"/>クラスの新しいインスタンスを初期化します。</summary>
       public SafeLocalMemoryBufferHandle() : base(true)
       {
       }
 
 
-      /// <summary>Copies data from a one-dimensional, managed 8-bit unsigned integer array to the unmanaged memory pointer referenced by this instance.</summary>
-      /// <param name="source">The one-dimensional array to copy from.</param>
-      /// <param name="startIndex">The zero-based index into the array where Copy should start.</param>
-      /// <param name="length">The number of array elements to copy.</param>      
+      /// <summary>1次元のマネージ8ビット符号なし整数配列からこのインスタンスが参照するアンマネージメモリポインターにデータをコピーします。</summary>
+      /// <param name="source">コピー元の1次元配列。</param>
+      /// <param name="startIndex">コピーを開始する配列のゼロベースインデックス。</param>
+      /// <param name="length">コピーする配列要素の数。</param>
       public void CopyFrom(byte[] source, int startIndex, int length)
       {
          Marshal.Copy(source, startIndex, handle, length);
@@ -85,10 +85,10 @@ namespace Alphaleonis.Win32.Security
       }
 
 
-      /// <summary>When overridden in a derived class, executes the code required to free the handle.</summary>
+      /// <summary>派生クラスでオーバーライドされた場合、ハンドルを解放するために必要なコードを実行します。</summary>
       /// <returns>
-      /// <c>true</c> if the handle is released successfully; otherwise, in the event of a catastrophic failure,
-      /// <c>false</c>. In this case, it generates a ReleaseHandleFailed Managed Debugging Assistant.
+      /// ハンドルが正常に解放された場合は<c>true</c>、致命的な障害が発生した場合は
+      /// <c>false</c>。この場合、ReleaseHandleFailed マネージデバッグアシスタントが生成されます。
       /// </returns>
       protected override bool ReleaseHandle()
       {

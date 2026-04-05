@@ -25,7 +25,7 @@ using System.Security;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>Exposes instance methods for creating, moving, and enumerating through directories and subdirectories. This class cannot be inherited.</summary>
+   /// <summary>ディレクトリおよびサブディレクトリの作成、移動、列挙を行うインスタンスメソッドを公開します。このクラスは継承できません。</summary>
    [Serializable]
    public sealed partial class DirectoryInfo : FileSystemInfo
    {
@@ -33,11 +33,11 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region .NET
 
-      /// <summary>Initializes a new instance of the <see cref="DirectoryInfo"/> class on the specified path.</summary>
-      /// <param name="path">The path on which to create the <see cref="DirectoryInfo"/>.</param>
+      /// <summary><see cref="DirectoryInfo"/> クラスの新しいインスタンスを指定されたパスで初期化します。</summary>
+      /// <param name="path"><see cref="DirectoryInfo"/> を作成するパス。</param>
       /// <remarks>
-      /// This constructor does not check if a directory exists. This constructor is a placeholder for a string that is used to access the disk in subsequent operations.
-      /// The path parameter can be a file name, including a file on a Universal Naming Convention (UNC) share.
+      /// このコンストラクターはディレクトリの存在を確認しません。このコンストラクターは、後続の操作でディスクにアクセスするために使用される文字列のプレースホルダーです。
+      /// path パラメーターには、UNC (Universal Naming Convention) 共有上のファイルを含むファイル名を指定できます。
       /// </remarks>
       public DirectoryInfo(string path) : this(null, path, PathFormat.RelativePath)
       {
@@ -46,20 +46,20 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="DirectoryInfo"/> class on the specified path.</summary>
-      /// <param name="path">The path on which to create the <see cref="DirectoryInfo"/>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <remarks>This constructor does not check if a directory exists. This constructor is a placeholder for a string that is used to access the disk in subsequent operations.</remarks>
+      /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> クラスの新しいインスタンスを指定されたパスで初期化します。</summary>
+      /// <param name="path"><see cref="DirectoryInfo"/> を作成するパス。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
+      /// <remarks>このコンストラクターはディレクトリの存在を確認しません。このコンストラクターは、後続の操作でディスクにアクセスするために使用される文字列のプレースホルダーです。</remarks>
       public DirectoryInfo(string path, PathFormat pathFormat) : this(null, path, pathFormat)
       {
       }
 
-      /// <summary>[AlphaFS] Special internal implementation.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="fullPath">The full path on which to create the <see cref="DirectoryInfo"/>.</param>
-      /// <param name="junk1">Not used.</param>
-      /// <param name="junk2">Not used.</param>
-      /// <remarks>This constructor does not check if a directory exists. This constructor is a placeholder for a string that is used to access the disk in subsequent operations.</remarks>
+      /// <summary>[AlphaFS] 特殊な内部実装です。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="fullPath"><see cref="DirectoryInfo"/> を作成する完全パス。</param>
+      /// <param name="junk1">使用しません。</param>
+      /// <param name="junk2">使用しません。</param>
+      /// <remarks>このコンストラクターはディレクトリの存在を確認しません。このコンストラクターは、後続の操作でディスクにアクセスするために使用される文字列のプレースホルダーです。</remarks>
       [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "junk1")]
       [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "junk2")]
       private DirectoryInfo(KernelTransaction transaction, string fullPath, bool junk1, bool junk2)
@@ -79,20 +79,20 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region Transactional
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="DirectoryInfo"/> class on the specified path.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path on which to create the <see cref="DirectoryInfo"/>.</param>
-      /// <remarks>This constructor does not check if a directory exists. This constructor is a placeholder for a string that is used to access the disk in subsequent operations.</remarks>
+      /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> クラスの新しいインスタンスを指定されたパスで初期化します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path"><see cref="DirectoryInfo"/> を作成するパス。</param>
+      /// <remarks>このコンストラクターはディレクトリの存在を確認しません。このコンストラクターは、後続の操作でディスクにアクセスするために使用される文字列のプレースホルダーです。</remarks>
       public DirectoryInfo(KernelTransaction transaction, string path) : this(transaction, path, PathFormat.RelativePath)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="DirectoryInfo"/> class on the specified path.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path on which to create the <see cref="DirectoryInfo"/>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <remarks>This constructor does not check if a directory exists. This constructor is a placeholder for a string that is used to access the disk in subsequent operations.</remarks>
+      /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> クラスの新しいインスタンスを指定されたパスで初期化します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path"><see cref="DirectoryInfo"/> を作成するパス。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
+      /// <remarks>このコンストラクターはディレクトリの存在を確認しません。このコンストラクターは、後続の操作でディスクにアクセスするために使用される文字列のプレースホルダーです。</remarks>
       public DirectoryInfo(KernelTransaction transaction, string path, PathFormat pathFormat)
       {
          InitializeCore(transaction, true, path, pathFormat);
@@ -107,15 +107,13 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region .NET
 
-      /// <summary>Gets a value indicating whether the directory exists.</summary>
+      /// <summary>ディレクトリが存在するかどうかを示す値を取得します。</summary>
       /// <remarks>
-      ///   <para>The <see cref="Exists"/> property returns <c>false</c> if any error occurs while trying to determine if the
-      ///   specified directory exists.</para>
-      ///   <para>This can occur in situations that raise exceptions such as passing a directory name with invalid characters or too many
-      ///   characters,</para>
-      ///   <para>a failing or missing disk, or if the caller does not have permission to read the directory.</para>
+      ///   <para>指定されたディレクトリの存在を確認しようとしたときにエラーが発生した場合、<see cref="Exists"/> プロパティは <c>false</c> を返します。</para>
+      ///   <para>これは、無効な文字や文字数が多すぎるディレクトリ名を渡した場合など、例外が発生する状況で起こる可能性があります。</para>
+      ///   <para>また、ディスクの障害や欠落、またはディレクトリの読み取り権限がない場合にも発生します。</para>
       /// </remarks>
-      /// <value><c>true</c> if the directory exists; otherwise, <c>false</c>.</value>
+      /// <value>ディレクトリが存在する場合は <c>true</c>、それ以外の場合は <c>false</c>。</value>
       [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
       public override bool Exists
       {
@@ -139,11 +137,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets the name of this <see cref="DirectoryInfo"/> instance.</summary>
-      /// <value>The directory name.</value>
+      /// <summary>この <see cref="DirectoryInfo"/> インスタンスの名前を取得します。</summary>
+      /// <value>ディレクトリ名。</value>
       /// <remarks>
-      ///   <para>This Name property returns only the name of the directory, such as "Bin".</para>
-      ///   <para>To get the full path, such as "c:\public\Bin", use the FullName property.</para>
+      ///   <para>この Name プロパティは、"Bin" のようなディレクトリ名のみを返します。</para>
+      ///   <para>"c:\public\Bin" のような完全パスを取得するには、FullName プロパティを使用してください。</para>
       /// </remarks>
       public override string Name
       {
@@ -151,8 +149,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets the parent directory of a specified subdirectory.</summary>
-      /// <value>The parent directory, or null if the path is null or if the file path denotes a root (such as "\", "C:", or * "\\server\share").</value>
+      /// <summary>指定されたサブディレクトリの親ディレクトリを取得します。</summary>
+      /// <value>親ディレクトリ。パスが null の場合、またはファイルパスがルート（"\"、"C:"、"\\server\share" など）を示す場合は null。</value>
       public DirectoryInfo Parent
       {
          [SecurityCritical]
@@ -172,8 +170,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets the root portion of the directory.</summary>
-      /// <value>An object that represents the root of the directory.</value>
+      /// <summary>ディレクトリのルート部分を取得します。</summary>
+      /// <value>ディレクトリのルートを表すオブジェクト。</value>
       public DirectoryInfo Root
       {
          [SecurityCritical]
@@ -187,8 +185,8 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region Methods
 
-      /// <summary>Returns the original path that was passed by the user.</summary>
-      /// <returns>A string that represents this object.</returns>
+      /// <summary>ユーザーが渡した元のパスを返します。</summary>
+      /// <returns>このオブジェクトを表す文字列。</returns>
       public override string ToString()
       {
          return DisplayPath;

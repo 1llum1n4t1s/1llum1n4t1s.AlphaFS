@@ -23,21 +23,21 @@ using System.Runtime.InteropServices;
 
 namespace Alphaleonis.Win32.Security
 {
-   /// <summary>The TOKEN_PRIVILEGES structure contains information about a set of privileges for an access token.</summary>
+   /// <summary>TOKEN_PRIVILEGES構造体は、アクセストークンの特権セットに関する情報を含みます。</summary>
    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
    internal struct TOKEN_PRIVILEGES
    {
-      /// <summary>This must be set to the number of entries in the Privileges array.</summary>
+      /// <summary>Privileges配列のエントリ数に設定する必要があります。</summary>
       [MarshalAs(UnmanagedType.U4)] public uint PrivilegeCount;
 
-      /// <summary>Specifies an array of LUID_AND_ATTRIBUTES structures. Each structure contains the LUID and attributes of a privilege.</summary>
+      /// <summary>LUID_AND_ATTRIBUTES構造体の配列を指定します。各構造体は特権のLUIDと属性を含みます。</summary>
       public LUID Luid;
 
-      /// <summary>The attributes of a privilege can be a combination of the following values:
-      /// SE_PRIVILEGE_ENABLED: The privilege is enabled.
-      /// SE_PRIVILEGE_ENABLED_BY_DEFAULT: The privilege is enabled by default.
-      /// SE_PRIVILEGE_REMOVED: Used to remove a privilege. For details, see AdjustTokenPrivileges.
-      /// SE_PRIVILEGE_USED_FOR_ACCESS: The privilege was used to gain access to an object or service. This flag is used to identify the relevant privileges in a set passed by a client application that may contain unnecessary privileges.
+      /// <summary>特権の属性は、以下の値の組み合わせです:
+      /// SE_PRIVILEGE_ENABLED: 特権が有効です。
+      /// SE_PRIVILEGE_ENABLED_BY_DEFAULT: 特権がデフォルトで有効です。
+      /// SE_PRIVILEGE_REMOVED: 特権の削除に使用されます。詳細はAdjustTokenPrivilegesを参照してください。
+      /// SE_PRIVILEGE_USED_FOR_ACCESS: 特権がオブジェクトまたはサービスへのアクセス取得に使用されました。このフラグは、不要な特権を含む可能性があるクライアントアプリケーションから渡されたセット内の関連する特権を識別するために使用されます。
       /// </summary>
       [MarshalAs(UnmanagedType.U4)] public uint Attributes;
    }

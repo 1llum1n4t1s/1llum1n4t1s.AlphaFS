@@ -29,7 +29,7 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Deletes this <see cref="DirectoryInfo"/> if it is empty.</summary>
+      /// <summary>この <see cref="DirectoryInfo"/> が空の場合、削除します。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -43,10 +43,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Deletes this instance of a <see cref="DirectoryInfo"/>, specifying whether to delete subdirectories and files.</summary>
+      /// <summary>サブディレクトリおよびファイルを削除するかどうかを指定して、この <see cref="DirectoryInfo"/> インスタンスを削除します。</summary>
       /// <remarks>
-      ///   <para>If the <see cref="DirectoryInfo"/> has no files and no subdirectories, this method deletes the <see cref="DirectoryInfo"/> even if recursive is <c>false</c>.</para>
-      ///   <para>Attempting to delete a <see cref="DirectoryInfo"/> that is not empty when recursive is false throws an <see cref="IOException"/>.</para>
+      ///   <para><see cref="DirectoryInfo"/> にファイルもサブディレクトリもない場合、recursive が <c>false</c> でもこのメソッドは <see cref="DirectoryInfo"/> を削除します。</para>
+      ///   <para>recursive が false のときに空でない <see cref="DirectoryInfo"/> を削除しようとすると、<see cref="IOException"/> がスローされます。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -54,7 +54,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="recursive"><c>true</c> to delete this directory, its subdirectories, and all files; otherwise, <c>false</c>.</param>
+      /// <param name="recursive">このディレクトリ、そのサブディレクトリ、およびすべてのファイルを削除する場合は <c>true</c>、それ以外の場合は <c>false</c>。</param>
       [SecurityCritical]
       public void Delete(bool recursive)
       {
@@ -64,10 +64,10 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Deletes this instance of a <see cref="DirectoryInfo"/>, specifying whether to delete files and subdirectories.</summary>
+      /// <summary>[AlphaFS] ファイルおよびサブディレクトリを削除するかどうかを指定して、この <see cref="DirectoryInfo"/> インスタンスを削除します。</summary>
       /// <remarks>
-      ///   <para>If the <see cref="DirectoryInfo"/> has no files and no subdirectories, this method deletes the <see cref="DirectoryInfo"/> even if recursive is <c>false</c>.</para>
-      ///   <para>Attempting to delete a <see cref="DirectoryInfo"/> that is not empty when recursive is false throws an <see cref="IOException"/>.</para>
+      ///   <para><see cref="DirectoryInfo"/> にファイルもサブディレクトリもない場合、recursive が <c>false</c> でもこのメソッドは <see cref="DirectoryInfo"/> を削除します。</para>
+      ///   <para>recursive が false のときに空でない <see cref="DirectoryInfo"/> を削除しようとすると、<see cref="IOException"/> がスローされます。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -75,8 +75,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="recursive"><c>true</c> to delete this directory, its subdirectories, and all files; otherwise, <c>false</c>.</param>
-      /// <param name="ignoreReadOnly"><c>true</c> ignores read only attribute of files and directories.</param>
+      /// <param name="recursive">このディレクトリ、そのサブディレクトリ、およびすべてのファイルを削除する場合は <c>true</c>、それ以外の場合は <c>false</c>。</param>
+      /// <param name="ignoreReadOnly"><c>true</c> の場合、ファイルおよびディレクトリの読み取り専用属性を無視します。</param>
       [SecurityCritical]
       public void Delete(bool recursive, bool ignoreReadOnly)
       {
@@ -84,10 +84,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Deletes this instance of a <see cref="DirectoryInfo"/>, specifying whether to delete files and subdirectories.</summary>
+      /// <summary>[AlphaFS] ファイルおよびサブディレクトリを削除するかどうかを指定して、この <see cref="DirectoryInfo"/> インスタンスを削除します。</summary>
       /// <remarks>
-      ///   <para>If the <see cref="DirectoryInfo"/> has no files and no subdirectories, this method deletes the <see cref="DirectoryInfo"/> even if recursive is <c>false</c>.</para>
-      ///   <para>Attempting to delete a <see cref="DirectoryInfo"/> that is not empty when recursive is false throws an <see cref="IOException"/>.</para>
+      ///   <para><see cref="DirectoryInfo"/> にファイルもサブディレクトリもない場合、recursive が <c>false</c> でもこのメソッドは <see cref="DirectoryInfo"/> を削除します。</para>
+      ///   <para>recursive が false のときに空でない <see cref="DirectoryInfo"/> を削除しようとすると、<see cref="IOException"/> がスローされます。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -95,9 +95,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="recursive"><c>true</c> to delete this directory, its subdirectories, and all files; otherwise, <c>false</c>.</param>
-      /// <param name="ignoreReadOnly"><c>true</c> ignores read only attribute of files and directories.</param>
-      /// <param name="continueOnNotFound">When <c>true</c> does not throw an <see cref="DirectoryNotFoundException"/> when the directory does not exist.</param>
+      /// <param name="recursive">このディレクトリ、そのサブディレクトリ、およびすべてのファイルを削除する場合は <c>true</c>、それ以外の場合は <c>false</c>。</param>
+      /// <param name="ignoreReadOnly"><c>true</c> の場合、ファイルおよびディレクトリの読み取り専用属性を無視します。</param>
+      /// <param name="continueOnNotFound"><c>true</c> の場合、ディレクトリが存在しないときに <see cref="DirectoryNotFoundException"/> をスローしません。</param>
       [SecurityCritical]
       public void Delete(bool recursive, bool ignoreReadOnly, bool continueOnNotFound)
       {

@@ -27,8 +27,8 @@ namespace Alphaleonis.Win32.Filesystem
    public static partial class File
    {
       /// <summary>Gets the creation date and time, in Coordinated Universal Time (UTC) format, of the specified file.</summary>
-      /// <returns>A <see cref="DateTime"/> structure set to the creation date and time for the specified file. This value is expressed in UTC time.</returns>
-      /// <param name="path">The file for which to obtain creation date and time information, in Coordinated Universal Time (UTC) format.</param>
+      /// <returns>指定されたファイルの作成日時に設定された<see cref="DateTime"/>構造体。この値はUTC時刻で表されます。</returns>
+      /// <param name="path">作成日時情報を協定世界時(UTC)形式で取得するファイル。</param>
       [SecurityCritical]
       public static DateTime GetCreationTimeUtc(string path)
       {
@@ -37,9 +37,9 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>[AlphaFS] Gets the creation date and time, in Coordinated Universal Time (UTC) format, of the specified file.</summary>
-      /// <returns>A <see cref="DateTime"/> structure set to the creation date and time for the specified file. This value is expressed in UTC time.</returns>
-      /// <param name="path">The file for which to obtain creation date and time information, in Coordinated Universal Time (UTC) format.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <returns>指定されたファイルの作成日時に設定された<see cref="DateTime"/>構造体。この値はUTC時刻で表されます。</returns>
+      /// <param name="path">作成日時情報を協定世界時(UTC)形式で取得するファイル。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static DateTime GetCreationTimeUtc(string path, PathFormat pathFormat)
       {

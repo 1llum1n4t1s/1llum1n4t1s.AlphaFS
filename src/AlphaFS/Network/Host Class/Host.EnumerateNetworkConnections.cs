@@ -27,7 +27,7 @@ namespace Alphaleonis.Win32.Network
 {
    public static partial class Host
    {
-      /// <summary>[AlphaFS] Returns an enumerable collection of defined network connections on the local host.</summary>
+      /// <summary>[AlphaFS] 列挙可能なコレクションを返します of defined network connections on the local host.</summary>
       /// <returns>An <see cref="IEnumerable{NetworkConnectionInfo}"/> collection of defined network connections on the local host. Each item in the collection must be disposed by the caller.</returns>
       [SecurityCritical]
       public static IEnumerable<NetworkConnectionInfo> EnumerateNetworkConnections()
@@ -38,7 +38,7 @@ namespace Alphaleonis.Win32.Network
 
 
 
-      /// <summary>[AlphaFS] Returns an enumerable collection of defined network connections on the local host.</summary>
+      /// <summary>[AlphaFS] 列挙可能なコレクションを返します of defined network connections on the local host.</summary>
       /// <param name="networkConnectionID">A <see cref="Guid"/> that specifies the network connection ID.</param>
       /// <returns>An <see cref="IEnumerable{NetworkConnectionInfo}"/> collection of network connection ID's on the local host.</returns>
       [SecurityCritical]

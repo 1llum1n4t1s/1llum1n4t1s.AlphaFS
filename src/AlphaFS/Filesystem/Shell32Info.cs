@@ -28,26 +28,26 @@ using System.Text;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>Contains Shell32 information about a file.</summary>
+   /// <summary>ファイルに関するShell32情報を格納します。</summary>
    [Serializable]
    [SecurityCritical]
    public sealed class Shell32Info : IDisposable
    {
       #region Constructors
 
-      /// <summary>Initializes a Shell32Info instance.</summary>
-      /// <remarks>Shell32 is limited to <c>MAX_PATH</c> length.</remarks>
-      /// <remarks>This constructor does not check if a file exists. This constructor is a placeholder for a string that is used to access the file in subsequent operations.</remarks>
-      /// <param name="fileName">The fully qualified name of the new file, or the relative file name. Do not end the path with the directory separator character.</param>
+      /// <summary>Shell32Infoインスタンスを初期化します。</summary>
+      /// <remarks>Shell32は<c>MAX_PATH</c>の長さに制限されています。</remarks>
+      /// <remarks>このコンストラクタはファイルの存在を確認しません。後続の操作でファイルにアクセスするための文字列のプレースホルダーです。</remarks>
+      /// <param name="fileName">新しいファイルの完全修飾名、または相対ファイル名。パスの末尾にディレクトリ区切り文字を付けないでください。</param>
       public Shell32Info(string fileName) : this(fileName, PathFormat.RelativePath)
       {
       }
 
-      /// <summary>Initializes a Shell32Info instance.</summary>
-      /// <remarks>Shell32 is limited to <c>MAX_PATH</c> length.</remarks>
-      /// <remarks>This constructor does not check if a file exists. This constructor is a placeholder for a string that is used to access the file in subsequent operations.</remarks>
-      /// <param name="fileName">The fully qualified name of the new file, or the relative file name. Do not end the path with the directory separator character.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <summary>Shell32Infoインスタンスを初期化します。</summary>
+      /// <remarks>Shell32は<c>MAX_PATH</c>の長さに制限されています。</remarks>
+      /// <remarks>このコンストラクタはファイルの存在を確認しません。後続の操作でファイルにアクセスするための文字列のプレースホルダーです。</remarks>
+      /// <param name="fileName">新しいファイルの完全修飾名、または相対ファイル名。パスの末尾にディレクトリ区切り文字を付けないでください。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       public Shell32Info(string fileName, PathFormat pathFormat)
       {
          if (Utils.IsNullOrWhiteSpace(fileName))
@@ -55,8 +55,8 @@ namespace Alphaleonis.Win32.Filesystem
             throw new ArgumentNullException("fileName");
          }
 
-         // Shell32 is limited to <c>MAX_PATH</c> length.
-         // Get a full path of regular format.
+         // Shell32は MAX_PATH の長さに制限されています。
+         // 通常形式のフルパスを取得します。
 
          FullPath = Path.GetExtendedLengthPathCore(null, fileName, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.FullCheck);
 
@@ -68,10 +68,10 @@ namespace Alphaleonis.Win32.Filesystem
       
       #region Methods
 
-      /// <summary>Gets an <see cref="IntPtr"/> handle to the Shell icon that represents the file.</summary>
-      /// <param name="iconAttributes">Icon size <see cref="Shell32.FileAttributes.SmallIcon"/> or <see cref="Shell32.FileAttributes.LargeIcon"/>. Can also be combined with <see cref="Shell32.FileAttributes.AddOverlays"/> and others.</param>
-      /// <returns>An <see cref="IntPtr"/> handle to the Shell icon that represents the file.</returns>
-      /// <remarks>Caller is responsible for destroying this handle with DestroyIcon() when no longer needed.</remarks>
+      /// <summary>ファイルを表すShellアイコンへの<see cref="IntPtr"/>ハンドルを取得します。</summary>
+      /// <param name="iconAttributes">アイコンサイズ <see cref="Shell32.FileAttributes.SmallIcon"/> または <see cref="Shell32.FileAttributes.LargeIcon"/>。<see cref="Shell32.FileAttributes.AddOverlays"/>などと組み合わせることもできます。</param>
+      /// <returns>ファイルを表すShellアイコンへの<see cref="IntPtr"/>ハンドル。</returns>
+      /// <remarks>呼び出し元は不要になった時点でDestroyIcon()でこのハンドルを破棄する責任があります。</remarks>
       [SecurityCritical]
       public IntPtr GetIcon(Shell32.FileAttributes iconAttributes)
       {
@@ -79,11 +79,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets the Shell command association from the registry.</summary>
-      /// <param name="shellVerb">The shell verb.</param>
+      /// <summary>レジストリからShellコマンドの関連付けを取得します。</summary>
+      /// <param name="shellVerb">シェル動詞。</param>
       /// <returns>
-      ///   Returns the associated file- or protocol-related Shell command from the registry or <c>string.Empty</c> if no association can be
-      ///   found.
+      ///   レジストリから関連するファイルまたはプロトコル関連のShellコマンドを返します。関連付けが見つからない場合は<c>string.Empty</c>を返します。
       /// </returns>
       [SecurityCritical]
       public string GetVerbCommand(string shellVerb)
@@ -96,17 +95,17 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       private static string GetString(NativeMethods.QueryAssociationsWrapper iQa, Shell32.AssociationString assocString, string shellVerb)
       {
-         // Avoid null-pointer dereference if the COM wrapper was never initialized or has been disposed.
+         // COMラッパーが初期化されていないか破棄されている場合のnullポインター逆参照を回避します。
          if (null == iQa || !iQa.IsValid)
          {
             return string.Empty;
          }
 
-         // GetString() throws Exceptions.
+         // GetString()は例外をスローします。
          try
          {
-            // Use a large buffer to prevent calling this function twice.
-            var size = NativeMethods.DefaultFileBufferSize;
+            // この関数を2回呼び出すことを防ぐために大きなバッファを使用します。
+            var size = NativeMethods.DefaultNativeQueryBufferSize;
             var buffer = new StringBuilder(size);
 
             iQa.GetString(Shell32.AssociationAttributes.NoTruncate | Shell32.AssociationAttributes.RemapRunDll, assocString, shellVerb, buffer, out size);
@@ -121,9 +120,9 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       [NonSerialized]
-      private NativeMethods.QueryAssociationsWrapper _iQaNone;    // Retrieve info from Shell.
+      private NativeMethods.QueryAssociationsWrapper _iQaNone;    // Shellから情報を取得。
       [NonSerialized]
-      private NativeMethods.QueryAssociationsWrapper _iQaByExe;   // Retrieve info from exe file.
+      private NativeMethods.QueryAssociationsWrapper _iQaByExe;   // exeファイルから情報を取得。
 
       [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
       [SecurityCritical]
@@ -158,7 +157,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Refreshes the state of the object.</summary>
+      /// <summary>オブジェクトの状態を更新します。</summary>
       [SecurityCritical]
       public void Refresh()
       {
@@ -174,7 +173,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Releases the underlying COM references.</summary>
+      /// <summary>基盤となるCOM参照を解放します。</summary>
       public void Dispose()
       {
          _iQaNone?.Dispose();
@@ -184,8 +183,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Returns the path as a string.</summary>
-      /// <returns>The path.</returns>      
+      /// <summary>パスを文字列として返します。</summary>
+      /// <returns>パス。</returns>
       public override string ToString()
       {
          return FullPath;
@@ -198,7 +197,7 @@ namespace Alphaleonis.Win32.Filesystem
 
       private string _association;
 
-      /// <summary>Gets the Shell file or protocol association from the registry.</summary>
+      /// <summary>レジストリからShellのファイルまたはプロトコルの関連付けを取得します。</summary>
       public string Association
       {
          get
@@ -217,7 +216,7 @@ namespace Alphaleonis.Win32.Filesystem
       
       private Shell32.GetAttributesOf _attributes;
 
-      /// <summary>The attributes of the file object.</summary>
+      /// <summary>ファイルオブジェクトの属性。</summary>
       public Shell32.GetAttributesOf Attributes
       {
          get
@@ -237,7 +236,7 @@ namespace Alphaleonis.Win32.Filesystem
 
       private string _command;
 
-      /// <summary>Gets the Shell command association from the registry.</summary>
+      /// <summary>レジストリからShellコマンドの関連付けを取得します。</summary>
       public string Command
       {
          get
@@ -256,7 +255,7 @@ namespace Alphaleonis.Win32.Filesystem
 
       private string _contentType;
 
-      /// <summary>Gets the Shell command association from the registry.</summary>
+      /// <summary>レジストリからShellコマンドの関連付けを取得します。</summary>
       public string ContentType
       {
          get
@@ -275,7 +274,7 @@ namespace Alphaleonis.Win32.Filesystem
 
       private string _ddeApplication;
 
-      /// <summary>Gets the Shell DDE association from the registry.</summary>
+      /// <summary>レジストリからShell DDEの関連付けを取得します。</summary>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Dde")]
       public string DdeApplication
       {
@@ -295,7 +294,7 @@ namespace Alphaleonis.Win32.Filesystem
 
       private string _defaultIcon;
 
-      /// <summary>Gets the Shell default icon association from the registry.</summary>
+      /// <summary>レジストリからShellのデフォルトアイコンの関連付けを取得します。</summary>
       public string DefaultIcon
       {
          get
@@ -312,13 +311,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Represents the fully qualified path of the file.</summary>
+      /// <summary>ファイルの完全修飾パスを表します。</summary>
       public string FullPath { get; private set; }
 
 
       private string _friendlyAppName;
 
-      /// <summary>Gets the Shell friendly application name association from the registry.</summary>
+      /// <summary>レジストリからShellのフレンドリーなアプリケーション名の関連付けを取得します。</summary>
       public string FriendlyAppName
       {
          get
@@ -337,7 +336,7 @@ namespace Alphaleonis.Win32.Filesystem
 
       private string _friendlyDocName;
 
-      /// <summary>Gets the Shell friendly document name association from the registry.</summary>
+      /// <summary>レジストリからShellのフレンドリーなドキュメント名の関連付けを取得します。</summary>
       public string FriendlyDocName
       {
          get
@@ -354,13 +353,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Reflects the initialization state of the instance.</summary>
+      /// <summary>インスタンスの初期化状態を反映します。</summary>
       internal bool Initialized { get; set; }
 
 
       private string _openWithAppName;
 
-      /// <summary>Gets the Shell "Open With" command association from the registry.</summary>
+      /// <summary>レジストリからShellの「プログラムから開く」コマンドの関連付けを取得します。</summary>
       public string OpenWithAppName
       {
          get

@@ -25,13 +25,13 @@ using Alphaleonis.Win32.Filesystem;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>Contains the identification number and other pertinent information about files, devices, and pipes. This class cannot be inherited.</summary>
+   /// <summary>ファイル、デバイス、パイプの識別番号およびその他の関連情報を含みます。このクラスは継承できません。</summary>
    [Serializable]
    public sealed class OpenResourceInfo
    {
-      #region Constructor
+      #region コンストラクター
 
-      /// <summary>Create an OpenResourceInfo instance.</summary>
+      /// <summary>OpenResourceInfo インスタンスを作成します。</summary>
       internal OpenResourceInfo(string hostName, NativeMethods.FILE_INFO_3 fileInfo)
       {
          HostName = hostName;
@@ -42,13 +42,13 @@ namespace Alphaleonis.Win32.Network
          UserName = fileInfo.fi3_username;
       }
 
-      #endregion // Constructor
+      #endregion // コンストラクター
 
 
-      #region Methods
+      #region メソッド
 
-      /// <summary>Forces the open resource to close.</summary>
-      /// <remarks>You should this method with caution because it does not write data cached on the client system to the file before closing the file.</remarks>
+      /// <summary>開いているリソースを強制的に閉じます。</summary>
+      /// <remarks>このメソッドはファイルを閉じる前にクライアントシステムにキャッシュされたデータをファイルに書き込まないため、注意して使用する必要があります。</remarks>
       public void Close()
       {
          var lastError = NativeMethods.NetFileClose(HostName, (uint) Id);
@@ -60,41 +60,41 @@ namespace Alphaleonis.Win32.Network
          }
       }
 
-      /// <summary>Returns the full path to the share.</summary>
-      /// <returns>A string that represents this instance.</returns>
+      /// <summary>共有へのフルパスを返します。</summary>
+      /// <returns>このインスタンスを表す文字列。</returns>
       public override string ToString()
       {
          return Id.ToString(CultureInfo.InvariantCulture);
       }
 
 
-      #endregion // Methods
+      #endregion // メソッド
 
-      #region Properties
+      #region プロパティ
 
-      /// <summary>The local or remote Host.</summary>
+      /// <summary>ローカルまたはリモートホスト。</summary>
       [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
       [Obsolete("Use HostName")]
       public string Host { get; private set; }
 
-      /// <summary>The host name of this resource information.</summary>
+      /// <summary>このリソース情報のホスト名。</summary>
       public string HostName { get; private set; }
 
-      /// <summary>The identification number assigned to the resource when it is opened.</summary>
+      /// <summary>リソースが開かれたときに割り当てられる識別番号。</summary>
       public long Id { get; private set; }
 
-      /// <summary>The path of the opened resource.</summary>
+      /// <summary>開かれたリソースのパス。</summary>
       public string PathName { get; private set; }
 
-      /// <summary>The access permissions associated with the opening application. This member can be one or more of the following <see cref="AccessPermissions"/> values.</summary>
+      /// <summary>オープンしたアプリケーションに関連付けられたアクセス許可。このメンバーは以下の <see cref="AccessPermissions"/> 値の 1 つ以上を指定できます。</summary>
       public AccessPermissions Permissions { get; private set; }
 
-      /// <summary>The number of file locks on the file, device, or pipe.</summary>
+      /// <summary>ファイル、デバイス、またはパイプのファイルロック数。</summary>
       public long TotalLocks { get; private set; }
 
-      /// <summary>Specifies which user (on servers that have user-level security) or which computer (on servers that have share-level security) opened the resource.</summary>
+      /// <summary>リソースを開いたユーザー（ユーザーレベルのセキュリティを持つサーバー上）またはコンピューター（共有レベルのセキュリティを持つサーバー上）を指定します。</summary>
       public string UserName { get; private set; }
 
-      #endregion // Properties
+      #endregion // プロパティ
    }
 }

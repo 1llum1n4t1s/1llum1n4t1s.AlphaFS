@@ -28,13 +28,13 @@ namespace Alphaleonis.Win32.Network
    internal static partial class NativeMethods
    {
       /// <summary>Contains the name, status, GUID, time-out, property flags, metadata size, DFS target information, link reparse point security descriptor, and a list of DFS targets for a root or link.</summary>
-      /// <remarks>Minimum supported client: Windows Vista with SP1</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2008</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows Vista with SP1</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2008</remarks>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Dfs")]
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct DFS_INFO_9
       {
-         /// <summary>The Universal Naming Convention (UNC) path of a DFS root or link.</summary>
+         /// <summary>DFS ルートまたはリンクの汎用名前付け規則 (UNC) パス。</summary>
          [MarshalAs(UnmanagedType.LPWStr)] public readonly string EntryPath;
 
          /// <summary>The comment associated with the DFS root or link.</summary>

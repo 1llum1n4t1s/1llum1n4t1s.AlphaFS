@@ -25,96 +25,96 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Volume Attributes used by the GetVolumeInfo() function.</summary>
+      /// <summary>GetVolumeInfo() 関数で使用されるボリューム属性。</summary>
       [Flags]
       internal enum VOLUME_INFO_FLAGS
       {
-         /// <summary>The specified volume supports case-sensitive file names.</summary>
+         /// <summary>指定されたボリュームは大文字と小文字を区別するファイル名をサポートします。</summary>
          FILE_CASE_SENSITIVE_SEARCH = 1,
 
 
-         /// <summary>The specified volume supports preserved case of file names when it places a name on disk.</summary>
+         /// <summary>指定されたボリュームは、ディスクに名前を配置する際にファイル名の大文字と小文字の保持をサポートします。</summary>
          FILE_CASE_PRESERVED_NAMES = 2,
 
 
-         /// <summary>The specified volume supports Unicode in file names as they appear on disk.</summary>
+         /// <summary>指定されたボリュームは、ディスク上に表示されるファイル名の Unicode をサポートします。</summary>
          FILE_UNICODE_ON_DISK = 4,
 
 
-         /// <summary>The specified volume preserves and enforces access control lists (ACL). For example, the NTFS file system preserves and enforces ACLs, and the FAT file system does not.</summary>
+         /// <summary>指定されたボリュームはアクセス制御リスト (ACL) を保持および適用します。例えば、NTFS ファイルシステムは ACL を保持・適用しますが、FAT ファイルシステムはしません。</summary>
          FILE_PERSISTENT_ACLS = 8,
 
 
-         /// <summary>The specified volume supports file-based compression.</summary>
+         /// <summary>指定されたボリュームはファイルベースの圧縮をサポートします。</summary>
          FILE_FILE_COMPRESSION = 16,
 
 
-         /// <summary>The specified volume supports disk quotas.</summary>
+         /// <summary>指定されたボリュームはディスククォータをサポートします。</summary>
          FILE_VOLUME_QUOTAS = 32,
 
 
-         /// <summary>The specified volume supports sparse files.</summary>
+         /// <summary>指定されたボリュームはスパースファイルをサポートします。</summary>
          FILE_SUPPORTS_SPARSE_FILES = 64,
 
 
-         /// <summary>The specified volume supports re-parse points.</summary>
+         /// <summary>指定されたボリュームはリパースポイントをサポートします。</summary>
          FILE_SUPPORTS_REPARSE_POINTS = 128,
 
 
-         /// <summary>(does not appear on MSDN)</summary>
+         /// <summary>(MSDN に記載なし)</summary>
          FILE_SUPPORTS_REMOTE_STORAGE = 256,
 
 
-         /// <summary>The specified volume is a compressed volume, for example, a DoubleSpace volume.</summary>
+         /// <summary>指定されたボリュームは圧縮ボリュームです（例: DoubleSpace ボリューム）。</summary>
          FILE_VOLUME_IS_COMPRESSED = 32768,
 
 
-         /// <summary>The specified volume supports object identifiers.</summary>
+         /// <summary>指定されたボリュームはオブジェクト識別子をサポートします。</summary>
          FILE_SUPPORTS_OBJECT_IDS = 65536,
 
 
-         /// <summary>The specified volume supports the Encrypted File System (EFS). For more information, see File Encryption.</summary>
+         /// <summary>指定されたボリュームは暗号化ファイルシステム (EFS) をサポートします。詳細については、ファイルの暗号化を参照してください。</summary>
          FILE_SUPPORTS_ENCRYPTION = 131072,
 
 
-         /// <summary>The specified volume supports named streams.</summary>
+         /// <summary>指定されたボリュームは名前付きストリームをサポートします。</summary>
          FILE_NAMED_STREAMS = 262144,
 
 
-         /// <summary>The specified volume is read-only.</summary>
+         /// <summary>指定されたボリュームは読み取り専用です。</summary>
          FILE_READ_ONLY_VOLUME = 524288,
 
 
-         /// <summary>The specified volume is read-only.</summary>
+         /// <summary>指定されたボリュームは一度だけのシーケンシャル書き込みをサポートします。</summary>
          FILE_SEQUENTIAL_WRITE_ONCE = 1048576,
 
 
-         /// <summary>The specified volume supports transactions.For more information, see About KTM.</summary>
+         /// <summary>指定されたボリュームはトランザクションをサポートします。詳細については、About KTM を参照してください。</summary>
          FILE_SUPPORTS_TRANSACTIONS = 2097152,
 
 
-         /// <summary>The specified volume supports hard links. For more information, see Hard Links and Junctions.</summary>
-         /// <remarks>Windows Server 2008, Windows Vista, Windows Server 2003, and Windows XP: This value is not supported until Windows Server 2008 R2 and Windows 7.</remarks>
+         /// <summary>指定されたボリュームはハードリンクをサポートします。詳細については、Hard Links and Junctions を参照してください。</summary>
+         /// <remarks>Windows Server 2008、Windows Vista、Windows Server 2003、および Windows XP: この値は Windows Server 2008 R2 および Windows 7 までサポートされていません。</remarks>
          FILE_SUPPORTS_HARD_LINKS = 4194304,
 
 
-         /// <summary>The specified volume supports extended attributes. An extended attribute is a piece of application-specific metadata that an application can associate with a file and is not part of the file's data.</summary>
-         /// <remarks>Windows Server 2008, Windows Vista, Windows Server 2003, and Windows XP: This value is not supported until Windows Server 2008 R2 and Windows 7.</remarks>
+         /// <summary>指定されたボリュームは拡張属性をサポートします。拡張属性はアプリケーション固有のメタデータで、アプリケーションがファイルに関連付けることができ、ファイルのデータの一部ではありません。</summary>
+         /// <remarks>Windows Server 2008、Windows Vista、Windows Server 2003、および Windows XP: この値は Windows Server 2008 R2 および Windows 7 までサポートされていません。</remarks>
          FILE_SUPPORTS_EXTENDED_ATTRIBUTES = 8388608,
 
 
-         /// <summary>The file system supports open by FileID. For more information, see FILE_ID_BOTH_DIR_INFO.</summary>
-         /// <remarks>Windows Server 2008, Windows Vista, Windows Server 2003, and Windows XP: This value is not supported until Windows Server 2008 R2 and Windows 7.</remarks>
+         /// <summary>ファイルシステムは FileID によるオープンをサポートします。詳細については、FILE_ID_BOTH_DIR_INFO を参照してください。</summary>
+         /// <remarks>Windows Server 2008、Windows Vista、Windows Server 2003、および Windows XP: この値は Windows Server 2008 R2 および Windows 7 までサポートされていません。</remarks>
          FILE_SUPPORTS_OPEN_BY_FILE_ID = 16777216,
 
 
-         /// <summary>The specified volume supports update sequence number (USN) journals. For more information, see Change Journal Records.</summary>
-         /// <remarks>Windows Server 2008, Windows Vista, Windows Server 2003, and Windows XP: This value is not supported until Windows Server 2008 R2 and Windows 7.</remarks>
+         /// <summary>指定されたボリュームは更新シーケンス番号 (USN) ジャーナルをサポートします。詳細については、Change Journal Records を参照してください。</summary>
+         /// <remarks>Windows Server 2008、Windows Vista、Windows Server 2003、および Windows XP: この値は Windows Server 2008 R2 および Windows 7 までサポートされていません。</remarks>
          FILE_SUPPORTS_USN_JOURNAL = 33554432,
 
 
-         /// <summary>The specified volume is a direct access (DAX) volume.</summary>
-         /// <remarks>This flag was introduced in Windows 10, version 1607.</remarks>
+         /// <summary>指定されたボリュームはダイレクトアクセス (DAX) ボリュームです。</summary>
+         /// <remarks>このフラグは Windows 10 バージョン 1607 で導入されました。</remarks>
          FILE_DAX_VOLUME = 536870912
       }
    }

@@ -26,12 +26,12 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>[AlphaFS] Makes an extended long path from the specified <paramref name="path"/> by prefixing <see cref="LongPathPrefix"/>.</summary>
-      /// <returns>The <paramref name="path"/> prefixed with a <see cref="LongPathPrefix"/>, the minimum required full path is: "C:\".</returns>
-      /// <remarks>This method does not verify that the resulting path and file name are valid, or that they see an existing file on the associated volume.</remarks>
+      /// <summary>[AlphaFS] 指定された <paramref name="path"/> に <see cref="LongPathPrefix"/> を付加して拡張長パスを作成します。</summary>
+      /// <returns><see cref="LongPathPrefix"/> が付加された <paramref name="path"/>。必要な最小完全パスは "C:\" です。</returns>
+      /// <remarks>このメソッドは、結果のパスとファイル名が有効であるか、関連するボリューム上に既存のファイルが存在するかを検証しません。</remarks>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
-      /// <param name="path">The path to the file or directory, this can also be an UNC path.</param>
+      /// <param name="path">ファイルまたはディレクトリへのパス。UNCパスも指定可能です。</param>
       [SecurityCritical]
       public static string GetLongPath(string path)
       {

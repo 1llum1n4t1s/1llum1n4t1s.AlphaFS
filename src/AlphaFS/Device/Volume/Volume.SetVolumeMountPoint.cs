@@ -28,14 +28,14 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Volume
    {
-      /// <summary>[AlphaFS] Associates a volume with a Drive letter or a directory on another volume.</summary>
+      /// <summary>[AlphaFS] ボリュームをドライブ文字または別のボリュームのディレクトリに関連付けます。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <param name="volumeMountPoint">
-      ///   The user-mode path to be associated with the volume. This may be a Drive letter (for example, "X:\")
-      ///   or a directory on another volume (for example, "Y:\MountX\").
+      ///   ボリュームに関連付けるユーザーモードパス。ドライブ文字（例: "X:\"）
+      ///   または別のボリュームのディレクトリ（例: "Y:\MountX\"）を指定できます。
       /// </param>
-      /// <param name="volumeGuid">A <see cref="string"/> containing the volume <see cref="Guid"/>.</param>      
+      /// <param name="volumeGuid">ボリューム <see cref="Guid"/> を含む <see cref="string"/>。</param>      
       [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1", Justification = "Utils.IsNullOrWhiteSpace validates arguments.")]
       [SecurityCritical]
       public static void SetVolumeMountPoint(string volumeMountPoint, string volumeGuid)
@@ -59,24 +59,24 @@ namespace Alphaleonis.Win32.Filesystem
          volumeMountPoint = Path.GetFullPathCore(null, false, volumeMountPoint, GetFullPathOptions.AsLongPath | GetFullPathOptions.AddTrailingDirectorySeparator | GetFullPathOptions.FullCheck);
 
 
-         // This string must be of the form "\\?\Volume{GUID}\"
+         // この文字列は "\\?\Volume{GUID}\" の形式である必要があります
          volumeGuid = Path.AddTrailingDirectorySeparator(volumeGuid, false);
 
 
-         // ChangeErrorMode is for the Win32 SetThreadErrorMode() method, used to suppress possible pop-ups.
+         // ChangeErrorMode は Win32 SetThreadErrorMode() メソッド用で、ポップアップの抑制に使用されます。
          using (new NativeMethods.ChangeErrorMode(NativeMethods.ErrorMode.FailCriticalErrors))
          {
             // SetVolumeMountPoint()
-            // 2014-01-29: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
+            // 2014-01-29: MSDN は LongPath の使用を確認していませんが、この関数の Unicode バージョンが存在します。
 
-            // The string must end with a trailing backslash.
+            // 文字列は末尾のバックスラッシュで終わる必要があります。
             var success = NativeMethods.SetVolumeMountPoint(volumeMountPoint, volumeGuid);
 
             var lastError = Marshal.GetLastWin32Error();
             if (!success)
             {
-               // If the lpszVolumeMountPoint parameter contains a path to a mounted folder,
-               // GetLastError returns ERROR_DIR_NOT_EMPTY, even if the directory is empty.
+               // lpszVolumeMountPoint パラメーターにマウントフォルダーへのパスが含まれている場合、
+               // ディレクトリが空であっても GetLastError は ERROR_DIR_NOT_EMPTY を返します。
 
                if (lastError != Win32Errors.ERROR_DIR_NOT_EMPTY)
                {

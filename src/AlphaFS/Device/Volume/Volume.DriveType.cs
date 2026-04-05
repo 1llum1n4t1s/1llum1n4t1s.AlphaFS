@@ -27,8 +27,8 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Volume
    {
-      /// <summary>[AlphaFS] Determines the disk <see cref="DriveType"/>, based on the root of the current directory.</summary>
-      /// <returns>A <see cref="DriveType"/> enum value.</returns>
+      /// <summary>[AlphaFS] 現在のディレクトリのルートに基づいてディスクの <see cref="DriveType"/> を判定します。</summary>
+      /// <returns><see cref="DriveType"/> 列挙値。</returns>
       [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
       [SecurityCritical]
       public static DriveType GetCurrentDriveType()
@@ -37,18 +37,18 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Determines the disk <see cref="DriveType"/>.</summary>
-      /// <param name="drivePath">A path to a drive. For example: "C:\", "\\server\share", or "\\?\Volume{c0580d5e-2ad6-11dc-9924-806e6f6e6963}\"</param>
-      /// <returns>A <see cref="DriveType"/> enum value.</returns>
+      /// <summary>[AlphaFS] ディスクの <see cref="DriveType"/> を判定します。</summary>
+      /// <param name="drivePath">ドライブへのパス。例: "C:\"、"\\server\share"、または "\\?\Volume{c0580d5e-2ad6-11dc-9924-806e6f6e6963}\"</param>
+      /// <returns><see cref="DriveType"/> 列挙値。</returns>
       [SecurityCritical]
       public static DriveType GetDriveType(string drivePath)
       {
-         // drivePath is allowed to be == null.
+         // drivePath は null であることが許可されています。
 
          drivePath = Path.AddTrailingDirectorySeparator(drivePath, false);
 
 
-         // ChangeErrorMode is for the Win32 SetThreadErrorMode() method, used to suppress possible pop-ups. 
+         // ChangeErrorMode は Win32 SetThreadErrorMode() メソッド用で、ポップアップの抑制に使用されます。
 
          using (new NativeMethods.ChangeErrorMode(NativeMethods.ErrorMode.FailCriticalErrors))
 

@@ -30,7 +30,7 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       internal static void CopyMoveDirectoryCore(bool retry, CopyMoveArguments cma, CopyMoveResult copyMoveResult)
       {
-         var dirs = new Queue<string>(NativeMethods.DefaultFileBufferSize);
+         var dirs = new Queue<string>(NativeMethods.DefaultDirectoryQueueCapacity);
 
          dirs.Enqueue(cma.SourcePathLp);
 
@@ -44,8 +44,8 @@ namespace Alphaleonis.Win32.Filesystem
                : srcLp.ReplaceIgnoreCase(cma.SourcePathLp, cma.DestinationPathLp);
             
 
-            // Traverse the source folder, processing files and folders.
-            // No recursion is applied; a Queue is used instead.
+            // ソースフォルダを走査し、ファイルとフォルダを処理する。
+            // 再帰は使用せず、代わりにQueueを使用する。
 
             foreach (var fseiSource in EnumerateFileSystemEntryInfosCore<FileSystemEntryInfo>(null, cma.Transaction, srcLp, Path.WildcardStarMatchAll, null, null, cma.DirectoryEnumerationFilters, PathFormat.LongFullPath))
             {
@@ -64,16 +64,16 @@ namespace Alphaleonis.Win32.Filesystem
 
                else
                {
-                  // File count is done in File.CopyMoveCore method.
+                  // ファイルカウントはFile.CopyMoveCoreメソッドで行われる。
 
                   File.CopyMoveCore(retry, cma, true, false, fseiSourcePath, fseiDestinationPath, copyMoveResult);
 
                   if (copyMoveResult.IsCanceled)
                   {
-                     // Break while loop.
+                     // whileループを中断。
                      dirs.Clear();
 
-                     // Break foreach loop.
+                     // foreachループを中断。
                      break;
                   }
                   

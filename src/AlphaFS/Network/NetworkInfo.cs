@@ -26,31 +26,31 @@ using System.Globalization;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>Represents a network on the local machine. It can also represent a collection of network connections with a similar network signature.</summary>
+   /// <summary>ローカルマシン上のネットワークを表します。同様のネットワークシグネチャを持つネットワーク接続のコレクションを表すこともできます。</summary>
    [Serializable]
    public class NetworkInfo : IEquatable<NetworkInfo>, IDisposable
    {
-      #region Private Fields
+      #region プライベートフィールド
 
       [NonSerialized]
       private NativeMethods.NetworkWrapper _network;
 
-      #endregion // Private Fields
+      #endregion // プライベートフィールド
 
 
-      #region Constructors
+      #region コンストラクター
 
       internal NetworkInfo(NativeMethods.NetworkWrapper network)
       {
          _network = network;
       }
 
-      #endregion // Constructors
+      #endregion // コンストラクター
 
 
       #region IDisposable
 
-      /// <summary>Releases the underlying COM reference.</summary>
+      /// <summary>基になる COM 参照を解放します。</summary>
       public void Dispose()
       {
          _network?.Dispose();
@@ -60,7 +60,7 @@ namespace Alphaleonis.Win32.Network
       #endregion // IDisposable
 
 
-      #region Private Helpers
+      #region プライベートヘルパー
 
       private void ThrowIfDisposed()
       {
@@ -68,27 +68,27 @@ namespace Alphaleonis.Win32.Network
             throw new ObjectDisposedException(GetType().FullName);
       }
 
-      #endregion // Private Helpers
+      #endregion // プライベートヘルパー
 
 
-      #region Properties
+      #region プロパティ
 
-      /// <summary>Gets the category of a network. The categories are trusted, untrusted, or authenticated. This value of this property is not cached.</summary>
+      /// <summary>ネットワークのカテゴリを取得します。カテゴリは信頼済み、信頼されていない、または認証済みです。このプロパティの値はキャッシュされません。</summary>
       public NetworkCategory Category
       {
          get { ThrowIfDisposed(); return _network.GetCategory(); }
       }
 
 
-      /// <summary>Gets the network connections for the network. This value of this property is not cached. Each item in the returned collection must be disposed by the caller.</summary>
+      /// <summary>ネットワークのネットワーク接続を取得します。このプロパティの値はキャッシュされません。返されたコレクション内の各アイテムは呼び出し元が破棄する必要があります。</summary>
       public IEnumerable<NetworkConnectionInfo> Connections
       {
          get
          {
             ThrowIfDisposed();
 
-            // Eagerly wrap all COM wrappers into NetworkConnectionInfo objects (which have finalizers)
-            // to prevent COM reference leaks if the caller partially enumerates.
+            // 呼び出し元が部分的に列挙した場合の COM 参照リークを防ぐため、
+            // すべての COM ラッパーを NetworkConnectionInfo オブジェクト（ファイナライザーを持つ）に即座にラップします。
             var connections = _network.GetNetworkConnections();
             var result = new List<NetworkConnectionInfo>();
 
@@ -110,14 +110,14 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>Gets the local date and time when the network was connected. This value of this property is not cached.</summary>
+      /// <summary>ネットワークが接続されたローカルの日時を取得します。このプロパティの値はキャッシュされません。</summary>
       public DateTime ConnectionTime
       {
          get { return ConnectionTimeUtc.ToLocalTime(); }
       }
 
 
-      /// <summary>Gets the date and time when the network was connected. This value of this property is not cached.</summary>
+      /// <summary>ネットワークが接続された UTC 日時を取得します。このプロパティの値はキャッシュされません。</summary>
       public DateTime ConnectionTimeUtc
       {
          get
@@ -130,7 +130,7 @@ namespace Alphaleonis.Win32.Network
             
             long time = high;
 
-            // Shift the day info into the high order bits.
+            // 日付情報を上位ビットにシフトします。
             time <<= 32;
             time |= low;
 
@@ -139,22 +139,22 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>Gets the connectivity state of the network. This value of this property is not cached.</summary>
-      /// <remarks>Connectivity provides information on whether the network is connected, and the protocols in use for network traffic.</remarks>
+      /// <summary>ネットワークの接続状態を取得します。このプロパティの値はキャッシュされません。</summary>
+      /// <remarks>Connectivity はネットワークが接続されているかどうか、およびネットワークトラフィックに使用されているプロトコルに関する情報を提供します。</remarks>
       public ConnectivityStates Connectivity
       {
          get { ThrowIfDisposed(); return _network.GetConnectivity(); }
       }
 
 
-      /// <summary>Gets the local date and time when the network was created. This value of this property is not cached.</summary>
+      /// <summary>ネットワークが作成されたローカルの日時を取得します。このプロパティの値はキャッシュされません。</summary>
       public DateTime CreationTime
       {
          get { return CreationTimeUtc.ToLocalTime(); }
       }
 
 
-      /// <summary>Gets the date and time when the network was created. This value of this property is not cached.</summary>
+      /// <summary>ネットワークが作成された UTC 日時を取得します。このプロパティの値はキャッシュされません。</summary>
       public DateTime CreationTimeUtc
       {
          get
@@ -167,7 +167,7 @@ namespace Alphaleonis.Win32.Network
 
             long time = high;
 
-            // Shift the value into the high order bits.
+            // 値を上位ビットにシフトします。
             time <<= 32;
             time |= low;
 
@@ -176,63 +176,63 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>Gets a description for the network. This value of this property is not cached.</summary>
+      /// <summary>ネットワークの説明を取得します。このプロパティの値はキャッシュされません。</summary>
       public string Description
       {
          get { ThrowIfDisposed(); return _network.GetDescription(); }
 
-         // Should we allow this in AlphaFS?
+         // AlphaFS でこれを許可すべきか？
          //private set { _network.SetDescription(value); }
       }
 
 
-      /// <summary>Gets the domain type of the network. This value of this property is not cached.</summary>
-      /// <remarks>The domain indictates whether the network is an Active Directory Network, and whether the machine has been authenticated by Active Directory.</remarks>
+      /// <summary>ネットワークのドメインタイプを取得します。このプロパティの値はキャッシュされません。</summary>
+      /// <remarks>ドメインは、ネットワークが Active Directory ネットワークであるかどうか、およびマシンが Active Directory によって認証されているかどうかを示します。</remarks>
       public DomainType DomainType
       {
          get { ThrowIfDisposed(); return _network.GetDomainType(); }
       }
 
 
-      /// <summary>Gets a value that indicates whether there is network connectivity. This value of this property is not cached.</summary>
+      /// <summary>ネットワーク接続があるかどうかを示す値を取得します。このプロパティの値はキャッシュされません。</summary>
       public bool IsConnected
       {
          get { ThrowIfDisposed(); return _network.IsConnected; }
       }
 
 
-      /// <summary>Gets a value that indicates whether there is Internet connectivity. This value of this property is not cached.</summary>
+      /// <summary>インターネット接続があるかどうかを示す値を取得します。このプロパティの値はキャッシュされません。</summary>
       public bool IsConnectedToInternet
       {
          get { ThrowIfDisposed(); return _network.IsConnectedToInternet; }
       }
 
 
-      /// <summary>Gets the name of the network. This value of this property is not cached.</summary>
+      /// <summary>ネットワークの名前を取得します。このプロパティの値はキャッシュされません。</summary>
       public string Name
       {
          get { ThrowIfDisposed(); return _network.GetName(); }
 
-         // Should we allow this in AlphaFS?
+         // AlphaFS でこれを許可すべきか？
          //private set { _network.SetName(value); }
       }
 
 
-      /// <summary>Gets a unique identifier for the network. This value of this property is not cached.</summary>
+      /// <summary>ネットワークの一意の識別子を取得します。このプロパティの値はキャッシュされません。</summary>
       [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "ID")]
       public Guid NetworkId
       {
          get { ThrowIfDisposed(); return _network.GetNetworkId(); }
       }
 
-      #endregion // Properties
+      #endregion // プロパティ
 
 
-      #region Methods
+      #region メソッド
       
-      /// <summary>Returns the network name, description, and category.
-      /// <para>Note: This method performs COM calls to retrieve network properties.</para></summary>
-      /// <returns>A string that represents this instance.</returns>
+      /// <summary>ネットワーク名、説明、カテゴリを返します。
+      /// <para>注意: このメソッドはネットワークプロパティを取得するために COM 呼び出しを行います。</para></summary>
+      /// <returns>このインスタンスを表す文字列。</returns>
       public override string ToString()
       {
          ThrowIfDisposed();
@@ -243,17 +243,17 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>Serves as a hash function for a particular type.</summary>
-      /// <returns>A hash code for the current Object.</returns>
+      /// <summary>特定の型のハッシュ関数として機能します。</summary>
+      /// <returns>現在のオブジェクトのハッシュコード。</returns>
       public override int GetHashCode()
       {
          return NetworkId.GetHashCode();
       }
       
 
-      /// <summary>Determines whether the specified Object is equal to the current Object.</summary>
-      /// <param name="other">Another <see cref="NetworkInfo"/> instance to compare to.</param>
-      /// <returns><c>true</c> if the specified Object is equal to the current Object; otherwise, <c>false</c>.</returns>
+      /// <summary>指定されたオブジェクトが現在のオブジェクトと等しいかどうかを判断します。</summary>
+      /// <param name="other">比較する別の <see cref="NetworkInfo"/> インスタンス。</param>
+      /// <returns>指定されたオブジェクトが現在のオブジェクトと等しい場合は <c>true</c>、それ以外の場合は <c>false</c>。</returns>
       public bool Equals(NetworkInfo other)
       {
          return null != other && GetType() == other.GetType() &&
@@ -261,9 +261,9 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>Determines whether the specified Object is equal to the current Object.</summary>
-      /// <param name="obj">Another object to compare to.</param>
-      /// <returns><c>true</c> if the specified Object is equal to the current Object; otherwise, <c>false</c>.</returns>
+      /// <summary>指定されたオブジェクトが現在のオブジェクトと等しいかどうかを判断します。</summary>
+      /// <param name="obj">比較する別のオブジェクト。</param>
+      /// <returns>指定されたオブジェクトが現在のオブジェクトと等しい場合は <c>true</c>、それ以外の場合は <c>false</c>。</returns>
       public override bool Equals(object obj)
       {
          var other = obj as NetworkInfo;
@@ -272,10 +272,10 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>Implements the operator ==</summary>
-      /// <param name="left">A.</param>
-      /// <param name="right">B.</param>
-      /// <returns>The result of the operator.</returns>
+      /// <summary>== 演算子を実装します。</summary>
+      /// <param name="left">A。</param>
+      /// <param name="right">B。</param>
+      /// <returns>演算子の結果。</returns>
       public static bool operator ==(NetworkInfo left, NetworkInfo right)
       {
          return ReferenceEquals(left, null) && ReferenceEquals(right, null) ||
@@ -283,15 +283,15 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>Implements the operator !=</summary>
-      /// <param name="left">A.</param>
-      /// <param name="right">B.</param>
-      /// <returns>The result of the operator.</returns>
+      /// <summary>!= 演算子を実装します。</summary>
+      /// <param name="left">A。</param>
+      /// <param name="right">B。</param>
+      /// <returns>演算子の結果。</returns>
       public static bool operator !=(NetworkInfo left, NetworkInfo right)
       {
          return !(left == right);
       }
 
-      #endregion // Methods
+      #endregion // メソッド
    }
 }

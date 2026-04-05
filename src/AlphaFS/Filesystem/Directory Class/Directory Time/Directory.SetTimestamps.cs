@@ -26,11 +26,11 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>[AlphaFS] Sets all the date and time stamps for the specified directory, at once.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリのすべての日時スタンプを一度に設定します。</summary>
       /// <param name="path">The directory for which to set the dates and times information.</param>
-      /// <param name="creationTime">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="lastAccessTime">A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="lastWriteTime">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in local time.</param>
+      /// <param name="creationTime">A <see cref="DateTime"/> 作成日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
+      /// <param name="lastAccessTime">A <see cref="DateTime"/> 最終アクセス日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
+      /// <param name="lastWriteTime">A <see cref="DateTime"/> 最終書き込み日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
       [SecurityCritical]
       public static void SetTimestamps(string path, DateTime creationTime, DateTime lastAccessTime, DateTime lastWriteTime)
       {
@@ -38,12 +38,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets all the date and time stamps for the specified directory, at once.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリのすべての日時スタンプを一度に設定します。</summary>
       /// <param name="path">The directory for which to set the dates and times information.</param>
-      /// <param name="creationTime">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="lastAccessTime">A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="lastWriteTime">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="creationTime">A <see cref="DateTime"/> 作成日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
+      /// <param name="lastAccessTime">A <see cref="DateTime"/> 最終アクセス日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
+      /// <param name="lastWriteTime">A <see cref="DateTime"/> 最終書き込み日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void SetTimestamps(string path, DateTime creationTime, DateTime lastAccessTime, DateTime lastWriteTime, PathFormat pathFormat)
       {
@@ -51,11 +51,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets all the date and time stamps for the specified directory, at once.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリのすべての日時スタンプを一度に設定します。</summary>
       /// <param name="path">The directory for which to set the dates and times information.</param>
-      /// <param name="creationTime">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="lastAccessTime">A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="lastWriteTime">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in local time.</param>
+      /// <param name="creationTime">A <see cref="DateTime"/> 作成日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
+      /// <param name="lastAccessTime">A <see cref="DateTime"/> 最終アクセス日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
+      /// <param name="lastWriteTime">A <see cref="DateTime"/> 最終書き込み日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
       /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the file or directory linked to. No effect if <paramref name="path"/> does not refer to a reparse point.</param>
       [SecurityCritical]
       public static void SetTimestamps(string path, DateTime creationTime, DateTime lastAccessTime, DateTime lastWriteTime, bool modifyReparsePoint)
@@ -64,13 +64,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets all the date and time stamps for the specified directory, at once.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリのすべての日時スタンプを一度に設定します。</summary>
       /// <param name="path">The directory for which to set the dates and times information.</param>
-      /// <param name="creationTime">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="lastAccessTime">A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="lastWriteTime">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in local time.</param>
+      /// <param name="creationTime">A <see cref="DateTime"/> 作成日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
+      /// <param name="lastAccessTime">A <see cref="DateTime"/> 最終アクセス日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
+      /// <param name="lastWriteTime">A <see cref="DateTime"/> 最終書き込み日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
       /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the file or directory linked to. No effect if <paramref name="path"/> does not refer to a reparse point.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void SetTimestamps(string path, DateTime creationTime, DateTime lastAccessTime, DateTime lastWriteTime, bool modifyReparsePoint, PathFormat pathFormat)
       {
@@ -80,11 +80,11 @@ namespace Alphaleonis.Win32.Filesystem
 
 
 
-      /// <summary>[AlphaFS] Sets all the date and time stamps, in coordinated universal time (UTC), for the specified directory, at once.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリのすべての日時スタンプを協定世界時（UTC）で一度に設定します。</summary>
       /// <param name="path">The directory for which to set the dates and times information.</param>
-      /// <param name="creationTimeUtc">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastAccessTimeUtc">A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
+      /// <param name="creationTimeUtc">A <see cref="DateTime"/> 作成日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
+      /// <param name="lastAccessTimeUtc">A <see cref="DateTime"/> 最終アクセス日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
+      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> 最終書き込み日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
       [SecurityCritical]
       public static void SetTimestampsUtc(string path, DateTime creationTimeUtc, DateTime lastAccessTimeUtc, DateTime lastWriteTimeUtc)
       {
@@ -92,12 +92,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets all the date and time stamps, in coordinated universal time (UTC), for the specified directory, at once.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリのすべての日時スタンプを協定世界時（UTC）で一度に設定します。</summary>
       /// <param name="path">The directory for which to set the dates and times information.</param>
-      /// <param name="creationTimeUtc">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastAccessTimeUtc">A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="creationTimeUtc">A <see cref="DateTime"/> 作成日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
+      /// <param name="lastAccessTimeUtc">A <see cref="DateTime"/> 最終アクセス日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
+      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> 最終書き込み日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void SetTimestampsUtc(string path, DateTime creationTimeUtc, DateTime lastAccessTimeUtc, DateTime lastWriteTimeUtc, PathFormat pathFormat)
       {
@@ -105,11 +105,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets all the date and time stamps, in coordinated universal time (UTC), for the specified directory, at once.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリのすべての日時スタンプを協定世界時（UTC）で一度に設定します。</summary>
       /// <param name="path">The directory for which to set the dates and times information.</param>
-      /// <param name="creationTimeUtc">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastAccessTimeUtc">A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
+      /// <param name="creationTimeUtc">A <see cref="DateTime"/> 作成日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
+      /// <param name="lastAccessTimeUtc">A <see cref="DateTime"/> 最終アクセス日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
+      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> 最終書き込み日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
       /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the file or directory linked to. No effect if <paramref name="path"/> does not refer to a reparse point.</param>
       [SecurityCritical]
       public static void SetTimestampsUtc(string path, DateTime creationTimeUtc, DateTime lastAccessTimeUtc, DateTime lastWriteTimeUtc, bool modifyReparsePoint)
@@ -118,13 +118,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets all the date and time stamps, in coordinated universal time (UTC), for the specified directory, at once.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリのすべての日時スタンプを協定世界時（UTC）で一度に設定します。</summary>
       /// <param name="path">The directory for which to set the dates and times information.</param>
-      /// <param name="creationTimeUtc">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastAccessTimeUtc">A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
+      /// <param name="creationTimeUtc">A <see cref="DateTime"/> 作成日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
+      /// <param name="lastAccessTimeUtc">A <see cref="DateTime"/> 最終アクセス日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
+      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> 最終書き込み日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
       /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the file or directory linked to. No effect if <paramref name="path"/> does not refer to a reparse point.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void SetTimestampsUtc(string path, DateTime creationTimeUtc, DateTime lastAccessTimeUtc, DateTime lastWriteTimeUtc, bool modifyReparsePoint, PathFormat pathFormat)
       {
@@ -134,12 +134,12 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region Transactional
 
-      /// <summary>[AlphaFS] Sets all the date and time stamps for the specified directory, at once.</summary>
-      /// <param name="transaction">The transaction.</param>
+      /// <summary>[AlphaFS] 指定されたディレクトリのすべての日時スタンプを一度に設定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The directory for which to set the dates and times information.</param>
-      /// <param name="creationTime">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="lastAccessTime">A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="lastWriteTime">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in local time.</param>
+      /// <param name="creationTime">A <see cref="DateTime"/> 作成日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
+      /// <param name="lastAccessTime">A <see cref="DateTime"/> 最終アクセス日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
+      /// <param name="lastWriteTime">A <see cref="DateTime"/> 最終書き込み日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
       [SecurityCritical]
       public static void SetTimestampsTransacted(KernelTransaction transaction, string path, DateTime creationTime, DateTime lastAccessTime, DateTime lastWriteTime)
       {
@@ -147,13 +147,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets all the date and time stamps for the specified directory, at once.</summary>
-      /// <param name="transaction">The transaction.</param>
+      /// <summary>[AlphaFS] 指定されたディレクトリのすべての日時スタンプを一度に設定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The directory for which to set the dates and times information.</param>
-      /// <param name="creationTime">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="lastAccessTime">A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="lastWriteTime">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="creationTime">A <see cref="DateTime"/> 作成日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
+      /// <param name="lastAccessTime">A <see cref="DateTime"/> 最終アクセス日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
+      /// <param name="lastWriteTime">A <see cref="DateTime"/> 最終書き込み日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void SetTimestampsTransacted(KernelTransaction transaction, string path, DateTime creationTime, DateTime lastAccessTime, DateTime lastWriteTime, PathFormat pathFormat)
       {
@@ -161,12 +161,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets all the date and time stamps for the specified directory, at once.</summary>
-      /// <param name="transaction">The transaction.</param>
+      /// <summary>[AlphaFS] 指定されたディレクトリのすべての日時スタンプを一度に設定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The directory for which to set the dates and times information.</param>
-      /// <param name="creationTime">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="lastAccessTime">A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="lastWriteTime">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in local time.</param>
+      /// <param name="creationTime">A <see cref="DateTime"/> 作成日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
+      /// <param name="lastAccessTime">A <see cref="DateTime"/> 最終アクセス日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
+      /// <param name="lastWriteTime">A <see cref="DateTime"/> 最終書き込み日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
       /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the file or directory linked to. No effect if <paramref name="path"/> does not refer to a reparse point.</param>
       [SecurityCritical]
       public static void SetTimestampsTransacted(KernelTransaction transaction, string path, DateTime creationTime, DateTime lastAccessTime, DateTime lastWriteTime, bool modifyReparsePoint)
@@ -175,14 +175,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets all the date and time stamps for the specified directory, at once.</summary>
-      /// <param name="transaction">The transaction.</param>
+      /// <summary>[AlphaFS] 指定されたディレクトリのすべての日時スタンプを一度に設定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The directory for which to set the dates and times information.</param>
-      /// <param name="creationTime">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="lastAccessTime">A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="lastWriteTime">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in local time.</param>
+      /// <param name="creationTime">A <see cref="DateTime"/> 作成日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
+      /// <param name="lastAccessTime">A <see cref="DateTime"/> 最終アクセス日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
+      /// <param name="lastWriteTime">A <see cref="DateTime"/> 最終書き込み日時に設定する値を含む of <paramref name="path"/>. この値はローカル時刻で表されます。</param>
       /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the file or directory linked to. No effect if <paramref name="path"/> does not refer to a reparse point.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void SetTimestampsTransacted(KernelTransaction transaction, string path, DateTime creationTime, DateTime lastAccessTime, DateTime lastWriteTime, bool modifyReparsePoint, PathFormat pathFormat)
       {
@@ -192,12 +192,12 @@ namespace Alphaleonis.Win32.Filesystem
 
 
 
-      /// <summary>[AlphaFS] Sets all the date and time stamps, in coordinated universal time (UTC), for the specified directory, at once.</summary>
-      /// <param name="transaction">The transaction.</param>
+      /// <summary>[AlphaFS] 指定されたディレクトリのすべての日時スタンプを協定世界時（UTC）で一度に設定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The directory for which to set the dates and times information.</param>
-      /// <param name="creationTimeUtc">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastAccessTimeUtc">A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
+      /// <param name="creationTimeUtc">A <see cref="DateTime"/> 作成日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
+      /// <param name="lastAccessTimeUtc">A <see cref="DateTime"/> 最終アクセス日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
+      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> 最終書き込み日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
       [SecurityCritical]
       public static void SetTimestampsUtcTransacted(KernelTransaction transaction, string path, DateTime creationTimeUtc, DateTime lastAccessTimeUtc, DateTime lastWriteTimeUtc)
       {
@@ -205,13 +205,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets all the date and time stamps, in coordinated universal time (UTC), for the specified directory, at once.</summary>
-      /// <param name="transaction">The transaction.</param>
+      /// <summary>[AlphaFS] 指定されたディレクトリのすべての日時スタンプを協定世界時（UTC）で一度に設定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The directory for which to set the dates and times information.</param>
-      /// <param name="creationTimeUtc">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastAccessTimeUtc">A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="creationTimeUtc">A <see cref="DateTime"/> 作成日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
+      /// <param name="lastAccessTimeUtc">A <see cref="DateTime"/> 最終アクセス日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
+      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> 最終書き込み日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void SetTimestampsUtcTransacted(KernelTransaction transaction, string path, DateTime creationTimeUtc, DateTime lastAccessTimeUtc, DateTime lastWriteTimeUtc, PathFormat pathFormat)
       {
@@ -219,12 +219,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets all the date and time stamps, in coordinated universal time (UTC), for the specified directory, at once.</summary>
-      /// <param name="transaction">The transaction.</param>
+      /// <summary>[AlphaFS] 指定されたディレクトリのすべての日時スタンプを協定世界時（UTC）で一度に設定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The directory for which to set the dates and times information.</param>
-      /// <param name="creationTimeUtc">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastAccessTimeUtc">A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
+      /// <param name="creationTimeUtc">A <see cref="DateTime"/> 作成日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
+      /// <param name="lastAccessTimeUtc">A <see cref="DateTime"/> 最終アクセス日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
+      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> 最終書き込み日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
       /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the file or directory linked to. No effect if <paramref name="path"/> does not refer to a reparse point.</param>
       [SecurityCritical]
       public static void SetTimestampsUtcTransacted(KernelTransaction transaction, string path, DateTime creationTimeUtc, DateTime lastAccessTimeUtc, DateTime lastWriteTimeUtc, bool modifyReparsePoint)
@@ -233,14 +233,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets all the date and time stamps, in coordinated universal time (UTC), for the specified directory, at once.</summary>
-      /// <param name="transaction">The transaction.</param>
+      /// <summary>[AlphaFS] 指定されたディレクトリのすべての日時スタンプを協定世界時（UTC）で一度に設定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The directory for which to set the dates and times information.</param>
-      /// <param name="creationTimeUtc">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastAccessTimeUtc">A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
+      /// <param name="creationTimeUtc">A <see cref="DateTime"/> 作成日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
+      /// <param name="lastAccessTimeUtc">A <see cref="DateTime"/> 最終アクセス日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
+      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> 最終書き込み日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
       /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the file or directory linked to. No effect if <paramref name="path"/> does not refer to a reparse point.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void SetTimestampsUtcTransacted(KernelTransaction transaction, string path, DateTime creationTimeUtc, DateTime lastAccessTimeUtc, DateTime lastWriteTimeUtc, bool modifyReparsePoint, PathFormat pathFormat)
       {

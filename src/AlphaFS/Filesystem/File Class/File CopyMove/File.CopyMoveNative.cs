@@ -30,26 +30,26 @@ namespace Alphaleonis.Win32.Filesystem
       // Symbolic Link Effects on File Systems Functions: https://msdn.microsoft.com/en-us/library/windows/desktop/aa365682(v=vs.85).aspx
 
 
-      // MSDN: If lpProgressRoutine returns PROGRESS_CANCEL due to the user canceling the operation,
-      // CopyFileEx will return zero and GetLastError will return ERROR_REQUEST_ABORTED.
-      // In this case, the partially copied destination file is deleted.
+      // MSDN: lpProgressRoutineがユーザーによる操作のキャンセルによりPROGRESS_CANCELを返した場合、
+      // CopyFileExはゼロを返し、GetLastErrorはERROR_REQUEST_ABORTEDを返します。
+      // この場合、部分的にコピーされたコピー先ファイルは削除されます。
       //
-      // If lpProgressRoutine returns PROGRESS_STOP due to the user stopping the operation,
-      // CopyFileEx will return zero and GetLastError will return ERROR_REQUEST_ABORTED.
-      // In this case, the partially copied destination file is left intact.
+      // lpProgressRoutineがユーザーによる操作の停止によりPROGRESS_STOPを返した場合、
+      // CopyFileExはゼロを返し、GetLastErrorはERROR_REQUEST_ABORTEDを返します。
+      // この場合、部分的にコピーされたコピー先ファイルはそのまま残されます。
 
 
-      // Note: MoveFileXxx fails if one of the paths is a UNC path, even though both paths refer to the same volume.
-      // For example, src = C:\TempSrc and dst = \\localhost\C$\TempDst
+      // 注: 両方のパスが同じボリュームを参照していても、パスの1つがUNCパスの場合、MoveFileXxxは失敗します。
+      // 例: src = C:\TempSrc, dst = \\localhost\C$\TempDst
 
-      // MoveFileXxx fails if it cannot access the registry. The function stores the locations of the files to be renamed at restart in the following registry value:
+      // MoveFileXxxはレジストリにアクセスできない場合に失敗します。この関数は再起動時に名前変更されるファイルの場所を次のレジストリ値に格納します:
       //
       //    HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\PendingFileRenameOperations
       //
-      // This registry value is of type REG_MULTI_SZ. Each rename operation stores one of the following NULL-terminated strings, depending on whether the rename is a delete or not:
+      // このレジストリ値はREG_MULTI_SZ型です。各名前変更操作は、削除かどうかに応じて次のNULL終端文字列の1つを格納します:
       //
-      //    szDstFile\0\0              : indicates that the file szDstFile is to be deleted on reboot.
-      //    szSrcFile\0szDstFile\0     : indicates that szSrcFile is to be renamed szDstFile on reboot.
+      //    szDstFile\0\0              : 再起動時にszDstFileが削除されることを示します。
+      //    szSrcFile\0szDstFile\0     : 再起動時にszSrcFileがszDstFileに名前変更されることを示します。
 
 
       [SecurityCritical]
@@ -60,7 +60,7 @@ namespace Alphaleonis.Win32.Filesystem
          var success = null == cma.Transaction || !NativeMethods.IsAtLeastWindowsVista
 
             // CopyFileEx() / CopyFileTransacted() / MoveFileWithProgress() / MoveFileTransacted()
-            // 2013-04-15: MSDN confirms LongPath usage.
+            // 2013-04-15: MSDNはLongPathの使用を確認しています。
 
 
             ? isMove

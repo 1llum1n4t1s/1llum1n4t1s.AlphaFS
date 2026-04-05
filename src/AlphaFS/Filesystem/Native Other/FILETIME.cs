@@ -26,7 +26,7 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Represents the number of 100-nanosecond intervals since January 1, 1601. This structure is a 64-bit value.</summary>
+      /// <summary>1601年1月1日からの 100 ナノ秒間隔の数を表します。この構造体は 64 ビット値です。</summary>
       [Serializable]
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct FILETIME
@@ -40,13 +40,13 @@ namespace Alphaleonis.Win32.Filesystem
 
          #region Methods
 
-         /// <summary>Converts a value to long.</summary>
+         /// <summary>値を long に変換します。</summary>
          public static implicit operator long(FILETIME ft)
          {
             return ft.ToLong();
          }
 
-         /// <summary>Converts a value to long.</summary>
+         /// <summary>値を long に変換します。</summary>
          [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "long")]
          public long ToLong()
          {
@@ -59,9 +59,9 @@ namespace Alphaleonis.Win32.Filesystem
 
          #region Equals
 
-         /// <summary>Determines whether the specified Object is equal to the current Object.</summary>
-         /// <param name="obj">Another object to compare to.</param>
-         /// <returns><c>true</c> if the specified Object is equal to the current Object; otherwise, <c>false</c>.</returns>
+         /// <summary>指定した Object が現在の Object と等しいかどうかを判定します。</summary>
+         /// <param name="obj">比較対象の別のオブジェクト。</param>
+         /// <returns>指定した Object が現在の Object と等しい場合は <c>true</c>、それ以外の場合は <c>false</c>。</returns>
          public override bool Equals(object obj)
          {
             if (null == obj || GetType() != obj.GetType())
@@ -78,8 +78,8 @@ namespace Alphaleonis.Win32.Filesystem
 
          #region GetHashCode
 
-         /// <summary>Serves as a hash function for a particular type.</summary>
-         /// <returns>A hash code for the current Object.</returns>
+         /// <summary>特定の型のハッシュ関数として機能します。</summary>
+         /// <returns>現在の Object のハッシュコード。</returns>
          public override int GetHashCode()
          {
             unchecked
@@ -95,22 +95,22 @@ namespace Alphaleonis.Win32.Filesystem
 
          #region ==
 
-         /// <summary>Implements the operator ==</summary>
-         /// <param name="left">A.</param>
-         /// <param name="right">B.</param>
-         /// <returns>The result of the operator.</returns>
+         /// <summary>== 演算子を実装します。</summary>
+         /// <param name="left">左辺の値。</param>
+         /// <param name="right">右辺の値。</param>
+         /// <returns>演算子の結果。</returns>
          public static bool operator ==(FILETIME left, FILETIME right)
          {
             return left.Equals(right);
          }
-         
+
          #endregion // ==
 
          #region !=
-         /// <summary>Implements the operator !=</summary>
-         /// <param name="left">A.</param>
-         /// <param name="right">B.</param>
-         /// <returns>The result of the operator.</returns>
+         /// <summary>!= 演算子を実装します。</summary>
+         /// <param name="left">左辺の値。</param>
+         /// <param name="right">右辺の値。</param>
+         /// <returns>演算子の結果。</returns>
          public static bool operator !=(FILETIME left, FILETIME right)
          {
             return !(left == right);

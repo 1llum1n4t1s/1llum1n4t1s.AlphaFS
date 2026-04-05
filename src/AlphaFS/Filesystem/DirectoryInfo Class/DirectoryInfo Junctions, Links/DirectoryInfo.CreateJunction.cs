@@ -27,16 +27,16 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public sealed partial class DirectoryInfo
    {
-      /// <summary>[AlphaFS] Converts the <see cref="DirectoryInfo"/> instance into a directory junction instance (similar to CMD command: "MKLINK /J").</summary>
+      /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> インスタンスをディレクトリジャンクションインスタンスに変換します（CMD コマンド "MKLINK /J" と同様）。</summary>
       /// <remarks>
       /// <para>&#160;</para>
-      /// <para>The directory must be empty and reside on a local volume.</para>
+      /// <para>ディレクトリは空でローカルボリューム上に存在する必要があります。</para>
       /// <para></para>
       /// <para></para>
       /// <para>&#160;</para>
-      /// <para>MSDN: A junction (also called a soft link) differs from a hard link in that the storage objects it references are separate directories,</para>
-      /// <para>and a junction can link directories located on different local volumes on the same computer.</para>
-      /// <para>Otherwise, junctions operate identically to hard links. Junctions are implemented through reparse points.</para>
+      /// <para>MSDN: ジャンクション（ソフトリンクとも呼ばれます）は、参照するストレージオブジェクトが別のディレクトリであるという点でハードリンクと異なり、</para>
+      /// <para>同じコンピューター上の異なるローカルボリュームにあるディレクトリをリンクできます。</para>
+      /// <para>それ以外の点では、ジャンクションはハードリンクと同じように動作します。ジャンクションはリパースポイントを通じて実装されます。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -45,7 +45,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotAReparsePointException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="junctionPath">The path of the junction point to create.</param>
+      /// <param name="junctionPath">作成するジャンクションポイントのパス。</param>
       [SecurityCritical]
       public void CreateJunction(string junctionPath)
       {
@@ -55,16 +55,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Converts the <see cref="DirectoryInfo"/> instance into a directory junction instance (similar to CMD command: "MKLINK /J").</summary>
+      /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> インスタンスをディレクトリジャンクションインスタンスに変換します（CMD コマンド "MKLINK /J" と同様）。</summary>
       /// <remarks>
       /// <para>&#160;</para>
-      /// <para>The directory must be empty and reside on a local volume.</para>
+      /// <para>ディレクトリは空でローカルボリューム上に存在する必要があります。</para>
       /// <para></para>
       /// <para></para>
       /// <para>&#160;</para>
-      /// <para>MSDN: A junction (also called a soft link) differs from a hard link in that the storage objects it references are separate directories,</para>
-      /// <para>and a junction can link directories located on different local volumes on the same computer.</para>
-      /// <para>Otherwise, junctions operate identically to hard links. Junctions are implemented through reparse points.</para>
+      /// <para>MSDN: ジャンクション（ソフトリンクとも呼ばれます）は、参照するストレージオブジェクトが別のディレクトリであるという点でハードリンクと異なり、</para>
+      /// <para>同じコンピューター上の異なるローカルボリュームにあるディレクトリをリンクできます。</para>
+      /// <para>それ以外の点では、ジャンクションはハードリンクと同じように動作します。ジャンクションはリパースポイントを通じて実装されます。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -73,8 +73,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotAReparsePointException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="junctionPath">The path of the junction point to create.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="junctionPath">作成するジャンクションポイントのパス。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [SecurityCritical]
       public void CreateJunction(string junctionPath, PathFormat pathFormat)
       {
@@ -84,16 +84,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Converts the <see cref="DirectoryInfo"/> instance into a directory junction instance (similar to CMD command: "MKLINK /J").</summary>
+      /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> インスタンスをディレクトリジャンクションインスタンスに変換します（CMD コマンド "MKLINK /J" と同様）。</summary>
       /// <remarks>
       /// <para>&#160;</para>
-      /// <para>The directory must be empty and reside on a local volume.</para>
+      /// <para>ディレクトリは空でローカルボリューム上に存在する必要があります。</para>
       /// <para></para>
       /// <para></para>
       /// <para>&#160;</para>
-      /// <para>MSDN: A junction (also called a soft link) differs from a hard link in that the storage objects it references are separate directories,</para>
-      /// <para>and a junction can link directories located on different local volumes on the same computer.</para>
-      /// <para>Otherwise, junctions operate identically to hard links. Junctions are implemented through reparse points.</para>
+      /// <para>MSDN: ジャンクション（ソフトリンクとも呼ばれます）は、参照するストレージオブジェクトが別のディレクトリであるという点でハードリンクと異なり、</para>
+      /// <para>同じコンピューター上の異なるローカルボリュームにあるディレクトリをリンクできます。</para>
+      /// <para>それ以外の点では、ジャンクションはハードリンクと同じように動作します。ジャンクションはリパースポイントを通じて実装されます。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -102,8 +102,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotAReparsePointException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="junctionPath">The path of the junction point to create.</param>
-      /// <param name="overwrite"><c>true</c> to overwrite an existing junction point. The directory is removed and recreated.</param>
+      /// <param name="junctionPath">作成するジャンクションポイントのパス。</param>
+      /// <param name="overwrite">既存のジャンクションポイントを上書きする場合は <c>true</c>。ディレクトリは削除されて再作成されます。</param>
       [SecurityCritical]
       public void CreateJunction(string junctionPath, bool overwrite)
       {
@@ -113,16 +113,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Converts the <see cref="DirectoryInfo"/> instance into a directory junction instance (similar to CMD command: "MKLINK /J").</summary>
+      /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> インスタンスをディレクトリジャンクションインスタンスに変換します（CMD コマンド "MKLINK /J" と同様）。</summary>
       /// <remarks>
       /// <para>&#160;</para>
-      /// <para>The directory must be empty and reside on a local volume.</para>
+      /// <para>ディレクトリは空でローカルボリューム上に存在する必要があります。</para>
       /// <para></para>
       /// <para></para>
       /// <para>&#160;</para>
-      /// <para>MSDN: A junction (also called a soft link) differs from a hard link in that the storage objects it references are separate directories,</para>
-      /// <para>and a junction can link directories located on different local volumes on the same computer.</para>
-      /// <para>Otherwise, junctions operate identically to hard links. Junctions are implemented through reparse points.</para>
+      /// <para>MSDN: ジャンクション（ソフトリンクとも呼ばれます）は、参照するストレージオブジェクトが別のディレクトリであるという点でハードリンクと異なり、</para>
+      /// <para>同じコンピューター上の異なるローカルボリュームにあるディレクトリをリンクできます。</para>
+      /// <para>それ以外の点では、ジャンクションはハードリンクと同じように動作します。ジャンクションはリパースポイントを通じて実装されます。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -131,9 +131,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotAReparsePointException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="junctionPath">The path of the junction point to create.</param>
-      /// <param name="overwrite"><c>true</c> to overwrite an existing junction point. The directory is removed and recreated.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="junctionPath">作成するジャンクションポイントのパス。</param>
+      /// <param name="overwrite">既存のジャンクションポイントを上書きする場合は <c>true</c>。ディレクトリは削除されて再作成されます。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [SecurityCritical]
       public void CreateJunction(string junctionPath, bool overwrite, PathFormat pathFormat)
       {
@@ -143,16 +143,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Converts the <see cref="DirectoryInfo"/> instance into a directory junction instance (similar to CMD command: "MKLINK /J").</summary>
+      /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> インスタンスをディレクトリジャンクションインスタンスに変換します（CMD コマンド "MKLINK /J" と同様）。</summary>
       /// <remarks>
       /// <para>&#160;</para>
-      /// <para>The directory must be empty and reside on a local volume.</para>
+      /// <para>ディレクトリは空でローカルボリューム上に存在する必要があります。</para>
       /// <para></para>
       /// <para></para>
       /// <para>&#160;</para>
-      /// <para>MSDN: A junction (also called a soft link) differs from a hard link in that the storage objects it references are separate directories,</para>
-      /// <para>and a junction can link directories located on different local volumes on the same computer.</para>
-      /// <para>Otherwise, junctions operate identically to hard links. Junctions are implemented through reparse points.</para>
+      /// <para>MSDN: ジャンクション（ソフトリンクとも呼ばれます）は、参照するストレージオブジェクトが別のディレクトリであるという点でハードリンクと異なり、</para>
+      /// <para>同じコンピューター上の異なるローカルボリュームにあるディレクトリをリンクできます。</para>
+      /// <para>それ以外の点では、ジャンクションはハードリンクと同じように動作します。ジャンクションはリパースポイントを通じて実装されます。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -161,9 +161,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotAReparsePointException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="junctionPath">The path of the junction point to create.</param>
-      /// <param name="overwrite"><c>true</c> to overwrite an existing junction point. The directory is removed and recreated.</param>
-      /// <param name="copyTargetTimestamps"><c>true</c> to copy the target date and time stamps to the directory junction.</param>
+      /// <param name="junctionPath">作成するジャンクションポイントのパス。</param>
+      /// <param name="overwrite">既存のジャンクションポイントを上書きする場合は <c>true</c>。ディレクトリは削除されて再作成されます。</param>
+      /// <param name="copyTargetTimestamps">ターゲットの日時スタンプをディレクトリジャンクションにコピーする場合は <c>true</c>。</param>
       [SecurityCritical]
       public void CreateJunction(string junctionPath, bool overwrite, bool copyTargetTimestamps)
       {
@@ -173,16 +173,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Converts the <see cref="DirectoryInfo"/> instance into a directory junction instance (similar to CMD command: "MKLINK /J").</summary>
+      /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> インスタンスをディレクトリジャンクションインスタンスに変換します（CMD コマンド "MKLINK /J" と同様）。</summary>
       /// <remarks>
       /// <para>&#160;</para>
-      /// <para>The directory must be empty and reside on a local volume.</para>
+      /// <para>ディレクトリは空でローカルボリューム上に存在する必要があります。</para>
       /// <para></para>
       /// <para></para>
       /// <para>&#160;</para>
-      /// <para>MSDN: A junction (also called a soft link) differs from a hard link in that the storage objects it references are separate directories,</para>
-      /// <para>and a junction can link directories located on different local volumes on the same computer.</para>
-      /// <para>Otherwise, junctions operate identically to hard links. Junctions are implemented through reparse points.</para>
+      /// <para>MSDN: ジャンクション（ソフトリンクとも呼ばれます）は、参照するストレージオブジェクトが別のディレクトリであるという点でハードリンクと異なり、</para>
+      /// <para>同じコンピューター上の異なるローカルボリュームにあるディレクトリをリンクできます。</para>
+      /// <para>それ以外の点では、ジャンクションはハードリンクと同じように動作します。ジャンクションはリパースポイントを通じて実装されます。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -191,10 +191,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotAReparsePointException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="junctionPath">The path of the junction point to create.</param>
-      /// <param name="overwrite"><c>true</c> to overwrite an existing junction point. The directory is removed and recreated.</param>
-      /// <param name="copyTargetTimestamps"><c>true</c> to copy the target date and time stamps to the directory junction.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="junctionPath">作成するジャンクションポイントのパス。</param>
+      /// <param name="overwrite">既存のジャンクションポイントを上書きする場合は <c>true</c>。ディレクトリは削除されて再作成されます。</param>
+      /// <param name="copyTargetTimestamps">ターゲットの日時スタンプをディレクトリジャンクションにコピーする場合は <c>true</c>。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [SecurityCritical]
       public void CreateJunction(string junctionPath, bool overwrite, bool copyTargetTimestamps, PathFormat pathFormat)
       {

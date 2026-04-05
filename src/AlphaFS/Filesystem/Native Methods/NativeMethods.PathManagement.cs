@@ -28,56 +28,56 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Retrieves the full path and file name of the specified file or directory.</summary>
-      /// <returns>If the function fails for any other reason, the return value is zero. To get extended error information, call GetLastError.</returns>
-      /// <remarks>The GetFullPathName function is not recommended for multithreaded applications or shared library code.</remarks>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <summary>指定されたファイルまたはディレクトリの完全パスとファイル名を取得します。</summary>
+      /// <returns>関数がその他の理由で失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。</returns>
+      /// <remarks>GetFullPathName 関数はマルチスレッドアプリケーションや共有ライブラリコードには推奨されません。</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "GetFullPathNameW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.U4)]
       internal static extern uint GetFullPathName([MarshalAs(UnmanagedType.LPWStr)] string lpFileName, [MarshalAs(UnmanagedType.U4)] uint nBufferLength, StringBuilder lpBuffer, IntPtr lpFilePart);
 
-      /// <summary>Retrieves the full path and file name of the specified file or directory as a transacted operation.</summary>
-      /// <returns>If the function fails for any other reason, the return value is zero. To get extended error information, call GetLastError.</returns>
-      /// <remarks>Minimum supported client: Windows Vista [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2008 [desktop apps only]</remarks>
+      /// <summary>トランザクション操作として、指定されたファイルまたはディレクトリの完全パスとファイル名を取得します。</summary>
+      /// <returns>関数がその他の理由で失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。</returns>
+      /// <remarks>サポートされる最小クライアント: Windows Vista [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2008 [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "GetFullPathNameTransactedW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.U4)]
       internal static extern uint GetFullPathNameTransacted([MarshalAs(UnmanagedType.LPWStr)] string lpFileName, [MarshalAs(UnmanagedType.U4)] uint nBufferLength, StringBuilder lpBuffer, IntPtr lpFilePart, SafeHandle hTransaction);
 
-      /// <summary>Converts the specified path to its long form.</summary>
+      /// <summary>指定されたパスをロング形式に変換します。</summary>
       /// <returns>
-      /// If the function succeeds, the return value is nonzero.
-      /// If the function fails, the return value is zero. To get extended error information, call GetLastError.
+      /// 関数が成功した場合、戻り値はゼロ以外です。
+      /// 関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。
       /// </returns>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "GetLongPathNameW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.U4)]
       internal static extern uint GetLongPathName([MarshalAs(UnmanagedType.LPWStr)] string lpszShortPath, StringBuilder lpszLongPath, [MarshalAs(UnmanagedType.U4)] uint cchBuffer);
 
-      /// <summary>Converts the specified path to its long form as a transacted operation.</summary>
+      /// <summary>トランザクション操作として、指定されたパスをロング形式に変換します。</summary>
       /// <returns>
-      /// If the function succeeds, the return value is nonzero.
-      /// If the function fails, the return value is zero. To get extended error information, call GetLastError.
+      /// 関数が成功した場合、戻り値はゼロ以外です。
+      /// 関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。
       /// </returns>
-      /// <remarks>Minimum supported client: Windows Vista [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2008 [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows Vista [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2008 [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "GetLongPathNameTransactedW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.U4)]
       internal static extern uint GetLongPathNameTransacted([MarshalAs(UnmanagedType.LPWStr)] string lpszShortPath, StringBuilder lpszLongPath, [MarshalAs(UnmanagedType.U4)] uint cchBuffer, SafeHandle hTransaction);
 
-      /// <summary>Retrieves the short path form of the specified path.</summary>
+      /// <summary>指定されたパスのショートパス形式を取得します。</summary>
       /// <returns>
-      /// If the function succeeds, the return value is nonzero.
-      /// If the function fails, the return value is zero. To get extended error information, call GetLastError.
+      /// 関数が成功した場合、戻り値はゼロ以外です。
+      /// 関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。
       /// </returns>
-      /// <remarks>Minimum supported client: Windows XP</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "GetShortPathNameW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.U4)]

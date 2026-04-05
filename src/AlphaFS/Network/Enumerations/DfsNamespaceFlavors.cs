@@ -26,9 +26,9 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Contains the name and type (domain-based or stand-alone) of a DFS namespace.</summary>
-      /// <remarks>Minimum supported client: Windows XP with SP1 [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <summary>DFS 名前空間の名前と種類（ドメインベースまたはスタンドアロン）を含みます.</summary>
+      /// <remarks>サポートされる最小クライアント: Windows XP with SP1 [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [desktop apps only]</remarks>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Dfs")]
       [Flags]
       internal enum DfsNamespaceFlavors

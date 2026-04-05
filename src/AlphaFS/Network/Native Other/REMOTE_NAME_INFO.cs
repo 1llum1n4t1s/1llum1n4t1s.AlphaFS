@@ -30,7 +30,7 @@ namespace Alphaleonis.Win32.Network
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct REMOTE_NAME_INFO
       {
-         /// <summary>Identifies a network resource.</summary>
+         /// <summary>ネットワークリソースを識別します.</summary>
          [SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
          [MarshalAs(UnmanagedType.LPWStr)]
          public readonly string lpUniversalName;

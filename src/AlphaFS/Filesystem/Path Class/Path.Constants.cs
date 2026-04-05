@@ -27,123 +27,123 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>[AlphaFS] Characters to trim from the SearchPattern.</summary>
+      /// <summary>[AlphaFS] SearchPatternからトリムする文字。</summary>
       internal static readonly char[] TrimEndChars = {(char) 0x9, (char) 0xA, (char) 0xB, (char) 0xC, (char) 0xD, (char) 0x20, (char) 0x85, (char) 0xA0};
 
-      /// <summary>AltDirectorySeparatorChar = '/' Provides a platform-specific alternate character used to separate directory levels in a path string that reflects a hierarchical file system organization.</summary>
+      /// <summary>AltDirectorySeparatorChar = '/' 階層的なファイルシステム構成を反映するパス文字列内のディレクトリ階層を区切るための、プラットフォーム固有の代替文字を提供します。</summary>
       public static readonly char AltDirectorySeparatorChar = System.IO.Path.AltDirectorySeparatorChar;
 
-      /// <summary>[AlphaFS] AltDirectorySeparatorChar = "/" Provides a platform-specific alternate string used to separate directory levels in a path string that reflects a hierarchical file system organization.</summary>
+      /// <summary>[AlphaFS] AltDirectorySeparatorChar = "/" 階層的なファイルシステム構成を反映するパス文字列内のディレクトリ階層を区切るための、プラットフォーム固有の代替文字列を提供します。</summary>
       public static readonly string AltDirectorySeparator = AltDirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
 
 
-      /// <summary>DirectorySeparatorChar = '\' Provides a platform-specific character used to separate directory levels in a path string that reflects a hierarchical file system organization.</summary>
+      /// <summary>DirectorySeparatorChar = '\' 階層的なファイルシステム構成を反映するパス文字列内のディレクトリ階層を区切るための、プラットフォーム固有の文字を提供します。</summary>
       public static readonly char DirectorySeparatorChar = System.IO.Path.DirectorySeparatorChar;
 
-      /// <summary>[AlphaFS] DirectorySeparator = "\" Provides a platform-specific string used to separate directory levels in a path string that reflects a hierarchical file system organization.</summary>
+      /// <summary>[AlphaFS] DirectorySeparator = "\" 階層的なファイルシステム構成を反映するパス文字列内のディレクトリ階層を区切るための、プラットフォーム固有の文字列を提供します。</summary>
       public static readonly string DirectorySeparator = DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
 
 
-      /// <summary>[AlphaFS] NetworkDriveSeparator = '$' Provides a platform-specific network drive separator character.</summary>
+      /// <summary>[AlphaFS] NetworkDriveSeparator = '$' プラットフォーム固有のネットワークドライブ区切り文字を提供します。</summary>
       public const char NetworkDriveSeparatorChar = '$';
 
-      /// <summary>[AlphaFS] NetworkDriveSeparator = "$" Provides a platform-specific network drive separator string.</summary>
+      /// <summary>[AlphaFS] NetworkDriveSeparator = "$" プラットフォーム固有のネットワークドライブ区切り文字列を提供します。</summary>
       public static readonly string NetworkDriveSeparator = NetworkDriveSeparatorChar.ToString(CultureInfo.InvariantCulture);
 
 
-      /// <summary>PathSeparator = ';' A platform-specific separator character used to separate path strings in environment variables.</summary>
+      /// <summary>PathSeparator = ';' 環境変数内のパス文字列を区切るためのプラットフォーム固有の区切り文字。</summary>
       public static readonly char PathSeparator = System.IO.Path.PathSeparator;
 
 
-      /// <summary>VolumeSeparatorChar = ':' Provides a platform-specific Volume Separator character.</summary>
+      /// <summary>VolumeSeparatorChar = ':' プラットフォーム固有のボリューム区切り文字を提供します。</summary>
       public static readonly char VolumeSeparatorChar = System.IO.Path.VolumeSeparatorChar;
 
-      /// <summary>[AlphaFS] VolumeSeparator = ":" Provides a platform-specific Volume Separator string.</summary>
+      /// <summary>[AlphaFS] VolumeSeparator = ":" プラットフォーム固有のボリューム区切り文字列を提供します。</summary>
       public static readonly string VolumeSeparator = VolumeSeparatorChar.ToString(CultureInfo.InvariantCulture);
 
 
-      /// <summary>[AlphaFS] StreamSeparator = ':' Provides a platform-specific Stream-name character.</summary>
+      /// <summary>[AlphaFS] StreamSeparator = ':' プラットフォーム固有のストリーム名文字を提供します。</summary>
       public const char StreamSeparatorChar = ':';
 
-      /// <summary>[AlphaFS] StreamSeparator = ':' Provides a platform-specific Stream-name string.</summary>
+      /// <summary>[AlphaFS] StreamSeparator = ':' プラットフォーム固有のストリーム名文字列を提供します。</summary>
       public static readonly string StreamSeparator = StreamSeparatorChar.ToString(CultureInfo.InvariantCulture);
 
 
-      /// <summary>[AlphaFS] StreamDataLabel = ':$DATA' Provides a platform-specific Stream :$DATA label.</summary>
+      /// <summary>[AlphaFS] StreamDataLabel = ':$DATA' プラットフォーム固有のストリーム :$DATA ラベルを提供します。</summary>
       public static readonly string StreamDataLabel = StreamSeparator + "$DATA";
 
-      /// <summary>[AlphaFS] StringTerminatorChar = '\0' String Terminator Suffix.</summary>
+      /// <summary>[AlphaFS] StringTerminatorChar = '\0' 文字列終端サフィックス。</summary>
       public const char StringTerminatorChar = '\0';
-      
-      
-      /// <summary>[AlphaFS] CurrentDirectoryPrefix = '.' Provides a current directory character.</summary>
+
+
+      /// <summary>[AlphaFS] CurrentDirectoryPrefix = '.' カレントディレクトリ文字を提供します。</summary>
       public const char CurrentDirectoryPrefixChar = '.';
 
-      /// <summary>[AlphaFS] CurrentDirectoryPrefix = "." Provides a current directory string.</summary>
+      /// <summary>[AlphaFS] CurrentDirectoryPrefix = "." カレントディレクトリ文字列を提供します。</summary>
       public static readonly string CurrentDirectoryPrefix = CurrentDirectoryPrefixChar.ToString(CultureInfo.InvariantCulture);
-      
-      /// <summary>[AlphaFS] ExtensionSeparatorChar = '.' Provides an Extension Separator character.</summary>
+
+      /// <summary>[AlphaFS] ExtensionSeparatorChar = '.' 拡張子区切り文字を提供します。</summary>
       public const char ExtensionSeparatorChar = '.';
 
-      /// <summary>[AlphaFS] ParentDirectoryPrefix = ".." Provides a parent directory string.</summary>
+      /// <summary>[AlphaFS] ParentDirectoryPrefix = ".." 親ディレクトリ文字列を提供します。</summary>
       public const string ParentDirectoryPrefix = "..";
-      
-      /// <summary>[AlphaFS] WildcardStarMatchAll = '*' Provides a match-all-items character.</summary>
+
+      /// <summary>[AlphaFS] WildcardStarMatchAll = '*' 全項目一致ワイルドカード文字を提供します。</summary>
       public const char WildcardStarMatchAllChar = '*';
-      
-      /// <summary>[AlphaFS] WildcardStarMatchAll = "*" Provides a match-all-items string.</summary>
+
+      /// <summary>[AlphaFS] WildcardStarMatchAll = "*" 全項目一致ワイルドカード文字列を提供します。</summary>
       public static readonly string WildcardStarMatchAll = WildcardStarMatchAllChar.ToString(CultureInfo.InvariantCulture);
-      
-      /// <summary>[AlphaFS] WildcardQuestion = '?' Provides a replace-item string.</summary>
+
+      /// <summary>[AlphaFS] WildcardQuestion = '?' 単一文字置換ワイルドカード文字を提供します。</summary>
       public const char WildcardQuestionChar = '?';
 
-      /// <summary>[AlphaFS] WildcardQuestion = "?" Provides a replace-item string.</summary>
+      /// <summary>[AlphaFS] WildcardQuestion = "?" 単一文字置換ワイルドカード文字列を提供します。</summary>
       public static readonly string WildcardQuestion = WildcardQuestionChar.ToString(CultureInfo.InvariantCulture);
 
 
-      /// <summary>[AlphaFS] Win32 File Namespace. The "\\?\" prefix to a path string tells the Windows APIs to disable all string parsing and to send the string that follows it straight to the file system.</summary>
+      /// <summary>[AlphaFS] Win32 ファイル名前空間。パス文字列の "\\?\" プレフィックスは、Windows APIに対してすべての文字列解析を無効にし、それに続く文字列をそのままファイルシステムに送信するよう指示します。</summary>
       public static readonly string LongPathPrefix = string.Format(CultureInfo.InvariantCulture, "{0}{0}{1}{0}", DirectorySeparatorChar, WildcardQuestion);
 
-      /// <summary>[AlphaFS] Win32 Device Namespace. The "\\.\"prefix is how to access physical disks and volumes, without going through the file system, if the API supports this type of access.</summary>
+      /// <summary>[AlphaFS] Win32 デバイス名前空間。"\\.\" プレフィックスは、APIがこの種のアクセスをサポートしている場合に、ファイルシステムを経由せずに物理ディスクやボリュームにアクセスする方法です。</summary>
       public static readonly string LogicalDrivePrefix = string.Format(CultureInfo.InvariantCulture, "{0}{0}.{0}", DirectorySeparatorChar);
 
-      /// <summary>[AlphaFS] PhysicalDrivePrefix = "\\.\PhysicalDrive" Provides standard physical drive prefix.</summary>
+      /// <summary>[AlphaFS] PhysicalDrivePrefix = "\\.\PhysicalDrive" 標準的な物理ドライブプレフィックスを提供します。</summary>
       public static readonly string PhysicalDrivePrefix = string.Format(CultureInfo.InvariantCulture, "{0}PhysicalDrive", LogicalDrivePrefix);
 
 
-      /// <summary>[AlphaFS] GlobalRootPrefix = "\\?\GlobalRoot\" Provides standard Windows Volume prefix.</summary>
+      /// <summary>[AlphaFS] GlobalRootPrefix = "\\?\GlobalRoot\" 標準的なWindowsボリュームプレフィックスを提供します。</summary>
       public static readonly string GlobalRootPrefix = string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", LongPathPrefix, "GlobalRoot", DirectorySeparatorChar);
 
-      /// <summary>[AlphaFS] GlobalRootDevicePrefix = "\\?\GlobalRoot\Device\" Provides standard Windows Volume prefix.</summary>
+      /// <summary>[AlphaFS] GlobalRootDevicePrefix = "\\?\GlobalRoot\Device\" 標準的なWindowsボリュームプレフィックスを提供します。</summary>
       public static readonly string GlobalRootDevicePrefix = string.Format(CultureInfo.InvariantCulture, "{0}{2}{1}{3}{1}", LongPathPrefix, DirectorySeparatorChar, "GlobalRoot", "Device");
 
-      /// <summary>[AlphaFS] NonInterpretedPathPrefix = "\??\" Provides a non-interpreted path prefix.</summary>
+      /// <summary>[AlphaFS] NonInterpretedPathPrefix = "\??\" 非解釈パスプレフィックスを提供します。</summary>
       public static readonly string NonInterpretedPathPrefix = string.Format(CultureInfo.InvariantCulture, "{0}{1}{1}{0}", DirectorySeparatorChar, WildcardQuestion);
 
-      /// <summary>[AlphaFS] VolumePrefix = "\\?\Volume" Provides standard Windows Volume prefix.</summary>
+      /// <summary>[AlphaFS] VolumePrefix = "\\?\Volume" 標準的なWindowsボリュームプレフィックスを提供します。</summary>
       public static readonly string VolumePrefix = string.Format(CultureInfo.InvariantCulture, "{0}{1}", LongPathPrefix, "Volume");
 
-      /// <summary>[AlphaFS] DevicePrefix = "\Device\" Provides standard Windows Device prefix.</summary>
+      /// <summary>[AlphaFS] DevicePrefix = "\Device\" 標準的なWindowsデバイスプレフィックスを提供します。</summary>
       public static readonly string DevicePrefix = string.Format(CultureInfo.InvariantCulture, "{0}{1}{0}", DirectorySeparatorChar, "Device");
 
-      /// <summary>[AlphaFS] DosDeviceLanmanPrefix = "\Device\LanmanRedirector\" Provides a MS-Dos Lanman Redirector Path UNC prefix to a network share.</summary>
+      /// <summary>[AlphaFS] DosDeviceLanmanPrefix = "\Device\LanmanRedirector\" ネットワーク共有へのMS-Dos Lanmanリダイレクタ パス UNCプレフィックスを提供します。</summary>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Lanman")]
       [Obsolete("Unused")]
       public static readonly string DosDeviceLanmanPrefix = string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", DevicePrefix, "LanmanRedirector", DirectorySeparatorChar);
 
-      /// <summary>[AlphaFS] DosDeviceMupPrefix = "\Device\Mup\" Provides a MS-Dos Mup Redirector Path UNC prefix to a network share.</summary>
+      /// <summary>[AlphaFS] DosDeviceMupPrefix = "\Device\Mup\" ネットワーク共有へのMS-Dos Mupリダイレクタ パス UNCプレフィックスを提供します。</summary>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Mup")]
       [Obsolete("Unused")]
       public static readonly string DosDeviceMupPrefix = string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", DevicePrefix, "Mup", DirectorySeparatorChar);
 
 
-      /// <summary>[AlphaFS] UncPrefix = "\\" Provides standard Windows Path UNC prefix.</summary>
+      /// <summary>[AlphaFS] UncPrefix = "\\" 標準的なWindows パス UNCプレフィックスを提供します。</summary>
       public static readonly string UncPrefix = string.Format(CultureInfo.InvariantCulture, "{0}{0}", DirectorySeparatorChar);
 
-      /// <summary>[AlphaFS] DosDeviceUncPrefix = "\??\UNC\" Provides a SUBST.EXE Path UNC prefix to a network share.</summary>
+      /// <summary>[AlphaFS] DosDeviceUncPrefix = "\??\UNC\" ネットワーク共有へのSUBST.EXE パス UNCプレフィックスを提供します。</summary>
       public static readonly string DosDeviceUncPrefix = string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", NonInterpretedPathPrefix, "UNC", DirectorySeparatorChar);
 
-      /// <summary>[AlphaFS] LongPathUncPrefix = "\\?\UNC\" Provides standard Windows Long Path UNC prefix.</summary>
+      /// <summary>[AlphaFS] LongPathUncPrefix = "\\?\UNC\" 標準的なWindows長パス UNCプレフィックスを提供します。</summary>
       public static readonly string LongPathUncPrefix = string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}", LongPathPrefix, "UNC", DirectorySeparatorChar);
    }
 }

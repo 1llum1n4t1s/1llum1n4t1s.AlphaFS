@@ -28,26 +28,26 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>Sets the attributes for a Non-/Transacted file or directory.</summary>
+      /// <summary>非トランザクション/トランザクションファイルまたはディレクトリの属性を設定します。</summary>
       /// <remarks>
-      ///   Certain file attributes, such as <see cref="FileAttributes.Hidden"/> and <see cref="FileAttributes.ReadOnly"/>, can be combined.
-      ///   Other attributes, such as <see cref="FileAttributes.Normal"/>, must be used alone.
+      ///   <see cref="FileAttributes.Hidden"/>や<see cref="FileAttributes.ReadOnly"/>などの特定のファイル属性は組み合わせることができます。
+      ///   <see cref="FileAttributes.Normal"/>などの他の属性は単独で使用する必要があります。
       /// </remarks>
       /// <remarks>
-      ///   It is not possible to change the <see cref="FileAttributes.Compressed"/> status of a File object using the SetAttributes method.
+      ///   SetAttributesメソッドを使用してFileオブジェクトの<see cref="FileAttributes.Compressed"/>ステータスを変更することはできません。
       /// </remarks>
       /// <exception cref="ArgumentException">path is empty, contains only white spaces, contains invalid characters, or the file attribute is invalid.</exception>
       /// <exception cref="DirectoryNotFoundException">The specified path is invalid, (for example, it is on an unmapped drive).</exception>
       /// <exception cref="FileNotFoundException">The file cannot be found.</exception>
       /// <exception cref="NotSupportedException">path is in an invalid format.</exception>
       /// <exception cref="UnauthorizedAccessException">path specified a file that is read-only. -or- This operation is not supported on the current platform. -or- path specified a directory. -or- The caller does not have the required permission.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="isFolder">Specifies that <paramref name="path"/> is a file or directory.</param>
-      /// <param name="path">The name of the file or directory whose attributes are to be set.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="isFolder"><paramref name="path"/>がファイルかディレクトリかを指定します。</param>
+      /// <param name="path">属性を設定するファイルまたはディレクトリの名前。</param>
       /// <param name="fileAttributes">
       ///    The attributes to set for the file or directory. Note that all other values override <see cref="FileAttributes.Normal"/>.
       /// </param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       internal static void SetAttributesCore(KernelTransaction transaction, bool isFolder, string path, FileAttributes fileAttributes, PathFormat pathFormat)
       {
@@ -60,7 +60,7 @@ namespace Alphaleonis.Win32.Filesystem
          var success = null == transaction || !NativeMethods.IsAtLeastWindowsVista
 
             // SetFileAttributes()
-            // 2013-01-13: MSDN confirms LongPath usage.
+            // 2013-01-13: MSDNはLongPathの使用を確認しています。
 
             ? NativeMethods.SetFileAttributes(path, fileAttributes)
 

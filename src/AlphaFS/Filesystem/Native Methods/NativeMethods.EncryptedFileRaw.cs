@@ -7,46 +7,46 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal partial class NativeMethods
    {
-      /// <summary>Opens an encrypted file in order to backup (export) or restore (import) the file.</summary>
-      /// <returns>If the function succeeds, it returns ERROR_SUCCESS.</returns>
-      /// <returns>If the function fails, it returns a nonzero error code defined in WinError.h. You can use FormatMessage with the FORMAT_MESSAGE_FROM_SYSTEM flag to get a generic text description of the error.</returns>
-      /// <remarks>Minimum supported client: Windows XP Professional [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
-      /// <param name="lpFileName">The name of the file to be opened.</param>
-      /// <param name="ulFlags">The operation to be performed.</param>
-      /// <param name="pvContext">[out] The address of a context block that must be presented in subsequent calls to
-      /// ReadEncryptedFileRaw, WriteEncryptedFileRaw, or CloseEncryptedFileRaw.</param>
+      /// <summary>暗号化されたファイルをバックアップ（エクスポート）または復元（インポート）するために開きます。</summary>
+      /// <returns>関数が成功した場合、ERROR_SUCCESS を返します。</returns>
+      /// <returns>関数が失敗した場合、WinError.h で定義されたゼロ以外のエラーコードを返します。FORMAT_MESSAGE_FROM_SYSTEM フラグを使用して FormatMessage を呼び出すことで、エラーの一般的なテキスト説明を取得できます。</returns>
+      /// <remarks>サポートされる最小クライアント: Windows XP Professional [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</remarks>
+      /// <param name="lpFileName">開くファイルの名前。</param>
+      /// <param name="ulFlags">実行する操作。</param>
+      /// <param name="pvContext">[out] 後続の ReadEncryptedFileRaw、WriteEncryptedFileRaw、または CloseEncryptedFileRaw の呼び出しで
+      /// 提示する必要があるコンテキストブロックのアドレス。</param>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("Advapi32.dll", SetLastError = false, CharSet = CharSet.Unicode, EntryPoint = "OpenEncryptedFileRawW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.U4)]
       internal static extern uint OpenEncryptedFileRaw([MarshalAs(UnmanagedType.LPWStr)] string lpFileName, EncryptedFileRawMode ulFlags, out SafeEncryptedFileRawHandle pvContext);
 
 
-      /// <summary>Closes an encrypted file after a backup or restore operation, and frees associated system resources.</summary>
-      /// <remarks>Minimum supported client: Windows XP Professional [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
-      /// <param name="pvContext">A pointer to a system-defined context block. The OpenEncryptedFileRaw function returns the context block.</param>
+      /// <summary>バックアップまたは復元操作後に暗号化されたファイルを閉じ、関連するシステムリソースを解放します。</summary>
+      /// <remarks>サポートされる最小クライアント: Windows XP Professional [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</remarks>
+      /// <param name="pvContext">システム定義のコンテキストブロックへのポインタ。OpenEncryptedFileRaw 関数がコンテキストブロックを返します。</param>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("Advapi32.dll", SetLastError = false, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
       internal static extern void CloseEncryptedFileRaw(IntPtr pvContext);
 
 
-      /// <summary>Backs up (export) encrypted files. This is one of a group of Encrypted File System (EFS) functions that is intended to implement backup and restore functionality, while maintaining files in their encrypted state.</summary>
-      /// <returns>If the function succeeds, it returns ERROR_SUCCESS.</returns>
-      /// <returns>If the function fails, it returns a nonzero error code defined in WinError.h. You can use FormatMessage with the FORMAT_MESSAGE_FROM_SYSTEM flag to get a generic text description of the error.</returns>
-      /// <remarks>Minimum supported client: Windows XP Professional [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <summary>暗号化されたファイルをバックアップ（エクスポート）します。これは、ファイルを暗号化された状態のまま維持しながらバックアップおよび復元機能を実装するための暗号化ファイルシステム (EFS) 関数グループの1つです。</summary>
+      /// <returns>関数が成功した場合、ERROR_SUCCESS を返します。</returns>
+      /// <returns>関数が失敗した場合、WinError.h で定義されたゼロ以外のエラーコードを返します。FORMAT_MESSAGE_FROM_SYSTEM フラグを使用して FormatMessage を呼び出すことで、エラーの一般的なテキスト説明を取得できます。</returns>
+      /// <remarks>サポートされる最小クライアント: Windows XP Professional [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule"), SuppressUnmanagedCodeSecurity]
       [DllImport("Advapi32.dll", SetLastError = false, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.U4)]
       internal static extern uint ReadEncryptedFileRaw([MarshalAs(UnmanagedType.FunctionPtr)] EncryptedFileRawExportCallback pfExportCallback, IntPtr pvCallbackContext, SafeEncryptedFileRawHandle pvContext);
 
 
-      /// <summary>Restores (import) encrypted files. This is one of a group of Encrypted File System (EFS) functions that is intended to implement backup and restore functionality, while maintaining files in their encrypted state.</summary>
-      /// <returns>If the function succeeds, it returns ERROR_SUCCESS.</returns>
-      /// <returns>If the function fails, it returns a nonzero error code defined in WinError.h. You can use FormatMessage with the FORMAT_MESSAGE_FROM_SYSTEM flag to get a generic text description of the error.</returns>
-      /// <remarks>Minimum supported client: Windows XP Professional [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <summary>暗号化されたファイルを復元（インポート）します。これは、ファイルを暗号化された状態のまま維持しながらバックアップおよび復元機能を実装するための暗号化ファイルシステム (EFS) 関数グループの1つです。</summary>
+      /// <returns>関数が成功した場合、ERROR_SUCCESS を返します。</returns>
+      /// <returns>関数が失敗した場合、WinError.h で定義されたゼロ以外のエラーコードを返します。FORMAT_MESSAGE_FROM_SYSTEM フラグを使用して FormatMessage を呼び出すことで、エラーの一般的なテキスト説明を取得できます。</returns>
+      /// <remarks>サポートされる最小クライアント: Windows XP Professional [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("Advapi32.dll", SetLastError = false, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.U4)]

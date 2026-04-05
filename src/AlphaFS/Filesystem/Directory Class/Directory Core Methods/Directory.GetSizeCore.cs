@@ -28,12 +28,12 @@ namespace Alphaleonis.Win32.Filesystem
    public static partial class Directory
    {
       /// <summary>Retrieves the size of all alternate data streams of the specified directory and it files.</summary>
-      /// <returns>The size of all alternate data streams of the specified directory and its files.</returns>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the directory.</param>
+      /// <returns>指定されたディレクトリとそのファイルのすべての代替データストリームのサイズ。</returns>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ディレクトリへのパス。</param>
       /// <param name="sizeOfAllStreams"><c>true</c> to retrieve the size of all alternate data streams, <c>false</c> to get the size of the first stream.</param>
       /// <param name="recursive"><c>true</c> to include subdirectories.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       internal static long GetSizeCore(KernelTransaction transaction, string path, bool sizeOfAllStreams, bool recursive, PathFormat pathFormat)
       {

@@ -26,20 +26,20 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>An SP_DEVINFO_DATA structure defines a device instance that is a member of a device information set.</summary>
+      /// <summary>SP_DEVINFO_DATA 構造体は、デバイス情報セットのメンバーであるデバイスインスタンスを定義します。</summary>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct SP_DEVINFO_DATA
       {
-         /// <summary>The size, in bytes, of the SP_DEVINFO_DATA structure.</summary>
+         /// <summary>SP_DEVINFO_DATA 構造体のサイズ（バイト単位）。</summary>
          [MarshalAs(UnmanagedType.U4)] public uint cbSize;
 
-         /// <summary>The GUID of the device's setup class.</summary>
+         /// <summary>デバイスのセットアップクラスの GUID。</summary>
          public readonly Guid ClassGuid;
 
-         /// <summary>An opaque handle to the device instance (also known as a handle to the devnode).</summary>
+         /// <summary>デバイスインスタンスへの不透明なハンドル（devnode へのハンドルとも呼ばれます）。</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint DevInst;
 
-         /// <summary>Reserved. For internal use only.</summary>
+         /// <summary>予約済み。内部使用のみ。</summary>
          private readonly IntPtr Reserved;
       }
    }

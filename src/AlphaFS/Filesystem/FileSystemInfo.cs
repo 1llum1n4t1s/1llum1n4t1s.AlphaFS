@@ -27,7 +27,7 @@ using System.Security;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>Provides the base class for both <see cref="FileInfo"/> and <see cref="DirectoryInfo"/> objects.</summary>
+   /// <summary><see cref="FileInfo"/>と<see cref="DirectoryInfo"/>の両方のオブジェクトの基底クラスを提供します。</summary>
    [Serializable]
    [ComVisible(true)]
    public abstract class FileSystemInfo : MarshalByRefObject, IEquatable<FileSystemInfo>
@@ -36,27 +36,27 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region .NET
 
-      /// <summary>Represents the fully qualified path of the file or directory.</summary>
+      /// <summary>ファイルまたはディレクトリの完全修飾パスを表します。</summary>
       /// <remarks>
-      ///   <para>Classes derived from <see cref="FileSystemInfo"/> can use the FullPath field</para>
-      ///   <para>to determine the full path of the object being manipulated.</para>
+      ///   <para><see cref="FileSystemInfo"/>から派生したクラスは、FullPathフィールドを使用して</para>
+      ///   <para>操作対象オブジェクトのフルパスを取得できます。</para>
       /// </remarks>
       [SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
       protected string FullPath;
 
-      /// <summary>The path originally specified by the user, whether relative or absolute.</summary>
+      /// <summary>ユーザーが最初に指定したパス（相対パスまたは絶対パス）。</summary>
       [SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
       protected string OriginalPath;
 
       #endregion // .NET
 
 
-      // We use this field in conjunction with the Refresh methods, if we succeed we store a zero,
-      // on failure we store the HResult in it so that we can give back a generic error back.
+      // このフィールドはRefreshメソッドと組み合わせて使用します。成功時はゼロを格納し、
+      // 失敗時はHResultを格納して汎用エラーを返せるようにします。
       [NonSerialized] internal int DataInitialised = -1;
 
 
-      // The pre-cached FileSystemInfo information.
+      // 事前キャッシュされたFileSystemInfo情報。
       [NonSerialized] internal NativeMethods.WIN32_FILE_ATTRIBUTE_DATA Win32AttributeData;
 
       #endregion // Fields
@@ -66,12 +66,12 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region .NET
 
-      /// <summary>Gets or sets the attributes for the current file or directory.</summary>
+      /// <summary>現在のファイルまたはディレクトリの属性を取得または設定します。</summary>
       /// <remarks>
-      ///   <para>The value of the CreationTime property is pre-cached</para>
-      ///   <para>To get the latest value, call the Refresh method.</para>
+      ///   <para>CreationTimeプロパティの値は事前キャッシュされています。</para>
+      ///   <para>最新の値を取得するには、Refreshメソッドを呼び出してください。</para>
       /// </remarks>
-      /// <value><see cref="FileAttributes"/> of the current <see cref="FileSystemInfo"/>.</value>
+      /// <value>現在の<see cref="FileSystemInfo"/>の<see cref="FileAttributes"/>。</value>
       ///
       /// <exception cref="FileNotFoundException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -107,18 +107,15 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets or sets the creation time of the current file or directory.</summary>
+      /// <summary>現在のファイルまたはディレクトリの作成時刻を取得または設定します。</summary>
       /// <remarks>
-      ///   <para>The value of the CreationTime property is pre-cached To get the latest value, call the Refresh method.</para>
-      ///   <para>This method may return an inaccurate value, because it uses native functions whose values may not be continuously updated by
-      ///   the operating system.</para>
-      ///   <para>If the file described in the FileSystemInfo object does not exist, this property will return
-      ///   12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC), adjusted to local time.</para>
-      ///   <para>NTFS-formatted drives may cache file meta-info, such as file creation time, for a short period of time.
-      ///   This process is known as file tunneling. As a result, it may be necessary to explicitly set the creation time of a file if you are
-      ///   overwriting or replacing an existing file.</para>
+      ///   <para>CreationTimeプロパティの値は事前キャッシュされています。最新の値を取得するには、Refreshメソッドを呼び出してください。</para>
+      ///   <para>このメソッドはネイティブ関数を使用するため、オペレーティングシステムによって継続的に更新されない値が返される可能性があり、不正確な値を返す場合があります。</para>
+      ///   <para>FileSystemInfoオブジェクトで記述されたファイルが存在しない場合、このプロパティはローカル時間に調整された1601年1月1日午前0時（UTC）を返します。</para>
+      ///   <para>NTFSフォーマットのドライブは、ファイル作成時刻などのファイルメタ情報を短期間キャッシュする場合があります。
+      ///   このプロセスはファイルトンネリングと呼ばれます。その結果、既存のファイルを上書きまたは置換する場合は、明示的にファイルの作成時刻を設定する必要がある場合があります。</para>
       /// </remarks>
-      /// <value>The creation date and time of the current <see cref="FileSystemInfo"/> object.</value>
+      /// <value>現在の<see cref="FileSystemInfo"/>オブジェクトの作成日時。</value>
       ///
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
@@ -130,20 +127,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets or sets the creation time, in coordinated universal time (UTC), of the current file or directory.</summary>
+      /// <summary>現在のファイルまたはディレクトリの協定世界時（UTC）での作成時刻を取得または設定します。</summary>
       /// <remarks>
-      ///   <para>The value of the CreationTimeUtc property is pre-cached
-      ///   To get the latest value, call the Refresh method.</para>
-      ///   <para>This method may return an inaccurate value, because it uses native functions
-      ///   whose values may not be continuously updated by the operating system.</para>
-      ///   <para>To get the latest value, call the Refresh method.</para>
-      ///   <para>If the file described in the FileSystemInfo object does not exist, this property will return
-      ///   12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC).</para>
-      ///   <para>NTFS-formatted drives may cache file meta-info, such as file creation time, for a short period of time.
-      ///   This process is known as file tunneling. As a result, it may be necessary to explicitly set the creation time
-      ///   of a file if you are overwriting or replacing an existing file.</para>
+      ///   <para>CreationTimeUtcプロパティの値は事前キャッシュされています。最新の値を取得するには、Refreshメソッドを呼び出してください。</para>
+      ///   <para>このメソッドはネイティブ関数を使用するため、オペレーティングシステムによって継続的に更新されない値が返される可能性があり、不正確な値を返す場合があります。</para>
+      ///   <para>最新の値を取得するには、Refreshメソッドを呼び出してください。</para>
+      ///   <para>FileSystemInfoオブジェクトで記述されたファイルが存在しない場合、このプロパティは1601年1月1日午前0時（UTC）を返します。</para>
+      ///   <para>NTFSフォーマットのドライブは、ファイル作成時刻などのファイルメタ情報を短期間キャッシュする場合があります。
+      ///   このプロセスはファイルトンネリングと呼ばれます。その結果、既存のファイルを上書きまたは置換する場合は、明示的にファイルの作成時刻を設定する必要がある場合があります。</para>
       /// </remarks>
-      /// <value>The creation date and time in UTC format of the current <see cref="FileSystemInfo"/> object.</value>
+      /// <value>現在の<see cref="FileSystemInfo"/>オブジェクトのUTC形式での作成日時。</value>
       ///
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
@@ -179,48 +172,43 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets a value indicating whether the file or directory exists.</summary>
+      /// <summary>ファイルまたはディレクトリが存在するかどうかを示す値を取得します。</summary>
       /// <remarks>
-      ///   <para>The <see cref="Exists"/> property returns <c>false</c> if any error occurs while trying to determine if the
-      ///   specified file or directory exists.</para>
-      ///   <para>This can occur in situations that raise exceptions such as passing a directory- or file name with invalid characters or too
-      ///   many characters,</para>
-      ///   <para>a failing or missing disk, or if the caller does not have permission to read the file or directory.</para>
+      ///   <para>指定されたファイルまたはディレクトリの存在を確認しようとした際にエラーが発生した場合、<see cref="Exists"/>プロパティは<c>false</c>を返します。</para>
+      ///   <para>これは、無効な文字または文字数が多すぎるディレクトリ名やファイル名を渡した場合など、例外が発生する状況で起こり得ます。</para>
+      ///   <para>また、ディスクの障害や欠落、またはファイルやディレクトリの読み取り権限がない場合にも発生します。</para>
       /// </remarks>
-      /// <value><c>true</c> if the file or directory exists; otherwise, <c>false</c>.</value>
+      /// <value>ファイルまたはディレクトリが存在する場合は<c>true</c>、それ以外の場合は<c>false</c>。</value>
       public abstract bool Exists { get; }
 
 
-      /// <summary>Gets the string representing the extension part of the file.</summary>
+      /// <summary>ファイルの拡張子部分を表す文字列を取得します。</summary>
       /// <remarks>
-      ///   The Extension property returns the <see cref="FileSystemInfo"/> extension, including the period (.).
-      ///   For example, for a file c:\NewFile.txt, this property returns ".txt".
+      ///   Extensionプロパティは、ピリオド（.）を含む<see cref="FileSystemInfo"/>の拡張子を返します。
+      ///   例えば、c:\NewFile.txtというファイルの場合、このプロパティは「.txt」を返します。
       /// </remarks>
-      /// <value>A string containing the <see cref="FileSystemInfo"/> extension.</value>
+      /// <value><see cref="FileSystemInfo"/>の拡張子を含む文字列。</value>
       public string Extension
       {
          get { return Path.GetExtension(FullPath, false); }
       }
 
 
-      /// <summary>Gets the full path of the directory or file.</summary>
-      /// <value>A string containing the full path.</value>
+      /// <summary>ディレクトリまたはファイルのフルパスを取得します。</summary>
+      /// <value>フルパスを含む文字列。</value>
       public virtual string FullName
       {
          [SecurityCritical] get { return FullPath; }
       }
 
       
-      /// <summary>Gets or sets the time the current file or directory was last accessed.</summary>
+      /// <summary>現在のファイルまたはディレクトリに最後にアクセスした時刻を取得または設定します。</summary>
       /// <remarks>
-      ///   <para>The value of the LastAccessTime property is pre-cached
-      ///   To get the latest value, call the Refresh method.</para>
-      ///   <para>This method may return an inaccurate value, because it uses native functions
-      ///   whose values may not be continuously updated by the operating system.</para>
-      ///   <para>If the file described in the FileSystemInfo object does not exist, this property will return
-      ///   12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC), adjusted to local time.</para>
+      ///   <para>LastAccessTimeプロパティの値は事前キャッシュされています。最新の値を取得するには、Refreshメソッドを呼び出してください。</para>
+      ///   <para>このメソッドはネイティブ関数を使用するため、オペレーティングシステムによって継続的に更新されない値が返される可能性があり、不正確な値を返す場合があります。</para>
+      ///   <para>FileSystemInfoオブジェクトで記述されたファイルが存在しない場合、このプロパティはローカル時間に調整された1601年1月1日午前0時（UTC）を返します。</para>
       /// </remarks>
-      /// <value>The time that the current file or directory was last accessed.</value>
+      /// <value>現在のファイルまたはディレクトリに最後にアクセスした時刻。</value>
       ///
       /// <exception cref="IOException"/>
       public DateTime LastAccessTime
@@ -231,16 +219,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets or sets the time, in coordinated universal time (UTC), that the current file or directory was last accessed.</summary>
+      /// <summary>現在のファイルまたはディレクトリに最後にアクセスした協定世界時（UTC）での時刻を取得または設定します。</summary>
       /// <remarks>
-      ///   <para>The value of the LastAccessTimeUtc property is pre-cached.
-      ///   To get the latest value, call the Refresh method.</para>
-      ///   <para>This method may return an inaccurate value, because it uses native functions
-      ///   whose values may not be continuously updated by the operating system.</para>
-      ///   <para>If the file described in the FileSystemInfo object does not exist, this property will return
-      ///   12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC), adjusted to local time.</para>
+      ///   <para>LastAccessTimeUtcプロパティの値は事前キャッシュされています。最新の値を取得するには、Refreshメソッドを呼び出してください。</para>
+      ///   <para>このメソッドはネイティブ関数を使用するため、オペレーティングシステムによって継続的に更新されない値が返される可能性があり、不正確な値を返す場合があります。</para>
+      ///   <para>FileSystemInfoオブジェクトで記述されたファイルが存在しない場合、このプロパティはローカル時間に調整された1601年1月1日午前0時（UTC）を返します。</para>
       /// </remarks>
-      /// <value>The UTC time that the current file or directory was last accessed.</value>
+      /// <value>現在のファイルまたはディレクトリに最後にアクセスしたUTC時刻。</value>
       ///
       /// <exception cref="IOException"/>
       [ComVisible(false)]
@@ -275,16 +260,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets or sets the time when the current file or directory was last written to.</summary>
+      /// <summary>現在のファイルまたはディレクトリが最後に書き込まれた時刻を取得または設定します。</summary>
       /// <remarks>
-      ///   <para>The value of the LastWriteTime property is pre-cached.
-      ///   To get the latest value, call the Refresh method.</para>
-      ///   <para>This method may return an inaccurate value, because it uses native functions
-      ///   whose values may not be continuously updated by the operating system.</para>
-      ///   <para>If the file described in the FileSystemInfo object does not exist, this property will return
-      ///   12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC), adjusted to local time.</para>
+      ///   <para>LastWriteTimeプロパティの値は事前キャッシュされています。最新の値を取得するには、Refreshメソッドを呼び出してください。</para>
+      ///   <para>このメソッドはネイティブ関数を使用するため、オペレーティングシステムによって継続的に更新されない値が返される可能性があり、不正確な値を返す場合があります。</para>
+      ///   <para>FileSystemInfoオブジェクトで記述されたファイルが存在しない場合、このプロパティはローカル時間に調整された1601年1月1日午前0時（UTC）を返します。</para>
       /// </remarks>
-      /// <value>The time the current file was last written.</value>
+      /// <value>現在のファイルが最後に書き込まれた時刻。</value>
       ///
       /// <exception cref="IOException"/>
       public DateTime LastWriteTime
@@ -295,15 +277,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets or sets the time, in coordinated universal time (UTC), when the current file or directory was last written to.</summary>
+      /// <summary>現在のファイルまたはディレクトリが最後に書き込まれた協定世界時（UTC）での時刻を取得または設定します。</summary>
       /// <remarks>
-      ///   <para>The value of the LastWriteTimeUtc property is pre-cached. To get the latest value, call the Refresh method.</para>
-      ///   <para>This method may return an inaccurate value, because it uses native functions whose values may not be continuously updated by
-      ///   the operating system.</para>
-      ///   <para>If the file described in the FileSystemInfo object does not exist, this property will return 12:00 midnight, January 1, 1601
-      ///   A.D. (C.E.) Coordinated Universal Time (UTC), adjusted to local time.</para>
+      ///   <para>LastWriteTimeUtcプロパティの値は事前キャッシュされています。最新の値を取得するには、Refreshメソッドを呼び出してください。</para>
+      ///   <para>このメソッドはネイティブ関数を使用するため、オペレーティングシステムによって継続的に更新されない値が返される可能性があり、不正確な値を返す場合があります。</para>
+      ///   <para>FileSystemInfoオブジェクトで記述されたファイルが存在しない場合、このプロパティはローカル時間に調整された1601年1月1日午前0時（UTC）を返します。</para>
       /// </remarks>
-      /// <value>The UTC time when the current file was last written to.</value>
+      /// <value>現在のファイルが最後に書き込まれたUTC時刻。</value>
       [ComVisible(false)]
       public DateTime LastWriteTimeUtc
       {
@@ -337,17 +317,17 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>
-      ///   For files, gets the name of the file. For directories, gets the name of the last directory in the hierarchy if a hierarchy exists.
-      ///   <para>Otherwise, the Name property gets the name of the directory.</para>
+      ///   ファイルの場合はファイル名を取得します。ディレクトリの場合は、階層が存在する場合は階層内の最後のディレクトリ名を取得します。
+      ///   <para>それ以外の場合、Nameプロパティはディレクトリ名を取得します。</para>
       /// </summary>
       /// <remarks>
-      ///   <para>For a directory, Name returns only the name of the parent directory, such as Dir, not c:\Dir.</para>
-      ///   <para>For a subdirectory, Name returns only the name of the subdirectory, such as Sub1, not c:\Dir\Sub1.</para>
-      ///   <para>For a file, Name returns only the file name and file name extension, such as MyFile.txt, not c:\Dir\Myfile.txt.</para>
+      ///   <para>ディレクトリの場合、Nameは親ディレクトリの名前のみを返します（例: c:\Dirではなく Dir）。</para>
+      ///   <para>サブディレクトリの場合、Nameはサブディレクトリの名前のみを返します（例: c:\Dir\Sub1ではなく Sub1）。</para>
+      ///   <para>ファイルの場合、Nameはファイル名と拡張子のみを返します（例: c:\Dir\Myfile.txtではなく MyFile.txt）。</para>
       /// </remarks>
       /// <value>
-      ///   <para>A string that is the name of the parent directory, the name of the last directory in the hierarchy,</para>
-      ///   <para>or the name of a file, including the file name extension.</para>
+      ///   <para>親ディレクトリの名前、階層内の最後のディレクトリの名前、</para>
+      ///   <para>またはファイル拡張子を含むファイル名。</para>
       /// </value>
       public abstract string Name { get; }
 
@@ -356,13 +336,13 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region AlphaFS
 
-      /// <summary>Returns the path as a string.</summary>
+      /// <summary>パスを文字列として返します。</summary>
       protected internal string DisplayPath { get; protected set; }
 
 
       private FileSystemEntryInfo _entryInfo;
 
-      /// <summary>[AlphaFS] Gets the instance of the <see cref="FileSystemEntryInfo"/> class.</summary>
+      /// <summary>[AlphaFS] <see cref="FileSystemEntryInfo"/>クラスのインスタンスを取得します。</summary>
       public FileSystemEntryInfo EntryInfo
       {
          [SecurityCritical]
@@ -398,15 +378,15 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] The initial "IsDirectory" indicator that was passed to the constructor.</summary>
+      /// <summary>[AlphaFS] コンストラクタに渡された初期の「IsDirectory」インジケーター。</summary>
       protected bool IsDirectory { get; set; }
 
 
-      /// <summary>The full path of the file system object in Unicode (LongPath) format.</summary>
+      /// <summary>Unicode（LongPath）形式でのファイルシステムオブジェクトのフルパス。</summary>
       protected string LongFullName { get; set; }
 
 
-      /// <summary>[AlphaFS] Represents the KernelTransaction that was passed to the constructor.</summary>
+      /// <summary>[AlphaFS] コンストラクタに渡されたKernelTransactionを表します。</summary>
       protected KernelTransaction Transaction { get; set; }
 
       #endregion // AlphaFS
@@ -418,18 +398,17 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region .NET
 
-      /// <summary>Deletes a file or directory.</summary>
+      /// <summary>ファイルまたはディレクトリを削除します。</summary>
       [SecurityCritical]
       public abstract void Delete();
 
 
-      /// <summary>Refreshes the state of the object.</summary>
+      /// <summary>オブジェクトの状態を更新します。</summary>
       /// <remarks>
-      ///   <para>FileSystemInfo.Refresh() takes a snapshot of the file from the current file system.</para>
-      ///   <para>Refresh cannot correct the underlying file system even if the file system returns incorrect or outdated information.</para>
-      ///   <para>This can happen on platforms such as Windows 98.</para>
-      ///   <para>Calls must be made to Refresh() before attempting to get the attribute information, or the information will be
-      ///   outdated.</para>
+      ///   <para>FileSystemInfo.Refresh()は現在のファイルシステムからファイルのスナップショットを取得します。</para>
+      ///   <para>ファイルシステムが不正確または古い情報を返した場合でも、Refreshは基盤のファイルシステムを修正できません。</para>
+      ///   <para>これはWindows 98などのプラットフォームで発生する可能性があります。</para>
+      ///   <para>属性情報を取得する前にRefresh()を呼び出す必要があります。そうしないと情報が古くなります。</para>
       /// </remarks>
       [SecurityCritical]
       public void Refresh()
@@ -440,12 +419,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Returns a string that represents the current object.</summary>
+      /// <summary>現在のオブジェクトを表す文字列を返します。</summary>
       /// <remarks>
-      ///   ToString is the major formatting method in the .NET Framework. It converts an object to its string representation so that it is
-      ///   suitable for display.
+      ///   ToStringは.NET Frameworkの主要なフォーマットメソッドです。オブジェクトを表示に適した文字列表現に変換します。
       /// </remarks>
-      /// <returns>A string that represents this instance.</returns>
+      /// <returns>このインスタンスを表す文字列。</returns>
       public override string ToString()
       {
          // "Alphaleonis.Win32.Filesystem.FileSystemInfo"
@@ -453,17 +431,17 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Serves as a hash function for a particular type.</summary>
-      /// <returns>A hash code for the current Object.</returns>
+      /// <summary>特定の型のハッシュ関数として機能します。</summary>
+      /// <returns>現在のオブジェクトのハッシュコード。</returns>
       public override int GetHashCode()
       {
          return null != FullName ? FullName.GetHashCode() : 0;
       }
 
 
-      /// <summary>Determines whether the specified Object is equal to the current Object.</summary>
-      /// <param name="other">Another <see cref="FileSystemInfo"/> instance to compare to.</param>
-      /// <returns><c>true</c> if the specified Object is equal to the current Object; otherwise, <c>false</c>.</returns>
+      /// <summary>指定されたオブジェクトが現在のオブジェクトと等しいかどうかを判断します。</summary>
+      /// <param name="other">比較する別の<see cref="FileSystemInfo"/>インスタンス。</param>
+      /// <returns>指定されたオブジェクトが現在のオブジェクトと等しい場合は<c>true</c>、それ以外の場合は<c>false</c>。</returns>
       public bool Equals(FileSystemInfo other)
       {
          return null != other && GetType() == other.GetType() &&
@@ -475,9 +453,9 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Determines whether the specified Object is equal to the current Object.</summary>
-      /// <param name="obj">Another object to compare to.</param>
-      /// <returns><c>true</c> if the specified Object is equal to the current Object; otherwise, <c>false</c>.</returns>
+      /// <summary>指定されたオブジェクトが現在のオブジェクトと等しいかどうかを判断します。</summary>
+      /// <param name="obj">比較する別のオブジェクト。</param>
+      /// <returns>指定されたオブジェクトが現在のオブジェクトと等しい場合は<c>true</c>、それ以外の場合は<c>false</c>。</returns>
       public override bool Equals(object obj)
       {
          var other = obj as FileSystemInfo;
@@ -486,10 +464,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Implements the operator ==</summary>
-      /// <param name="left">A.</param>
-      /// <param name="right">B.</param>
-      /// <returns>The result of the operator.</returns>
+      /// <summary>==演算子を実装します。</summary>
+      /// <param name="left">左辺。</param>
+      /// <param name="right">右辺。</param>
+      /// <returns>演算子の結果。</returns>
       public static bool operator ==(FileSystemInfo left, FileSystemInfo right)
       {
          return ReferenceEquals(left, null) && ReferenceEquals(right, null) ||
@@ -497,10 +475,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Implements the operator !=</summary>
-      /// <param name="left">A.</param>
-      /// <param name="right">B.</param>
-      /// <returns>The result of the operator.</returns>
+      /// <summary>!=演算子を実装します。</summary>
+      /// <param name="left">左辺。</param>
+      /// <param name="right">右辺。</param>
+      /// <returns>演算子の結果。</returns>
       public static bool operator !=(FileSystemInfo left, FileSystemInfo right)
       {
          return !(left == right);
@@ -509,7 +487,7 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Refreshes the current <see cref="FileSystemInfo"/> instance (<see cref="DirectoryInfo"/> or <see cref="FileInfo"/>) with a new destination path.</summary>
+      /// <summary>[AlphaFS] 新しい宛先パスで現在の<see cref="FileSystemInfo"/>インスタンス（<see cref="DirectoryInfo"/>または<see cref="FileInfo"/>）を更新します。</summary>
       internal void UpdateSourcePath(string destinationPath, string destinationPathLp)
       {
          LongFullName = destinationPathLp;
@@ -520,17 +498,17 @@ namespace Alphaleonis.Win32.Filesystem
 
          DisplayPath = null != OriginalPath ? Path.GetRegularPathCore(OriginalPath, GetFullPathOptions.None, false) : null;
 
-         // Flush any cached information about the FileSystemInfo instance.
+         // FileSystemInfoインスタンスに関するキャッシュ情報をフラッシュします。
          Reset();
       }
 
 
-      /// <summary>[AlphaFS] Refreshes the state of the <see cref="FileSystemEntryInfo"/> EntryInfo property.</summary>
+      /// <summary>[AlphaFS] <see cref="FileSystemEntryInfo"/> EntryInfoプロパティの状態を更新します。</summary>
       /// <remarks>
-      ///   <para>FileSystemInfo.RefreshEntryInfo() takes a snapshot of the file from the current file system.</para>
-      ///   <para>Refresh cannot correct the underlying file system even if the file system returns incorrect or outdated information.</para>
-      ///   <para>This can happen on platforms such as Windows 98.</para>
-      ///   <para>Calls must be made to Refresh() before attempting to get the attribute information, or the information will be outdated.</para>
+      ///   <para>FileSystemInfo.RefreshEntryInfo()は現在のファイルシステムからファイルのスナップショットを取得します。</para>
+      ///   <para>ファイルシステムが不正確または古い情報を返した場合でも、Refreshは基盤のファイルシステムを修正できません。</para>
+      ///   <para>これはWindows 98などのプラットフォームで発生する可能性があります。</para>
+      ///   <para>属性情報を取得する前にRefresh()を呼び出す必要があります。そうしないと情報が古くなります。</para>
       /// </remarks>
       [SecurityCritical]
       protected void RefreshEntryInfo()
@@ -550,20 +528,20 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Resets the state of the file system object to uninitialized.</summary>
+      /// <summary>[AlphaFS] ファイルシステムオブジェクトの状態を未初期化にリセットします。</summary>
       private void Reset()
       {
          DataInitialised = -1;
       }
 
 
-      /// <summary>Initializes the specified file name.</summary>
+      /// <summary>指定されたファイル名を初期化します。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="isFolder">Specifies that <paramref name="path"/> is a file or directory.</param>
-      /// <param name="path">The full path and name of the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="isFolder"><paramref name="path"/>がファイルかディレクトリかを指定します。</param>
+      /// <param name="path">ファイルのフルパスと名前。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       internal void InitializeCore(KernelTransaction transaction, bool isFolder, string path, PathFormat pathFormat)
       {
          if (pathFormat == PathFormat.RelativePath)
@@ -573,7 +551,7 @@ namespace Alphaleonis.Win32.Filesystem
 
          LongFullName = Path.GetExtendedLengthPathCore(transaction, path, pathFormat, GetFullPathOptions.TrimEnd | (isFolder ? GetFullPathOptions.RemoveTrailingDirectorySeparator : 0) | GetFullPathOptions.ContinueOnNonExist);
          
-         // (Not on MSDN): .NET 4+ Trailing spaces are removed from the end of the path parameter before creating the FileSystemInfo instance.
+         // (MSDNに記載なし): .NET 4以降では、FileSystemInfoインスタンスの作成前にパスパラメータの末尾のスペースが除去されます。
 
          FullPath = Path.GetRegularPathCore(LongFullName, GetFullPathOptions.None, false);
 
@@ -592,9 +570,9 @@ namespace Alphaleonis.Win32.Filesystem
          var safeHandle = null == transaction || !NativeMethods.IsAtLeastWindowsVista
 
             // FindFirstFileEx() / FindFirstFileTransacted()
-            // 2013-01-13: MSDN confirms LongPath usage.
+            // 2013-01-13: MSDNがLongPathの使用を確認。
 
-            // A trailing backslash is not allowed.
+            // 末尾のバックスラッシュは許可されていません。
             ? NativeMethods.FindFirstFileEx(Path.RemoveTrailingDirectorySeparator(pathLp), infoLevel, out win32FindData, searchOption, IntPtr.Zero, additionalFlags)
 
             : NativeMethods.FindFirstFileTransacted(Path.RemoveTrailingDirectorySeparator(pathLp), infoLevel, out win32FindData, searchOption, IntPtr.Zero, additionalFlags, transaction.SafeHandle);

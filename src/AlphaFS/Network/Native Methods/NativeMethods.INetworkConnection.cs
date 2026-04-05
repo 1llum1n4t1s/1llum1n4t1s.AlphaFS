@@ -26,7 +26,7 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>AOT-safe wrapper for the INetworkConnection COM interface (IDispatch-based).
+      /// <summary>INetworkConnection COM インターフェースの AOT 安全なラッパー (IDispatch-based).
       /// INetworkConnection GUID: DCB00005-570F-4A9B-8D69-199FDBA5723B
       /// Vtable layout: IUnknown (3) + IDispatch (4) + INetworkConnection methods starting at slot 7.
       /// This wrapper takes ownership of the COM pointer passed to the constructor (no AddRef).

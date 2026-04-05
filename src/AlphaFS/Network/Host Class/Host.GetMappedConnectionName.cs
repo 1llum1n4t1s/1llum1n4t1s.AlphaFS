@@ -28,7 +28,7 @@ namespace Alphaleonis.Win32.Network
 {
    public static partial class Host
    {
-      /// <summary>[AlphaFS] Gets the connection name of the locally mapped drive.</summary>
+      /// <summary>[AlphaFS] ローカルにマップされたドライブの接続名を取得します.</summary>
       /// <returns>The server and share as: \\servername\sharename.</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>

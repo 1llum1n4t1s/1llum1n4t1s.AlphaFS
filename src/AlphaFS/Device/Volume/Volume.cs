@@ -21,7 +21,7 @@
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>[AlphaFS] Static class providing utility methods for working with Microsoft Windows devices and volumes.</summary>
+   /// <summary>[AlphaFS] Microsoft Windows デバイスおよびボリュームを操作するためのユーティリティメソッドを提供する静的クラス。</summary>
    public static partial class Volume
    {
    }

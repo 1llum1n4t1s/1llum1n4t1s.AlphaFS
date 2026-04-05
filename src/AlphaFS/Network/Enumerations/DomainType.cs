@@ -21,7 +21,7 @@
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>Specifies the domain type of a network.</summary>
+   /// <summary>ネットワークのドメイン種類を指定します.</summary>
    public enum DomainType
    {
       /// <summary>The Network is not an Active Directory Network.</summary>

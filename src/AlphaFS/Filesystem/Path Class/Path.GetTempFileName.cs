@@ -28,8 +28,8 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Creates a uniquely named, zero-byte temporary file on disk and returns the full path of that file.</summary>
-      /// <returns>The full path of the temporary file.</returns>
+      /// <summary>一意の名前を持つ0バイトの一時ファイルをディスク上に作成し、そのファイルの完全パスを返します。</summary>
+      /// <returns>一時ファイルの完全パス。</returns>
       [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
       [SecurityCritical]
       public static string GetTempFileName()

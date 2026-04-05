@@ -28,8 +28,8 @@ namespace Alphaleonis.Win32.Filesystem
 {
    partial class FileInfo
    {
-      /// <summary>Creates a <see cref="StreamReader"/> with NativeMethods.DefaultFileEncoding encoding that reads from an existing text file.</summary>
-      /// <returns>A new <see cref="StreamReader"/> with NativeMethods.DefaultFileEncoding encoding.</returns>
+      /// <summary>既存のテキストファイルから読み取る NativeMethods.DefaultFileEncoding エンコーディングの <see cref="StreamReader"/> を作成します。</summary>
+      /// <returns>NativeMethods.DefaultFileEncoding エンコーディングの新しい <see cref="StreamReader"/>。</returns>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       [SecurityCritical]
       public StreamReader OpenText()
@@ -38,9 +38,9 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates a <see cref="StreamReader"/> with <see cref="Encoding"/> that reads from an existing text file.</summary>
-      /// <returns>A new <see cref="StreamReader"/> with the specified <see cref="Encoding"/>.</returns>
-      /// <param name="encoding">The <see cref="Encoding"/> applied to the contents of the file.</param>
+      /// <summary>[AlphaFS] 既存のテキストファイルから読み取る <see cref="Encoding"/> を使用した <see cref="StreamReader"/> を作成します。</summary>
+      /// <returns>指定された <see cref="Encoding"/> を使用した新しい <see cref="StreamReader"/>。</returns>
+      /// <param name="encoding">ファイルの内容に適用される <see cref="Encoding"/>。</param>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       [SecurityCritical]
       public StreamReader OpenText(Encoding encoding)

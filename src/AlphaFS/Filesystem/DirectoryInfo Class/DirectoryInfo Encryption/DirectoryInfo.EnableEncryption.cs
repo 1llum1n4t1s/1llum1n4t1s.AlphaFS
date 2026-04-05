@@ -25,9 +25,9 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public sealed partial class DirectoryInfo
    {
-      /// <summary>[AlphaFS] Enables encryption of the specified directory and the files in it. It does not affect encryption of subdirectories below the indicated directory.</summary>
-      /// <returns><c>true</c> on success, <c>false</c> otherwise.</returns>
-      /// <remarks>This method will create/change the file "Desktop.ini" and wil set Encryption value: "Disable=1"</remarks>
+      /// <summary>[AlphaFS] 指定されたディレクトリとその中のファイルの暗号化を有効にします。指定されたディレクトリの下にあるサブディレクトリの暗号化には影響しません。</summary>
+      /// <returns>成功した場合は <c>true</c>、それ以外の場合は <c>false</c>。</returns>
+      /// <remarks>このメソッドは "Desktop.ini" ファイルを作成/変更し、暗号化値を "Disable=1" に設定します。</remarks>
       [SecurityCritical]
       public void EnableEncryption()
       {

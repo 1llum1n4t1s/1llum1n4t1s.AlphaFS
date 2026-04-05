@@ -29,19 +29,19 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>Opens a <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write access, the specified sharing option and additional options specified.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A <see cref="FileMode"/> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten.</param>
-      /// <param name="access">A <see cref="FileAccess"/> value that specifies the operations that can be performed on the file.</param>
-      /// <param name="share">A <see cref="FileShare"/> value specifying the type of access other threads have to the file.</param>
+      /// <summary>指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、 read/write access, the specified sharing option and additional options specified.</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルが存在しない場合に作成するかどうか、および既存ファイルの内容を保持するか上書きするかを指定する<see cref="FileMode"/>値。</param>
+      /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
+      /// <param name="share">他のスレッドがファイルに対して持つアクセスの種類を指定する<see cref="FileShare"/>値。</param>
       /// <param name="attributes">Advanced <see cref="ExtendedFileAttributes"/> options for this file.</param>
-      /// <param name="bufferSize">A positive <see cref="System.Int32"/> value greater than 0 indicating the buffer size. The default buffer size is 4096.</param>
+      /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。 デフォルトのバッファサイズは4096です。</param>
       /// <param name="security">The security.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
       ///   <para>A <see cref="FileStream"/> instance on the specified path, having the specified mode with</para>
-      ///   <para>read, write, or read/write access and the specified sharing option.</para>
+      ///   <para>read, write, or read/write および指定された共有オプションの<see cref="FileStream"/>。</para>
       /// </returns>
       internal static FileStream OpenCore(KernelTransaction transaction, string path, FileMode mode, FileAccess access, FileShare share, ExtendedFileAttributes attributes, int? bufferSize, FileSecurity security, PathFormat pathFormat)
       {
@@ -51,19 +51,19 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Opens a <see cref="FileStream"/> on the specified path, having the specified mode with read, write, or read/write access, the specified sharing option and additional options specified.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to open.</param>
-      /// <param name="mode">A <see cref="FileMode"/> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten.</param>
+      /// <summary>指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、 read/write access, the specified sharing option and additional options specified.</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">開くファイル。</param>
+      /// <param name="mode">ファイルが存在しない場合に作成するかどうか、および既存ファイルの内容を保持するか上書きするかを指定する<see cref="FileMode"/>値。</param>
       /// <param name="rights">A <see cref="FileSystemRights"/> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten along with additional options.</param>
-      /// <param name="share">A <see cref="FileShare"/> value specifying the type of access other threads have to the file.</param>
+      /// <param name="share">他のスレッドがファイルに対して持つアクセスの種類を指定する<see cref="FileShare"/>値。</param>
       /// <param name="attributes">Advanced <see cref="ExtendedFileAttributes"/> options for this file.</param>
-      /// <param name="bufferSize">A positive <see cref="System.Int32"/> value greater than 0 indicating the buffer size. The default buffer size is 4096.</param>
+      /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。 デフォルトのバッファサイズは4096です。</param>
       /// <param name="security">The security.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
       ///   <para>A <see cref="FileStream"/> instance on the specified path, having the specified mode with</para>
-      ///   <para>read, write, or read/write access and the specified sharing option.</para>
+      ///   <para>read, write, or read/write および指定された共有オプションの<see cref="FileStream"/>。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       internal static FileStream OpenCore(KernelTransaction transaction, string path, FileMode mode, FileSystemRights rights, FileShare share, ExtendedFileAttributes attributes, int? bufferSize, FileSecurity security, PathFormat pathFormat)

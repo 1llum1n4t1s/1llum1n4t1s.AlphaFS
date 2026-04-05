@@ -27,10 +27,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Opens a text file, reads all lines of the file, and then closes the file.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to open for reading.</param>
-      /// <returns>All lines of the file.</returns>
+      /// <summary>[AlphaFS] テキストファイルを開き、ファイルのすべての行を読み取り、ファイルを閉じます。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">読み取り用に開くファイル。</param>
+      /// <returns>ファイルのすべての行。</returns>
       [SecurityCritical]
       public static string[] ReadAllLinesTransacted(KernelTransaction transaction, string path)
       {
@@ -38,11 +38,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens a file, reads all lines of the file with the specified encoding, and then closes the file.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to open for reading.</param>
-      /// <param name="encoding">The <see cref="Encoding"/> applied to the contents of the file.</param>
-      /// <returns>All lines of the file.</returns>
+      /// <summary>[AlphaFS] ファイルを開き、指定されたエンコーディングでファイルのすべての行を読み取り、ファイルを閉じます。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">読み取り用に開くファイル。</param>
+      /// <param name="encoding">ファイルの内容に適用される<see cref="Encoding"/>。</param>
+      /// <returns>ファイルのすべての行。</returns>
       [SecurityCritical]
       public static string[] ReadAllLinesTransacted(KernelTransaction transaction, string path, Encoding encoding)
       {
@@ -50,11 +50,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens a text file, reads all lines of the file, and then closes the file.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to open for reading.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>All lines of the file.</returns>
+      /// <summary>[AlphaFS] テキストファイルを開き、ファイルのすべての行を読み取り、ファイルを閉じます。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">読み取り用に開くファイル。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>ファイルのすべての行。</returns>
       [SecurityCritical]
       public static string[] ReadAllLinesTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)
       {
@@ -62,12 +62,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens a file, reads all lines of the file with the specified encoding, and then closes the file.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to open for reading.</param>
-      /// <param name="encoding">The <see cref="Encoding"/> applied to the contents of the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>All lines of the file.</returns>
+      /// <summary>[AlphaFS] ファイルを開き、指定されたエンコーディングでファイルのすべての行を読み取り、ファイルを閉じます。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">読み取り用に開くファイル。</param>
+      /// <param name="encoding">ファイルの内容に適用される<see cref="Encoding"/>。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>ファイルのすべての行。</returns>
       [SecurityCritical]
       public static string[] ReadAllLinesTransacted(KernelTransaction transaction, string path, Encoding encoding, PathFormat pathFormat)
       {

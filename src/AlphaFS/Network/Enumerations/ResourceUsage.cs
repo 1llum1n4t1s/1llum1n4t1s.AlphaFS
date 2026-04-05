@@ -26,37 +26,37 @@ namespace Alphaleonis.Win32.Network
    internal static partial class NativeMethods
    {
       /// <summary>NETRESOURCE structure.
-      ///   <para>ResourceUsage: A set of bit flags describing how the resource can be used.</para>
+      ///   <para>ResourceUsage: リソースの使用方法を記述するビットフラグのセット。</para>
       /// </summary>
       /// <remarks>Note that this member can be specified only if the <see cref="ResourceScope"/> member is equal to <see cref="ResourceScope.GlobalNet"/>.</remarks>
       [Flags]
       internal enum ResourceUsage
       {
          /// <summary>RESOURCEUSAGE_CONNECTABLE
-         /// <para>The resource is a connectable resource.</para>
+         /// <para>リソースは接続可能なリソースです。</para>
          /// <para>The name pointed to by the lpRemoteName member can be passed to the WNetAddConnection function to make a network connection.</para>
          /// </summary>
          Connectable = 1,
 
          /// <summary>RESOURCEUSAGE_CONTAINER
-         /// <para>The resource is a container resource.</para>
+         /// <para>リソースはコンテナーリソースです。</para>
          /// <para>The name pointed to by the lpRemoteName member can be passed to the WNetAddConnection function to make a network connection.</para>
          /// </summary>
          Container = 2,
 
          /// <summary>RESOURCEUSAGE_NOLOCALDEVICE
-         /// <para>The resource is not a local device.</para>
+         /// <para>リソースはローカルデバイスではありません。</para>
          /// </summary>
          NoLocalDevice = 4,
 
          /// <summary>RESOURCEUSAGE_SIBLING
-         /// <para>The resource is a sibling.</para>
+         /// <para>リソースは兄弟です。</para>
          /// <para>This value is not used by Windows.</para>
          /// </summary>
          Sibling = 8,
 
          /// <summary>RESOURCEUSAGE_ATTACHED
-         /// <para>The resource must be attached.</para>
+         /// <para>リソースは接続されている必要があります。</para>
          /// <para>This value specifies that a function to enumerate this resource should fail</para>
          /// <para>if the caller is not authenticated, even if the network permits enumeration without authentication.</para>
          /// </summary>

@@ -63,10 +63,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Check is the current handle is not null, not closed and not invalid.</summary>
-      /// <param name="handle">The current handle to check.</param>
-      /// <param name="throwException"><c>true</c> will throw an <exception cref="Resources.Handle_Is_Invalid"/>, <c>false</c> will not raise this exception..</param>
-      /// <returns><c>true</c> on success, <c>false</c> otherwise.</returns>
+      /// <summary>現在のハンドルが null でなく、閉じられておらず、無効でないことを確認します。</summary>
+      /// <param name="handle">確認する現在のハンドル。</param>
+      /// <param name="throwException"><c>true</c> の場合 <exception cref="Resources.Handle_Is_Invalid"/> をスローし、<c>false</c> の場合はこの例外を発生させません。</param>
+      /// <returns>成功した場合は <c>true</c>、それ以外は <c>false</c>。</returns>
       /// <exception cref="ArgumentException"/>
       internal static bool IsValidHandle(SafeHandle handle, bool throwException = true)
       {
@@ -86,11 +86,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Check is the current handle is not null, not closed and not invalid.</summary>
-      /// <param name="handle">The current handle to check.</param>
-      /// <param name="lastError">The result of Marshal.GetLastWin32Error()</param>
-      /// <param name="throwException"><c>true</c> will throw an <exception cref="Resources.Handle_Is_Invalid_Win32Error"/>, <c>false</c> will not raise this exception..</param>
-      /// <returns><c>true</c> on success, <c>false</c> otherwise.</returns>
+      /// <summary>現在のハンドルが null でなく、閉じられておらず、無効でないことを確認します。</summary>
+      /// <param name="handle">確認する現在のハンドル。</param>
+      /// <param name="lastError">Marshal.GetLastWin32Error() の結果。</param>
+      /// <param name="throwException"><c>true</c> の場合 <exception cref="Resources.Handle_Is_Invalid_Win32Error"/> をスローし、<c>false</c> の場合はこの例外を発生させません。</param>
+      /// <returns>成功した場合は <c>true</c>、それ以外は <c>false</c>。</returns>
       /// <exception cref="ArgumentException"/>
       internal static bool IsValidHandle(SafeHandle handle, int lastError, bool throwException = true)
       {
@@ -110,12 +110,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Check is the current handle is not null, not closed and not invalid.</summary>
-      /// <param name="handle">The current handle to check.</param>
-      /// <param name="lastError">The result of Marshal.GetLastWin32Error()</param>
-      /// <param name="path">The path on which the Exception occurred.</param>
-      /// <param name="throwException"><c>true</c> will throw an <exception cref="Resources.Handle_Is_Invalid_Win32Error"/>, <c>false</c> will not raise this exception..</param>
-      /// <returns><c>true</c> on success, <c>false</c> otherwise.</returns>
+      /// <summary>現在のハンドルが null でなく、閉じられておらず、無効でないことを確認します。</summary>
+      /// <param name="handle">確認する現在のハンドル。</param>
+      /// <param name="lastError">Marshal.GetLastWin32Error() の結果。</param>
+      /// <param name="path">例外が発生したパス。</param>
+      /// <param name="throwException"><c>true</c> の場合 <exception cref="Resources.Handle_Is_Invalid_Win32Error"/> をスローし、<c>false</c> の場合はこの例外を発生させません。</param>
+      /// <returns>成功した場合は <c>true</c>、それ以外は <c>false</c>。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="Exception"/>
       internal static bool IsValidHandle(SafeHandle handle, int lastError, string path, bool throwException = true)
@@ -136,13 +136,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Check is the current handle is not null, not closed and not invalid.</summary>
-      /// <param name="handle">The current handle to check.</param>
-      /// <param name="lastError">The result of Marshal.GetLastWin32Error()</param>
-      /// <param name="isFolder">When <c>true</c> indicates the source is a directory, <c>false</c> indicates a file and <c>null</c> specifies a physical device.</param>
-      /// <param name="path">The path on which the Exception occurred.</param>
-      /// <param name="throwException"><c>true</c> will throw an <exception cref="Resources.Handle_Is_Invalid_Win32Error"/>, <c>false</c> will not raise this exception..</param>
-      /// <returns><c>true</c> on success, <c>false</c> otherwise.</returns>
+      /// <summary>現在のハンドルが null でなく、閉じられておらず、無効でないことを確認します。</summary>
+      /// <param name="handle">確認する現在のハンドル。</param>
+      /// <param name="lastError">Marshal.GetLastWin32Error() の結果。</param>
+      /// <param name="isFolder"><c>true</c> の場合ソースがディレクトリ、<c>false</c> の場合ファイル、<c>null</c> の場合物理デバイスを示します。</param>
+      /// <param name="path">例外が発生したパス。</param>
+      /// <param name="throwException"><c>true</c> の場合 <exception cref="Resources.Handle_Is_Invalid_Win32Error"/> をスローし、<c>false</c> の場合はこの例外を発生させません。</param>
+      /// <returns>成功した場合は <c>true</c>、それ以外は <c>false</c>。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="Exception"/>
       internal static bool CloseHandleAndPossiblyThrowException(SafeHandle handle, int lastError, bool? isFolder, string path, bool throwException = true)
@@ -174,31 +174,31 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Controls whether the system will handle the specified types of serious errors or whether the process will handle them.</summary>
+      /// <summary>指定された種類の重大なエラーをシステムが処理するか、プロセスが処理するかを制御します。</summary>
       /// <remarks>
-      ///   Because the error mode is set for the entire process, you must ensure that multi-threaded applications do not set different error-
-      ///   mode attributes. Doing so can lead to inconsistent error handling.
+      ///   エラーモードはプロセス全体に設定されるため、マルチスレッドアプリケーションが異なるエラーモード属性を設定しないようにする必要があります。
+      ///   そうしないと、一貫性のないエラー処理が発生する可能性があります。
       /// </remarks>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only].</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only].</remarks>
-      /// <param name="uMode">The mode.</param>
-      /// <returns>The return value is the previous state of the error-mode bit attributes.</returns>
+      /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]。</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]。</remarks>
+      /// <param name="uMode">モード。</param>
+      /// <returns>戻り値はエラーモードビット属性の以前の状態です。</returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = false, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.U4)]
       private static extern ErrorMode SetErrorMode(ErrorMode uMode);
 
 
-      /// <summary>Controls whether the system will handle the specified types of serious errors or whether the calling thread will handle them.</summary>
+      /// <summary>指定された種類の重大なエラーをシステムが処理するか、呼び出しスレッドが処理するかを制御します。</summary>
       /// <remarks>
-      ///   Because the error mode is set for the entire process, you must ensure that multi-threaded applications do not set different error-
-      ///   mode attributes. Doing so can lead to inconsistent error handling.
+      ///   エラーモードはプロセス全体に設定されるため、マルチスレッドアプリケーションが異なるエラーモード属性を設定しないようにする必要があります。
+      ///   そうしないと、一貫性のないエラー処理が発生する可能性があります。
       /// </remarks>
-      /// <remarks>Minimum supported client: Windows 7 [desktop apps only].</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2008 R2 [desktop apps only].</remarks>
-      /// <param name="dwNewMode">The new mode.</param>
-      /// <param name="lpOldMode">[out] The old mode.</param>
-      /// <returns>The return value is the previous state of the error-mode bit attributes.</returns>
+      /// <remarks>サポートされる最小クライアント: Windows 7 [デスクトップアプリのみ]。</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2008 R2 [デスクトップアプリのみ]。</remarks>
+      /// <param name="dwNewMode">新しいモード。</param>
+      /// <param name="lpOldMode">[out] 以前のモード。</param>
+      /// <returns>戻り値はエラーモードビット属性の以前の状態です。</returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = false, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]

@@ -29,10 +29,10 @@ namespace Alphaleonis.Win32.Network
 {
    public static partial class Host
    {
-      /// <summary>Retrieves information about the Server Message Block (SMB) share as defined on the specified host.</summary>
+      /// <summary>サーバーメッセージブロック (SMB) 共有に関する情報を取得します as defined on the specified host.</summary>
       /// <returns>A <see cref="ShareInfo"/> class, or <c>null</c> on failure or when not available, and <paramref name="continueOnException"/> is <c>true</c>.</returns>
       /// <param name="uncPath">The share in the format: \\host\share.</param>
-      /// <param name="continueOnException"><c>true</c> to suppress any Exception that might be thrown as a result from a failure, such as unavailable resources.</param>
+      /// <param name="continueOnException"><c>true</c> to リソース不足などの失敗から発生する可能性のある例外を抑制します。</param>
       [SecurityCritical]
       public static ShareInfo GetShareInfo(string uncPath, bool continueOnException)
       {
@@ -41,11 +41,11 @@ namespace Alphaleonis.Win32.Network
       }
 
       
-      /// <summary>Retrieves information about the Server Message Block (SMB) share as defined on the specified host.</summary>
+      /// <summary>サーバーメッセージブロック (SMB) 共有に関する情報を取得します as defined on the specified host.</summary>
       /// <returns>A <see cref="ShareInfo"/> class, or <c>null</c> on failure or when not available, and <paramref name="continueOnException"/> is <c>true</c>.</returns>
       /// <param name="shareLevel">One of the <see cref="ShareInfoLevel"/> options.</param>
       /// <param name="uncPath">The share in the format: \\host\share.</param>
-      /// <param name="continueOnException"><c>true</c> to suppress any Exception that might be thrown as a result from a failure, such as unavailable resources.</param>
+      /// <param name="continueOnException"><c>true</c> to リソース不足などの失敗から発生する可能性のある例外を抑制します。</param>
       [SecurityCritical]
       public static ShareInfo GetShareInfo(ShareInfoLevel shareLevel, string uncPath, bool continueOnException)
       {
@@ -54,11 +54,11 @@ namespace Alphaleonis.Win32.Network
       }
 
       
-      /// <summary>Retrieves information about the Server Message Block (SMB) share as defined on the specified host.</summary>
+      /// <summary>サーバーメッセージブロック (SMB) 共有に関する情報を取得します as defined on the specified host.</summary>
       /// <returns>A <see cref="ShareInfo"/> class, or <c>null</c> on failure or when not available, and <paramref name="continueOnException"/> is <c>true</c>.</returns>
-      /// <param name="host">The DNS or NetBIOS name of the specified host.</param>
-      /// <param name="share">The name of the Server Message Block (SMB) share.</param>
-      /// <param name="continueOnException"><c>true</c> to suppress any Exception that might be thrown as a result from a failure, such as unavailable resources.</param>
+      /// <param name="host">指定されたホストの DNS 名または NetBIOS 名。</param>
+      /// <param name="share">サーバーメッセージブロック (SMB) 共有の名前。</param>
+      /// <param name="continueOnException"><c>true</c> to リソース不足などの失敗から発生する可能性のある例外を抑制します。</param>
       [SecurityCritical]
       public static ShareInfo GetShareInfo(string host, string share, bool continueOnException)
       {
@@ -66,12 +66,12 @@ namespace Alphaleonis.Win32.Network
       }
 
       
-      /// <summary>Retrieves information about the Server Message Block (SMB) share as defined on the specified host.</summary>
+      /// <summary>サーバーメッセージブロック (SMB) 共有に関する情報を取得します as defined on the specified host.</summary>
       /// <returns>A <see cref="ShareInfo"/> class, or <c>null</c> on failure or when not available, and <paramref name="continueOnException"/> is <c>true</c>.</returns>
       /// <param name="shareLevel">One of the <see cref="ShareInfoLevel"/> options.</param>
       /// <param name="host">A string that specifies the DNS or NetBIOS name of the specified <paramref name="host"/>.</param>
       /// <param name="share">A string that specifies the name of the Server Message Block (SMB) share.</param>
-      /// <param name="continueOnException"><c>true</c> to suppress any Exception that might be thrown as a result from a failure, such as unavailable resources.</param>
+      /// <param name="continueOnException"><c>true</c> to リソース不足などの失敗から発生する可能性のある例外を抑制します。</param>
       [SecurityCritical]
       public static ShareInfo GetShareInfo(ShareInfoLevel shareLevel, string host, string share, bool continueOnException)
       {
@@ -87,7 +87,7 @@ namespace Alphaleonis.Win32.Network
       /// <param name="shareLevel">One of the <see cref="ShareInfoLevel"/> options.</param>
       /// <param name="host">A string that specifies the DNS or NetBIOS name of the specified <paramref name="host"/>.</param>
       /// <param name="share">A string that specifies the name of the Server Message Block (SMB) share.</param>
-      /// <param name="continueOnException"><c>true</c> to suppress any Exception that might be thrown as a result from a failure, such as unavailable resources.</param>
+      /// <param name="continueOnException"><c>true</c> to リソース不足などの失敗から発生する可能性のある例外を抑制します。</param>
       [SecurityCritical]
       internal static ShareInfo GetShareInfoCore(ShareInfoLevel shareLevel, string host, string share, bool continueOnException)
       {

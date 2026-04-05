@@ -28,22 +28,22 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Creates a symbolic link (similar to CMD command: "MKLINK") to a file as a transacted operation.</summary>
+      /// <summary>[AlphaFS] トランザクション操作として、ファイルへのシンボリックリンク(CMDコマンド"MKLINK"と同様)を作成します。</summary>
       /// <para>&#160;</para>
       /// <remarks>
-      /// <para>Symbolic links can point to a non-existent target.</para>
-      /// <para>When creating a symbolic link, the operating system does not check to see if the target exists.</para>
-      /// <para>Symbolic links are reparse points.</para>
-      /// <para>There is a maximum of 31 reparse points (and therefore symbolic links) allowed in a particular path.</para>
-      /// <para>See <see cref="Security.Privilege.CreateSymbolicLink"/> to run this method in an elevated state.</para>
+      /// <para>シンボリックリンクは存在しないターゲットを指すことができます。</para>
+      /// <para>シンボリックリンクを作成するとき、オペレーティングシステムはターゲットが存在するかどうかをチェックしません。</para>
+      /// <para>シンボリックリンクはリパースポイントです。</para>
+      /// <para>特定のパスで許可されるリパースポイント(したがってシンボリックリンク)は最大31個です。</para>
+      /// <para>このメソッドを昇格された状態で実行するには、<see cref="Security.Privilege.CreateSymbolicLink"/>を参照してください。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="symlinkFileName">The name of the target for the symbolic link to be created.</param>
-      /// <param name="targetFileName">The symbolic link to be created.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="symlinkFileName">作成するシンボリックリンクのターゲット名。</param>
+      /// <param name="targetFileName">作成するシンボリックリンク。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "symlink")]
       [SecurityCritical]
       public static void CreateSymbolicLinkTransacted(KernelTransaction transaction, string symlinkFileName, string targetFileName)
@@ -52,23 +52,23 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates a symbolic link (similar to CMD command: "MKLINK") to a file as a transacted operation.</summary>
+      /// <summary>[AlphaFS] トランザクション操作として、ファイルへのシンボリックリンク(CMDコマンド"MKLINK"と同様)を作成します。</summary>
       /// <para>&#160;</para>
       /// <remarks>
-      /// <para>Symbolic links can point to a non-existent target.</para>
-      /// <para>When creating a symbolic link, the operating system does not check to see if the target exists.</para>
-      /// <para>Symbolic links are reparse points.</para>
-      /// <para>There is a maximum of 31 reparse points (and therefore symbolic links) allowed in a particular path.</para>
-      /// <para>See <see cref="Security.Privilege.CreateSymbolicLink"/> to run this method in an elevated state.</para>
+      /// <para>シンボリックリンクは存在しないターゲットを指すことができます。</para>
+      /// <para>シンボリックリンクを作成するとき、オペレーティングシステムはターゲットが存在するかどうかをチェックしません。</para>
+      /// <para>シンボリックリンクはリパースポイントです。</para>
+      /// <para>特定のパスで許可されるリパースポイント(したがってシンボリックリンク)は最大31個です。</para>
+      /// <para>このメソッドを昇格された状態で実行するには、<see cref="Security.Privilege.CreateSymbolicLink"/>を参照してください。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="symlinkFileName">The name of the target for the symbolic link to be created.</param>
-      /// <param name="targetFileName">The symbolic link to be created.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>      
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="symlinkFileName">作成するシンボリックリンクのターゲット名。</param>
+      /// <param name="targetFileName">作成するシンボリックリンク。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>      
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "symlink")]
       [SecurityCritical]
       public static void CreateSymbolicLinkTransacted(KernelTransaction transaction, string symlinkFileName, string targetFileName, PathFormat pathFormat)

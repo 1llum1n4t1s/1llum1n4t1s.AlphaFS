@@ -25,46 +25,46 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>Checks if the <see cref="MoveOptions.CopyAllowed"/> flag is specified.</summary>
+      /// <summary><see cref="MoveOptions.CopyAllowed"/>フラグが指定されているかをチェックします。</summary>
       internal static bool HasCopyAllowed(MoveOptions? moveOptions)
       {
          return Utils.IsNotNull(moveOptions) && (moveOptions & MoveOptions.CopyAllowed) != 0;
       }
 
 
-      /// <summary>Checks if the <see cref="CopyOptions.CopySymbolicLink"/> flag is specified.</summary>
+      /// <summary><see cref="CopyOptions.CopySymbolicLink"/>フラグが指定されているかをチェックします。</summary>
       internal static bool HasCopySymbolicLink(CopyOptions? copyOptions)
       {
          return Utils.IsNotNull(copyOptions) && (copyOptions & CopyOptions.CopySymbolicLink) != 0;
       }
 
 
-      /// <summary>Checks if the <see cref="MoveOptions.DelayUntilReboot"/> flag is specified.</summary>
+      /// <summary><see cref="MoveOptions.DelayUntilReboot"/>フラグが指定されているかをチェックします。</summary>
       internal static bool HasDelayUntilReboot(MoveOptions? moveOptions)
       {
          return Utils.IsNotNull(moveOptions) && (moveOptions & MoveOptions.DelayUntilReboot) != 0;
       }
 
 
-      /// <summary>Checks if the <see cref="CopyOptions.CopyTimestamp"/> flag is specified.</summary>
+      /// <summary><see cref="CopyOptions.CopyTimestamp"/>フラグが指定されているかをチェックします。</summary>
       internal static bool HasCopyTimestamps(CopyOptions? copyOptions)
       {
          return Utils.IsNotNull(copyOptions) && (copyOptions & CopyOptions.CopyTimestamp) != 0;
       }
 
 
-      /// <summary>Checks if the <see cref="MoveOptions.ReplaceExisting"/> flag is specified.</summary>
+      /// <summary><see cref="MoveOptions.ReplaceExisting"/>フラグが指定されているかをチェックします。</summary>
       internal static bool HasReplaceExisting(MoveOptions? moveOptions)
       {
          return Utils.IsNotNull(moveOptions) && (moveOptions & MoveOptions.ReplaceExisting) != 0;
       }
 
 
-      /// <summary>Determine the Copy or Move action.</summary>
+      /// <summary>コピーまたは移動アクションを決定します。</summary>
       /// <exception cref="NotSupportedException"/>
       internal static bool IsCopyAction(CopyMoveArguments cma)
       {
-         // Determine Copy or Move action.
+         // コピーまたは移動アクションを判定する。
 
          var isMove = Utils.IsNotNull(cma.MoveOptions) && Equals(null, cma.CopyOptions);
 

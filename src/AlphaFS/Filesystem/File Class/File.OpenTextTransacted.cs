@@ -27,11 +27,11 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Opens an existing UTF-8 encoded text file for reading.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to be opened for reading.</param>
-      /// <returns>A <see cref="StreamReader"/> on the specified path.</returns>
-      /// <remarks>This method is equivalent to the <see cref="StreamReader"/>(String) constructor overload.</remarks>
+      /// <summary>[AlphaFS] 既存のUTF-8エンコードされたテキストファイルを読み取り用に開きます。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">読み取り用に開くファイル。</param>
+      /// <returns>指定されたパス上の<see cref="StreamReader"/>。</returns>
+      /// <remarks>このメソッドは<see cref="StreamReader"/>(String)コンストラクタオーバーロードと同等です。</remarks>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       public static StreamReader OpenTextTransacted(KernelTransaction transaction, string path)
       {
@@ -39,12 +39,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens an existing UTF-8 encoded text file for reading.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to be opened for reading.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>A <see cref="StreamReader"/> on the specified path.</returns>
-      /// <remarks>This method is equivalent to the <see cref="StreamReader"/>(String) constructor overload.</remarks>
+      /// <summary>[AlphaFS] 既存のUTF-8エンコードされたテキストファイルを読み取り用に開きます。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">読み取り用に開くファイル。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>指定されたパス上の<see cref="StreamReader"/>。</returns>
+      /// <remarks>このメソッドは<see cref="StreamReader"/>(String)コンストラクタオーバーロードと同等です。</remarks>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       public static StreamReader OpenTextTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)
       {
@@ -52,12 +52,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens an existing <see cref="Encoding"/> encoded text file for reading.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to be opened for reading.</param>
-      /// <param name="encoding">The <see cref="Encoding"/> applied to the contents of the file.</param>
-      /// <returns>A <see cref="StreamReader"/> on the specified path.</returns>
-      /// <remarks>This method is equivalent to the <see cref="StreamReader"/>(String) constructor overload.</remarks>
+      /// <summary>[AlphaFS] 既存の<see cref="Encoding"/>エンコードされたテキストファイルを読み取り用に開きます。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">読み取り用に開くファイル。</param>
+      /// <param name="encoding">ファイルの内容に適用される<see cref="Encoding"/>。</param>
+      /// <returns>指定されたパス上の<see cref="StreamReader"/>。</returns>
+      /// <remarks>このメソッドは<see cref="StreamReader"/>(String)コンストラクタオーバーロードと同等です。</remarks>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       public static StreamReader OpenTextTransacted(KernelTransaction transaction, string path, Encoding encoding)
       {
@@ -65,13 +65,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens an existing <see cref="Encoding"/> encoded text file for reading.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to be opened for reading.</param>
-      /// <param name="encoding">The <see cref="Encoding"/> applied to the contents of the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>A <see cref="StreamReader"/> on the specified path.</returns>
-      /// <remarks>This method is equivalent to the <see cref="StreamReader"/>(String) constructor overload.</remarks>
+      /// <summary>[AlphaFS] 既存の<see cref="Encoding"/>エンコードされたテキストファイルを読み取り用に開きます。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">読み取り用に開くファイル。</param>
+      /// <param name="encoding">ファイルの内容に適用される<see cref="Encoding"/>。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>指定されたパス上の<see cref="StreamReader"/>。</returns>
+      /// <remarks>このメソッドは<see cref="StreamReader"/>(String)コンストラクタオーバーロードと同等です。</remarks>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       public static StreamReader OpenTextTransacted(KernelTransaction transaction, string path, Encoding encoding, PathFormat pathFormat)
       {

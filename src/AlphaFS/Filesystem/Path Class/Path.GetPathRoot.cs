@@ -28,14 +28,14 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Gets the root directory information of the specified path.</summary>
+      /// <summary>指定されたパスのルートディレクトリ情報を取得します。</summary>
       /// <returns>
-      ///   Returns the root directory of <paramref name="path"/>, such as "C:\",
-      ///   or <c>null</c> if <paramref name="path"/> is <c>null</c>,
-      ///   or an empty string if <paramref name="path"/> does not contain root directory information.
+      ///   "C:\" のような <paramref name="path"/> のルートディレクトリ。
+      ///   <paramref name="path"/> が <c>null</c> の場合は <c>null</c>、
+      ///   <paramref name="path"/> にルートディレクトリ情報が含まれていない場合は空文字列を返します。
       /// </returns>
       /// <exception cref="ArgumentException"/>
-      /// <param name="path">The path from which to obtain root directory information.</param>
+      /// <param name="path">ルートディレクトリ情報を取得するパス。</param>
       [SecurityCritical]
       public static string GetPathRoot(string path)
       {
@@ -45,15 +45,15 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Gets the root directory information of the specified path.</summary>
+      /// <summary>[AlphaFS] 指定されたパスのルートディレクトリ情報を取得します。</summary>
       /// <returns>
-      ///   Returns the root directory of <paramref name="path"/>, such as "C:\",
-      ///   or <c>null</c> if <paramref name="path"/> is <c>null</c>,
-      ///   or an empty string if <paramref name="path"/> does not contain root directory information.
+      ///   "C:\" のような <paramref name="path"/> のルートディレクトリ。
+      ///   <paramref name="path"/> が <c>null</c> の場合は <c>null</c>、
+      ///   <paramref name="path"/> にルートディレクトリ情報が含まれていない場合は空文字列を返します。
       /// </returns>
       /// <exception cref="ArgumentException"/>
-      /// <param name="path">The path from which to obtain root directory information.</param>
-      /// <param name="checkInvalidPathChars"><c>true</c> will check <paramref name="path"/> for invalid path characters.</param>
+      /// <param name="path">ルートディレクトリ情報を取得するパス。</param>
+      /// <param name="checkInvalidPathChars"><c>true</c> の場合、<paramref name="path"/> の無効なパス文字をチェックします。</param>
       [SecurityCritical]
       public static string GetPathRoot(string path, bool checkInvalidPathChars)
       {

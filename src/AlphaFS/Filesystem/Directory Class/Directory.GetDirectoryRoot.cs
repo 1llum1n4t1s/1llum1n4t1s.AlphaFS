@@ -28,7 +28,7 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Returns the volume information, root information, or both for the specified path.</summary>
+      /// <summary>指定されたパスのボリューム情報、ルート情報、またはその両方を返します。</summary>
       /// <returns>The volume information, root information, or both for the specified path, or <c>null</c> if <paramref name="path"/> path does not contain root directory information.</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -43,13 +43,13 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Returns the volume information, root information, or both for the specified path.</summary>
+      /// <summary>[AlphaFS] 指定されたパスのボリューム情報、ルート情報、またはその両方を返します。</summary>
       /// <returns>The volume information, root information, or both for the specified path, or <c>null</c> if <paramref name="path"/> path does not contain root directory information.</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="NotSupportedException"/>
       /// <param name="path">The path of a file or directory.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static string GetDirectoryRoot(string path, PathFormat pathFormat)
       {

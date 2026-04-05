@@ -30,11 +30,11 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region Obsolete
 
-      /// <summary>[AlphaFS] Creates an enumeration of all the hard links to the specified <paramref name="path"/>.</summary>
-      /// <returns>An enumerable collection of <see cref="string"/> of all the hard links to the specified <paramref name="path"/></returns>
+      /// <summary>[AlphaFS] 指定された<paramref name="path"/>へのすべてのハードリンクの列挙を作成します。</summary>
+      /// <returns>指定された<paramref name="path"/>へのすべてのハードリンクの<see cref="string"/>の列挙可能なコレクション</returns>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The name of the file.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルの名前。</param>
       [Obsolete("Use EnumerateHardLinks method.")]
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Hardlinks")]
       [SecurityCritical]
@@ -44,12 +44,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates an enumeration of all the hard links to the specified <paramref name="path"/>.</summary>
-      /// <returns>An enumerable collection of <see cref="string"/> of all the hard links to the specified <paramref name="path"/></returns>
+      /// <summary>[AlphaFS] 指定された<paramref name="path"/>へのすべてのハードリンクの列挙を作成します。</summary>
+      /// <returns>指定された<paramref name="path"/>へのすべてのハードリンクの<see cref="string"/>の列挙可能なコレクション</returns>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The name of the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルの名前。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [Obsolete("Use EnumerateHardLinks method.")]
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Hardlinks")]
       [SecurityCritical]
@@ -61,11 +61,11 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // Obsolete
 
 
-      /// <summary>[AlphaFS] Creates an enumeration of all the hard links to the specified <paramref name="path"/>.</summary>
-      /// <returns>An enumerable collection of <see cref="string"/> of all the hard links to the specified <paramref name="path"/></returns>
+      /// <summary>[AlphaFS] 指定された<paramref name="path"/>へのすべてのハードリンクの列挙を作成します。</summary>
+      /// <returns>指定された<paramref name="path"/>へのすべてのハードリンクの<see cref="string"/>の列挙可能なコレクション</returns>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The name of the file.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルの名前。</param>
       [SecurityCritical]
 #pragma warning disable CS3005 // Identifier differing only in case is not CLS-compliant
       public static IEnumerable<string> EnumerateHardLinksTransacted(KernelTransaction transaction, string path)
@@ -75,12 +75,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates an enumeration of all the hard links to the specified <paramref name="path"/>.</summary>
-      /// <returns>An enumerable collection of <see cref="string"/> of all the hard links to the specified <paramref name="path"/></returns>
+      /// <summary>[AlphaFS] 指定された<paramref name="path"/>へのすべてのハードリンクの列挙を作成します。</summary>
+      /// <returns>指定された<paramref name="path"/>へのすべてのハードリンクの<see cref="string"/>の列挙可能なコレクション</returns>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The name of the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルの名前。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
 #pragma warning disable CS3005 // Identifier differing only in case is not CLS-compliant
       public static IEnumerable<string> EnumerateHardLinksTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)

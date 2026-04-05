@@ -31,12 +31,12 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>[AlphaFS] Appends lines to a file, and then closes the file. If the specified file does not exist, this method creates a file,
-      ///   writes the specified lines to the file, and then closes the file.
+      /// <summary>[AlphaFS] 行をファイルに追記し、ファイルを閉じます。指定されたファイルが存在しない場合、このメソッドはファイルを作成し、
+      ///   指��された行をファイルに書き込み、ファイルを閉じます。
       /// </summary>
       /// <remarks>
-      ///   The method creates the file if it doesn't exist, but it doesn't create new directories. Therefore, the value of the path parameter
-      ///   must contain existing directories.
+      ///   ファイルが存在しない場合、このメソッドはファイルを作成しますが、新しいディレクトリは作成しません。したがって、pathパラメータの値には
+      ///   既存のディレクトリが含まれている必要があります。
       /// </remarks>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
@@ -48,9 +48,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to append the lines to. The file is created if it doesn't already exist.</param>
-      /// <param name="contents">The lines to append to the file.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">行を追記するファイル。ファイルが存在しない場合は作成されます。</param>
+      /// <param name="contents">ファイルに追記する行。</param>
       [SecurityCritical]
       public static void AppendAllLinesTransacted(KernelTransaction transaction, string path, IEnumerable<string> contents)
       {
@@ -58,12 +58,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Appends lines to a file, and then closes the file. If the specified file does not exist, this method creates a file,
-      ///   writes the specified lines to the file, and then closes the file.
+      /// <summary>[AlphaFS] 行をファイルに追記し、ファイルを閉じます。指定されたファイルが存在しない場合、このメソッドはファイルを作成し、
+      ///   指��された行をファイルに書き込み、ファイルを閉じます。
       /// </summary>
       /// <remarks>
-      ///   The method creates the file if it doesn't exist, but it doesn't create new directories. Therefore, the value of the path parameter
-      ///   must contain existing directories.
+      ///   ファイルが存在しない場合、このメソッドはファイルを作成しますが、新しいディレクトリは作成しません。したがって、pathパラメータの値には
+      ///   既存のディレクトリが含まれている必要があります。
       /// </remarks>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
@@ -75,10 +75,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to append the lines to. The file is created if it doesn't already exist.</param>
-      /// <param name="contents">The lines to append to the file.</param>
-      /// <param name="encoding">The character <see cref="Encoding"/> to use.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">行を追記するファイル。ファイルが存在しない場合は作成されます。</param>
+      /// <param name="contents">ファイルに追記する行。</param>
+      /// <param name="encoding">使用する文字<see cref="Encoding"/>。</param>
       [SecurityCritical]
       public static void AppendAllLinesTransacted(KernelTransaction transaction, string path, IEnumerable<string> contents, Encoding encoding)
       {
@@ -88,12 +88,12 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Appends lines to a file, and then closes the file. If the specified file does not exist, this method creates a file, writes the
-      ///   specified lines to the file, and then closes the file.
+      /// <summary>[AlphaFS] 行をファイルに追記し、ファイルを閉じます。指定されたファイルが存在しない場合、このメソッドはファイルを作成し、 writes the
+      ///   specified lines to the file, and then closes 閉じます。
       /// </summary>
       /// <remarks>
-      ///   The method creates the file if it doesn't exist, but it doesn't create new directories. Therefore, the value of the path parameter
-      ///   must contain existing directories.
+      ///   ファイルが存在しない場合、このメソッドはファイルを作成しますが、新しいディレクトリは作成しません。したがって、pathパラメータの値には
+      ///   既存のディレクトリが含まれている必要があります。
       /// </remarks>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
@@ -105,10 +105,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to append the lines to. The file is created if it doesn't already exist.</param>
-      /// <param name="contents">The lines to append to the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">行を追記するファイル。ファイルが存在しない場合は作成されます。</param>
+      /// <param name="contents">ファイルに追記する行。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void AppendAllLinesTransacted(KernelTransaction transaction, string path, IEnumerable<string> contents, PathFormat pathFormat)
       {
@@ -116,12 +116,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Appends lines to a file, and then closes the file. If the specified file does not exist, this method creates a file,
-      ///   writes the specified lines to the file, and then closes the file.
+      /// <summary>[AlphaFS] 行をファイルに追記し、ファイルを閉じます。指定されたファイルが存在しない場合、このメソッドはファイルを作成し、
+      ///   指��された行をファイルに書き込み、ファイルを閉じます。
       /// </summary>
       /// <remarks>
-      ///   The method creates the file if it doesn't exist, but it doesn't create new directories. Therefore, the value of the path parameter
-      ///   must contain existing directories.
+      ///   ファイルが存在しない場合、このメソッドはファイルを作成しますが、新しいディレクトリは作成しません。したがって、pathパラメータの値には
+      ///   既存のディレクトリが含まれている必要があります。
       /// </remarks>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
@@ -133,11 +133,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to append the lines to. The file is created if it doesn't already exist.</param>
-      /// <param name="contents">The lines to append to the file.</param>
-      /// <param name="encoding">The character <see cref="Encoding"/> to use.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">行を追記するファイル。ファイルが存在しない場合は作成されます。</param>
+      /// <param name="contents">ファイルに追記する行。</param>
+      /// <param name="encoding">使用する文字<see cref="Encoding"/>。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void AppendAllLinesTransacted(KernelTransaction transaction, string path, IEnumerable<string> contents, Encoding encoding, PathFormat pathFormat)
       {

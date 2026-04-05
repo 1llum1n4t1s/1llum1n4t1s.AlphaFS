@@ -29,13 +29,13 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Creates a subdirectory or subdirectories on the specified path. The specified path can be relative to this instance of the <see cref="DirectoryInfo"/> class.</summary>
-      /// <param name="path">The specified path. This cannot be a different disk volume.</param>
-      /// <returns>The last directory specified in <paramref name="path"/>.</returns>
+      /// <summary>指定されたパスにサブディレクトリを作成します。指定されたパスは、この <see cref="DirectoryInfo"/> クラスのインスタンスに対する相対パスにできます。</summary>
+      /// <param name="path">指定されたパス。別のディスクボリュームにすることはできません。</param>
+      /// <returns><paramref name="path"/> で指定された最後のディレクトリ。</returns>
       /// <remarks>
-      /// Any and all directories specified in path are created, unless some part of path is invalid.
-      /// The path parameter specifies a directory path, not a file path.
-      /// If the subdirectory already exists, this method does nothing.
+      /// パスの一部が無効でない限り、パスに指定されたすべてのディレクトリが作成されます。
+      /// path パラメーターはディレクトリパスを指定するもので、ファイルパスではありません。
+      /// サブディレクトリが既に存在する場合、このメソッドは何もしません。
       /// </remarks>
       [SecurityCritical]
       public DirectoryInfo CreateSubdirectory(string path)
@@ -44,14 +44,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Creates a subdirectory or subdirectories on the specified path. The specified path can be relative to this instance of the <see cref="DirectoryInfo"/> class.</summary>
-      /// <param name="path">The specified path. This cannot be a different disk volume.</param>
-      /// <param name="directorySecurity">The <see cref="DirectorySecurity"/> security to apply.</param>
-      /// <returns>The last directory specified in <paramref name="path"/>.</returns>
+      /// <summary>指定されたパスにサブディレクトリを作成します。指定されたパスは、この <see cref="DirectoryInfo"/> クラスのインスタンスに対する相対パスにできます。</summary>
+      /// <param name="path">指定されたパス。別のディスクボリュームにすることはできません。</param>
+      /// <param name="directorySecurity">適用する <see cref="DirectorySecurity"/> セキュリティ。</param>
+      /// <returns><paramref name="path"/> で指定された最後のディレクトリ。</returns>
       /// <remarks>
-      /// Any and all directories specified in path are created, unless some part of path is invalid.
-      /// The path parameter specifies a directory path, not a file path.
-      /// If the subdirectory already exists, this method does nothing.
+      /// パスの一部が無効でない限り、パスに指定されたすべてのディレクトリが作成されます。
+      /// path パラメーターはディレクトリパスを指定するもので、ファイルパスではありません。
+      /// サブディレクトリが既に存在する場合、このメソッドは何もしません。
       /// </remarks>
       [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
       [SecurityCritical]
@@ -63,15 +63,15 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Creates a subdirectory or subdirectories on the specified path. The specified path can be relative to this instance of the <see cref="DirectoryInfo"/> class.</summary>
-      /// <returns>The last directory specified in <paramref name="path"/>.</returns>
+      /// <summary>[AlphaFS] 指定されたパスにサブディレクトリを作成します。指定されたパスは、この <see cref="DirectoryInfo"/> クラスのインスタンスに対する相対パスにできます。</summary>
+      /// <returns><paramref name="path"/> で指定された最後のディレクトリ。</returns>
       /// <remarks>
-      /// Any and all directories specified in path are created, unless some part of path is invalid.
-      /// The path parameter specifies a directory path, not a file path.
-      /// If the subdirectory already exists, this method does nothing.
+      /// パスの一部が無効でない限り、パスに指定されたすべてのディレクトリが作成されます。
+      /// path パラメーターはディレクトリパスを指定するもので、ファイルパスではありません。
+      /// サブディレクトリが既に存在する場合、このメソッドは何もしません。
       /// </remarks>
-      /// <param name="path">The specified path. This cannot be a different disk volume.</param>
-      /// <param name="compress">When <c>true</c> compresses the directory using NTFS compression.</param>
+      /// <param name="path">指定されたパス。別のディスクボリュームにすることはできません。</param>
+      /// <param name="compress"><c>true</c> の場合、NTFS 圧縮を使用してディレクトリを圧縮します。</param>
       [SecurityCritical]
       public DirectoryInfo CreateSubdirectory(string path, bool compress)
       {
@@ -79,15 +79,15 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates a subdirectory or subdirectories on the specified path. The specified path can be relative to this instance of the <see cref="DirectoryInfo"/> class.</summary>
-      /// <param name="path">The specified path. This cannot be a different disk volume.</param>
-      /// <param name="templatePath">The path of the directory to use as a template when creating the new directory.</param>
-      /// <param name="compress">When <c>true</c> compresses the directory using NTFS compression.</param>
-      /// <returns>The last directory specified in <paramref name="path"/>.</returns>
+      /// <summary>[AlphaFS] 指定されたパスにサブディレクトリを作成します。指定されたパスは、この <see cref="DirectoryInfo"/> クラスのインスタンスに対する相対パスにできます。</summary>
+      /// <param name="path">指定されたパス。別のディスクボリュームにすることはできません。</param>
+      /// <param name="templatePath">新しいディレクトリの作成時にテンプレートとして使用するディレクトリのパス。</param>
+      /// <param name="compress"><c>true</c> の場合、NTFS 圧縮を使用してディレクトリを圧縮します。</param>
+      /// <returns><paramref name="path"/> で指定された最後のディレクトリ。</returns>
       /// <remarks>
-      /// Any and all directories specified in path are created, unless some part of path is invalid.
-      /// The path parameter specifies a directory path, not a file path.
-      /// If the subdirectory already exists, this method does nothing.
+      /// パスの一部が無効でない限り、パスに指定されたすべてのディレクトリが作成されます。
+      /// path パラメーターはディレクトリパスを指定するもので、ファイルパスではありません。
+      /// サブディレクトリが既に存在する場合、このメソッドは何もしません。
       /// </remarks>
       [SecurityCritical]
       public DirectoryInfo CreateSubdirectory(string path, string templatePath, bool compress)
@@ -96,15 +96,15 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates a subdirectory or subdirectories on the specified path. The specified path can be relative to this instance of the <see cref="DirectoryInfo"/> class.</summary>
-      /// <param name="path">The specified path. This cannot be a different disk volume.</param>
-      /// <param name="directorySecurity">The <see cref="DirectorySecurity"/> security to apply.</param>
-      /// <param name="compress">When <c>true</c> compresses the directory using NTFS compression.</param>
-      /// <returns>The last directory specified in <paramref name="path"/>.</returns>
+      /// <summary>[AlphaFS] 指定されたパスにサブディレクトリを作成します。指定されたパスは、この <see cref="DirectoryInfo"/> クラスのインスタンスに対する相対パスにできます。</summary>
+      /// <param name="path">指定されたパス。別のディスクボリュームにすることはできません。</param>
+      /// <param name="directorySecurity">適用する <see cref="DirectorySecurity"/> セキュリティ。</param>
+      /// <param name="compress"><c>true</c> の場合、NTFS 圧縮を使用してディレクトリを圧縮します。</param>
+      /// <returns><paramref name="path"/> で指定された最後のディレクトリ。</returns>
       /// <remarks>
-      /// Any and all directories specified in path are created, unless some part of path is invalid.
-      /// The path parameter specifies a directory path, not a file path.
-      /// If the subdirectory already exists, this method does nothing.
+      /// パスの一部が無効でない限り、パスに指定されたすべてのディレクトリが作成されます。
+      /// path パラメーターはディレクトリパスを指定するもので、ファイルパスではありません。
+      /// サブディレクトリが既に存在する場合、このメソッドは何もしません。
       /// </remarks>
       [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
       [SecurityCritical]
@@ -114,16 +114,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates a subdirectory or subdirectories on the specified path. The specified path can be relative to this instance of the <see cref="DirectoryInfo"/> class.</summary>
-      /// <param name="templatePath">The path of the directory to use as a template when creating the new directory.</param>
-      /// <param name="path">The specified path. This cannot be a different disk volume.</param>
-      /// <param name="compress">When <c>true</c> compresses the directory using NTFS compression.</param>
-      /// <param name="directorySecurity">The <see cref="DirectorySecurity"/> security to apply.</param>
-      /// <returns>The last directory specified in <paramref name="path"/>.</returns>
+      /// <summary>[AlphaFS] 指定されたパスにサブディレクトリを作成します。指定されたパスは、この <see cref="DirectoryInfo"/> クラスのインスタンスに対する相対パスにできます。</summary>
+      /// <param name="templatePath">新しいディレクトリの作成時にテンプレートとして使用するディレクトリのパス。</param>
+      /// <param name="path">指定されたパス。別のディスクボリュームにすることはできません。</param>
+      /// <param name="compress"><c>true</c> の場合、NTFS 圧縮を使用してディレクトリを圧縮します。</param>
+      /// <param name="directorySecurity">適用する <see cref="DirectorySecurity"/> セキュリティ。</param>
+      /// <returns><paramref name="path"/> で指定された最後のディレクトリ。</returns>
       /// <remarks>
-      /// Any and all directories specified in path are created, unless some part of path is invalid.
-      /// The path parameter specifies a directory path, not a file path.
-      /// If the subdirectory already exists, this method does nothing.
+      /// パスの一部が無効でない限り、パスに指定されたすべてのディレクトリが作成されます。
+      /// path パラメーターはディレクトリパスを指定するもので、ファイルパスではありません。
+      /// サブディレクトリが既に存在する場合、このメソッドは何もしません。
       /// </remarks>
       [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
       [SecurityCritical]

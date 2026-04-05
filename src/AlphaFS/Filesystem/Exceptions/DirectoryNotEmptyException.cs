@@ -25,7 +25,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>[AlphaFS] The operation could not be completed because the directory is not empty.</summary>
+   /// <summary>[AlphaFS] ディレクトリが空でないため、操作を完了できませんでした。</summary>
    [Serializable]
    public class DirectoryNotEmptyException : System.IO.IOException
    {
@@ -33,31 +33,31 @@ namespace Alphaleonis.Win32.Filesystem
       private static readonly string ErrorText = string.Format(CultureInfo.InvariantCulture, "({0}) {1}", Win32Errors.ERROR_DIR_NOT_EMPTY, new Win32Exception((int) Win32Errors.ERROR_DIR_NOT_EMPTY).Message.Trim().TrimEnd('.').Trim());
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="DirectoryNotEmptyException"/> class.</summary>
+      /// <summary>[AlphaFS] <see cref="DirectoryNotEmptyException"/>クラスの新しいインスタンスを初期化します。</summary>
       public DirectoryNotEmptyException() : base(string.Format(CultureInfo.InvariantCulture, "{0}.", ErrorText), ErrorCode)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="DirectoryNotEmptyException"/> class.</summary>
-      /// <param name="message">The message.</param>
+      /// <summary>[AlphaFS] <see cref="DirectoryNotEmptyException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="message">メッセージ。</param>
       public DirectoryNotEmptyException(string message) : base(message, ErrorCode)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="DirectoryNotEmptyException"/> class.</summary>
-      /// <param name="path">The path to the directory.</param>
-      /// <param name="isPath">Always set to true when using this constructor.</param>
+      /// <summary>[AlphaFS] <see cref="DirectoryNotEmptyException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="path">ディレクトリへのパス。</param>
+      /// <param name="isPath">このコンストラクタを使用する場合は常にtrueに設定します。</param>
       [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "isPath")]
       public DirectoryNotEmptyException(string path, bool isPath) : base(string.Format(CultureInfo.InvariantCulture, "{0}: [{1}]", ErrorText, path), ErrorCode)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="DirectoryNotEmptyException"/> class.</summary>
-      /// <param name="path">The path to the file.</param>
-      /// <param name="innerException">The inner exception.</param>
+      /// <summary>[AlphaFS] <see cref="DirectoryNotEmptyException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="path">ファイルへのパス。</param>
+      /// <param name="innerException">内部例外。</param>
       public DirectoryNotEmptyException(string path, Exception innerException) : base(string.Format(CultureInfo.InvariantCulture, "{0}: [{1}]", ErrorText, path), innerException)
       {
       }

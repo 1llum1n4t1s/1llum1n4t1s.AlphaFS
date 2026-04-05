@@ -27,24 +27,24 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>Compress/decompress Non-/Transacted files/directories.</summary>
+      /// <summary>非トランザクション/トランザクションのファイル/ディレクトリを圧縮/展開します。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">A path that describes a directory to compress.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">圧縮するディレクトリを示すパス。</param>
       /// <param name="searchPattern">
-      ///    The search string to match against the names of directories in <paramref name="path"/>.
-      ///    This parameter can contain a combination of valid literal path and wildcard
+      ///    ディレクトリ名と照合する検索文字列。対象: <paramref name="path"/>.
+      ///    このパラメータには、有効なリテラルパスとワイルドカードの組み合わせを含めることができますが、
       ///    (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
       /// </param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
-      /// <param name="filters">The specification of custom filters to be used in the process.</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
+      /// <param name="filters">処理で使用するカスタムフィルタの指定。</param>
       /// <param name="compress"><c>true</c> compress, when <c>false</c> decompress.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       internal static void CompressDecompressCore(KernelTransaction transaction, string path, string searchPattern, DirectoryEnumerationOptions? options, DirectoryEnumerationFilters filters, bool compress, PathFormat pathFormat)
       {
@@ -56,14 +56,14 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
-         // Traverse the source folder, processing files and folders.
+         // ソースフォルダを走査し、ファイルとフォルダを処理する。
 
          foreach (var fsei in EnumerateFileSystemEntryInfosCore<FileSystemEntryInfo>(null, transaction, pathLp, searchPattern, null, options | DirectoryEnumerationOptions.AsLongPath, filters, PathFormat.LongFullPath))
 
             Device.ToggleCompressionCore(transaction, fsei.IsDirectory, fsei.FullPath, compress, PathFormat.LongFullPath);
 
 
-         // Process the root directory, the given path.
+         // ルートディレクトリ（指定されたパス）を処理する。
 
          Device.ToggleCompressionCore(transaction, true, pathLp, compress, PathFormat.LongFullPath);
       }

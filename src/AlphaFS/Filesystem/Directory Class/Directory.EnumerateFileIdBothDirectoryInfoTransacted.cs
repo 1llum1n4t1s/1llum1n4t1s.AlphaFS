@@ -31,7 +31,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] Retrieves information about files in the directory specified by <paramref name="path"/> in <see cref="FileShare.ReadWrite"/> mode.</summary>
       /// <returns>An enumeration of <see cref="FileIdBothDirectoryInfo"/> records for each file system entry in the specified diretory.</returns>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">A path to a directory from which to retrieve information.</param>
       [SecurityCritical]
       public static IEnumerable<FileIdBothDirectoryInfo> EnumerateFileIdBothDirectoryInfoTransacted(KernelTransaction transaction, string path)
@@ -43,9 +43,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] Retrieves information about files in the directory specified by <paramref name="path"/> in <see cref="FileShare.ReadWrite"/> mode.</summary>
       /// <returns>An enumeration of <see cref="FileIdBothDirectoryInfo"/> records for each file system entry in the specified diretory.</returns>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">A path to a directory from which to retrieve information.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static IEnumerable<FileIdBothDirectoryInfo> EnumerateFileIdBothDirectoryInfoTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)
       {
@@ -56,7 +56,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] Retrieves information about files in the directory specified by <paramref name="path"/> in specified <see cref="FileShare"/> mode.</summary>
       /// <returns>An enumeration of <see cref="FileIdBothDirectoryInfo"/> records for each file system entry in the specified diretory.</returns>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">A path to a directory from which to retrieve information.</param>
       /// <param name="shareMode">The <see cref="FileShare"/> mode with which to open a handle to the directory.</param>
       [SecurityCritical]
@@ -69,10 +69,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] Retrieves information about files in the directory specified by <paramref name="path"/> in specified <see cref="FileShare"/> mode.</summary>
       /// <returns>An enumeration of <see cref="FileIdBothDirectoryInfo"/> records for each file system entry in the specified diretory.</returns>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">A path to a directory from which to retrieve information.</param>
       /// <param name="shareMode">The <see cref="FileShare"/> mode with which to open a handle to the directory.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static IEnumerable<FileIdBothDirectoryInfo> EnumerateFileIdBothDirectoryInfoTransacted(KernelTransaction transaction, string path, FileShare shareMode, PathFormat pathFormat)
       {

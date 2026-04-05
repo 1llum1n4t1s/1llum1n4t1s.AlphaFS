@@ -27,16 +27,16 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Volume
    {
-      /// <summary>[AlphaFS] Get the unique volume name for the given path.</summary>
+      /// <summary>[AlphaFS] 指定されたパスの一意のボリューム名を取得します。</summary>
       /// <exception cref="ArgumentNullException"/>
       /// <param name="volumePathName">
-      ///   A path string. Both absolute and relative file and directory names, for example "..", is acceptable in this path. If you specify a
-      ///   relative file or directory name without a volume qualifier, GetUniqueVolumeNameForPath returns the Drive letter of the current
-      ///   volume.
+      ///   パス文字列。".." などの絶対および相対ファイル名とディレクトリ名の両方がこのパスで使用できます。
+      ///   ボリューム修飾子なしの相対ファイル名またはディレクトリ名を指定した場合、GetUniqueVolumeNameForPath は現在のボリュームの
+      ///   ドライブ文字を返します。
       /// </param>
       /// <returns>
-      ///   <para>Returns the unique volume name in the form: "\\?\Volume{GUID}\",</para>
-      ///   <para>or <c>null</c> on error or if unavailable.</para>
+      ///   <para>"\\?\Volume{GUID}\" 形式の一意のボリューム名を返します。</para>
+      ///   <para>エラーの場合または利用できない場合は <c>null</c>。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
       [SecurityCritical]

@@ -26,10 +26,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>Adds a trailing <see cref="DirectorySeparatorChar"/> or <see cref="AltDirectorySeparatorChar"/> character to the string, when absent.</summary>
-      /// <returns>A text string with a trailing <see cref="DirectorySeparatorChar"/> or <see cref="AltDirectorySeparatorChar"/> character. The function returns <c>null</c> when <paramref name="path"/> is <c>null</c>.</returns>
-      /// <param name="path">A text string to which the trailing <see cref="DirectorySeparatorChar"/> or <see cref="AltDirectorySeparatorChar"/> is to be added, when absent.</param>
-      /// <param name="addAlternateSeparator">If <c>true</c> the <see cref="AltDirectorySeparatorChar"/> character will be added instead.</param>
+      /// <summary>文字列の末尾に <see cref="DirectorySeparatorChar"/> または <see cref="AltDirectorySeparatorChar"/> 文字が存在しない場合に追加します。</summary>
+      /// <returns>末尾に <see cref="DirectorySeparatorChar"/> または <see cref="AltDirectorySeparatorChar"/> 文字を持つテキスト文字列。<paramref name="path"/> が <c>null</c> の場合は <c>null</c> を返します。</returns>
+      /// <param name="path">末尾に <see cref="DirectorySeparatorChar"/> または <see cref="AltDirectorySeparatorChar"/> が存在しない場合に追加するテキスト文字列。</param>
+      /// <param name="addAlternateSeparator"><c>true</c> の場合、代わりに <see cref="AltDirectorySeparatorChar"/> 文字が追加されます。</param>
       [SecurityCritical]
       internal static string AddTrailingDirectorySeparatorCore(string path, bool addAlternateSeparator)
       {

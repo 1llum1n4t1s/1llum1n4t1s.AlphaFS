@@ -27,8 +27,8 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public sealed partial class DirectoryInfo
    {
-      /// <summary>[AlphaFS] Compresses a directory using NTFS compression.</summary>
-      /// <remarks>This will only compress the root items (non recursive).</remarks>
+      /// <summary>[AlphaFS] NTFS 圧縮を使用してディレクトリを圧縮します。</summary>
+      /// <remarks>ルート項目のみを圧縮します（非再帰）。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -42,14 +42,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Compresses a directory using NTFS compression.</summary>
+      /// <summary>[AlphaFS] NTFS 圧縮を使用してディレクトリを圧縮します。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
       [SecurityCritical]
       public void Compress(DirectoryEnumerationOptions options)
       {

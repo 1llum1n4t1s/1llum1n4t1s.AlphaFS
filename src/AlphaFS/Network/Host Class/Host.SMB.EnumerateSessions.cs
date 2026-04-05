@@ -29,7 +29,7 @@ namespace Alphaleonis.Win32.Network
 {
    public static partial class Host
    {
-      /// <summary>[AlphaFS] Enumerates sessions established on the local host.</summary>
+      /// <summary>[AlphaFS] ローカルホスト上で確立されたセッションを列挙します.</summary>
       /// <returns>An <see cref="IEnumerable{SessionInfo}"/> collection from the local host.</returns>
       [SecurityCritical]
       public static IEnumerable<SessionInfo> EnumerateSessions()
@@ -40,7 +40,7 @@ namespace Alphaleonis.Win32.Network
 
       /// <summary>[AlphaFS] Enumerates sessions established on the specified <paramref name="hostName"/>.</summary>
       /// <returns>An <see cref="IEnumerable{SessionInfo}"/> collection from the specified <paramref name="hostName"/>.</returns>
-      /// <param name="hostName">The DNS or NetBIOS name of the specified host. If this parameter is <c>null</c>, the local Computer is used.</param>
+      /// <param name="hostName">指定されたホストの DNS 名または NetBIOS 名。 If this parameter is <c>null</c>, the local Computer is used.</param>
       [SecurityCritical]
       public static IEnumerable<SessionInfo> EnumerateSessions(string hostName)
       {
@@ -50,8 +50,8 @@ namespace Alphaleonis.Win32.Network
 
       /// <summary>[AlphaFS] Enumerates sessions established on the specified <paramref name="hostName"/>.</summary>
       /// <returns>An <see cref="IEnumerable{SessionInfo}"/> collection from the specified <paramref name="hostName"/>.</returns>
-      /// <param name="hostName">The DNS or NetBIOS name of the specified host. If this parameter is <c>null</c>, the local Computer is used.</param>
-      /// <param name="clientName">The name of the Computer session for which information is to be returned. If this parameter is <c>null</c>, information for all Computer sessions on the server is returned.</param>
+      /// <param name="hostName">指定されたホストの DNS 名または NetBIOS 名。 If this parameter is <c>null</c>, the local Computer is used.</param>
+      /// <param name="clientName">情報を返す対象のコンピューターセッションの名前。 If this parameter is <c>null</c>, information for all Computer sessions on the server is returned.</param>
       [SecurityCritical]
       public static IEnumerable<SessionInfo> EnumerateSessions(string hostName, string clientName)
       {
@@ -61,8 +61,8 @@ namespace Alphaleonis.Win32.Network
 
       /// <summary>[AlphaFS] Enumerates sessions established on the specified <paramref name="hostName"/>.</summary>
       /// <returns>An <see cref="IEnumerable{SessionInfo}"/> collection from the specified <paramref name="hostName"/>.</returns>
-      /// <param name="hostName">The DNS or NetBIOS name of the specified host. If this parameter is <c>null</c>, the local Computer is used.</param>
-      /// <param name="clientName">The name of the Computer session for which information is to be returned. If this parameter is <c>null</c>, information for all Computer sessions on the server is returned.</param>
+      /// <param name="hostName">指定されたホストの DNS 名または NetBIOS 名。 If this parameter is <c>null</c>, the local Computer is used.</param>
+      /// <param name="clientName">情報を返す対象のコンピューターセッションの名前。 If this parameter is <c>null</c>, information for all Computer sessions on the server is returned.</param>
       /// <param name="userName">The name of the user for which information is to be returned. If this parameter is <c>null</c>, information for all users is returned.</param>
       [SecurityCritical]
       public static IEnumerable<SessionInfo> EnumerateSessions(string hostName, string clientName, string userName)
@@ -76,8 +76,8 @@ namespace Alphaleonis.Win32.Network
       /// <summary>[AlphaFS] Enumerates sessions established on the specified <paramref name="hostName"/>.</summary>
       /// <returns>An <see cref="IEnumerable{SessionInfo}"/> collection from the specified <paramref name="hostName"/>.</returns>
       /// <exception cref="NetworkInformationException"/>
-      /// <param name="hostName">The DNS or NetBIOS name of the specified host. If this parameter is <c>null</c>, the local Computer is used.</param>
-      /// <param name="clientName">The name of the Computer session for which information is to be returned. If this parameter is <c>null</c>, information for all Computer sessions on the server is returned.</param>
+      /// <param name="hostName">指定されたホストの DNS 名または NetBIOS 名。 If this parameter is <c>null</c>, the local Computer is used.</param>
+      /// <param name="clientName">情報を返す対象のコンピューターセッションの名前。 If this parameter is <c>null</c>, information for all Computer sessions on the server is returned.</param>
       /// <param name="userName">The name of the user for which information is to be returned. If this parameter is <c>null</c>, information for all users is returned.</param>
       [SecurityCritical]
       internal static IEnumerable<SessionInfo> EnumerateSessionsCore(string hostName, string clientName, string userName)

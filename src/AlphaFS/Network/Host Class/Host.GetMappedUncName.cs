@@ -28,7 +28,7 @@ namespace Alphaleonis.Win32.Network
 {
    public static partial class Host
    {
-      /// <summary>[AlphaFS] Gets the network share name from the locally mapped path.</summary>
+      /// <summary>[AlphaFS] ローカルにマップされたパスからネットワーク共有名を取得します.</summary>
       /// <returns>The network share connection name of <paramref name="path"/>.</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>

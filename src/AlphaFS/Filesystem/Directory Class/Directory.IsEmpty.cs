@@ -25,10 +25,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>[AlphaFS] Determines whether the given directory is empty; i.e. it contains no files and no subdirectories.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリが空かどうかを判定します。つまり、ファイルもサブディレクトリも含まれていません。</summary>
       /// <returns>
-      ///   <para>Returns <c>true</c> when the directory contains no file system objects.</para>
-      ///   <para>Returns <c>false</c> when directory contains at least one file system object.</para>
+      ///   <para>ディレクトリにファイルシステムオブジェクトが含まれない場合は <c>true</c> を返します。</para>
+      ///   <para>ディレクトリに少なくとも1つのファイルシステムオブジェクトが含まれる場合は <c>false</c> を返します。</para>
       /// </returns>
       /// <param name="directoryPath">The path to the directory.</param>
       [SecurityCritical]
@@ -38,13 +38,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Determines whether the given directory is empty; i.e. it contains no files and no subdirectories.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリが空かどうかを判定します。つまり、ファイルもサブディレクトリも含まれていません。</summary>
       /// <returns>
-      ///   <para>Returns <c>true</c> when the directory contains no file system objects.</para>
-      ///   <para>Returns <c>false</c> when directory contains at least one file system object.</para>
+      ///   <para>ディレクトリにファイルシステムオブジェクトが含まれない場合は <c>true</c> を返します。</para>
+      ///   <para>ディレクトリに少なくとも1つのファイルシステムオブジェクトが含まれる場合は <c>false</c> を返します。</para>
       /// </returns>
       /// <param name="directoryPath">The path to the directory.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static bool IsEmpty(string directoryPath, PathFormat pathFormat)
       {

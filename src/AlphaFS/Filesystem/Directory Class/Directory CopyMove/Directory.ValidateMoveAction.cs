@@ -29,32 +29,32 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       internal static CopyMoveArguments ValidateMoveAction(CopyMoveArguments cma)
       {
-         // Determine if a Move action or Copy action-fallback is possible.
+         // 移動操作またはコピー操作フォールバックが可能かどうかを判定する。
 
          cma.IsCopy = false;
          cma.EmulateMove = false;
-         
 
-         // Compare the root part of both paths.
+
+         // 両方のパスのルート部分を比較する。
 
          var equalRootPaths = Path.GetPathRoot(cma.SourcePathLp, false).Equals(Path.GetPathRoot(cma.DestinationPathLp, false), StringComparison.OrdinalIgnoreCase);
-         
 
-         // Method Volume.IsSameVolume() returns true when both paths refer to the same volume, even if one of the paths is a UNC path.
-         // For example, src = C:\TempSrc and dst = \\localhost\C$\TempDst
+
+         // Volume.IsSameVolume() メソッドは、一方のパスがUNCパスであっても、両方のパスが同じボリュームを参照する場合にtrueを返す。
+         // 例: src = C:\TempSrc、dst = \\localhost\C$\TempDst
 
          var isSameVolume = equalRootPaths || Volume.IsSameVolume(cma.SourcePathLp, cma.DestinationPathLp);
-         
+
          var isMove = isSameVolume && equalRootPaths;
 
          if (!isMove)
          {
-            // A Move() can be emulated by using Copy() and Delete(), but only if the MoveOptions.CopyAllowed flag is set.
+            // Move() は Copy() と Delete() を使ってエミュレートできるが、MoveOptions.CopyAllowed フラグが設定されている場合のみ。
 
             isMove = File.HasCopyAllowed(cma.MoveOptions);
 
 
-            // MSDN: .NET3.5+: IOException: An attempt was made to move a directory to a different volume.
+            // MSDN: .NET3.5+: IOException: 異なるボリュームにディレクトリを移動しようとした。
 
             if (!isMove)
             {
@@ -63,10 +63,10 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
-         // The MoveFileXxx methods fail when:
-         // - A directory is being moved;
-         // - One of the paths is a UNC path, even though both paths refer to the same volume.
-         //   For example, src = C:\TempSrc and dst = \\localhost\C$\TempDst
+         // MoveFileXxx メソッドは以下の場合に失敗する:
+         // - ディレクトリが移動される場合
+         // - 両方のパスが同じボリュームを参照していても、一方のパスがUNCパスの場合。
+         //   例: src = C:\TempSrc、dst = \\localhost\C$\TempDst
 
          if (isMove)
          {
@@ -80,7 +80,7 @@ namespace Alphaleonis.Win32.Filesystem
          isMove = isMove && isSameVolume && equalRootPaths;
 
 
-         // Emulate Move().
+         // Move() をエミュレートする。
          if (!isMove)
          {
             cma.MoveOptions = null;

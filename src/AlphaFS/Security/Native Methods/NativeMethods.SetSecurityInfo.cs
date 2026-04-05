@@ -29,14 +29,14 @@ namespace Alphaleonis.Win32.Security
 {
    internal static partial class NativeMethods
    {
-      /// <summary>The SetSecurityInfo function sets specified security information in the security descriptor of a specified object. 
-      /// The caller identifies the object by a handle.</summary>
+      /// <summary>SetSecurityInfo関数は、指定されたオブジェクトのセキュリティ記述子に指定されたセキュリティ情報を設定します。
+      /// 呼び出し元はオブジェクトをハンドルで識別します。</summary>
       /// <returns>
-      /// If the function succeeds, the function returns ERROR_SUCCESS.
-      /// If the function fails, it returns a nonzero error code defined in WinError.h.
+      /// 関数が成功した場合、ERROR_SUCCESSを返します。
+      /// 関数が失敗した場合、WinError.hで定義された0以外のエラーコードを返します。
       /// </returns>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.U4)]

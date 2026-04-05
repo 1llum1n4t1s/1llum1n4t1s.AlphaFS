@@ -27,7 +27,7 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>[AlphaFS] Encrypts a directory so that only the account used to encrypt the directory can decrypt it.</summary>
+      /// <summary>[AlphaFS] ディレクトリを暗号化し、暗号化に使用したアカウントのみが復号化できるようにします。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryReadOnlyException"/>
@@ -35,7 +35,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="path">A path that describes a directory to encrypt.</param>
+      /// <param name="path">暗号化するディレクトリを示すパス。</param>
       [SecurityCritical]
       public static void Encrypt(string path)
       {
@@ -43,7 +43,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Encrypts a directory so that only the account used to encrypt the directory can decrypt it.</summary>
+      /// <summary>[AlphaFS] ディレクトリを暗号化し、暗号化に使用したアカウントのみが復号化できるようにします。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryReadOnlyException"/>
@@ -51,8 +51,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="path">A path that describes a directory to encrypt.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="path">暗号化するディレクトリを示すパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void Encrypt(string path, PathFormat pathFormat)
       {
@@ -60,7 +60,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Encrypts a directory so that only the account used to encrypt the directory can decrypt it.</summary>
+      /// <summary>[AlphaFS] ディレクトリを暗号化し、暗号化に使用したアカウントのみが復号化できるようにします。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryReadOnlyException"/>
@@ -68,7 +68,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="path">A path that describes a directory to encrypt.</param>
+      /// <param name="path">暗号化するディレクトリを示すパス。</param>
       /// <param name="recursive"><c>true</c> to encrypt the directory recursively. <c>false</c> only encrypt the directory.</param>
       [SecurityCritical]
       public static void Encrypt(string path, bool recursive)
@@ -77,7 +77,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Encrypts a directory so that only the account used to encrypt the directory can decrypt it.</summary>
+      /// <summary>[AlphaFS] ディレクトリを暗号化し、暗号化に使用したアカウントのみが復号化できるようにします。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryReadOnlyException"/>
@@ -85,9 +85,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="path">A path that describes a directory to encrypt.</param>
+      /// <param name="path">暗号化するディレクトリを示すパス。</param>
       /// <param name="recursive"><c>true</c> to encrypt the directory recursively. <c>false</c> only encrypt the directory.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void Encrypt(string path, bool recursive, PathFormat pathFormat)
       {

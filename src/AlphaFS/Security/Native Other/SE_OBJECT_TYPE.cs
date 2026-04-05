@@ -21,60 +21,60 @@
 
 namespace Alphaleonis.Win32.Security
 {
-   /// <summary>The SE_OBJECT_TYPE enumeration contains values that correspond to the types of Windows objects that support security.
-   /// The functions, such as GetSecurityInfo and SetSecurityInfo, that set and retrieve the security information of an object, use these values to indicate the type of object.
+   /// <summary>SE_OBJECT_TYPE列挙型は、セキュリティをサポートするWindowsオブジェクトの種類に対応する値を含みます。
+   /// GetSecurityInfoやSetSecurityInfoなど、オブジェクトのセキュリティ情報を設定・取得する関数は、これらの値を使用してオブジェクトの種類を示します。
    /// </summary>
    /// <remarks>
-   /// <para>Minimum supported client: Windows XP [desktop apps only]</para>
-   /// <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+   /// <para>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</para>
+   /// <para>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</para>
    /// </remarks>
    internal enum SE_OBJECT_TYPE
    {
-      /// <summary>Unknown object type.</summary>
+      /// <summary>不明なオブジェクトタイプ。</summary>
       SE_UNKNOWN_OBJECT_TYPE = 0,
 
-      /// <summary>Indicates a file or directory. The name string that identifies a file or directory object can be in one of the following formats:
-      ///   A relative path, such as FileName.dat or ..\FileName
-      ///   An absolute path, such as FileName.dat, C:\DirectoryName\FileName.dat, or G:\RemoteDirectoryName\FileName.dat.
-      ///   A UNC name, such as \\ComputerName\ShareName\FileName.dat.
+      /// <summary>ファイルまたはディレクトリを示します。ファイルまたはディレクトリオブジェクトを識別する名前文字列は、以下の形式のいずれかです:
+      ///   相対パス（例: FileName.dat または ..\FileName）
+      ///   絶対パス（例: FileName.dat、C:\DirectoryName\FileName.dat、G:\RemoteDirectoryName\FileName.dat）
+      ///   UNC名（例: \\ComputerName\ShareName\FileName.dat）
       /// </summary>
       SE_FILE_OBJECT,
 
-      /// <summary>Indicates a Windows service. A service object can be a local service, such as ServiceName, or a remote service, such as \\ComputerName\ServiceName.</summary>
+      /// <summary>Windowsサービスを示します。サービスオブジェクトは、ServiceNameのようなローカルサービス、または\\ComputerName\ServiceNameのようなリモートサービスです。</summary>
       SE_SERVICE,
 
-      /// <summary>Indicates a printer. A printer object can be a local printer, such as PrinterName, or a remote printer, such as \\ComputerName\PrinterName.</summary>
+      /// <summary>プリンターを示します。プリンターオブジェクトは、PrinterNameのようなローカルプリンター、または\\ComputerName\PrinterNameのようなリモートプリンターです。</summary>
       SE_PRINTER,
 
-      /// <summary>Indicates a registry key. A registry key object can be in the local registry, such as CLASSES_ROOT\SomePath or in a remote registry, such as \\ComputerName\CLASSES_ROOT\SomePath.
-      /// The names of registry keys must use the following literal strings to identify the predefined registry keys: "CLASSES_ROOT", "CURRENT_USER", "MACHINE", and "USERS".
+      /// <summary>レジストリキーを示します。レジストリキーオブジェクトは、CLASSES_ROOT\SomePathのようなローカルレジストリ、または\\ComputerName\CLASSES_ROOT\SomePathのようなリモートレジストリに存在できます。
+      /// レジストリキーの名前は、定義済みレジストリキーを識別するために"CLASSES_ROOT"、"CURRENT_USER"、"MACHINE"、"USERS"のリテラル文字列を使用する必要があります。
       /// </summary>
       SE_REGISTRY_KEY,
 
-      /// <summary>Indicates a network share. A share object can be local, such as ShareName, or remote, such as \\ComputerName\ShareName.</summary>
+      /// <summary>ネットワーク共有を示します。共有オブジェクトは、ShareNameのようなローカル、または\\ComputerName\ShareNameのようなリモートです。</summary>
       SE_LMSHARE,
 
-      /// <summary>Indicates a local kernel object. The GetSecurityInfo and SetSecurityInfo functions support all types of kernel objects.
-      /// The GetNamedSecurityInfo and SetNamedSecurityInfo functions work only with the following kernel objects: semaphore, event, mutex, waitable timer, and file mapping.</summary>
+      /// <summary>ローカルカーネルオブジェクトを示します。GetSecurityInfoおよびSetSecurityInfo関数はすべてのカーネルオブジェクトをサポートします。
+      /// GetNamedSecurityInfoおよびSetNamedSecurityInfo関数は、セマフォ、イベント、ミューテックス、待機タイマー、ファイルマッピングのカーネルオブジェクトのみで動作します。</summary>
       SE_KERNEL_OBJECT,
 
-      /// <summary>Indicates a window station or desktop object on the local computer. You cannot use GetNamedSecurityInfo and SetNamedSecurityInfo with these objects because the names of window stations or desktops are not unique.</summary>
+      /// <summary>ローカルコンピューター上のウィンドウステーションまたはデスクトップオブジェクトを示します。ウィンドウステーションまたはデスクトップの名前は一意ではないため、これらのオブジェクトにGetNamedSecurityInfoおよびSetNamedSecurityInfoは使用できません。</summary>
       SE_WINDOW_OBJECT,
 
-      /// <summary>Indicates a directory service object or a property set or property of a directory service object.
-      /// The name string for a directory service object must be in X.500 form, for example: CN=SomeObject,OU=ou2,OU=ou1,DC=DomainName,DC=CompanyName,DC=com,O=internet</summary>
+      /// <summary>ディレクトリサービスオブジェクト、またはディレクトリサービスオブジェクトのプロパティセットまたはプロパティを示します。
+      /// ディレクトリサービスオブジェクトの名前文字列はX.500形式である必要があります（例: CN=SomeObject,OU=ou2,OU=ou1,DC=DomainName,DC=CompanyName,DC=com,O=internet）。</summary>
       SE_DS_OBJECT,
 
-      /// <summary>Indicates a directory service object and all of its property sets and properties.</summary>
+      /// <summary>ディレクトリサービスオブジェクトとそのすべてのプロパティセットおよびプロパティを示します。</summary>
       SE_DS_OBJECT_ALL,
 
-      /// <summary>Indicates a provider-defined object.</summary>
+      /// <summary>プロバイダー定義オブジェクトを示します。</summary>
       SE_PROVIDER_DEFINED_OBJECT,
 
-      /// <summary>Indicates a WMI object.</summary>
+      /// <summary>WMIオブジェクトを示します。</summary>
       SE_WMIGUID_OBJECT,
 
-      /// <summary>Indicates an object for a registry entry under WOW64.</summary>
+      /// <summary>WOW64下のレジストリエントリのオブジェクトを示します。</summary>
       SE_REGISTRY_WOW64_32KEY
    }
 }

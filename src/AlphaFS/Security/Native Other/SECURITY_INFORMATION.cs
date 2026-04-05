@@ -23,65 +23,65 @@ using System;
 
 namespace Alphaleonis.Win32.Security
 {
-   /// <summary>The SECURITY_INFORMATION data type identifies the object-related security information being set or queried.
-   /// This security information includes:
-   ///   The owner of an object;
-   ///   The primary group of an object;
-   ///   The discretionary access control list (DACL) of an object;
-   ///   The system access control list (SACL) of an object;
+   /// <summary>SECURITY_INFORMATIONデータ型は、設定または照会されるオブジェクト関連のセキュリティ情報を識別します。
+   /// このセキュリティ情報には以下が含まれます:
+   ///   オブジェクトの所有者;
+   ///   オブジェクトのプライマリグループ;
+   ///   オブジェクトの随意アクセス制御リスト（DACL）;
+   ///   オブジェクトのシステムアクセス制御リスト（SACL）;
    /// </summary>
    /// <remarks>
-   /// An unsigned 32-bit integer specifies portions of a SECURITY_DESCRIPTOR by means of bit flags.
-   /// Individual bit values (combinable with the bitwise OR operation) are as shown in the following table.
+   /// 符号なし32ビット整数がビットフラグによってSECURITY_DESCRIPTORの部分を指定します。
+   /// 個々のビット値（ビットOR演算で組み合わせ可能）は以下の表の通りです。
    /// </remarks>
    [Flags]
    internal enum SECURITY_INFORMATION : uint
    {
-      /// <summary>None</summary>
+      /// <summary>なし</summary>
       None = 0,
 
-      /// <summary>OWNER_SECURITY_INFORMATION (0x00000001) - The owner identifier of the object is being referenced.</summary>
+      /// <summary>OWNER_SECURITY_INFORMATION (0x00000001) - オブジェクトの所有者識別子が参照されています。</summary>
       OWNER_SECURITY_INFORMATION = 1,
 
-      /// <summary>GROUP_SECURITY_INFORMATION (0x00000002) - The primary group identifier of the object is being referenced.</summary>
+      /// <summary>GROUP_SECURITY_INFORMATION (0x00000002) - オブジェクトのプライマリグループ識別子が参照されています。</summary>
       GROUP_SECURITY_INFORMATION = 2,
 
-      /// <summary>DACL_SECURITY_INFORMATION (0x00000004) - The DACL of the object is being referenced.</summary>
+      /// <summary>DACL_SECURITY_INFORMATION (0x00000004) - オブジェクトのDACLが参照されています。</summary>
       DACL_SECURITY_INFORMATION = 4,
 
-      /// <summary>SACL_SECURITY_INFORMATION (0x00000008) - The SACL of the object is being referenced.</summary>
+      /// <summary>SACL_SECURITY_INFORMATION (0x00000008) - オブジェクトのSACLが参照されています。</summary>
       SACL_SECURITY_INFORMATION = 8,
 
-      /// <summary>LABEL_SECURITY_INFORMATION (0x00000010) - The mandatory integrity label is being referenced. The mandatory integrity label is an ACE in the SACL of the object.</summary>
-      /// <remarks>Windows Server 2003 and Windows XP: This bit flag is not available.</remarks>
+      /// <summary>LABEL_SECURITY_INFORMATION (0x00000010) - 必須整合性ラベルが参照されています。必須整合性ラベルはオブジェクトのSACL内のACEです。</summary>
+      /// <remarks>Windows Server 2003およびWindows XP: このビットフラグは利用できません。</remarks>
       LABEL_SECURITY_INFORMATION = 16,
 
-      /// <summary>ATTRIBUTE_SECURITY_INFORMATION (0x00000020) - The resource properties of the object being referenced.
-      /// The resource properties are stored in SYSTEM_RESOURCE_ATTRIBUTE_ACE types in the SACL of the security descriptor.
+      /// <summary>ATTRIBUTE_SECURITY_INFORMATION (0x00000020) - 参照されるオブジェクトのリソースプロパティ。
+      /// リソースプロパティはセキュリティ記述子のSACL内のSYSTEM_RESOURCE_ATTRIBUTE_ACE型に格納されます。
       /// </summary>
-      /// <remarks>Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003, and Windows XP: This bit flag is not available.</remarks>
+      /// <remarks>Windows Server 2008 R2、Windows 7、Windows Server 2008、Windows Vista、Windows Server 2003、Windows XP: このビットフラグは利用できません。</remarks>
       ATTRIBUTE_SECURITY_INFORMATION = 32,
 
-      /// <summary>SCOPE_SECURITY_INFORMATION (0x00000040) - The Central Access Policy (CAP) identifier applicable on the object that is being referenced.
-      /// Each CAP identifier is stored in a SYSTEM_SCOPED_POLICY_ID_ACE type in the SACL of the SD.
+      /// <summary>SCOPE_SECURITY_INFORMATION (0x00000040) - 参照されるオブジェクトに適用される集中アクセスポリシー（CAP）識別子。
+      /// 各CAP識別子はセキュリティ記述子のSACL内のSYSTEM_SCOPED_POLICY_ID_ACE型に格納されます。
       /// </summary>
-      /// <remarks>Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003, and Windows XP: This bit flag is not available.</remarks>
+      /// <remarks>Windows Server 2008 R2、Windows 7、Windows Server 2008、Windows Vista、Windows Server 2003、Windows XP: このビットフラグは利用できません。</remarks>
       SCOPE_SECURITY_INFORMATION = 64,
 
-      /// <summary>BACKUP_SECURITY_INFORMATION (0x00010000) - All parts of the security descriptor. This is useful for backup and restore software that needs to preserve the entire security descriptor.</summary>
-      /// <remarks>Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003, and Windows XP: This bit flag is not available.</remarks>
+      /// <summary>BACKUP_SECURITY_INFORMATION (0x00010000) - セキュリティ記述子のすべての部分。セキュリティ記述子全体を保持する必要があるバックアップおよび復元ソフトウェアに便利です。</summary>
+      /// <remarks>Windows Server 2008 R2、Windows 7、Windows Server 2008、Windows Vista、Windows Server 2003、Windows XP: このビットフラグは利用できません。</remarks>
       BACKUP_SECURITY_INFORMATION = 65536,
 
-      /// <summary>UNPROTECTED_SACL_SECURITY_INFORMATION (0x10000000) - The SACL inherits ACEs from the parent object.</summary>
+      /// <summary>UNPROTECTED_SACL_SECURITY_INFORMATION (0x10000000) - SACLが親オブジェクトからACEを継承します。</summary>
       UNPROTECTED_SACL_SECURITY_INFORMATION = 268435456,
 
-      /// <summary>UNPROTECTED_DACL_SECURITY_INFORMATION (0x20000000) - The DACL inherits ACEs from the parent object.</summary>
+      /// <summary>UNPROTECTED_DACL_SECURITY_INFORMATION (0x20000000) - DACLが親オブジェクトからACEを継承します。</summary>
       UNPROTECTED_DACL_SECURITY_INFORMATION = 536870912,
 
-      /// <summary>PROTECTED_SACL_SECURITY_INFORMATION (0x40000000) - The SACL cannot inherit ACEs.</summary>
+      /// <summary>PROTECTED_SACL_SECURITY_INFORMATION (0x40000000) - SACLはACEを継承できません。</summary>
       PROTECTED_SACL_SECURITY_INFORMATION = 1073741824,
 
-      /// <summary>PROTECTED_DACL_SECURITY_INFORMATION (0x80000000) - The DACL cannot inherit access control entries (ACEs).</summary>
+      /// <summary>PROTECTED_DACL_SECURITY_INFORMATION (0x80000000) - DACLはアクセス制御エントリ（ACE）を継承できません。</summary>
       PROTECTED_DACL_SECURITY_INFORMATION = 2147483648
    }
 }

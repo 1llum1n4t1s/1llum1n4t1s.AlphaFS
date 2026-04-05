@@ -27,7 +27,7 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Lists all connections made to a shared resource on the server or all connections established from a particular computer.</summary>
+      /// <summary>サーバー上の共有リソースに対して行われたすべての接続を一覧表示します or all connections established from a particular computer.</summary>
       /// <returns>
       /// If the function succeeds, the return value is NERR_Success.
       /// If the function fails, the return value is a system error code.
@@ -35,8 +35,8 @@ namespace Alphaleonis.Win32.Network
       /// <remarks>
       /// <para>If there is more than one user using this connection, then it is possible to get more than one structure for the same connection, but with a different user name.</para>
       /// <para>Administrator, Server or Print Operator, or Power User group membership is required to successfully execute the NetConnectionEnum function.</para>
-      /// <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      /// <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      /// <para>サポートされる最小クライアント: Windows XP [desktop apps only]</para>
+      /// <para>サポートされる最小サーバー: Windows Server 2003 [desktop apps only]</para>
       /// </remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("netapi32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
@@ -44,7 +44,7 @@ namespace Alphaleonis.Win32.Network
       internal static extern uint NetConnectionEnum([MarshalAs(UnmanagedType.LPWStr)] string serverName, [MarshalAs(UnmanagedType.LPWStr)] string qualifier, [MarshalAs(UnmanagedType.U4)] uint level, out SafeGlobalMemoryBufferHandle bufPtr, [MarshalAs(UnmanagedType.I4)] int prefMaxLen, [MarshalAs(UnmanagedType.U4)] out uint entriesRead, [MarshalAs(UnmanagedType.U4)] out uint totalEntries, [MarshalAs(UnmanagedType.U4)] out uint resumeHandle);
 
 
-      /// <summary>Forces a resource to close. This function can be used when an error prevents closure by any other means.</summary>
+      /// <summary>リソースの強制クローズ。 This function can be used when an error prevents closure by any other means.</summary>
       /// <returns>
       /// If the function succeeds, the return value is NERR_Success.
       /// If the function fails, the return value is a system error code.
@@ -52,8 +52,8 @@ namespace Alphaleonis.Win32.Network
       /// <remarks>
       /// <para>You should use NetFileClose with caution because it does not write data cached on the client system to the file before closing the file.</para>
       /// <para>Only members of the Administrators or Server Operators local group can successfully execute the NetFileEnum function.</para>
-      /// <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      /// <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      /// <para>サポートされる最小クライアント: Windows XP [desktop apps only]</para>
+      /// <para>サポートされる最小サーバー: Windows Server 2003 [desktop apps only]</para>
       /// </remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("netapi32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
@@ -68,8 +68,8 @@ namespace Alphaleonis.Win32.Network
       /// </returns>
       /// <remarks>
       /// <para>Only members of the Administrators or Server Operators local group can successfully execute the NetFileEnum function.</para>
-      /// <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      /// <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      /// <para>サポートされる最小クライアント: Windows XP [desktop apps only]</para>
+      /// <para>サポートされる最小サーバー: Windows Server 2003 [desktop apps only]</para>
       /// </remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("netapi32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
@@ -77,7 +77,7 @@ namespace Alphaleonis.Win32.Network
       internal static extern uint NetFileEnum([MarshalAs(UnmanagedType.LPWStr)] string serverName, [MarshalAs(UnmanagedType.LPWStr)] string basepath, [MarshalAs(UnmanagedType.LPWStr)] string username, [MarshalAs(UnmanagedType.U4)] uint level, out SafeGlobalMemoryBufferHandle buffer, [MarshalAs(UnmanagedType.I4)] int prefmaxlen, [MarshalAs(UnmanagedType.U4)] out uint entriesRead, [MarshalAs(UnmanagedType.U4)] out uint totalentries, [MarshalAs(UnmanagedType.U4)] out uint resumeHandle);
 
 
-      /// <summary>Provides information about sessions established on a server.</summary>
+      /// <summary>サーバー上で確立されたセッションに関する情報を提供します。</summary>
       /// <returns>
       /// If the function succeeds, the return value is NERR_Success.
       /// If the function fails, the return value is a system error code.
@@ -85,8 +85,8 @@ namespace Alphaleonis.Win32.Network
       /// <remarks>
       /// <para>Only members of the Administrators or Server Operators local group can successfully execute the NetSessionEnum function at level 1 or level 2.</para>
       /// <para>No special group membership is required for level 0 or level 10 calls.</para>
-      /// <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      /// <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      /// <para>サポートされる最小クライアント: Windows XP [desktop apps only]</para>
+      /// <para>サポートされる最小サーバー: Windows Server 2003 [desktop apps only]</para>
       /// </remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("netapi32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
@@ -105,8 +105,8 @@ namespace Alphaleonis.Win32.Network
       /// <para>to successfully execute the NetShareEnum function at levels 2, 502, and 503. No special group membership is required for level 0 or level 1 calls.</para>
       /// <para>This function applies only to Server Message Block (SMB) shares.</para>
       /// <para>Windows Server 2003 and Windows XP: For all users, Administrator, Power User, Print Operator, or Server Operator group membership is required to successfully execute the NetShareEnum function at levels 2 and 502.</para>
-      /// <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      /// <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      /// <para>サポートされる最小クライアント: Windows XP [desktop apps only]</para>
+      /// <para>サポートされる最小サーバー: Windows Server 2003 [desktop apps only]</para>
       /// </remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("netapi32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
@@ -124,8 +124,8 @@ namespace Alphaleonis.Win32.Network
       /// <para>For non-interactive users, Administrator, Power User, Print Operator, or Server Operator group membership is required to successfully execute the NetShareGetInfo function at levels 2, 502, and 503.</para>
       /// <para>This function applies only to Server Message Block (SMB) shares.</para>
       /// <para>Windows Server 2003 and Windows XP: For all users, Administrator, Power User, Print Operator, or Server Operator group membership is required to successfully execute the NetShareGetInfo function at levels 2 and 502.</para>
-      /// <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      /// <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      /// <para>サポートされる最小クライアント: Windows XP [desktop apps only]</para>
+      /// <para>サポートされる最小サーバー: Windows Server 2003 [desktop apps only]</para>
       /// </remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("netapi32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
@@ -142,8 +142,8 @@ namespace Alphaleonis.Win32.Network
       /// <remarks>
       /// <para>No special group membership is required to obtain workstation statistics.</para>
       /// <para>Only members of the Administrators or Server Operators local group can successfully execute the NetStatisticsGet function on a remote server.</para>
-      /// <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      /// <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      /// <para>サポートされる最小クライアント: Windows XP [desktop apps only]</para>
+      /// <para>サポートされる最小サーバー: Windows Server 2003 [desktop apps only]</para>
       /// </remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("netapi32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]

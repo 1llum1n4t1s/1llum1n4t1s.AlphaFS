@@ -35,10 +35,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="path">A path that describes a directory to encrypt.</param>
+      /// <param name="path">暗号化するディレクトリを示すパス。</param>
       /// <param name="encrypt"><c>true</c> encrypt, <c>false</c> decrypt.</param>
       /// <param name="recursive"><c>true</c> to decrypt the directory recursively. <c>false</c> only decrypt files and directories in the root of <paramref name="path"/>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       internal static void EncryptDecryptDirectoryCore(string path, bool encrypt, bool recursive, PathFormat pathFormat)
       {
@@ -59,7 +59,7 @@ namespace Alphaleonis.Win32.Filesystem
                File.EncryptDecryptFileCore(true, fsei, encrypt, pathFormat);
          }
 
-         // Process the root folder, the given path.
+         // ルートフォルダ（指定されたパス）を処理する。
 
          File.EncryptDecryptFileCore(true, path, encrypt, pathFormat);
       }

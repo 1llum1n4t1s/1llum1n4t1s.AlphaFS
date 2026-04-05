@@ -37,8 +37,8 @@ namespace Alphaleonis.Win32.Filesystem
             }
 
 
-            // MoveFileXxx: (lpExistingFileName) If dwFlags specifies MOVEFILE_DELAY_UNTIL_REBOOT,
-            // the file cannot exist on a remote share, because delayed operations are performed before the network is available.
+            // MoveFileXxx: (lpExistingFileName) dwFlagsにMOVEFILE_DELAY_UNTIL_REBOOTが指定されている場合、
+            // ネットワークが利用可能になる前に遅延操作が実行されるため、ファイルはリモート共有上に存在できません。
 
             if (Path.IsUncPathCore(sourcePath, pathFormat != PathFormat.LongFullPath, false))
             {

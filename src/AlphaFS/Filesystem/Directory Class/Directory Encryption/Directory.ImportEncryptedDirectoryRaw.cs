@@ -1,4 +1,4 @@
-﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy 
  *  of this software and associated documentation files (the "Software"), to deal 
@@ -25,8 +25,8 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>[AlphaFS] Restores (import) encrypted directories. This is one of a group of Encrypted File System (EFS) functions that is
-      ///   intended to implement backup and restore functionality, while maintaining files in their encrypted state.
+      /// <summary>[AlphaFS] 暗号化されたディレクトリを復元（インポート）します。 This is one of a group of Encrypted File System (EFS) functions that is
+      ///   ファイルを暗号化状態のまま、バックアップと復元機能を実装するためのものです。
       /// </summary>
       /// <remarks>
       ///   <para>If the caller does not have access to the key for the directory, the caller needs <see cref="Security.Privilege.Backup"/> to restore encrypted directories. See <see cref="Security.PrivilegeEnabler"/>.</para>
@@ -44,8 +44,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Restores (import) encrypted directories. This is one of a group of Encrypted File System (EFS) functions that is
-      ///   intended to implement backup and restore functionality, while maintaining files in their encrypted state.
+      /// <summary>[AlphaFS] 暗号化されたディレクトリを復元（インポート）します。 This is one of a group of Encrypted File System (EFS) functions that is
+      ///   ファイルを暗号化状態のまま、バックアップと復元機能を実装するためのものです。
       /// </summary>
       /// <remarks>
       ///   <para>If the caller does not have access to the key for the directory, the caller needs <see cref="Security.Privilege.Backup"/> to restore encrypted directories. See <see cref="Security.PrivilegeEnabler"/>.</para>
@@ -64,8 +64,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Restores (import) encrypted directories. This is one of a group of Encrypted File System (EFS) functions that is
-      ///   intended to implement backup and restore functionality, while maintaining files in their encrypted state.
+      /// <summary>[AlphaFS] 暗号化されたディレクトリを復元（インポート）します。 This is one of a group of Encrypted File System (EFS) functions that is
+      ///   ファイルを暗号化状態のまま、バックアップと復元機能を実装するためのものです。
       /// </summary>
       /// <remarks>
       ///   <para>If the caller does not have access to the key for the directory, the caller needs <see cref="Security.Privilege.Backup"/> to restore encrypted directories. See <see cref="Security.PrivilegeEnabler"/>.</para>
@@ -84,8 +84,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Restores (import) encrypted directories. This is one of a group of Encrypted File System (EFS) functions that is
-      ///   intended to implement backup and restore functionality, while maintaining files in their encrypted state.
+      /// <summary>[AlphaFS] 暗号化されたディレクトリを復元（インポート）します。 This is one of a group of Encrypted File System (EFS) functions that is
+      ///   ファイルを暗号化状態のまま、バックアップと復元機能を実装するためのものです。
       /// </summary>
       /// <remarks>
       ///   <para>If the caller does not have access to the key for the directory, the caller needs <see cref="Security.Privilege.Backup"/> to restore encrypted directories. See <see cref="Security.PrivilegeEnabler"/>.</para>

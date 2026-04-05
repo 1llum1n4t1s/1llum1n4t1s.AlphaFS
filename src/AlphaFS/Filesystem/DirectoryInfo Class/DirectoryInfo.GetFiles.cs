@@ -30,14 +30,14 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Returns a file list from the current directory.</summary>
-      /// <returns>An array of type <see cref="FileInfo"/>.</returns>
-      /// <remarks>The order of the returned file names is not guaranteed; use the Sort() method if a specific sort order is required.</remarks>
-      /// <remarks>If there are no files in the <see cref="DirectoryInfo"/>, this method returns an empty array.</remarks>
+      /// <summary>現在のディレクトリからファイルリストを返します。</summary>
+      /// <returns><see cref="FileInfo"/> 型の配列。</returns>
+      /// <remarks>返されるファイル名の順序は保証されません。特定の並べ替え順序が必要な場合は、Sort() メソッドを使用してください。</remarks>
+      /// <remarks><see cref="DirectoryInfo"/> にファイルがない場合、このメソッドは空の配列を返します。</remarks>
       /// <remarks>
-      /// The EnumerateFiles and GetFiles methods differ as follows: When you use EnumerateFiles, you can start enumerating the collection of names
-      /// before the whole collection is returned; when you use GetFiles, you must wait for the whole array of names to be returned before you can access the array.
-      /// Therefore, when you are working with many files and directories, EnumerateFiles can be more efficient.
+      /// EnumerateFiles メソッドと GetFiles メソッドの違い: EnumerateFiles を使用すると、コレクション全体が返される前に名前のコレクションの列挙を開始できます。
+      /// GetFiles を使用する場合は、配列にアクセスする前に名前の配列全体が返されるのを待つ必要があります。
+      /// そのため、多数のファイルやディレクトリを操作する場合は、EnumerateFiles の方が効率的です。
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -52,19 +52,19 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Returns a file list from the current directory matching the given search pattern.</summary>
+      /// <summary>指定された検索パターンに一致する現在のディレクトリからファイルリストを返します。</summary>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in path.
-      ///   This parameter can contain a combination of valid literal path and wildcard
-      ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
+      ///   パス内のディレクトリ名と照合する検索文字列。
+      ///   このパラメーターには、有効なリテラルパスとワイルドカード
+      ///   （<see cref="Path.WildcardStarMatchAll"/> および <see cref="Path.WildcardQuestion"/>）文字の組み合わせを含めることができますが、正規表現はサポートされません。
       /// </param>
-      /// <returns>An array of type <see cref="FileInfo"/>.</returns>
-      /// <remarks>The order of the returned file names is not guaranteed; use the Sort() method if a specific sort order is required.</remarks>
-      /// <remarks>If there are no files in the <see cref="DirectoryInfo"/>, this method returns an empty array.</remarks>
+      /// <returns><see cref="FileInfo"/> 型の配列。</returns>
+      /// <remarks>返されるファイル名の順序は保証されません。特定の並べ替え順序が必要な場合は、Sort() メソッドを使用してください。</remarks>
+      /// <remarks><see cref="DirectoryInfo"/> にファイルがない場合、このメソッドは空の配列を返します。</remarks>
       /// <remarks>
-      /// The EnumerateFiles and GetFiles methods differ as follows: When you use EnumerateFiles, you can start enumerating the collection of names
-      /// before the whole collection is returned; when you use GetFiles, you must wait for the whole array of names to be returned before you can access the array.
-      /// Therefore, when you are working with many files and directories, EnumerateFiles can be more efficient.
+      /// EnumerateFiles メソッドと GetFiles メソッドの違い: EnumerateFiles を使用すると、コレクション全体が返される前に名前のコレクションの列挙を開始できます。
+      /// GetFiles を使用する場合は、配列にアクセスする前に名前の配列全体が返されるのを待つ必要があります。
+      /// そのため、多数のファイルやディレクトリを操作する場合は、EnumerateFiles の方が効率的です。
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -79,23 +79,23 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Returns a file list from the current directory matching the given search pattern and using a value to determine whether to search subdirectories.</summary>
+      /// <summary>指定された検索パターンに一致し、サブディレクトリを検索するかどうかを決定する値を使用して、現在のディレクトリからファイルリストを返します。</summary>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in path.
-      ///   This parameter can contain a combination of valid literal path and wildcard
-      ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
+      ///   パス内のディレクトリ名と照合する検索文字列。
+      ///   このパラメーターには、有効なリテラルパスとワイルドカード
+      ///   （<see cref="Path.WildcardStarMatchAll"/> および <see cref="Path.WildcardQuestion"/>）文字の組み合わせを含めることができますが、正規表現はサポートされません。
       /// </param>
       /// <param name="searchOption">
-      ///   One of the <see cref="SearchOption"/> enumeration values that specifies whether the <paramref name="searchOption"/>
-      ///   should include only the current directory or should include all subdirectories.
+      ///   <paramref name="searchOption"/> が現在のディレクトリのみを含むか、すべてのサブディレクトリを含むかを指定する
+      ///   <see cref="SearchOption"/> 列挙値の 1 つ。
       /// </param>
-      /// <returns>An array of type <see cref="FileInfo"/>.</returns>
-      /// <remarks>The order of the returned file names is not guaranteed; use the Sort() method if a specific sort order is required.</remarks>
-      /// <remarks>If there are no files in the <see cref="DirectoryInfo"/>, this method returns an empty array.</remarks>
+      /// <returns><see cref="FileInfo"/> 型の配列。</returns>
+      /// <remarks>返されるファイル名の順序は保証されません。特定の並べ替え順序が必要な場合は、Sort() メソッドを使用してください。</remarks>
+      /// <remarks><see cref="DirectoryInfo"/> にファイルがない場合、このメソッドは空の配列を返します。</remarks>
       /// <remarks>
-      /// The EnumerateFiles and GetFiles methods differ as follows: When you use EnumerateFiles, you can start enumerating the collection of names
-      /// before the whole collection is returned; when you use GetFiles, you must wait for the whole array of names to be returned before you can access the array.
-      /// Therefore, when you are working with many files and directories, EnumerateFiles can be more efficient.
+      /// EnumerateFiles メソッドと GetFiles メソッドの違い: EnumerateFiles を使用すると、コレクション全体が返される前に名前のコレクションの列挙を開始できます。
+      /// GetFiles を使用する場合は、配列にアクセスする前に名前の配列全体が返されるのを待つ必要があります。
+      /// そのため、多数のファイルやディレクトリを操作する場合は、EnumerateFiles の方が効率的です。
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>

@@ -34,7 +34,7 @@ namespace Alphaleonis
       // Source: https://stackoverflow.com/questions/6275980/string-replace-ignoring-case/45756981#45756981
 
 
-      /// <summary>Returns a new string in which all occurrences of a specified string in the current instance are replaced with another specified string, ignoring any casing difference.</summary>
+      /// <summary>大文字と小文字の違いを無視して、現在のインスタンス内の指定された文字列のすべての出現箇所を別の指定された文字列で置き換えた新しい文字列を返します。</summary>
       internal static string ReplaceIgnoreCase(this string str, string oldValue, string newValue)
       {
          if (null == str)
@@ -58,10 +58,10 @@ namespace Alphaleonis
          }
 
 
-         // Prepare string builder for storing the processed string.
+         // 処理済み文字列を格納するための StringBuilder を準備する。
          var resultStringBuilder = new StringBuilder(str.Length);
 
-         // Analyze the replacement: replace or remove.
+         // 置換を分析: 置換か削除か。
          var isReplacementNullOrWhiteSpace = IsNullOrWhiteSpace(newValue);
 
 
@@ -71,7 +71,7 @@ namespace Alphaleonis
 
          while ((foundAt = str.IndexOf(oldValue, startSearchFromIndex, StringComparison.OrdinalIgnoreCase)) != valueNotFound)
          {
-            // Append all characters until the found replacement.
+            // 検出された置換箇所までのすべての文字を追加する。
             var charsUntilReplacment = foundAt - startSearchFromIndex;
 
             var isNothingToAppend = charsUntilReplacment == 0;
@@ -87,24 +87,24 @@ namespace Alphaleonis
             }
 
 
-            // Prepare start index for the next search.
-            // This needed to prevent infinite loop, otherwise method always start search 
-            // from the start of the string. For example: if an oldValue == "EXAMPLE", newValue == "example"
-            // and comparisonType == "any ignore case" will conquer to replacing:
-            // "EXAMPLE" to "example" to "example" to "example" � infinite loop.
+            // 次の検索の開始インデックスを準備する。
+            // これは無限ループを防ぐために必要。そうしないとメソッドは常に文字列の先頭から検索を開始する。
+            // 例: oldValue == "EXAMPLE"、newValue == "example"、
+            // comparisonType == "大文字小文字無視" の場合、
+            // "EXAMPLE" → "example" → "example" → "example" と無限ループになる。
             startSearchFromIndex = foundAt + oldValue.Length;
 
             if (startSearchFromIndex == str.Length)
             {
-               // It is end of the input string: no more space for the next search.
-               // The input string ends with a value that has already been replaced. 
-               // Therefore, the string builder with the result is complete and no further action is required.
+               // 入力文字列の終端: 次の検索のためのスペースがない。
+               // 入力文字列は既に置換された値で終了している。
+               // そのため、結果を持つ string builder は完成しており、追加のアクションは不要。
                return resultStringBuilder.ToString();
             }
          }
 
 
-         // Append the last part to the result.
+         // 最後の部分を結果に追加する。
          var charsUntilStringEnd = str.Length - startSearchFromIndex;
 
          resultStringBuilder.Append(str, startSearchFromIndex, charsUntilStringEnd);
@@ -114,9 +114,9 @@ namespace Alphaleonis
       }
 
 
-      /// <summary>Gets an attribute on an enum field value.</summary>
-      /// <returns>The description belonging to the enum option, as a string</returns>
-      /// <param name="enumValue">One of the <see cref="Alphaleonis.Win32.Filesystem.DeviceGuid"/> enum types.</param>
+      /// <summary>列挙フィールド値の属性を取得します。</summary>
+      /// <returns>列挙オプションに属する説明（文字列として）。</returns>
+      /// <param name="enumValue"><see cref="Alphaleonis.Win32.Filesystem.DeviceGuid"/> 列挙型のいずれか。</param>
       [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
       public static string GetEnumDescription(Enum enumValue)
       {
@@ -135,16 +135,16 @@ namespace Alphaleonis
       }
 
 
-      /// <summary>Checks that the object is not null.</summary>
+      /// <summary>オブジェクトが null でないことを確認します。</summary>
       public static bool IsNotNull<T>(T obj)
       {
          return !Equals(null, obj);
       }
 
 
-      /// <summary>Indicates whether a specified string is null, empty, or consists only of white-space characters.</summary>
-      /// <returns><c>true</c> if the <paramref name="value"/> parameter is null or <see cref="string.Empty"/>, or if <paramref name="value"/> consists exclusively of white-space characters.</returns>
-      /// <param name="value">The string to test.</param>
+      /// <summary>指定された文字列が null、空、または空白文字のみで構成されているかどうかを示します。</summary>
+      /// <returns><paramref name="value"/> パラメーターが null または <see cref="string.Empty"/>、もしくは <paramref name="value"/> が空白文字のみで構成されている場合は <c>true</c>。</returns>
+      /// <param name="value">テストする文字列。</param>
       public static bool IsNullOrWhiteSpace(string value)
       {
 #if NET35
@@ -162,16 +162,16 @@ namespace Alphaleonis
       }
 
 
-      /// <summary>Converts a number of type T to string formated using <see cref="CultureInfo.InvariantCulture"/>, suffixed with a unit size.</summary>
+      /// <summary>型 T の数値を <see cref="CultureInfo.InvariantCulture"/> を使用してフォーマットし、単位サイズのサフィックスを付けた文字列に変換します。</summary>
       public static string UnitSizeToText<T>(T numberOfBytes)
       {
-         // CultureInfo.CurrentCulture uses the culture as set in the Region applet.
+         // CultureInfo.CurrentCulture は地域アプレットで設定されたカルチャを使用する。
 
          return UnitSizeToText(numberOfBytes, CultureInfo.CurrentCulture);
       }
 
 
-      /// <summary>Converts a number of type T to string formated using the specified <paramref name="cultureInfo"/>, suffixed with a unit size.</summary>
+      /// <summary>型 T の数値を指定された <paramref name="cultureInfo"/> を使用してフォーマットし、単位サイズのサフィックスを付けた文字列に変換します。</summary>
       public static string UnitSizeToText<T>(T numberOfBytes, CultureInfo cultureInfo)
       {
          const int kb = 1024;
@@ -194,7 +194,7 @@ namespace Alphaleonis
          }
 
 
-         // Will return "512 B" instead of "512,00 B".
+         // "512,00 B" の代わりに "512 B" を返す。
 
          return string.Format(cultureInfo, "{0} {1}", bytes.ToString(index == 0 ? "0" : "0.##", cultureInfo), SizeFormats[index]);
       }

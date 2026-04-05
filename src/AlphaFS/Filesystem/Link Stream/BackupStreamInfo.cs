@@ -21,7 +21,7 @@
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>The <see cref="BackupStreamInfo"/> structure contains stream header data.</summary>
+   /// <summary><see cref="BackupStreamInfo"/> 構造体はストリームヘッダーデータを格納します。</summary>
    /// <seealso cref="BackupFileStream"/>
    public sealed class BackupStreamInfo
    {
@@ -37,9 +37,9 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region Constructor
 
-      /// <summary>Initializes a new instance of the <see cref="BackupStreamInfo"/> class.</summary>
-      /// <param name="streamId">The stream ID.</param>
-      /// <param name="name">The name.</param>
+      /// <summary><see cref="BackupStreamInfo"/> クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="streamId">ストリームID。</param>
+      /// <param name="name">名前。</param>
       internal BackupStreamInfo(NativeMethods.WIN32_STREAM_ID streamId, string name)
       {
          _streamName = name;
@@ -53,32 +53,32 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region Public Properties
 
-      /// <summary>Gets the size of the data in the substream, in bytes.</summary>
-      /// <value>The size of the data in the substream, in bytes.</value>
+      /// <summary>サブストリーム内のデータサイズをバイト単位で取得します。</summary>
+      /// <value>サブストリーム内のデータサイズ（バイト単位）。</value>
       public long Size
       {
          get { return _streamSize; }
       }
 
 
-      /// <summary>Gets a string that specifies the name of the alternative data stream.</summary>
-      /// <value>A string that specifies the name of the alternative data stream.</value>
+      /// <summary>代替データストリームの名前を指定する文字列を取得します。</summary>
+      /// <value>代替データストリームの名前を指定する文字列。</value>
       public string Name
       {
          get { return _streamName; }
       }
 
 
-      /// <summary>Gets the type of the data in the stream.</summary>
-      /// <value>The type of the data in the stream.</value>
+      /// <summary>ストリーム内のデータの種類を取得します。</summary>
+      /// <value>ストリーム内のデータの種類。</value>
       public StreamId StreamType
       {
          get { return _streamId; }
       }
 
 
-      /// <summary>Gets the attributes of the data to facilitate cross-operating system transfer.</summary>
-      /// <value>Attributes of the data to facilitate cross-operating system transfer.</value>
+      /// <summary>異なるオペレーティングシステム間での転送を容易にするためのデータ属性を取得します。</summary>
+      /// <value>異なるオペレーティングシステム間での転送を容易にするためのデータ属性。</value>
       public StreamAttribute Attribute
       {
          get { return _streamAttribute; }

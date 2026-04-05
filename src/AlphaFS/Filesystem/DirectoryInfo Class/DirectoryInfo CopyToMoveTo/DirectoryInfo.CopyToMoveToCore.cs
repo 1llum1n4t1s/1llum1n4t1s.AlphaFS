@@ -27,14 +27,14 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public sealed partial class DirectoryInfo
    {
-      /// <summary>Copy/move a Non-/Transacted file or directory including its children to a new location,
-      /// <see cref="CopyOptions"/> or <see cref="MoveOptions"/> can be specified, and the possibility of notifying the application of its progress through a callback function.
+      /// <summary>非トランザクション/トランザクションファイルまたはディレクトリとその子をコピー/移動して新しい場所に配置します。
+      /// <see cref="CopyOptions"/> または <see cref="MoveOptions"/> を指定でき、コールバック関数を通じてアプリケーションに進行状況を通知できます。
       /// </summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with details of the Copy or Move action.</returns>
+      /// <returns>コピーまたは移動操作の詳細を含む <see cref="CopyMoveResult"/> クラス。</returns>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
-      ///   <para>You cannot use the Move method to overwrite an existing file, unless <paramref name="moveOptions"/> contains <see cref="MoveOptions.ReplaceExisting"/>.</para>
-      ///   <para>Note that if you attempt to replace a file by moving a file of the same name into that directory, you get an IOException.</para>
+      ///   <para>非常に大きなファイル転送には、<see cref="CopyOptions.NoBuffering"/> オプションが推奨されます。</para>
+      ///   <para><paramref name="moveOptions"/> に <see cref="MoveOptions.ReplaceExisting"/> が含まれていない限り、Move メソッドを使用して既存のファイルを上書きすることはできません。</para>
+      ///   <para>同じ名前のファイルをそのディレクトリに移動してファイルを置き換えようとすると、IOException が発生することに注意してください。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -42,15 +42,15 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="preserveDates"><c>true</c> if original Timestamps must be preserved, <c>false</c> otherwise.</param>
-      /// <param name="copyOptions"><see cref="CopyOptions"/> that specify how the file is to be copied. This parameter can be <c>null</c>.</param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the file is to be moved. This parameter can be <c>null</c>.</param>
-      /// <param name="filters">The specification of custom filters to be used in the process.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the file has been copied. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
-      /// <param name="longFullPath">Returns the retrieved long full path.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="destinationPath">コピー先のディレクトリパス。</param>
+      /// <param name="preserveDates">元のタイムスタンプを保持する場合は <c>true</c>、それ以外の場合は <c>false</c>。</param>
+      /// <param name="copyOptions">ファイルのコピー方法を指定する <see cref="CopyOptions"/>。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="moveOptions">ファイルの移動方法を指定する <see cref="MoveOptions"/>。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="filters">処理で使用するカスタムフィルターの仕様。</param>
+      /// <param name="progressHandler">ファイルの別の部分がコピーされるたびに呼び出されるコールバック関数。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="longFullPath">取得された長い完全パスを返します。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [SecurityCritical]
       private CopyMoveResult CopyToMoveToCore(string destinationPath, bool preserveDates, CopyOptions? copyOptions, MoveOptions? moveOptions, DirectoryEnumerationFilters filters, CopyMoveProgressRoutine progressHandler, object userProgressData, out string longFullPath, PathFormat pathFormat)
       {

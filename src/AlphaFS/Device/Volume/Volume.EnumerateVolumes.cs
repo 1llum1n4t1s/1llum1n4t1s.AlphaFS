@@ -30,8 +30,8 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Volume
    {
-      /// <summary>[AlphaFS] Returns an enumerable collection of <see cref="String"/> volumes on the computer.</summary>
-      /// <returns>An enumerable collection of <see cref="String"/> volume names on the computer.</returns>
+      /// <summary>[AlphaFS] コンピューター上のボリュームの <see cref="String"/> の列挙可能なコレクションを返します。</summary>
+      /// <returns>コンピューター上のボリューム名の <see cref="String"/> の列挙可能なコレクション。</returns>
       [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
       [SecurityCritical]
       public static IEnumerable<string> EnumerateVolumes()

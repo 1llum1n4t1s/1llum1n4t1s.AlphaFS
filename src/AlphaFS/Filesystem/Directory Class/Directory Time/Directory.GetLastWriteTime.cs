@@ -28,8 +28,8 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Gets the date and time that the specified directory was last written to.</summary>
-      /// <returns>A <see cref="DateTime"/> structure set to the date and time that the specified directory was last written to. This value is expressed in local time.</returns>
+      /// <summary>指定されたディレクトリが最後に書き込まれた日時を取得します。</summary>
+      /// <returns>指定されたディレクトリが最後に書き込まれた日時に設定された <see cref="DateTime"/> 構造体。 この値はローカル時刻で表されます。</returns>
       /// <param name="path">The directory for which to obtain write date and time information.</param>
       [SecurityCritical]
       public static DateTime GetLastWriteTime(string path)
@@ -40,10 +40,10 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Gets the date and time that the specified directory was last written to.</summary>
-      /// <returns>A <see cref="DateTime"/> structure set to the date and time that the specified directory was last written to. This value is expressed in local time.</returns>
+      /// <summary>[AlphaFS] 指定されたディレクトリが最後に書き込まれた日時を取得します。</summary>
+      /// <returns>指定されたディレクトリが最後に書き込まれた日時に設定された <see cref="DateTime"/> 構造体。 この値はローカル時刻で表されます。</returns>
       /// <param name="path">The directory for which to obtain write date and time information.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static DateTime GetLastWriteTime(string path, PathFormat pathFormat)
       {

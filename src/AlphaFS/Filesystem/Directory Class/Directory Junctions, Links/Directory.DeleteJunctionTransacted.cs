@@ -29,10 +29,10 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region Obsolete
 
-      /// <summary>[AlphaFS] Deletes an NTFS directory junction.</summary>
+      /// <summary>[AlphaFS] NTFSディレクトリジャンクションを削除します。</summary>
       /// <para>&#160;</para>
       /// <remarks>
-      /// <para>Only the directory junction is removed, not the target.</para>
+      /// <para>ディレクトリジャンクションのみが削除され、ターゲットは削除されません。</para>
       /// </remarks>
       /// <returns>A <see cref="DirectoryInfo"/> instance referencing the junction point.</returns>
       /// <exception cref="ArgumentException"/>
@@ -42,8 +42,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotAReparsePointException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="junctionPath">The path of the junction point to remove.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="junctionPath">削除するジャンクションポイントのパス。</param>
       [Obsolete("Use method DeleteJunctionTransacted.")]
       [SecurityCritical]
       public static void DeleteJunction(KernelTransaction transaction, string junctionPath)
@@ -52,10 +52,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Deletes an NTFS directory junction.</summary>
+      /// <summary>[AlphaFS] NTFSディレクトリジャンクションを削除します。</summary>
       /// <para>&#160;</para>
       /// <remarks>
-      /// <para>Only the directory junction is removed, not the target.</para>
+      /// <para>ディレクトリジャンクションのみが削除され、ターゲットは削除されません。</para>
       /// </remarks>
       /// <returns>A <see cref="DirectoryInfo"/> instance referencing the junction point.</returns>
       /// <exception cref="ArgumentException"/>
@@ -65,9 +65,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotAReparsePointException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="junctionPath">The path of the junction point to remove.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="junctionPath">削除するジャンクションポイントのパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [Obsolete("Use method DeleteJunctionTransacted.")]
       [SecurityCritical]
       public static void DeleteJunction(KernelTransaction transaction, string junctionPath, PathFormat pathFormat)
@@ -76,10 +76,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Deletes an NTFS directory junction.</summary>
+      /// <summary>[AlphaFS] NTFSディレクトリジャンクションを削除します。</summary>
       /// <para>&#160;</para>
       /// <remarks>
-      /// <para>Only the directory junction is removed, not the target.</para>
+      /// <para>ディレクトリジャンクションのみが削除され、ターゲットは削除されません。</para>
       /// </remarks>
       /// <returns>A <see cref="DirectoryInfo"/> instance referencing the junction point.</returns>
       /// <exception cref="ArgumentException"/>
@@ -89,8 +89,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotAReparsePointException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="junctionPath">The path of the junction point to remove.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="junctionPath">削除するジャンクションポイントのパス。</param>
       /// <param name="removeDirectory">When <c>true</c>, also removes the directory and all its contents.</param>
       [Obsolete("Use method DeleteJunctionTransacted.")]
       [SecurityCritical]
@@ -100,10 +100,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Deletes an NTFS directory junction.</summary>
+      /// <summary>[AlphaFS] NTFSディレクトリジャンクションを削除します。</summary>
       /// <para>&#160;</para>
       /// <remarks>
-      /// <para>Only the directory junction is removed, not the target.</para>
+      /// <para>ディレクトリジャンクションのみが削除され、ターゲットは削除されません。</para>
       /// </remarks>
       /// <returns>A <see cref="DirectoryInfo"/> instance referencing the junction point.</returns>
       /// <exception cref="ArgumentException"/>
@@ -113,10 +113,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotAReparsePointException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="junctionPath">The path of the junction point to remove.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="junctionPath">削除するジャンクションポイントのパス。</param>
       /// <param name="removeDirectory">When <c>true</c>, also removes the directory and all its contents.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [Obsolete("Use method DeleteJunctionTransacted.")]
       [SecurityCritical]
       public static void DeleteJunction(KernelTransaction transaction, string junctionPath, bool removeDirectory, PathFormat pathFormat)
@@ -127,10 +127,10 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // Obsolete
 
 
-      /// <summary>[AlphaFS] Deletes an NTFS directory junction.</summary>
+      /// <summary>[AlphaFS] NTFSディレクトリジャンクションを削除します。</summary>
       /// <para>&#160;</para>
       /// <remarks>
-      /// <para>Only the directory junction is removed, not the target.</para>
+      /// <para>ディレクトリジャンクションのみが削除され、ターゲットは削除されません。</para>
       /// </remarks>
       /// <returns>A <see cref="DirectoryInfo"/> instance referencing the junction point.</returns>
       /// <exception cref="ArgumentException"/>
@@ -140,8 +140,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotAReparsePointException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="junctionPath">The path of the junction point to remove.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="junctionPath">削除するジャンクションポイントのパス。</param>
       [SecurityCritical]
       public static void DeleteJunctionTransacted(KernelTransaction transaction, string junctionPath)
       {
@@ -149,10 +149,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Deletes an NTFS directory junction.</summary>
+      /// <summary>[AlphaFS] NTFSディレクトリジャンクションを削除します。</summary>
       /// <para>&#160;</para>
       /// <remarks>
-      /// <para>Only the directory junction is removed, not the target.</para>
+      /// <para>ディレクトリジャンクションのみが削除され、ターゲットは削除されません。</para>
       /// </remarks>
       /// <returns>A <see cref="DirectoryInfo"/> instance referencing the junction point.</returns>
       /// <exception cref="ArgumentException"/>
@@ -162,9 +162,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotAReparsePointException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="junctionPath">The path of the junction point to remove.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="junctionPath">削除するジャンクションポイントのパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void DeleteJunctionTransacted(KernelTransaction transaction, string junctionPath, PathFormat pathFormat)
       {
@@ -172,10 +172,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Deletes an NTFS directory junction.</summary>
+      /// <summary>[AlphaFS] NTFSディレクトリジャンクションを削除します。</summary>
       /// <para>&#160;</para>
       /// <remarks>
-      /// <para>Only the directory junction is removed, not the target.</para>
+      /// <para>ディレクトリジャンクションのみが削除され、ターゲットは削除されません。</para>
       /// </remarks>
       /// <returns>A <see cref="DirectoryInfo"/> instance referencing the junction point.</returns>
       /// <exception cref="ArgumentException"/>
@@ -185,8 +185,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotAReparsePointException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="junctionPath">The path of the junction point to remove.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="junctionPath">削除するジャンクションポイントのパス。</param>
       /// <param name="removeDirectory">When <c>true</c>, also removes the directory and all its contents.</param>
       [SecurityCritical]
       public static void DeleteJunctionTransacted(KernelTransaction transaction, string junctionPath, bool removeDirectory)
@@ -195,10 +195,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Deletes an NTFS directory junction.</summary>
+      /// <summary>[AlphaFS] NTFSディレクトリジャンクションを削除します。</summary>
       /// <para>&#160;</para>
       /// <remarks>
-      /// <para>Only the directory junction is removed, not the target.</para>
+      /// <para>ディレクトリジャンクションのみが削除され、ターゲットは削除されません。</para>
       /// </remarks>
       /// <returns>A <see cref="DirectoryInfo"/> instance referencing the junction point.</returns>
       /// <exception cref="ArgumentException"/>
@@ -208,10 +208,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotAReparsePointException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="junctionPath">The path of the junction point to remove.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="junctionPath">削除するジャンクションポイントのパス。</param>
       /// <param name="removeDirectory">When <c>true</c>, also removes the directory and all its contents.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void DeleteJunctionTransacted(KernelTransaction transaction, string junctionPath, bool removeDirectory, PathFormat pathFormat)
       {

@@ -28,24 +28,24 @@ namespace Alphaleonis.Win32.Filesystem
    internal static partial class NativeMethods
    {
       /// <summary>
-      ///   Retrieves information about the specified disk, including the amount of free space on the disk.
+      ///   指定されたディスクに関する情報（ディスク上の空き容量を含む）を取得します。
       /// </summary>
       /// <remarks>
-      ///   <para>Symbolic link behavior: If the path points to a symbolic link, the operation is performed on the target.</para>
-      ///   <para>If this parameter is a UNC name, it must include a trailing backslash (for example, "\\MyServer\MyShare\").</para>
-      ///   <para>Furthermore, a drive specification must have a trailing backslash (for example, "C:\").</para>
-      ///   <para>The calling application must have FILE_LIST_DIRECTORY access rights for this directory.</para>
-      ///   <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      ///   <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      ///   <para>シンボリックリンクの動作: パスがシンボリックリンクを指している場合、操作はターゲットに対して実行されます。</para>
+      ///   <para>このパラメータが UNC 名の場合、末尾にバックスラッシュを含める必要があります（例: "\\MyServer\MyShare\"）。</para>
+      ///   <para>さらに、ドライブ指定には末尾にバックスラッシュが必要です（例: "C:\"）。</para>
+      ///   <para>呼び出し元のアプリケーションは、このディレクトリに対する FILE_LIST_DIRECTORY アクセス権を持っている必要があります。</para>
+      ///   <para>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</para>
       /// </remarks>
-      /// <param name="lpRootPathName">Full pathname of the root file.</param>
-      /// <param name="lpSectorsPerCluster">[out] The sectors per cluster.</param>
-      /// <param name="lpBytesPerSector">[out] The bytes per sector.</param>
-      /// <param name="lpNumberOfFreeClusters">[out] Number of free clusters.</param>
-      /// <param name="lpTotalNumberOfClusters">[out] The total number of clusters.</param>
+      /// <param name="lpRootPathName">ルートファイルの完全パス名。</param>
+      /// <param name="lpSectorsPerCluster">[out] クラスタあたりのセクタ数。</param>
+      /// <param name="lpBytesPerSector">[out] セクタあたりのバイト数。</param>
+      /// <param name="lpNumberOfFreeClusters">[out] 空きクラスタ数。</param>
+      /// <param name="lpTotalNumberOfClusters">[out] クラスタの合計数。</param>
       /// <returns>
-      ///   <para>If the function succeeds, the return value is nonzero.</para>
-      ///   <para>If the function fails, the return value is zero. To get extended error information, call GetLastError.</para>
+      ///   <para>関数が成功した場合、戻り値はゼロ以外です。</para>
+      ///   <para>関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "GetDiskFreeSpaceW"), SuppressUnmanagedCodeSecurity]
@@ -53,28 +53,27 @@ namespace Alphaleonis.Win32.Filesystem
       internal static extern bool GetDiskFreeSpace([MarshalAs(UnmanagedType.LPWStr)] string lpRootPathName, [MarshalAs(UnmanagedType.U4)] out int lpSectorsPerCluster, [MarshalAs(UnmanagedType.U4)] out int lpBytesPerSector, [MarshalAs(UnmanagedType.U4)] out int lpNumberOfFreeClusters, [MarshalAs(UnmanagedType.U4)] out uint lpTotalNumberOfClusters);
 
       /// <summary>
-      ///   Retrieves information about the amount of space that is available on a disk volume, which is the total amount of space,
-      ///   <para>the total amount of free space, and the total amount of free space available to the user that is associated with the calling
-      ///   thread.</para>
+      ///   ディスクボリュームで利用可能な容量に関する情報を取得します。合計容量、
+      ///   <para>合計空き容量、および呼び出しスレッドに関連付けられたユーザーが利用可能な合計空き容量が含まれます。</para>
       /// </summary>
       /// <remarks>
-      ///   <para>Symbolic link behavior: If the path points to a symbolic link, the operation is performed on the target.</para>
-      ///   <para>The GetDiskFreeSpaceEx function returns zero (0) for lpTotalNumberOfFreeBytes and lpFreeBytesAvailable
-      ///   for all CD requests unless the disk is an unwritten CD in a CD-RW drive.</para>
-      ///   <para>If this parameter is a UNC name, it must include a trailing backslash, for example, "\\MyServer\MyShare\".</para>
-      ///   <para>This parameter does not have to specify the root directory on a disk.</para>
-      ///   <para>The function accepts any directory on a disk.</para>
-      ///   <para>The calling application must have FILE_LIST_DIRECTORY access rights for this directory.</para>
-      ///   <para>Minimum supported client: Windows XP [desktop apps | Windows Store apps]</para>
-      ///   <para>Minimum supported server: Windows Server 2003 [desktop apps | Windows Store apps]</para>
+      ///   <para>シンボリックリンクの動作: パスがシンボリックリンクを指している場合、操作はターゲットに対して実行されます。</para>
+      ///   <para>GetDiskFreeSpaceEx 関数は、ディスクが CD-RW ドライブの未書き込み CD でない限り、すべての CD リクエストに対して
+      ///   lpTotalNumberOfFreeBytes および lpFreeBytesAvailable にゼロ (0) を返します。</para>
+      ///   <para>このパラメータが UNC 名の場合、末尾にバックスラッシュを含める必要があります（例: "\\MyServer\MyShare\"）。</para>
+      ///   <para>このパラメータはディスク上のルートディレクトリを指定する必要はありません。</para>
+      ///   <para>この関数はディスク上の任意のディレクトリを受け入れます。</para>
+      ///   <para>呼び出し元のアプリケーションは、このディレクトリに対する FILE_LIST_DIRECTORY アクセス権を持っている必要があります。</para>
+      ///   <para>サポートされる最小クライアント: Windows XP [デスクトップアプリ | Windows ストアアプリ]</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリ | Windows ストアアプリ]</para>
       /// </remarks>
-      /// <param name="lpDirectoryName">Pathname of the directory.</param>
-      /// <param name="lpFreeBytesAvailable">[out] The free bytes available.</param>
-      /// <param name="lpTotalNumberOfBytes">[out] The total number of in bytes.</param>
-      /// <param name="lpTotalNumberOfFreeBytes">[out] The total number of free in bytes.</param>
+      /// <param name="lpDirectoryName">ディレクトリのパス名。</param>
+      /// <param name="lpFreeBytesAvailable">[out] 利用可能な空きバイト数。</param>
+      /// <param name="lpTotalNumberOfBytes">[out] 合計バイト数。</param>
+      /// <param name="lpTotalNumberOfFreeBytes">[out] 合計空きバイト数。</param>
       /// <returns>
-      ///   <para>If the function succeeds, the return value is nonzero.</para>
-      ///   <para>If the function fails, the return value is zero (0). To get extended error information, call GetLastError.</para>
+      ///   <para>関数が成功した場合、戻り値はゼロ以外です。</para>
+      ///   <para>関数が失敗した場合、戻り値はゼロ (0) です。拡張エラー情報を取得するには GetLastError を呼び出してください。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "GetDiskFreeSpaceExW"), SuppressUnmanagedCodeSecurity]

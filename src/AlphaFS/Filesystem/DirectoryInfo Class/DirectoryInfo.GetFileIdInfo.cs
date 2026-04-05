@@ -26,9 +26,9 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public sealed partial class DirectoryInfo
    {
-      /// <summary>[AlphaFS] Gets the unique identifier for the directory. The identifier is composed of a 64-bit volume serial number and 128-bit file system entry identifier.</summary>
-      /// <returns>A <see cref="FileIdInfo"/> instance containing the requested information.</returns>
-      /// <remarks>Directory IDs are not guaranteed to be unique over time, because file systems are free to reuse them. In some cases, the file ID for a directory can change over time.</remarks>
+      /// <summary>[AlphaFS] ディレクトリの一意識別子を取得します。識別子は、64 ビットのボリュームシリアル番号と 128 ビットのファイルシステムエントリ識別子で構成されます。</summary>
+      /// <returns>要求された情報を含む <see cref="FileIdInfo"/> インスタンス。</returns>
+      /// <remarks>ファイルシステムは識別子を再利用できるため、ディレクトリ ID は時間の経過とともに一意であることが保証されません。場合によっては、ディレクトリのファイル ID が時間の経過とともに変更されることがあります。</remarks>
       [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
       [SecurityCritical]
       public FileIdInfo GetFileIdInfo()

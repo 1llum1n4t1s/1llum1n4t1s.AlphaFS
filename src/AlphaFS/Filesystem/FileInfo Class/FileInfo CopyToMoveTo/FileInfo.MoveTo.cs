@@ -29,14 +29,14 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Moves a specified file to a new location, providing the option to specify a new file name.</summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with details of the Move action.</returns>
+      /// <summary>指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供します。</summary>
+      /// <returns>移動操作の詳細を含む <see cref="CopyMoveResult"/> クラス。</returns>
       /// <remarks>
-      ///   <para>Use this method to prevent overwriting of an existing file by default.</para>
-      ///   <para>This method works across disk volumes.</para>
-      ///   <para>For example, the file c:\MyFile.txt can be moved to d:\public and renamed NewFile.txt.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>デフォルトで既存のファイルの上書きを防止するには、このメソッドを使用します。</para>
+      ///   <para>このメソッドはディスクボリュームをまたいで動作します。</para>
+      ///   <para>たとえば、ファイル c:\MyFile.txt を d:\public に移動して NewFile.txt に名前を変更できます。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2 つのファイルに同等の短いファイル名がある場合、このメソッドが失敗して例外がスローされるか、望ましくない動作が発生する可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -45,7 +45,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The path to move the file to, which can specify a different file name.</param>
+      /// <param name="destinationPath">ファイルの移動先のパス。別のファイル名を指定できます。</param>
       [SecurityCritical]
       public void MoveTo(string destinationPath)
       {
@@ -58,8 +58,8 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Moves a specified file to a new location, providing the option to specify a new file name.</summary>
-      /// <returns>Returns a new <see cref="FileInfo"/> instance with a fully qualified path when successfully moved.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供します。</summary>
+      /// <returns>正常に移動された場合、完全修飾パスを持つ新しい <see cref="FileInfo"/> インスタンスを返します。</returns>
       /// <remarks>
       ///   <para>Use this method to prevent overwriting of an existing file by default.</para>
       ///   <para>This method works across disk volumes.</para>
@@ -74,8 +74,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The path to move the file to, which can specify a different file name.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="destinationPath">ファイルの移動先のパス。別のファイル名を指定できます。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [SecurityCritical]
       public FileInfo MoveTo(string destinationPath, PathFormat pathFormat)
       {
@@ -88,7 +88,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
       
 
-      /// <summary>[AlphaFS] Moves a specified file to a new location, providing the option to specify a new file name, <see cref="MoveOptions"/> can be specified.</summary>
+      /// <summary>[AlphaFS] 指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供し、<see cref="MoveOptions"/> を指定できます。</summary>
       /// <returns>Returns a new <see cref="FileInfo"/> instance with a fully qualified path when successfully moved.</returns>
       /// <remarks>
       ///   <para>Use this method to allow or prevent overwriting of an existing file.</para>
@@ -104,8 +104,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The path to move the file to, which can specify a different file name.</param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the directory is to be moved. This parameter can be <c>null</c>.</param>
+      /// <param name="destinationPath">ファイルの移動先のパス。別のファイル名を指定できます。</param>
+      /// <param name="moveOptions">ディレクトリの移動方法を指定する <see cref="MoveOptions"/>。このパラメーターは <c>null</c> にできます。</param>
       [SecurityCritical]
       public FileInfo MoveTo(string destinationPath, MoveOptions moveOptions)
       {
@@ -118,7 +118,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a specified file to a new location, providing the option to specify a new file name, <see cref="MoveOptions"/> can be specified.</summary>
+      /// <summary>[AlphaFS] 指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供し、<see cref="MoveOptions"/> を指定できます。</summary>
       /// <returns>Returns a new <see cref="FileInfo"/> instance with a fully qualified path when successfully moved.</returns>
       /// <remarks>
       ///   <para>Use this method to allow or prevent overwriting of an existing file.</para>
@@ -134,9 +134,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The path to move the file to, which can specify a different file name.</param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the directory is to be moved. This parameter can be <c>null</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="destinationPath">ファイルの移動先のパス。別のファイル名を指定できます。</param>
+      /// <param name="moveOptions">ディレクトリの移動方法を指定する <see cref="MoveOptions"/>。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [SecurityCritical]
       public FileInfo MoveTo(string destinationPath, MoveOptions moveOptions, PathFormat pathFormat)
       {
@@ -149,10 +149,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
       
 
-      /// <summary>[AlphaFS] Moves a specified file to a new location, providing the option to specify a new file name, <see cref="MoveOptions"/> can be specified,
-      /// and the possibility of notifying the application of its progress through a callback function.
+      /// <summary>[AlphaFS] 指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供し、<see cref="MoveOptions"/> を指定でき、
+      /// コールバック関数を通じてアプリケーションに進行状況を通知できます。
       /// </summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
+      /// <returns>移動操作のステータスを含む <see cref="CopyMoveResult"/> クラス。</returns>
       /// <remarks>
       ///   <para>Use this method to allow or prevent overwriting of an existing file.</para>
       ///   <para>This method works across disk volumes.</para>
@@ -167,14 +167,14 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The path to move the file to, which can specify a different file name.</param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the directory is to be moved. This parameter can be <c>null</c>.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the directory has been moved. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
+      /// <param name="destinationPath">ファイルの移動先のパス。別のファイル名を指定できます。</param>
+      /// <param name="moveOptions">ディレクトリの移動方法を指定する <see cref="MoveOptions"/>。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="progressHandler">ディレクトリの別の部分が移動されるたびに呼び出されるコールバック関数。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメーターは <c>null</c> にできます。</param>
       [SecurityCritical]
       public CopyMoveResult MoveTo(string destinationPath, MoveOptions moveOptions, CopyMoveProgressRoutine progressHandler, object userProgressData)
       {
-         // Reject DelayUntilReboot.
+         // DelayUntilReboot を拒否する。
 
          if ((moveOptions & MoveOptions.DelayUntilReboot) != 0)
 
@@ -191,8 +191,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a specified file to a new location, providing the option to specify a new file name, <see cref="MoveOptions"/> can be specified.</summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供し、<see cref="MoveOptions"/> を指定できます。</summary>
+      /// <returns>移動操作のステータスを含む <see cref="CopyMoveResult"/> クラス。</returns>
       /// <remarks>
       ///   <para>Use this method to allow or prevent overwriting of an existing file.</para>
       ///   <para>This method works across disk volumes.</para>
@@ -207,15 +207,15 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="destinationPath">The path to move the file to, which can specify a different file name.</param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the directory is to be moved. This parameter can be <c>null</c>.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the directory has been moved. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="destinationPath">ファイルの移動先のパス。別のファイル名を指定できます。</param>
+      /// <param name="moveOptions">ディレクトリの移動方法を指定する <see cref="MoveOptions"/>。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="progressHandler">ディレクトリの別の部分が移動されるたびに呼び出されるコールバック関数。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [SecurityCritical]
       public CopyMoveResult MoveTo(string destinationPath, MoveOptions moveOptions, CopyMoveProgressRoutine progressHandler, object userProgressData, PathFormat pathFormat)
       {
-         // Reject DelayUntilReboot.
+         // DelayUntilReboot を拒否する。
 
          if ((moveOptions & MoveOptions.DelayUntilReboot) != 0)
 

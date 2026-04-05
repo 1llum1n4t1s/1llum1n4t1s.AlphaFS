@@ -29,13 +29,13 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region Obsolete
 
-      /// <summary>[AlphaFS] Establishes a hard link (similar to CMD command: "MKLINK /H") between an existing file and a new file as a transacted operation. This function is only supported on the NTFS file system, and only for files, not directories.</summary>
+      /// <summary>[AlphaFS] トランザクション操作として、既存のファイルと新しいファイルの間にハードリンク(CMDコマンド"MKLINK /H"と同様)を確立します。この機能はNTFSファイルシステムでのみサポートされ、ディレクトリではなくファイルのみが対象です。</summary>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="fileName">The name of the new file. This parameter cannot specify the name of a directory.</param>
-      /// <param name="existingFileName">The name of the existing file. This parameter cannot specify the name of a directory.</param>      
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="fileName">新しいファイルの名前。このパラメータではディレクトリの名前を指定できません。</param>
+      /// <param name="existingFileName">既存のファイルの名前。このパラメータではディレクトリの名前を指定できません。</param>      
       [Obsolete("Use CreateHardLinkTransacted method.")]
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Hardlink")]
       [SecurityCritical]
@@ -45,14 +45,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Establishes a hard link (similar to CMD command: "MKLINK /H") between an existing file and a new file as a transacted operation. This function is only supported on the NTFS file system, and only for files, not directories.</summary>
+      /// <summary>[AlphaFS] トランザクション操作として、既存のファイルと新しいファイルの間にハードリンク(CMDコマンド"MKLINK /H"と同様)を確立します。この機能はNTFSファイルシステムでのみサポートされ、ディレクトリではなくファイルのみが対象です。</summary>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="fileName">The name of the new file. This parameter cannot specify the name of a directory.</param>
-      /// <param name="existingFileName">The name of the existing file. This parameter cannot specify the name of a directory.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>      
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="fileName">新しいファイルの名前。このパラメータではディレクトリの名前を指定できません。</param>
+      /// <param name="existingFileName">既存のファイルの名前。このパラメータではディレクトリの名前を指定できません。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>      
       [Obsolete("Use CreateHardLinkTransacted method.")]
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Hardlink")]
       [SecurityCritical]
@@ -64,13 +64,13 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // Obsolete
 
 
-      /// <summary>[AlphaFS] Establishes a hard link (similar to CMD command: "MKLINK /H") between an existing file and a new file as a transacted operation. This function is only supported on the NTFS file system, and only for files, not directories.</summary>
+      /// <summary>[AlphaFS] トランザクション操作として、既存のファイルと新しいファイルの間にハードリンク(CMDコマンド"MKLINK /H"と同様)を確立します。この機能はNTFSファイルシステムでのみサポートされ、ディレクトリではなくファイルのみが対象です。</summary>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="fileName">The name of the new file. This parameter cannot specify the name of a directory.</param>
-      /// <param name="existingFileName">The name of the existing file. This parameter cannot specify the name of a directory.</param>      
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="fileName">新しいファイルの名前。このパラメータではディレクトリの名前を指定できません。</param>
+      /// <param name="existingFileName">既存のファイルの名前。このパラメータではディレクトリの名前を指定できません。</param>      
       [SecurityCritical]
 #pragma warning disable CS3005 // Identifier differing only in case is not CLS-compliant
       public static void CreateHardLinkTransacted(KernelTransaction transaction, string fileName, string existingFileName)
@@ -80,14 +80,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Establishes a hard link (similar to CMD command: "MKLINK /H") between an existing file and a new file as a transacted operation. This function is only supported on the NTFS file system, and only for files, not directories.</summary>
+      /// <summary>[AlphaFS] トランザクション操作として、既存のファイルと新しいファイルの間にハードリンク(CMDコマンド"MKLINK /H"と同様)を確立します。この機能はNTFSファイルシステムでのみサポートされ、ディレクトリではなくファイルのみが対象です。</summary>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="fileName">The name of the new file. This parameter cannot specify the name of a directory.</param>
-      /// <param name="existingFileName">The name of the existing file. This parameter cannot specify the name of a directory.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>      
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="fileName">新しいファイルの名前。このパラメータではディレクトリの名前を指定できません。</param>
+      /// <param name="existingFileName">既存のファイルの名前。このパラメータではディレクトリの名前を指定できません。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>      
       [SecurityCritical]
 #pragma warning disable CS3005 // Identifier differing only in case is not CLS-compliant
       public static void CreateHardLinkTransacted(KernelTransaction transaction, string fileName, string existingFileName, PathFormat pathFormat)

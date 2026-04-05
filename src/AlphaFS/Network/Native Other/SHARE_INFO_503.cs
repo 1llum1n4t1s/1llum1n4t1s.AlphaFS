@@ -26,21 +26,21 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Contains information about the shared resource, including the server name, name of the resource, type, and permissions,
+      /// <summary>共有リソースに関する情報を含みます, サーバーを含むr name, name of the resource, type, and permissions,
       /// the number of connections, and other pertinent information.
       /// </summary>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [desktop apps only]</remarks>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct SHARE_INFO_503
       {
-         /// <summary>The name of a shared resource.</summary>
+         /// <summary>共有リソースの名前。</summary>
          [MarshalAs(UnmanagedType.LPWStr)] public readonly string shi503_netname;
 
-         /// <summary>The type of share.</summary>
+         /// <summary>共有の種類.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly ShareType shi503_type;
 
-         /// <summary>An optional comment about the shared resource.</summary>
+         /// <summary>共有リソースに関するオプションのコメント。</summary>
          [MarshalAs(UnmanagedType.LPWStr)] public readonly string shi503_remark;
 
          /// <summary>The shared resource's permissions for servers running with share-level security.</summary>
@@ -48,10 +48,10 @@ namespace Alphaleonis.Win32.Network
          [MarshalAs(UnmanagedType.U4)] public readonly AccessPermissions shi503_permissions;
 
          /// <summary>The maximum number of concurrent connections that the shared resource can accommodate.</summary>
-         /// <remarks>The number of connections is unlimited if the value specified in this member is –1.</remarks>
+         /// <remarks>の数 connections is unlimited if the value specified in this member is –1.</remarks>
          [MarshalAs(UnmanagedType.U4)] public readonly uint shi503_max_uses;
 
-         /// <summary>The number of current connections to the resource.</summary>
+         /// <summary>の数 current connections to the resource.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint shi503_current_uses;
 
          /// <summary>The local path for the shared resource.</summary>

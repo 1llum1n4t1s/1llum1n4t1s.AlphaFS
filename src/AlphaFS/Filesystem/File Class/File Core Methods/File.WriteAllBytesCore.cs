@@ -28,12 +28,12 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>Creates a new file as part of a transaction, writes the specified byte array to the file, and then closes the file. If the target file already exists, it is overwritten.</summary>
+      /// <summary>Creates a new file as part of a transaction, writes the specified byte array to the file, and then closes 閉じます。 If the target file already exists, it is overwritten.</summary>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to write to.</param>
-      /// <param name="bytes">The bytes to write to the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">書き込むファイル。</param>
+      /// <param name="bytes">ファイルに書き込むバイト。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "bytes")]
       [SecurityCritical]
       internal static void WriteAllBytesCore(KernelTransaction transaction, string path, byte[] bytes, PathFormat pathFormat)

@@ -28,12 +28,12 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Volume
    {
-      /// <summary>[AlphaFS] Retrieves the volume mount point where the specified path is mounted.</summary>
+      /// <summary>[AlphaFS] 指定されたパスがマウントされているボリュームマウントポイントを取得します。</summary>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="path">The path to the volume, for example: "C:\Windows".</param>
+      /// <param name="path">ボリュームへのパス。例: "C:\Windows"。</param>
       /// <returns>
-      ///   <para>Returns the nearest volume root path for a given directory.</para>
-      ///   <para>The volume path name, for example: "C:\Windows" returns: "C:\".</para>
+      ///   <para>指定されたディレクトリに最も近いボリュームルートパスを返します。</para>
+      ///   <para>ボリュームパス名。例: "C:\Windows" は "C:\" を返します。</para>
       /// </returns>
       [SecurityCritical]
       public static string GetVolumePathName(string path)
@@ -51,7 +51,7 @@ namespace Alphaleonis.Win32.Filesystem
 
 
             // GetVolumePathName()
-            // 2013-07-18: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
+            // 2013-07-18: MSDN は LongPath の使用を確認していませんが、この関数の Unicode バージョンが存在します。
 
             var success = NativeMethods.GetVolumePathName(pathLp, volumeRootPath, (uint) volumeRootPath.Capacity);
 
@@ -65,7 +65,7 @@ namespace Alphaleonis.Win32.Filesystem
 
             switch ((uint) lastError)
             {
-               // Don't throw exception on these errors.
+               // これらのエラーでは例外をスローしません。
                case Win32Errors.ERROR_NO_MORE_FILES:
                case Win32Errors.ERROR_INVALID_PARAMETER:
                case Win32Errors.ERROR_INVALID_NAME:
@@ -77,7 +77,7 @@ namespace Alphaleonis.Win32.Filesystem
             }
 
 
-            // Return original path.
+            // 元のパスを返します。
             return path;
          }
       }

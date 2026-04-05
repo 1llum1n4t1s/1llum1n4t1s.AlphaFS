@@ -25,11 +25,11 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Volume
    {
-      /// <summary>[AlphaFS] Determines whether the specified volume name is a defined volume on the current computer.</summary>
+      /// <summary>[AlphaFS] 指定されたボリューム名が現在のコンピューター上の定義済みボリュームかどうかを判断します。</summary>
       /// <param name="volumeMountPoint">
-      ///   A path to a volume. For example: "C:\", "\\server\share", or "\\?\Volume{c0580d5e-2ad6-11dc-9924-806e6f6e6963}\".
+      ///   ボリュームへのパス。例: "C:\"、"\\server\share"、または "\\?\Volume{c0580d5e-2ad6-11dc-9924-806e6f6e6963}\"。
       /// </param>
-      /// <returns><c>true</c> on success, <c>false</c> otherwise.</returns>
+      /// <returns>成功した場合は <c>true</c>、それ以外の場合は <c>false</c>。</returns>
       [SecurityCritical]
       public static bool IsVolume(string volumeMountPoint)
       {

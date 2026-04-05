@@ -30,12 +30,12 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>Opens a file, read all lines of the file with the specified encoding, and then close the file.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to open for reading.</param>
-      /// <param name="encoding">The <see cref="Encoding"/> applied to the contents of the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>An IEnumerable string containing all lines of the file.</returns>
+      /// <summary>ファイルを開き、指定されたエンコーディングでファイルのすべての行を読み取り、ファイルを閉じます。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">読み取り用に開くファイル。</param>
+      /// <param name="encoding">ファイルの内容に適用される<see cref="Encoding"/>。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>ファイルのすべての行を含むIEnumerable stringコレクション。</returns>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       [SecurityCritical]
       internal static IEnumerable<string> ReadAllLinesCore(KernelTransaction transaction, string path, Encoding encoding, PathFormat pathFormat)

@@ -26,10 +26,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Gets the <see cref="FileAttributes"/> of the file on the path.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the file.</param>
-      /// <returns>The <see cref="FileAttributes"/> of the file on the path.</returns>
+      /// <summary>[AlphaFS] パス上のファイルの<see cref="FileAttributes"/>を取得します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルへのパス。</param>
+      /// <returns>パス上のファイルの<see cref="FileAttributes"/>。</returns>
       [SecurityCritical]
       public static FileAttributes GetAttributesTransacted(KernelTransaction transaction, string path)
       {
@@ -37,11 +37,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Gets the <see cref="FileAttributes"/> of the file on the path.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>The <see cref="FileAttributes"/> of the file on the path.</returns>
+      /// <summary>[AlphaFS] パス上のファイルの<see cref="FileAttributes"/>を取得します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルへのパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>パス上のファイルの<see cref="FileAttributes"/>。</returns>
       [SecurityCritical]
       public static FileAttributes GetAttributesTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)
       {

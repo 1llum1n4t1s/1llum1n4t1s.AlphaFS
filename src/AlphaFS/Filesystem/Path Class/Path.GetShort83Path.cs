@@ -26,13 +26,13 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>[AlphaFS] Retrieves the short path form of the specified path.</summary>
-      /// <returns>A path that has the 8.3 path form.</returns>
-      /// <remarks>Will fail on NTFS volumes with disabled 8.3 name generation.</remarks>
-      /// <remarks>The path must actually exist to be able to get the short path name.</remarks>
+      /// <summary>[AlphaFS] 指定されたパスの短いパス形式を取得します。</summary>
+      /// <returns>8.3形式のパス。</returns>
+      /// <remarks>8.3名前生成が無効化されているNTFSボリュームでは失敗します。</remarks>
+      /// <remarks>短いパス名を取得するには、パスが実際に存在する必要があります。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="path">An existing path to a folder or file.</param>
+      /// <param name="path">フォルダまたはファイルへの既存のパス。</param>
       [SecurityCritical]
       public static string GetShort83Path(string path)
       {

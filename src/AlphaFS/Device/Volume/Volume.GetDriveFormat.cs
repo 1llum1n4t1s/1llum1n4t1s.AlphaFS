@@ -26,12 +26,12 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Volume
    {
-      /// <summary>[AlphaFS] Gets the name of the file system, such as NTFS or FAT32.</summary>
-      /// <remarks>Use DriveFormat to determine what formatting a drive uses.</remarks>
+      /// <summary>[AlphaFS] NTFS や FAT32 などのファイルシステムの名前を取得します。</summary>
+      /// <remarks>ドライブが使用するフォーマットを判断するには DriveFormat を使用してください。</remarks>
       /// <param name="drivePath">
-      ///   A path to a drive. For example: "C:\", "\\server\share", or "\\?\Volume{c0580d5e-2ad6-11dc-9924-806e6f6e6963}\".
+      ///   ドライブへのパス。例: "C:\"、"\\server\share"、または "\\?\Volume{c0580d5e-2ad6-11dc-9924-806e6f6e6963}\"。
       /// </param>
-      /// <returns>The name of the file system on the specified drive or <c>null</c>  on failure or if not available.</returns>
+      /// <returns>指定されたドライブのファイルシステム名。失敗した場合または利用できない場合は <c>null</c>。</returns>
       [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
       [SecurityCritical]
       public static string GetDriveFormat(string drivePath)

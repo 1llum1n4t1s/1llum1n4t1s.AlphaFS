@@ -29,13 +29,13 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Moves a specified file to a new location, providing the option to specify a new file name.
+      /// <summary>指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供します。
       /// <remarks>
-      ///   <para>This method works across disk volumes.</para>
-      ///   <para>Note that if you attempt to replace a file by moving a file of the same name into that directory, you get an <see cref="IOException"/>.</para>
-      ///   <para>You cannot use the Move method to overwrite an existing file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>このメソッドはディスクボリュームをまたいで動作します。</para>
+      ///   <para>同名のファイルをそのディレクトリに移動してファイルを置換しようとすると、<see cref="IOException"/>が発生します。</para>
+      ///   <para>Moveメソッドを使用して既存のファイルを上書きすることはできません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
       /// </summary>
       /// <exception cref="ArgumentException"/>
@@ -45,8 +45,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The name of the file to move.</param>
-      /// <param name="destinationPath">The new path for the file.</param>
+      /// <param name="sourcePath">移動するファイルの名前。</param>
+      /// <param name="destinationPath">ファイルの新しいパス。</param>
       [SecurityCritical]
       public static void Move(string sourcePath, string destinationPath)
       {
@@ -60,14 +60,14 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Moves a specified file to a new location, providing the option to specify a new file name.</summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供します。</summary>
+      /// <returns>移動操作のステータスを含む<see cref="CopyMoveResult"/>クラス。</returns>
       /// <remarks>
-      ///   <para>This method works across disk volumes.</para>
-      ///   <para>Note that if you attempt to replace a file by moving a file of the same name into that directory, you get an <see cref="IOException"/>.</para>
-      ///   <para>You cannot use the Move method to overwrite an existing file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>このメソッドはディスクボリュームをまたいで動作します。</para>
+      ///   <para>同名のファイルをそのディレクトリに移動してファイルを置換しようとすると、<see cref="IOException"/>が発生します。</para>
+      ///   <para>Moveメソッドを使用して既存のファイルを上書きすることはできません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -76,9 +76,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The name of the file to move.</param>
-      /// <param name="destinationPath">The new path for the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="sourcePath">移動するファイルの名前。</param>
+      /// <param name="destinationPath">ファイルの新しいパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static CopyMoveResult Move(string sourcePath, string destinationPath, PathFormat pathFormat)
       {
@@ -91,14 +91,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a specified file to a new location, providing the option to specify a new file name.
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供します。
+      /// <returns>移動操作のステータスを含む<see cref="CopyMoveResult"/>クラス。</returns>
       /// <remarks>
-      ///   <para>This method works across disk volumes.</para>
-      ///   <para>Note that if you attempt to replace a file by moving a file of the same name into that directory, you get an <see cref="IOException"/>.</para>
-      ///   <para>You cannot use the Move method to overwrite an existing file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>このメソッドはディスクボリュームをまたいで動作します。</para>
+      ///   <para>同名のファイルをそのディレクトリに移動してファイルを置換しようとすると、<see cref="IOException"/>が発生します。</para>
+      ///   <para>Moveメソッドを使用して既存のファイルを上書きすることはできません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
       /// </summary>
       /// <exception cref="ArgumentException"/>
@@ -108,10 +108,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The name of the file to move.</param>
-      /// <param name="destinationPath">The new path for the file.</param>
-      /// <param name="retry">The number of retries on failed copies.</param>
-      /// <param name="retryTimeout">The wait time in seconds between retries.</param>
+      /// <param name="sourcePath">移動するファイルの名前。</param>
+      /// <param name="destinationPath">ファイルの新しいパス。</param>
+      /// <param name="retry">コピー失敗時のリトライ回数。</param>
+      /// <param name="retryTimeout">リトライ間の待機時間(秒)。</param>
       [SecurityCritical]
       public static CopyMoveResult Move(string sourcePath, string destinationPath, int retry, int retryTimeout)
       {
@@ -125,14 +125,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a specified file to a new location, providing the option to specify a new file name.</summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供します。</summary>
+      /// <returns>移動操作のステータスを含む<see cref="CopyMoveResult"/>クラス。</returns>
       /// <remarks>
-      ///   <para>This method works across disk volumes.</para>
-      ///   <para>Note that if you attempt to replace a file by moving a file of the same name into that directory, you get an <see cref="IOException"/>.</para>
-      ///   <para>You cannot use the Move method to overwrite an existing file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>このメソッドはディスクボリュームをまたいで動作します。</para>
+      ///   <para>同名のファイルをそのディレクトリに移動してファイルを置換しようとすると、<see cref="IOException"/>が発生します。</para>
+      ///   <para>Moveメソッドを使用して既存のファイルを上書きすることはできません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -141,11 +141,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The name of the file to move.</param>
-      /// <param name="destinationPath">The new path for the file.</param>
-      /// <param name="retry">The number of retries on failed copies.</param>
-      /// <param name="retryTimeout">The wait time in seconds between retries.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="sourcePath">移動するファイルの名前。</param>
+      /// <param name="destinationPath">ファイルの新しいパス。</param>
+      /// <param name="retry">コピー失敗時のリトライ回数。</param>
+      /// <param name="retryTimeout">リトライ間の待機時間(秒)。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static CopyMoveResult Move(string sourcePath, string destinationPath, int retry, int retryTimeout, PathFormat pathFormat)
       {
@@ -160,14 +160,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a specified file to a new location, providing the option to specify a new file name.</summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供します。</summary>
+      /// <returns>移動操作のステータスを含む<see cref="CopyMoveResult"/>クラス。</returns>
       /// <remarks>
-      ///   <para>This method works across disk volumes.</para>
-      ///   <para>Note that if you attempt to replace a file by moving a file of the same name into that directory, you get an <see cref="IOException"/>.</para>
-      ///   <para>You cannot use the Move method to overwrite an existing file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>このメソッドはディスクボリュームをまたいで動作します。</para>
+      ///   <para>同名のファイルをそのディレクトリに移動してファイルを置換しようとすると、<see cref="IOException"/>が発生します。</para>
+      ///   <para>Moveメソッドを使用して既存のファイルを上書きすることはできません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -176,10 +176,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The name of the file to move.</param>
-      /// <param name="destinationPath">The new path for the file.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the file has been moved. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
+      /// <param name="sourcePath">移動するファイルの名前。</param>
+      /// <param name="destinationPath">ファイルの新しいパス。</param>
+      /// <param name="progressHandler">ファイルの別の部分が移動されるたびに呼び出されるコールバック関数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメータは<c>null</c>にできます。</param>
       [SecurityCritical]
       public static CopyMoveResult Move(string sourcePath, string destinationPath, CopyMoveProgressRoutine progressHandler, object userProgressData)
       {
@@ -193,15 +193,15 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a specified file to a new location, providing the option to specify a new file name.</summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供します。</summary>
+      /// <returns>移動操作のステータスを含む<see cref="CopyMoveResult"/>クラス。</returns>
+      /// <returns>移動操作のステータスを含む<see cref="CopyMoveResult"/>クラス。</returns>
       /// <remarks>
-      ///   <para>This method works across disk volumes.</para>
-      ///   <para>Note that if you attempt to replace a file by moving a file of the same name into that directory, you get an <see cref="IOException"/>.</para>
-      ///   <para>You cannot use the Move method to overwrite an existing file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>このメソッドはディスクボリュームをまたいで動作します。</para>
+      ///   <para>同名のファイルをそのディレクトリに移動してファイルを置換しようとすると、<see cref="IOException"/>が発生します。</para>
+      ///   <para>Moveメソッドを使用して既存のファイルを上書きすることはできません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -210,11 +210,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The name of the file to move.</param>
-      /// <param name="destinationPath">The new path for the file.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the file has been moved. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="sourcePath">移動するファイルの名前。</param>
+      /// <param name="destinationPath">ファイルの新しいパス。</param>
+      /// <param name="progressHandler">ファイルの別の部分が移動されるたびに呼び出されるコールバック関数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static CopyMoveResult Move(string sourcePath, string destinationPath, CopyMoveProgressRoutine progressHandler, object userProgressData, PathFormat pathFormat)
       {
@@ -229,14 +229,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a specified file to a new location, providing the option to specify a new file name.</summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供します。</summary>
+      /// <returns>移動操作のステータスを含む<see cref="CopyMoveResult"/>クラス。</returns>
       /// <remarks>
-      ///   <para>This method works across disk volumes.</para>
-      ///   <para>Note that if you attempt to replace a file by moving a file of the same name into that directory, you get an <see cref="IOException"/>.</para>
-      ///   <para>You cannot use the Move method to overwrite an existing file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>このメソッドはディスクボリュームをまたいで動作します。</para>
+      ///   <para>同名のファイルをそのディレクトリに移動してファイルを置換しようとすると、<see cref="IOException"/>が発生します。</para>
+      ///   <para>Moveメソッドを使用して既存のファイルを上書きすることはできません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -245,12 +245,12 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The name of the file to move.</param>
-      /// <param name="destinationPath">The new path for the file.</param>
-      /// <param name="retry">The number of retries on failed copies.</param>
-      /// <param name="retryTimeout">The wait time in seconds between retries.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the file has been moved. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
+      /// <param name="sourcePath">移動するファイルの名前。</param>
+      /// <param name="destinationPath">ファイルの新しいパス。</param>
+      /// <param name="retry">コピー失敗時のリトライ回数。</param>
+      /// <param name="retryTimeout">リトライ間の待機時間(秒)。</param>
+      /// <param name="progressHandler">ファイルの別の部分が移動されるたびに呼び出されるコールバック関数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメータは<c>null</c>にできます。</param>
       [SecurityCritical]
       public static CopyMoveResult Move(string sourcePath, string destinationPath, int retry, int retryTimeout, CopyMoveProgressRoutine progressHandler, object userProgressData)
       {
@@ -266,15 +266,15 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a specified file to a new location, providing the option to specify a new file name.</summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供します。</summary>
+      /// <returns>移動操作のステータスを含む<see cref="CopyMoveResult"/>クラス。</returns>
+      /// <returns>移動操作のステータスを含む<see cref="CopyMoveResult"/>クラス。</returns>
       /// <remarks>
-      ///   <para>This method works across disk volumes.</para>
-      ///   <para>Note that if you attempt to replace a file by moving a file of the same name into that directory, you get an <see cref="IOException"/>.</para>
-      ///   <para>You cannot use the Move method to overwrite an existing file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>このメソッドはディスクボリュームをまたいで動作します。</para>
+      ///   <para>同名のファイルをそのディレクトリに移動してファイルを置換しようとすると、<see cref="IOException"/>が発生します。</para>
+      ///   <para>Moveメソッドを使用して既存のファイルを上書きすることはできません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -283,13 +283,13 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The name of the file to move.</param>
-      /// <param name="destinationPath">The new path for the file.</param>
-      /// <param name="retry">The number of retries on failed copies.</param>
-      /// <param name="retryTimeout">The wait time in seconds between retries.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the file has been moved. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="sourcePath">移動するファイルの名前。</param>
+      /// <param name="destinationPath">ファイルの新しいパス。</param>
+      /// <param name="retry">コピー失敗時のリトライ回数。</param>
+      /// <param name="retryTimeout">リトライ間の待機時間(秒)。</param>
+      /// <param name="progressHandler">ファイルの別の部分が移動されるたびに呼び出されるコールバック関数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static CopyMoveResult Move(string sourcePath, string destinationPath, int retry, int retryTimeout, CopyMoveProgressRoutine progressHandler, object userProgressData, PathFormat pathFormat)
       {
@@ -308,14 +308,14 @@ namespace Alphaleonis.Win32.Filesystem
 
 
 
-      /// <summary>[AlphaFS] Moves a specified file to a new location, providing the option to specify a new file name.</summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供します。</summary>
+      /// <returns>移動操作のステータスを含む<see cref="CopyMoveResult"/>クラス。</returns>
       /// <remarks>
-      ///   <para>This method works across disk volumes.</para>
-      ///   <para>Note that if you attempt to replace a file by moving a file of the same name into that directory, you get an <see cref="IOException"/>.</para>
-      ///   <para>You cannot use the Move method to overwrite an existing file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>このメソッドはディスクボリュームをまたいで動作します。</para>
+      ///   <para>同名のファイルをそのディレクトリに移動してファイルを置換しようとすると、<see cref="IOException"/>が発生します。</para>
+      ///   <para>Moveメソッドを使用して既存のファイルを上書きすることはできません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -324,9 +324,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The name of the file to move.</param>
-      /// <param name="destinationPath">The new path for the file.</param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the file is to be moved. This parameter can be <c>null</c>.</param>
+      /// <param name="sourcePath">移動するファイルの名前。</param>
+      /// <param name="destinationPath">ファイルの新しいパス。</param>
+      /// <param name="moveOptions">ファイルの移動方法を指定する<see cref="MoveOptions"/>。このパラメータは<c>null</c>にできます。</param>
       [SecurityCritical]
       public static CopyMoveResult Move(string sourcePath, string destinationPath, MoveOptions moveOptions)
       {
@@ -338,14 +338,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a specified file to a new location, providing the option to specify a new file name.</summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供します。</summary>
+      /// <returns>移動操作のステータスを含む<see cref="CopyMoveResult"/>クラス。</returns>
       /// <remarks>
-      ///   <para>This method works across disk volumes.</para>
-      ///   <para>Note that if you attempt to replace a file by moving a file of the same name into that directory, you get an <see cref="IOException"/>.</para>
-      ///   <para>You cannot use the Move method to overwrite an existing file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>このメソッドはディスクボリュームをまたいで動作します。</para>
+      ///   <para>同名のファイルをそのディレクトリに移動してファイルを置換しようとすると、<see cref="IOException"/>が発生します。</para>
+      ///   <para>Moveメソッドを使用して既存のファイルを上書きすることはできません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -354,10 +354,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The name of the file to move.</param>
-      /// <param name="destinationPath">The new path for the file.</param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the file is to be moved. This parameter can be <c>null</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="sourcePath">移動するファイルの名前。</param>
+      /// <param name="destinationPath">ファイルの新しいパス。</param>
+      /// <param name="moveOptions">ファイルの移動方法を指定する<see cref="MoveOptions"/>。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static CopyMoveResult Move(string sourcePath, string destinationPath, MoveOptions moveOptions, PathFormat pathFormat)
       {
@@ -370,14 +370,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a specified file to a new location, providing the option to specify a new file name.</summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供します。</summary>
+      /// <returns>移動操作のステータスを含む<see cref="CopyMoveResult"/>クラス。</returns>
       /// <remarks>
-      ///   <para>This method works across disk volumes.</para>
-      ///   <para>Note that if you attempt to replace a file by moving a file of the same name into that directory, you get an <see cref="IOException"/>.</para>
-      ///   <para>You cannot use the Move method to overwrite an existing file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>このメソッドはディスクボリュームをまたいで動作します。</para>
+      ///   <para>同名のファイルをそのディレクトリに移動してファイルを置換しようとすると、<see cref="IOException"/>が発生します。</para>
+      ///   <para>Moveメソッドを使用して既存のファイルを上書きすることはできません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -386,11 +386,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The name of the file to move.</param>
-      /// <param name="destinationPath">The new path for the file.</param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the file is to be moved. This parameter can be <c>null</c>.</param>
-      /// <param name="retry">The number of retries on failed copies.</param>
-      /// <param name="retryTimeout">The wait time in seconds between retries.</param>
+      /// <param name="sourcePath">移動するファイルの名前。</param>
+      /// <param name="destinationPath">ファイルの新しいパス。</param>
+      /// <param name="moveOptions">ファイルの移動方法を指定する<see cref="MoveOptions"/>。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="retry">コピー失敗時のリトライ回数。</param>
+      /// <param name="retryTimeout">リトライ間の待機時間(秒)。</param>
       [SecurityCritical]
       public static CopyMoveResult Move(string sourcePath, string destinationPath, MoveOptions moveOptions, int retry, int retryTimeout)
       {
@@ -404,14 +404,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a specified file to a new location, providing the option to specify a new file name.</summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供します。</summary>
+      /// <returns>移動操作のステータスを含む<see cref="CopyMoveResult"/>クラス。</returns>
       /// <remarks>
-      ///   <para>This method works across disk volumes.</para>
-      ///   <para>Note that if you attempt to replace a file by moving a file of the same name into that directory, you get an <see cref="IOException"/>.</para>
-      ///   <para>You cannot use the Move method to overwrite an existing file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>このメソッドはディスクボリュームをまたいで動作します。</para>
+      ///   <para>同名のファイルをそのディレクトリに移動してファイルを置換しようとすると、<see cref="IOException"/>が発生します。</para>
+      ///   <para>Moveメソッドを使用して既存のファイルを上書きすることはできません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -420,12 +420,12 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The name of the file to move.</param>
-      /// <param name="destinationPath">The new path for the file.</param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the file is to be moved. This parameter can be <c>null</c>.</param>
-      /// <param name="retry">The number of retries on failed copies.</param>
-      /// <param name="retryTimeout">The wait time in seconds between retries.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="sourcePath">移動するファイルの名前。</param>
+      /// <param name="destinationPath">ファイルの新しいパス。</param>
+      /// <param name="moveOptions">ファイルの移動方法を指定する<see cref="MoveOptions"/>。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="retry">コピー失敗時のリトライ回数。</param>
+      /// <param name="retryTimeout">リトライ間の待機時間(秒)。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static CopyMoveResult Move(string sourcePath, string destinationPath, MoveOptions moveOptions, int retry, int retryTimeout, PathFormat pathFormat)
       {
@@ -440,14 +440,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a specified file to a new location, providing the option to specify a new file name.</summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供します。</summary>
+      /// <returns>移動操作のステータスを含む<see cref="CopyMoveResult"/>クラス。</returns>
       /// <remarks>
-      ///   <para>This method works across disk volumes.</para>
-      ///   <para>Note that if you attempt to replace a file by moving a file of the same name into that directory, you get an <see cref="IOException"/>.</para>
-      ///   <para>You cannot use the Move method to overwrite an existing file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>このメソッドはディスクボリュームをまたいで動作します。</para>
+      ///   <para>同名のファイルをそのディレクトリに移動してファイルを置換しようとすると、<see cref="IOException"/>が発生します。</para>
+      ///   <para>Moveメソッドを使用して既存のファイルを上書きすることはできません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -456,11 +456,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The name of the file to move.</param>
-      /// <param name="destinationPath">The new path for the file.</param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the file is to be moved. This parameter can be <c>null</c>.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the file has been moved. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
+      /// <param name="sourcePath">移動するファイルの名前。</param>
+      /// <param name="destinationPath">ファイルの新しいパス。</param>
+      /// <param name="moveOptions">ファイルの移動方法を指定する<see cref="MoveOptions"/>。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="progressHandler">ファイルの別の部分が移動されるたびに呼び出されるコールバック関数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメータは<c>null</c>にできます。</param>
       [SecurityCritical]
       public static CopyMoveResult Move(string sourcePath, string destinationPath, MoveOptions moveOptions, CopyMoveProgressRoutine progressHandler, object userProgressData)
       {
@@ -474,15 +474,15 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a specified file to a new location, providing the option to specify a new file name.</summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供します。</summary>
+      /// <returns>移動操作のステータスを含む<see cref="CopyMoveResult"/>クラス。</returns>
+      /// <returns>移動操作のステータスを含む<see cref="CopyMoveResult"/>クラス。</returns>
       /// <remarks>
-      ///   <para>This method works across disk volumes.</para>
-      ///   <para>Note that if you attempt to replace a file by moving a file of the same name into that directory, you get an <see cref="IOException"/>.</para>
-      ///   <para>You cannot use the Move method to overwrite an existing file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>このメソッドはディスクボリュームをまたいで動作します。</para>
+      ///   <para>同名のファイルをそのディレクトリに移動してファイルを置換しようとすると、<see cref="IOException"/>が発生します。</para>
+      ///   <para>Moveメソッドを使用して既存のファイルを上書きすることはできません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -491,12 +491,12 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The name of the file to move.</param>
-      /// <param name="destinationPath">The new path for the file.</param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the file is to be moved. This parameter can be <c>null</c>.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the file has been moved. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="sourcePath">移動するファイルの名前。</param>
+      /// <param name="destinationPath">ファイルの新しいパス。</param>
+      /// <param name="moveOptions">ファイルの移動方法を指定する<see cref="MoveOptions"/>。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="progressHandler">ファイルの別の部分が移動されるたびに呼び出されるコールバック関数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static CopyMoveResult Move(string sourcePath, string destinationPath, MoveOptions moveOptions, CopyMoveProgressRoutine progressHandler, object userProgressData, PathFormat pathFormat)
       {
@@ -511,14 +511,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a specified file to a new location, providing the option to specify a new file name.</summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供します。</summary>
+      /// <returns>移動操作のステータスを含む<see cref="CopyMoveResult"/>クラス。</returns>
       /// <remarks>
-      ///   <para>This method works across disk volumes.</para>
-      ///   <para>Note that if you attempt to replace a file by moving a file of the same name into that directory, you get an <see cref="IOException"/>.</para>
-      ///   <para>You cannot use the Move method to overwrite an existing file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>このメソッドはディスクボリュームをまたいで動作します。</para>
+      ///   <para>同名のファイルをそのディレクトリに移動してファイルを置換しようとすると、<see cref="IOException"/>が発生します。</para>
+      ///   <para>Moveメソッドを使用して既存のファイルを上書きすることはできません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -527,13 +527,13 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The name of the file to move.</param>
-      /// <param name="destinationPath">The new path for the file.</param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the file is to be moved. This parameter can be <c>null</c>.</param>
-      /// <param name="retry">The number of retries on failed copies.</param>
-      /// <param name="retryTimeout">The wait time in seconds between retries.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the file has been moved. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
+      /// <param name="sourcePath">移動するファイルの名前。</param>
+      /// <param name="destinationPath">ファイルの新しいパス。</param>
+      /// <param name="moveOptions">ファイルの移動方法を指定する<see cref="MoveOptions"/>。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="retry">コピー失敗時のリトライ回数。</param>
+      /// <param name="retryTimeout">リトライ間の待機時間(秒)。</param>
+      /// <param name="progressHandler">ファイルの別の部分が移動されるたびに呼び出されるコールバック関数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメータは<c>null</c>にできます。</param>
       [SecurityCritical]
       public static CopyMoveResult Move(string sourcePath, string destinationPath, MoveOptions moveOptions, int retry, int retryTimeout, CopyMoveProgressRoutine progressHandler, object userProgressData)
       {
@@ -549,15 +549,15 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a specified file to a new location, providing the option to specify a new file name.</summary>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
-      /// <returns>A <see cref="CopyMoveResult"/> class with the status of the Move action.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルを新しい場所に移動します。新しいファイル名を指定するオプションを提供します。</summary>
+      /// <returns>移動操作のステータスを含む<see cref="CopyMoveResult"/>クラス。</returns>
+      /// <returns>移動操作のステータスを含む<see cref="CopyMoveResult"/>クラス。</returns>
       /// <remarks>
-      ///   <para>This method works across disk volumes.</para>
-      ///   <para>Note that if you attempt to replace a file by moving a file of the same name into that directory, you get an <see cref="IOException"/>.</para>
-      ///   <para>You cannot use the Move method to overwrite an existing file.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two files have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>このメソッドはディスクボリュームをまたいで動作します。</para>
+      ///   <para>同名のファイルをそのディレクトリに移動してファイルを置換しようとすると、<see cref="IOException"/>が発生します。</para>
+      ///   <para>Moveメソッドを使用して既存のファイルを上書きすることはできません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名(<c>XXXXXX~1.XXX</c>など)の使用を避けてください。</para>
+      ///   <para>2つのファイルの短いファイル名が同等の場合、このメソッドは失敗して例外を発生させるか、望ましくない動作になる可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -566,14 +566,14 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The name of the file to move.</param>
-      /// <param name="destinationPath">The new path for the file.</param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the file is to be moved. This parameter can be <c>null</c>.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the file has been moved. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
-      /// <param name="retry">The number of retries on failed copies.</param>
-      /// <param name="retryTimeout">The wait time in seconds between retries.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="sourcePath">移動するファイルの名前。</param>
+      /// <param name="destinationPath">ファイルの新しいパス。</param>
+      /// <param name="moveOptions">ファイルの移動方法を指定する<see cref="MoveOptions"/>。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="progressHandler">ファイルの別の部分が移動されるたびに呼び出されるコールバック関数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメータは<c>null</c>にできます。</param>
+      /// <param name="retry">コピー失敗時のリトライ回数。</param>
+      /// <param name="retryTimeout">リトライ間の待機時間(秒)。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static CopyMoveResult Move(string sourcePath, string destinationPath, MoveOptions moveOptions, int retry, int retryTimeout, CopyMoveProgressRoutine progressHandler, object userProgressData, PathFormat pathFormat)
       {

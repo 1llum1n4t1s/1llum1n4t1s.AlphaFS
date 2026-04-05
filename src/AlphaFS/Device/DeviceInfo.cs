@@ -26,114 +26,114 @@ using System.Security;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>Provides access to information of a device, on a local or remote host.</summary>
+   /// <summary>ローカルまたはリモートホスト上のデバイスの情報へのアクセスを提供します。</summary>
    [Serializable]
    [SecurityCritical]
    public sealed class DeviceInfo
    {
-      #region Constructors
-      
-      /// <summary>Initializes a DeviceInfo class.</summary>
+      #region コンストラクター
+
+      /// <summary>DeviceInfo クラスを初期化します。</summary>
       [SecurityCritical]
       public DeviceInfo()
       {
          HostName = Host.GetUncName();
       }
 
-      /// <summary>Initializes a DeviceInfo class.</summary>
-      /// <param name="host">The DNS or NetBIOS name of the remote server. <c>null</c> refers to the local host.</param>
+      /// <summary>DeviceInfo クラスを初期化します。</summary>
+      /// <param name="host">リモートサーバーの DNS 名または NetBIOS 名。<c>null</c> はローカルホストを参照します。</param>
       [SecurityCritical]
       public DeviceInfo(string host)
       {
          HostName = Host.GetUncName(host).Replace(Path.UncPrefix, string.Empty);
       }
 
-      #endregion // Constructors
+      #endregion // コンストラクター
 
 
-      #region Methods
+      #region メソッド
 
-      /// <summary>Enumerates all available devices on the local host.</summary>
-      /// <param name="deviceGuid">One of the <see cref="Filesystem.DeviceGuid"/> devices.</param>
-      /// <returns><see cref="IEnumerable{DeviceInfo}"/> instances of type <see cref="Filesystem.DeviceGuid"/> from the local host.</returns>
+      /// <summary>ローカルホスト上の利用可能な全デバイスを列挙します。</summary>
+      /// <param name="deviceGuid"><see cref="Filesystem.DeviceGuid"/> デバイスのいずれか。</param>
+      /// <returns>ローカルホストからの <see cref="Filesystem.DeviceGuid"/> 型の <see cref="IEnumerable{DeviceInfo}"/> インスタンス。</returns>
       [SecurityCritical]
       public IEnumerable<DeviceInfo> EnumerateDevices(DeviceGuid deviceGuid)
       {
          return Device.EnumerateDevicesCore(HostName, deviceGuid, true);
       }
       
-      #endregion // Methods
+      #endregion // メソッド
 
 
-      #region Properties
+      #region プロパティ
 
-      /// <summary>Represents the <see cref="Guid"/> value of the base container identifier (ID) .The Windows Plug and Play (PnP) manager assigns this value to the device node (devnode).</summary>
+      /// <summary>ベースコンテナー識別子 (ID) の <see cref="Guid"/> 値を表します。Windows プラグアンドプレイ (PnP) マネージャーがデバイスノード (devnode) にこの値を割り当てます。</summary>
       public Guid BaseContainerId { get; internal set; }
 
 
-      /// <summary>Represents the name of the device setup class that a device instance belongs to.</summary>
+      /// <summary>デバイスインスタンスが属するデバイスセットアップクラスの名前を表します。</summary>
       public string DeviceClass { get; internal set; }
 
 
-      /// <summary>Represents the <see cref="Guid"/> of the device setup class that a device instance belongs to.</summary>
+      /// <summary>デバイスインスタンスが属するデバイスセットアップクラスの <see cref="Guid"/> を表します。</summary>
       public Guid ClassGuid { get; internal set; }
 
 
-      /// <summary>Represents the list of compatible identifiers for a device instance.</summary>
+      /// <summary>デバイスインスタンスの互換性のある識別子のリストを表します。</summary>
       public string CompatibleIds { get; internal set; }
 
 
-      /// <summary>Represents a description of a device instance.</summary>
+      /// <summary>デバイスインスタンスの説明を表します。</summary>
       public string DeviceDescription { get; internal set; }
 
 
-      /// <summary>The device interface path.</summary>
+      /// <summary>デバイスインターフェースのパス。</summary>
       public string DevicePath { get; internal set; }
 
 
-      /// <summary>Represents the registry entry name of the driver key for a device instance.</summary>
+      /// <summary>デバイスインスタンスのドライバーキーのレジストリエントリ名を表します。</summary>
       public string Driver { get; internal set; }
 
 
-      /// <summary>Represents the name of the enumerator for a device instance.</summary>
+      /// <summary>デバイスインスタンスの列挙子の名前を表します。</summary>
       public string EnumeratorName { get; internal set; }
 
 
-      /// <summary>Represents the friendly name of a device instance.</summary>
+      /// <summary>デバイスインスタンスのフレンドリ名を表します。</summary>
       public string FriendlyName { get; internal set; }
 
 
-      /// <summary>Represents the list of hardware identifiers for a device instance.</summary>
+      /// <summary>デバイスインスタンスのハードウェア識別子のリストを表します。</summary>
       public string HardwareId { get; internal set; }
 
 
-      /// <summary>The host name that was passed to the class constructor.</summary>
+      /// <summary>クラスコンストラクターに渡されたホスト名。</summary>
       public string HostName { get; internal set; }
 
 
-      /// <summary>Gets the instance Id of the device.</summary>
+      /// <summary>デバイスのインスタンス ID を取得します。</summary>
       public string InstanceId { get; internal set; }
 
 
-      /// <summary>Represents the bus-specific physical location of a device instance.</summary>
+      /// <summary>デバイスインスタンスのバス固有の物理的な位置を表します。</summary>
       public string LocationInformation { get; internal set; }
 
 
-      /// <summary>Represents the location of a device instance in the device tree.</summary>
+      /// <summary>デバイスツリー内のデバイスインスタンスの位置を表します。</summary>
       public string LocationPaths { get; internal set; }
 
 
-      /// <summary>Represents the name of the manufacturer of a device instance.</summary>
+      /// <summary>デバイスインスタンスの製造元の名前を表します。</summary>
       public string Manufacturer { get; internal set; }
 
 
-      /// <summary>Encapsulates the physical device location information provided by a device's firmware to Windows.</summary>
+      /// <summary>デバイスのファームウェアから Windows に提供される物理デバイスの位置情報をカプセル化します。</summary>
       public string PhysicalDeviceObjectName { get; internal set; }
 
 
-      /// <summary>Represents the name of the service that is installed for a device instance.</summary>
+      /// <summary>デバイスインスタンスにインストールされているサービスの名前を表します。</summary>
       public string Service { get; internal set; }
 
-      #endregion // Properties
+      #endregion // プロパティ
    }
 }

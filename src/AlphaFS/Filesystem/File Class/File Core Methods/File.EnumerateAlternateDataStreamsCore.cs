@@ -27,12 +27,12 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Enumerates the streams of type :$DATA from the specified file or directory.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="isFolder">When <c>true</c> indicates the source is a directory; file otherwise.</param>
-      /// <param name="path">The path to the file or directory to enumerate streams of.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>An enumeration of <see cref="AlternateDataStreamInfo"/> instances.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルまたはディレクトリから:$DATA型のストリームを列挙します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="isFolder"><c>true</c>の場合、ソースがディレクトリであることを示します。それ以外の場合はファイルです。</param>
+      /// <param name="path">ストリームを列挙するファイルまたはディレクトリのパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns><see cref="AlternateDataStreamInfo"/>インスタンスの列挙。</returns>
       [SecurityCritical]
       internal static IEnumerable<AlternateDataStreamInfo> EnumerateAlternateDataStreamsCore(KernelTransaction transaction, bool isFolder, string path, PathFormat pathFormat)
       {

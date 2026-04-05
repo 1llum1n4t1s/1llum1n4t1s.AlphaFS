@@ -28,14 +28,14 @@ namespace Alphaleonis.Win32.Security
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Class used to represent the SECURITY_ATTRIBUTES native Win32 structure.
-      /// The SECURITY_ATTRIBUTES structure contains the security descriptor for an object and specifies whether the handle retrieved by specifying this structure is inheritable.
-      /// This structure provides security settings for objects created by various functions, such as CreateFile, CreatePipe, CreateProcess, RegCreateKeyEx, or RegSaveKeyEx.
+      /// <summary>SECURITY_ATTRIBUTES ネイティブWin32構造体を表すクラス。
+      /// SECURITY_ATTRIBUTES構造体はオブジェクトのセキュリティ記述子を含み、この構造体を指定して取得されたハンドルが継承可能かどうかを指定します。
+      /// この構造体は、CreateFile、CreatePipe、CreateProcess、RegCreateKeyEx、RegSaveKeyExなどのさまざまな関数によって作成されるオブジェクトのセキュリティ設定を提供します。
       /// </summary>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal sealed class SecurityAttributes : IDisposable
       {
-         // Removing the StructLayout attribute results in errors.
+         // StructLayout属性を削除するとエラーが発生します。
 
 
          [MarshalAs(UnmanagedType.U4)]
@@ -62,9 +62,9 @@ namespace Alphaleonis.Win32.Security
          public bool InheritHandle { get; set; }
 
 
-         /// <summary>Marshals an ObjectSecurity instance to unmanaged memory.</summary>
-         /// <returns>A safe handle containing the marshalled security descriptor.</returns>
-         /// <param name="securityDescriptor">The security descriptor.</param>
+         /// <summary>ObjectSecurityインスタンスをアンマネージメモリにマーシャリングします。</summary>
+         /// <returns>マーシャリングされたセキュリティ記述子を含むセーフハンドル。</returns>
+         /// <param name="securityDescriptor">セキュリティ記述子。</param>
          [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
          private static SafeGlobalMemoryBufferHandle ToUnmanagedSecurityAttributes(ObjectSecurity securityDescriptor)
          {

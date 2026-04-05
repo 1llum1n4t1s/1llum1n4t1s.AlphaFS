@@ -34,7 +34,7 @@ using Path = Alphaleonis.Win32.Filesystem.Path;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>Provides static methods to retrieve network resource information from a local- or remote host.</summary>
+   /// <summary>ローカルまたはリモートホストから��ットワークリソース情報を取得するための静的メソッドを提供します。</summary>
    public static partial class Host
    {
       private static readonly NativeMethods.NetworkListManagerWrapper Manager = NativeMethods.CreateNetworkListManager();
@@ -43,7 +43,7 @@ namespace Alphaleonis.Win32.Network
          [MarshalAs(UnmanagedType.U4)] out uint entriesRead, [MarshalAs(UnmanagedType.U4)] out uint totalEntries, [MarshalAs(UnmanagedType.U4)] out uint resumeHandle);
 
 
-      /// <summary>Structure is used to pass additional data to the Win32 function.</summary>
+      /// <summary>Win32 関数に追加データを渡すために使用される構造体。</summary>
       internal struct FunctionData
       {
          public int EnumType;
@@ -54,53 +54,53 @@ namespace Alphaleonis.Win32.Network
 
       internal struct ConnectDisconnectArguments
       {
-         /// <summary>Handle to a window that the provider of network resources can use as an owner window for dialog boxes.</summary>
+         /// <summary>ネットワークリソースのプロバイダーが���イアログボックスのオーナーウィンドウとして使用できるウィンドウへのハンドル。</summary>
          public IntPtr WinOwner;
 
-         /// <summary>The name of a local device to be redirected, such as "F:". When <see cref="LocalName"/> is <c>null</c> or <c>string.Empty</c>, the last available drive letter will be used. Letters are assigned beginning with Z:, then Y: and so on.</summary>
+         /// <summary>リダイレクトするローカルデバイスの名前。���: "F:"。<see cref="LocalName"/> が <c>null</c> または <c>string.Empty</c> の場合、最後に利用可能なドライブ文字が使用されます。文字は Z: から始まり、次に Y: というように割り当てられます。</summary>
          public string LocalName;
 
-         /// <summary>A network resource to connect to/disconnect from, for example: \\server or \\server\share. The string can be up to <see cref="Filesystem.NativeMethods.MaxPath"/> characters in length.</summary>
+         /// <summary>接続/切断するネットワークリソース。例: \\server または \\server\share。文字列の長さは最大 <see cref="Filesystem.NativeMethods.MaxPath"/> 文字です。</summary>
          public string RemoteName;
 
-         /// <summary>A <see cref="NetworkCredential"/> instance. Use either this or the combination of <see cref="UserName"/> and <see cref="Password"/>.</summary>
+         /// <summary><see cref="NetworkCredential"/> インスタンス。これ��、<see cref="UserName"/> と <see cref="Password"/> の組み合わせのいずれかを使用します。</summary>
          public NetworkCredential Credential;
 
-         /// <summary>The user name for making the connection. If <see cref="UserName"/> is <c>null</c>, the function uses the default user name. (The user context for the process provides the default user name)</summary>
+         /// <summary>接続を確立するためのユーザー名。<see cref="UserName"/> が <c>null</c> の場合、関数はデフォルトのユーザー名を使用します。（プロセスのユーザーコンテキストがデフォルトのユーザー名を提供します）</summary>
          public string UserName;
 
-         /// <summary>The password to be used for making the network connection. If <see cref="Password"/> is <c>null</c>, the function uses the current default password associated with the user specified by <see cref="UserName"/>.</summary>
+         /// <summary>ネットワーク接続の確立に使用するパスワード。<see cref="Password"/> が <c>null</c> の場合、関数は <see cref="UserName"/> で指定されたユーザーに関連付けられた現在のデフォルトパスワードを使用します。</summary>
          public string Password;
 
-         /// <summary><c>true</c> always pops-up an authentication dialog box.</summary>
+         /// <summary><c>true</c> は常に認証ダイアログボックスをポップアップします。</summary>
          public bool Prompt;
 
-         /// <summary><c>true</c> successful network resource connections will be saved.</summary>
+         /// <summary><c>true</c> は成功したネットワークリソース接続を保存します。</summary>
          public bool UpdateProfile;
 
-         /// <summary>When the operating system prompts for a credential, the credential should be saved by the credential manager when true.</summary>
+         /// <summary>オペレーティングシステムが資格情報を要求した場合、true のときに資格情報マネージャーによって資格情報が保存されます。</summary>
          public bool SaveCredentials;
 
-         /// <summary><c>true</c> indicates that the operation concerns a drive mapping.</summary>
+         /// <summary><c>true</c> は操作がドライブマッピングに関するものであることを示します。</summary>
          public bool IsDeviceMap;
 
-         /// <summary><c>true</c> indicates that the operation needs to disconnect from the network resource, otherwise connect.</summary>
+         /// <summary><c>true</c> はネットワークリソースからの切断が必要であることを示します。それ以外の場合は接続します。</summary>
          public bool IsDisconnect;
       }
 
 
-      /// <summary>Connects to/disconnects from a network resource. The function can redirect a local device to a network resource.</summary>
-      /// <returns>If <see cref="ConnectDisconnectArguments.LocalName"/> is <c>null</c> or <c>string.Empty</c>, returns the last available drive letter, null otherwise.</returns>
+      /// <summary>ネットワークリソースへの接続/切断を行います。この関数はローカルデバイスをネットワークリソースにリダイレクトできます。</summary>
+      /// <returns><see cref="ConnectDisconnectArguments.LocalName"/> が <c>null</c> または <c>string.Empty</c> の場合、最後に利用可能なドライブ文字を返します。それ以外の場合は null。</returns>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="NetworkInformationException"/>
-      /// <param name="arguments">The <see cref="ConnectDisconnectArguments"/>.</param>
+      /// <param name="arguments"><see cref="ConnectDisconnectArguments"/>。</param>
       [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
       [SecurityCritical]
       internal static string ConnectDisconnectCore(ConnectDisconnectArguments arguments)
       {
          uint lastError;
 
-         // Always remove backslash.
+         // 常にバックスラッシュを削除します。
          if (!Utils.IsNullOrWhiteSpace(arguments.LocalName))
          {
             arguments.LocalName = Path.RemoveTrailingDirectorySeparator(arguments.LocalName).ToUpperInvariant();
@@ -115,7 +115,7 @@ namespace Alphaleonis.Win32.Network
             }
 
 
-            // Always remove backslash.
+            // 常にバックスラッシュを削除します。
             if (!Utils.IsNullOrWhiteSpace(arguments.RemoteName))
             {
                arguments.RemoteName = Path.RemoveTrailingDirectorySeparator(arguments.RemoteName);
@@ -123,7 +123,7 @@ namespace Alphaleonis.Win32.Network
          }
 
          
-         // Disconnect
+         // 切断
 
          if (arguments.IsDisconnect)
          {
@@ -147,9 +147,9 @@ namespace Alphaleonis.Win32.Network
          }
 
          
-         // Connect
+         // 接続
 
-         // arguments.LocalName is allowed to be null or empty.
+         // arguments.LocalName は null または空が許可されています。
 
          if (Utils.IsNullOrWhiteSpace(arguments.RemoteName) && !arguments.IsDeviceMap)
          {
@@ -157,7 +157,7 @@ namespace Alphaleonis.Win32.Network
          }
 
 
-         // When supplied, use data from NetworkCredential instance.
+         // 提供された場合、NetworkCredential インスタンスのデータを使用します。
          if (arguments.Credential != null)
          {
             arguments.UserName = Utils.IsNullOrWhiteSpace(arguments.Credential.Domain)
@@ -168,7 +168,7 @@ namespace Alphaleonis.Win32.Network
          }
 
 
-         // Assemble Connect arguments.
+         // 接続引数を組み立てます。
          var connect = NativeMethods.Connect.None;
 
          if (arguments.IsDeviceMap)
@@ -192,7 +192,7 @@ namespace Alphaleonis.Win32.Network
          }
 
 
-         // Initialize structure.
+         // 構造体を初期化します。
          var resource = new NativeMethods.NETRESOURCE
          {
             lpLocalName = arguments.LocalName,
@@ -200,7 +200,7 @@ namespace Alphaleonis.Win32.Network
             dwType = NativeMethods.ResourceType.Disk
          };
 
-         // Three characters for: "X:\0" (Drive X: with null terminator)
+         // 3 文字分: "X:\0" (ドライブ X: とヌル終端文字)
          uint bufferSize = 3;
          StringBuilder buffer;
 
@@ -217,10 +217,10 @@ namespace Alphaleonis.Win32.Network
                   break;
 
                case Win32Errors.ERROR_MORE_DATA:
-                  // MSDN, lpBufferSize: If the call fails because the buffer is not large enough,
-                  // the function returns the required buffer size in this location.
+                  // MSDN, lpBufferSize: バッファが十分でないために呼び出しが失敗した場合、
+                  // 関数はこの場所に必要なバッファサイズを返します。
                   //
-                  // Windows 8 x64: bufferSize remains unchanged.
+                  // Windows 8 x64: bufferSize は変更されません。
 
                   bufferSize = bufferSize * 2;
                   break;
@@ -247,10 +247,10 @@ namespace Alphaleonis.Win32.Network
 
          switch (functionData.EnumType)
          {
-            // Logical Drives
+            // 論理ドライブ
             case 1:
                isString = true;
-               objectSize = 6; // Should always be 6.
+               objectSize = 6; // 常に 6 であるべきです。
                break;
 
             default:
@@ -282,7 +282,7 @@ namespace Alphaleonis.Win32.Network
                      break;
 
                   
-                  // Observed when SHARE_INFO_503 is requested but not supported/possible.
+                  // SHARE_INFO_503 が要求されたがサポートされていない場合に観察されます。
                   case Win32Errors.RPC_X_BAD_STUB_DATA:
                   case Win32Errors.ERROR_NOT_SUPPORTED:
                      yield break;
@@ -300,15 +300,15 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>This method uses <see cref="NativeMethods.REMOTE_NAME_INFO"/> level to retrieve full REMOTE_NAME_INFO structure.</summary>
-      /// <returns>A <see cref="NativeMethods.REMOTE_NAME_INFO"/> structure.</returns>
-      /// <remarks>AlphaFS regards network drives created using SUBST.EXE as invalid.</remarks>
+      /// <summary>このメソッドは <see cref="NativeMethods.REMOTE_NAME_INFO"/> レベルを使用して完全な REMOTE_NAME_INFO 構造体を取得します。</summary>
+      /// <returns><see cref="NativeMethods.REMOTE_NAME_INFO"/> 構造体。</returns>
+      /// <remarks>AlphaFS は SUBST.EXE を使用して作成されたネットワークドライブを無効として扱います。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="PathTooLongException"/>
       /// <exception cref="NetworkInformationException"/>
-      /// <param name="path">The local path with drive name.</param>
-      /// <param name="continueOnException"><c>true</c> suppress any Exception that might be thrown as a result from a failure, such as unavailable resources.</param>
+      /// <param name="path">ドライブ名を含むローカルパス。</param>
+      /// <param name="continueOnException"><c>true</c> はリソース不足などの失敗から発生する可能性のある例外を抑制します。</param>
       [SecurityCritical]
       internal static NativeMethods.REMOTE_NAME_INFO GetRemoteNameInfoCore(string path, bool continueOnException)
       {
@@ -327,8 +327,8 @@ namespace Alphaleonis.Win32.Network
          do
          {
             using var buffer = new SafeGlobalMemoryBufferHandle((int) bufferSize);
-            // Structure: UNIVERSAL_NAME_INFO_LEVEL = 1 (not used in AlphaFS).
-            // Structure: REMOTE_NAME_INFO_LEVEL    = 2
+            // 構造体: UNIVERSAL_NAME_INFO_LEVEL = 1 (AlphaFS では使用されません)。
+            // 構造体: REMOTE_NAME_INFO_LEVEL    = 2
 
             lastError = NativeMethods.WNetGetUniversalName(path, 2, buffer, out bufferSize);
 
@@ -346,7 +346,7 @@ namespace Alphaleonis.Win32.Network
          }
 
 
-         // Return an empty structure (all fields set to null).
+         // 空の構造体を返します（すべてのフィールドが null に設定されています）。
          return new NativeMethods.REMOTE_NAME_INFO();
       }
    }

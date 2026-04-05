@@ -24,7 +24,7 @@ using System.ComponentModel;
 using System.Globalization;
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>[AlphaFS] The function attempted to use a name that is reserved for use by another transaction.</summary>
+   /// <summary>[AlphaFS] 認識されないリパースポイントデータが検出されました。</summary>
    [Serializable]
    public class UnrecognizedReparsePointException : System.IO.IOException
    {
@@ -32,30 +32,30 @@ namespace Alphaleonis.Win32.Filesystem
       private static readonly string ErrorText = string.Format(CultureInfo.InvariantCulture, "({0}) {1}", Win32Errors.ERROR_INVALID_REPARSE_DATA, new Win32Exception((int) Win32Errors.ERROR_INVALID_REPARSE_DATA).Message.Trim().TrimEnd('.').Trim());
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="UnrecognizedReparsePointException"/> class.</summary>
+      /// <summary>[AlphaFS] <see cref="UnrecognizedReparsePointException"/>クラスの新しいインスタンスを初期化します。</summary>
       public UnrecognizedReparsePointException() : base(string.Format(CultureInfo.InvariantCulture, "{0}.", ErrorText), ErrorCode)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="UnrecognizedReparsePointException"/> class.</summary>
-      /// <param name="message">The custom error message..</param>
-      /// <param name="lastError">The GetLastWin32Error.</param>
+      /// <summary>[AlphaFS] <see cref="UnrecognizedReparsePointException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="message">カスタムエラーメッセージ。</param>
+      /// <param name="lastError">GetLastWin32Errorの値。</param>
       public UnrecognizedReparsePointException(string message, int lastError) : base(message, lastError)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="UnrecognizedReparsePointException"/> class.</summary>
-      /// <param name="path">The path to the file system object.</param>
+      /// <summary>[AlphaFS] <see cref="UnrecognizedReparsePointException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="path">ファイルシステムオブジェクトへのパス。</param>
       public UnrecognizedReparsePointException(string path) : base(string.Format(CultureInfo.InvariantCulture, "{0}: [{1}]", ErrorText, path), ErrorCode)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="UnrecognizedReparsePointException"/> class.</summary>
-      /// <param name="path">The path to the file system object.</param>
-      /// <param name="innerException">The inner exception.</param>
+      /// <summary>[AlphaFS] <see cref="UnrecognizedReparsePointException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="path">ファイルシステムオブジェクトへのパス。</param>
+      /// <param name="innerException">内部例外。</param>
       public UnrecognizedReparsePointException(string path, Exception innerException) : base(string.Format(CultureInfo.InvariantCulture, "{0}: [{1}]", ErrorText, path), innerException)
       {
       }

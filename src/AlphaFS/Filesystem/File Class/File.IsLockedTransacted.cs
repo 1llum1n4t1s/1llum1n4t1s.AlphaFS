@@ -27,13 +27,13 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Determines whether the specified file is in use (locked).</summary>
-      /// <returns>Returns <c>true</c> if the specified file is in use (locked); otherwise, <c>false</c></returns>
+      /// <summary>[AlphaFS] 指定されたファイルが使用中(ロック中)かどうかを判定します。</summary>
+      /// <returns>指定されたファイルが使用中(ロック中)の場合は<c>true</c>を返します。それ以外の場合は<c>false</c></returns>
       /// <exception cref="FileNotFoundException"></exception>
       /// <exception cref="IOException"/>
       /// <exception cref="Exception"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to check.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">チェックするファイル。</param>
       [SecurityCritical]
       public static bool IsLockedTransacted(KernelTransaction transaction, string path)
       {
@@ -41,14 +41,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Determines whether the specified file is in use (locked).</summary>
-      /// <returns>Returns <c>true</c> if the specified file is in use (locked); otherwise, <c>false</c></returns>
+      /// <summary>[AlphaFS] 指定されたファイルが使用中(ロック中)かどうかを判定します。</summary>
+      /// <returns>指定されたファイルが使用中(ロック中)の場合は<c>true</c>を返します。それ以外の場合は<c>false</c></returns>
       /// <exception cref="FileNotFoundException"></exception>
       /// <exception cref="IOException"/>
       /// <exception cref="Exception"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to check.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">チェックするファイル。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static bool IsLockedTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)
       {

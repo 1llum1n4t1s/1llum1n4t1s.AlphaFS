@@ -30,7 +30,7 @@ namespace Alphaleonis.Win32.Network
       private static readonly Guid CLSID_NetworkListManager = new Guid("DCB00C01-570F-4A9B-8D69-199FDBA5723B");
       private static readonly Guid IID_INetworkListManager = new Guid("DCB00000-570F-4A9B-8D69-199FDBA5723B");
 
-      /// <summary>Creates a NetworkListManager COM instance using CoCreateInstance (AOT-safe).</summary>
+      /// <summary>CoCreateInstance を使用して NetworkListManager COM インスタンスを作成します（AOT 安全）。</summary>
       internal static NetworkListManagerWrapper CreateNetworkListManager()
       {
          var ptr = ComHelper.CoCreateInstance(CLSID_NetworkListManager, IID_INetworkListManager);

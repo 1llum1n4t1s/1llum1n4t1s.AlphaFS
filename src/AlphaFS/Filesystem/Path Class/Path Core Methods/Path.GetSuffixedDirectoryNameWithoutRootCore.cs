@@ -25,14 +25,14 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>Returns the directory information for the specified <paramref name="path"/> without the root and with a trailing <see cref="DirectorySeparatorChar"/> character.</summary>
+      /// <summary>指定された <paramref name="path"/> のルートを除いたディレクトリ情報を末尾に <see cref="DirectorySeparatorChar"/> 文字を付加して返します。</summary>
       /// <returns>
-      ///   <para>The directory information for the specified <paramref name="path"/> without the root and with a trailing <see cref="DirectorySeparatorChar"/> character,</para>
-      ///   <para>or <c>null</c> if <paramref name="path"/> is <c>null</c> or if <paramref name="path"/> is <c>null</c>.</para>
+      ///   <para>指定された <paramref name="path"/> のルートを除き、末尾に <see cref="DirectorySeparatorChar"/> 文字を付加したディレクトリ情報。</para>
+      ///   <para><paramref name="path"/> が <c>null</c> の場合は <c>null</c>。</para>
       /// </returns>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">パス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       private static string GetSuffixedDirectoryNameWithoutRootCore(KernelTransaction transaction, string path, PathFormat pathFormat)
       {

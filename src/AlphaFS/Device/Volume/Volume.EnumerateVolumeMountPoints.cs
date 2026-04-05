@@ -29,11 +29,11 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Volume
    {
-      /// <summary>[AlphaFS] Returns an enumerable collection of <see cref="String"/> of all mounted folders (volume mount points) on the specified volume. </summary>
+      /// <summary>[AlphaFS] 指定されたボリューム上のすべてのマウントフォルダー（ボリュームマウントポイント）の <see cref="String"/> の列挙可能なコレクションを返します。</summary>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
-      /// <param name="volumeGuid">A <see cref="string"/> containing the volume <see cref="Guid"/>.</param>
-      /// <returns>An enumerable collection of <see cref="String"/> of all volume mount points on the specified volume.</returns>
+      /// <param name="volumeGuid">ボリューム <see cref="Guid"/> を含む <see cref="string"/>。</param>
+      /// <returns>指定されたボリューム上のすべてのボリュームマウントポイントの <see cref="String"/> の列挙可能なコレクション。</returns>
       [SecurityCritical]
       public static IEnumerable<string> EnumerateVolumeMountPoints(string volumeGuid)
       {
@@ -48,7 +48,7 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
-         // A trailing backslash is required.
+         // 末尾のバックスラッシュが必要です。
          volumeGuid = Path.AddTrailingDirectorySeparator(volumeGuid, false);
 
 

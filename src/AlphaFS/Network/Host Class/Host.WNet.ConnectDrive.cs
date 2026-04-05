@@ -27,13 +27,13 @@ namespace Alphaleonis.Win32.Network
 {
    public static partial class Host
    {
-      /// <summary>Creates a connection to a network resource. The function can redirect a local device to a network resource.</summary>
+      /// <summary>ネットワークリソースへの接続を作成します. この関数はローカルデバイスをネットワークリソースにリダイレクトできます.</summary>
       /// <returns>If <paramref name="localName"/> is <c>null</c> or <c>string.Empty</c>, returns the last available drive letter, <c>null</c> otherwise.</returns>
       /// <param name="localName">
       ///   The name of a local device to be redirected, such as "F:". When <paramref name="localName"/> is <c>null</c> or
       ///   <c>string.Empty</c>, the last available drive letter will be used. Letters are assigned beginning with Z:, then Y: and so on.
       /// </param>
-      /// <param name="remoteName">The network resource to connect to. The string can be up to <c>MAX_PATH</c> characters in length.</param>
+      /// <param name="remoteName">接続先のネットワークリソース。文字列の長さは最大 <c>MAX_PATH</c> characters in length.</param>
       [SecurityCritical]
       public static string ConnectDrive(string localName, string remoteName)
       {
@@ -46,13 +46,13 @@ namespace Alphaleonis.Win32.Network
       }
 
       
-      /// <summary>Creates a connection to a network resource. The function can redirect a local device to a network resource.</summary>
+      /// <summary>ネットワークリソースへの接続を作成します. この関数はローカルデバイスをネットワークリソースにリダイレクトできます.</summary>
       /// <returns>If <paramref name="localName"/> is <c>null</c> or <c>string.Empty</c>, returns the last available drive letter, null otherwise.</returns>
       /// <param name="localName">
       ///   The name of a local device to be redirected, such as "F:". When <paramref name="localName"/> is <c>null</c> or
       ///   <c>string.Empty</c>, the last available drive letter will be used. Letters are assigned beginning with Z:, then Y: and so on.
       /// </param>
-      /// <param name="remoteName">The network resource to connect to. The string can be up to <c>MAX_PATH</c> characters in length.</param>
+      /// <param name="remoteName">接続先のネットワークリソース。文字列の長さは最大 <c>MAX_PATH</c> characters in length.</param>
       /// <param name="userName">
       ///   The user name for making the connection. If <paramref name="userName"/> is <c>null</c>, the function uses the default
       ///   user name. (The user context for the process provides the default user name)
@@ -61,10 +61,10 @@ namespace Alphaleonis.Win32.Network
       ///   The password to be used for making the network connection. If <paramref name="password"/> is <c>null</c>, the function
       ///   uses the current default password associated with the user specified by <paramref name="userName"/>.
       /// </param>
-      /// <param name="prompt"><c>true</c> always pops-up an authentication dialog box.</param>
-      /// <param name="updateProfile"><c>true</c> successful network resource connections will be saved.</param>
+      /// <param name="prompt"><c>true</c> は常に認証ダイアログボックスをポップアップします。</param>
+      /// <param name="updateProfile"><c>true</c> は成功したネットワークリソース接続を保存します。</param>
       /// <param name="saveCredentials">
-      ///   When the operating system prompts for a credential, the credential should be saved by the credential manager when true.
+      ///   オペレーティングシステムが資格情報を要求した場合、true のときに資格情報マネージャーによって資格情報が保存されます。
       /// </param>
       [SecurityCritical]
       public static string ConnectDrive(string localName, string remoteName, string userName, string password, bool prompt, bool updateProfile, bool saveCredentials)
@@ -83,21 +83,21 @@ namespace Alphaleonis.Win32.Network
       }
 
       
-      /// <summary>Creates a connection to a network resource. The function can redirect a local device to a network resource.</summary>
+      /// <summary>ネットワークリソースへの接続を作成します. この関数はローカルデバイスをネットワークリソースにリダイレクトできます.</summary>
       /// <returns>If <paramref name="localName"/> is <c>null</c> or <c>string.Empty</c>, returns the last available drive letter, null otherwise.</returns>
       /// <param name="localName">
       ///   The name of a local device to be redirected, such as "F:". When <paramref name="localName"/> is <c>null</c> or
       ///   <c>string.Empty</c>, the last available drive letter will be used. Letters are assigned beginning with Z:, then Y: and so on.
       /// </param>
-      /// <param name="remoteName">The network resource to connect to. The string can be up to <c>MAX_PATH</c> characters in length.</param>
+      /// <param name="remoteName">接続先のネットワークリソース。文字列の長さは最大 <c>MAX_PATH</c> characters in length.</param>
       /// <param name="credentials">
       ///   An instance of <see cref="NetworkCredential"/> which provides credentials for password-based authentication schemes such as basic,
       ///   digest, NTLM, and Kerberos authentication.
       /// </param>
-      /// <param name="prompt"><c>true</c> always pops-up an authentication dialog box.</param>
-      /// <param name="updateProfile"><c>true</c> successful network resource connections will be saved.</param>
+      /// <param name="prompt"><c>true</c> は常に認証ダイアログボックスをポップアップします。</param>
+      /// <param name="updateProfile"><c>true</c> は成功したネットワークリソース接続を保存します。</param>
       /// <param name="saveCredentials">
-      ///   When the operating system prompts for a credential, the credential should be saved by the credential manager when true.
+      ///   オペレーティングシステムが資格情報を要求した場合、true のときに資格情報マネージャーによって資格情報が保存されます。
       /// </param>
       [SecurityCritical]
       public static string ConnectDrive(string localName, string remoteName, NetworkCredential credentials, bool prompt, bool updateProfile, bool saveCredentials)
@@ -115,14 +115,14 @@ namespace Alphaleonis.Win32.Network
       }
 
       
-      /// <summary>Creates a connection to a network resource. The function can redirect a local device to a network resource.</summary>
+      /// <summary>ネットワークリソースへの接続を作成します. この関数はローカルデバイスをネットワークリソースにリダイレクトできます.</summary>
       /// <returns>If <paramref name="localName"/> is <c>null</c> or <c>string.Empty</c>, returns the last available drive letter, null otherwise.</returns>
-      /// <param name="winOwner">Handle to a window that the provider of network resources can use as an owner window for dialog boxes.</param>
+      /// <param name="winOwner">ネットワークリソースのプロバイダーがダイアログボックスのオーナーウィンドウとして使用できるウィンドウへのハンドル。</param>
       /// <param name="localName">
       ///   The name of a local device to be redirected, such as "F:". When <paramref name="localName"/> is <c>null</c> or
       ///   <c>string.Empty</c>, the last available drive letter will be used. Letters are assigned beginning with Z:, then Y: and so on.
       /// </param>
-      /// <param name="remoteName">The network resource to connect to. The string can be up to <c>MAX_PATH</c> characters in length.</param>
+      /// <param name="remoteName">接続先のネットワークリソース。文字列の長さは最大 <c>MAX_PATH</c> characters in length.</param>
       /// <param name="userName">
       ///   The user name for making the connection. If <paramref name="userName"/> is <c>null</c>, the function uses the default
       ///   user name. (The user context for the process provides the default user name)
@@ -131,10 +131,10 @@ namespace Alphaleonis.Win32.Network
       ///   The password to be used for making the network connection. If <paramref name="password"/> is <c>null</c>, the function
       ///   uses the current default password associated with the user specified by <paramref name="userName"/>.
       /// </param>
-      /// <param name="prompt"><c>true</c> always pops-up an authentication dialog box.</param>
-      /// <param name="updateProfile"><c>true</c> successful network resource connections will be saved.</param>
+      /// <param name="prompt"><c>true</c> は常に認証ダイアログボックスをポップアップします。</param>
+      /// <param name="updateProfile"><c>true</c> は成功したネットワークリソース接続を保存します。</param>
       /// <param name="saveCredentials">
-      ///   When the operating system prompts for a credential, the credential should be saved by the credential manager when true.
+      ///   オペレーティングシステムが資格情報を要求した場合、true のときに資格情報マネージャーによって資格情報が保存されます。
       /// </param>
       [SecurityCritical]
       public static string ConnectDrive(IntPtr winOwner, string localName, string remoteName, string userName, string password, bool prompt, bool updateProfile, bool saveCredentials)
@@ -154,22 +154,22 @@ namespace Alphaleonis.Win32.Network
       }
 
       
-      /// <summary>Creates a connection to a network resource. The function can redirect a local device to a network resource.</summary>
+      /// <summary>ネットワークリソースへの接続を作成します. この関数はローカルデバイスをネットワークリソースにリダイレクトできます.</summary>
       /// <returns>If <paramref name="localName"/> is <c>null</c> or <c>string.Empty</c>, returns the last available drive letter, null otherwise.</returns>
-      /// <param name="winOwner">Handle to a window that the provider of network resources can use as an owner window for dialog boxes.</param>
+      /// <param name="winOwner">ネットワークリソースのプロバイダーがダイアログボックスのオーナーウィンドウとして使用できるウィンドウへのハンドル。</param>
       /// <param name="localName">
       ///   The name of a local device to be redirected, such as "F:". When <paramref name="localName"/> is <c>null</c> or
       ///   <c>string.Empty</c>, the last available drive letter will be used. Letters are assigned beginning with Z:, then Y: and so on.
       /// </param>
-      /// <param name="remoteName">The network resource to connect to. The string can be up to <c>MAX_PATH</c> characters in length.</param>
+      /// <param name="remoteName">接続先のネットワークリソース。文字列の長さは最大 <c>MAX_PATH</c> characters in length.</param>
       /// <param name="credentials">
       ///   An instance of <see cref="NetworkCredential"/> which provides credentials for password-based authentication schemes such as basic,
       ///   digest, NTLM, and Kerberos authentication.
       /// </param>
-      /// <param name="prompt"><c>true</c> always pops-up an authentication dialog box.</param>
-      /// <param name="updateProfile"><c>true</c> successful network resource connections will be saved.</param>
+      /// <param name="prompt"><c>true</c> は常に認証ダイアログボックスをポップアップします。</param>
+      /// <param name="updateProfile"><c>true</c> は成功したネットワークリソース接続を保存します。</param>
       /// <param name="saveCredentials">
-      ///   When the operating system prompts for a credential, the credential should be saved by the credential manager when true.
+      ///   オペレーティングシステムが資格情報を要求した場合、true のときに資格情報マネージャーによって資格情報が保存されます。
       /// </param>
       [SecurityCritical]
       public static string ConnectDrive(IntPtr winOwner, string localName, string remoteName, NetworkCredential credentials, bool prompt, bool updateProfile, bool saveCredentials)

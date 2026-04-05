@@ -26,9 +26,9 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>Sets the date and time, in coordinated universal time (UTC), that the file was created.</summary>
-      /// <param name="path">The file for which to set the creation date and time information.</param>
-      /// <param name="creationTimeUtc">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>      
+      /// <summary>ファイルが作成された日時を協定世界時(UTC)で設定します。</summary>
+      /// <param name="path">作成日時情報を設定するファイル。</param>
+      /// <param name="creationTimeUtc"><paramref name="path"/>の作成日時に設定する値を含む<see cref="DateTime"/>。この値はUTC時刻で表されます。</param>      
       [SecurityCritical]
       public static void SetCreationTimeUtc(string path, DateTime creationTimeUtc)
       {
@@ -36,10 +36,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets the date and time, in coordinated universal time (UTC), that the file was created.</summary>
-      /// <param name="path">The file for which to set the creation date and time information.</param>
-      /// <param name="creationTimeUtc">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>      
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>      
+      /// <summary>[AlphaFS] ファイルが作成された日時を協定世界時(UTC)で設定します。</summary>
+      /// <param name="path">作成日時情報を設定するファイル。</param>
+      /// <param name="creationTimeUtc"><paramref name="path"/>の作成日時に設定する値を含む<see cref="DateTime"/>。この値はUTC時刻で表されます。</param>      
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>      
       [SecurityCritical]
       public static void SetCreationTimeUtc(string path, DateTime creationTimeUtc, PathFormat pathFormat)
       {
@@ -47,10 +47,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets the date and time, in coordinated universal time (UTC), that the file was created.</summary>
-      /// <param name="path">The file for which to set the creation date and time information.</param>
-      /// <param name="creationTimeUtc">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>      
-      /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the file or directory linked to. No effect if <paramref name="path"/> does not refer to a reparse point.</param>
+      /// <summary>[AlphaFS] ファイルが作成された日時を協定世界時(UTC)で設定します。</summary>
+      /// <param name="path">作成日時情報を設定するファイル。</param>
+      /// <param name="creationTimeUtc"><paramref name="path"/>の作成日時に設定する値を含む<see cref="DateTime"/>。この値はUTC時刻で表されます。</param>      
+      /// <param name="modifyReparsePoint"><c>true</c>の場合、日時情報はリパースポイント(シンボリックリンクまたはジャンクション)に適用され、リンク先のファイルまたはディレクトリには適用されません。<paramref name="path"/>がリパースポイントを参照していない場合は効果がありません。</param>
       [SecurityCritical]
       public static void SetCreationTimeUtc(string path, DateTime creationTimeUtc, bool modifyReparsePoint)
       {
@@ -58,11 +58,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets the date and time, in coordinated universal time (UTC), that the file was created.</summary>
-      /// <param name="path">The file for which to set the creation date and time information.</param>
-      /// <param name="creationTimeUtc">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>      
-      /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the file or directory linked to. No effect if <paramref name="path"/> does not refer to a reparse point.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>      
+      /// <summary>[AlphaFS] ファイルが作成された日時を協定世界時(UTC)で設定します。</summary>
+      /// <param name="path">作成日時情報を設定するファイル。</param>
+      /// <param name="creationTimeUtc"><paramref name="path"/>の作成日時に設定する値を含む<see cref="DateTime"/>。この値はUTC時刻で表されます。</param>      
+      /// <param name="modifyReparsePoint"><c>true</c>の場合、日時情報はリパースポイント(シンボリックリンクまたはジャンクション)に適用され、リンク先のファイルまたはディレクトリには適用されません。<paramref name="path"/>がリパースポイントを参照していない場合は効果がありません。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>      
       [SecurityCritical]
       public static void SetCreationTimeUtc(string path, DateTime creationTimeUtc, bool modifyReparsePoint, PathFormat pathFormat)
       {

@@ -26,19 +26,19 @@ using System.Linq;
 
 namespace Alphaleonis.Win32.Security
 {
-   /// <summary>Used to enable one or more privileges. The privileges specified will be enabled during the lifetime of the instance. Users create an instance of this object in a <c>using</c> statement to ensure that it is properly disposed when the elevated privileges are no longer needed.</summary>
+   /// <summary>1つ以上の特権を有効にするために使用されます。指定された特権はインスタンスの存続期間中に有効になります。昇格された特権が不要になったときに適切にDisposeされるように、<c>using</c>ステートメント内でこのオブジェクトのインスタンスを作成してください。</summary>
    public sealed class PrivilegeEnabler : IDisposable
    {
       #region PrivilegeEnabler
 
       private readonly List<InternalPrivilegeEnabler> _enabledPrivileges = new List<InternalPrivilegeEnabler>();
 
-      /// <summary>Initializes a new instance of the <see cref="PrivilegeEnabler"/> class.
-      /// This will enable the privileges specified (unless already enabled), and ensure that they are disabled again when
-      /// the object is disposed. (Any privileges already enabled will not be disabled).
+      /// <summary><see cref="PrivilegeEnabler"/>クラスの新しいインスタンスを初期化します。
+      /// これにより、指定された特権が有効になり（既に有効でない場合）、オブジェクトがDisposeされたときに再び無効になります。
+      /// （既に有効な特権��無効にされません。）
       /// </summary>
-      /// <param name="privilege">The privilege to enable.</param>
-      /// <param name="privileges">Additional privileges to enable.</param>
+      /// <param name="privilege">有効にする特権。</param>
+      /// <param name="privileges">追加で有効にする特権。</param>
       public PrivilegeEnabler(Privilege privilege, params Privilege[] privileges)
       {
          _enabledPrivileges.Add(new InternalPrivilegeEnabler(privilege));
@@ -54,7 +54,7 @@ namespace Alphaleonis.Win32.Security
 
       #region Dispose
 
-      /// <summary>Makes sure any privileges enabled by this instance are disabled.</summary>
+      /// <summary>このインスタンスによって有効にされた特権が確実に無効にされるようにします。</summary>
       [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
       public void Dispose()
       {
@@ -66,7 +66,7 @@ namespace Alphaleonis.Win32.Security
             }
             catch
             {
-               // We ignore any exceptions here
+               // ここではすべての例外を無視する
             }
          }
       }
@@ -75,8 +75,8 @@ namespace Alphaleonis.Win32.Security
 
       #region EnabledPrivileges
 
-      /// <summary>Gets the enabled privileges. Note that this might not contain all privileges specified to the constructor. Only the privileges actually enabled by this instance is returned.</summary>
-      /// <value>The enabled privileges.</value>
+      /// <summary>有効にされた特権を取得します。コンストラクタで指定されたすべての特権が含まれない場合があります。このインスタンスによって実際に有効にされた特権のみが返されます。</summary>
+      /// <value>有効にされた特権。</value>
       public IEnumerable<Privilege> EnabledPrivileges
       {
          get { return from priv in _enabledPrivileges where priv.EnabledPrivilege != null select priv.EnabledPrivilege; }

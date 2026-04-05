@@ -29,11 +29,11 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Moves a file or a directory and its contents to a new location.</summary>
+      /// <summary>ファイルまたはディレクトリとその内容を新しい場所に移動します。</summary>
       /// <remarks>
-      ///   <para>This method does not work across disk volumes.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>このメソッドはディスクボリュームをまたいで動作しません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2つのディレクトリが同等の短いファイル名を持つ場合、このメソッドは失敗して例外を発生させるか、望ましくない動作を引き起こす可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -41,8 +41,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The source directory path.</param>
-      /// <param name="destinationPath">The destination directory path.</param>
+      /// <param name="sourcePath">移動元ディレクトリのパス。</param>
+      /// <param name="destinationPath">移動先ディレクトリのパス。</param>
       [SecurityCritical]
       public static void Move(string sourcePath, string destinationPath)
       {
@@ -57,22 +57,22 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Moves a file or a directory and its contents to a new location.</summary>
+      /// <summary>[AlphaFS] ファイルまたはディレクトリとその内容を新しい場所に移動します。</summary>
       /// <remarks>
-      ///   <para>This method does not work across disk volumes.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>このメソッドはディスクボリュームをまたいで動作しません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2つのディレクトリが同等の短いファイル名を持つ場合、このメソッドは失敗して例外を発生させるか、望ましくない動作を引き起こす可能性があります。</para>
       /// </remarks>
-      /// <returns>A <see cref="CopyMoveResult"/> class with details of the Move action.</returns>
+      /// <returns>移動操作の詳細を含む <see cref="CopyMoveResult"/> クラス。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The source directory path.</param>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="sourcePath">移動元ディレクトリのパス。</param>
+      /// <param name="destinationPath">移動先ディレクトリのパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static CopyMoveResult Move(string sourcePath, string destinationPath, PathFormat pathFormat)
       {
@@ -86,22 +86,22 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a file or a directory and its contents to a new location, <see cref="MoveOptions"/> can be specified.</summary>
+      /// <summary>[AlphaFS] ファイルまたはディレクトリとその内容を新しい場所に移動します。<see cref="MoveOptions"/> を指定できます。</summary>
       /// <remarks>
-      ///   <para>This method does not work across disk volumes unless <paramref name="moveOptions"/> contains <see cref="MoveOptions.CopyAllowed"/>.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para><paramref name="moveOptions"/> に <see cref="MoveOptions.CopyAllowed"/> が含まれていない限り、このメソッドはディスクボリュームをまたいで動作しません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2つのディレクトリが同等の短いファイル名を持つ場合、このメソッドは失敗して例外を発生させるか、望ましくない動作を引き起こす可能性があります。</para>
       /// </remarks>
-      /// <returns>A <see cref="CopyMoveResult"/> class with details of the Move action.</returns>
+      /// <returns>移動操作の詳細を含む <see cref="CopyMoveResult"/> クラス。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The source directory path.</param>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the directory is to be moved. This parameter can be <c>null</c>.</param>
+      /// <param name="sourcePath">移動元ディレクトリのパス。</param>
+      /// <param name="destinationPath">移動先ディレクトリのパス。</param>
+      /// <param name="moveOptions">ディレクトリの移動方法を指定する <see cref="MoveOptions"/>。このパラメータは <c>null</c> にできます。</param>
       [SecurityCritical]
       public static CopyMoveResult Move(string sourcePath, string destinationPath, MoveOptions moveOptions)
       {
@@ -114,23 +114,23 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a file or a directory and its contents to a new location, <see cref="MoveOptions"/> can be specified.</summary>
+      /// <summary>[AlphaFS] ファイルまたはディレクトリとその内容を新しい場所に移動します。<see cref="MoveOptions"/> を指定できます。</summary>
       /// <remarks>
-      ///   <para>This method does not work across disk volumes unless <paramref name="moveOptions"/> contains <see cref="MoveOptions.CopyAllowed"/>.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para><paramref name="moveOptions"/> に <see cref="MoveOptions.CopyAllowed"/> が含まれていない限り、このメソッドはディスクボリュームをまたいで動作しません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2つのディレクトリが同等の短いファイル名を持つ場合、このメソッドは失敗して例外を発生させるか、望ましくない動作を引き起こす可能性があります。</para>
       /// </remarks>
-      /// <returns>A <see cref="CopyMoveResult"/> class with details of the Move action.</returns>
+      /// <returns>移動操作の詳細を含む <see cref="CopyMoveResult"/> クラス。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The source directory path.</param>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the directory is to be moved. This parameter can be <c>null</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="sourcePath">移動元ディレクトリのパス。</param>
+      /// <param name="destinationPath">移動先ディレクトリのパス。</param>
+      /// <param name="moveOptions">ディレクトリの移動方法を指定する <see cref="MoveOptions"/>。このパラメータは <c>null</c> にできます。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static CopyMoveResult Move(string sourcePath, string destinationPath, MoveOptions moveOptions, PathFormat pathFormat)
       {
@@ -144,26 +144,26 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a file or a directory and its contents to a new location, <see cref="MoveOptions"/> can be specified,
-      /// and the possibility of notifying the application of its progress through a callback function.
+      /// <summary>[AlphaFS] ファイルまたはディレクトリとその内容を新しい場所に移動します。<see cref="MoveOptions"/> を指定でき、
+      /// コールバック関数を通じてアプリケーションに進行状況を通知できます。
       /// </summary>
       /// <remarks>
-      ///   <para>This method does not work across disk volumes unless <paramref name="moveOptions"/> contains <see cref="MoveOptions.CopyAllowed"/>.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para><paramref name="moveOptions"/> に <see cref="MoveOptions.CopyAllowed"/> が含まれていない限り、このメソッドはディスクボリュームをまたいで動作しません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2つのディレクトリが同等の短いファイル名を持つ場合、このメソッドは失敗して例外を発生させるか、望ましくない動作を引き起こす可能性があります。</para>
       /// </remarks>
-      /// <returns>A <see cref="CopyMoveResult"/> class with details of the Move action.</returns>
+      /// <returns>移動操作の詳細を含む <see cref="CopyMoveResult"/> クラス。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The source directory path.</param>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the directory is to be moved. This parameter can be <c>null</c>.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the directory has been moved. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
+      /// <param name="sourcePath">移動元ディレクトリのパス。</param>
+      /// <param name="destinationPath">移動先ディレクトリのパス。</param>
+      /// <param name="moveOptions">ディレクトリの移動方法を指定する <see cref="MoveOptions"/>。このパラメータは <c>null</c> にできます。</param>
+      /// <param name="progressHandler">ディレクトリの一部が移動されるたびに呼び出されるコールバック関数。このパラメータは <c>null</c> にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメータは <c>null</c> にできます。</param>
       [SecurityCritical]
       public static CopyMoveResult Move(string sourcePath, string destinationPath, MoveOptions moveOptions, CopyMoveProgressRoutine progressHandler, object userProgressData)
       {
@@ -178,27 +178,27 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a file or a directory and its contents to a new location, <see cref="MoveOptions"/> can be specified,
-      ///   and the possibility of notifying the application of its progress through a callback function.
+      /// <summary>[AlphaFS] ファイルまたはディレクトリとその内容を新しい場所に移動します。<see cref="MoveOptions"/> を指定でき、
+      ///   コールバック関数を通じてアプリケーションに進行状況を通知できます。
       /// </summary>
       /// <remarks>
-      ///   <para>This method does not work across disk volumes unless <paramref name="moveOptions"/> contains <see cref="MoveOptions.CopyAllowed"/>.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para><paramref name="moveOptions"/> に <see cref="MoveOptions.CopyAllowed"/> が含まれていない限り、このメソッドはディスクボリュームをまたいで動作しません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2つのディレクトリが同等の短いファイル名を持つ場合、このメソッドは失敗して例外を発生させるか、望ましくない動作を引き起こす可能性があります。</para>
       /// </remarks>
-      /// <returns>A <see cref="CopyMoveResult"/> class with details of the Move action.</returns>
+      /// <returns>移動操作の詳細を含む <see cref="CopyMoveResult"/> クラス。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="sourcePath">The source directory path.</param>
-      /// <param name="destinationPath">The destination directory path.</param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the directory is to be moved. This parameter can be <c>null</c>.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the directory has been moved. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="sourcePath">移動元ディレクトリのパス。</param>
+      /// <param name="destinationPath">移動先ディレクトリのパス。</param>
+      /// <param name="moveOptions">ディレクトリの移動方法を指定する <see cref="MoveOptions"/>。このパラメータは <c>null</c> にできます。</param>
+      /// <param name="progressHandler">ディレクトリの一部が移動されるたびに呼び出されるコールバック関数。このパラメータは <c>null</c> にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメータは <c>null</c> にできます。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static CopyMoveResult Move(string sourcePath, string destinationPath, MoveOptions moveOptions, CopyMoveProgressRoutine progressHandler, object userProgressData, PathFormat pathFormat)
       {

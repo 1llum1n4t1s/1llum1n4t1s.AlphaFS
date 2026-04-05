@@ -25,7 +25,7 @@ namespace Alphaleonis.Win32.Filesystem
 {
    partial class FileInfo
    {
-      /// <summary>[AlphaFS] Compresses a file using NTFS compression.</summary>      
+      /// <summary>[AlphaFS] NTFS 圧縮を使用してファイルを圧縮します。</summary>      
       [SecurityCritical]
       public void Compress()
       {

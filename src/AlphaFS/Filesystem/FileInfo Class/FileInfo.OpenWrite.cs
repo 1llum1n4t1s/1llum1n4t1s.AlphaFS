@@ -28,8 +28,8 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Creates a write-only <see cref="FileStream"/>.</summary>
-      /// <returns>A write-only unshared <see cref="FileStream"/> object for a new or existing file.</returns>
+      /// <summary>書き込み専用の <see cref="FileStream"/> を作成します。</summary>
+      /// <returns>新しいファイルまたは既存のファイルの書き込み専用非共有 <see cref="FileStream"/> オブジェクト。</returns>
       [SecurityCritical]
       public FileStream OpenWrite()
       {

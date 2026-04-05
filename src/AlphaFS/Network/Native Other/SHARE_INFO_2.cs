@@ -25,22 +25,22 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Contains information about the shared resource, including the name, type, and permissions of the resource, comments associated with the resource,
+      /// <summary>共有リソースに関する情報を含みます, 名前を含む, type, and permissions of the resource, comments associated with the resource,
       /// the maximum number of concurrent connections, the number of current connections, the local path for the resource, and a password for the current connection.
       /// </summary>
       /// <remarks>Share information, NT, level 2, requires admin rights to work.</remarks>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [desktop apps only]</remarks>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct SHARE_INFO_2
       {
-         /// <summary>The name of a shared resource.</summary>
+         /// <summary>共有リソースの名前。</summary>
          [MarshalAs(UnmanagedType.LPWStr)] public readonly string shi2_netname;
 
-         /// <summary>The type of share.</summary>
+         /// <summary>共有の種類.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly ShareType shi2_type;
 
-         /// <summary>An optional comment about the shared resource.</summary>
+         /// <summary>共有リソースに関するオプションのコメント。</summary>
          [MarshalAs(UnmanagedType.LPWStr)] public readonly string shi2_remark;
 
          /// <summary>The shared resource's permissions for servers running with share-level security.</summary>
@@ -48,10 +48,10 @@ namespace Alphaleonis.Win32.Network
          [MarshalAs(UnmanagedType.U4)] public readonly AccessPermissions shi2_permissions;
 
          /// <summary>The maximum number of concurrent connections that the shared resource can accommodate.</summary>
-         /// <remarks>The number of connections is unlimited if the value specified in this member is –1.</remarks>
+         /// <remarks>の数 connections is unlimited if the value specified in this member is –1.</remarks>
          [MarshalAs(UnmanagedType.U4)] public readonly uint shi2_max_uses;
 
-         /// <summary>The number of current connections to the resource.</summary>
+         /// <summary>の数 current connections to the resource.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint shi2_current_uses;
 
          /// <summary>The local path for the shared resource.</summary>

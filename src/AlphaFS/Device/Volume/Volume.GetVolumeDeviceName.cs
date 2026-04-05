@@ -27,12 +27,12 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Volume
    {
-      /// <summary>[AlphaFS] Retrieves the Win32 Device name from the Volume name.</summary>
-      /// <returns>The Win32 Device name from the Volume name, for example: "\Device\HarddiskVolume2",  or <c>null</c> on error or if unavailable.</returns>
-      /// <remarks>This is the same method as <see cref="Volume.QueryDosDevice"/>.</remarks>
+      /// <summary>[AlphaFS] ボリューム名から Win32 デバイス名を取得します。</summary>
+      /// <returns>ボリューム名からの Win32 デバイス名。例: "\Device\HarddiskVolume2"。エラーの場合または利用できない場合は <c>null</c>。</returns>
+      /// <remarks>このメソッドは <see cref="Volume.QueryDosDevice"/> と同じです。</remarks>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="FileNotFoundException"/>
-      /// <param name="volumeName">Name of the Volume.</param>
+      /// <param name="volumeName">ボリュームの名前。</param>
       [SecurityCritical]
       public static string GetVolumeDeviceName(string volumeName)
       {

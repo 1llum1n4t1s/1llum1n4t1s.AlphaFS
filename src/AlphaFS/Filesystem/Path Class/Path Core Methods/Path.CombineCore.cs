@@ -27,17 +27,17 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>Combines an array of strings into a path.</summary>
-      /// <returns>The combined paths.</returns>
+      /// <summary>文字列の配列を1つのパスに結合します。</summary>
+      /// <returns>結合されたパス。</returns>
       /// <remarks>
-      ///   <para>The parameters are not parsed if they have white space.</para>
-      ///   <para>Therefore, if path2 includes white space (for example, " c:\\ "),</para>
-      ///   <para>the Combine method appends path2 to path1 instead of returning only path2.</para>
+      ///   <para>パラメータに空白が含まれている場合は解析されません。</para>
+      ///   <para>したがって、path2 に空白が含まれている場合（例: " c:\\ "）、</para>
+      ///   <para>Combine メソッドは path2 のみを返す代わりに path2 を path1 に追加します。</para>
       /// </remarks>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
-      /// <param name="checkInvalidPathChars"><c>true</c> will not check <paramref name="paths"/> for invalid path characters.</param>
-      /// <param name="paths">An array of parts of the path.</param>
+      /// <param name="checkInvalidPathChars"><c>true</c> の場合、<paramref name="paths"/> の無効なパス文字をチェックしません。</param>
+      /// <param name="paths">パスの構成部分の配列。</param>
       [SecurityCritical]
       internal static string CombineCore(bool checkInvalidPathChars, params string[] paths)
       {

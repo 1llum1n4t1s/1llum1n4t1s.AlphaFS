@@ -27,18 +27,18 @@ namespace Alphaleonis.Win32.Filesystem
    public static partial class File
    {
       /// <summary>Gets the <see cref="FileSystemEntryInfo"/> for a Non-/Transacted file or directory on the path.</summary>
-      /// <returns>The <see cref="FileSystemEntryInfo"/> instance of the file or directory, or <c>null</c> on Exception when <paramref name="continueOnException"/> is <c>true</c>.</returns>
+      /// <returns>ファイルまたはディレクトリの<see cref="FileSystemEntryInfo"/>インスタンス、または<paramref name="continueOnException"/>が<c>true</c>の場合の例外時は<c>null</c>。</returns>
       /// <remarks>BasicSearch <see cref="NativeMethods.FINDEX_INFO_LEVELS.Basic"/> and LargeCache <see cref="NativeMethods.FIND_FIRST_EX_FLAGS.LARGE_FETCH"/> are used by default, if possible.</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="isFolder">When <c>true</c> indicates the source is a directory; file otherwise. Use <c>false</c> if unknown.</param>
-      /// <param name="path">The path to the file.</param>
+      /// <param name="path">ファイルへのパス。</param>
       /// <param name="continueOnException">
-      ///    <para><c>true</c> suppress any Exception that might be thrown as a result from a failure,</para>
-      ///    <para>such as ACLs protected filesor non-accessible reparse points.</para>
+      ///    <para><c>true</c>の場合、失敗の結果としてスローされる可能性のある例外を抑制します。</para>
+      ///    <para>ACLで保護されたファイルやアクセスできないリパースポイントなど。</para>
       /// </param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       internal static FileSystemEntryInfo GetFileSystemEntryInfoCore(KernelTransaction transaction, bool isFolder, string path, bool continueOnException, PathFormat pathFormat)
       {

@@ -44,7 +44,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <returns>An enumeration of <see cref="FileIdBothDirectoryInfo"/> records for each file system entry in the specified diretory.</returns>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
       /// <param name="path">A path to a directory from which to retrieve information.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static IEnumerable<FileIdBothDirectoryInfo> EnumerateFileIdBothDirectoryInfo(string path, PathFormat pathFormat)
       {
@@ -69,7 +69,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
       /// <param name="path">A path to a directory from which to retrieve information.</param>
       /// <param name="shareMode">The <see cref="FileShare"/> mode with which to open a handle to the directory.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static IEnumerable<FileIdBothDirectoryInfo> EnumerateFileIdBothDirectoryInfo(string path, FileShare shareMode, PathFormat pathFormat)
       {

@@ -26,8 +26,8 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>Class for CopyMoveResult that contains the results for the Copy or Move action.</summary>
-   /// <remarks>Normally there is no need to manually instantiate and/or populate this class.</remarks>
+   /// <summary>コピーまたは移動操作の結果を格納するCopyMoveResultクラス。</summary>
+   /// <remarks>通常、このクラスを手動でインスタンス化したり、値を設定する必要はありません。</remarks>
    [Serializable]
    public sealed class CopyMoveResult
    {
@@ -40,9 +40,9 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region Constructors
 
-      /// <summary>Initializes a CopyMoveResult instance for the Copy or Move action.</summary>
-      /// <param name="source">Indicates the full path to the source file or directory.</param>
-      /// <param name="destination">Indicates the full path to the destination file or directory.</param>
+      /// <summary>コピーまたは移動操作用のCopyMoveResultインスタンスを初期化します。</summary>
+      /// <param name="source">ソースファイルまたはディレクトリのフルパス。</param>
+      /// <param name="destination">宛先ファイルまたはディレクトリのフルパス。</param>
       private CopyMoveResult(string source, string destination)
       {
          Source = source;
@@ -85,85 +85,85 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region Properties
 
-      /// <summary>Indicates the duration of the Copy or Move action.</summary>
+      /// <summary>コピーまたは移動操作の所要時間を示します。</summary>
       public TimeSpan Duration
       {
          get { return Stopwatch.Elapsed; }
       }
       
 
-      /// <summary>Indicates the destination file or directory.</summary>
+      /// <summary>宛先ファイルまたはディレクトリを示します。</summary>
       public string Destination { get; private set; }
       
 
-      /// <summary>The error code encountered during the Copy or Move action.</summary>
-      /// <value>0 (zero) indicates success.</value>
+      /// <summary>コピーまたは移動操作中に発生したエラーコード。</summary>
+      /// <value>0（ゼロ）は成功を示します。</value>
       public int ErrorCode { get; internal set; }
 
 
-      /// <summary>The error message from the <see cref="ErrorCode"/> that was encountered during the Copy or Move action.</summary>
-      /// <value>A message describing the error.</value>
+      /// <summary>コピーまたは移動操作中に発生した<see cref="ErrorCode"/>からのエラーメッセージ。</summary>
+      /// <value>エラーを説明するメッセージ。</value>
       [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
       public string ErrorMessage { get { return new Win32Exception(ErrorCode).Message; } }
 
 
-      /// <summary>When <c>true</c> indicates that the Copy or Move action was canceled.</summary>
-      /// <value><c>true</c> when the Copy/Move action was canceled. Otherwise <c>false</c>.</value>
+      /// <summary><c>true</c>の場合、コピーまたは移動操作がキャンセルされたことを示します。</summary>
+      /// <value>コピー/移動操作がキャンセルされた場合は<c>true</c>、それ以外の場合は<c>false</c>。</value>
       public bool IsCanceled { get; internal set; }
 
 
-      /// <summary>When <c>true</c> the action was a Copy, Move otherwise.</summary>
-      /// <value><c>true</c> when the action was a Copy. Otherwise a Move action was performed.</value>
+      /// <summary><c>true</c>の場合はコピー操作、それ以外は移動操作。</summary>
+      /// <value>コピー操作の場合は<c>true</c>、移動操作の場合は<c>false</c>。</value>
       public bool IsCopy { get; private set; }
 
 
-      /// <summary>Gets a value indicating whether this instance represents a directory.</summary>
-      /// <value><c>true</c> if this instance represents a directory; otherwise, <c>false</c>.</value>
+      /// <summary>このインスタンスがディレクトリを表すかどうかを示す値を取得します。</summary>
+      /// <value>このインスタンスがディレクトリを表す場合は<c>true</c>、それ以外の場合は<c>false</c>。</value>
       public bool IsDirectory { get; private set; }
 
 
-      /// <summary>Indicates the Move action used a fallback of Copy + Delete actions.</summary>
+      /// <summary>移動操作がコピー＋削除のフォールバックを使用したことを示します。</summary>
       public bool IsEmulatedMove { get; private set; }
 
 
-      /// <summary>Gets a value indicating whether this instance represents a file.</summary>
-      /// <value><c>true</c> if this instance represents a file; otherwise, <c>false</c>.</value>
+      /// <summary>このインスタンスがファイルを表すかどうかを示す値を取得します。</summary>
+      /// <value>このインスタンスがファイルを表す場合は<c>true</c>、それ以外の場合は<c>false</c>。</value>
       public bool IsFile { get { return !IsDirectory; } }
 
 
-      /// <summary>When <c>true</c> the action was a Move, Copy otherwise.</summary>
-      /// <value><c>true</c> when the action was a Move. Otherwise a Copy action was performed.</value>
+      /// <summary><c>true</c>の場合は移動操作、それ以外はコピー操作。</summary>
+      /// <value>移動操作の場合は<c>true</c>、コピー操作の場合は<c>false</c>。</value>
       public bool IsMove { get { return !IsCopy; } }
 
 
-      /// <summary>The total number of retry attempts.</summary>
+      /// <summary>リトライ試行の合計回数。</summary>
       public long Retries { get; internal set; }
 
 
-      /// <summary>Indicates the source file or directory.</summary>
+      /// <summary>ソースファイルまたはディレクトリを示します。</summary>
       public string Source { get; private set; }
 
 
-      /// <summary>Indicates that the source date and timestamps have been applied to the destination file system objects.</summary>
+      /// <summary>ソースの日付とタイムスタンプが宛先ファイルシステムオブジェクトに適用されたことを示します。</summary>
       public bool TimestampsCopied { get; private set; }
 
 
-      /// <summary>The total number of bytes copied.</summary>
+      /// <summary>コピーされた合計バイト数。</summary>
       public long TotalBytes { get; internal set; }
 
 
-      /// <summary>The total number of bytes copied, formatted as a unit size.</summary>
+      /// <summary>コピーされた合計バイト数（単位サイズとしてフォーマット済み）。</summary>
       public string TotalBytesUnitSize
       {
          get { return Utils.UnitSizeToText(TotalBytes); }
       }
 
 
-      /// <summary>The total number of files copied.</summary>
+      /// <summary>コピーされた合計ファイル数。</summary>
       public long TotalFiles { get; internal set; }
 
 
-      /// <summary>The total number of folders copied.</summary>
+      /// <summary>コピーされた合計フォルダ数。</summary>
       public long TotalFolders { get; internal set; }
 
       #endregion // Properties

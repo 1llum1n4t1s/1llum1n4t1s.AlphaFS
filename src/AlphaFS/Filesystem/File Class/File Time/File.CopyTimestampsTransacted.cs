@@ -27,14 +27,14 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Copies the date and timestamps for the specified existing files.</summary>
-      /// <remarks>This method does not change last access time for the source file.</remarks>
+      /// <summary>[AlphaFS] 指定された既存ファイルの日時とタイムスタンプをコピーします。</summary>
+      /// <remarks>このメソッドはソースファイルの最終アクセス日時を変更しません。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="FileNotFoundException"/>
       /// <exception cref="NotSupportedException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The source file to get the date and time stamps from.</param>
-      /// <param name="destinationPath">The destination file to set the date and time stamps.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">日時スタンプの取得元となるソースファイル。</param>
+      /// <param name="destinationPath">日時スタンプを設定するコピー先ファイル。</param>
       [SecurityCritical]
       public static void CopyTimestampsTransacted(KernelTransaction transaction, string sourcePath, string destinationPath)
       {
@@ -42,15 +42,15 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies the date and timestamps for the specified existing files.</summary>
-      /// <remarks>This method does not change last access time for the source file.</remarks>
+      /// <summary>[AlphaFS] 指定された既存ファイルの日時とタイムスタンプをコピーします。</summary>
+      /// <remarks>このメソッドはソースファイルの最終アクセス日時を変更しません。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="FileNotFoundException"/>
       /// <exception cref="NotSupportedException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The source file to get the date and time stamps from.</param>
-      /// <param name="destinationPath">The destination file to set the date and time stamps.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">日時スタンプの取得元となるソースファイル。</param>
+      /// <param name="destinationPath">日時スタンプを設定するコピー先ファイル。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void CopyTimestampsTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, PathFormat pathFormat)
       {
@@ -58,15 +58,15 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies the date and timestamps for the specified existing files.</summary>
-      /// <remarks>This method does not change last access time for the source file.</remarks>
+      /// <summary>[AlphaFS] 指定された既存ファイルの日時とタイムスタンプをコピーします。</summary>
+      /// <remarks>このメソッドはソースファイルの最終アクセス日時を変更しません。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="FileNotFoundException"/>
       /// <exception cref="NotSupportedException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The source file to get the date and time stamps from.</param>
-      /// <param name="destinationPath">The destination file to set the date and time stamps.</param>
-      /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the file linked to. No effect if <paramref name="destinationPath"/> does not refer to a reparse point.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">日時スタンプの取得元となるソースファイル。</param>
+      /// <param name="destinationPath">日時スタンプを設定するコピー先ファイル。</param>
+      /// <param name="modifyReparsePoint"><c>true</c>の場合、日時情報はリパースポイント(シンボリックリンクまたはジャンクション)に適用され、リンク先のファイルには適用されません。<paramref name="destinationPath"/>がリパースポイントを参照していない場合は効果がありません。</param>
       [SecurityCritical]
       public static void CopyTimestampsTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, bool modifyReparsePoint)
       {
@@ -74,16 +74,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Copies the date and timestamps for the specified existing files.</summary>
-      /// <remarks>This method does not change last access time for the source file.</remarks>
+      /// <summary>[AlphaFS] 指定された既存ファイルの日時とタイムスタンプをコピーします。</summary>
+      /// <remarks>このメソッドはソースファイルの最終アクセス日時を変更しません。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="FileNotFoundException"/>
       /// <exception cref="NotSupportedException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="sourcePath">The source file to get the date and time stamps from.</param>
-      /// <param name="destinationPath">The destination file to set the date and time stamps.</param>
-      /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the file linked to. No effect if <paramref name="destinationPath"/> does not refer to a reparse point.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="sourcePath">日時スタンプの取得元となるソースファイル。</param>
+      /// <param name="destinationPath">日時スタンプを設定するコピー先ファイル。</param>
+      /// <param name="modifyReparsePoint"><c>true</c>の場合、日時情報はリパースポイント(シンボリックリンクまたはジャンクション)に適用され、リンク先のファイルには適用されません。<paramref name="destinationPath"/>がリパースポイントを参照していない場合は効果がありません。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void CopyTimestampsTransacted(KernelTransaction transaction, string sourcePath, string destinationPath, bool modifyReparsePoint, PathFormat pathFormat)
       {

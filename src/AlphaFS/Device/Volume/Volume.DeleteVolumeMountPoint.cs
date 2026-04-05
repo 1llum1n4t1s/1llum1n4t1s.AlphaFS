@@ -27,17 +27,17 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Volume
    {
-      /// <summary>[AlphaFS] Deletes a Drive letter or mounted folder.</summary>
-      /// <remarks>Deleting a mounted folder does not cause the underlying directory to be deleted.</remarks>
+      /// <summary>[AlphaFS] ドライブ文字またはマウントフォルダーを削除します。</summary>
+      /// <remarks>マウントフォルダーの削除は、基になるディレクトリの削除を引き起こしません。</remarks>
       /// <remarks>
-      ///   If the <paramref name="volumeMountPoint"/> parameter is a directory that is not a mounted folder, the function does nothing. The
-      ///   directory is not deleted.
+      ///   <paramref name="volumeMountPoint"/> パラメーターがマウントフォルダーではないディレクトリの場合、関数は何もしません。
+      ///   ディレクトリは削除されません。
       /// </remarks>
       /// <remarks>
-      ///   It's not an error to attempt to unmount a volume from a volume mount point when there is no volume actually mounted at that volume
-      ///   mount point.
+      ///   ボリュームマウントポイントに実際にボリュームがマウントされていない場合に、ボリュームマウントポイントからボリュームの
+      ///   マウント解除を試みてもエラーにはなりません。
       /// </remarks>
-      /// <param name="volumeMountPoint">The Drive letter or mounted folder to be deleted. For example, X:\ or Y:\MountX\.</param>      
+      /// <param name="volumeMountPoint">削除するドライブ文字またはマウントフォルダー。例: X:\ または Y:\MountX\。</param>      
       [SecurityCritical]
       public static void DeleteVolumeMountPoint(string volumeMountPoint)
       {
@@ -47,20 +47,20 @@ namespace Alphaleonis.Win32.Filesystem
 
 
 
-      /// <summary>Deletes a Drive letter or mounted folder.
+      /// <summary>ドライブ文字またはマウントフォルダーを削除します。
       /// <remarks>
-      ///   <para>It's not an error to attempt to unmount a volume from a volume mount point when there is no volume actually mounted at that volume mount point.</para>
-      ///   <para>Deleting a mounted folder does not cause the underlying directory to be deleted.</para>
+      ///   <para>ボリュームマウントポイントに実際にボリュームがマウントされていない場合に、マウント解除を試みてもエラーにはなりません。</para>
+      ///   <para>マウントフォルダーの削除は、基になるディレクトリの削除を引き起こしません。</para>
       /// </remarks>
       /// </summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="NotSupportedException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="volumeMountPoint">The Drive letter or mounted folder to be deleted. For example, X:\ or Y:\MountX\.</param>
-      /// <param name="continueOnException"><c>true</c> suppress any Exception that might be thrown as a result from a failure, such as unavailable resources.</param>
-      /// <param name="continueIfJunction"><c>true</c> suppress an exception due to this mount point being a Junction.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="volumeMountPoint">削除するドライブ文字またはマウントフォルダー。例: X:\ または Y:\MountX\。</param>
+      /// <param name="continueOnException"><c>true</c> はリソース不足などの失敗から発生する可能性のある例外を抑制します。</param>
+      /// <param name="continueIfJunction"><c>true</c> はこのマウントポイントがジャンクションである場合の例外を抑制します。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [SecurityCritical]
       internal static void DeleteVolumeMountPointCore(KernelTransaction transaction, string volumeMountPoint, bool continueOnException, bool continueIfJunction, PathFormat pathFormat)
       {
@@ -75,9 +75,9 @@ namespace Alphaleonis.Win32.Filesystem
          using (new NativeMethods.ChangeErrorMode(NativeMethods.ErrorMode.FailCriticalErrors))
          {
             // DeleteVolumeMountPoint()
-            // 2013-01-13: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
+            // 2013-01-13: MSDN は LongPath の使用を確認していませんが、この関数の Unicode バージョンが存在します。
 
-            // A trailing backslash is required.
+            // 末尾のバックスラッシュが必要です。
             var success = NativeMethods.DeleteVolumeMountPoint(Path.AddTrailingDirectorySeparator(volumeMountPoint, false));
 
             var lastError = Marshal.GetLastWin32Error();

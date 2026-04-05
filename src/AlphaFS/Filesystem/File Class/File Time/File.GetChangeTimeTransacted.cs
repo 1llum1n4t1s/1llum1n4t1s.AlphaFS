@@ -26,11 +26,11 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Gets the change date and time of the specified file.</summary>
-      /// <returns>A <see cref="DateTime"/> structure set to the change date and time for the specified file. This value is expressed in local time.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルの変更日時を取得します。</summary>
+      /// <returns>指定されたファイルの変更日時に設定された<see cref="DateTime"/>構造体。この値はローカル時刻で表されます。</returns>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file for which to obtain creation date and time information.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">作成日時情報を取得するファイル。</param>
       [SecurityCritical]
       public static DateTime GetChangeTimeTransacted(KernelTransaction transaction, string path)
       {
@@ -38,12 +38,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Gets the change date and time of the specified file.</summary>
-      /// <returns>A <see cref="DateTime"/> structure set to the change date and time for the specified file. This value is expressed in local time.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルの変更日時を取得します。</summary>
+      /// <returns>指定されたファイルの変更日時に設定された<see cref="DateTime"/>構造体。この値はローカル時刻で表されます。</returns>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file for which to obtain creation date and time information.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">作成日時情報を取得するファイル。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static DateTime GetChangeTimeTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)
       {

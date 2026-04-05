@@ -23,7 +23,7 @@ using System;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>A set of bit flags that describe the permissions for the shared resource's on servers running with share-level security.</summary>
+   /// <summary>共有リソースのアクセス許可を記述するビットフラグのセット's on servers running with share-level security.</summary>
    /// <remarks>Note that Windows does not support share-level security. This member is ignored on a server running user-level security.</remarks>
    [Flags]
    public enum AccessPermissions
@@ -32,27 +32,27 @@ namespace Alphaleonis.Win32.Network
       None = 0,
 
       /// <summary>ACCESS_READ
-      /// <para>Permission to read data from a resource and, by default, to execute the resource.</para>
+      /// <para>リソースからデータを読み取るアクセス許可。デフォルトではリソースの実行も含みます.</para>
       /// </summary>
       Read = 1,
 
       /// <summary>ACCESS_WRITE
-      /// <para>Permission to write data to the resource.</para>
+      /// <para>リソースにデータを書き込むアクセス許可.</para>
       /// </summary>
       Write = 2,
 
       /// <summary>ACCESS_CREATE
-      /// <para>Permission to create an instance of the resource (such as a file); data can be written to the resource as the resource is created.</para>
+      /// <para>リソースのインスタンスを作成するアクセス許可 (such as a file); data can be written to the resource as the resource is created.</para>
       /// </summary>
       Create = 4,
 
       /// <summary>ACCESS_EXEC
-      /// <para>Permission to execute the resource.</para>
+      /// <para>リソースを実行するアクセス許可.</para>
       /// </summary>
       Execute = 8,
 
       /// <summary>ACCESS_DELETE
-      /// <para>Permission to delete the resource.</para>
+      /// <para>リソースを削除するアクセス許可.</para>
       /// </summary>
       Delete = 16,
 
@@ -62,7 +62,7 @@ namespace Alphaleonis.Win32.Network
       Attributes = 32,
 
       /// <summary>ACCESS_PERM
-      /// <para>Permission to modify the permissions (read, write, create, execute, and delete) assigned to a resource for a user or application.</para>
+      /// <para>アクセス許可を変更するアクセス許可 (read, write, create, execute, and delete) assigned to a resource for a user or application.</para>
       /// </summary>
       Permissions = 64,
 

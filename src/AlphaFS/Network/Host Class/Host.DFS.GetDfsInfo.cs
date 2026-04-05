@@ -29,11 +29,11 @@ namespace Alphaleonis.Win32.Network
 {
    public static partial class Host
    {
-      /// <summary>Gets information about a specified DFS root or link in a DFS namespace.</summary>
+      /// <summary>指定された DFS 名前空間内の DFS ルートまたはリンクに関する情報を取得します.</summary>
       /// <returns>A <see cref="DfsInfo"/> instance.</returns>
       /// <exception cref="NetworkInformationException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="dfsName">The Universal Naming Convention (UNC) path of a DFS root or link.</param>
+      /// <param name="dfsName">DFS ルートまたはリンクの汎用名前付け規則 (UNC) パス。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Dfs")]
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "dfs")]
       [SecurityCritical]
@@ -45,7 +45,7 @@ namespace Alphaleonis.Win32.Network
 
 
 
-      /// <summary>Retrieves information about a specified DFS root or link in a DFS namespace.</summary>
+      /// <summary>指定された DFS ルートまたはリンクに関する情報を取得します DFS 名前空間内の。</summary>
       /// <returns>A <see cref="DfsInfo"/> instance.</returns>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="NetworkInformationException"/>
@@ -55,7 +55,7 @@ namespace Alphaleonis.Win32.Network
       ///   DFS client. When <c>false</c> retrieves information about a specified Distributed File System (DFS) root or link in a
       ///   DFS namespace.
       /// </param>
-      /// <param name="dfsName">The Universal Naming Convention (UNC) path of a DFS root or link.</param>
+      /// <param name="dfsName">DFS ルートまたはリンクの汎用名前付け規則 (UNC) パス。</param>
       /// <param name="serverName">
       ///   The name of the DFS root target or link target server. If <paramref name="getFromClient"/> is <c>false</c>, this
       ///   parameter is always <c>null</c>.

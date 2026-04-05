@@ -25,7 +25,7 @@ using System.Runtime.InteropServices;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>AOT-safe COM helper utilities.</summary>
+   /// <summary>AOT 安全な COM ヘルパーユーティリティ.</summary>
    internal static unsafe class ComHelper
    {
       private static readonly Guid IID_IUnknown = new Guid("00000000-0000-0000-C000-000000000046");

@@ -26,19 +26,19 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>Gets the regular path from a long path.</summary>
+      /// <summary>長いパスから通常のパスを取得します。</summary>
       /// <returns>
-      ///   Returns the regular form of a long <paramref name="path"/>.
-      ///   For example: "\\?\C:\Temp\file.txt" to: "C:\Temp\file.txt", or: "\\?\UNC\Server\share\file.txt" to: "\\Server\share\file.txt".
+      ///   長い <paramref name="path"/> の通常形式。
+      ///   例: "\\?\C:\Temp\file.txt" は "C:\Temp\file.txt" に、"\\?\UNC\Server\share\file.txt" は "\\Server\share\file.txt" に変換されます。
       /// </returns>
       /// <remarks>
       ///   MSDN: String.TrimEnd Method notes to Callers: http://msdn.microsoft.com/en-us/library/system.string.trimend%28v=vs.110%29.aspx
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="path">The path.</param>
-      /// <param name="options">Options for controlling the full path retrieval.</param>
-      /// <param name="allowEmpty">When <c>false</c>, throws an <see cref="ArgumentException"/>.</param>
+      /// <param name="path">パス。</param>
+      /// <param name="options">完全パス取得を制御するオプション。</param>
+      /// <param name="allowEmpty"><c>false</c> の場合、<see cref="ArgumentException"/> をスローします。</param>
       [SecurityCritical]
       internal static string GetRegularPathCore(string path, GetFullPathOptions options, bool allowEmpty)
       {
@@ -58,29 +58,36 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
+         // 最も一般的なケース: パスが '\' で始まらなければプレフィックスなし → 即座に返す
+         // 全プレフィックス（\\?\, \\.\, \??\）は '\' で始まる
+         if (path.Length == 0 || path[0] != DirectorySeparatorChar)
+            return path;
+
+         // DosDeviceUncPrefix (\??\UNC\) — LongPathPrefix で始まらないため別途チェック
          if (path.StartsWith(DosDeviceUncPrefix, StringComparison.OrdinalIgnoreCase))
-         {
             return UncPrefix + path.Substring(DosDeviceUncPrefix.Length);
-         }
 
-
+         // LogicalDrivePrefix (\\.\) — LongPathPrefix で始まらないため別途チェック
          if (path.StartsWith(LogicalDrivePrefix, StringComparison.Ordinal))
-         {
             return path.Substring(LogicalDrivePrefix.Length);
-         }
 
-
+         // NonInterpretedPathPrefix (\??\) — LongPathPrefix で始まらないため別途チェック
          if (path.StartsWith(NonInterpretedPathPrefix, StringComparison.Ordinal))
-         {
             return path.Substring(NonInterpretedPathPrefix.Length);
-         }
 
+         // LongPathPrefix (\\?\) で始まらないパスは即座に返す（UNCパス等）
+         if (!path.StartsWith(LongPathPrefix, StringComparison.Ordinal))
+            return path;
 
-         return path.StartsWith(GlobalRootPrefix, StringComparison.OrdinalIgnoreCase) || path.StartsWith(VolumePrefix, StringComparison.OrdinalIgnoreCase) ||
-                !path.StartsWith(LongPathPrefix, StringComparison.Ordinal)
+         // 以下、LongPathPrefix で始まるパスのみ到達
+         if (path.StartsWith(LongPathUncPrefix, StringComparison.OrdinalIgnoreCase))
+            return UncPrefix + path.Substring(LongPathUncPrefix.Length);
 
-            ? path
-            : (path.StartsWith(LongPathUncPrefix, StringComparison.OrdinalIgnoreCase) ? UncPrefix + path.Substring(LongPathUncPrefix.Length) : path.Substring(LongPathPrefix.Length));
+         if (path.StartsWith(GlobalRootPrefix, StringComparison.OrdinalIgnoreCase) ||
+             path.StartsWith(VolumePrefix, StringComparison.OrdinalIgnoreCase))
+            return path;
+
+         return path.Substring(LongPathPrefix.Length);
       }
    }
 }

@@ -27,13 +27,13 @@ namespace Alphaleonis.Win32.Security
 {
    internal static partial class NativeMethods
    {
-      /// <summary>The LookupPrivilegeValue function retrieves the locally unique identifier (LUID) used on a specified system to locally represent the specified privilege name.</summary>
+      /// <summary>LookupPrivilegeValue関数は、指定されたシステムで指定された特権名をローカルに表すために使用されるローカル一意識別子（LUID）を取得します。</summary>
       /// <returns>
-      /// If the function succeeds, the function returns nonzero.
-      /// If the function fails, it returns zero. To get extended error information, call GetLastError.
+      /// 関数が成功した場合、0以外の値を返します。
+      /// 関数が失敗した場合、0を返します。拡張エラー情報を取得するには、GetLastErrorを呼び出します。
       /// </returns>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "LookupPrivilegeValueW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]

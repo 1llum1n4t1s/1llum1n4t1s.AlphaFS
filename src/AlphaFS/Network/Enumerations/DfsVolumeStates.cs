@@ -33,7 +33,7 @@ namespace Alphaleonis.Win32.Network
    [Flags]
    public enum DfsVolumeStates
    {
-      /// <summary>No volume state.</summary>
+      /// <summary>ボリューム状態なし.</summary>
       None = 0,
 
       /// <summary>DFS_VOLUME_STATE_OK

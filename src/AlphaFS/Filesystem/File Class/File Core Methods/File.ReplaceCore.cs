@@ -28,25 +28,25 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>Replaces the contents of a specified file with the contents of another file, deleting the original file, and creating a backup of the replaced file and optionally ignores merge errors.</summary>
-      /// <remarks>The Replace method replaces the contents of a specified file with the contents of another file. It also creates a backup of the file that was replaced.</remarks>
+      /// <summary>指定されたファイルの内容を別のファイルの内容で置換し、元のファイルを削除し、置換されたファイルのバックアップを作成します。オプションでマージエラーを無視します。</summary>
+      /// <remarks>Replaceメソッドは、指定されたファイルの内容を別のファイルの内容で置換します。また、置換されたファイルのバックアップを作成します。</remarks>
       /// <remarks>
-      ///   If the <paramref name="sourceFileName"/> and <paramref name="destinationFileName"/> are on different volumes, this method will
-      ///   raise an exception. If the <paramref name="destinationBackupFileName"/> is on a different volume from the source file, the backup
-      ///   file will be deleted.
+      ///   <paramref name="sourceFileName"/>と<paramref name="destinationFileName"/>が異なるボリューム上にある場合、このメソッドは
+      ///   例外が発生します。<paramref name="destinationBackupFileName"/>がソースファイルと異なるボリューム上にある場合、バックアップ
+      ///   ファイルは削除されます。
       /// </remarks>
       /// <remarks>
-      ///   Pass null to the <paramref name="destinationBackupFileName"/> parameter if you do not want to create a backup of the file being
-      ///   replaced.
+      ///   置換されるファイルのバックアップを作成しない場合は、<paramref name="destinationBackupFileName"/>パラメータにnullを渡します。
+      ///   
       /// </remarks>
-      /// <param name="sourceFileName">The name of a file that replaces the file specified by <paramref name="destinationFileName"/>.</param>
-      /// <param name="destinationFileName">The name of the file being replaced.</param>
-      /// <param name="destinationBackupFileName">The name of the backup file.</param>
+      /// <param name="sourceFileName"><paramref name="destinationFileName"/>で指定されたファイルを置換するファイルの名前。</param>
+      /// <param name="destinationFileName">置換されるファイルの名前。</param>
+      /// <param name="destinationBackupFileName">バックアップファイルの名前。</param>
       /// <param name="ignoreMetadataErrors">
       ///   <c>true</c> to ignore merge errors (such as attributes and access control lists (ACLs)) from the replaced file to the
       ///   replacement file; otherwise, <c>false</c>.
       /// </param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>      
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>      
       [SecurityCritical]
       internal static void ReplaceCore(string sourceFileName, string destinationFileName, string destinationBackupFileName, bool ignoreMetadataErrors, PathFormat pathFormat)
       {
@@ -63,7 +63,7 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
-         // Pass null to the destinationBackupFileName parameter if you do not want to create a backup of the file being replaced.
+         // 置換されるファイルのバックアップを作成しない場合は、destinationBackupFileNameパラメータにnullを渡します。
          var destinationBackupFileNameLp = null == destinationBackupFileName
             ? null
             : Path.GetExtendedLengthPathCore(null, destinationBackupFileName, pathFormat, options);
@@ -82,7 +82,7 @@ namespace Alphaleonis.Win32.Filesystem
 
 
          // ReplaceFile()
-         // 2013-01-13: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
+         // 2013-01-13: MSDNはLongPathの使用を確認していませんが、この関数のUnicodeバージョンが存在します。
          // 2017-05-30: MSDN confirms LongPath usage: Starting with Windows 10, version 1607
 
          var success = NativeMethods.ReplaceFile(destinationFileNameLp, sourceFileNameLp, destinationBackupFileNameLp, dwReplaceFlags, IntPtr.Zero, IntPtr.Zero);

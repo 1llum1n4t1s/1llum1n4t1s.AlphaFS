@@ -31,10 +31,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Gets a list of processes that have a lock on the file(s) specified by <paramref name="filePaths"/>.</summary>
+      /// <summary>[AlphaFS] <paramref name="filePaths"/>で指定されたファイルにロックを持つプロセスのリストを取得します。</summary>
       /// <returns>
       /// <c>null</c> when no processes found that are locking the file(s) specified by <paramref name="filePaths"/>.
-      /// A list of processes locking the file(s) specified by <paramref name="filePaths"/>.
+      /// <paramref name="filePaths"/>で指定されたファイルをロックしているプロセスのリスト。
       /// </returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -42,9 +42,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="InvalidOperationException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction"></param>
-      /// <param name="filePaths">A list with one or more file paths.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="filePaths">1つ以上のファイルパスのリスト。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults", MessageId = "Alphaleonis.Win32.Filesystem.NativeMethods.RmEndSession(System.UInt32)")]
       internal static Collection<Process> GetProcessForFileLockCore(KernelTransaction transaction, Collection<string> filePaths, PathFormat pathFormat)
       {
@@ -91,7 +91,7 @@ namespace Alphaleonis.Win32.Filesystem
 
          try
          {
-            // A snapshot count of all running processes.
+            // すべての実行中プロセスのスナップショットカウント。
             var processesFound = (uint) Process.GetProcesses().Length;
             uint lpdwRebootReasons = 0;
 
@@ -114,7 +114,7 @@ namespace Alphaleonis.Win32.Filesystem
             lastError = NativeMethods.RmGetList(sessionHandle, out processesFound, ref processesTotal, processInfo, ref lpdwRebootReasons);
 
 
-            // There would be no need for this because we already have a/the total number of running processes.
+            // 既に実行中プロセスの総数があるため、これは不要です。
             if (lastError == Win32Errors.ERROR_MORE_DATA)
             {
                goto GetList;
@@ -134,7 +134,7 @@ namespace Alphaleonis.Win32.Filesystem
                   processes.Add(Process.GetProcessById(processInfo[i].Process.dwProcessId));
                }
 
-               // MSDN: The process specified by the processId parameter is not running. The identifier might be expired.
+               // MSDN: processIdパラメータで指定されたプロセスは実行されていません。識別子が期限切れの可能性があります。
                catch (ArgumentException) {}
             }
          }

@@ -26,27 +26,27 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>Determines whether the specified file or directory exists.</summary>
+      /// <summary>指定されたファイルまたはディレクトリが存在するかどうかを判定します。</summary>
       /// <remarks>
-      ///   <para>MSDN: .NET 3.5+: Trailing spaces are removed from the end of the <paramref name="path"/> parameter before checking whether
+      ///   <para>MSDN: .NET 3.5+: ファイルまたはディレクトリが存在するかどうかを <paramref name="path"/> parameter before checking whether
       ///   the directory exists.</para>
-      ///   <para>The Exists method returns <c>false</c> if any error occurs while trying to determine if the specified file
+      ///   <para>指定されたファイルが存在するかどうかを判定中にエラーが発生した場合、 determine if the specified file
       ///   exists.</para>
-      ///   <para>This can occur in situations that raise exceptions such as passing a file name with invalid characters or too many characters,
+      ///   <para>これは、無効な文字を含むファイル名を渡す、 invalid characters or too many characters,
       ///   </para>
-      ///   <para>a failing or missing disk, or if the caller does not have permission to read the file.</para>
+      ///   <para>a failing or missing disk, or if the caller does not have permission to read the ファイル。</para>
       ///   <para>The Exists method should not be used for path validation,
-      ///   this method merely checks if the file specified in path exists.</para>
-      ///   <para>Passing an invalid path to Exists returns false.</para>
-      ///   <para>Be aware that another process can potentially do something with the file in between
+      ///   this method merely checks pathで指定されたファイルが存在するかどうかをチェックするだけです。</para>
+      ///   <para>無効なパスをExistsに渡すと、falseが返されます。</para>
+      ///   <para>Existsメソッドの呼び出しからファイルに対する別の操作の実行までの間に、 between
       ///   the time you call the Exists method and perform another operation on the file, such as Delete.</para>
       /// </remarks>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="isFolder">Specifies that <paramref name="path"/> is a file or directory.</param>
-      /// <param name="path">The file to check.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="isFolder"><paramref name="path"/>がファイルかディレクトリかを指定します。</param>
+      /// <param name="path">チェックするファイル。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
-      ///   <para>Returns <c>true</c> if the caller has the required permissions</para>
+      ///   <para>呼び出し元に必要なアクセス許可がある場合は<c>true</c>を返します</para>
       ///   <para>and <paramref name="path"/> contains the name of an existing file or directory; otherwise, <c>false</c></para>
       /// </returns>
       [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]

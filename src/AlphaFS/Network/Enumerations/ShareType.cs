@@ -24,7 +24,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>The type of the shared resource.</summary>
+   /// <summary>共有リソースの種類.</summary>
    /// <remarks>MSDN: 2.2.2.4 Share Types
    /// http://msdn.microsoft.com/en-us/library/cc247110.aspx
    /// </remarks>
@@ -34,16 +34,16 @@ namespace Alphaleonis.Win32.Network
    [Flags]  // Needs Flags attribute to combine attributes.
    public enum ShareType
    {
-      /// <summary>Disk drive.</summary>
+      /// <summary>ディスクドライブ.</summary>
       DiskTree = 0,
 
-      /// <summary>Print queue.</summary>
+      /// <summary>印刷キュー.</summary>
       PrintQueue = 1,
 
-      /// <summary>Communication device.</summary>
+      /// <summary>通信デバイス.</summary>
       Device = 2,
 
-      /// <summary>Interprocess communication (IPC).</summary>
+      /// <summary>プロセス間通信 (IPC).</summary>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ipc")]
       Ipc = 3,
 
@@ -65,12 +65,12 @@ namespace Alphaleonis.Win32.Network
       // The following table of values can be OR'd with the values in the preceding table to further specify the characteristics of a shared resource.
       // It is possible to use both values in this OR operation.
 
-      /// <summary>Special share reserved for interprocess communication (IPC$) or remote administration of the server (ADMIN$).
+      /// <summary>プロセス間通信用に予約された特殊な共有 (IPC$) or remote administration of the server (ADMIN$).
       /// <para>Can also refer to administrative shares such as C$, D$, E$, and so forth.</para>
       /// </summary>
       Special = -2147483648,
 
-      /// <summary>A temporary share that is not persisted for creation each time the file server initializes.</summary>
+      /// <summary>一時的な共有 that is not persisted for creation each time the file server initializes.</summary>
       Temporary = 1073741824,
 
       /// <summary>Retriev all known <see cref="ShareType"/>.</summary>

@@ -25,10 +25,10 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Contains the identifier and other pertinent information about files, devices, and pipes.</summary>
+      /// <summary>ファイルの識別子およびその他の関連情報を含みます, devices, and pipes.</summary>
       /// <remarks>This structure is only for use with the NetFileEnum function.</remarks>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [desktop apps only]</remarks>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct FILE_INFO_3
       {
@@ -38,7 +38,7 @@ namespace Alphaleonis.Win32.Network
          /// <summary>The access permissions associated with the opening application. This member can be one or more of the following <see cref="AccessPermissions"/> values.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly AccessPermissions fi3_permissions;
 
-         /// <summary>The number of file locks on the file, device, or pipe.</summary>
+         /// <summary>の数 file locks on the file, device, or pipe.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint fi3_num_locks;
 
          /// <summary>The path of the opened resource.</summary>

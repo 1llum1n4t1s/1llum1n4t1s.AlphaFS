@@ -28,9 +28,9 @@ namespace Alphaleonis.Win32.Filesystem
    public static partial class File
    {
       /// <summary>[AlphaFS] Opens the specified file for reading purposes bypassing security attributes.</summary>
-      /// <param name="path">The file path to open.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>A <see cref="FileStream"/> on the specified path, having the read-only mode and sharing options.</returns>
+      /// <param name="path">開くファイルのパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>指定されたパスの読み取り専用モードと共有オプションの<see cref="FileStream"/>。</returns>
       [SecurityCritical]
       public static FileStream OpenBackupRead(string path, PathFormat pathFormat)
       {
@@ -38,9 +38,9 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens the specified file for reading purposes bypassing security attributes. This method is simpler to use then BackupFileStream to read only file's data stream.</summary>
-      /// <param name="path">The file path to open.</param>
-      /// <returns>A <see cref="FileStream"/> on the specified path, having the read-only mode and sharing options.</returns>      
+      /// <summary>[AlphaFS] セキュリティ属性をバイパスして、指定されたファイルを読み取り目的で開きます。このメソッドはファイルのデータストリームのみを読み取るためにBackupFileStreamよりも簡単に使用できます。</summary>
+      /// <param name="path">開くファイルのパス。</param>
+      /// <returns>指定されたパスの読み取り専用モードと共有オプションの<see cref="FileStream"/>。</returns>      
       [SecurityCritical]
       public static FileStream OpenBackupRead(string path)
       {

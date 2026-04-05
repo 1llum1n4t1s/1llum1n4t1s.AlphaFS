@@ -23,18 +23,18 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>FINDEX_INFO_LEVELS Enumeration - Defines values that are used with the FindFirstFileEx function to specify the information level of the returned data.</summary>
+      /// <summary>FINDEX_INFO_LEVELS 列挙型 - FindFirstFileEx 関数と共に使用して、返されるデータの情報レベルを指定する値を定義します。</summary>
       /// <remarks>
-      ///   <para>Minimum supported client: Windows XP [desktop apps | Windows Store apps]</para>
-      ///   <para>Minimum supported server: Windows Server 2003 [desktop apps | Windows Store apps]</para>
+      ///   <para>サポートされる最小クライアント: Windows XP [デスクトップアプリ | Windows ストアアプリ]</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリ | Windows ストアアプリ]</para>
       /// </remarks>
       internal enum FINDEX_INFO_LEVELS
       {
-         /// <summary>A standard set of attribute is returned in a <see cref="WIN32_FIND_DATA"/> structure.</summary>
+         /// <summary><see cref="WIN32_FIND_DATA"/> 構造体で標準的な属性セットが返されます。</summary>
          Standard = 0,
 
-         /// <summary>The FindFirstFileEx function does not query the short file name, improving overall enumeration speed.</summary>
-         /// <remarks>This value is not supported until Windows Server 2008 R2 and Windows 7.</remarks>
+         /// <summary>FindFirstFileEx 関数は短いファイル名を問い合わせないため、全体的な列挙速度が向上します。</summary>
+         /// <remarks>この値は Windows Server 2008 R2 および Windows 7 までサポートされていません。</remarks>
          Basic = 1
 
          ///// <summary>This value is used for validation. Supported values are less than this value.</summary>

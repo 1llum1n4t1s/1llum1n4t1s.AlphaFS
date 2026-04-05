@@ -27,16 +27,16 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>[AlphaFS] Disables NTFS compression of the specified directory and the files in it.</summary>
-      /// <remarks>This method disables the directory-compression attribute. It will not decompress the current contents of the directory. However, newly created files and directories will be uncompressed.</remarks>
+      /// <summary>[AlphaFS] 指定されたディレクトリとその中のファイルのNTFS圧縮を無効にします。</summary>
+      /// <remarks>このメソッドはディレクトリの圧縮属性を無効にします。ディレクトリの現在の内容は展開されません。ただし、新しく作成されるファイルとディレクトリは非圧縮になります。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">A path to a directory to decompress.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">展開するディレクトリへのパス。</param>
       [SecurityCritical]
       public static void DisableCompressionTransacted(KernelTransaction transaction, string path)
       {
@@ -44,17 +44,17 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Disables NTFS compression of the specified directory and the files in it.</summary>
-      /// <remarks>This method disables the directory-compression attribute. It will not decompress the current contents of the directory. However, newly created files and directories will be uncompressed.</remarks>
+      /// <summary>[AlphaFS] 指定されたディレクトリとその中のファイルのNTFS圧縮を無効にします。</summary>
+      /// <remarks>このメソッドはディレクトリの圧縮属性を無効にします。ディレクトリの現在の内容は展開されません。ただし、新しく作成されるファイルとディレクトリは非圧縮になります。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <param name="path">A path to a directory to decompress.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <param name="path">展開するディレクトリへのパス。</param>
       [SecurityCritical]
       public static void DisableCompressionTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)
       {

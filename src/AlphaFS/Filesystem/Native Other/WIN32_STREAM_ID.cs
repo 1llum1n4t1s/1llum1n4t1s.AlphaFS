@@ -26,24 +26,24 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Contains stream data.</summary>
+      /// <summary>ストリームデータを格納します。</summary>
       [StructLayout(LayoutKind.Sequential, Pack = 1, CharSet = CharSet.Unicode)]
       [Serializable]
       internal struct WIN32_STREAM_ID
       {
-         /// <summary>Type of stream data.</summary>
+         /// <summary>ストリームデータの種類。</summary>
          [MarshalAs(UnmanagedType.U4)]
          public readonly STREAM_ID dwStreamId;
 
-         /// <summary>Attributes of data to facilitate cross-operating system transfer.</summary>
+         /// <summary>異なるオペレーティングシステム間の転送を容易にするためのデータ属性。</summary>
          [MarshalAs(UnmanagedType.U4)]
          public readonly STREAM_ATTRIBUTE dwStreamAttribute;
 
-         /// <summary>Size of data, in bytes.</summary>
+         /// <summary>データのサイズ（バイト単位）。</summary>
          [MarshalAs(UnmanagedType.U8)]
          public readonly ulong Size;
 
-         /// <summary>Length of the name of the alternative data stream, in bytes.</summary>
+         /// <summary>代替データストリームの名前の長さ（バイト単位）。</summary>
          [MarshalAs(UnmanagedType.U4)]
          public readonly uint dwStreamNameSize;
       }

@@ -26,10 +26,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Sets the date and time that the specified file was last written to.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file for which to set the date and time information.</param>
-      /// <param name="lastWriteTime">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in local time.</param>
+      /// <summary>[AlphaFS] 指定されたファイルが最後に書き込まれた日時を設定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">日時情報を設定するファイル。</param>
+      /// <param name="lastWriteTime"><paramref name="path"/>の最終書き込み日時に設定する値を含む<see cref="DateTime"/>。この値はローカル時刻で表されます。</param>
       [SecurityCritical]
       public static void SetLastWriteTimeTransacted(KernelTransaction transaction, string path, DateTime lastWriteTime)
       {
@@ -37,11 +37,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets the date and time that the specified file was last written to.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file for which to set the date and time information.</param>
-      /// <param name="lastWriteTime">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>      
+      /// <summary>[AlphaFS] 指定されたファイルが最後に書き込まれた日時を設定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">日時情報を設定するファイル。</param>
+      /// <param name="lastWriteTime"><paramref name="path"/>の最終書き込み日時に設定する値を含む<see cref="DateTime"/>。この値はローカル時刻で表されます。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>      
       [SecurityCritical]
       public static void SetLastWriteTimeTransacted(KernelTransaction transaction, string path, DateTime lastWriteTime, PathFormat pathFormat)
       {
@@ -49,11 +49,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets the date and time that the specified file was last written to.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file for which to set the date and time information.</param>
-      /// <param name="lastWriteTime">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the file or directory linked to. No effect if <paramref name="path"/> does not refer to a reparse point.</param>
+      /// <summary>[AlphaFS] 指定されたファイルが最後に書き込まれた日時を設定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">日時情報を設定するファイル。</param>
+      /// <param name="lastWriteTime"><paramref name="path"/>の最終書き込み日時に設定する値を含む<see cref="DateTime"/>。この値はローカル時刻で表されます。</param>
+      /// <param name="modifyReparsePoint"><c>true</c>の場合、日時情報はリパースポイント(シンボリックリンクまたはジャンクション)に適用され、リンク先のファイルまたはディレクトリには適用されません。<paramref name="path"/>がリパースポイントを参照していない場合は効果がありません。</param>
       [SecurityCritical]
       public static void SetLastWriteTimeTransacted(KernelTransaction transaction, string path, DateTime lastWriteTime, bool modifyReparsePoint)
       {
@@ -61,12 +61,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets the date and time that the specified file was last written to.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file for which to set the date and time information.</param>
-      /// <param name="lastWriteTime">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in local time.</param>
-      /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the file or directory linked to. No effect if <paramref name="path"/> does not refer to a reparse point.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>      
+      /// <summary>[AlphaFS] 指定されたファイルが最後に書き込まれた日時を設定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">日時情報を設定するファイル。</param>
+      /// <param name="lastWriteTime"><paramref name="path"/>の最終書き込み日時に設定する値を含む<see cref="DateTime"/>。この値はローカル時刻で表されます。</param>
+      /// <param name="modifyReparsePoint"><c>true</c>の場合、日時情報はリパースポイント(シンボリックリンクまたはジャンクション)に適用され、リンク先のファイルまたはディレクトリには適用されません。<paramref name="path"/>がリパースポイントを参照していない場合は効果がありません。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>      
       [SecurityCritical]
       public static void SetLastWriteTimeTransacted(KernelTransaction transaction, string path, DateTime lastWriteTime, bool modifyReparsePoint, PathFormat pathFormat)
       {

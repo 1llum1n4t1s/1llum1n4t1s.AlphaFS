@@ -27,7 +27,7 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Encrypts a file so that only the account used to encrypt the file can decrypt it.</summary>      
+      /// <summary>ファイルを暗号化して、ファイルの暗号化に使用されたアカウントのみが復号化できるようにします。</summary>      
       [SecurityCritical]
       public void Encrypt()
       {

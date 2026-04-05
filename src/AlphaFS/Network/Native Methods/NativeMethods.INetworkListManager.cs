@@ -27,7 +27,7 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>AOT-safe wrapper for the INetworkListManager COM interface (IDispatch-based).
+      /// <summary>INetworkListManager COM インターフェースの AOT 安全なラッパー (IDispatch-based).
       /// INetworkListManager GUID: DCB00000-570F-4A9B-8D69-199FDBA5723B
       /// Vtable layout: IUnknown (3) + IDispatch (4) + INetworkListManager methods starting at slot 7.</summary>
       internal sealed unsafe class NetworkListManagerWrapper : IDisposable

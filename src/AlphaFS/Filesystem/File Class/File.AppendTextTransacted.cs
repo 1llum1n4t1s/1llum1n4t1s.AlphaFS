@@ -28,15 +28,15 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Creates a <see cref="StreamWriter"/> that appends UTF-8 encoded text to an existing file, or to a new file if the specified file does not exist.</summary>
-      /// <returns>A stream writer that appends UTF-8 encoded text to the specified file or to a new file.</returns>
+      /// <summary>[AlphaFS] 既存のファイルにUTF-8エンコードされたテキストを追記する<see cref="StreamWriter"/>を作成します。指定されたファイルが存在しない場合は新しいファイルに書き込みます。</summary>
+      /// <returns>指定されたファイルまたは新しいファイルにUTF-8エンコードされたテキストを追記するストリームライター。</returns>
       /// <exception cref="ArgumentException">path is a zero-length string, contains only white space, or contains one or more invalid characters as defined by InvalidPathChars.</exception>
       /// <exception cref="ArgumentNullException">path is null.</exception>
-      /// <exception cref="DirectoryNotFoundException">The specified path is invalid (for example, the directory doesn�t exist or it is on an unmapped drive).</exception>
+      /// <exception cref="DirectoryNotFoundException">The specified path is invalid (for example, the directory doesn�t exist or it is on an unmapped drive).</exception>
       /// <exception cref="NotSupportedException">path is in an invalid format.</exception>
       /// <exception cref="UnauthorizedAccessException">The caller does not have the required permission.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the file to append to.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">追記するファイルのパス。</param>
       [SecurityCritical]
       public static StreamWriter AppendTextTransacted(KernelTransaction transaction, string path)
       {
@@ -44,16 +44,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
       
-      /// <summary>[AlphaFS] Creates a <see cref="StreamWriter"/> that appends UTF-8 encoded text to an existing file, or to a new file if the specified file does not exist.</summary>
-      /// <returns>A stream writer that appends UTF-8 encoded text to the specified file or to a new file.</returns>
+      /// <summary>[AlphaFS] 既存のファイルにUTF-8エンコードされたテキストを追記する<see cref="StreamWriter"/>を作成します。指定されたファイルが存在しない場合は新しいファイルに書き込みます。</summary>
+      /// <returns>指定されたファイルまたは新しいファイルにUTF-8エンコードされたテキストを追記するストリームライター。</returns>
       /// <exception cref="ArgumentException">path is a zero-length string, contains only white space, or contains one or more invalid characters as defined by InvalidPathChars.</exception>
       /// <exception cref="ArgumentNullException">path is null.</exception>
-      /// <exception cref="DirectoryNotFoundException">The specified path is invalid (for example, the directory doesn�t exist or it is on an unmapped drive).</exception>
+      /// <exception cref="DirectoryNotFoundException">The specified path is invalid (for example, the directory doesn�t exist or it is on an unmapped drive).</exception>
       /// <exception cref="NotSupportedException">path is in an invalid format.</exception>
       /// <exception cref="UnauthorizedAccessException">The caller does not have the required permission.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the file to append to.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">追記するファイルのパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static StreamWriter AppendTextTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)
       {
@@ -61,16 +61,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates a <see cref="StreamWriter"/> that appends UTF-8 encoded text to an existing file, or to a new file if the specified file does not exist.</summary>
-      /// <returns>A stream writer that appends UTF-8 encoded text to the specified file or to a new file.</returns>
+      /// <summary>[AlphaFS] 既存のファイルにUTF-8エンコードされたテキストを追記する<see cref="StreamWriter"/>を作成します。指定されたファイルが存在しない場合は新しいファイルに書き込みます。</summary>
+      /// <returns>指定されたファイルまたは新しいファイルにUTF-8エンコードされたテキストを追記するストリームライター。</returns>
       /// <exception cref="ArgumentException">path is a zero-length string, contains only white space, or contains one or more invalid characters as defined by InvalidPathChars.</exception>
       /// <exception cref="ArgumentNullException">path is null.</exception>
-      /// <exception cref="DirectoryNotFoundException">The specified path is invalid (for example, the directory doesn�t exist or it is on an unmapped drive).</exception>
+      /// <exception cref="DirectoryNotFoundException">The specified path is invalid (for example, the directory doesn�t exist or it is on an unmapped drive).</exception>
       /// <exception cref="NotSupportedException">path is in an invalid format.</exception>
       /// <exception cref="UnauthorizedAccessException">The caller does not have the required permission.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the file to append to.</param>
-      /// <param name="encoding">The character <see cref="Encoding"/> to use.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">追記するファイルのパス。</param>
+      /// <param name="encoding">使用する文字<see cref="Encoding"/>。</param>
       [SecurityCritical]
       public static StreamWriter AppendTextTransacted(KernelTransaction transaction, string path, Encoding encoding)
       {
@@ -78,17 +78,17 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates a <see cref="StreamWriter"/> that appends UTF-8 encoded text to an existing file, or to a new file if the specified file does not exist.</summary>
-      /// <returns>A stream writer that appends UTF-8 encoded text to the specified file or to a new file.</returns>
+      /// <summary>[AlphaFS] 既存のファイルにUTF-8エンコードされたテキストを追記する<see cref="StreamWriter"/>を作成します。指定されたファイルが存在しない場合は新しいファイルに書き込みます。</summary>
+      /// <returns>指定されたファイルまたは新しいファイルにUTF-8エンコードされたテキストを追記するストリームライター。</returns>
       /// <exception cref="ArgumentException">path is a zero-length string, contains only white space, or contains one or more invalid characters as defined by InvalidPathChars.</exception>
       /// <exception cref="ArgumentNullException">path is null.</exception>
-      /// <exception cref="DirectoryNotFoundException">The specified path is invalid (for example, the directory doesn�t exist or it is on an unmapped drive).</exception>
+      /// <exception cref="DirectoryNotFoundException">The specified path is invalid (for example, the directory doesn�t exist or it is on an unmapped drive).</exception>
       /// <exception cref="NotSupportedException">path is in an invalid format.</exception>
       /// <exception cref="UnauthorizedAccessException">The caller does not have the required permission.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the file to append to.</param>
-      /// <param name="encoding">The character <see cref="Encoding"/> to use.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">追記するファイルのパス。</param>
+      /// <param name="encoding">使用する文字<see cref="Encoding"/>。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static StreamWriter AppendTextTransacted(KernelTransaction transaction, string path, Encoding encoding, PathFormat pathFormat)
       {

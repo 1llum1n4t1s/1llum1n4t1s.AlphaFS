@@ -26,20 +26,20 @@ using Alphaleonis.Win32.Filesystem;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>Contains the identification number of a connection, number of open files, connection time, number of users on the connection, and the type of connection.</summary>
+   /// <summary>接続の識別番号、開いているファイルの数、接続時間、接続上のユーザー数、および接続の種類を含みます。</summary>
    [Serializable]
    public sealed class OpenConnectionInfo
    {
-      #region Private Fields
+      #region プライベートフィールド
 
       private string _netName;
 
-      #endregion // Private Fields
+      #endregion // プライベートフィールド
 
 
-      #region Constructor
+      #region コンストラクター
 
-      /// <summary>Create an OpenConnectionInfo instance.</summary>
+      /// <summary>OpenConnectionInfo インスタンスを作成します。</summary>
       internal OpenConnectionInfo(string hostName, NativeMethods.CONNECTION_INFO_1 connectionInfo)
       {
          HostName = hostName;
@@ -52,55 +52,55 @@ namespace Alphaleonis.Win32.Network
          NetName = connectionInfo.oni1_netname;
       }
 
-      #endregion // Constructor
+      #endregion // コンストラクター
 
       
-      #region Methods
+      #region メソッド
 
-      /// <summary>Returns the full path to the share.</summary>
-      /// <returns>A string that represents this instance.</returns>
+      /// <summary>共有へのフルパスを返します。</summary>
+      /// <returns>このインスタンスを表す文字列。</returns>
       public override string ToString()
       {
          return Id.ToString(CultureInfo.InvariantCulture);
       }
 
 
-      #endregion // Methods
+      #endregion // メソッド
 
-      #region Properties
+      #region プロパティ
 
-      /// <summary>The local or remote Host.</summary>
+      /// <summary>ローカルまたはリモートホスト。</summary>
       [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
       [Obsolete("Use HostName")]
       public string Host { get; private set; }
 
-      /// <summary>The host name of this connection information.</summary>
+      /// <summary>この接続情報のホスト名。</summary>
       public string HostName { get; private set; }
 
-      /// <summary>Specifies a connection identification number.</summary>
+      /// <summary>接続識別番号を指定します。</summary>
       public long Id { get; private set; }
 
-      /// <summary>The type of share.</summary>
+      /// <summary>共有の種類。</summary>
       public ShareType ShareType { get; private set; }
 
-      /// <summary>Specifies the number of files currently open as a result of the connection.</summary>
+      /// <summary>接続の結果として現在開いているファイルの数を指定します。</summary>
       public long TotalOpenFiles { get; private set; }
 
-      /// <summary>Specifies the number of users on the connection.</summary>
+      /// <summary>接続上のユーザー数を指定します。</summary>
       public long TotalUsers { get; private set; }
 
-      /// <summary>Specifies the number of seconds that the connection has been established.</summary>
+      /// <summary>接続が確立されてからの秒数を指定します。</summary>
       [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
       [Obsolete("Use ConnectedTime property.")]
       public long ConnectedSeconds { get; private set; }
 
-      /// <summary>Specifies duration that the connection has been established.</summary>
+      /// <summary>接続が確立されてからの期間を指定します。</summary>
       public TimeSpan ConnectedTime { get; private set; }
 
-      /// <summary>If the server sharing the resource is running with user-level security, the UserName member describes which user made the connection. If the server is running with share-level security, UserName describes which Computer (Computer name) made the connection.</summary>
+      /// <summary>リソースを共有しているサーバーがユーザーレベルのセキュリティで実行されている場合、UserName メンバーはどのユーザーが接続したかを記述します。サーバーが共有レベルのセキュリティで実行されている場合、UserName はどのコンピューター（コンピューター名）が接続したかを記述します。</summary>
       public string UserName { get; private set; }
       
-      /// <summary>Specifies either the server's shared resource name or the Computer name or IP address of the client. The value of this member depends on which name was specified as the qualifier parameter to the function.</summary>
+      /// <summary>サーバーの共有リソース名、またはクライアントのコンピューター名もしくは IP アドレスを指定します。このメンバーの値は、関数の修飾子パラメーターとして指定された名前に依存します。</summary>
       public string NetName
       {
          get { return _netName; }
@@ -108,6 +108,6 @@ namespace Alphaleonis.Win32.Network
          set { _netName = null != value ? value.ReplaceIgnoreCase(Path.LongPathUncPrefix, string.Empty).Replace(Path.UncPrefix, string.Empty).Trim('[', ']') : null; }
       }
 
-      #endregion // Properties
+      #endregion // プロパティ
    }
 }

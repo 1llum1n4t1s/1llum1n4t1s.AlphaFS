@@ -31,13 +31,13 @@ using Microsoft.Win32;
 
 namespace Alphaleonis.Win32.Security
 {
-   /// <summary>[AlphaFS] Class to determine the context of the current process.</summary>
+   /// <summary>[AlphaFS] 現在のプロセスのコンテキストを判定するクラス。</summary>
    public static class ProcessContext
    {
       #region Properties
 
-      /// <summary>[AlphaFS] Determines if the current process is run in the context of an Administrator.</summary>
-      /// <returns><c>true</c> if the current process is run in the context of an Administrator; otherwise, <c>false</c>.</returns>
+      /// <summary>[AlphaFS] 現在のプロセスが管理者のコンテキストで実行されているかどうかを判定します。</summary>
+      /// <returns>現在のプロセスが管理者のコンテキストで実行されている場合は<c>true</c>、それ以外の場合は<c>false</c>。</returns>
       public static bool IsAdministrator
       {
          get
@@ -47,20 +47,20 @@ namespace Alphaleonis.Win32.Security
             using (windowsIdentity)
                return
 
-                  // Local Administrator.
+                  // ローカル管理者
                   principal.IsInRole(WindowsBuiltInRole.Administrator) ||
 
-                  // Domain Administrator.
+                  // ドメイン管理者
                   principal.IsInRole(512);
          }
       }
 
 
-      /// <summary>[AlphaFS] Determines if UAC is enabled and that the current process is in an elevated state.
-      /// <para>If the current User is the default Administrator then the process is assumed to be in an elevated state.</para>
-      /// <para>This assumption is made because by default, the default Administrator (disabled by default) gets all access rights without showing an UAC prompt.</para>
+      /// <summary>[AlphaFS] UACが有効で、現在のプロセスが昇格された状態にあるかどうかを判定します。
+      /// <para>現在のユーザーがデフォルトのAdministratorの場合、プロセスは昇格された状態にあると見なされます。</para>
+      /// <para>これは、デフォルトのAdministrator（デフォルトでは無効）がUACプロンプトを表示せずにすべてのアクセス権を取得するためです。</para>
       /// </summary>
-      /// <returns><c>true</c> if UAC is enabled and the current process is in an elevated state; otherwise, <c>false</c>.</returns>
+      /// <returns>UACが有効で現在のプロセスが昇格された状態にある場合は<c>true</c>、それ以外の場合は<c>false</c>。</returns>
       public static bool IsElevatedProcess
       {
          get
@@ -70,8 +70,8 @@ namespace Alphaleonis.Win32.Security
       }
 
 
-      /// <summary>[AlphaFS] Determines if UAC is enabled by reading the "EnableLUA" registry key of the local Computer.</summary>
-      /// <returns><c>true</c> if the UAC status was successfully read from registry; otherwise, <c>false</c>.</returns>
+      /// <summary>[AlphaFS] ローカルコンピューターの"EnableLUA"レジストリキーを読み取ることでUACが有効かどうかを判定します。</summary>
+      /// <returns>UACのステータスがレジストリから正常に読み取られた場合は<c>true</c>、それ以外の場合は<c>false</c>。</returns>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Uac")]
       public static bool IsUacEnabled
       {
@@ -84,8 +84,8 @@ namespace Alphaleonis.Win32.Security
       }
 
 
-      /// <summary>[AlphaFS] Determines if the current process is run in the context of a Windows Service.</summary>
-      /// <returns><c>true</c> if the current process is run in the context of a Windows Service; otherwise, <c>false</c>.</returns>
+      /// <summary>[AlphaFS] 現在のプロセスがWindowsサービスのコンテキストで実行されているかどうかを判定します。</summary>
+      /// <returns>現在のプロセスがWindowsサービスのコンテキストで実行されている場合は<c>true</c>、それ以外の場合は<c>false</c>。</returns>
       public static bool IsWindowsService
       {
          get
@@ -114,8 +114,8 @@ namespace Alphaleonis.Win32.Security
       }
 
 
-      /// <summary>[AlphaFS] Retrieves the elevation type of the current process.</summary>
-      /// <returns>A <see cref="NativeMethods.TOKEN_ELEVATION_TYPE"/> value.</returns>
+      /// <summary>[AlphaFS] 現在のプロセスの昇格タイプを取得します。</summary>
+      /// <returns><see cref="NativeMethods.TOKEN_ELEVATION_TYPE"/>の値。</returns>
       [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "GetTokenInformation")]
       [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "OpenProcessToken")]
       private static NativeMethods.TOKEN_ELEVATION_TYPE GetProcessElevationType()

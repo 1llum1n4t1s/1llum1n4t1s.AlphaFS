@@ -30,20 +30,20 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region Obsolete
 
-      /// <summary>[AlphaFS] Converts a local path to a network share path, optionally returning it as a long path format and the ability to add or remove a trailing backslash.
-      ///   <para>A Local path, e.g.: "C:\Windows" or "C:\Windows\" will be returned as: "\\localhost\C$\Windows".</para>
-      ///   <para>If a logical drive points to a network share path (mapped drive), the share path will be returned without a trailing <see cref="DirectorySeparator"/> character.</para>
+      /// <summary>[AlphaFS] ローカルパスをネットワーク共有パスに変換します。オプションで長いパス形式での返却や末尾のバックスラッシュの追加・削除が可能です。
+      ///   <para>ローカルパス（例: "C:\Windows" または "C:\Windows\"）は "\\localhost\C$\Windows" として返されます。</para>
+      ///   <para>論理ドライブがネットワーク共有パス（マップドドライブ）を指している場合、共有パスは末尾の <see cref="DirectorySeparator"/> 文字なしで返されます。</para>
       /// </summary>
-      /// <returns>On successful conversion a UNC path is returned.
-      ///   <para>If the conversion fails, <paramref name="localPath"/> is returned.</para>
-      ///   <para>If <paramref name="localPath"/> is an empty string or <c>null</c>, <c>null</c> is returned.</para>
+      /// <returns>変換が成功するとUNCパスが返されます。
+      ///   <para>変換に失敗した場合、<paramref name="localPath"/> が返されます。</para>
+      ///   <para><paramref name="localPath"/> が空文字列または <c>null</c> の場合、<c>null</c> が返されます。</para>
       /// </returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="PathTooLongException"/>
       /// <exception cref="NetworkInformationException"/>
-      /// <param name="localPath">A local path, e.g.: "C:\Windows".</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter.</param>
-      /// <param name="fullPathOptions">Options for controlling the full path retrieval.</param>
+      /// <param name="localPath">ローカルパス。例: "C:\Windows"。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <param name="fullPathOptions">完全パス取得を制御するオプション。</param>
       [Obsolete]
       [SecurityCritical]
       public static string LocalToUnc(string localPath, PathFormat pathFormat, GetFullPathOptions fullPathOptions)
@@ -54,18 +54,18 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // Obsolete
 
 
-      /// <summary>[AlphaFS] Converts a local path to a network share path.  
-      ///   <para>A Local path, e.g.: "C:\Windows" or "C:\Windows\" will be returned as: "\\localhost\C$\Windows".</para>
-      ///   <para>If a logical drive points to a network share path (mapped drive), the share path will be returned without a trailing <see cref="DirectorySeparator"/> character.</para>
+      /// <summary>[AlphaFS] ローカルパスをネットワーク共有パスに変換します。
+      ///   <para>ローカルパス（例: "C:\Windows" または "C:\Windows\"）は "\\localhost\C$\Windows" として返されます。</para>
+      ///   <para>論理ドライブがネットワーク共有パス（マップドドライブ）を指している場合、共有パスは末尾の <see cref="DirectorySeparator"/> 文字なしで返されます。</para>
       /// </summary>
-      /// <returns>On successful conversion a UNC path is returned.
-      ///   <para>If the conversion fails, <paramref name="localPath"/> is returned.</para>
-      ///   <para>If <paramref name="localPath"/> is an empty string or <c>null</c>, <c>null</c> is returned.</para>
+      /// <returns>変換が成功するとUNCパスが返されます。
+      ///   <para>変換に失敗した場合、<paramref name="localPath"/> が返されます。</para>
+      ///   <para><paramref name="localPath"/> が空文字列または <c>null</c> の場合、<c>null</c> が返されます。</para>
       /// </returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="PathTooLongException"/>
       /// <exception cref="NetworkInformationException"/>
-      /// <param name="localPath">A local path, e.g.: "C:\Windows".</param>
+      /// <param name="localPath">ローカルパス。例: "C:\Windows"。</param>
       [SecurityCritical]
       public static string LocalToUnc(string localPath)
       {
@@ -73,39 +73,39 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Converts a local path to a network share path.  
-      ///   <para>A Local path, e.g.: "C:\Windows" or "C:\Windows\" will be returned as: "\\localhost\C$\Windows".</para>
-      ///   <para>If a logical drive points to a network share path (mapped drive), the share path will be returned without a trailing <see cref="DirectorySeparator"/> character.</para>
+      /// <summary>[AlphaFS] ローカルパスをネットワーク共有パスに変換します。
+      ///   <para>ローカルパス（例: "C:\Windows" または "C:\Windows\"）は "\\localhost\C$\Windows" として返されます。</para>
+      ///   <para>論理ドライブがネットワーク共有パス（マップドドライブ）を指している場合、共有パスは末尾の <see cref="DirectorySeparator"/> 文字なしで返されます。</para>
       /// </summary>
-      /// <returns>On successful conversion a UNC path is returned.
-      ///   <para>If the conversion fails, <paramref name="localPath"/> is returned.</para>
-      ///   <para>If <paramref name="localPath"/> is an empty string or <c>null</c>, <c>null</c> is returned.</para>
+      /// <returns>変換が成功するとUNCパスが返されます。
+      ///   <para>変換に失敗した場合、<paramref name="localPath"/> が返されます。</para>
+      ///   <para><paramref name="localPath"/> が空文字列または <c>null</c> の場合、<c>null</c> が返されます。</para>
       /// </returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="PathTooLongException"/>
       /// <exception cref="NetworkInformationException"/>
-      /// <param name="localPath">A local path, e.g.: "C:\Windows".</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter.</param>
+      /// <param name="localPath">ローカルパス。例: "C:\Windows"。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static string LocalToUnc(string localPath, PathFormat pathFormat)
       {
          return LocalToUncCore(localPath, GetFullPathOptions.None, pathFormat);
       }
-      
 
-      /// <summary>[AlphaFS] Converts a local path to a network share path, optionally returning it as a long path format and the ability to add or remove a trailing backslash.
-      ///   <para>A Local path, e.g.: "C:\Windows" or "C:\Windows\" will be returned as: "\\localhost\C$\Windows".</para>
-      ///   <para>If a logical drive points to a network share path (mapped drive), the share path will be returned without a trailing <see cref="DirectorySeparator"/> character.</para>
+
+      /// <summary>[AlphaFS] ローカルパスをネットワーク共有パスに変換します。オプションで長いパス形式での返却や末尾のバックスラッシュの追加・削除が可能です。
+      ///   <para>ローカルパス（例: "C:\Windows" または "C:\Windows\"）は "\\localhost\C$\Windows" として返されます。</para>
+      ///   <para>論理ドライブがネットワーク共有パス（マップドドライブ）を指している場合、共有パスは末尾の <see cref="DirectorySeparator"/> 文字なしで返されます。</para>
       /// </summary>
-      /// <returns>On successful conversion a UNC path is returned.
-      ///   <para>If the conversion fails, <paramref name="localPath"/> is returned.</para>
-      ///   <para>If <paramref name="localPath"/> is an empty string or <c>null</c>, <c>null</c> is returned.</para>
+      /// <returns>変換が成功するとUNCパスが返されます。
+      ///   <para>変換に失敗した場合、<paramref name="localPath"/> が返されます。</para>
+      ///   <para><paramref name="localPath"/> が空文字列または <c>null</c> の場合、<c>null</c> が返されます。</para>
       /// </returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="PathTooLongException"/>
       /// <exception cref="NetworkInformationException"/>
-      /// <param name="localPath">A local path, e.g.: "C:\Windows".</param>
-      /// <param name="fullPathOptions">Options for controlling the full path retrieval.</param>
+      /// <param name="localPath">ローカルパス。例: "C:\Windows"。</param>
+      /// <param name="fullPathOptions">完全パス取得を制御するオプション。</param>
       [SecurityCritical]
       public static string LocalToUnc(string localPath, GetFullPathOptions fullPathOptions)
       {
@@ -113,20 +113,20 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Converts a local path to a network share path, optionally returning it as a long path format and the ability to add or remove a trailing backslash.
-      ///   <para>A Local path, e.g.: "C:\Windows" or "C:\Windows\" will be returned as: "\\localhost\C$\Windows".</para>
-      ///   <para>If a logical drive points to a network share path (mapped drive), the share path will be returned without a trailing <see cref="DirectorySeparator"/> character.</para>
+      /// <summary>[AlphaFS] ローカルパスをネットワーク共有パスに変換します。オプションで長いパス形式での返却や末尾のバックスラッシュの追加・削除が可能です。
+      ///   <para>ローカルパス（例: "C:\Windows" または "C:\Windows\"）は "\\localhost\C$\Windows" として返されます。</para>
+      ///   <para>論理ドライブがネットワーク共有パス（マップドドライブ）を指している場合、共有パスは末尾の <see cref="DirectorySeparator"/> 文字なしで返されます。</para>
       /// </summary>
-      /// <returns>On successful conversion a UNC path is returned.
-      ///   <para>If the conversion fails, <paramref name="localPath"/> is returned.</para>
-      ///   <para>If <paramref name="localPath"/> is an empty string or <c>null</c>, <c>null</c> is returned.</para>
+      /// <returns>変換が成功するとUNCパスが返されます。
+      ///   <para>変換に失敗した場合、<paramref name="localPath"/> が返されます。</para>
+      ///   <para><paramref name="localPath"/> が空文字列または <c>null</c> の場合、<c>null</c> が返されます。</para>
       /// </returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="PathTooLongException"/>
       /// <exception cref="NetworkInformationException"/>
-      /// <param name="localPath">A local path, e.g.: "C:\Windows".</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter.</param>
-      /// <param name="fullPathOptions">Options for controlling the full path retrieval.</param>
+      /// <param name="localPath">ローカルパス。例: "C:\Windows"。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <param name="fullPathOptions">完全パス取得を制御するオプション。</param>
       [SecurityCritical]
       public static string LocalToUnc(string localPath, GetFullPathOptions fullPathOptions, PathFormat pathFormat)
       {

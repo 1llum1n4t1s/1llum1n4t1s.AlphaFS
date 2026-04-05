@@ -27,7 +27,7 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public sealed partial class DirectoryInfo
    {
-      /// <summary>[AlphaFS] Encrypts a directory so that only the account used to encrypt the directory can decrypt it.</summary>
+      /// <summary>[AlphaFS] ディレクトリを暗号化して、暗号化に使用されたアカウントのみが復号化できるようにします。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryReadOnlyException"/>
@@ -42,7 +42,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Decrypts a directory that was encrypted by the current account using the Encrypt method.</summary>
+      /// <summary>[AlphaFS] ディレクトリを暗号化します。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryReadOnlyException"/>
@@ -50,7 +50,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="recursive"><c>true</c> to encrypt the directory recursively. <c>false</c> only encrypt files and directories in the root of the directory.</param>
+      /// <param name="recursive">ディレクトリを再帰的に暗号化する場合は <c>true</c>。ディレクトリのルートにあるファイルとディレクトリのみを暗号化する場合は <c>false</c>。</param>
       [SecurityCritical]
       public void Encrypt(bool recursive)
       {

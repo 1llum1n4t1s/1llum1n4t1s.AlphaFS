@@ -24,29 +24,29 @@ using System.ComponentModel;
 using System.Globalization;
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>[AlphaFS] The operation could not be completed because the directory is read-only.</summary>
+   /// <summary>[AlphaFS] ディレクトリが読み取り専用のため、操作を完了できませんでした。</summary>
    [Serializable]
    public class DirectoryReadOnlyException : UnauthorizedAccessException
    {
       private static readonly string ErrorText = string.Format(CultureInfo.InvariantCulture, "({0}) {1}", Win32Errors.ERROR_FILE_READ_ONLY, new Win32Exception((int) Win32Errors.ERROR_FILE_READ_ONLY).Message.Trim().TrimEnd('.').Trim());
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="DirectoryReadOnlyException"/> class.</summary>
+      /// <summary>[AlphaFS] <see cref="DirectoryReadOnlyException"/>クラスの新しいインスタンスを初期化します。</summary>
       public DirectoryReadOnlyException() : base(string.Format(CultureInfo.InvariantCulture, "{0}.", ErrorText))
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="DirectoryReadOnlyException"/> class.</summary>
-      /// <param name="path">The path to the directory.</param>
+      /// <summary>[AlphaFS] <see cref="DirectoryReadOnlyException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="path">ディレクトリへのパス。</param>
       public DirectoryReadOnlyException(string path) : base(string.Format(CultureInfo.InvariantCulture, "{0}: [{1}]", ErrorText, path))
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="DirectoryReadOnlyException"/> class.</summary>
-      /// <param name="path">The path to the directory.</param>
-      /// <param name="innerException">The inner exception.</param>
+      /// <summary>[AlphaFS] <see cref="DirectoryReadOnlyException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="path">ディレクトリへのパス。</param>
+      /// <param name="innerException">内部例外。</param>
       public DirectoryReadOnlyException(string path, Exception innerException) : base(string.Format(CultureInfo.InvariantCulture, "{0}: [{1}]", ErrorText, path), innerException)
       {
       }

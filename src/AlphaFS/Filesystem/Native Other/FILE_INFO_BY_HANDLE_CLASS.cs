@@ -23,11 +23,11 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Identifies the type of file information that GetFileInformationByHandleEx should retrieve or SetFileInformationByHandle should set.
+      /// <summary>GetFileInformationByHandleEx が取得すべき、または SetFileInformationByHandle が設定すべきファイル情報の種類を識別します。
       /// </summary>
       internal enum FILE_INFO_BY_HANDLE_CLASS
       {
-         /// <summary>Minimal information for the file should be retrieved or set. Used for file handles.</summary>
+         /// <summary>ファイルの最小限の情報を取得または設定します。ファイルハンドルに使用されます。</summary>
          FILE_BASIC_INFO = 0,
 
 
@@ -67,12 +67,12 @@ namespace Alphaleonis.Win32.Filesystem
          //FILE_ATTRIBUTE_TAG_INFO = 9,
 
 
-         /// <summary>Files in the specified directory should be retrieved. Used for directory handles. Use only when calling GetFileInformationByHandleEx.
+         /// <summary>指定されたディレクトリ内のファイルを取得します。ディレクトリハンドルに使用されます。GetFileInformationByHandleEx の呼び出し時にのみ使用してください。
          /// <remarks>
-         /// The number of files returned for each call to GetFileInformationByHandleEx
-         /// depends on the size of the buffer that is passed to the function.
-         /// Any subsequent calls to GetFileInformationByHandleEx on the same handle
-         /// will resume the enumeration operation after the last file is returned.
+         /// GetFileInformationByHandleEx の各呼び出しで返されるファイル数は、
+         /// 関数に渡されるバッファーのサイズに依存します。
+         /// 同じハンドルでの後続の GetFileInformationByHandleEx 呼び出しは、
+         /// 最後に返されたファイルの後から列挙操作を再開します。
          /// </remarks>
          /// </summary>
          FILE_ID_BOTH_DIR_INFO = 10,
@@ -126,10 +126,10 @@ namespace Alphaleonis.Win32.Filesystem
          //FILE_ALIGNMENT_INFO = 17,
 
 
-         /// <summary>File information should be retrieved. Use for any handles. Use only when calling GetFileInformationByHandleEx.
+         /// <summary>ファイル情報を取得します。任意のハンドルに使用されます。GetFileInformationByHandleEx の呼び出し時にのみ使用してください。
          /// <remarks>
-         /// Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003, and Windows XP:
-         /// This value is not supported before Windows 8 and Windows Server 2012
+         /// Windows Server 2008 R2、Windows 7、Windows Server 2008、Windows Vista、Windows Server 2003、および Windows XP:
+         /// この値は Windows 8 および Windows Server 2012 より前ではサポートされていません。
          /// </remarks>
          /// </summary>
          FILE_ID_INFO = 18,

@@ -29,7 +29,7 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region Obsolete
 
-      /// <summary>[AlphaFS] Determines whether the given path refers to an existing directory junction on disk.</summary>
+      /// <summary>[AlphaFS] 指定されたパスがディスク上の既存のディレクトリジャンクションを参照しているかどうかを判定します。</summary>
       /// <returns>
       ///   <para>Returns <c>true</c> if <paramref name="junctionPath"/> refers to an existing directory junction.</para>
       ///   <para>Returns <c>false</c> if the directory junction does not exist or an error occurs when trying to determine if the specified file exists.</para>
@@ -37,15 +37,15 @@ namespace Alphaleonis.Win32.Filesystem
       /// <para>&#160;</para>
       /// <remarks>
       ///   <para>The Exists method returns <c>false</c> if any error occurs while trying to determine if the specified file exists.</para>
-      ///   <para>This can occur in situations that raise exceptions such as passing a file name with invalid characters or too many characters,</para>
-      ///   <para>a failing or missing disk, or if the caller does not have permission to read the file.</para>
+      ///   <para>これは、無効な文字や文字数が多すぎるファイル名を渡すなど、例外が発生する状況で発生する可能性があります。</para>
+      ///   <para>ディスクの障害や欠落、または呼び出し元にファイルの読み取り権限がない場合でも発生します。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="junctionPath">The path to test.</param>
       [Obsolete("Use ExistsJunctionTransacted method.")]
       [SecurityCritical]
@@ -55,7 +55,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Determines whether the given path refers to an existing directory junction on disk.</summary>
+      /// <summary>[AlphaFS] 指定されたパスがディスク上の既存のディレクトリジャンクションを参照しているかどうかを判定します。</summary>
       /// <returns>
       ///   <para>Returns <c>true</c> if <paramref name="junctionPath"/> refers to an existing directory junction.</para>
       ///   <para>Returns <c>false</c> if the directory junction does not exist or an error occurs when trying to determine if the specified file exists.</para>
@@ -63,17 +63,17 @@ namespace Alphaleonis.Win32.Filesystem
       /// <para>&#160;</para>
       /// <remarks>
       ///   <para>The Exists method returns <c>false</c> if any error occurs while trying to determine if the specified file exists.</para>
-      ///   <para>This can occur in situations that raise exceptions such as passing a file name with invalid characters or too many characters,</para>
-      ///   <para>a failing or missing disk, or if the caller does not have permission to read the file.</para>
+      ///   <para>これは、無効な文字や文字数が多すぎるファイル名を渡すなど、例外が発生する状況で発生する可能性があります。</para>
+      ///   <para>ディスクの障害や欠落、または呼び出し元にファイルの読み取り権限がない場合でも発生します。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="junctionPath">The path to test.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [Obsolete("Use ExistsJunctionTransacted method.")]
       [SecurityCritical]
       public static bool ExistsJunction(KernelTransaction transaction, string junctionPath, PathFormat pathFormat)
@@ -84,7 +84,7 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // Obsolete
 
 
-      /// <summary>[AlphaFS] Determines whether the given path refers to an existing directory junction on disk.</summary>
+      /// <summary>[AlphaFS] 指定されたパスがディスク上の既存のディレクトリジャンクションを参照しているかどうかを判定します。</summary>
       /// <returns>
       ///   <para>Returns <c>true</c> if <paramref name="junctionPath"/> refers to an existing directory junction.</para>
       ///   <para>Returns <c>false</c> if the directory junction does not exist or an error occurs when trying to determine if the specified file exists.</para>
@@ -92,15 +92,15 @@ namespace Alphaleonis.Win32.Filesystem
       /// <para>&#160;</para>
       /// <remarks>
       ///   <para>The Exists method returns <c>false</c> if any error occurs while trying to determine if the specified file exists.</para>
-      ///   <para>This can occur in situations that raise exceptions such as passing a file name with invalid characters or too many characters,</para>
-      ///   <para>a failing or missing disk, or if the caller does not have permission to read the file.</para>
+      ///   <para>これは、無効な文字や文字数が多すぎるファイル名を渡すなど、例外が発生する状況で発生する可能性があります。</para>
+      ///   <para>ディスクの障害や欠落、または呼び出し元にファイルの読み取り権限がない場合でも発生します。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="junctionPath">The path to test.</param>
       [SecurityCritical]
       public static bool ExistsJunctionTransacted(KernelTransaction transaction, string junctionPath)
@@ -109,7 +109,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Determines whether the given path refers to an existing directory junction on disk.</summary>
+      /// <summary>[AlphaFS] 指定されたパスがディスク上の既存のディレクトリジャンクションを参照しているかどうかを判定します。</summary>
       /// <returns>
       ///   <para>Returns <c>true</c> if <paramref name="junctionPath"/> refers to an existing directory junction.</para>
       ///   <para>Returns <c>false</c> if the directory junction does not exist or an error occurs when trying to determine if the specified file exists.</para>
@@ -117,17 +117,17 @@ namespace Alphaleonis.Win32.Filesystem
       /// <para>&#160;</para>
       /// <remarks>
       ///   <para>The Exists method returns <c>false</c> if any error occurs while trying to determine if the specified file exists.</para>
-      ///   <para>This can occur in situations that raise exceptions such as passing a file name with invalid characters or too many characters,</para>
-      ///   <para>a failing or missing disk, or if the caller does not have permission to read the file.</para>
+      ///   <para>これは、無効な文字や文字数が多すぎるファイル名を渡すなど、例外が発生する状況で発生する可能性があります。</para>
+      ///   <para>ディスクの障害や欠落、または呼び出し元にファイルの読み取り権限がない場合でも発生します。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="junctionPath">The path to test.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static bool ExistsJunctionTransacted(KernelTransaction transaction, string junctionPath, PathFormat pathFormat)
       {

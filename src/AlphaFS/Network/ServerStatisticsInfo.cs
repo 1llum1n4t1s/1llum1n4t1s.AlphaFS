@@ -23,7 +23,7 @@ using System;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>Contains operating statistics for the Server service.</summary>
+   /// <summary>サーバーサービスの動作統計を含みます.</summary>
    [Serializable]
    public sealed class ServerStatisticsInfo : IEquatable<ServerStatisticsInfo>
    {
@@ -35,7 +35,7 @@ namespace Alphaleonis.Win32.Network
       #endregion // Fields
 
       
-      #region Constructors
+      #region コンストラクター
 
       /// <summary>Create a ServerStatisticsInfo instance from the local host.</summary>
       public ServerStatisticsInfo() : this(Environment.MachineName, null)
@@ -68,12 +68,12 @@ namespace Alphaleonis.Win32.Network
          }
       }
 
-      #endregion // Constructors
+      #endregion // コンストラクター
 
 
-      #region Properties
+      #region プロパティ
 
-      /// <summary>The number of server access permission errors.</summary>
+      /// <summary>の数 server access permission errors.</summary>
       public int AccessPermissionErrors
       {
          get { return (int) _serverStat.sts0_permerrors; }
@@ -87,56 +87,56 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>The number of times the server required a big buffer but failed to allocate one. This value indicates that the server parameters may need adjustment.</summary>
+      /// <summary>の数 times the server required a big buffer but failed to allocate one. This value indicates that the server parameters may need adjustment.</summary>
       public int BufferAllocationFailed
       {
          get { return (int) _serverStat.sts0_bigbufneed; }
       }
 
 
-      /// <summary>The number of times the server required a request buffer but failed to allocate one. This value indicates that the server parameters may need adjustment.</summary>
+      /// <summary>の数 times the server required a request buffer but failed to allocate one. This value indicates that the server parameters may need adjustment.</summary>
       public int BufferRequestFailed
       {
          get { return (int) _serverStat.sts0_reqbufneed; }
       }
 
 
-      /// <summary>The number of server bytes received from the network.</summary>
+      /// <summary>の数 server bytes received from the network.</summary>
       public long BytesReceived
       {
          get { return Filesystem.NativeMethods.ToLong(_serverStat.sts0_bytesrcvd_high, _serverStat.sts0_bytesrcvd_low); }
       }
 
 
-      /// <summary>The number of server bytes received from the network, formatted as a unit size.</summary>
+      /// <summary>の数 server bytes received from the network, formatted as a unit size.</summary>
       public string BytesReceivedUnitSize
       {
          get { return Utils.UnitSizeToText(BytesReceived); }
       }
 
 
-      /// <summary>The number of server bytes sent to the network.</summary>
+      /// <summary>の数 server bytes sent to the network.</summary>
       public long BytesSent
       {
          get { return Filesystem.NativeMethods.ToLong(_serverStat.sts0_bytessent_high, _serverStat.sts0_bytessent_low); }
       }
 
 
-      /// <summary>The number of server bytes sent to the network, formatted as a unit size.</summary>
+      /// <summary>の数 server bytes sent to the network, formatted as a unit size.</summary>
       public string BytesSentUnitSize
       {
          get { return Utils.UnitSizeToText(BytesSent); }
       }
       
 
-      /// <summary>The number of times a server device is opened.</summary>
+      /// <summary>の数 times a server device is opened.</summary>
       public int DevicesOpened
       {
          get { return (int) _serverStat.sts0_devopens; }
       }
 
 
-      /// <summary>The number of times a file is opened on a server. This includes the number of times named pipes are opened.</summary>
+      /// <summary>の数 times a file is opened on a server. This includes the number of times named pipes are opened.</summary>
       public int FilesOpened
       {
          get { return (int) _serverStat.sts0_fopens; }
@@ -147,35 +147,35 @@ namespace Alphaleonis.Win32.Network
       public string HostName { get; private set; }
 
 
-      /// <summary>The number of server print jobs spooled.</summary>
+      /// <summary>の数 server print jobs spooled.</summary>
       public int JobsQueued
       {
          get { return (int) _serverStat.sts0_jobsqueued; }
       }
 
 
-      /// <summary>The number of server password violations.</summary>
+      /// <summary>の数 server password violations.</summary>
       public int PasswordViolations
       {
          get { return (int) _serverStat.sts0_pwerrors; }
       }
 
 
-      /// <summary>The number of times the server sessions failed with an error.</summary>
+      /// <summary>の数 times the server sessions failed with an error.</summary>
       public int SessionsFailed
       {
          get { return (int) _serverStat.sts0_serrorout; }
       }
 
 
-      /// <summary>The number of times the server session started.</summary>
+      /// <summary>の数 times the server session started.</summary>
       public int SessionsStarted
       {
          get { return (int) _serverStat.sts0_sopens; }
       }
 
 
-      /// <summary>The number of times the server session automatically disconnected.</summary>
+      /// <summary>の数 times the server session automatically disconnected.</summary>
       public int SessionsTimedOut
       {
          get { return (int) _serverStat.sts0_stimedout; }
@@ -196,16 +196,16 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>The number of server system errors.</summary>
+      /// <summary>の数 server system errors.</summary>
       public int SystemErrors
       {
          get { return (int) _serverStat.sts0_syserrors; }
       }
 
-      #endregion // Properties
+      #endregion // プロパティ
 
 
-      #region Methods
+      #region メソッド
 
       /// <summary>Refreshes the state of the object.</summary>
       public void Refresh()
@@ -217,24 +217,24 @@ namespace Alphaleonis.Win32.Network
 
 
       /// <summary>Returns the local time when statistics collection started or when the statistics were last cleared.</summary>
-      /// <returns>A string that represents this instance.</returns>
+      /// <returns>このインスタンスを表す文字列。</returns>
       public override string ToString()
       {
          return HostName;
       }
 
 
-      /// <summary>Serves as a hash function for a particular type.</summary>
-      /// <returns>A hash code for the current Object.</returns>
+      /// <summary>特定の型のハッシュ関数として機能します。</summary>
+      /// <returns>現在のオブジェクトのハッシュコード。</returns>
       public override int GetHashCode()
       {
          return Utils.CombineHashCodesOf(HostName, BytesSent, StatisticsStartTime);
       }
       
 
-      /// <summary>Determines whether the specified Object is equal to the current Object.</summary>
+      /// <summary>指定されたオブジェクトが現在のオブジェクトと等しいかどうかを判断します。</summary>
       /// <param name="other">Another <see cref="ServerStatisticsInfo"/> instance to compare to.</param>
-      /// <returns><c>true</c> if the specified Object is equal to the current Object; otherwise, <c>false</c>.</returns>
+      /// <returns><c>true</c> 指定されたオブジェクトが現在のオブジェクトと等しい場合。それ以外の場合は <c>false</c>.</returns>
       public bool Equals(ServerStatisticsInfo other)
       {
          return null != other && GetType() == other.GetType() &&
@@ -245,9 +245,9 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>Determines whether the specified Object is equal to the current Object.</summary>
-      /// <param name="obj">Another object to compare to.</param>
-      /// <returns><c>true</c> if the specified Object is equal to the current Object; otherwise, <c>false</c>.</returns>
+      /// <summary>指定されたオブジェクトが現在のオブジェクトと等しいかどうかを判断します。</summary>
+      /// <param name="obj">比較する別のオブジェクト。</param>
+      /// <returns><c>true</c> 指定されたオブジェクトが現在のオブジェクトと等しい場合。それ以外の場合は <c>false</c>.</returns>
       public override bool Equals(object obj)
       {
          var other = obj as ServerStatisticsInfo;
@@ -256,10 +256,10 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>Implements the operator ==</summary>
+      /// <summary>== 演算子を実装します</summary>
       /// <param name="left">A.</param>
       /// <param name="right">B.</param>
-      /// <returns>The result of the operator.</returns>
+      /// <returns>演算子の結果。</returns>
       public static bool operator ==(ServerStatisticsInfo left, ServerStatisticsInfo right)
       {
          return ReferenceEquals(left, null) && ReferenceEquals(right, null) ||
@@ -267,15 +267,15 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>Implements the operator !=</summary>
+      /// <summary>!= 演算子を実装します</summary>
       /// <param name="left">A.</param>
       /// <param name="right">B.</param>
-      /// <returns>The result of the operator.</returns>
+      /// <returns>演算子の結果。</returns>
       public static bool operator !=(ServerStatisticsInfo left, ServerStatisticsInfo right)
       {
          return !(left == right);
       }
 
-      #endregion // Methods
+      #endregion // メソッド
    }
 }

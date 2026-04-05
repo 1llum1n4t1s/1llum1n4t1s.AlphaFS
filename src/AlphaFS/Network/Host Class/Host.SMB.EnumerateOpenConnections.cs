@@ -29,7 +29,7 @@ namespace Alphaleonis.Win32.Network
 {
    public static partial class Host
    {
-      /// <summary>Enumerates open connections from the local host.</summary>
+      /// <summary>ローカルホストからオープン接続を列挙します.</summary>
       /// <returns><see cref="OpenConnectionInfo"/> connection information from the local host.</returns>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="NetworkInformationException"/>
@@ -40,12 +40,12 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>Enumerates open connections from the specified host.</summary>
+      /// <summary>指定されたホストからオープン接続を列挙します。</summary>
       /// <returns><see cref="OpenConnectionInfo"/> connection information from the specified <paramref name="host"/>.</returns>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="NetworkInformationException"/>
-      /// <param name="host">The DNS or NetBIOS name of the remote server. <c>null</c> refers to the local host.</param>
-      /// <param name="share">The name of the Server Message Block (SMB) share.</param>
+      /// <param name="host">リモートサーバーの DNS 名または NetBIOS 名。 <c>null</c> ローカルホストを参照します。</param>
+      /// <param name="share">サーバーメッセージブロック (SMB) 共有の名前。</param>
       [SecurityCritical]
       public static IEnumerable<OpenConnectionInfo> EnumerateOpenConnections(string host, string share)
       {
@@ -53,12 +53,12 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>Enumerates open connections from the specified host.</summary>
+      /// <summary>指定されたホストからオープン接続を列挙します。</summary>
       /// <returns><see cref="OpenConnectionInfo"/> connection information from the specified <paramref name="host"/>.</returns>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="NetworkInformationException"/>
-      /// <param name="host">The DNS or NetBIOS name of the remote server. <c>null</c> refers to the local host.</param>
-      /// <param name="share">The name of the Server Message Block (SMB) share.</param>
+      /// <param name="host">リモートサーバーの DNS 名または NetBIOS 名。 <c>null</c> ローカルホストを参照します。</param>
+      /// <param name="share">サーバーメッセージブロック (SMB) 共有の名前。</param>
       /// <param name="continueOnException">
       ///   <para><c>true</c> suppress any Exception that might be thrown as a result from a failure,</para>
       ///   <para>such as unavailable resources.</para>
@@ -76,9 +76,9 @@ namespace Alphaleonis.Win32.Network
       /// <returns><see cref="OpenConnectionInfo"/> connection information from the specified <paramref name="host"/>.</returns>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="NetworkInformationException"/>
-      /// <param name="host">The DNS or NetBIOS name of the remote server. <c>null</c> refers to the local host.</param>
-      /// <param name="share">The name of the Server Message Block (SMB) share.</param>
-      /// <param name="continueOnException"><c>true</c> suppress any Exception that might be thrown as a result from a failure, such as unavailable resources.</param>
+      /// <param name="host">リモートサーバーの DNS 名または NetBIOS 名。 <c>null</c> ローカルホストを参照します。</param>
+      /// <param name="share">サーバーメッセージブロック (SMB) 共有の名前。</param>
+      /// <param name="continueOnException"><c>true</c> リソース不足などの失敗から発生する可能性のある例外を抑制します。</param>
       [SecurityCritical]
       internal static IEnumerable<OpenConnectionInfo> EnumerateOpenConnectionsCore(string host, string share, bool continueOnException)
       {

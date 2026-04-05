@@ -25,35 +25,35 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>Checks that the <see cref="FileAttributes"/> instance is valid.</summary>
+      /// <summary><see cref="FileAttributes"/>インスタンスが有効かどうかをチェックします。</summary>
       internal static bool HasValidAttributes(FileAttributes fileAttributes)
       {
          return Utils.IsNotNull(fileAttributes) && !fileAttributes.Equals(NativeMethods.InvalidFileAttributes);
       }
 
 
-      /// <summary>Checks that the file system object is a directory.</summary>
+      /// <summary>ファイルシステムオブジェクトがディレクトリかどうかをチェックします。</summary>
       internal static bool IsDirectory(FileAttributes fileAttributes)
       {
          return HasValidAttributes(fileAttributes) && (fileAttributes & FileAttributes.Directory) != 0;
       }
 
 
-      /// <summary>Checks that the file system object is hidden.</summary>
+      /// <summary>ファイルシステムオブジェクトが隠しファイルかどうかをチェックします。</summary>
       internal static bool IsHidden(FileAttributes fileAttributes)
       {
          return HasValidAttributes(fileAttributes) && (fileAttributes & FileAttributes.Hidden) != 0;
       }
       
 
-      /// <summary>Checks that the file system object is read-only.</summary>
+      /// <summary>ファイルシステムオブジェクトが読み取り専用かどうかをチェックします。</summary>
       internal static bool IsReadOnly(FileAttributes fileAttributes)
       {
          return HasValidAttributes(fileAttributes) && (fileAttributes & FileAttributes.ReadOnly) != 0;
       }
 
 
-      /// <summary>Checks that the file system object is read-only or hidden.</summary>
+      /// <summary>ファイルシステムオブジェクトが読み取り専用または隠しファイルかどうかをチェックします。</summary>
       internal static bool IsReadOnlyOrHidden(FileAttributes fileAttributes)
       {
          return IsReadOnly(fileAttributes) || IsHidden(fileAttributes);

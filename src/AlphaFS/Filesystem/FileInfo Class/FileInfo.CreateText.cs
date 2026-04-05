@@ -29,8 +29,8 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Creates a <see crefe="StreamWriter"/> instance that writes a new text file.</summary>
-      /// <returns>A new <see cref="StreamWriter"/></returns>
+      /// <summary>新しいテキストファイルに書き込む <see cref="StreamWriter"/> インスタンスを作成します。</summary>
+      /// <returns>新しい <see cref="StreamWriter"/>。</returns>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       [SecurityCritical]
       public StreamWriter CreateText()

@@ -25,14 +25,14 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>An SP_DEVICE_INTERFACE_DETAIL_DATA structure contains the path for a device interface.</summary>
+      /// <summary>SP_DEVICE_INTERFACE_DETAIL_DATA 構造体は、デバイスインターフェイスのパスを格納します。</summary>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct SP_DEVICE_INTERFACE_DETAIL_DATA
       {
-         /// <summary>The size, in bytes, of the SP_DEVICE_INTERFACE_DETAIL_DATA structure.</summary>
+         /// <summary>SP_DEVICE_INTERFACE_DETAIL_DATA 構造体のサイズ（バイト単位）。</summary>
          [MarshalAs(UnmanagedType.U4)] public uint cbSize;
 
-         /// <summary>The device interface path. This path can be passed to Win32 functions such as CreateFile.</summary>
+         /// <summary>デバイスインターフェイスのパス。このパスは CreateFile などの Win32 関数に渡すことができます。</summary>
          [MarshalAs(UnmanagedType.ByValTStr, SizeConst = MaxPath)] public readonly string DevicePath;
       }
    }

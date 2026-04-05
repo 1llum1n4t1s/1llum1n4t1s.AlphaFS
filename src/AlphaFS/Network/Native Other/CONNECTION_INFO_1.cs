@@ -25,25 +25,25 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Contains the identification number of a connection, number of open files, connection time, number of users on the connection, and the type of connection.</summary>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <summary>接続の識別番号を含みます, number of open files, connection time, number of users on the connection, and the type of connection.</summary>
+      /// <remarks>サポートされる最小クライアント: Windows XP [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [desktop apps only]</remarks>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct CONNECTION_INFO_1
       {
-         /// <summary>Specifies a connection identification number.</summary>
+         /// <summary>接続識別番号を指定します。</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint coni1_id;
 
          /// <summary>A combination of values that specify the type of connection made from the local device name to the shared resource.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly ShareType coni1_type;
 
-         /// <summary>Specifies the number of files currently open as a result of the connection.</summary>
+         /// <summary>接続の結果として現在開いているファイルの数を指定します。</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint coni1_num_opens;
 
-         /// <summary>Specifies the number of users on the connection.</summary>
+         /// <summary>接続上のユーザー数を指定します。</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint coni1_num_users;
 
-         /// <summary>Specifies the number of seconds that the connection has been established.</summary>
+         /// <summary>接続が確立されてからの秒数を指定します。</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint coni1_time;
 
          /// <summary>If the server sharing the resource is running with user-level security, the UserName member describes which user made the connection. If the server is running with share-level security, coni1_username describes which computer (computername) made the connection.</summary>

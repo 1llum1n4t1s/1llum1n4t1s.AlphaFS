@@ -30,12 +30,12 @@ namespace Alphaleonis.Win32.Network
 {
    public static partial class Host
    {
-      /// <summary>Enumerates the DFS Links from a DFS namespace.</summary>
+      /// <summary>DFS 名前空間から DFS リンクを列挙します.</summary>
       /// <returns><see cref="IEnumerable{DfsInfo}"/> of DFS namespaces.</returns>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="NetworkInformationException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="dfsName">The Universal Naming Convention (UNC) path of a DFS root or link.</param>
+      /// <param name="dfsName">DFS ルートまたはリンクの汎用名前付け規則 (UNC) パス。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Dfs")]
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "dfs")]
       [SecurityCritical]

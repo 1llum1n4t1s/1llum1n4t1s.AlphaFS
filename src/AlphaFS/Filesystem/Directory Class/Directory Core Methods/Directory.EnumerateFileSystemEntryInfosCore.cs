@@ -28,8 +28,8 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>[AlphaFS] Returns an enumerable collection of file system entries in a specified path using <see cref="DirectoryEnumerationOptions"/> and <see cref="DirectoryEnumerationFilters"/>.</summary>
-      /// <returns>The matching file system entries. The type of the items is determined by the type <typeparamref name="T"/>.</returns>
+      /// <summary>[AlphaFS] の列挙可能なコレクションを返します。 file system entries in a specified path using <see cref="DirectoryEnumerationOptions"/> and <see cref="DirectoryEnumerationFilters"/>.</summary>
+      /// <returns>一致するファイルシステムエントリ。項目の型は <typeparamref name="T"/> によって決定されます。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -53,17 +53,17 @@ namespace Alphaleonis.Win32.Filesystem
       /// </list>
       /// </typeparam>
       /// <param name="onlyFolders"></param>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The directory to search.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">検索するディレクトリ。</param>
       /// <param name="searchPattern">
-      ///    The search string to match against the names of directories in <paramref name="path"/>.
-      ///    This parameter can contain a combination of valid literal path and wildcard
+      ///    ディレクトリ名と照合する検索文字列。対象: <paramref name="path"/>.
+      ///    このパラメータには、有効なリテラルパスとワイルドカードの組み合わせを含めることができますが、
       ///    (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
       /// </param>
       /// <param name="searchOption"></param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
-      /// <param name="filters">The specification of custom filters to be used in the process.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
+      /// <param name="filters">処理で使用するカスタムフィルタの指定。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       internal static IEnumerable<T> EnumerateFileSystemEntryInfosCore<T>(bool? onlyFolders, KernelTransaction transaction, string path, string searchPattern, SearchOption? searchOption, DirectoryEnumerationOptions? options, DirectoryEnumerationFilters filters, PathFormat pathFormat)
       {

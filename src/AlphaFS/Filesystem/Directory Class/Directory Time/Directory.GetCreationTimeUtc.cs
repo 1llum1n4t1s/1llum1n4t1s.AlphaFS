@@ -28,8 +28,8 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Gets the creation date and time, in Coordinated Universal Time (UTC) format, of the specified directory.</summary>
-      /// <returns>A <see cref="DateTime"/> structure set to the creation date and time for the specified directory. This value is expressed in UTC time.</returns>
+      /// <summary>指定されたディレクトリの作成日時を協定世界時（UTC）形式で取得します。</summary>
+      /// <returns>指定されたディレクトリの作成日時に設定された <see cref="DateTime"/> 構造体。 この値はUTC時刻で表されます。</returns>
       /// <param name="path">The directory for which to obtain creation date and time information, in Coordinated Universal Time (UTC) format.</param>
       [SecurityCritical]
       public static DateTime GetCreationTimeUtc(string path)
@@ -40,10 +40,10 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Gets the creation date and time, in Coordinated Universal Time (UTC) format, of the specified directory.</summary>
-      /// <returns>A <see cref="DateTime"/> structure set to the creation date and time for the specified directory. This value is expressed in UTC time.</returns>
+      /// <summary>[AlphaFS] 指定されたディレクトリの作成日時を協定世界時（UTC）形式で取得します。</summary>
+      /// <returns>指定されたディレクトリの作成日時に設定された <see cref="DateTime"/> 構造体。 この値はUTC時刻で表されます。</returns>
       /// <param name="path">The directory for which to obtain creation date and time information, in Coordinated Universal Time (UTC) format.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static DateTime GetCreationTimeUtc(string path, PathFormat pathFormat)
       {

@@ -27,21 +27,21 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>Gets information about the target of a mount point or symbolic link on an NTFS file system.</summary>
+      /// <summary>NTFSファイルシステム上のマウントポイントまたはシンボリックリンクのターゲットに関する情報を取得します。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="NotAReparsePointException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnrecognizedReparsePointException"/>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="reparsePath">The path to the reparse point.</param>
       /// <param name="continueOnException">
-      ///    <para><c>true</c> suppress any Exception that might be thrown as a result from a failure,</para>
+      ///    <para><c>true</c>の場合、失敗の結果としてスローされる可能性のある例外を抑制します。</para>
       ///    <para>such as ACLs protected directories or non-accessible reparse points.</para>
       /// </param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
-      ///   An instance of <see cref="LinkTargetInfo"/> or <see cref="SymbolicLinkTargetInfo"/> containing information about the symbolic link
+      ///   <see cref="LinkTargetInfo"/>または<see cref="SymbolicLinkTargetInfo"/>のインスタンスで、シンボリックリンクに関する情報を含みます
       ///   or mount point pointed to by <paramref name="reparsePath"/>.
       /// </returns>
       [SecurityCritical]

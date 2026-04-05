@@ -26,12 +26,12 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>[AlphaFS] Converts the specified existing path to its regular long form.</summary>
-      /// <returns>The regular full path.</returns>
+      /// <summary>[AlphaFS] 指定された既存のパスを通常の長い形式に変換します。</summary>
+      /// <returns>通常の完全パス。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">An existing path to a folder or file.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">フォルダまたはファイルへの既存のパス。</param>
       [SecurityCritical]
       public static string GetLongFrom83ShortPathTransacted(KernelTransaction transaction, string path)
       {

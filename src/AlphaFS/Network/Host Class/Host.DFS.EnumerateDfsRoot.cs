@@ -32,7 +32,7 @@ namespace Alphaleonis.Win32.Network
 {
    public static partial class Host
    {
-      /// <summary>Enumerates the DFS namespaces from the local host.</summary>
+      /// <summary>ローカルホストから DFS 名前空間を列挙します.</summary>
       /// <returns><see cref="IEnumerable{String}"/> of DFS Root namespaces from the local host.</returns>
       /// <exception cref="NetworkInformationException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
@@ -49,7 +49,7 @@ namespace Alphaleonis.Win32.Network
       /// <exception cref="NetworkInformationException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
       /// <param name="host">The DNS or NetBIOS name of a host.</param>
-      /// <param name="continueOnException"><c>true</c> suppress any Exception that might be thrown as a result from a failure, such as unavailable resources.</param>
+      /// <param name="continueOnException"><c>true</c> リソース不足などの失敗から発生する可能性のある例外を抑制します。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Dfs")]
       [SecurityCritical]
       public static IEnumerable<string> EnumerateDfsRoot(string host, bool continueOnException)
@@ -66,7 +66,7 @@ namespace Alphaleonis.Win32.Network
       /// <exception cref="NetworkInformationException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
       /// <param name="host">The DNS or NetBIOS name of a host.</param>
-      /// <param name="continueOnException"><c>true</c> suppress any Exception that might be thrown as a result from a failure, such as unavailable resources.</param>
+      /// <param name="continueOnException"><c>true</c> リソース不足などの失敗から発生する可能性のある例外を抑制します。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Dfs")]
       [SecurityCritical]
       internal static IEnumerable<string> EnumerateDfsRootCore(string host, bool continueOnException)

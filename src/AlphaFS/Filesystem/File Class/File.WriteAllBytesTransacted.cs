@@ -26,10 +26,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Creates a new file, writes the specified byte array to the file, and then closes the file. If the target file already exists, it is overwritten.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to write to.</param>
-      /// <param name="bytes">The bytes to write to the file.</param>
+      /// <summary>[AlphaFS] 新しいファイルを作成し、指定されたバイト配列をファイルに書き込み、ファイルを閉じます。対象ファイルが既に存在する場合は上書きされます。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">書き込むファイル。</param>
+      /// <param name="bytes">ファイルに書き込むバイト。</param>
       [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "bytes")]
       [SecurityCritical]
       public static void WriteAllBytesTransacted(KernelTransaction transaction, string path, byte[] bytes)
@@ -38,11 +38,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates a new file, writes the specified byte array to the file, and then closes the file. If the target file already exists, it is overwritten.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to write to.</param>
-      /// <param name="bytes">The bytes to write to the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <summary>[AlphaFS] 新しいファイルを作成し、指定されたバイト配列をファイルに書き込み、ファイルを閉じます。対象ファイルが既に存在する場合は上書きされます。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">書き込むファイル。</param>
+      /// <param name="bytes">ファイルに書き込むバイト。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "bytes")]
       [SecurityCritical]
       public static void WriteAllBytesTransacted(KernelTransaction transaction, string path, byte[] bytes, PathFormat pathFormat)

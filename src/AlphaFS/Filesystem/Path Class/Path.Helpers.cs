@@ -32,7 +32,7 @@ namespace Alphaleonis.Win32.Filesystem
    {
       internal static void CheckInvalidUncPath(string path)
       {
-         // Tackle: Path.GetFullPath(@"\\\\.txt"), but exclude "." which is the current directory.
+         // 処理対象: Path.GetFullPath(@"\\\\.txt")、ただしカレントディレクトリを表す "." は除外する。
          if (!IsLongPath(path) && path.StartsWith(UncPrefix, StringComparison.Ordinal))
          {
             var tackle = GetRegularPathCore(path, GetFullPathOptions.None, false).TrimStart(DirectorySeparatorChar, AltDirectorySeparatorChar);
@@ -46,13 +46,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Checks that the given path format is supported.</summary>
+      /// <summary>指定されたパス形式がサポートされているかをチェックします。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="NotSupportedException"/>
-      /// <param name="path">A path to the file or directory.</param>
-      /// <param name="checkInvalidPathChars">Checks that the path contains only valid path-characters.</param>
-      /// <param name="checkAdditional">.</param>
+      /// <param name="path">ファイルまたはディレクトリへのパス。</param>
+      /// <param name="checkInvalidPathChars">パスに有効なパス文字のみが含まれているかをチェックします。</param>
+      /// <param name="checkAdditional">追加チェックを行うかどうか。</param>
       internal static void CheckSupportedPathFormat(string path, bool checkInvalidPathChars, bool checkAdditional)
       {
          // "."
@@ -84,12 +84,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Checks that the path contains only valid path-characters.</summary>
+      /// <summary>パスに有効なパス文字のみが含まれているかをチェックします。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="path">A path to the file or directory.</param>
-      /// <param name="checkAdditional"><c>true</c> also checks for ? and * characters.</param>
-      /// <param name="allowEmpty">When <c>false</c>, throws an <see cref="ArgumentException"/>.</param>
+      /// <param name="path">ファイルまたはディレクトリへのパス。</param>
+      /// <param name="checkAdditional"><c>true</c> の場合、? および * 文字もチェックします。</param>
+      /// <param name="allowEmpty"><c>false</c> の場合、<see cref="ArgumentException"/> をスローします。</param>
       [SecurityCritical]
       private static void CheckInvalidPathChars(string path, bool checkAdditional, bool allowEmpty)
       {
@@ -103,11 +103,11 @@ namespace Alphaleonis.Win32.Filesystem
             throw new ArgumentException(Resources.Path_Is_Zero_Length_Or_Only_White_Space, "path");
          }
 
-         // Will fail on a Unicode path.
+         // Unicodeパスでは失敗する可能性がある。
          var pathRp = GetRegularPathCore(path, GetFullPathOptions.None, allowEmpty);
 
 
-         // Handle "\\?\GlobalRoot\" and "\\?\Volume" prefixes.
+         // "\\?\GlobalRoot\" および "\\?\Volume" プレフィックスを処理する。
          if (pathRp.StartsWith(GlobalRootPrefix, StringComparison.OrdinalIgnoreCase))
          {
             pathRp = pathRp.ReplaceIgnoreCase(GlobalRootPrefix, string.Empty);
@@ -150,14 +150,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets the path as a long full path.</summary>
-      /// <returns>The path as an extended length path.</returns>
+      /// <summary>パスを長い完全パスとして取得します。</summary>
+      /// <returns>拡張長パスとしてのパス。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to convert.</param>
-      /// <param name="pathFormat">The path format to use.</param>
-      /// <param name="options">Options for controlling the operation. Note that on .NET 3.5 the TrimEnd option has no effect.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">変換するパス。</param>
+      /// <param name="pathFormat">使用するパス形式。</param>
+      /// <param name="options">操作を制御するオプション。.NET 3.5 では TrimEnd オプションは効果がありません。</param>
       [SecurityCritical]
       internal static string GetExtendedLengthPathCore(KernelTransaction transaction, string path, PathFormat pathFormat, GetFullPathOptions options)
       {
@@ -172,8 +172,8 @@ namespace Alphaleonis.Win32.Filesystem
             case PathFormat.LongFullPath:
                if (options != GetFullPathOptions.None)
                {
-                  // If pathFormat equals LongFullPath it is possible that the trailing backslashg ('\') is not added or removed.
-                  // Prevent that.
+                  // pathFormat が LongFullPath の場合、末尾のバックスラッシュ ('\') が追加または削除されない可能性がある。
+                  // それを防止する。
 
                   options &= ~GetFullPathOptions.CheckAdditional;
                   options &= ~GetFullPathOptions.CheckInvalidPathChars;
@@ -241,24 +241,24 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Check if <paramref name="c"/> is a directory- and/or volume-separator character.</summary>
-      /// <returns><c>true</c> if <paramref name="c"/> is a separator character.</returns>
-      /// <param name="c">The character to check.</param>
+      /// <summary><paramref name="c"/> がディレクトリ区切り文字および/またはボリューム区切り文字であるかをチェックします。</summary>
+      /// <returns><paramref name="c"/> が区切り文字の場合は <c>true</c>。</returns>
+      /// <param name="c">チェックする文字。</param>
       /// <param name="checkSeparatorChar">
-      ///   If <c>null</c>, checks for all separator characters: <see cref="DirectorySeparatorChar"/>,
-      ///   <see cref="AltDirectorySeparatorChar"/> and <see cref="VolumeSeparatorChar"/>
-      ///   If <c>false</c>, only checks for: <see cref="DirectorySeparatorChar"/> and <see cref="AltDirectorySeparatorChar"/>
-      ///   If <c>true</c> only checks for: <see cref="VolumeSeparatorChar"/>
+      ///   <c>null</c> の場合、すべての区切り文字をチェックします: <see cref="DirectorySeparatorChar"/>、
+      ///   <see cref="AltDirectorySeparatorChar"/>、<see cref="VolumeSeparatorChar"/>。
+      ///   <c>false</c> の場合、<see cref="DirectorySeparatorChar"/> と <see cref="AltDirectorySeparatorChar"/> のみチェックします。
+      ///   <c>true</c> の場合、<see cref="VolumeSeparatorChar"/> のみチェックします。
       /// </param>
       [SecurityCritical]
       internal static bool IsDVsc(char c, bool? checkSeparatorChar)
       {
          return checkSeparatorChar == null
 
-            // Check for all separator characters.
+            // すべての区切り文字をチェックする。
             ? c == DirectorySeparatorChar || c == AltDirectorySeparatorChar || c == VolumeSeparatorChar
 
-            // Check for some separator characters.
+            // 一部の区切り文字をチェックする。
             : ((bool) checkSeparatorChar
                ? c == VolumeSeparatorChar
                : c == DirectorySeparatorChar || c == AltDirectorySeparatorChar);
@@ -269,7 +269,7 @@ namespace Alphaleonis.Win32.Filesystem
       [SuppressMessage("Microsoft.Performance", "CA1809:AvoidExcessiveLocals")]
       private static string NormalizePath(string path, GetFullPathOptions options)
       {
-         var newBuffer = new StringBuilder(NativeMethods.MaxPath);
+         var newBuffer = new StringBuilder(path.Length);
          var index = 0;
          uint numSpaces = 0;
          uint numDots = 0;
@@ -549,10 +549,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Dot and space handling.</summary>
+      /// <summary>ドットとスペースの処理。</summary>
       private static StringBuilder NormalizePathDotSpaceHandler(string path, int lastSigChar, uint numDots, bool startedWithVolumeSeparator)
       {
-         var newBuffer = new StringBuilder(NativeMethods.MaxPath);
+         var newBuffer = new StringBuilder(4);  // "." or ".." + 余裕
 
          // Look for ".[space]*" or "..[space]*".
 

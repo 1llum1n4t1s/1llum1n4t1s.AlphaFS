@@ -29,8 +29,8 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>[AlphaFS] Returns an enumerable collection of file system entries in a specified path.</summary>
-      /// <returns>The matching file system entries. The type of the items is determined by the type <typeparamref name="T"/>.</returns>
+      /// <summary>[AlphaFS] 指定されたパス内のファイルシステムエントリの列挙可能なコレクションを返します。</summary>
+      /// <returns>一致するファイルシステムエントリ。項目の型は <typeparamref name="T"/> によって決定されます。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -53,7 +53,7 @@ namespace Alphaleonis.Win32.Filesystem
       ///    </item>
       /// </list>
       /// </typeparam>
-      /// <param name="path">The directory to search.</param>
+      /// <param name="path">検索するディレクトリ。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Infos")]
       [SecurityCritical]
       public static IEnumerable<T> EnumerateFileSystemEntryInfos<T>(string path)
@@ -62,8 +62,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Returns an enumerable collection of file system entries in a specified path.</summary>
-      /// <returns>The matching file system entries. The type of the items is determined by the type <typeparamref name="T"/>.</returns>
+      /// <summary>[AlphaFS] 指定されたパス内のファイルシステムエントリの列挙可能なコレクションを返します。</summary>
+      /// <returns>一致するファイルシステムエントリ。項目の型は <typeparamref name="T"/> によって決定されます。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -86,8 +86,8 @@ namespace Alphaleonis.Win32.Filesystem
       ///    </item>
       /// </list>
       /// </typeparam>
-      /// <param name="path">The directory to search.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="path">検索するディレクトリ。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Infos")]
       [SecurityCritical]
       public static IEnumerable<T> EnumerateFileSystemEntryInfos<T>(string path, PathFormat pathFormat)
@@ -96,8 +96,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Returns an enumerable collection of file system entries in a specified path.</summary>
-      /// <returns>The matching file system entries. The type of the items is determined by the type <typeparamref name="T"/>.</returns>
+      /// <summary>[AlphaFS] 指定されたパス内のファイルシステムエントリの列挙可能なコレクションを返します。</summary>
+      /// <returns>一致するファイルシステムエントリ。項目の型は <typeparamref name="T"/> によって決定されます。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -120,8 +120,8 @@ namespace Alphaleonis.Win32.Filesystem
       ///    </item>
       /// </list>
       /// </typeparam>
-      /// <param name="path">The directory to search.</param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
+      /// <param name="path">検索するディレクトリ。</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Infos")]
       [SecurityCritical]
       public static IEnumerable<T> EnumerateFileSystemEntryInfos<T>(string path, DirectoryEnumerationOptions options)
@@ -130,8 +130,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Returns an enumerable collection of file system entries in a specified path.</summary>
-      /// <returns>The matching file system entries. The type of the items is determined by the type <typeparamref name="T"/>.</returns>
+      /// <summary>[AlphaFS] 指定されたパス内のファイルシステムエントリの列挙可能なコレクションを返します。</summary>
+      /// <returns>一致するファイルシステムエントリ。項目の型は <typeparamref name="T"/> によって決定されます。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -154,9 +154,9 @@ namespace Alphaleonis.Win32.Filesystem
       ///    </item>
       /// </list>
       /// </typeparam>
-      /// <param name="path">The directory to search.</param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="path">検索するディレクトリ。</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Infos")]
       [SecurityCritical]
       public static IEnumerable<T> EnumerateFileSystemEntryInfos<T>(string path, DirectoryEnumerationOptions options, PathFormat pathFormat)
@@ -165,8 +165,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Returns an enumerable collection of file system entries that match a <paramref name="searchPattern"/> in a specified path.</summary>
-      /// <returns>The matching file system entries. The type of the items is determined by the type <typeparamref name="T"/>.</returns>
+      /// <summary>[AlphaFS] の列挙可能なコレクションを返します。 file system entries that match a <paramref name="searchPattern"/> 指定されたパス内の</summary>
+      /// <returns>一致するファイルシステムエントリ。項目の型は <typeparamref name="T"/> によって決定されます。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -189,10 +189,10 @@ namespace Alphaleonis.Win32.Filesystem
       ///    </item>
       /// </list>
       /// </typeparam>
-      /// <param name="path">The directory to search.</param>
+      /// <param name="path">検索するディレクトリ。</param>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in <paramref name="path"/>.
-      ///   This parameter can contain a combination of valid literal path and wildcard
+      ///   ディレクトリ名と照合する検索文字列。対象: <paramref name="path"/>.
+      ///   このパラメータには、有効なリテラルパスとワイルドカードの組み合わせを含めることができますが、
       ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
       /// </param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Infos")]
@@ -203,8 +203,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Returns an enumerable collection of file system entries that match a <paramref name="searchPattern"/> in a specified path.</summary>
-      /// <returns>The matching file system entries. The type of the items is determined by the type <typeparamref name="T"/>.</returns>
+      /// <summary>[AlphaFS] の列挙可能なコレクションを返します。 file system entries that match a <paramref name="searchPattern"/> 指定されたパス内の</summary>
+      /// <returns>一致するファイルシステムエントリ。項目の型は <typeparamref name="T"/> によって決定されます。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -227,13 +227,13 @@ namespace Alphaleonis.Win32.Filesystem
       ///    </item>
       /// </list>
       /// </typeparam>
-      /// <param name="path">The directory to search.</param>
+      /// <param name="path">検索するディレクトリ。</param>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in <paramref name="path"/>.
-      ///   This parameter can contain a combination of valid literal path and wildcard
+      ///   ディレクトリ名と照合する検索文字列。対象: <paramref name="path"/>.
+      ///   このパラメータには、有効なリテラルパスとワイルドカードの組み合わせを含めることができますが、
       ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
       /// </param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Infos")]
       [SecurityCritical]
       public static IEnumerable<T> EnumerateFileSystemEntryInfos<T>(string path, string searchPattern, PathFormat pathFormat)
@@ -242,8 +242,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Returns an enumerable collection of file system entries that match a <paramref name="searchPattern"/> in a specified path using <see cref="DirectoryEnumerationOptions"/>.</summary>
-      /// <returns>The matching file system entries. The type of the items is determined by the type <typeparamref name="T"/>.</returns>
+      /// <summary>[AlphaFS] の列挙可能なコレクションを返します。 file system entries that match a <paramref name="searchPattern"/> in a specified path using <see cref="DirectoryEnumerationOptions"/>.</summary>
+      /// <returns>一致するファイルシステムエントリ。項目の型は <typeparamref name="T"/> によって決定されます。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -266,13 +266,13 @@ namespace Alphaleonis.Win32.Filesystem
       ///    </item>
       /// </list>
       /// </typeparam>
-      /// <param name="path">The directory to search.</param>
+      /// <param name="path">検索するディレクトリ。</param>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in <paramref name="path"/>.
-      ///   This parameter can contain a combination of valid literal path and wildcard
+      ///   ディレクトリ名と照合する検索文字列。対象: <paramref name="path"/>.
+      ///   このパラメータには、有効なリテラルパスとワイルドカードの組み合わせを含めることができますが、
       ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
       /// </param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Infos")]
       [SecurityCritical]
       public static IEnumerable<T> EnumerateFileSystemEntryInfos<T>(string path, string searchPattern, DirectoryEnumerationOptions options)
@@ -281,8 +281,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Returns an enumerable collection of file system entries that match a <paramref name="searchPattern"/> in a specified path using <see cref="DirectoryEnumerationOptions"/>.</summary>
-      /// <returns>The matching file system entries. The type of the items is determined by the type <typeparamref name="T"/>.</returns>
+      /// <summary>[AlphaFS] の列挙可能なコレクションを返します。 file system entries that match a <paramref name="searchPattern"/> in a specified path using <see cref="DirectoryEnumerationOptions"/>.</summary>
+      /// <returns>一致するファイルシステムエントリ。項目の型は <typeparamref name="T"/> によって決定されます。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -305,14 +305,14 @@ namespace Alphaleonis.Win32.Filesystem
       ///    </item>
       /// </list>
       /// </typeparam>
-      /// <param name="path">The directory to search.</param>
+      /// <param name="path">検索するディレクトリ。</param>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in <paramref name="path"/>.
-      ///   This parameter can contain a combination of valid literal path and wildcard
+      ///   ディレクトリ名と照合する検索文字列。対象: <paramref name="path"/>.
+      ///   このパラメータには、有効なリテラルパスとワイルドカードの組み合わせを含めることができますが、
       ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
       /// </param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Infos")]
       [SecurityCritical]
       public static IEnumerable<T> EnumerateFileSystemEntryInfos<T>(string path, string searchPattern, DirectoryEnumerationOptions options, PathFormat pathFormat)
@@ -321,8 +321,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Returns an enumerable collection of file system entries in a specified path.</summary>
-      /// <returns>The matching file system entries. The type of the items is determined by the type <typeparamref name="T"/>.</returns>
+      /// <summary>[AlphaFS] 指定されたパス内のファイルシステムエントリの列挙可能なコレクションを返します。</summary>
+      /// <returns>一致するファイルシステムエントリ。項目の型は <typeparamref name="T"/> によって決定されます。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -345,8 +345,8 @@ namespace Alphaleonis.Win32.Filesystem
       ///    </item>
       /// </list>
       /// </typeparam>
-      /// <param name="path">The directory to search.</param>
-      /// <param name="filters">The specification of custom filters to be used in the process.</param>
+      /// <param name="path">検索するディレクトリ。</param>
+      /// <param name="filters">処理で使用するカスタムフィルタの指定。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Infos")]
       [SecurityCritical]
       public static IEnumerable<T> EnumerateFileSystemEntryInfos<T>(string path, DirectoryEnumerationFilters filters)
@@ -355,8 +355,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Returns an enumerable collection of file system entries in a specified path.</summary>
-      /// <returns>The matching file system entries. The type of the items is determined by the type <typeparamref name="T"/>.</returns>
+      /// <summary>[AlphaFS] 指定されたパス内のファイルシステムエントリの列挙可能なコレクションを返します。</summary>
+      /// <returns>一致するファイルシステムエントリ。項目の型は <typeparamref name="T"/> によって決定されます。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -379,9 +379,9 @@ namespace Alphaleonis.Win32.Filesystem
       ///    </item>
       /// </list>
       /// </typeparam>
-      /// <param name="path">The directory to search.</param>
-      /// <param name="filters">The specification of custom filters to be used in the process.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="path">検索するディレクトリ。</param>
+      /// <param name="filters">処理で使用するカスタムフィルタの指定。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Infos")]
       [SecurityCritical]
       public static IEnumerable<T> EnumerateFileSystemEntryInfos<T>(string path, DirectoryEnumerationFilters filters, PathFormat pathFormat)
@@ -390,8 +390,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Returns an enumerable collection of file system entries in a specified path.</summary>
-      /// <returns>The matching file system entries. The type of the items is determined by the type <typeparamref name="T"/>.</returns>
+      /// <summary>[AlphaFS] 指定されたパス内のファイルシステムエントリの列挙可能なコレクションを返します。</summary>
+      /// <returns>一致するファイルシステムエントリ。項目の型は <typeparamref name="T"/> によって決定されます。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -414,9 +414,9 @@ namespace Alphaleonis.Win32.Filesystem
       ///    </item>
       /// </list>
       /// </typeparam>
-      /// <param name="path">The directory to search.</param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
-      /// <param name="filters">The specification of custom filters to be used in the process.</param>
+      /// <param name="path">検索するディレクトリ。</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
+      /// <param name="filters">処理で使用するカスタムフィルタの指定。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Infos")]
       [SecurityCritical]
       public static IEnumerable<T> EnumerateFileSystemEntryInfos<T>(string path, DirectoryEnumerationOptions options, DirectoryEnumerationFilters filters)
@@ -425,8 +425,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Returns an enumerable collection of file system entries in a specified path.</summary>
-      /// <returns>The matching file system entries. The type of the items is determined by the type <typeparamref name="T"/>.</returns>
+      /// <summary>[AlphaFS] 指定されたパス内のファイルシステムエントリの列挙可能なコレクションを返します。</summary>
+      /// <returns>一致するファイルシステムエントリ。項目の型は <typeparamref name="T"/> によって決定されます。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -449,10 +449,10 @@ namespace Alphaleonis.Win32.Filesystem
       ///    </item>
       /// </list>
       /// </typeparam>
-      /// <param name="path">The directory to search.</param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
-      /// <param name="filters">The specification of custom filters to be used in the process.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="path">検索するディレクトリ。</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
+      /// <param name="filters">処理で使用するカスタムフィルタの指定。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Infos")]
       [SecurityCritical]
       public static IEnumerable<T> EnumerateFileSystemEntryInfos<T>(string path, DirectoryEnumerationOptions options, DirectoryEnumerationFilters filters, PathFormat pathFormat)
@@ -461,8 +461,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Returns an enumerable collection of file system entries that match a <paramref name="searchPattern"/> in a specified path.</summary>
-      /// <returns>The matching file system entries. The type of the items is determined by the type <typeparamref name="T"/>.</returns>
+      /// <summary>[AlphaFS] の列挙可能なコレクションを返します。 file system entries that match a <paramref name="searchPattern"/> 指定されたパス内の</summary>
+      /// <returns>一致するファイルシステムエントリ。項目の型は <typeparamref name="T"/> によって決定されます。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -485,13 +485,13 @@ namespace Alphaleonis.Win32.Filesystem
       ///    </item>
       /// </list>
       /// </typeparam>
-      /// <param name="path">The directory to search.</param>
+      /// <param name="path">検索するディレクトリ。</param>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in <paramref name="path"/>.
-      ///   This parameter can contain a combination of valid literal path and wildcard
+      ///   ディレクトリ名と照合する検索文字列。対象: <paramref name="path"/>.
+      ///   このパラメータには、有効なリテラルパスとワイルドカードの組み合わせを含めることができますが、
       ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
       /// </param>
-      /// <param name="filters">The specification of custom filters to be used in the process.</param>
+      /// <param name="filters">処理で使用するカスタムフィルタの指定。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Infos")]
       [SecurityCritical]
       [Obsolete("Argument searchPattern is obsolete. The DirectoryEnumerationFilters argument provides better filter criteria.")]
@@ -501,8 +501,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Returns an enumerable collection of file system entries that match a <paramref name="searchPattern"/> in a specified path.</summary>
-      /// <returns>The matching file system entries. The type of the items is determined by the type <typeparamref name="T"/>.</returns>
+      /// <summary>[AlphaFS] の列挙可能なコレクションを返します。 file system entries that match a <paramref name="searchPattern"/> 指定されたパス内の</summary>
+      /// <returns>一致するファイルシステムエントリ。項目の型は <typeparamref name="T"/> によって決定されます。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -525,14 +525,14 @@ namespace Alphaleonis.Win32.Filesystem
       ///    </item>
       /// </list>
       /// </typeparam>
-      /// <param name="path">The directory to search.</param>
+      /// <param name="path">検索するディレクトリ。</param>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in <paramref name="path"/>.
-      ///   This parameter can contain a combination of valid literal path and wildcard
+      ///   ディレクトリ名と照合する検索文字列。対象: <paramref name="path"/>.
+      ///   このパラメータには、有効なリテラルパスとワイルドカードの組み合わせを含めることができますが、
       ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
       /// </param>
-      /// <param name="filters">The specification of custom filters to be used in the process.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="filters">処理で使用するカスタムフィルタの指定。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Infos")]
       [SecurityCritical]
       [Obsolete("Argument searchPattern is obsolete. The DirectoryEnumerationFilters argument provides better filter criteria.")]
@@ -542,8 +542,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Returns an enumerable collection of file system entries that match a <paramref name="searchPattern"/> in a specified path.</summary>
-      /// <returns>The matching file system entries. The type of the items is determined by the type <typeparamref name="T"/>.</returns>
+      /// <summary>[AlphaFS] の列挙可能なコレクションを返します。 file system entries that match a <paramref name="searchPattern"/> 指定されたパス内の</summary>
+      /// <returns>一致するファイルシステムエントリ。項目の型は <typeparamref name="T"/> によって決定されます。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -566,14 +566,14 @@ namespace Alphaleonis.Win32.Filesystem
       ///    </item>
       /// </list>
       /// </typeparam>
-      /// <param name="path">The directory to search.</param>
+      /// <param name="path">検索するディレクトリ。</param>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in <paramref name="path"/>.
-      ///   This parameter can contain a combination of valid literal path and wildcard
+      ///   ディレクトリ名と照合する検索文字列。対象: <paramref name="path"/>.
+      ///   このパラメータには、有効なリテラルパスとワイルドカードの組み合わせを含めることができますが、
       ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
       /// </param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
-      /// <param name="filters">The specification of custom filters to be used in the process.</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
+      /// <param name="filters">処理で使用するカスタムフィルタの指定。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Infos")]
       [SecurityCritical]
       [Obsolete("Argument searchPattern is obsolete. The DirectoryEnumerationFilters argument provides better filter criteria.")]
@@ -583,8 +583,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Returns an enumerable collection of file system entries that match a <paramref name="searchPattern"/> in a specified path.</summary>
-      /// <returns>The matching file system entries. The type of the items is determined by the type <typeparamref name="T"/>.</returns>
+      /// <summary>[AlphaFS] の列挙可能なコレクションを返します。 file system entries that match a <paramref name="searchPattern"/> 指定されたパス内の</summary>
+      /// <returns>一致するファイルシステムエントリ。項目の型は <typeparamref name="T"/> によって決定されます。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -607,15 +607,15 @@ namespace Alphaleonis.Win32.Filesystem
       ///    </item>
       /// </list>
       /// </typeparam>
-      /// <param name="path">The directory to search.</param>
+      /// <param name="path">検索するディレクトリ。</param>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in <paramref name="path"/>.
-      ///   This parameter can contain a combination of valid literal path and wildcard
+      ///   ディレクトリ名と照合する検索文字列。対象: <paramref name="path"/>.
+      ///   このパラメータには、有効なリテラルパスとワイルドカードの組み合わせを含めることができますが、
       ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
       /// </param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
-      /// <param name="filters">The specification of custom filters to be used in the process.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
+      /// <param name="filters">処理で使用するカスタムフィルタの指定。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Infos")]
       [SecurityCritical]
       [Obsolete("Argument searchPattern is obsolete. The DirectoryEnumerationFilters argument provides better filter criteria.")]

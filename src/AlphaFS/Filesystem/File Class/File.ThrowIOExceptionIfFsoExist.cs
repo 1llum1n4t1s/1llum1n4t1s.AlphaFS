@@ -25,8 +25,8 @@ using System.IO;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>Provides static methods for the creation, copying, deletion, moving, and opening of files, and aids in the creation of <see cref="System.IO.FileStream"/> objects.
-   ///   <para>This class cannot be inherited.</para>
+   /// <summary>ファイルの作成、コピー、削除、移動、およびオープンのための静的メソッドを提供し、<see cref="System.IO.FileStream"/>オブジェクトの作成を支援します。
+   ///   <para>このクラスは継承できません。</para>
    /// </summary>
    [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]   
    public static partial class File

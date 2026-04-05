@@ -28,9 +28,9 @@ namespace Alphaleonis.Win32.Network
 {
    public static partial class Host
    {
-      /// <summary>Creates a connection to a network resource.</summary>
+      /// <summary>ネットワークリソースへの接続を作成します.</summary>
       /// <exception cref="NetworkInformationException"/>
-      /// <param name="remoteName">A network resource to connect to, for example: \\server or \\server\share.</param>
+      /// <param name="remoteName">接続先のネットワークリソース。例: \\server または \\server\share。</param>
       [SecurityCritical]
       public static void ConnectTo(string remoteName)
       {
@@ -38,9 +38,9 @@ namespace Alphaleonis.Win32.Network
       }
 
       
-      /// <summary>Creates a connection to a network resource.</summary>
+      /// <summary>ネットワークリソースへの接続を作成します.</summary>
       /// <exception cref="NetworkInformationException"/>
-      /// <param name="remoteName">A network resource to connect to, for example: \\server or \\server\share.</param>
+      /// <param name="remoteName">接続先のネットワークリソース。例: \\server または \\server\share。</param>
       /// <param name="userName">
       ///   The user name for making the connection. If <paramref name="userName"/> is <c>null</c>, the function uses the default
       ///   user name. (The user context for the process provides the default user name)
@@ -49,10 +49,10 @@ namespace Alphaleonis.Win32.Network
       ///   The password to be used for making the network connection. If <paramref name="password"/> is <c>null</c>, the function
       ///   uses the current default password associated with the user specified by <paramref name="userName"/>.
       /// </param>
-      /// <param name="prompt"><c>true</c> always pops-up an authentication dialog box.</param>
-      /// <param name="updateProfile"><c>true</c> successful network resource connections will be saved.</param>
+      /// <param name="prompt"><c>true</c> は常に認証ダイアログボックスをポップアップします。</param>
+      /// <param name="updateProfile"><c>true</c> は成功したネットワークリソース接続を保存します。</param>
       /// <param name="saveCredentials">
-      ///   When the operating system prompts for a credential, the credential should be saved by the credential manager when true.
+      ///   オペレーティングシステムが資格情報を要求した場合、true のときに資格情報マネージャーによって資格情報が保存されます。
       /// </param>
       [SecurityCritical]
       public static void ConnectTo(string remoteName, string userName, string password, bool prompt, bool updateProfile, bool saveCredentials)
@@ -69,12 +69,12 @@ namespace Alphaleonis.Win32.Network
       }
 
       
-      /// <summary>Creates a connection to a network resource.</summary>
-      /// <param name="remoteName">A network resource to connect to, for example: \\server or \\server\share.</param>
+      /// <summary>ネットワークリソースへの接続を作成します.</summary>
+      /// <param name="remoteName">接続先のネットワークリソース。例: \\server または \\server\share。</param>
       /// <param name="credentials">An instance of <see cref="NetworkCredential"/> which provides credentials for password-based authentication schemes such as basic, digest, NTLM, and Kerberos authentication.</param>
-      /// <param name="prompt"><c>true</c> always pops-up an authentication dialog box.</param>
-      /// <param name="updateProfile"><c>true</c> successful network resource connections will be saved.</param>
-      /// <param name="saveCredentials">When the operating system prompts for a credential, the credential should be saved by the credential manager when true.</param>
+      /// <param name="prompt"><c>true</c> は常に認証ダイアログボックスをポップアップします。</param>
+      /// <param name="updateProfile"><c>true</c> は成功したネットワークリソース接続を保存します。</param>
+      /// <param name="saveCredentials">オペレーティングシステムが資格情報を要求した場合、true のときに資格情報マネージャーによって資格情報が保存されます。</param>
       ///
       /// <exception cref="NetworkInformationException"/>
       [SecurityCritical]
@@ -91,10 +91,10 @@ namespace Alphaleonis.Win32.Network
       }
 
       
-      /// <summary>Creates a connection to a network resource.</summary>
+      /// <summary>ネットワークリソースへの接続を作成します.</summary>
       /// <exception cref="NetworkInformationException"/>
-      /// <param name="winOwner">Handle to a window that the provider of network resources can use as an owner window for dialog boxes.</param>
-      /// <param name="remoteName">A network resource to connect to, for example: \\server or \\server\share.</param>
+      /// <param name="winOwner">ネットワークリソースのプロバイダーがダイアログボックスのオーナーウィンドウとして使用できるウィンドウへのハンドル。</param>
+      /// <param name="remoteName">接続先のネットワークリソース。例: \\server または \\server\share。</param>
       /// <param name="userName">
       ///   The user name for making the connection. If <paramref name="userName"/> is <c>null</c>, the function uses the default
       ///   user name. (The user context for the process provides the default user name)
@@ -103,9 +103,9 @@ namespace Alphaleonis.Win32.Network
       ///   The password to be used for making the network connection. If <paramref name="password"/> is <c>null</c>, the function
       ///   uses the current default password associated with the user specified by <paramref name="userName"/>.
       /// </param>
-      /// <param name="prompt"><c>true</c> always pops-up an authentication dialog box.</param>
-      /// <param name="updateProfile"><c>true</c> successful network resource connections will be saved.</param>
-      /// <param name="saveCredentials">When the operating system prompts for a credential, the credential should be saved by the credential manager when true.</param>
+      /// <param name="prompt"><c>true</c> は常に認証ダイアログボックスをポップアップします。</param>
+      /// <param name="updateProfile"><c>true</c> は成功したネットワークリソース接続を保存します。</param>
+      /// <param name="saveCredentials">オペレーティングシステムが資格情報を要求した場合、true のときに資格情報マネージャーによって資格情報が保存されます。</param>
       [SecurityCritical]
       public static void ConnectTo(IntPtr winOwner, string remoteName, string userName, string password, bool prompt, bool updateProfile, bool saveCredentials)
       {
@@ -122,14 +122,14 @@ namespace Alphaleonis.Win32.Network
       }
 
       
-      /// <summary>Creates a connection to a network resource.</summary>
+      /// <summary>ネットワークリソースへの接続を作成します.</summary>
       /// <exception cref="NetworkInformationException"/>
-      /// <param name="winOwner">Handle to a window that the provider of network resources can use as an owner window for dialog boxes.</param>
-      /// <param name="remoteName">A network resource to connect to, for example: \\server or \\server\share.</param>
+      /// <param name="winOwner">ネットワークリソースのプロバイダーがダイアログボックスのオーナーウィンドウとして使用できるウィンドウへのハンドル。</param>
+      /// <param name="remoteName">接続先のネットワークリソース。例: \\server または \\server\share。</param>
       /// <param name="credentials">An instance of <see cref="NetworkCredential"/> which provides credentials for password-based authentication schemes such as basic, digest, NTLM, and Kerberos authentication.</param>
-      /// <param name="prompt"><c>true</c> always pops-up an authentication dialog box.</param>
-      /// <param name="updateProfile"><c>true</c> successful network resource connections will be saved.</param>
-      /// <param name="saveCredentials">When the operating system prompts for a credential, the credential should be saved by the credential manager when true.</param>
+      /// <param name="prompt"><c>true</c> は常に認証ダイアログボックスをポップアップします。</param>
+      /// <param name="updateProfile"><c>true</c> は成功したネットワークリソース接続を保存します。</param>
+      /// <param name="saveCredentials">オペレーティングシステムが資格情報を要求した場合、true のときに資格情報マネージャーによって資格情報が保存されます。</param>
       [SecurityCritical]
       public static void ConnectTo(IntPtr winOwner, string remoteName, NetworkCredential credentials, bool prompt, bool updateProfile, bool saveCredentials)
       {

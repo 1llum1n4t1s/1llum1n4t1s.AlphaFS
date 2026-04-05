@@ -25,10 +25,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public sealed partial class DirectoryInfo
    {
-      /// <summary>[AlphaFS] Enables compression of the specified directory and the files in it.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリとその中のファイルの圧縮を有効にします。</summary>
       /// <remarks>
-      /// This method enables the directory-compression attribute. It will not compress the current contents of the directory.
-      /// However, newly created files and directories will be compressed.
+      /// このメソッドはディレクトリ圧縮属性を有効にします。ディレクトリの現在の内容を圧縮することはありません。
+      /// ただし、新しく作成されるファイルとディレクトリは圧縮されます。
       /// </remarks>
       [SecurityCritical]
       public void EnableCompression()

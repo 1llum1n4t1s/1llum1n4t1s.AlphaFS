@@ -26,11 +26,11 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>Determines if a path string is a valid Universal Naming Convention (UNC) path, optionally skip invalid path character check.</summary>
-      /// <returns><c>true</c> if the specified path is a Universal Naming Convention (UNC) path, <c>false</c> otherwise.</returns>
-      /// <param name="path">The path to check.</param>
-      /// <param name="isRegularPath">When <c>true</c> indicates that <paramref name="path"/> is already in regular path format.</param>
-      /// <param name="checkInvalidPathChars"><c>true</c> will check <paramref name="path"/> for invalid path characters.</param>
+      /// <summary>パス文字列が有効なUNC（汎用名前付け規則）パスであるかどうかを判定します。オプションで無効なパス文字のチェックをスキップできます。</summary>
+      /// <returns>指定されたパスがUNC（汎用名前付け規則）パスの場合は <c>true</c>、それ以外は <c>false</c>。</returns>
+      /// <param name="path">チェックするパス。</param>
+      /// <param name="isRegularPath"><c>true</c> の場合、<paramref name="path"/> が既に通常のパス形式であることを示します。</param>
+      /// <param name="checkInvalidPathChars"><c>true</c> の場合、<paramref name="path"/> の無効なパス文字をチェックします。</param>
       [SecurityCritical]
       internal static bool IsUncPathCore(string path, bool isRegularPath, bool checkInvalidPathChars)
       {

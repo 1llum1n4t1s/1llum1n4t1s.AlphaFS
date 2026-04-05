@@ -25,10 +25,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public sealed partial class DirectoryInfo
    {
-      /// <summary>[AlphaFS] Disables compression of the specified directory and the files in it.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリとその中のファイルの圧縮を無効にします。</summary>
       /// <remarks>
-      /// This method disables the directory-compression attribute. It will not decompress the current contents of the directory.
-      /// However, newly created files and directories will be uncompressed.
+      /// このメソッドはディレクトリ圧縮属性を無効にします。ディレクトリの現在の内容を展開することはありません。
+      /// ただし、新しく作成されるファイルとディレクトリは非圧縮になります。
       /// </remarks>
       [SecurityCritical]
       public void DisableCompression()

@@ -25,10 +25,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>[AlphaFS] Check if file or folder name has any invalid characters.</summary>
+      /// <summary>[AlphaFS] ファイル名またはフォルダ名に無効な文字が含まれていないかをチェックします。</summary>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="name">File or folder name.</param>
-      /// <returns><c>true</c> if name contains any invalid characters. Otherwise <c>false</c></returns>
+      /// <param name="name">ファイル名またはフォルダ名。</param>
+      /// <returns>名前に無効な文字が含まれていない場合は <c>true</c>。それ以外は <c>false</c>。</returns>
       public static bool IsValidName(string name)
       {
          if (null == name)

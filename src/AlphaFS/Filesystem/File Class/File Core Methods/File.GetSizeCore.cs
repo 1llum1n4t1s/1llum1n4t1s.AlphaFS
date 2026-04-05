@@ -30,14 +30,14 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>Retrieves the size of the specified file.</summary>
-      /// <returns>The file size of the first or all streams, in bytes.</returns>
-      /// <remarks>Use either <paramref name="path"/> or <paramref name="safeFileHandle"/>, not both.</remarks>
-      /// <param name="safeFileHandle">The <see cref="SafeFileHandle"/> to the file.</param>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the file.</param>
-      /// <param name="sizeOfAllStreams"><c>true</c> to retrieve the size of all alternate data streams, <c>false</c> to get the size of the first stream.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <summary>指定されたファイルのサイズを取得します。</summary>
+      /// <returns>最初のストリームまたはすべてのストリームのファイルサイズ(バイト単位)。</returns>
+      /// <remarks><paramref name="path"/>または<paramref name="safeFileHandle"/>のいずれかを使用し、両方は使用しないでください。</remarks>
+      /// <param name="safeFileHandle">ファイルへの<see cref="SafeFileHandle"/>。</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルへのパス。</param>
+      /// <param name="sizeOfAllStreams">すべての代替データストリームのサイズを取得する場合は<c>true</c>、最初のストリームのサイズを取得する場合は<c>false</c>。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       [SecurityCritical]
       internal static long GetSizeCore(SafeFileHandle safeFileHandle, KernelTransaction transaction, string path, bool sizeOfAllStreams, PathFormat pathFormat)

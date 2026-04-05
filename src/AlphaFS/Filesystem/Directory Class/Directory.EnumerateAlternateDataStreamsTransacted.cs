@@ -26,10 +26,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>[AlphaFS] Enumerates the streams of type :$DATA from the specified directory.</summary>
-      /// <param name="transaction">The transaction.</param>
+      /// <summary>[AlphaFS] 指定されたディレクトリから :$DATA 型のストリームを列挙します。</summary>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The path to the directory to enumerate streams of.</param>
-      /// <returns>The streams of type :$DATA in the specified directory.</returns>
+      /// <returns>指定されたディレクトリ内の :$DATA 型のストリーム。</returns>
       [SecurityCritical]
       public static IEnumerable<AlternateDataStreamInfo> EnumerateAlternateDataStreamsTransacted(KernelTransaction transaction, string path)
       {
@@ -37,11 +37,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Enumerates the streams of type :$DATA from the specified directory.</summary>
-      /// <param name="transaction">The transaction.</param>
+      /// <summary>[AlphaFS] 指定されたディレクトリから :$DATA 型のストリームを列挙します。</summary>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The path to the directory to enumerate streams of.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>The streams of type :$DATA in the specified directory.</returns>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>指定されたディレクトリ内の :$DATA 型のストリーム。</returns>
       [SecurityCritical]
       public static IEnumerable<AlternateDataStreamInfo> EnumerateAlternateDataStreamsTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)
       {

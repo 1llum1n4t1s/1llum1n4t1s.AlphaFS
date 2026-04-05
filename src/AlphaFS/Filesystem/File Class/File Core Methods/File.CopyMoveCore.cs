@@ -33,19 +33,19 @@ namespace Alphaleonis.Win32.Filesystem
       // Symbolic Link Effects on File Systems Functions: https://msdn.microsoft.com/en-us/library/windows/desktop/aa365682(v=vs.85).aspx
 
 
-      /// <summary>Copy/move a Non-/Transacted file or directory including its children to a new location, <see cref="CopyOptions"/> or <see cref="MoveOptions"/> can be specified,
-      /// and the possibility of notifying the application of its progress through a callback function.
+      /// <summary>非トランザクション/トランザクションファイルまたはディレクトリとその子要素を新しい場所にコピー/移動します。 <see cref="CopyOptions"/>または<see cref="MoveOptions"/>を指定でき、
+      /// およびコールバック関数を通じてアプリケーショ��に進行状況を通知する可能性があります。
       /// </summary>
       /// <remarks>
-      ///   <para>Option <see cref="CopyOptions.NoBuffering"/> is recommended for very large file transfers.</para>
+      ///   <para>非常に大きなファイル転送には<see cref="CopyOptions.NoBuffering"/>オプションが推奨されます。</para>
       ///   <para>You cannot use the Move method to overwrite an existing file, unless
       ///   <paramref name="cma.MoveOptions"/> contains <see cref="MoveOptions.ReplaceExisting"/>.</para>
       ///   <para>This Move method works across disk volumes, and it does not throw an exception if the
-      ///   source and destination are the same. </para>
+      ///   ソースとコピー先が同じ場合にも同様です。</para>
       ///   <para>Note that if you attempt to replace a file by moving a file of the same name into
       ///   that directory, you get an IOException.</para>
       /// </remarks>
-      /// <returns>Returns a <see cref="CopyMoveResult"/> class with the status of the Copy or Move action.</returns>
+      /// <returns>コピーまたは移動操作のステータスを含む<see cref="CopyMoveResult"/>クラスを返します。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -101,7 +101,7 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
-         // Calling start on a running Stopwatch is a no-op.
+         // 実行中のStopwatchでstartを呼び出しても何も起こらない。
          copyMoveRes.Stopwatch.Start();
 
          #endregion // Setup
@@ -109,8 +109,8 @@ namespace Alphaleonis.Win32.Filesystem
 
          while (attempts-- > 0)
          {
-            // MSDN: If this flag is set to TRUE during the copy/move operation, the operation is canceled.
-            // Otherwise, the copy/move operation will continue to completion.
+            // MSDN: コピー/移動操作中にこのフラグがTRUEに設定されると、操作はキャンセルされます。
+            // それ以外の場合、コピー/移動操作は完了まで続行されます。
 
             copyMoveRes.ErrorCode = (int) Win32Errors.NO_ERROR;
 
@@ -165,7 +165,7 @@ namespace Alphaleonis.Win32.Filesystem
             copyMoveRes.IsCanceled = cancel;
 
             
-            // Report the Exception back to the caller.
+            // 呼び出し元に例外を報告する。
             if (null != errorFilter)
             {
                var continueCopyMove = errorFilter(lastError, new Win32Exception(lastError).Message, Path.GetCleanExceptionPath(destinationFilePath));

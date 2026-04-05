@@ -28,16 +28,16 @@ namespace Alphaleonis.Win32.Security
 {
    internal static partial class NativeMethods
    {
-      /// <summary>The SetNamedSecurityInfo function sets specified security information in the security descriptor of a specified object. The caller identifies the object by name.
+      /// <summary>SetNamedSecurityInfo関数は、指定されたオブジェクトのセキュリティ記述子に指定されたセキュリティ情報を設定します。呼び出し元はオブジェクトを名前で識別します。
       /// <para>&#160;</para>
       /// <returns>
-      /// <para>If the function succeeds, the function returns ERROR_SUCCESS.</para>
-      /// <para>If the function fails, it returns a nonzero error code defined in WinError.h.</para>
+      /// <para>関数が成功した場合、ERROR_SUCCESSを返します。</para>
+      /// <para>関数が失敗した場合、WinError.hで定義された0以外のエラーコードを返します。</para>
       /// </returns>
       /// <para>&#160;</para>
       /// <remarks>
-      /// <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      /// <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      /// <para>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</para>
+      /// <para>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</para>
       /// </remarks>
       /// </summary>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]

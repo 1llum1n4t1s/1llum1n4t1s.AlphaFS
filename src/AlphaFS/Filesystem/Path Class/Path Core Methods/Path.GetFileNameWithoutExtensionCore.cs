@@ -26,11 +26,11 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>Returns the file name of the specified path string without the extension.</summary>
-      /// <returns>The string returned by GetFileName, minus the last period (.) and all characters following it.</returns>
+      /// <summary>指定されたパス文字列のファイル名を拡張子なしで返します。</summary>
+      /// <returns>GetFileName が返す文字列から、最後のピリオド (.) とそれに続くすべての文字を除いたもの。</returns>
       /// <exception cref="ArgumentException"/>
-      /// <param name="path">The path of the file. The path cannot contain any of the characters defined in <see cref="GetInvalidPathChars"/>.</param>
-      /// <param name="checkInvalidPathChars"><c>true</c> will check <paramref name="path"/> for invalid path characters.</param>
+      /// <param name="path">ファイルのパス。パスには <see cref="GetInvalidPathChars"/> で定義されている文字を含めることはできません。</param>
+      /// <param name="checkInvalidPathChars"><c>true</c> の場合、<paramref name="path"/> の無効なパス文字をチェックします。</param>
       [SecurityCritical]
       internal static string GetFileNameWithoutExtensionCore(string path, bool checkInvalidPathChars)
       {

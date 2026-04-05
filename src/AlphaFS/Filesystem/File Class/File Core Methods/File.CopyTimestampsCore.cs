@@ -29,19 +29,19 @@ namespace Alphaleonis.Win32.Filesystem
    {
       /// <summary>Copies the date and timestamps for the specified files and directories.</summary>
       /// <remarks>
-      ///   <para>This method does not change last access time for the source file.</para>
+      ///   <para>This method does not change last access time for the source ファイル。</para>
       ///   <para>This method uses BackupSemantics flag to get Timestamp changed for directories.</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="FileNotFoundException"/>
       /// <exception cref="NotSupportedException"/>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="isFolder">Specifies that <paramref name="sourcePath"/> is a file or directory.</param>
       /// <param name="sourcePath">The source path.</param>
       /// <param name="destinationPath">The destination path.</param>
       /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the file or directory linked to. No effect if <paramref name="destinationPath"/> does not refer to a reparse point.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       internal static void CopyTimestampsCore(KernelTransaction transaction, bool isFolder, string sourcePath, string destinationPath, bool modifyReparsePoint, PathFormat pathFormat)
       {

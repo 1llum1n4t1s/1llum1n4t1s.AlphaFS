@@ -24,7 +24,7 @@ namespace Alphaleonis.Win32.Network
    internal static partial class NativeMethods
    {
       /// <summary>NETRESOURCE structure.
-      /// <para>ResourceScope: The scope of the enumeration.</para>
+      /// <para>ResourceScope: 列挙のスコープ.</para>
       /// </summary>
       internal enum ResourceScope
       {

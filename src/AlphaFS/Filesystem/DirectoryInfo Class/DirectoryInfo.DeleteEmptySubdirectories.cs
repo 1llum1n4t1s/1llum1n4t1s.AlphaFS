@@ -26,7 +26,7 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public sealed partial class DirectoryInfo
    {
-      /// <summary>[AlphaFS] Deletes empty subdirectories from the <see cref="DirectoryInfo"/> instance.</summary>
+      /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> インスタンスから空のサブディレクトリを削除します。</summary>
       [SecurityCritical]
       public void DeleteEmptySubdirectories()
       {
@@ -34,8 +34,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Deletes empty subdirectories from the <see cref="DirectoryInfo"/> instance.</summary>
-      /// <param name="recursive"><c>true</c> deletes empty subdirectories from this directory and its subdirectories.</param>
+      /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> インスタンスから空のサブディレクトリを削除します。</summary>
+      /// <param name="recursive"><c>true</c> の場合、このディレクトリとそのサブディレクトリから空のサブディレクトリを削除します。</param>
       [SecurityCritical]
       public void DeleteEmptySubdirectories(bool recursive)
       {
@@ -43,9 +43,9 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Deletes empty subdirectories from the <see cref="DirectoryInfo"/> instance.</summary>
-      /// <param name="recursive"><c>true</c> deletes empty subdirectories from this directory and its subdirectories.</param>
-      /// <param name="ignoreReadOnly"><c>true</c> overrides read only <see cref="FileAttributes"/> of empty directories.</param>
+      /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> インスタンスから空のサブディレクトリを削除します。</summary>
+      /// <param name="recursive"><c>true</c> の場合、このディレクトリとそのサブディレクトリから空のサブディレクトリを削除します。</param>
+      /// <param name="ignoreReadOnly"><c>true</c> の場合、空のディレクトリの読み取り専用 <see cref="FileAttributes"/> をオーバーライドします。</param>
       [SecurityCritical]
       public void DeleteEmptySubdirectories(bool recursive, bool ignoreReadOnly)
       {

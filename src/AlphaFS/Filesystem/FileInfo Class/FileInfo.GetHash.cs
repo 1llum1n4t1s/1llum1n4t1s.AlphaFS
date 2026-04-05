@@ -25,9 +25,9 @@ namespace Alphaleonis.Win32.Filesystem
 {
    partial class FileInfo
    {
-      /// <summary>[AlphaFS] Calculates the hash/checksum.</summary>
-      /// <param name="hashType">One of the <see cref="HashType"/> values.</param>
-      /// <returns>The hash/checksum of the file represented by this <see cref="FileInfo"/>.</returns>
+      /// <summary>[AlphaFS] ハッシュ/チェックサムを計算します。</summary>
+      /// <param name="hashType"><see cref="HashType"/> 値の 1 つ。</param>
+      /// <returns>この <see cref="FileInfo"/> で表されるファイルのハッシュ/チェックサム。</returns>
       public string GetHash(HashType hashType)
       {
          return File.GetHashCore(Transaction, LongFullName, hashType, PathFormat.LongFullPath);

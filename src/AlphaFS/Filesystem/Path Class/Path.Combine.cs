@@ -26,11 +26,11 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>Combines an array of strings into a path.</summary>
-      /// <returns>The combined paths.</returns>
+      /// <summary>文字列の配列を1つのパスに結合します。</summary>
+      /// <returns>結合されたパス。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="paths">An array of parts of the path.</param>
+      /// <param name="paths">パスの構成部分の配列。</param>
       [SecurityCritical]
       public static string Combine(params string[] paths)
       {

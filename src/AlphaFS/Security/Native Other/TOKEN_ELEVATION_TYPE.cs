@@ -23,17 +23,17 @@ namespace Alphaleonis.Win32.Security
 {
    internal static partial class NativeMethods
    {
-      /// <summary>The TOKEN_ELEVATION_TYPE enumeration indicates the elevation type of token being queried by the GetTokenInformation function.</summary>
+      /// <summary>TOKEN_ELEVATION_TYPE列挙型は、GetTokenInformation関数によって照会されるトークンの昇格タイプを示します。</summary>
       /// <remarks>
-      /// <para>Minimum supported client: Windows Vista [desktop apps only]</para>
-      /// <para>Minimum supported server: Windows Server 2008 [desktop apps only]</para>
+      /// <para>サポートされる最小クライアント: Windows Vista [デスクトップアプリのみ]</para>
+      /// <para>サポートされる最小サーバー: Windows Server 2008 [デスクトップアプリのみ]</para>
       /// </remarks>
       internal enum TOKEN_ELEVATION_TYPE
       {
          ///// <summary>The token does not have a linked token: UAC is disabled or the process is started by a standard User (not a member of the Administrators group).</summary>
          //TokenElevationTypeDefault = 1,
 
-         /// <summary>The token is an elevated token: UAC is enabled and User is elevated.</summary>
+         /// <summary>トークンは昇格されたトークンです: UACが有効でユーザーが昇格されています。</summary>
          TokenElevationTypeFull = 2,
 
          ///// <summary>The token is a limited token: UAC is enabled but User is not elevated.</summary>

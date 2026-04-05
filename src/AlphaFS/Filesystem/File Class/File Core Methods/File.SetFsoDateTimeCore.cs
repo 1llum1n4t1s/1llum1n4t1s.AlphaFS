@@ -29,18 +29,18 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>Sets the date and time, in coordinated universal time (UTC), that the file or directory was created and/or last accessed and/or written to.</summary>
+      /// <summary>ファイルまたはディレクトリが作成された日時、および/または最終アクセス日時、および/または最終書き込み日時を協定世界時(UTC)で設定します。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="NotSupportedException"/>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="isFolder">Specifies that <paramref name="path"/> is a file or directory.</param>
-      /// <param name="path">The file or directory for which to set the date and time information.</param>
-      /// <param name="creationTimeUtc">A <see cref="DateTime"/> containing the value to set for the creation date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastAccessTimeUtc">A <see cref="DateTime"/> containing the value to set for the last access date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the file or directory linked to. No effect if <paramref name="path"/> does not refer to a reparse point.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="isFolder"><paramref name="path"/>がファイルかディレクトリかを指定します。</param>
+      /// <param name="path">日時情報を設定するファイルまたはディレクトリ。</param>
+      /// <param name="creationTimeUtc"><paramref name="path"/>の作成日時に設定する値を含む<see cref="DateTime"/>。この値はUTC時刻で表されます。</param>
+      /// <param name="lastAccessTimeUtc"><paramref name="path"/>の最終アクセス日時に設定する値を含む<see cref="DateTime"/>。この値はUTC時刻で表されます。</param>
+      /// <param name="lastWriteTimeUtc"><paramref name="path"/>の最終書き込み日時に設定する値を含む<see cref="DateTime"/>。この値はUTC時刻で表されます。</param>
+      /// <param name="modifyReparsePoint"><c>true</c>の場合、日時情報はリパースポイント(シンボリックリンクまたはジャンクション)に適用され、リンク先のファイルまたはディレクトリには適用されません。<paramref name="path"/>がリパースポイントを参照していない場合は効果がありません。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       internal static void SetFsoDateTimeCore(KernelTransaction transaction, bool isFolder, string path, DateTime? creationTimeUtc, DateTime? lastAccessTimeUtc, DateTime? lastWriteTimeUtc, bool modifyReparsePoint, PathFormat pathFormat)
       {
@@ -75,7 +75,7 @@ namespace Alphaleonis.Win32.Filesystem
 
          var lastError = Marshal.GetLastWin32Error();
             
-         // Reset file system object attributes.
+         // ファイルシステムオブジェクトの属性をリセットする。
 
          if (success)
          {

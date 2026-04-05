@@ -24,26 +24,26 @@ using System.Security;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>Provides a concrete implementation of SafeHandle supporting transactions.</summary>
+   /// <summary>トランザクションをサポートするSafeHandleの具象実装を提供します。</summary>
    internal class SafeKernelTransactionHandle : SafeHandleMinusOneIsInvalid
    {
-      /// <summary>Initializes a new instance of the <see cref="SafeKernelTransactionHandle"/> class.</summary>
+      /// <summary><see cref="SafeKernelTransactionHandle"/>クラスの新しいインスタンスを初期化します。</summary>
       public SafeKernelTransactionHandle() : base(true)
       {
       }
 
-      /// <summary>Initializes a new instance of the <see cref="SafeKernelTransactionHandle"/> class with an existing handle value.</summary>
-      /// <param name="existingHandle">The pre-existing handle value to wrap.</param>
+      /// <summary>既存のハンドル値で<see cref="SafeKernelTransactionHandle"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="existingHandle">ラップする既存のハンドル値。</param>
       internal SafeKernelTransactionHandle(nint existingHandle) : base(true)
       {
          SetHandle(existingHandle);
       }
 
 
-      /// <summary>When overridden in a derived class, executes the code required to free the handle.</summary>
+      /// <summary>派生クラスでオーバーライドされた場合、ハンドルを解放するために必要なコードを実行します。</summary>
       /// <returns>
-      /// <c>true</c> if the handle is released successfully; otherwise, in the event of a catastrophic failure,
-      /// <c>false</c>. In this case, it generates a ReleaseHandleFailed Managed Debugging Assistant.
+      /// ハンドルが正常に解放された場合は<c>true</c>、致命的な障害が発生した場合は
+      /// <c>false</c>。この場合、ReleaseHandleFailed マネージデバッグアシスタントが生成されます。
       /// </returns>
       [SecurityCritical]
       protected override bool ReleaseHandle()

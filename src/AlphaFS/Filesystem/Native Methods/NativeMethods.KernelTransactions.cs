@@ -28,34 +28,33 @@ namespace Alphaleonis.Win32.Filesystem
    internal static partial class NativeMethods
    {
       /// <summary>
-      ///   Creates a new transaction object.
+      ///   新しいトランザクションオブジェクトを作成します。
       /// </summary>
       /// <remarks>
-      ///   <para>Use the <see cref="CloseHandle"/> function to close the transaction handle. If the last transaction handle is closed
-      ///   beforea client calls the CommitTransaction function with the transaction handle, then KTM rolls back the transaction.</para>
-      ///   <para>Minimum supported client: Windows Vista</para>
-      ///   <para>Minimum supported server:Windows Server 2008</para>
+      ///   <para>トランザクションハンドルを閉じるには <see cref="CloseHandle"/> 関数を使用します。クライアントがトランザクションハンドルで
+      ///   CommitTransaction 関数を呼び出す前に最後のトランザクションハンドルが閉じられると、KTM はトランザクションをロールバックします。</para>
+      ///   <para>サポートされる最小クライアント: Windows Vista</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2008</para>
       /// </remarks>
       /// <returns>
-      ///   <para>If the function succeeds, the return value is a handle to the transaction.</para>
-      ///   <para>If the function fails, the return value is INVALID_HANDLE_VALUE. To get extended error information, call the GetLastError
-      ///   function.</para>
+      ///   <para>関数が成功した場合、戻り値はトランザクションへのハンドルです。</para>
+      ///   <para>関数が失敗した場合、戻り値は INVALID_HANDLE_VALUE です。拡張エラー情報を取得するには GetLastError 関数を呼び出してください。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("ktmw32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
       internal static extern SafeKernelTransactionHandle CreateTransaction([MarshalAs(UnmanagedType.LPStruct)] Security.NativeMethods.SecurityAttributes lpTransactionAttributes, IntPtr uow, [MarshalAs(UnmanagedType.U4)] uint createOptions, [MarshalAs(UnmanagedType.U4)] uint isolationLevel, [MarshalAs(UnmanagedType.U4)] uint isolationFlags, [MarshalAs(UnmanagedType.U4)] int timeout, [MarshalAs(UnmanagedType.LPWStr)] string description);
 
-      /// <summary>Requests that the specified transaction be committed.</summary>
+      /// <summary>指定されたトランザクションのコミットを要求します。</summary>
       /// <remarks>
-      ///   <para>You can commit any transaction handle that has been opened or created using the TRANSACTION_COMMIT permission; any
-      ///   application can commit a transaction, not just the creator.</para>
-      ///   <para>This function can only be called if the transaction is still active, not prepared, pre-prepared, or rolled back.</para>
-      ///   <para>Minimum supported client: Windows Vista</para>
-      ///   <para>Minimum supported server:Windows Server 2008</para>
+      ///   <para>TRANSACTION_COMMIT 権限で開かれたまたは作成された任意のトランザクションハンドルをコミットできます。
+      ///   作成者だけでなく、任意のアプリケーションがトランザクションをコミットできます。</para>
+      ///   <para>この関数は、トランザクションがまだアクティブで、準備済み、事前準備済み、またはロールバック済みでない場合にのみ呼び出すことができます。</para>
+      ///   <para>サポートされる最小クライアント: Windows Vista</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2008</para>
       /// </remarks>
       /// <returns>
-      ///   <para>If the function succeeds, the return value is nonzero.</para>
-      ///   <para>If the function fails, the return value is 0 (zero). To get extended error information, call the GetLastError function.</para>
+      ///   <para>関数が成功した場合、戻り値はゼロ以外です。</para>
+      ///   <para>関数が失敗した場合、戻り値は 0 (ゼロ) です。拡張エラー情報を取得するには GetLastError 関数を呼び出してください。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("ktmw32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
@@ -63,11 +62,11 @@ namespace Alphaleonis.Win32.Filesystem
       internal static extern bool CommitTransaction(SafeHandle hTrans);
 
       /// <summary>
-      ///   Requests that the specified transaction be rolled back. This function is synchronous.      
+      ///   指定されたトランザクションのロールバックを要求します。この関数は同期的です。
       /// </summary>
       /// <returns>
-      ///   <para>If the function succeeds, the return value is nonzero.</para>
-      ///   <para>If the function fails, the return value is zero. To get extended error information, call the GetLastError function. </para>
+      ///   <para>関数が成功した場合、戻り値はゼロ以外です。</para>
+      ///   <para>関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError 関数を呼び出してください。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("ktmw32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]

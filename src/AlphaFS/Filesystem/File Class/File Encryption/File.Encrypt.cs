@@ -26,13 +26,13 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>Encrypts a file so that only the account used to encrypt the file can decrypt it.</summary>
+      /// <summary>ファイルを暗号化し、暗号化に使用したアカウントのみが復号化できるようにします。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryReadOnlyException"/>
       /// <exception cref="FileReadOnlyException"/>
       /// <exception cref="NotSupportedException"/>
-      /// <param name="path">A path that describes a file to encrypt.</param>
+      /// <param name="path">暗号化するファイルを示すパス。</param>
       [SecurityCritical]
       public static void Encrypt(string path)
       {
@@ -40,14 +40,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Encrypts a file so that only the account used to encrypt the file can decrypt it.</summary>
+      /// <summary>[AlphaFS] ファイルを暗号化し、暗号化に使用したアカウントのみが復号化できるようにします。</summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryReadOnlyException"/>
       /// <exception cref="FileReadOnlyException"/>
       /// <exception cref="NotSupportedException"/>
-      /// <param name="path">A path that describes a file to encrypt.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>      
+      /// <param name="path">暗号化するファイルを示すパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>      
       [SecurityCritical]
       public static void Encrypt(string path, PathFormat pathFormat)
       {

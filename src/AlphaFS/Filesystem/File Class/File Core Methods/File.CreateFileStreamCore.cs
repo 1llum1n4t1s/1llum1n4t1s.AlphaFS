@@ -30,17 +30,17 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>Creates or overwrites a file in the specified path.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The name of the file.</param>
+      /// <summary>指定されたパスにファイルを作成するか、上書きします。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルの名前。</param>
       /// <param name="attributes">The <see cref="ExtendedFileAttributes"/> additional advanced options to create a file.</param>
-      /// <param name="fileSecurity">A <see cref="FileSecurity"/> instance that determines the access control and audit security for the file.</param>
+      /// <param name="fileSecurity">A <see cref="FileSecurity"/> instance that determines the access control and audit security for 閉じます。</param>
       /// <param name="mode">The <see cref="FileMode"/> option gives you more precise control over how you want to create a file.</param>
       /// <param name="access">The <see cref="FileAccess"/> allow you additionally specify to default read/write capability - just write, bypassing any cache.</param>
       /// <param name="share">The <see cref="FileShare"/> option controls how you would like to share created file with other requesters.</param>
-      ///  <param name="pathFormat">Indicates the format of the <paramref name="path"/> parameter.</param>
-      /// <param name="bufferSize">The number of bytes buffered for reads and writes to the file.</param>
-      /// <returns>A <see cref="FileStream"/> that provides read/write access to the file specified in path.</returns>      
+      ///  <param name="pathFormat"><paramref name="path"/>パラメータの形式を示します。</param>
+      /// <param name="bufferSize">ファイルの読み取りと書き込みのためにバッファリングされるバイト数。</param>
+      /// <returns>pathで指定されたファイルへの読み取り/書き込みアクセスを提供する<see cref="FileStream"/>。</returns>      
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "False positive")]
       [SecurityCritical]
       internal static FileStream CreateFileStreamCore(KernelTransaction transaction, string path, ExtendedFileAttributes attributes, FileSecurity fileSecurity, FileMode mode, FileAccess access, FileShare share, int bufferSize, PathFormat pathFormat)

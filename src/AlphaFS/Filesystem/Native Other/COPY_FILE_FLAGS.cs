@@ -23,34 +23,34 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Flags that specify how a file or directory is to be copied.</summary>
+      /// <summary>ファイルまたはディレクトリのコピー方法を指定するフラグ。</summary>
       internal enum COPY_FILE_FLAGS
       {
-         /// <summary>The copy operation fails immediately if the target file already exists.</summary>
+         /// <summary>対象ファイルが既に存在する場合、コピー操作は直ちに失敗します。</summary>
          COPY_FILE_FAIL_IF_EXISTS = 1,
 
 
          /// <summary>
-         ///   Progress of the copy is tracked in the target file in case the copy fails. The failed copy can be restarted at a later time by specifying the same values
-         ///   forexisting file name and new file name as those used in the call that failed. This can significantly slow down the copy operation as the new file may be
-         ///   flushed multiple times during the copy operation.
+         ///   コピーが失敗した場合に備えて、コピーの進行状況がターゲットファイルで追跡されます。失敗したコピーは、
+         ///   失敗した呼び出しで使用したのと同じ既存のファイル名と新しいファイル名を指定することで、後で再開できます。
+         ///   コピー操作中に新しいファイルが複数回フラッシュされる可能性があるため、コピー操作が大幅に遅くなる場合があります。
          /// </summary>
          COPY_FILE_RESTARTABLE = 2,
 
 
-         /// <summary>The file is copied and the original file is opened for write access.</summary>
+         /// <summary>ファイルがコピーされ、元のファイルが書き込みアクセス用に開かれます。</summary>
          COPY_FILE_OPEN_SOURCE_FOR_WRITE = 4,
 
 
-         /// <summary>An attempt to copy an encrypted file will succeed even if the destination copy cannot be encrypted.</summary>
+         /// <summary>暗号化されたファイルのコピーは、コピー先で暗号化できない場合でも成功します。</summary>
          COPY_FILE_ALLOW_DECRYPTED_DESTINATION = 8,
 
 
-         /// <summary>If the source file is a symbolic link, the destination file is also a symbolic link pointing to the same file that the source symbolic link is pointing to.</summary>
+         /// <summary>ソースファイルがシンボリックリンクの場合、コピー先ファイルもソースのシンボリックリンクが指しているのと同じファイルを指すシンボリックリンクになります。</summary>
          COPY_FILE_COPY_SYMLINK = 2048,
 
 
-         /// <summary>The copy operation is performed using unbuffered I/O, bypassing system I/O cache resources. Recommended for very large file transfers.</summary>
+         /// <summary>コピー操作はバッファーなし I/O を使用して実行され、システム I/O キャッシュリソースをバイパスします。非常に大きなファイル転送に推奨されます。</summary>
          COPY_FILE_NO_BUFFERING = 4096
       }
    }

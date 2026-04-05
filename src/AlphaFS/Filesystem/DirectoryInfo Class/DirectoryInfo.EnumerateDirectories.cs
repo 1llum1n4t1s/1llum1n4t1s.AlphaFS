@@ -30,8 +30,8 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Returns an enumerable collection of directory information in the current directory.</summary>
-      /// <returns>An enumerable collection of directories in the current directory.</returns>
+      /// <summary>現在のディレクトリ内のディレクトリ情報の列挙可能なコレクションを返します。</summary>
+      /// <returns>現在のディレクトリ内のディレクトリの列挙可能なコレクション。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -45,8 +45,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Returns an enumerable collection of directory information that matches a specified search pattern.</summary>
-      /// <returns>An enumerable collection of directories that matches <paramref name="searchPattern"/>.</returns>
+      /// <summary>指定された検索パターンに一致するディレクトリ情報の列挙可能なコレクションを返します。</summary>
+      /// <returns><paramref name="searchPattern"/> に一致するディレクトリの列挙可能なコレクション。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -54,9 +54,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in path.
-      ///   This parameter can contain a combination of valid literal path and wildcard
-      ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
+      ///   パス内のディレクトリ名と照合する検索文字列。
+      ///   このパラメーターには、有効なリテラルパスとワイルドカード
+      ///   （<see cref="Path.WildcardStarMatchAll"/> および <see cref="Path.WildcardQuestion"/>）文字の組み合わせを含めることができますが、正規表現はサポートされません。
       /// </param>
       [SecurityCritical]
       public IEnumerable<DirectoryInfo> EnumerateDirectories(string searchPattern)
@@ -65,8 +65,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Returns an enumerable collection of directory information that matches a specified search pattern and search subdirectory option.</summary>
-      /// <returns>An enumerable collection of directories that matches <paramref name="searchPattern"/> and <paramref name="searchOption"/>.</returns>
+      /// <summary>指定された検索パターンおよびサブディレクトリ検索オプションに一致するディレクトリ情報の列挙可能なコレクションを返します。</summary>
+      /// <returns><paramref name="searchPattern"/> および <paramref name="searchOption"/> に一致するディレクトリの列挙可能なコレクション。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -74,13 +74,13 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in path.
-      ///   This parameter can contain a combination of valid literal path and wildcard
-      ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
+      ///   パス内のディレクトリ名と照合する検索文字列。
+      ///   このパラメーターには、有効なリテラルパスとワイルドカード
+      ///   （<see cref="Path.WildcardStarMatchAll"/> および <see cref="Path.WildcardQuestion"/>）文字の組み合わせを含めることができますが、正規表現はサポートされません。
       /// </param>
       /// <param name="searchOption">
-      ///   One of the <see cref="SearchOption"/> enumeration values that specifies whether the <paramref name="searchOption"/>
-      ///   should include only the current directory or should include all subdirectories.
+      ///   <paramref name="searchOption"/> が現在のディレクトリのみを含むか、すべてのサブディレクトリを含むかを指定する
+      ///   <see cref="SearchOption"/> 列挙値の 1 つ。
       /// </param>
       [SecurityCritical]
       public IEnumerable<DirectoryInfo> EnumerateDirectories(string searchPattern, SearchOption searchOption)
@@ -91,15 +91,15 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
       
-      /// <summary>[AlphaFS] Returns an enumerable collection of directory information in the current directory.</summary>
-      /// <returns>An enumerable collection of directories in the current directory.</returns>
+      /// <summary>[AlphaFS] 現在のディレクトリ内のディレクトリ情報の列挙可能なコレクションを返します。</summary>
+      /// <returns>現在のディレクトリ内のディレクトリの列挙可能なコレクション。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
       [SecurityCritical]
       public IEnumerable<DirectoryInfo> EnumerateDirectories(DirectoryEnumerationOptions options)
       {
@@ -107,8 +107,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Returns an enumerable collection of directory information that matches a specified search pattern.</summary>
-      /// <returns>An enumerable collection of directories that matches <paramref name="searchPattern"/>.</returns>
+      /// <summary>[AlphaFS] 指定された検索パターンに一致するディレクトリ情報の列挙可能なコレクションを返します。</summary>
+      /// <returns><paramref name="searchPattern"/> に一致するディレクトリの列挙可能なコレクション。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -116,11 +116,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in path.
-      ///   This parameter can contain a combination of valid literal path and wildcard
-      ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
+      ///   パス内のディレクトリ名と照合する検索文字列。
+      ///   このパラメーターには、有効なリテラルパスとワイルドカード
+      ///   （<see cref="Path.WildcardStarMatchAll"/> および <see cref="Path.WildcardQuestion"/>）文字の組み合わせを含めることができますが、正規表現はサポートされません。
       /// </param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
       [SecurityCritical]
       public IEnumerable<DirectoryInfo> EnumerateDirectories(string searchPattern, DirectoryEnumerationOptions options)
       {

@@ -25,15 +25,15 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Controls whether the system will handle the specified types of serious errors or whether the process will handle them.</summary>
-      /// <remarks>Minimum supported client: Windows 2000 Professional</remarks>
-      /// <remarks>Minimum supported server: Windows 2000 Server</remarks>      
+      /// <summary>システムが指定された種類の重大なエラーを処理するか、プロセスが処理するかを制御します。</summary>
+      /// <remarks>サポートされる最小クライアント: Windows 2000 Professional</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows 2000 Server</remarks>
       public sealed class ChangeErrorMode : IDisposable
       {
          private readonly ErrorMode _oldMode;
 
-         /// <summary>ChangeErrorMode is for the Win32 SetThreadErrorMode() method, used to suppress possible pop-ups.</summary>
-         /// <param name="mode">One of the <see cref="ErrorMode"/> values.</param>
+         /// <summary>Win32 SetThreadErrorMode() メソッド用の ChangeErrorMode。ポップアップの抑制に使用されます。</summary>
+         /// <param name="mode"><see cref="ErrorMode"/> 値のいずれか。</param>
          public ChangeErrorMode(ErrorMode mode)
          {
             if (IsAtLeastWindows7)

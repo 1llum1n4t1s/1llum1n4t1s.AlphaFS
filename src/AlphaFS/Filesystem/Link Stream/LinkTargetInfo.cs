@@ -21,7 +21,7 @@
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>Information about the target of a symbolic link or mount point.</summary>
+   /// <summary>シンボリックリンクまたはマウントポイントのターゲットに関する情報を表します。</summary>
    public class LinkTargetInfo
    {
       internal LinkTargetInfo(string substituteName, string printName)
@@ -32,11 +32,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
       
-      /// <summary>The print name.</summary>
+      /// <summary>表示名を取得します。</summary>
       public string PrintName { get; private set; }
 
 
-      /// <summary>The substitute name.</summary>
+      /// <summary>代替名を取得します。</summary>
       public string SubstituteName { get; private set; }
    }
 }

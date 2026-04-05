@@ -29,13 +29,13 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Returns the file name and extension of the specified path string.</summary>
+      /// <summary>指定されたパス文字列のファイル名と拡張子を返します。</summary>
       /// <returns>
-      ///   The characters after the last directory character in <paramref name="path"/>. If the last character of <paramref name="path"/> is a
-      ///   directory or volume separator character, this method returns <c>string.Empty</c>. If path is null, this method returns null.
+      ///   <paramref name="path"/> 内の最後のディレクトリ区切り文字の後の文字。<paramref name="path"/> の最後の文字が
+      ///   ディレクトリ区切り文字またはボリューム区切り文字の場合、このメソッドは <c>string.Empty</c> を返します。path が null の場合、このメソッドは null を返します。
       /// </returns>
       /// <exception cref="ArgumentException"/>
-      /// <param name="path">The path string from which to obtain the file name and extension. The path cannot contain any of the characters defined in <see cref="GetInvalidPathChars"/>.</param>
+      /// <param name="path">ファイル名と拡張子を取得するパス文字列。パスには <see cref="GetInvalidPathChars"/> で定義されている文字を含めることはできません。</param>
       [SecurityCritical]
       public static string GetFileName(string path)
       {
@@ -45,14 +45,14 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Returns the file name and extension of the specified path string.</summary>
+      /// <summary>[AlphaFS] 指定されたパス文字列のファイル名と拡張子を返します。</summary>
       /// <returns>
-      ///   The characters after the last directory character in <paramref name="path"/>. If the last character of <paramref name="path"/> is a
-      ///   directory or volume separator character, this method returns <c>string.Empty</c>. If path is null, this method returns null.
+      ///   <paramref name="path"/> 内の最後のディレクトリ区切り文字の後の文字。<paramref name="path"/> の最後の文字が
+      ///   ディレクトリ区切り文字またはボリューム区切り文字の場合、このメソッドは <c>string.Empty</c> を返します。path が null の場合、このメソッドは null を返します。
       /// </returns>
       /// <exception cref="ArgumentException"/>
-      /// <param name="path">The path string from which to obtain the file name and extension.</param>
-      /// <param name="checkInvalidPathChars"><c>true</c> will check <paramref name="path"/> for invalid path characters.</param>
+      /// <param name="path">ファイル名と拡張子を取得するパス文字列。</param>
+      /// <param name="checkInvalidPathChars"><c>true</c> の場合、<paramref name="path"/> の無効なパス文字をチェックします。</param>
       [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "Utils.IsNullOrWhiteSpace validates arguments.")]
       public static string GetFileName(string path, bool checkInvalidPathChars)
       {

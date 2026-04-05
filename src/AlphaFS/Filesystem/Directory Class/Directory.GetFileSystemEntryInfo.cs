@@ -27,7 +27,7 @@ namespace Alphaleonis.Win32.Filesystem
    {
       /// <summary>[AlphaFS] Gets the <see cref="FileSystemEntryInfo"/> of the directory on the path.</summary>
       /// <returns>The <see cref="FileSystemEntryInfo"/> instance of the directory.</returns>
-      /// <param name="path">The path to the directory.</param>
+      /// <param name="path">ディレクトリへのパス。</param>
       [SecurityCritical]
       public static FileSystemEntryInfo GetFileSystemEntryInfo(string path)
       {
@@ -37,8 +37,8 @@ namespace Alphaleonis.Win32.Filesystem
 
       /// <summary>[AlphaFS] Gets the <see cref="FileSystemEntryInfo"/> of the directory on the path.</summary>
       /// <returns>The <see cref="FileSystemEntryInfo"/> instance of the directory.</returns>
-      /// <param name="path">The path to the directory.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="path">ディレクトリへのパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static FileSystemEntryInfo GetFileSystemEntryInfo(string path, PathFormat pathFormat)
       {
@@ -48,10 +48,10 @@ namespace Alphaleonis.Win32.Filesystem
 
       /// <summary>[AlphaFS] Gets the <see cref="FileSystemEntryInfo"/> of the directory on the path.</summary>
       /// <returns>The <see cref="FileSystemEntryInfo"/> instance of the directory.</returns>
-      /// <param name="path">The path to the directory.</param>
+      /// <param name="path">ディレクトリへのパス。</param>
       /// <param name="continueOnException">
       ///    <para><c>true</c> suppress any Exception that might be thrown as a result from a failure,</para>
-      ///    <para>such as ACLs protected directories or non-accessible reparse points.</para>
+      ///    <para>ACLで保護されたディレクトリやアクセス不可なリパースポイントなど。</para>
       /// </param>
       [SecurityCritical]
       public static FileSystemEntryInfo GetFileSystemEntryInfo(string path, bool continueOnException)
@@ -62,11 +62,11 @@ namespace Alphaleonis.Win32.Filesystem
 
       /// <summary>[AlphaFS] Gets the <see cref="FileSystemEntryInfo"/> of the directory on the path.</summary>
       /// <returns>The <see cref="FileSystemEntryInfo"/> instance of the directory.</returns>
-      /// <param name="path">The path to the directory.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="path">ディレクトリへのパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <param name="continueOnException">
       ///    <para><c>true</c> suppress any Exception that might be thrown as a result from a failure,</para>
-      ///    <para>such as ACLs protected directories or non-accessible reparse points.</para>
+      ///    <para>ACLで保護されたディレクトリやアクセス不可なリパースポイントなど。</para>
       /// </param>
       [SecurityCritical]
       public static FileSystemEntryInfo GetFileSystemEntryInfo(string path, bool continueOnException, PathFormat pathFormat)

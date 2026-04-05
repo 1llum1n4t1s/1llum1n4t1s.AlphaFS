@@ -31,16 +31,16 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Returns an array of strongly typed <see cref="FileSystemInfo"/> entries representing all the files and subdirectories in a directory.</summary>
-      /// <returns>An array of strongly typed <see cref="FileSystemInfo"/> entries.</returns>
+      /// <summary>ディレクトリ内のすべてのファイルとサブディレクトリを表す、厳密に型指定された <see cref="FileSystemInfo"/> エントリの配列を返します。</summary>
+      /// <returns>厳密に型指定された <see cref="FileSystemInfo"/> エントリの配列。</returns>
       /// <remarks>
-      /// For subdirectories, the <see cref="FileSystemInfo"/> objects returned by this method can be cast to the derived class <see cref="DirectoryInfo"/>.
-      /// Use the <see cref="FileAttributes"/> value returned by the <see cref="FileSystemInfo.Attributes"/> property to determine whether the <see cref="FileSystemInfo"/> represents a file or a directory.
+      /// サブディレクトリの場合、このメソッドによって返される <see cref="FileSystemInfo"/> オブジェクトは、派生クラス <see cref="DirectoryInfo"/> にキャストできます。
+      /// <see cref="FileSystemInfo.Attributes"/> プロパティによって返される <see cref="FileAttributes"/> 値を使用して、<see cref="FileSystemInfo"/> がファイルかディレクトリかを判断します。
       /// </remarks>
       /// <remarks>
-      /// If there are no files or directories in the DirectoryInfo, this method returns an empty array. This method is not recursive.
-      /// For subdirectories, the FileSystemInfo objects returned by this method can be cast to the derived class DirectoryInfo.
-      /// Use the FileAttributes value returned by the Attributes property to determine whether the FileSystemInfo represents a file or a directory.
+      /// DirectoryInfo にファイルもディレクトリもない場合、このメソッドは空の配列を返します。このメソッドは再帰的ではありません。
+      /// サブディレクトリの場合、このメソッドによって返される FileSystemInfo オブジェクトは、派生クラス DirectoryInfo にキャストできます。
+      /// Attributes プロパテ���によって返される FileAttributes 値を使用して、FileSystemInfo がファイルかディレクトリかを判断します。
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -56,21 +56,21 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Retrieves an array of strongly typed <see cref="FileSystemInfo"/> objects representing the files and subdirectories that match the specified search criteria.</summary>
+      /// <summary>指定された検索条件に一致するファイルおよびサブディレクトリを表す、厳密に型指定された <see cref="FileSystemInfo"/> オブジェクトの配列を取得します。</summary>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in path.
-      ///   This parameter can contain a combination of valid literal path and wildcard
-      ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
+      ///   パス内のディレクトリ名と照合する検索文字列。
+      ///   このパラメーターには、有効なリテラルパスとワイルドカード
+      ///   （<see cref="Path.WildcardStarMatchAll"/> および <see cref="Path.WildcardQuestion"/>）文字の組み合わせを含めることができますが、正規表現はサポートされません。
       /// </param>
-      /// <returns>An array of strongly typed <see cref="FileSystemInfo"/> entries.</returns>
+      /// <returns>厳密に型指定された <see cref="FileSystemInfo"/> エントリの配列。</returns>
       /// <remarks>
-      /// For subdirectories, the <see cref="FileSystemInfo"/> objects returned by this method can be cast to the derived class <see cref="DirectoryInfo"/>.
-      /// Use the <see cref="FileAttributes"/> value returned by the <see cref="FileSystemInfo.Attributes"/> property to determine whether the <see cref="FileSystemInfo"/> represents a file or a directory.
+      /// サブディレクトリの場合、このメソッドによって返される <see cref="FileSystemInfo"/> オブジェクトは、派生クラス <see cref="DirectoryInfo"/> にキャストできます。
+      /// <see cref="FileSystemInfo.Attributes"/> プロパティによって返される <see cref="FileAttributes"/> 値を使用して、<see cref="FileSystemInfo"/> がファイルかディレクトリかを判断します。
       /// </remarks>
       /// <remarks>
-      /// If there are no files or directories in the DirectoryInfo, this method returns an empty array. This method is not recursive.
-      /// For subdirectories, the FileSystemInfo objects returned by this method can be cast to the derived class DirectoryInfo.
-      /// Use the FileAttributes value returned by the Attributes property to determine whether the FileSystemInfo represents a file or a directory.
+      /// DirectoryInfo にファイルもディレクトリもない場合、このメソッドは空の配列を返します。このメソッドは再帰的ではありません。
+      /// サブディレクトリの場合、このメソッドによって返される FileSystemInfo オブジェクトは、派生クラス DirectoryInfo にキャストできます。
+      /// Attributes プロパティによって返される FileAttributes 値を使用して、FileSystemInfo がファイルかディレクトリかを判断します。
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -86,25 +86,25 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Retrieves an array of strongly typed <see cref="FileSystemInfo"/> objects representing the files and subdirectories that match the specified search criteria.</summary>
+      /// <summary>指定された検索条件に一致するファイルおよびサブディレクトリを表す、厳密に型指定された <see cref="FileSystemInfo"/> オブジェクトの配列を取得します。</summary>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in path.
-      ///   This parameter can contain a combination of valid literal path and wildcard
-      ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
+      ///   パス内のディレクトリ名と照合する検索文字列。
+      ///   このパラメーターには、有効なリテラルパスとワイルドカード
+      ///   （<see cref="Path.WildcardStarMatchAll"/> および <see cref="Path.WildcardQuestion"/>）文字の組み合わせを含めることができますが、正規表現はサポートされません。
       /// </param>
       /// <param name="searchOption">
-      ///   One of the <see cref="SearchOption"/> enumeration values that specifies whether the <paramref name="searchOption"/>
-      ///   should include only the current directory or should include all subdirectories.
+      ///   <paramref name="searchOption"/> が現在のディレクトリのみを含むか、すべてのサブディレクトリを含むかを指定する
+      ///   <see cref="SearchOption"/> 列挙値の 1 つ。
       /// </param>
-      /// <returns>An array of strongly typed <see cref="FileSystemInfo"/> entries.</returns>
+      /// <returns>厳密に型指定された <see cref="FileSystemInfo"/> エントリの配列。</returns>
       /// <remarks>
-      /// For subdirectories, the <see cref="FileSystemInfo"/> objects returned by this method can be cast to the derived class <see cref="DirectoryInfo"/>.
-      /// Use the <see cref="FileAttributes"/> value returned by the <see cref="FileSystemInfo.Attributes"/> property to determine whether the <see cref="FileSystemInfo"/> represents a file or a directory.
+      /// サブディレクトリの場合、このメソッドによって返される <see cref="FileSystemInfo"/> オブジェクトは、派生クラス <see cref="DirectoryInfo"/> にキャストできます。
+      /// <see cref="FileSystemInfo.Attributes"/> プロパティによって返される <see cref="FileAttributes"/> 値を使用して、<see cref="FileSystemInfo"/> がファイルかディレクトリかを判断します。
       /// </remarks>
       /// <remarks>
-      /// If there are no files or directories in the DirectoryInfo, this method returns an empty array. This method is not recursive.
-      /// For subdirectories, the FileSystemInfo objects returned by this method can be cast to the derived class DirectoryInfo.
-      /// Use the FileAttributes value returned by the Attributes property to determine whether the FileSystemInfo represents a file or a directory.
+      /// DirectoryInfo にファイルもディレクトリもない場合、このメソッドは空の配列を返します。このメソッドは再帰的ではありません。
+      /// サブディレクトリの場合、このメソッドによって返される FileSystemInfo オブジェクトは、派生クラス DirectoryInfo にキャストできます。
+      /// Attributes プロパティによって返される FileAttributes 値を使用して、FileSystemInfo がファイルかディレクトリかを判断します。
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>

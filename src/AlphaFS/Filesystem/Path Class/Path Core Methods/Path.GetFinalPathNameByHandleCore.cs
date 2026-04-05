@@ -32,15 +32,15 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>Retrieves the final path for the specified file, formatted as <see cref="FinalPathFormats"/>.</summary>
-      /// <returns>The final path as a string.</returns>
+      /// <summary>指定されたファイルの最終パスを <see cref="FinalPathFormats"/> 形式で取得します。</summary>
+      /// <returns>文字列としての最終パス。</returns>
       /// <remarks>
-      ///   A final path is the path that is returned when a path is fully resolved. For example, for a symbolic link named "C:\tmp\mydir" that
-      ///   points to "D:\yourdir", the final path would be "D:\yourdir". The string that is returned by this function uses the
-      ///   <see cref="LongPathPrefix"/> syntax.
+      ///   最終パスとは、パスが完全に解決された際に返されるパスです。例えば、"D:\yourdir" を指すシンボリックリンク "C:\tmp\mydir" の場合、
+      ///   最終パスは "D:\yourdir" となります。この関数が返す文字列は
+      ///   <see cref="LongPathPrefix"/> 構文を使用します。
       /// </remarks>
-      /// <param name="handle">Then handle to a <see cref="SafeFileHandle"/> instance.</param>
-      /// <param name="finalPath">The final path, formatted as <see cref="FinalPathFormats"/></param>
+      /// <param name="handle"><see cref="SafeFileHandle"/> インスタンスへのハンドル。</param>
+      /// <param name="finalPath"><see cref="FinalPathFormats"/> 形式の最終パス。</param>
       [SecurityCritical]
       internal static string GetFinalPathNameByHandleCore(SafeFileHandle handle, FinalPathFormats finalPath)
       {
@@ -67,16 +67,16 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
          
-         // Older OperatingSystem
+         // 古いオペレーティングシステム
 
-         // Obtaining a File Name From a File Handle
+         // ファイルハンドルからファイル名を取得する
          // http://msdn.microsoft.com/en-us/library/aa366789%28VS.85%29.aspx
 
-         // Be careful when using GetFileSizeEx to check the size of hFile handle of an unknown "File" type object.
-         // This is more towards returning a filename from a file handle. If the handle is a named pipe handle it seems to hang the thread.
-         // Check for: FileTypes.DiskFile
+         // 不明な "File" 型オブジェクトの hFile ハンドルのサイズを確認するために GetFileSizeEx を使用する場合は注意が必要。
+         // これはファイルハンドルからファイル名を返すことに関連している。ハンドルが名前付きパイプの場合、スレッドがハングする可能性がある。
+         // チェック対象: FileTypes.DiskFile
 
-         // Can't map a 0 byte file.
+         // 0バイトのファイルはマップできない。
          if (NativeMethods.GetFileSizeEx(handle, out var fileSizeHi) && fileSizeHi == 0)
          {
             return string.Empty;
@@ -103,11 +103,11 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
-         // Default output from GetMappedFileName(): "\Device\HarddiskVolumeX\path\filename.ext"
+         // GetMappedFileName() のデフォルト出力: "\Device\HarddiskVolumeX\path\filename.ext"
          var dosDevice = buffer.Length > 0 ? buffer.ToString() : string.Empty;
 
 
-         // Select output format.
+         // 出力形式を選択する。
          switch (finalPath)
          {
             // As-is: "\Device\HarddiskVolumeX\path\filename.ext"
@@ -149,10 +149,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Tranlates DosDevicePath, Volume GUID. For example: "\Device\HarddiskVolumeX\path\filename.ext" can translate to: "\path\filename.ext" or: "\\?\Volume{GUID}\path\filename.ext".</summary>
-      /// <returns>A translated dos path.</returns>
-      /// <param name="dosDevice">A DosDevicePath, for example: \Device\HarddiskVolumeX\path\filename.ext.</param>
-      /// <param name="deviceReplacement">Alternate path/device text, usually <c>string.Empty</c> or <c>null</c>.</param>
+      /// <summary>DosDevicePath、ボリュームGUIDを変換します。例: "\Device\HarddiskVolumeX\path\filename.ext" は "\path\filename.ext" または "\\?\Volume{GUID}\path\filename.ext" に変換できます。</summary>
+      /// <returns>変換されたDOSパス。</returns>
+      /// <param name="dosDevice">DosDevicePath。例: \Device\HarddiskVolumeX\path\filename.ext。</param>
+      /// <param name="deviceReplacement">代替パス/デバイステキスト。通常は <c>string.Empty</c> または <c>null</c>。</param>
       [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
       [SecurityCritical]
       private static string DosDeviceToDosPath(string dosDevice, string deviceReplacement)

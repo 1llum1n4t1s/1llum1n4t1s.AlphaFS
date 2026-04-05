@@ -26,32 +26,32 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Contains the basic information for a file. Used for file handles.</summary>
+      /// <summary>ファイルの基本情報を格納します。ファイルハンドルに使用されます。</summary>
       /// <remarks>
-      ///   <para>Specifying -1 for <see cref="LastAccessTime"/>, <see cref="ChangeTime"/>, or <see cref="LastWriteTime"/></para>
-      ///   <para>indicates that operations on the current handle should not affect the given field.</para>
-      ///   <para>(I.e, specifying -1 for <see cref="LastWriteTime"/> will leave the <see cref="LastWriteTime"/> unaffected by writes performed
-      ///   on the current handle.)</para>
+      ///   <para><see cref="LastAccessTime"/>、<see cref="ChangeTime"/>、または <see cref="LastWriteTime"/> に -1 を指定すると、</para>
+      ///   <para>現在のハンドルでの操作が指定されたフィールドに影響を与えないことを示します。</para>
+      ///   <para>（つまり、<see cref="LastWriteTime"/> に -1 を指定すると、現在のハンドルで実行される書き込みによって
+      ///   <see cref="LastWriteTime"/> は影響を受けません。）</para>
       /// </remarks>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct FILE_BASIC_INFO
       {
-         /// <summary>The time the file was created in <see cref="FILETIME"/> format,
-         /// <para>which is a 64-bit value representing the number of 100-nanosecond intervals since January 1, 1601 (UTC).</para>
+         /// <summary><see cref="FILETIME"/> 形式でのファイル作成日時。
+         /// <para>1601年1月1日 (UTC) からの 100 ナノ秒間隔の数を表す 64 ビット値です。</para>
          /// </summary>
          public FILETIME CreationTime;
 
-         /// <summary>The time the file was last accessed in <see cref="FILETIME"/> format.</summary>
+         /// <summary><see cref="FILETIME"/> 形式でのファイル最終アクセス日時。</summary>
          public FILETIME LastAccessTime;
 
-         /// <summary>The time the file was last written to in <see cref="FILETIME"/> format.</summary>
+         /// <summary><see cref="FILETIME"/> 形式でのファイル最終書き込み日時。</summary>
          public FILETIME LastWriteTime;
 
-         /// <summary>The time the file was changed in <see cref="FILETIME"/> format.</summary>
+         /// <summary><see cref="FILETIME"/> 形式でのファイル変更日時。</summary>
          public FILETIME ChangeTime;
 
-         /// <summary>The file attributes.</summary>
-         /// <remarks>If this is set to 0 in a <see cref="FILE_BASIC_INFO"/> structure passed to SetFileInformationByHandle then none of the attributes are changed.</remarks>
+         /// <summary>ファイル属性。</summary>
+         /// <remarks>SetFileInformationByHandle に渡される <see cref="FILE_BASIC_INFO"/> 構造体でこの値が 0 に設定されている場合、属性は変更されません。</remarks>
          public FileAttributes FileAttributes;
       }
    }

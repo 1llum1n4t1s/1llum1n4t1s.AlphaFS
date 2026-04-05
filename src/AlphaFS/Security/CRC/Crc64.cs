@@ -30,7 +30,7 @@ using System.Security.Cryptography;
 
 namespace Alphaleonis.Win32.Security
 {
-   /// <summary>Implements an ISO-3309 compliant 64-bit CRC hash algorithm.</summary>
+   /// <summary>ISO-3309準拠の64ビットCRCハッシュアルゴリズムを実装します。</summary>
    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Crc")]
    internal class Crc64 : HashAlgorithm
    {
@@ -44,15 +44,15 @@ namespace Alphaleonis.Win32.Security
       private static ulong[] s_defaultTable;
 
 
-      /// <summary>Initializes a new instance of <see cref="Crc64"/> </summary>
+      /// <summary><see cref="Crc64"/>の新しいインスタンスを初期化します。</summary>
       public Crc64() : this(Iso3309Polynomial, DefaultSeed)
       {
       }
 
 
-      /// <summary>Initializes a new instance of <see cref="Crc64"/>.</summary>
-      /// <param name="polynomial">The polynomial.</param>
-      /// <param name="seed">The seed.</param>
+      /// <summary><see cref="Crc64"/>の新しいインスタンスを初期化します。</summary>
+      /// <param name="polynomial">多項式。</param>
+      /// <param name="seed">シード値。</param>
       private Crc64(ulong polynomial, ulong seed)
       {
          m_table = InitializeTable(polynomial);
@@ -61,25 +61,25 @@ namespace Alphaleonis.Win32.Security
       }
 
 
-      /// <summary>Initializes an implementation of the <see cref="T:System.Security.Cryptography.HashAlgorithm"/> class.</summary>
+      /// <summary><see cref="T:System.Security.Cryptography.HashAlgorithm"/>クラスの実装を初期化します。</summary>
       public override void Initialize()
       {
          m_hash = m_seed;
       }
 
 
-      /// <summary>When overridden in a derived class, routes data written to the object into the hash algorithm for computing the hash.</summary>
-      /// <param name="array">The input to compute the hash code for..</param>
-      /// <param name="ibStart">The offset into the byte array from which to begin using data.</param>
-      /// <param name="cbSize">The number of bytes in the byte array to use as data.</param>
+      /// <summary>派生クラスでオーバーライドされた場合、オブジェクトに書き込まれたデータをハッシュ計算用のハッシュアルゴリズムにルーティングします。</summary>
+      /// <param name="array">ハッシュコードを計算する入力データ。</param>
+      /// <param name="ibStart">データの使用を開始するバイト配列内のオフセット。</param>
+      /// <param name="cbSize">データとして使用するバイト配列内のバイト数。</param>
       protected override void HashCore(byte[] array, int ibStart, int cbSize)
       {
          m_hash = CalculateHash(m_hash, m_table, array, ibStart, cbSize);
       }
 
 
-      /// <summary>Finalizes the hash computation after the last data is processed by the cryptographic stream object.</summary>
-      /// <returns>This method finalizes any partial computation and returns the correct hash value for the data stream.</returns>
+      /// <summary>暗号ストリームオブジェクトによって最後のデータが処理された後、ハッシュ計算を完了します。</summary>
+      /// <returns>部分的な計算を完了し、データストリームの正しいハッシュ値を返します。</returns>
       protected override byte[] HashFinal()
       {
          var hashBuffer = UInt64ToBigEndianBytes(m_hash);
@@ -87,17 +87,17 @@ namespace Alphaleonis.Win32.Security
          return hashBuffer;
       }
 
-      /// <summary>Gets the size, in bits, of the computed hash code.</summary>
-      /// <value>The size, in bits, of the computed hash code.</value>
+      /// <summary>計算されたハッシュコードのサイズをビット単位で取得します。</summary>
+      /// <value>計算されたハッシュコードのビット単位のサイズ。</value>
       public override int HashSize
       {
          get { return 64; }
       }
 
 
-      /// <summary>Initializes the table.</summary>
-      /// <returns>The table.</returns>
-      /// <param name="polynomial">The polynomial.</param>
+      /// <summary>テーブルを初期化します。</summary>
+      /// <returns>初期化されたテーブル。</returns>
+      /// <param name="polynomial">多項式。</param>
       private static ulong[] InitializeTable(ulong polynomial)
       {
          if (polynomial == Iso3309Polynomial && s_defaultTable != null)
@@ -116,9 +116,9 @@ namespace Alphaleonis.Win32.Security
       }
 
 
-      /// <summary>Creates a table.</summary>
-      /// <returns>A new array of ulong.</returns>
-      /// <param name="polynomial">The polynomial.</param>
+      /// <summary>テーブルを作成します。</summary>
+      /// <returns>新しいulongの配列。</returns>
+      /// <param name="polynomial">多項式。</param>
       private static ulong[] CreateTable(ulong polynomial)
       {
          var createTable = new ulong[256];
@@ -137,13 +137,13 @@ namespace Alphaleonis.Win32.Security
       }
 
 
-      /// <summary>Calculates the hash.</summary>
-      /// <returns>The calculated hash.</returns>
-      /// <param name="seed">The seed.</param>
-      /// <param name="table">The table.</param>
-      /// <param name="buffer">The buffer.</param>
-      /// <param name="start">The start.</param>
-      /// <param name="size">The size.</param>
+      /// <summary>ハッシュを計算します。</summary>
+      /// <returns>計算されたハッシュ値。</returns>
+      /// <param name="seed">シード値。</param>
+      /// <param name="table">CRCテーブル。</param>
+      /// <param name="buffer">入力バッファ。</param>
+      /// <param name="start">開始位置。</param>
+      /// <param name="size">サイズ。</param>
       private static ulong CalculateHash(ulong seed, ulong[] table, IList<byte> buffer, int start, int size)
       {
          var hash = seed;
@@ -158,9 +158,9 @@ namespace Alphaleonis.Win32.Security
       }
 
 
-      /// <summary>Int 64 to big endian bytes.</summary>
-      /// <returns>A byte[].</returns>
-      /// <param name="value">The value.</param>
+      /// <summary>UInt64値をビッグエンディアンのバイト配列に変換します。</summary>
+      /// <returns>バイト配列。</returns>
+      /// <param name="value">変換する値。</param>
       private static byte[] UInt64ToBigEndianBytes(ulong value)
       {
          return new byte[]

@@ -30,13 +30,13 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Returns the subdirectories of the current directory.</summary>
-      /// <returns>An array of <see cref="DirectoryInfo"/> objects.</returns>
-      /// <remarks>If there are no subdirectories, this method returns an empty array. This method is not recursive.</remarks>
+      /// <summary>現在のディレクトリのサブディレクトリを返します。</summary>
+      /// <returns><see cref="DirectoryInfo"/> オブジェクトの配列。</returns>
+      /// <remarks>サブディレクトリがない場合、このメソッドは空の配列を返します。このメソッドは再帰的ではありません。</remarks>
       /// <remarks>
-      /// The EnumerateDirectories and GetDirectories methods differ as follows: When you use EnumerateDirectories, you can start enumerating the collection of names
-      /// before the whole collection is returned; when you use GetDirectories, you must wait for the whole array of names to be returned before you can access the array.
-      /// Therefore, when you are working with many files and directories, EnumerateDirectories can be more efficient.
+      /// EnumerateDirectories メソッドと GetDirectories メソッドの違い: EnumerateDirectories を使用すると、コレクション全体が返される前に名前のコレクションの列挙を開始できます。
+      /// GetDirectories を使用する場合は、配列にアクセスする前に名前の配列全体が返されるのを待つ必要があります。
+      /// そのため、多数のファイルやディレクトリを操作する場合は、EnumerateDirectories の方が効率的です。
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -51,12 +51,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Returns an array of directories in the current <see cref="DirectoryInfo"/> matching the given search criteria.</summary>
-      /// <returns>An array of type <see cref="DirectoryInfo"/> matching <paramref name="searchPattern"/>.</returns>
+      /// <summary>指定された検索条件に一致する現在の <see cref="DirectoryInfo"/> 内のディレクトリの配列を返します。</summary>
+      /// <returns><paramref name="searchPattern"/> に一致する <see cref="DirectoryInfo"/> 型の配列。</returns>
       /// <remarks>
-      /// The EnumerateDirectories and GetDirectories methods differ as follows: When you use EnumerateDirectories, you can start enumerating the collection of names
-      /// before the whole collection is returned; when you use GetDirectories, you must wait for the whole array of names to be returned before you can access the array.
-      /// Therefore, when you are working with many files and directories, EnumerateDirectories can be more efficient.
+      /// EnumerateDirectories メソッドと GetDirectories メソッドの違い: EnumerateDirectories を使用すると、コレクション全体が返される前に名前のコレクションの列挙を開始できます。
+      /// GetDirectories を使用する場合は、配列にアクセスする前に名前の配列全体が返されるのを待つ必要があります。
+      /// そのため、多数のファイルやディレクトリを操作する場合は、EnumerateDirectories の方が効率的です。
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -65,9 +65,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in path.
-      ///   This parameter can contain a combination of valid literal path and wildcard
-      ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
+      ///   パス内のディレクトリ名と照合する検索文字列。
+      ///   このパラメーターには、有効なリテラルパスとワイルドカード
+      ///   （<see cref="Path.WildcardStarMatchAll"/> および <see cref="Path.WildcardQuestion"/>）文字の組み合わせを含めることができますが、正規表現はサポートされません。
       /// </param>
       [SecurityCritical]
       public DirectoryInfo[] GetDirectories(string searchPattern)
@@ -76,13 +76,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Returns an array of directories in the current <see cref="DirectoryInfo"/> matching the given search criteria and using a value to determine whether to search subdirectories.</summary>
-      /// <returns>An array of type <see cref="DirectoryInfo"/> matching <paramref name="searchPattern"/>.</returns>
-      /// <remarks>If there are no subdirectories, or no subdirectories match the searchPattern parameter, this method returns an empty array.</remarks>
+      /// <summary>指定された検索条件に一致し、サブディレクトリを検索するかどうかを決定する値を使用して、現在の <see cref="DirectoryInfo"/> 内のディレクトリの配列を返します。</summary>
+      /// <returns><paramref name="searchPattern"/> に一致する <see cref="DirectoryInfo"/> 型の配列。</returns>
+      /// <remarks>サブディレクトリがない場合、または searchPattern パラメーターに一致するサブディレクトリがない場合、このメソッドは空の配列を返します。</remarks>
       /// <remarks>
-      /// The EnumerateDirectories and GetDirectories methods differ as follows: When you use EnumerateDirectories, you can start enumerating the collection of names
-      /// before the whole collection is returned; when you use GetDirectories, you must wait for the whole array of names to be returned before you can access the array.
-      /// Therefore, when you are working with many files and directories, EnumerateDirectories can be more efficient.
+      /// EnumerateDirectories メソッドと GetDirectories メソッドの違い: EnumerateDirectories を使用すると、コレクション全体が返される前に名前のコレクションの列挙を開始できます。
+      /// GetDirectories を使用する場合は、配列にアクセスする前に名前の配列全体が返されるのを待つ必要があります。
+      /// そのため、多数のファイルやディレクトリを操作する場合は、EnumerateDirectories の方が効率的です。
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -91,13 +91,13 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in path.
-      ///   This parameter can contain a combination of valid literal path and wildcard
-      ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
+      ///   パス内のディレクトリ名と照合する検索文字列。
+      ///   このパラメーターには、有効なリテラルパスとワイルドカード
+      ///   （<see cref="Path.WildcardStarMatchAll"/> および <see cref="Path.WildcardQuestion"/>）文字の組み合わせを含めることができますが、正規表現はサポートされません。
       /// </param>
       /// <param name="searchOption">
-      ///   One of the <see cref="SearchOption"/> enumeration values that specifies whether the <paramref name="searchOption"/>
-      ///   should include only the current directory or should include all subdirectories.
+      ///   <paramref name="searchOption"/> が現在のディレクトリのみを含むか、すべてのサブディレクトリを含むかを指定する
+      ///   <see cref="SearchOption"/> 列挙値の 1 つ。
       /// </param>
       [SecurityCritical]
       public DirectoryInfo[] GetDirectories(string searchPattern, SearchOption searchOption)

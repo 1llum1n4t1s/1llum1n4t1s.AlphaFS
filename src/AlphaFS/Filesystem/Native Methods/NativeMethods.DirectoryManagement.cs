@@ -29,25 +29,22 @@ namespace Alphaleonis.Win32.Filesystem
    internal static partial class NativeMethods
    {
       /// <summary>
-      ///   Creates a new directory.
-      ///   <para>If the underlying file system supports security on files and directories,</para>
-      ///   <para>the function applies a specified security descriptor to the new directory.</para>
+      ///   新しいディレクトリを作成します。
+      ///   <para>基盤となるファイルシステムがファイルおよびディレクトリのセキュリティをサポートしている場合、</para>
+      ///   <para>この関数は指定されたセキュリティ記述子を新しいディレクトリに適用します。</para>
       /// </summary>
       /// <remarks>
-      ///   <para>Some file systems, such as the NTFS file system, support compression or encryption for individual files and
-      ///   directories.</para>
-      ///   <para>On volumes formatted for such a file system, a new directory inherits the compression and encryption attributes of its parent
-      ///   directory.</para>
-      ///   <para>An application can obtain a handle to a directory by calling <see cref="CreateFile"/> with the FILE_FLAG_BACKUP_SEMANTICS
-      ///   flag set.</para>
-      ///   <para>Minimum supported client: Windows XP [desktop apps | Windows Store apps]</para>
-      ///   <para>Minimum supported server: Windows Server 2003 [desktop apps | Windows Store apps]</para>
+      ///   <para>NTFS ファイルシステムなど、一部のファイルシステムは個々のファイルおよびディレクトリの圧縮または暗号化をサポートします。</para>
+      ///   <para>そのようなファイルシステムでフォーマットされたボリュームでは、新しいディレクトリは親ディレクトリの圧縮および暗号化属性を継承します。</para>
+      ///   <para>アプリケーションは FILE_FLAG_BACKUP_SEMANTICS フラグを設定して <see cref="CreateFile"/> を呼び出すことで、ディレクトリのハンドルを取得できます。</para>
+      ///   <para>サポートされる最小クライアント: Windows XP [デスクトップアプリ | Windows ストアアプリ]</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリ | Windows ストアアプリ]</para>
       /// </remarks>
-      /// <param name="lpPathName">Full pathname of the file.</param>
-      /// <param name="lpSecurityAttributes">The security attributes.</param>
+      /// <param name="lpPathName">ファイルの完全パス名。</param>
+      /// <param name="lpSecurityAttributes">セキュリティ属性。</param>
       /// <returns>
-      ///   <para>If the function succeeds, the return value is nonzero.</para>
-      ///   <para>If the function fails, the return value is zero. To get extended error information, call GetLastError.</para>
+      ///   <para>関数が成功した場合、戻り値はゼロ以外です。</para>
+      ///   <para>関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "CreateDirectoryW"), SuppressUnmanagedCodeSecurity]
@@ -55,30 +52,27 @@ namespace Alphaleonis.Win32.Filesystem
       internal static extern bool CreateDirectory([MarshalAs(UnmanagedType.LPWStr)] string lpPathName, [MarshalAs(UnmanagedType.LPStruct)] Security.NativeMethods.SecurityAttributes lpSecurityAttributes);
 
       /// <summary>
-      ///   Creates a new directory with the attributes of a specified template directory.
-      ///   <para>If the underlying file system supports security on files and directories,</para>
-      ///   <para>the function applies a specified security descriptor to the new directory.</para>
-      ///   <para>The new directory retains the other attributes of the specified template directory.</para>
+      ///   指定されたテンプレートディレクトリの属性を持つ新しいディレクトリを作成します。
+      ///   <para>基盤となるファイルシステムがファイルおよびディレクトリのセキュリティをサポートしている場合、</para>
+      ///   <para>この関数は指定されたセキュリティ記述子を新しいディレクトリに適用します。</para>
+      ///   <para>新しいディレクトリは、指定されたテンプレートディレクトリのその他の属性を保持します。</para>
       /// </summary>
       /// <remarks>
-      ///   <para>The CreateDirectoryEx function allows you to create directories that inherit stream information from other directories.</para>
-      ///   <para>This function is useful, for example, when you are using Macintosh directories, which have a resource stream</para>
-      ///   <para>that is needed to properly identify directory contents as an attribute.</para>
-      ///   <para>Some file systems, such as the NTFS file system, support compression or encryption for individual files and
-      ///   directories.</para>
-      ///   <para>On volumes formatted for such a file system, a new directory inherits the compression and encryption attributes of its parent
-      ///   directory.</para>
-      ///   <para>You can obtain a handle to a directory by calling the <see cref="CreateFile"/> function with the FILE_FLAG_BACKUP_SEMANTICS
-      ///   flag set.</para>
-      ///   <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      ///   <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      ///   <para>CreateDirectoryEx 関数を使用すると、他のディレクトリからストリーム情報を継承するディレクトリを作成できます。</para>
+      ///   <para>この関数は、例えば、ディレクトリの内容を属性として適切に識別するために必要なリソースストリームを持つ</para>
+      ///   <para>Macintosh ディレクトリを使用している場合に便利です。</para>
+      ///   <para>NTFS ファイルシステムなど、一部のファイルシステムは個々のファイルおよびディレクトリの圧縮または暗号化をサポートします。</para>
+      ///   <para>そのようなファイルシステムでフォーマットされたボリュームでは、新しいディレクトリは親ディレクトリの圧縮および暗号化属性を継承します。</para>
+      ///   <para>FILE_FLAG_BACKUP_SEMANTICS フラグを設定して <see cref="CreateFile"/> 関数を呼び出すことで、ディレクトリのハンドルを取得できます。</para>
+      ///   <para>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</para>
       /// </remarks>
-      /// <param name="lpTemplateDirectory">Pathname of the template directory.</param>
-      /// <param name="lpPathName">Full pathname of the file.</param>
-      /// <param name="lpSecurityAttributes">The security attributes.</param>
+      /// <param name="lpTemplateDirectory">テンプレートディレクトリのパス名。</param>
+      /// <param name="lpPathName">ファイルの完全パス名。</param>
+      /// <param name="lpSecurityAttributes">セキュリティ属性。</param>
       /// <returns>
-      ///   <para>If the function succeeds, the return value is nonzero.</para>
-      ///   <para>If the function fails, the return value is zero (0). To get extended error information, call GetLastError.</para>
+      ///   <para>関数が成功した場合、戻り値はゼロ以外です。</para>
+      ///   <para>関数が失敗した場合、戻り値はゼロ (0) です。拡張エラー情報を取得するには GetLastError を呼び出してください。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "CreateDirectoryExW"), SuppressUnmanagedCodeSecurity]
@@ -86,34 +80,30 @@ namespace Alphaleonis.Win32.Filesystem
       internal static extern bool CreateDirectoryEx([MarshalAs(UnmanagedType.LPWStr)] string lpTemplateDirectory, [MarshalAs(UnmanagedType.LPWStr)] string lpPathName, [MarshalAs(UnmanagedType.LPStruct)] Security.NativeMethods.SecurityAttributes lpSecurityAttributes);
 
       /// <summary>
-      ///   Creates a new directory as a transacted operation, with the attributes of a specified template directory.
-      ///   <para>If the underlying file system supports security on files and directories,</para>
-      ///   <para>the function applies a specified security descriptor to the new directory.</para>
-      ///   <para>The new directory retains the other attributes of the specified template directory.</para>
+      ///   トランザクション操作として、指定されたテンプレートディレクトリの属性を持つ新しいディレクトリを作成します。
+      ///   <para>基盤となるファイルシステムがファイルおよびディレクトリのセキュリティをサポートしている場合、</para>
+      ///   <para>この関数は指定されたセキュリティ記述子を新しいディレクトリに適用します。</para>
+      ///   <para>新しいディレクトリは、指定されたテンプレートディレクトリのその他の属性を保持します。</para>
       /// </summary>
       /// <remarks>
-      ///   <para>The CreateDirectoryTransacted function allows you to create directories that inherit stream information from other
-      ///   directories.</para>
-      ///   <para>This function is useful, for example, when you are using Macintosh directories, which have a resource stream</para>
-      ///   <para>that is needed to properly identify directory contents as an attribute.</para>
-      ///   <para>Some file systems, such as the NTFS file system, support compression or encryption for individual files and
-      ///   directories.</para>
-      ///   <para>On volumes formatted for such a file system, a new directory inherits the compression and encryption attributes of its parent
-      ///   directory.</para>
-      ///   <para>You can obtain a handle to a directory by calling the <see cref="CreateFileTransacted"/> function with the
-      ///   FILE_FLAG_BACKUP_SEMANTICS flag set.</para>
-      ///   <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      ///   <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      ///   <para>CreateDirectoryTransacted 関数を使用すると、他のディレクトリからストリーム情報を継承するディレクトリを作成できます。</para>
+      ///   <para>この関数は、例えば、ディレクトリの内容を属性として適切に識別するために必要なリソースストリームを持つ</para>
+      ///   <para>Macintosh ディレクトリを使用している場合に便利です。</para>
+      ///   <para>NTFS ファイルシステムなど、一部のファイルシステムは個々のファイルおよびディレクトリの圧縮または暗号化をサポートします。</para>
+      ///   <para>そのようなファイルシステムでフォーマットされたボリュームでは、新しいディレクトリは親ディレクトリの圧縮および暗号化属性を継承します。</para>
+      ///   <para>FILE_FLAG_BACKUP_SEMANTICS フラグを設定して <see cref="CreateFileTransacted"/> 関数を呼び出すことで、ディレクトリのハンドルを取得できます。</para>
+      ///   <para>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</para>
       /// </remarks>
-      /// <param name="lpTemplateDirectory">Pathname of the template directory.</param>
-      /// <param name="lpNewDirectory">Pathname of the new directory.</param>
-      /// <param name="lpSecurityAttributes">The security attributes.</param>
-      /// <param name="hTransaction">The transaction.</param>
+      /// <param name="lpTemplateDirectory">テンプレートディレクトリのパス名。</param>
+      /// <param name="lpNewDirectory">新しいディレクトリのパス名。</param>
+      /// <param name="lpSecurityAttributes">セキュリティ属性。</param>
+      /// <param name="hTransaction">トランザクション。</param>
       /// <returns>
-      ///   <para>If the function succeeds, the return value is nonzero.</para>
-      ///   <para>If the function fails, the return value is zero (0). To get extended error information, call GetLastError.</para>
-      ///   <para>This function fails with ERROR_EFS_NOT_ALLOWED_IN_TRANSACTION if you try to create a</para>
-      ///   <para>child directory with a parent directory that has encryption disabled.</para>
+      ///   <para>関数が成功した場合、戻り値はゼロ以外です。</para>
+      ///   <para>関数が失敗した場合、戻り値はゼロ (0) です。拡張エラー情報を取得するには GetLastError を呼び出してください。</para>
+      ///   <para>暗号化が無効な親ディレクトリで子ディレクトリを作成しようとすると、</para>
+      ///   <para>この関数は ERROR_EFS_NOT_ALLOWED_IN_TRANSACTION で失敗します。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "CreateDirectoryTransactedW"), SuppressUnmanagedCodeSecurity]
@@ -121,24 +111,24 @@ namespace Alphaleonis.Win32.Filesystem
       internal static extern bool CreateDirectoryTransacted([MarshalAs(UnmanagedType.LPWStr)] string lpTemplateDirectory, [MarshalAs(UnmanagedType.LPWStr)] string lpNewDirectory, [MarshalAs(UnmanagedType.LPStruct)] Security.NativeMethods.SecurityAttributes lpSecurityAttributes, SafeHandle hTransaction);
 
       /// <summary>
-      ///   Retrieves the current directory for the current process.
+      ///   現在のプロセスのカレントディレクトリを取得します。
       /// </summary>
       /// <remarks>
-      ///   <para>The RemoveDirectory function marks a directory for deletion on close.</para>
-      ///   <para>Therefore, the directory is not removed until the last handle to the directory is closed.</para>
-      ///   <para>RemoveDirectory removes a directory junction, even if the contents of the target are not empty;</para>
-      ///   <para>the function removes directory junctions regardless of the state of the target object.</para>
-      ///   <para>Minimum supported client: Windows XP [desktop apps | Windows Store apps]</para>
-      ///   <para>Minimum supported server: Windows Server 2003 [desktop apps | Windows Store apps]</para>
+      ///   <para>RemoveDirectory 関数はディレクトリを閉じる際に削除対象としてマークします。</para>
+      ///   <para>そのため、ディレクトリへの最後のハンドルが閉じられるまでディレクトリは削除されません。</para>
+      ///   <para>RemoveDirectory は、ターゲットの内容が空でなくてもディレクトリジャンクションを削除します。</para>
+      ///   <para>この関数はターゲットオブジェクトの状態に関係なくディレクトリジャンクションを削除します。</para>
+      ///   <para>サポートされる最小クライアント: Windows XP [デスクトップアプリ | Windows ストアアプリ]</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリ | Windows ストアアプリ]</para>
       /// </remarks>
-      /// <param name="nBufferLength">The length of the buffer for the current directory string, in TCHARs. The buffer length must include room for a terminating null character.</param>
+      /// <param name="nBufferLength">カレントディレクトリ文字列のバッファの長さ (TCHAR 単位)。バッファの長さには終端のヌル文字のための領域を含める必要があります。</param>
       /// <param name="lpBuffer">
-      ///   <para>A pointer to the buffer that receives the current directory string. This null-terminated string specifies the absolute path to the current directory.</para>
-      ///   <para>To determine the required buffer size, set this parameter to NULL and the nBufferLength parameter to 0.</para>
+      ///   <para>カレントディレクトリ文字列を受け取るバッファへのポインタ。このヌル終端文字列はカレントディレクトリへの絶対パスを指定します。</para>
+      ///   <para>必要なバッファサイズを判断するには、このパラメータを NULL に設定し、nBufferLength パラメータを 0 に設定します。</para>
       /// </param>
       /// <returns>
-      ///   <para>If the function succeeds, the return value specifies the number of characters that are written to the buffer, not including the terminating null character.</para>
-      ///   <para>If the function fails, the return value is zero. To get extended error information, call GetLastError.</para>
+      ///   <para>関数が成功した場合、戻り値は終端のヌル文字を含まない、バッファに書き込まれた文字数を指定します。</para>
+      ///   <para>関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Usage", "CA2205:UseManagedEquivalentsOfWin32Api")]
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
@@ -147,20 +137,20 @@ namespace Alphaleonis.Win32.Filesystem
       internal static extern uint GetCurrentDirectory([MarshalAs(UnmanagedType.U4)] uint nBufferLength, StringBuilder lpBuffer);
       
       /// <summary>
-      ///   Deletes an existing empty directory.
+      ///   既存の空のディレクトリを削除します。
       /// </summary>
       /// <remarks>
-      ///   <para>The RemoveDirectory function marks a directory for deletion on close.</para>
-      ///   <para>Therefore, the directory is not removed until the last handle to the directory is closed.</para>
-      ///   <para>RemoveDirectory removes a directory junction, even if the contents of the target are not empty;</para>
-      ///   <para>the function removes directory junctions regardless of the state of the target object.</para>
-      ///   <para>Minimum supported client: Windows XP [desktop apps | Windows Store apps]</para>
-      ///   <para>Minimum supported server: Windows Server 2003 [desktop apps | Windows Store apps]</para>
+      ///   <para>RemoveDirectory 関数はディレクトリを閉じる際に削除対象としてマークします。</para>
+      ///   <para>そのため、ディレクトリへの最後のハンドルが閉じられるまでディレクトリは削除されません。</para>
+      ///   <para>RemoveDirectory は、ターゲットの内容が空でなくてもディレクトリジャンクションを削除します。</para>
+      ///   <para>この関数はターゲットオブジェクトの状態に関係なくディレクトリジャンクションを削除します。</para>
+      ///   <para>サポートされる最小クライアント: Windows XP [デスクトップアプリ | Windows ストアアプリ]</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリ | Windows ストアアプリ]</para>
       /// </remarks>
-      /// <param name="lpPathName">Full pathname of the file.</param>
+      /// <param name="lpPathName">ファイルの完全パス名。</param>
       /// <returns>
-      ///   <para>If the function succeeds, the return value is nonzero.</para>
-      ///   <para>If the function fails, the return value is zero. To get extended error information, call GetLastError.</para>
+      ///   <para>関数が成功した場合、戻り値はゼロ以外です。</para>
+      ///   <para>関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "RemoveDirectoryW"), SuppressUnmanagedCodeSecurity]
@@ -168,21 +158,21 @@ namespace Alphaleonis.Win32.Filesystem
       internal static extern bool RemoveDirectory([MarshalAs(UnmanagedType.LPWStr)] string lpPathName);
 
       /// <summary>
-      ///   Deletes an existing empty directory as a transacted operation.
+      ///   トランザクション操作として、既存の空のディレクトリを削除します。
       /// </summary>
       /// <remarks>
-      ///   <para>The RemoveDirectoryTransacted function marks a directory for deletion on close.</para>
-      ///   <para>Therefore, the directory is not removed until the last handle to the directory is closed.</para>
-      ///   <para>RemoveDirectory removes a directory junction, even if the contents of the target are not empty;</para>
-      ///   <para>the function removes directory junctions regardless of the state of the target object.</para>
-      ///   <para>Minimum supported client: Windows Vista [desktop apps only]</para>
-      ///   <para>Minimum supported server: Windows Server 2008 [desktop apps only]</para>
+      ///   <para>RemoveDirectoryTransacted 関数はディレクトリを閉じる際に削除対象としてマークします。</para>
+      ///   <para>そのため、ディレクトリへの最後のハンドルが閉じられるまでディレクトリは削除されません。</para>
+      ///   <para>RemoveDirectory は、ターゲットの内容が空でなくてもディレクトリジャンクションを削除します。</para>
+      ///   <para>この関数はターゲットオブジェクトの状態に関係なくディレクトリジャンクションを削除します。</para>
+      ///   <para>サポートされる最小クライアント: Windows Vista [デスクトップアプリのみ]</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2008 [デスクトップアプリのみ]</para>
       /// </remarks>
-      /// <param name="lpPathName">Full pathname of the file.</param>
-      /// <param name="hTransaction">The transaction.</param>
+      /// <param name="lpPathName">ファイルの完全パス名。</param>
+      /// <param name="hTransaction">トランザクション。</param>
       /// <returns>
-      ///   <para>If the function succeeds, the return value is nonzero.</para>
-      ///   <para>If the function fails, the return value is zero. To get extended error information, call GetLastError.</para>
+      ///   <para>関数が成功した場合、戻り値はゼロ以外です。</para>
+      ///   <para>関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "RemoveDirectoryTransactedW"), SuppressUnmanagedCodeSecurity]
@@ -190,14 +180,14 @@ namespace Alphaleonis.Win32.Filesystem
       internal static extern bool RemoveDirectoryTransacted([MarshalAs(UnmanagedType.LPWStr)] string lpPathName, SafeHandle hTransaction);
 
       /// <summary>
-      ///   Changes the current directory for the current process.
+      ///   現在のプロセスのカレントディレクトリを変更します。
       /// </summary>
       /// <param name="lpPathName">
-      ///   <para>The path to the new current directory. This parameter may specify a relative path or a full path. In either case, the full path of the specified directory is calculated and stored as the current directory.</para>
+      ///   <para>新しいカレントディレクトリへのパス。このパラメータは相対パスまたは完全パスを指定できます。いずれの場合も、指定されたディレクトリの完全パスが計算され、カレントディレクトリとして格納されます。</para>
       /// </param>
       /// <returns>
-      ///   <para>If the function succeeds, the return value is nonzero.</para>
-      ///   <para>If the function fails, the return value is zero. To get extended error information, call GetLastError.</para>
+      ///   <para>関数が成功した場合、戻り値はゼロ以外です。</para>
+      ///   <para>関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Usage", "CA2205:UseManagedEquivalentsOfWin32Api")]
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]

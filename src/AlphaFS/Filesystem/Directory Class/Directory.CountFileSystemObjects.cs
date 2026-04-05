@@ -28,8 +28,8 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>[AlphaFS] Counts file system objects: files, folders or both) in a given directory.</summary>
-      /// <returns>The counted number of file system objects.</returns>
+      /// <summary>[AlphaFS] 指定されたディレクトリ内のファイルシステムオブジェクト（ファイル、フォルダ、またはその両方）をカウントします。</summary>
+      /// <returns>カウントされたファイルシステムオブジェクトの数。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -37,7 +37,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <param name="path">The directory path.</param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
       [SecurityCritical]
       public static long CountFileSystemObjects(string path, DirectoryEnumerationOptions options)
       {
@@ -45,8 +45,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Counts file system objects: files, folders or both) in a given directory.</summary>
-      /// <returns>The counted number of file system objects.</returns>
+      /// <summary>[AlphaFS] 指定されたディレクトリ内のファイルシステムオブジェクト（ファイル、フォルダ、またはその両方）をカウントします。</summary>
+      /// <returns>カウントされたファイルシステムオブジェクトの数。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -54,8 +54,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <param name="path">The directory path.</param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static long CountFileSystemObjects(string path, DirectoryEnumerationOptions options, PathFormat pathFormat)
       {
@@ -63,8 +63,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
       
 
-      /// <summary>[AlphaFS] Counts file system objects: files, folders or both) in a given directory.</summary>
-      /// <returns>The counted number of file system objects.</returns>
+      /// <summary>[AlphaFS] 指定されたディレクトリ内のファイルシステムオブジェクト（ファイル、フォルダ、またはその両方）をカウントします。</summary>
+      /// <returns>カウントされたファイルシステムオブジェクトの数。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -73,11 +73,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="UnauthorizedAccessException"/>
       /// <param name="path">The directory path.</param>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in <paramref name="path"/>.
-      ///   This parameter can contain a combination of valid literal path and wildcard
+      ///   ディレクトリ名と照合する検索文字列。対象: <paramref name="path"/>.
+      ///   このパラメータには、有効なリテラルパスとワイルドカードの組み合わせを含めることができますが、
       ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
       /// </param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
       [SecurityCritical]
       public static long CountFileSystemObjects(string path, string searchPattern, DirectoryEnumerationOptions options)
       {
@@ -85,8 +85,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Counts file system objects: files, folders or both) in a given directory.</summary>
-      /// <returns>The counted number of file system objects.</returns>
+      /// <summary>[AlphaFS] 指定されたディレクトリ内のファイルシステムオブジェクト（ファイル、フォルダ、またはその両方）をカウントします。</summary>
+      /// <returns>カウントされたファイルシステムオブジェクトの数。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -95,12 +95,12 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="UnauthorizedAccessException"/>
       /// <param name="path">The directory path.</param>
       /// <param name="searchPattern">
-      ///   The search string to match against the names of directories in <paramref name="path"/>.
-      ///   This parameter can contain a combination of valid literal path and wildcard
+      ///   ディレクトリ名と照合する検索文字列。対象: <paramref name="path"/>.
+      ///   このパラメータには、有効なリテラルパスとワイルドカードの組み合わせを含めることができますが、
       ///   (<see cref="Path.WildcardStarMatchAll"/> and <see cref="Path.WildcardQuestion"/>) characters, but does not support regular expressions.
       /// </param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static long CountFileSystemObjects(string path, string searchPattern, DirectoryEnumerationOptions options, PathFormat pathFormat)
       {

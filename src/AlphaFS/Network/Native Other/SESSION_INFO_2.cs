@@ -25,27 +25,27 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Contains information about the session, including name of the computer; name of the user; open files, pipes, and devices on the computer; and the type of client that established the session.</summary>
+      /// <summary>セッションに関する情報を含みます, コンピューター名を含むter; name of the user; open files, pipes, and devices on the computer; and the type of client that established the session.</summary>
       /// <remarks>
-      /// <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      /// <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      /// <para>サポートされる最小クライアント: Windows XP [desktop apps only]</para>
+      /// <para>サポートされる最小サーバー: Windows Server 2003 [desktop apps only]</para>
       /// </remarks>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct SESSION_INFO_2
       {
-         /// <summary>Pointer to a Unicode string specifying the name of the computer that established the session. This string cannot contain a backslash (\).</summary>
+         /// <summary>セッションを確立したコンピューターの名前を指定する Unicode 文字列へのポインター。 This string cannot contain a backslash (\).</summary>
          [MarshalAs(UnmanagedType.LPWStr)] public readonly string sesi2_cname;
 
-         /// <summary>Pointer to a Unicode string specifying the name of the user who established the session.</summary>
+         /// <summary>セッションを確立したユーザーの名前を指定する Unicode 文字列へのポインター。</summary>
          [MarshalAs(UnmanagedType.LPWStr)] public readonly string sesi2_username;
 
          /// <summary>Specifies a DWORD value that contains the number of files, devices, and pipes opened during the session.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint sesi2_num_opens;
 
-         /// <summary>Specifies a DWORD value that contains the number of seconds the session has been active.</summary>
+         /// <summary>秒数を含む DWORD 値を指定します the session has been active.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint sesi2_time;
 
-         /// <summary>Specifies a DWORD value that contains the number of seconds the session has been idle.</summary>
+         /// <summary>秒数を含む DWORD 値を指定します the session has been idle.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint sesi2_idle_time;
 
          /// <summary>

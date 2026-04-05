@@ -25,14 +25,14 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>[AlphaFS] Returns the directory information for the specified <paramref name="path"/> with a trailing <see cref="DirectorySeparatorChar"/> character.</summary>
+      /// <summary>[AlphaFS] 指定された <paramref name="path"/> のディレクトリ情報を末尾に <see cref="DirectorySeparatorChar"/> 文字を付加して返します。</summary>
       /// <returns>
-      ///   <para>The suffixed directory information for the specified <paramref name="path"/> with a trailing <see cref="DirectorySeparatorChar"/> character,</para>
-      ///   <para>or <c>null</c> if <paramref name="path"/> is <c>null</c> or if <paramref name="path"/> denotes a root (such as "\", "C:", or * "\\server\share").</para>
+      ///   <para>指定された <paramref name="path"/> の末尾に <see cref="DirectorySeparatorChar"/> 文字を付加したディレクトリ情報。</para>
+      ///   <para><paramref name="path"/> が <c>null</c> の場合、またはルートを示す場合（"\"、"C:"、"\\server\share" など）は <c>null</c>。</para>
       /// </returns>
-      /// <remarks>This method is similar to calling Path.GetDirectoryName() + Path.AddTrailingDirectorySeparator()</remarks>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path.</param>
+      /// <remarks>このメソッドは Path.GetDirectoryName() + Path.AddTrailingDirectorySeparator() を呼び出すのと同様です。</remarks>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">パス。</param>
       [SecurityCritical]
       public static string GetSuffixedDirectoryNameTransacted(KernelTransaction transaction, string path)
       {
@@ -40,15 +40,15 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Returns the directory information for the specified <paramref name="path"/> with a trailing <see cref="DirectorySeparatorChar"/> character.</summary>
+      /// <summary>[AlphaFS] 指定された <paramref name="path"/> のディレクトリ情報を末尾に <see cref="DirectorySeparatorChar"/> 文字を付加して返します。</summary>
       /// <returns>
-      ///   <para>The suffixed directory information for the specified <paramref name="path"/> with a trailing <see cref="DirectorySeparatorChar"/> character,</para>
-      ///   <para>or <c>null</c> if <paramref name="path"/> is <c>null</c> or if <paramref name="path"/> denotes a root (such as "\", "C:", or * "\\server\share").</para>
+      ///   <para>指定された <paramref name="path"/> の末尾に <see cref="DirectorySeparatorChar"/> 文字を付加したディレクトリ情報。</para>
+      ///   <para><paramref name="path"/> が <c>null</c> の場合、またはルートを示す場合（"\"、"C:"、"\\server\share" など）は <c>null</c>。</para>
       /// </returns>
-      /// <remarks>This method is similar to calling Path.GetDirectoryName() + Path.AddTrailingDirectorySeparator()</remarks>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <remarks>このメソッドは Path.GetDirectoryName() + Path.AddTrailingDirectorySeparator() を呼び出すのと同様です。</remarks>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">パス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static string GetSuffixedDirectoryNameTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)
       {

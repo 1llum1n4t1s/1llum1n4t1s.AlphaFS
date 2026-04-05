@@ -26,21 +26,21 @@ using System.Runtime.InteropServices;
 
 namespace Alphaleonis.Win32
 {
-   /// <summary>Base class for classes representing a block of unmanaged memory.</summary>
+   /// <summary>アンマネージメモリのブロックを表すクラスの基底クラス。</summary>
    internal abstract class SafeNativeMemoryBufferHandle : SafeHandleZeroOrMinusOneIsInvalid
    {
       private readonly int m_capacity;
 
 
-      /// <summary>Initializes a new instance of the <see cref="SafeNativeMemoryBufferHandle"/> class, specifying the allocated capacity of the memory block.</summary>
-      /// <param name="callerHandle"><c>true</c> to reliably release the handle during the finalization phase; <c>false</c> to prevent reliable release (not recommended).</param>
+      /// <summary>メモリブロックの割り当て容量を指定して、<see cref="SafeNativeMemoryBufferHandle"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="callerHandle">ファイナライズ段階でハンドルを確実に解放する場合は<c>true</c>、確実な解放を防止する場合は<c>false</c>（非推奨）。</param>
       protected SafeNativeMemoryBufferHandle(bool callerHandle) : base(callerHandle)
       {
       }
 
 
-      /// <summary>Initializes a new instance of the <see cref="SafeNativeMemoryBufferHandle"/> class, specifying the allocated capacity of the memory block.</summary>
-      /// <param name="capacity">The capacity.</param>
+      /// <summary>メモリブロックの割り当て容量を指定して、<see cref="SafeNativeMemoryBufferHandle"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="capacity">容量。</param>
       protected SafeNativeMemoryBufferHandle(int capacity) : this(true)
       {
          m_capacity = capacity;
@@ -55,8 +55,8 @@ namespace Alphaleonis.Win32
 
       
       
-      /// <summary>Gets the capacity. Only valid if this instance was created using a constructor that specifies the size,
-      /// it is not correct if this handle was returned by a native method using p/invoke.
+      /// <summary>容量を取得します。このインスタンスがサイズを指定するコンストラクタを使用して作成された場合にのみ有効であり、
+      /// P/Invokeを使用するネイティブメソッドによって返されたハンドルの場合は正しくありません。
       /// </summary>
       public int Capacity
       {
@@ -66,10 +66,10 @@ namespace Alphaleonis.Win32
 
 
 
-      /// <summary>Copies data from a one-dimensional, managed 8-bit unsigned integer array to the unmanaged memory pointer referenced by this instance.</summary>
-      /// <param name="source">The one-dimensional array to copy from. </param>
-      /// <param name="startIndex">The zero-based index into the array where Copy should start.</param>
-      /// <param name="length">The number of array elements to copy.</param>
+      /// <summary>1次元のマネージ8ビット符号なし整数配列からこのインスタンスが参照するアンマネージメモリポインターにデータをコピーします。</summary>
+      /// <param name="source">コピー元の1次元配列。</param>
+      /// <param name="startIndex">コピーを開始する配列のゼロベースインデックス。</param>
+      /// <param name="length">コピーする配列要素の数。</param>
       public void CopyFrom(byte[] source, int startIndex, int length)
       {
          Marshal.Copy(source, startIndex, handle, length);
@@ -88,9 +88,9 @@ namespace Alphaleonis.Win32
       }
 
 
-      /// <summary>Copies data from this unmanaged memory pointer to a managed 8-bit unsigned integer array.</summary>
-      /// <param name="sourceOffset">The offset in the buffer to start copying from.</param>
-      /// <param name="destination">The array to copy to.</param>
+      /// <summary>このアンマネージメモリポインターからマネージ8ビット符号なし整数配列にデータをコピーします。</summary>
+      /// <param name="sourceOffset">コピーを開始するバッファ内のオフセット。</param>
+      /// <param name="destination">コピー先の配列。</param>
       public void CopyTo(int sourceOffset, byte[] destination)
       {
          if (null == destination || destination.Length == 0)
@@ -109,10 +109,10 @@ namespace Alphaleonis.Win32
       }
 
 
-      /// <summary>Copies data from an unmanaged memory pointer to a managed 8-bit unsigned integer array.</summary>
-      /// <param name="destination">The array to copy to.</param>
-      /// <param name="destinationOffset">The zero-based index in the destination array where copying should start.</param>
-      /// <param name="length">The number of array elements to copy.</param>
+      /// <summary>アンマネージメモリポインターからマネージ8ビット符号なし整数配列にデータをコピーします。</summary>
+      /// <param name="destination">コピー先の配列。</param>
+      /// <param name="destinationOffset">コピーを開始する宛先配列のゼロベースインデックス。</param>
+      /// <param name="length">コピーする配列要素の数。</param>
       public void CopyTo(byte[] destination, int destinationOffset, int length)
       {
          if (null == destination)
@@ -144,11 +144,11 @@ namespace Alphaleonis.Win32
       }
 
 
-      /// <summary>Copies data from this unmanaged memory pointer to a managed 8-bit unsigned integer array.</summary>
-      /// <param name="sourceOffset">The offset in the buffer to start copying from.</param>
-      /// <param name="destination">The array to copy to.</param>
-      /// <param name="destinationOffset">The zero-based index in the destination array where copying should start.</param>
-      /// <param name="length">The number of array elements to copy.</param>
+      /// <summary>このアンマネージメモリポインターからマネージ8ビット符号なし整数配列にデータをコピーします。</summary>
+      /// <param name="sourceOffset">コピーを開始するバッファ内のオフセット。</param>
+      /// <param name="destination">コピー先の配列。</param>
+      /// <param name="destinationOffset">コピーを開始する宛先配列のゼロベースインデックス。</param>
+      /// <param name="length">コピーする配列要素の数。</param>
       public void CopyTo(int sourceOffset, byte[] destination, int destinationOffset, int length)
       {
          if (null == destination)
@@ -315,38 +315,38 @@ namespace Alphaleonis.Win32
 
 
 
-      /// <summary>Marshals data from a managed object to an unmanaged block of memory.</summary>
+      /// <summary>マネージオブジェクトからアンマネージメモリブロックにデータをマーシャリングします。</summary>
       public void StructureToPtr<T>(T structure, bool deleteOld) where T : notnull
       {
          Marshal.StructureToPtr<T>(structure, handle, deleteOld);
       }
 
 
-      /// <summary>Marshals data from an unmanaged block of memory to a newly allocated managed object of the specified type.</summary>
-      /// <returns>A managed object containing the data pointed to by the ptr parameter.</returns>
+      /// <summary>アンマネージメモリブロックから指定された型の新しく割り当てられたマネージオブジェクトにデータをマーシャリングします。</summary>
+      /// <returns>ptrパラメータが指すデータを含むマネージオブジェクト。</returns>
       public T PtrToStructure<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)] T>(int offset)
       {
          return Marshal.PtrToStructure<T>(new IntPtr(handle.ToInt64() + offset));
       }
 
 
-      /// <summary>Allocates a managed System.String and copies a specified number of characters from an unmanaged ANSI string into it.</summary>
-      /// <returns>A managed string that holds a copy of the unmanaged string if the value of the ptr parameter is not null; otherwise, this method returns null.</returns>
+      /// <summary>マネージSystem.Stringを割り当て、アンマネージANSI文字列から指定された数の文字をコピーします。</summary>
+      /// <returns>ptrパラメータの値がnullでない場合はアンマネージ文字列のコピーを保持するマネージ文字列。そうでなければnullを返します。</returns>
       public string PtrToStringAnsi(int offset)
       {
          return Marshal.PtrToStringAnsi(new IntPtr(handle.ToInt64() + offset));
       }
 
-      /// <summary>Allocates a managed System.String and copies all characters up to the first null character from an unmanaged Unicode string into it.</summary>
-      /// <returns>A managed string that holds a copy of the unmanaged string if the value of the ptr parameter is not null; otherwise, this method returns null.</returns>
+      /// <summary>マネージSystem.Stringを割り当て、アンマネージUnicode文字列から最初のnull文字までのすべての文字をコピーします。</summary>
+      /// <returns>ptrパラメータの値がnullでない場合はアンマネージ文字列のコピーを保持するマネージ文字列。そうでなければnullを返します。</returns>
       public string PtrToStringUni()
       {
          return Marshal.PtrToStringUni(handle);
       }
 
 
-      /// <summary>Allocates a managed System.String and copies a specified number of characters from an unmanaged Unicode string into it.</summary>
-      /// <returns>A managed string that holds a copy of the unmanaged string if the value of the ptr parameter is not null; otherwise, this method returns null.</returns>
+      /// <summary>マネージSystem.Stringを割り当て、アンマネージUnicode文字列から指定された数の文字をコピーします。</summary>
+      /// <returns>ptrパラメータの値がnullでない場合はアンマネージ文字列のコピーを保持するマネージ文字列。そうでなければnullを返します。</returns>
       public string PtrToStringUni(int offset, int length)
       {
          return Marshal.PtrToStringUni(new IntPtr(handle.ToInt64() + offset), length);

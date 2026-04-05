@@ -26,10 +26,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>[AlphaFS] Sets the date and time, in coordinated universal time (UTC), that the specified directory was last written to.</summary>
-      /// <param name="transaction">The transaction.</param>
+      /// <summary>[AlphaFS] 指定されたディレクトリが最後に書き込まれた日時を協定世界時（UTC）で設定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The directory for which to set the date and time information.</param>
-      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
+      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> 最終書き込み日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
       [SecurityCritical]
       public static void SetLastWriteTimeUtcTransacted(KernelTransaction transaction, string path, DateTime lastWriteTimeUtc)
       {
@@ -37,11 +37,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets the date and time, in coordinated universal time (UTC), that the specified directory was last written to.</summary>
-      /// <param name="transaction">The transaction.</param>
+      /// <summary>[AlphaFS] 指定されたディレクトリが最後に書き込まれた日時を協定世界時（UTC）で設定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The directory for which to set the date and time information.</param>
-      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> 最終書き込み日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void SetLastWriteTimeUtcTransacted(KernelTransaction transaction, string path, DateTime lastWriteTimeUtc, PathFormat pathFormat)
       {
@@ -49,10 +49,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets the date and time, in coordinated universal time (UTC), that the specified directory was last written to.</summary>
-      /// <param name="transaction">The transaction.</param>
+      /// <summary>[AlphaFS] 指定されたディレクトリが最後に書き込まれた日時を協定世界時（UTC）で設定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The directory for which to set the date and time information.</param>
-      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
+      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> 最終書き込み日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
       /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the file or directory linked to. No effect if <paramref name="path"/> does not refer to a reparse point.</param>
       [SecurityCritical]
       public static void SetLastWriteTimeUtcTransacted(KernelTransaction transaction, string path, DateTime lastWriteTimeUtc, bool modifyReparsePoint)
@@ -61,12 +61,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets the date and time, in coordinated universal time (UTC), that the specified directory was last written to.</summary>
-      /// <param name="transaction">The transaction.</param>
+      /// <summary>[AlphaFS] 指定されたディレクトリが最後に書き込まれた日時を協定世界時（UTC）で設定します。</summary>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The directory for which to set the date and time information.</param>
-      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> containing the value to set for the last write date and time of <paramref name="path"/>. This value is expressed in UTC time.</param>
+      /// <param name="lastWriteTimeUtc">A <see cref="DateTime"/> 最終書き込み日時に設定する値を含む of <paramref name="path"/>. この値はUTC時刻で表されます。</param>
       /// <param name="modifyReparsePoint">If <c>true</c>, the date and time information will apply to the reparse point (symlink or junction) and not the file or directory linked to. No effect if <paramref name="path"/> does not refer to a reparse point.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void SetLastWriteTimeUtcTransacted(KernelTransaction transaction, string path, DateTime lastWriteTimeUtc, bool modifyReparsePoint, PathFormat pathFormat)
       {

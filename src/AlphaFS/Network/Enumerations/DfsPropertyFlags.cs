@@ -24,7 +24,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>A set of bit flags that describe specific properties of a DFS namespace, root, or link.</summary>
+   /// <summary>DFS 名前空間、ルート、またはリンクの特定のプロパティを記述するビットフラグのセット.</summary>
    [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags")]
    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Dfs")]
    [Flags]

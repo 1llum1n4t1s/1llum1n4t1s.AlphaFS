@@ -25,8 +25,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>[AlphaFS] The exception that is thrown when an attempt to create a file or directory that already exists was made.
-   /// Both <c>ERROR_ALREADY_EXISTS</c> and <c>ERROR_FILE_EXISTS</c> can cause this Exception.
+   /// <summary>[AlphaFS] 既に存在するファイルまたはディレクトリを作成しようとしたときにスローされる例外。
+   /// <c>ERROR_ALREADY_EXISTS</c>と<c>ERROR_FILE_EXISTS</c>の両方がこの例外を引き起こす可能性があります。
    /// </summary>
    [Serializable]
    public class AlreadyExistsException : System.IO.IOException
@@ -35,33 +35,33 @@ namespace Alphaleonis.Win32.Filesystem
       private static readonly string ErrorText = string.Format(CultureInfo.InvariantCulture, "({0}) {1}", Win32Errors.ERROR_ALREADY_EXISTS, new Win32Exception((int) Win32Errors.ERROR_ALREADY_EXISTS).Message.Trim().TrimEnd('.').Trim());
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="AlreadyExistsException"/> class.</summary>
+      /// <summary>[AlphaFS] <see cref="AlreadyExistsException"/>クラスの新しいインスタンスを初期化します。</summary>
       public AlreadyExistsException() : base(string.Format(CultureInfo.InvariantCulture, "{0}.", ErrorText), ErrorCode)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="AlreadyExistsException"/> class.
-      /// Both <c>ERROR_ALREADY_EXISTS</c> and <c>ERROR_FILE_EXISTS</c> can cause this Exception.
+      /// <summary>[AlphaFS] <see cref="AlreadyExistsException"/>クラスの新しいインスタンスを初期化します。
+      /// <c>ERROR_ALREADY_EXISTS</c>と<c>ERROR_FILE_EXISTS</c>の両方がこの例外を引き起こす可能性があります。
       /// </summary>
-      /// <param name="message">The custom error message..</param>
+      /// <param name="message">カスタムエラーメッセージ。</param>
       public AlreadyExistsException(string message) : base(message, ErrorCode)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="AlreadyExistsException"/> class.</summary>
-      /// <param name="path">The path to the file system object.</param>
-      /// <param name="isPath">Always set to true when using this constructor.</param>
+      /// <summary>[AlphaFS] <see cref="AlreadyExistsException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="path">ファイルシステムオブジェクトへのパス。</param>
+      /// <param name="isPath">このコンストラクタを使用する場合は常にtrueに設定します。</param>
       [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "isPath")]
       public AlreadyExistsException(string path, bool isPath) : base(string.Format(CultureInfo.InvariantCulture, "{0}: [{1}]", ErrorText, path), ErrorCode)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="AlreadyExistsException"/> class.</summary>
-      /// <param name="path">The path to the file system object.</param>
-      /// <param name="innerException">The inner exception.</param>
+      /// <summary>[AlphaFS] <see cref="AlreadyExistsException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="path">ファイルシステムオブジェクトへのパス。</param>
+      /// <param name="innerException">内部例外。</param>
       public AlreadyExistsException(string path, Exception innerException) : base(string.Format(CultureInfo.InvariantCulture, "{0}: [{1}]", ErrorText, path), innerException)
       {
       }

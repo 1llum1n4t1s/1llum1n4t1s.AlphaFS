@@ -26,10 +26,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>[AlphaFS] Gets the relative path from the <paramref name="startPath"/> path to the end path.</summary>
-      /// <param name="startPath">The absolute or relative folder path.</param>
-      /// <param name="selectedPath">The absolute or relative path containing the directory or file.</param>
-      /// <returns>The relative path containing the directory or file, from the <paramref name="startPath"/> path to the end path.</returns>
+      /// <summary>[AlphaFS] <paramref name="startPath"/> パスから終端パスまでの相対パスを取得します。</summary>
+      /// <param name="startPath">絶対または相対フォルダパス。</param>
+      /// <param name="selectedPath">ディレクトリまたはファイルを含む絶対または相対パス。</param>
+      /// <returns><paramref name="startPath"/> パスから終端パスまでの、ディレクトリまたはファイルを含む相対パス。</returns>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="UriFormatException"/>
       /// <exception cref="InvalidOperationException"/>
@@ -55,7 +55,7 @@ namespace Alphaleonis.Win32.Filesystem
          var lastCommonRoot = -1;
 
 
-         // Find common path root.
+         // 共通パスルートを検索する。
 
          for (var index = 0; index < length; index++)
          {
@@ -76,12 +76,12 @@ namespace Alphaleonis.Win32.Filesystem
          lastCommonRoot++;
 
 
-         // Assemble relative path.
+         // 相対パスを組み立てる。
 
          var relativePath = new StringBuilder();
 
          
-         // Add the "..\" suffix.
+         // "..\" サフィックスを追加する。
 
          for (var index = lastCommonRoot; index < fromLength; index++)
          {
@@ -93,7 +93,7 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
-         // Add folders.
+         // フォルダを追加する。
 
          toLength--;
 
@@ -158,10 +158,10 @@ namespace Alphaleonis.Win32.Filesystem
 
 
 
-      /// <summary>[AlphaFS] Gets the absolute path from the relative or absolute <paramref name="startPath"/> and the relative <paramref name="selectedPath"/>.</summary>
-      /// <returns>The absolute path from the relative or absolute <paramref name="startPath"/> and the relative <paramref name="selectedPath"/>.</returns>
-      /// <param name="startPath">The absolute folder path.</param>
-      /// <param name="selectedPath">The selected path containing the directory or file.</param>
+      /// <summary>[AlphaFS] 相対または絶対の <paramref name="startPath"/> と相対の <paramref name="selectedPath"/> から絶対パスを取得します。</summary>
+      /// <returns>相対または絶対の <paramref name="startPath"/> と相対の <paramref name="selectedPath"/> から取得された絶対パス。</returns>
+      /// <param name="startPath">絶対フォルダパス。</param>
+      /// <param name="selectedPath">ディレクトリまたはファイルを含む選択されたパス。</param>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="UriFormatException"/>
       /// <exception cref="InvalidOperationException"/>

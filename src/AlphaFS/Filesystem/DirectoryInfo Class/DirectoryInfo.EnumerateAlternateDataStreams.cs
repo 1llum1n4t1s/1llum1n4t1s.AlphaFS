@@ -26,8 +26,8 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public sealed partial class DirectoryInfo
    {
-      /// <summary>[AlphaFS] Returns an enumerable collection of <see cref="AlternateDataStreamInfo"/> instances for the directory.</summary>
-      /// <returns>An enumerable collection of <see cref="AlternateDataStreamInfo"/> instances for the directory.</returns>
+      /// <summary>[AlphaFS] ディレクトリの <see cref="AlternateDataStreamInfo"/> インスタンスの列挙可能なコレクションを返します。</summary>
+      /// <returns>ディレクトリの <see cref="AlternateDataStreamInfo"/> インスタンスの列挙可能なコレクション。</returns>
       [SecurityCritical]
       public IEnumerable<AlternateDataStreamInfo> EnumerateAlternateDataStreams()
       {

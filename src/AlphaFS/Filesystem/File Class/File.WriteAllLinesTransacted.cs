@@ -31,8 +31,8 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>[AlphaFS] Creates a new file, writes a collection of strings to the file, and then closes the file.</summary>
-      /// <remarks>The default behavior of the method is to write out data by using UTF-8 encoding without a byte order mark (BOM).</remarks>
+      /// <summary>[AlphaFS] 新しいファイルを作成し、文字列のコレクションをファイルに書き込み、ファイルを閉じます。</summary>
+      /// <remarks>このメソッドのデフォルト動作は、BOM(バイトオーダーマーク)なしのUTF-8エンコーディングを使用してデータを書き出すことです。</remarks>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
@@ -43,9 +43,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to write to.</param>
-      /// <param name="contents">The lines to write to the file.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">書き込むファイル。</param>
+      /// <param name="contents">ファイルに書き込む行。</param>
       [SecurityCritical]
       public static void WriteAllLinesTransacted(KernelTransaction transaction, string path, IEnumerable<string> contents)
       {
@@ -53,7 +53,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates a new file by using the specified encoding, writes a collection of strings to the file, and then closes the file.</summary>
+      /// <summary>[AlphaFS] 指定されたエンコーディングを使用して新しいファイルを作成し、文字列のコレクションをファイルに書き込み、ファイルを閉じます。</summary>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
@@ -64,10 +64,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to write to.</param>
-      /// <param name="contents">The lines to write to the file.</param>
-      /// <param name="encoding">The character <see cref="Encoding"/> to use.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">書き込むファイル。</param>
+      /// <param name="contents">ファイルに書き込む行。</param>
+      /// <param name="encoding">使用する文字<see cref="Encoding"/>。</param>
       [SecurityCritical]
       public static void WriteAllLinesTransacted(KernelTransaction transaction, string path, IEnumerable<string> contents, Encoding encoding)
       {
@@ -75,8 +75,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates a new file, writes a collection of strings to the file, and then closes the file.</summary>
-      /// <remarks>The default behavior of the method is to write out data by using UTF-8 encoding without a byte order mark (BOM).</remarks>
+      /// <summary>[AlphaFS] 新しいファイルを作成し、文字列のコレクションをファイルに書き込み、ファイルを閉じます。</summary>
+      /// <remarks>このメソッドのデフォルト動作は、BOM(バイトオーダーマーク)なしのUTF-8エンコーディングを使用してデータを書き出すことです。</remarks>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
@@ -87,9 +87,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to write to.</param>
-      /// <param name="contents">The string array to write to the file.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">書き込むファイル。</param>
+      /// <param name="contents">ファイルに書き込む文字列配列。</param>
       [SecurityCritical]
       public static void WriteAllLinesTransacted(KernelTransaction transaction, string path, string[] contents)
       {
@@ -97,7 +97,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
       
 
-      /// <summary>[AlphaFS] Creates a new file by using the specified encoding, writes a collection of strings to the file, and then closes the file.</summary>
+      /// <summary>[AlphaFS] 指定されたエンコーディングを使用して新しいファイルを作成し、文字列のコレクションをファイルに書き込み、ファイルを閉じます。</summary>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
@@ -108,10 +108,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to write to.</param>
-      /// <param name="contents">The string array to write to the file.</param>
-      /// <param name="encoding">The character <see cref="Encoding"/> to use.</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">書き込むファイル。</param>
+      /// <param name="contents">ファイルに書き込む文字列配列。</param>
+      /// <param name="encoding">使用する文字<see cref="Encoding"/>。</param>
       [SecurityCritical]
       public static void WriteAllLinesTransacted(KernelTransaction transaction, string path, string[] contents, Encoding encoding)
       {
@@ -121,8 +121,8 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Creates a new file, writes a collection of strings to the file, and then closes the file.</summary>
-      /// <remarks>The default behavior of the method is to write out data by using UTF-8 encoding without a byte order mark (BOM).</remarks>
+      /// <summary>[AlphaFS] 新しいファイルを作成し、文字列のコレクションをファイルに書き込み、ファイルを閉じます。</summary>
+      /// <remarks>このメソッドのデフォルト動作は、BOM(バイトオーダーマーク)なしのUTF-8エンコーディングを使用してデータを書き出すことです。</remarks>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
@@ -133,10 +133,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to write to.</param>
-      /// <param name="contents">The lines to write to the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">書き込むファイル。</param>
+      /// <param name="contents">ファイルに書き込む行。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void WriteAllLinesTransacted(KernelTransaction transaction, string path, IEnumerable<string> contents, PathFormat pathFormat)
       {
@@ -144,7 +144,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates a new file by using the specified encoding, writes a collection of strings to the file, and then closes the file.</summary>
+      /// <summary>[AlphaFS] 指定されたエンコーディングを使用して新しいファイルを作成し、文字列のコレクションをファイルに書き込み、ファイルを閉じます。</summary>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
@@ -155,11 +155,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to write to.</param>
-      /// <param name="contents">The lines to write to the file.</param>
-      /// <param name="encoding">The character <see cref="Encoding"/> to use.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">書き込むファイル。</param>
+      /// <param name="contents">ファイルに書き込む行。</param>
+      /// <param name="encoding">使用する文字<see cref="Encoding"/>。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void WriteAllLinesTransacted(KernelTransaction transaction, string path, IEnumerable<string> contents, Encoding encoding, PathFormat pathFormat)
       {
@@ -167,7 +167,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates a new file by using the specified encoding, writes a collection of strings to the file, and then closes the file.</summary>
+      /// <summary>[AlphaFS] 指定されたエンコーディングを使用して新しいファイルを作成し、文字列のコレクションをファイルに書き込み、ファイルを閉じます。</summary>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
@@ -178,10 +178,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to write to.</param>
-      /// <param name="contents">The string array to write to the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">書き込むファイル。</param>
+      /// <param name="contents">ファイルに書き込む文字列配列。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void WriteAllLinesTransacted(KernelTransaction transaction, string path, string[] contents, PathFormat pathFormat)
       {
@@ -189,7 +189,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
       
 
-      /// <summary>[AlphaFS] Creates a new file by using the specified encoding, writes a collection of strings to the file, and then closes the file.</summary>
+      /// <summary>[AlphaFS] 指定されたエンコーディングを使用して新しいファイルを作成し、文字列のコレクションをファイルに書き込み、ファイルを閉じます。</summary>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
@@ -200,11 +200,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to write to.</param>
-      /// <param name="contents">The string array to write to the file.</param>
-      /// <param name="encoding">The character <see cref="Encoding"/> to use.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">書き込むファイル。</param>
+      /// <param name="contents">ファイルに書き込む文字列配列。</param>
+      /// <param name="encoding">使用する文字<see cref="Encoding"/>。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void WriteAllLinesTransacted(KernelTransaction transaction, string path, string[] contents, Encoding encoding, PathFormat pathFormat)
       {

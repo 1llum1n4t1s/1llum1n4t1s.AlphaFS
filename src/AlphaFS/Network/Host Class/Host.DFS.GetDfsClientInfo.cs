@@ -28,11 +28,11 @@ namespace Alphaleonis.Win32.Network
 {
    public static partial class Host
    {
-      /// <summary>Gets information about a DFS root or link from the cache maintained by the DFS client.</summary>
+      /// <summary>DFS クライアントが管理するキャッシュから DFS ルートまたはリンクに関する情報を取得します.</summary>
       /// <returns>A <see cref="DfsInfo"/> instance.</returns>
       /// <exception cref="NetworkInformationException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="dfsName">The Universal Naming Convention (UNC) path of a DFS root or link.</param>
+      /// <param name="dfsName">DFS ルートまたはリンクの汎用名前付け規則 (UNC) パス。</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Dfs")]
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "dfs")]
       [SecurityCritical]
@@ -42,11 +42,11 @@ namespace Alphaleonis.Win32.Network
       }
 
       
-      /// <summary>Gets information about a DFS root or link from the cache maintained by the DFS client.</summary>
+      /// <summary>DFS クライアントが管理するキャッシュから DFS ルートまたはリンクに関する情報を取得します.</summary>
       /// <returns>A <see cref="DfsInfo"/> instance.</returns>
       /// <exception cref="NetworkInformationException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="dfsName">The Universal Naming Convention (UNC) path of a DFS root or link.</param>
+      /// <param name="dfsName">DFS ルートまたはリンクの汎用名前付け規則 (UNC) パス。</param>
       /// <param name="serverName">The name of the DFS root target or link target server.</param>
       /// <param name="shareName">The name of the share corresponding to the DFS root target or link target.</param>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Dfs")]

@@ -29,12 +29,12 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Applies access control list (ACL) entries described by a FileSecurity object to the file described by the current FileInfo object.</summary>
+      /// <summary>FileSecurity オブジェクトで記述されたアクセス制御リスト (ACL) エントリを、現在の FileInfo オブジェクトで記述されたファイルに適用します。</summary>
       /// <remarks>
-      ///   The SetAccessControl method applies access control list (ACL) entries to the current file that represents the noninherited ACL
-      ///   list. Use the SetAccessControl method whenever you need to add or remove ACL entries from a file.
+      ///   SetAccessControl メソッドは、非継承 ACL リストを表す現在のファイルにアクセス制御リスト (ACL) エントリを適用します。
+      ///   ファイルの ACL エントリを追加または削除する必要がある場合は、SetAccessControl メソッドを使用してください。
       /// </remarks>
-      /// <param name="fileSecurity">A <see cref="FileSecurity"/> object that describes an access control list (ACL) entry to apply to the current file.</param>      
+      /// <param name="fileSecurity">現在のファイルに適用するアクセス制御リスト (ACL) エントリを記述する <see cref="FileSecurity"/> オブジェクト。</param>      
       [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
       [SecurityCritical]
       public void SetAccessControl(FileSecurity fileSecurity)
@@ -43,13 +43,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Applies access control list (ACL) entries described by a FileSecurity object to the file described by the current FileInfo object.</summary>
+      /// <summary>FileSecurity オブジェクトで記述されたアクセス制御リスト (ACL) エントリを、現在の FileInfo オブジェクトで記述されたファイルに適用します。</summary>
       /// <remarks>
-      ///   The SetAccessControl method applies access control list (ACL) entries to the current file that represents the noninherited ACL
-      ///   list. Use the SetAccessControl method whenever you need to add or remove ACL entries from a file.
+      ///   SetAccessControl メソッドは、非継承 ACL リストを表す現在のファイルにアクセス制御リスト (ACL) エントリを適用します。
+      ///   ファイルの ACL エントリを追加または削除する必要がある場合は、SetAccessControl メソッドを使用してください。
       /// </remarks>
-      /// <param name="fileSecurity">A <see cref="FileSecurity"/> object that describes an access control list (ACL) entry to apply to the current file.</param>
-      /// <param name="includeSections">One or more of the <see cref="AccessControlSections"/> values that specifies the type of access control list (ACL) information to set.</param>      
+      /// <param name="fileSecurity">現在のファイルに適用するアクセス制御リスト (ACL) エントリを記述する <see cref="FileSecurity"/> オブジェクト。</param>
+      /// <param name="includeSections">設定するアクセス制御リスト (ACL) 情報の種類を指定する <see cref="AccessControlSections"/> 値の 1 つ以上。</param>      
       [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
       [SecurityCritical]
       public void SetAccessControl(FileSecurity fileSecurity, AccessControlSections includeSections)

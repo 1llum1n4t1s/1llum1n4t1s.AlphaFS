@@ -26,13 +26,13 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>Makes an extended long path from the specified <paramref name="path"/> by prefixing <see cref="LongPathPrefix"/>.</summary>
-      /// <returns>The <paramref name="path"/> prefixed with a <see cref="LongPathPrefix"/>, the minimum required full path is: "C:\".</returns>
-      /// <remarks>This method does not verify that the resulting path and file name are valid, or that they see an existing file on the associated volume.</remarks>
+      /// <summary>指定された <paramref name="path"/> に <see cref="LongPathPrefix"/> を付加して拡張長パスを作成します。</summary>
+      /// <returns><see cref="LongPathPrefix"/> が付加された <paramref name="path"/>。必要な最小完全パスは "C:\" です。</returns>
+      /// <remarks>このメソッドは、結果のパスとファイル名が有効であるか、関連するボリューム上に既存のファイルが存在するかを検証しません。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="path">The path to the file or directory, this can also be an UNC path.</param>
-      /// <param name="options">Options for controlling the full path retrieval.</param>
+      /// <param name="path">ファイルまたはディレクトリへのパス。UNCパスも指定可能です。</param>
+      /// <param name="options">完全パス取得を制御するオプション。</param>
       [SecurityCritical]
       internal static string GetLongPathCore(string path, GetFullPathOptions options)
       {
@@ -62,11 +62,11 @@ namespace Alphaleonis.Win32.Filesystem
 
          if (path.StartsWith(UncPrefix, StringComparison.Ordinal))
          {
-            return LongPathUncPrefix + path.Substring(UncPrefix.Length);
+            return string.Concat(LongPathUncPrefix.AsSpan(), path.AsSpan(UncPrefix.Length));
          }
 
 
-         return IsPathRooted(path, false) && IsLogicalDriveCore(path, false, PathFormat.LongFullPath) ? LongPathPrefix + path : path;
+         return IsPathRooted(path, false) && IsLogicalDriveCore(path, false, PathFormat.LongFullPath) ? string.Concat(LongPathPrefix, path) : path;
       }
    }
 }

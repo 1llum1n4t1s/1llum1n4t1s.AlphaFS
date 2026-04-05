@@ -25,8 +25,8 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Decompresses an NTFS compressed file.</summary>
-      /// <param name="path">A path that describes a file to decompress.</param>      
+      /// <summary>[AlphaFS] NTFS圧縮されたファイルを展開します。</summary>
+      /// <param name="path">展開するファイルを示すパス。</param>
       [SecurityCritical]
       public static void Decompress(string path)
       {
@@ -34,9 +34,9 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Decompresses an NTFS compressed file.</summary>
-      /// <param name="path">A path that describes a file to decompress.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>      
+      /// <summary>[AlphaFS] NTFS圧縮されたファイルを展開します。</summary>
+      /// <param name="path">展開するファイルを示すパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>      
       [SecurityCritical]
       public static void Decompress(string path, PathFormat pathFormat)
       {

@@ -24,25 +24,25 @@ using Alphaleonis.Win32.Filesystem;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>Contains information about Server Message Block (SMB) shares. This class cannot be inherited.</summary>
+   /// <summary>サーバーメッセージブロック (SMB) セッションに関する情報を含みます。このクラスは継承できません。</summary>
    [Serializable]
    public sealed class SessionInfo
    {
-      #region Private Fields
+      #region プライベートフィールド
 
       private string _netName;
 
-      #endregion // Private Fields
+      #endregion // プライベートフィールド
 
 
-      #region Constructor
+      #region コンストラクター
 
-      /// <summary>Creates a <see cref="SessionInfo"/> instance.</summary>
-      /// <param name="hostName">The DNS or NetBIOS name of the specified host.</param>
-      /// <param name="sessionLevel">One of the <see cref="SessionInfoLevel"/> options.</param>
+      /// <summary><see cref="SessionInfo"/> インスタンスを作成します。</summary>
+      /// <param name="hostName">指定されたホストの DNS 名または NetBIOS 名。</param>
+      /// <param name="sessionLevel"><see cref="SessionInfoLevel"/> オプションのいずれか。</param>
       /// <param name="structure">
-      /// A <see cref="NativeMethods.SESSION_INFO_502"/>, <see cref="NativeMethods.SESSION_INFO_2"/>,
-      /// <see cref="NativeMethods.SESSION_INFO_1"/>, <see cref="NativeMethods.SESSION_INFO_10"/> or <see cref="NativeMethods.SESSION_INFO_0"/> instance.
+      /// <see cref="NativeMethods.SESSION_INFO_502"/>、<see cref="NativeMethods.SESSION_INFO_2"/>、
+      /// <see cref="NativeMethods.SESSION_INFO_1"/>、<see cref="NativeMethods.SESSION_INFO_10"/>、または <see cref="NativeMethods.SESSION_INFO_0"/> インスタンス。
       /// </param>
       internal SessionInfo(string hostName, SessionInfoLevel sessionLevel, object structure)
       {
@@ -114,28 +114,28 @@ namespace Alphaleonis.Win32.Network
          EncryptedSession = (flags & 2) == 0;
       }
 
-      #endregion // Constructor
+      #endregion // コンストラクター
 
 
-      #region Methods
+      #region メソッド
 
-      /// <summary>Returns the host name of this session information.</summary>
-      /// <returns>A string that represents this instance.</returns>
+      /// <summary>このセッション情報のホスト名を返します。</summary>
+      /// <returns>このインスタンスを表す文字列。</returns>
       public override string ToString()
       {
          return HostName;
       }
 
-      #endregion // Methods
+      #endregion // メソッド
 
 
-      #region Properties
+      #region プロパティ
 
-      /// <summary>The host name of this session information.</summary>
+      /// <summary>このセッション情報のホスト名。</summary>
       public string HostName { get; private set; }
 
 
-      /// <summary>The Computer name or IP address that established the session.</summary>
+      /// <summary>セッションを確立したコンピューター名または IP アドレス。</summary>
       public string NetName
       {
          get { return _netName; }
@@ -144,19 +144,19 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>The name of the User who established the session.</summary>
+      /// <summary>セッションを確立したユーザーの名前。</summary>
       public string UserName { get; private set; }
 
 
-      /// <summary>The number of files, devices, and pipes opened during the session.</summary>
+      /// <summary>セッション中に開かれたファイル、デバイス、パイプの数。</summary>
       public int OpenedResources { get; private set; }
 
 
-      /// <summary>The session active duration.</summary>
+      /// <summary>セッションのアクティブ期間。</summary>
       public TimeSpan ActiveTime { get; private set; }
 
 
-      /// <summary>The session idle duration.</summary>
+      /// <summary>セッションのアイドル期間。</summary>
       public TimeSpan IdleTime { get; private set; }
 
 
@@ -167,24 +167,24 @@ namespace Alphaleonis.Win32.Network
       ///// </summary>
       ////public int Flags { get; private set; }
 
-      /// <summary>A value that describes how the User established the session.</summary>
+      /// <summary>ユーザーがセッションを確立した方法を記述する値。ゲストセッションかどうかを示します。</summary>
       public bool GuestSession { get; private set; }
 
-      /// <summary>A value that describes how the User established the session.</summary>
+      /// <summary>ユーザーがセッションを確立した方法を記述する値。暗号化されたセッションかどうかを示します。</summary>
       public bool EncryptedSession { get; private set; }
 
 
-      /// <summary>The type of client that established the session. Sessions from LAN Manager servers running UNIX also will appear as LAN Manager 2.0.</summary>
+      /// <summary>セッションを確立したクライアントの種類。UNIX を実行している LAN Manager サーバーからのセッションも LAN Manager 2.0 として表示されます。</summary>
       public string ClientType { get; private set; }
 
 
-      /// <summary>The name of the transport that the client is using to communicate with the server.</summary>
+      /// <summary>クライアントがサーバーとの通信に使用しているトランスポートの名前。</summary>
       public string TransportType { get; private set; }
 
 
-      /// <summary>The structure level for the <see cref="SessionInfo"/> instance.</summary>
+      /// <summary><see cref="SessionInfo"/> インスタンスの構造体レベル。</summary>
       public SessionInfoLevel SessionLevel { get; private set; }
 
-      #endregion // Properties
+      #endregion // プロパティ
    }
 }

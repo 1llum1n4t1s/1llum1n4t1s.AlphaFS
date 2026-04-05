@@ -27,23 +27,23 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public sealed partial class DirectoryInfo
    {
-      /// <summary>[AlphaFS] Determines whether the given path refers to an existing directory junction on disk.</summary>
+      /// <summary>[AlphaFS] 指定されたパスがディスク上の既存のディレクトリジャンクションを参照しているかどうかを判断します。</summary>
       /// <returns>
-      ///   <para>Returns <c>true</c> if <paramref name="junctionPath"/> refers to an existing directory junction.</para>
-      ///   <para>Returns <c>false</c> if the directory junction does not exist or an error occurs when trying to determine if the specified file exists.</para>
+      ///   <para><paramref name="junctionPath"/> が既存のディレクトリジャンクションを参照している場合は <c>true</c> を返します。</para>
+      ///   <para>ディレクトリジャンクションが存在しないか、指定されたファイルの存在を確認しようとしたときにエラーが発生した場合は <c>false</c> を返します。</para>
       /// </returns>
       /// <para>&#160;</para>
       /// <remarks>
-      ///   <para>The Exists method returns <c>false</c> if any error occurs while trying to determine if the specified file exists.</para>
-      ///   <para>This can occur in situations that raise exceptions such as passing a file name with invalid characters or too many characters,</para>
-      ///   <para>a failing or missing disk, or if the caller does not have permission to read the file.</para>
+      ///   <para>指定されたファイルの存在を確認しようとしたときにエラーが発生した場合、Exists メソッドは <c>false</c> を返します。</para>
+      ///   <para>これは、無効な文字や文字数が多すぎるファイル名を渡した場合など、例外が発生する状況で起こる可能性があります。</para>
+      ///   <para>また、ディスクの障害や欠落、またはファイルの読み取り権限がない場合にも発生します。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="junctionPath">The path to test.</param>
+      /// <param name="junctionPath">テストするパス。</param>
       [SecurityCritical]
       public bool ExistsJunction(string junctionPath)
       {
@@ -51,24 +51,24 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Determines whether the given path refers to an existing directory junction on disk.</summary>
+      /// <summary>[AlphaFS] 指定されたパスがディスク上の既存のディレクトリジャンクションを参照しているかどうかを判断します。</summary>
       /// <returns>
-      ///   <para>Returns <c>true</c> if <paramref name="junctionPath"/> refers to an existing directory junction.</para>
-      ///   <para>Returns <c>false</c> if the directory junction does not exist or an error occurs when trying to determine if the specified file exists.</para>
+      ///   <para><paramref name="junctionPath"/> が既存のディレクトリジャンクションを参照している場合は <c>true</c> を返します。</para>
+      ///   <para>ディレクトリジャンクションが存在しないか、指定されたファイルの存在を確認しようとしたときにエラーが発生した場合は <c>false</c> を返します。</para>
       /// </returns>
       /// <para>&#160;</para>
       /// <remarks>
-      ///   <para>The Exists method returns <c>false</c> if any error occurs while trying to determine if the specified file exists.</para>
-      ///   <para>This can occur in situations that raise exceptions such as passing a file name with invalid characters or too many characters,</para>
-      ///   <para>a failing or missing disk, or if the caller does not have permission to read the file.</para>
+      ///   <para>指定されたファイルの存在を確認しようとしたときにエラーが発生した場合、Exists メソッドは <c>false</c> を返します。</para>
+      ///   <para>これは、無効な文字や文字数が多すぎるファイル名を渡した場合など、例外が発生する状況で起こる可能性があります。</para>
+      ///   <para>また、ディスクの障害や欠落、またはファイルの読み取り権限がない場合にも発生します。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="junctionPath">The path to test.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="junctionPath">テストするパス。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [SecurityCritical]
       public bool ExistsJunction(string junctionPath, PathFormat pathFormat)
       {

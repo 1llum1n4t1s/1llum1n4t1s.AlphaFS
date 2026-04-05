@@ -23,26 +23,26 @@ using System;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>[AlphaFS] The function attempted to use a name that is reserved for use by another transaction.</summary>
+   /// <summary>[AlphaFS] 関数が別のトランザクションによって使用が予約されている名前を使用しようとしました。</summary>
    [Serializable]
    public class TransactionalConflictException : TransactionException
    {
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="TransactionalConflictException"/> class.</summary>
+      /// <summary>[AlphaFS] <see cref="TransactionalConflictException"/>クラスの新しいインスタンスを初期化します。</summary>
       public TransactionalConflictException()
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="TransactionalConflictException"/> class.</summary>
-      /// <param name="message">The message.</param>
+      /// <summary>[AlphaFS] <see cref="TransactionalConflictException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="message">メッセージ。</param>
       public TransactionalConflictException(string message) : base(message)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="TransactionalConflictException"/> class.</summary>
-      /// <param name="message">The message.</param>
-      /// <param name="innerException">The inner exception.</param>
+      /// <summary>[AlphaFS] <see cref="TransactionalConflictException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="message">メッセージ。</param>
+      /// <param name="innerException">内部例外。</param>
       public TransactionalConflictException(string message, Exception innerException) : base(message, innerException)
       {
       }

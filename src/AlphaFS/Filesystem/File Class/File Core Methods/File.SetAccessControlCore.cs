@@ -32,15 +32,15 @@ namespace Alphaleonis.Win32.Filesystem
    public static partial class File
    {
       /// <summary>[AlphaFS] Applies access control list (ACL) entries described by a <see cref="FileSecurity"/>/<see cref="DirectorySecurity"/> object to the specified file or directory.</summary>
-      /// <remarks>Use either <paramref name="path"/> or <paramref name="handle"/>, not both.</remarks>
+      /// <remarks><paramref name="path"/>または<paramref name="handle"/>のいずれかを使用し、両方は使用しないでください。</remarks>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
-      /// <param name="path">A file or directory to add or remove access control list (ACL) entries from. This parameter This parameter may be <c>null</c>.</param>
+      /// <param name="path">アクセス制御リスト(ACL)エントリを追加または削除するファイルまたはディレクトリ。このパラメータは<c>null</c>にできます。</param>
       /// <param name="handle">A <see cref="SafeFileHandle"/> to add or remove access control list (ACL) entries from. This parameter This parameter may be <c>null</c>.</param>
-      /// <param name="objectSecurity">A <see cref="FileSecurity"/>/<see cref="DirectorySecurity"/> object that describes an ACL entry to apply to the file or directory described by the <paramref name="path"/>/<paramref name="handle"/> parameter.</param>
-      /// <param name="includeSections">One or more of the <see cref="AccessControlSections"/> values that specifies the type of access control list (ACL) information to set.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="objectSecurity"><paramref name="path"/>/<paramref name="handle"/>パラメータで記述されたファイルまたはディレクトリに適用するACLエントリを記述する<see cref="FileSecurity"/>/<see cref="DirectorySecurity"/>オブジェクト。</param>
+      /// <param name="includeSections">設定するアクセス制御リスト(ACL)情報の種類を指��する<see cref="AccessControlSections"/>値の1つ以上。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
       [SecurityCritical]
       internal static void SetAccessControlCore(string path, SafeFileHandle handle, ObjectSecurity objectSecurity, AccessControlSections includeSections, PathFormat pathFormat)
@@ -181,7 +181,7 @@ namespace Alphaleonis.Win32.Filesystem
             if (!Utils.IsNullOrWhiteSpace(pathLp))
             {
                // SetNamedSecurityInfo()
-               // 2013-01-13: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
+               // 2013-01-13: MSDNはLongPathの使用を確認していませんが、この関数のUnicodeバージョンが存在します。
 
                lastError = (int) Security.NativeMethods.SetNamedSecurityInfo(pathLp, SE_OBJECT_TYPE.SE_FILE_OBJECT, securityInfo, pOwner, pGroup, pDacl, pSacl);
 

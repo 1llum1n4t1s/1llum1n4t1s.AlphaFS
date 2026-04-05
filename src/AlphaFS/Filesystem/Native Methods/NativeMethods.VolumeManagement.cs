@@ -31,100 +31,100 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {  
-      /// <summary>Defines, redefines, or deletes MS-DOS device names.</summary>
+      /// <summary>MS-DOS デバイス名を定義、再定義、または削除します。</summary>
       /// <returns>
-      /// If the function succeeds, the return value is nonzero.
-      /// If the function fails, the return value is zero. To get extended error information, call GetLastError.
+      /// 関数が成功した場合、戻り値はゼロ以外です。
+      /// 関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。
       /// </returns>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "DefineDosDeviceW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]
       internal static extern bool DefineDosDevice(DosDeviceAttributes dwFlags, [MarshalAs(UnmanagedType.LPWStr)] string lpDeviceName, [MarshalAs(UnmanagedType.LPWStr)] string lpTargetPath);
 
-      /// <summary>Deletes a drive letter or mounted folder.</summary>
+      /// <summary>ドライブ文字またはマウントされたフォルダを削除します。</summary>
       /// <returns>
-      /// If the function succeeds, the return value is nonzero.
-      /// If the function fails, the return value is zero. To get extended error information, call GetLastError.
+      /// 関数が成功した場合、戻り値はゼロ以外です。
+      /// 関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。
       /// </returns>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "DeleteVolumeMountPointW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]
       internal static extern bool DeleteVolumeMountPoint([MarshalAs(UnmanagedType.LPWStr)] string lpszVolumeMountPoint);
 
-      /// <summary>Retrieves the name of a volume on a computer. FindFirstVolume is used to begin scanning the volumes of a computer.</summary>
+      /// <summary>コンピュータ上のボリュームの名前を取得します。FindFirstVolume はコンピュータのボリュームのスキャンを開始するために使用されます。</summary>
       /// <returns>
-      /// If the function succeeds, the return value is a search handle used in a subsequent call to the FindNextVolume and FindVolumeClose functions.
-      /// If the function fails to find any volumes, the return value is the INVALID_HANDLE_VALUE error code. To get extended error information, call GetLastError.
+      /// 関数が成功した場合、戻り値は後続の FindNextVolume および FindVolumeClose 関数の呼び出しで使用される検索ハンドルです。
+      /// 関数がボリュームを見つけられなかった場合、戻り値は INVALID_HANDLE_VALUE エラーコードです。拡張エラー情報を取得するには GetLastError を呼び出してください。
       /// </returns>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "FindFirstVolumeW"), SuppressUnmanagedCodeSecurity]
       internal static extern SafeFindVolumeHandle FindFirstVolume(StringBuilder lpszVolumeName, [MarshalAs(UnmanagedType.U4)] uint cchBufferLength);
 
-      /// <summary>Retrieves the name of a mounted folder on the specified volume. FindFirstVolumeMountPoint is used to begin scanning the mounted folders on a volume.</summary>
+      /// <summary>指定されたボリューム上のマウントされたフォルダの名前を取得します。FindFirstVolumeMountPoint はボリューム上のマウントされたフォルダのスキャンを開始するために使用されます。</summary>
       /// <returns>
-      /// If the function succeeds, the return value is a search handle used in a subsequent call to the FindNextVolumeMountPoint and FindVolumeMountPointClose functions.
-      /// If the function fails to find a mounted folder on the volume, the return value is the INVALID_HANDLE_VALUE error code.
+      /// 関数が成功した場合、戻り値は後続の FindNextVolumeMountPoint および FindVolumeMountPointClose 関数の呼び出しで使用される検索ハンドルです。
+      /// 関数がボリューム上のマウントされたフォルダを見つけられなかった場合、戻り値は INVALID_HANDLE_VALUE エラーコードです。
       /// </returns>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "FindFirstVolumeMountPointW"), SuppressUnmanagedCodeSecurity]
       internal static extern SafeFindVolumeMountPointHandle FindFirstVolumeMountPoint([MarshalAs(UnmanagedType.LPWStr)] string lpszRootPathName, StringBuilder lpszVolumeMountPoint, [MarshalAs(UnmanagedType.U4)] uint cchBufferLength);
 
-      /// <summary>Continues a volume search started by a call to the FindFirstVolume function. FindNextVolume finds one volume per call.</summary>
+      /// <summary>FindFirstVolume 関数の呼び出しで開始されたボリューム検索を続行します。FindNextVolume は呼び出しごとに1つのボリュームを検索します。</summary>
       /// <returns>
-      /// If the function succeeds, the return value is nonzero.
-      /// If the function fails, the return value is zero. To get extended error information, call GetLastError.
+      /// 関数が成功した場合、戻り値はゼロ以外です。
+      /// 関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。
       /// </returns>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "FindNextVolumeW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]
       internal static extern bool FindNextVolume(SafeFindVolumeHandle hFindVolume, StringBuilder lpszVolumeName, [MarshalAs(UnmanagedType.U4)] uint cchBufferLength);
 
-      /// <summary>Continues a mounted folder search started by a call to the FindFirstVolumeMountPoint function. FindNextVolumeMountPoint finds one mounted folder per call.</summary>
+      /// <summary>FindFirstVolumeMountPoint 関数の呼び出しで開始されたマウントされたフォルダの検索を続行します。FindNextVolumeMountPoint は呼び出しごとに1つのマウントされたフォルダを検索します。</summary>
       /// <returns>
-      /// If the function succeeds, the return value is nonzero.
-      /// If the function fails, the return value is zero. To get extended error information, call GetLastError. If no more mounted folders can be found, the GetLastError function returns the ERROR_NO_MORE_FILES error code.
-      /// In that case, close the search with the FindVolumeMountPointClose function.
+      /// 関数が成功した場合、戻り値はゼロ以外です。
+      /// 関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。マウントされたフォルダがこれ以上見つからない場合、GetLastError 関数は ERROR_NO_MORE_FILES エラーコードを返します。
+      /// その場合は、FindVolumeMountPointClose 関数で検索を閉じてください。
       /// </returns>
-      /// <remarks>Minimum supported client: Windows XP</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "FindNextVolumeMountPointW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]
       internal static extern bool FindNextVolumeMountPoint(SafeFindVolumeMountPointHandle hFindVolume, StringBuilder lpszVolumeName, [MarshalAs(UnmanagedType.U4)] uint cchBufferLength);
 
-      /// <summary>Closes the specified volume search handle.</summary>
+      /// <summary>指定されたボリューム検索ハンドルを閉じます。</summary>
       /// <remarks>
-      ///   <para>SetLastError is set to <c>false</c>.</para>
-      ///   Minimum supported client: Windows XP [desktop apps only]. Minimum supported server: Windows Server 2003 [desktop apps only].
+      ///   <para>SetLastError は <c>false</c> に設定されています。</para>
+      ///   サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]。サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]。
       /// </remarks>
       /// <returns>
-      ///   If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error
-      ///   information, call GetLastError.
+      ///   関数が成功した場合、戻り値はゼロ以外です。関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには
+      ///   GetLastError を呼び出してください。
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = false, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]
       internal static extern bool FindVolumeClose(IntPtr hFindVolume);
 
-      /// <summary>Closes the specified mounted folder search handle.</summary>
+      /// <summary>指定されたマウントされたフォルダの検索ハンドルを閉じます。</summary>
       /// <remarks>
-      ///   <para>SetLastError is set to <c>false</c>.</para>
-      ///   <para>Minimum supported client: Windows XP</para>
-      ///   <para>Minimum supported server: Windows Server 2003</para>
+      ///   <para>SetLastError は <c>false</c> に設定されています。</para>
+      ///   <para>サポートされる最小クライアント: Windows XP</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2003</para>
       /// </remarks>
       /// <returns>
-      ///   If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error
-      ///   information, call GetLastError.
+      ///   関数が成功した場合、戻り値はゼロ以外です。関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには
+      ///   GetLastError を呼び出してください。
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = false, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
@@ -132,19 +132,19 @@ namespace Alphaleonis.Win32.Filesystem
       internal static extern bool FindVolumeMountPointClose(IntPtr hFindVolume);
 
       /// <summary>
-      ///   Determines whether a disk drive is a removable, fixed, CD-ROM, RAM disk, or network drive.
-      ///   <para>To determine whether a drive is a USB-type drive, call <see cref="SetupDiGetDeviceRegistryProperty"/> and specify the
-      ///   SPDRP_REMOVAL_POLICY property.</para>
+      ///   ディスクドライブがリムーバブル、固定、CD-ROM、RAM ディスク、またはネットワークドライブかどうかを判断します。
+      ///   <para>ドライブが USB タイプのドライブかどうかを判断するには、<see cref="SetupDiGetDeviceRegistryProperty"/> を呼び出して
+      ///   SPDRP_REMOVAL_POLICY プロパティを指定します。</para>
       /// </summary>
       /// <remarks>
-      ///   <para>SMB does not support volume management functions.</para>
-      ///   <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      ///   <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      ///   <para>SMB はボリューム管理関数をサポートしていません。</para>
+      ///   <para>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</para>
       /// </remarks>
-      /// <param name="lpRootPathName">Full pathname of the root file.</param>
+      /// <param name="lpRootPathName">ルートファイルの完全パス名。</param>
       /// <returns>
-      ///   <para>The return value specifies the type of drive, see <see cref="DriveType"/>.</para>
-      ///   <para>If the function fails, the return value is zero. To get extended error information, call GetLastError.</para>
+      ///   <para>戻り値はドライブの種類を指定します。<see cref="DriveType"/> を参照してください。</para>
+      ///   <para>関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "GetDriveTypeW"), SuppressUnmanagedCodeSecurity]
@@ -152,130 +152,130 @@ namespace Alphaleonis.Win32.Filesystem
       internal static extern DriveType GetDriveType([MarshalAs(UnmanagedType.LPWStr)] string lpRootPathName);
 
       /// <summary>
-      ///   Retrieves a bitmask representing the currently available disk drives.
+      ///   現在利用可能なディスクドライブを表すビットマスクを取得します。
       /// </summary>
       /// <remarks>
-      ///   <para>SMB does not support volume management functions.</para>
-      ///   <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      ///   <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      ///   <para>SMB はボリューム管理関数をサポートしていません。</para>
+      ///   <para>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</para>
       /// </remarks>
       /// <returns>
-      ///   <para>If the function succeeds, the return value is a bitmask representing the currently available disk drives.</para>
-      ///   <para>Bit position 0 (the least-significant bit) is drive A, bit position 1 is drive B, bit position 2 is drive C, and so on.</para>
-      ///   <para>If the function fails, the return value is zero. To get extended error information, call GetLastError.</para>
+      ///   <para>関数が成功した場合、戻り値は現在利用可能なディスクドライブを表すビットマスクです。</para>
+      ///   <para>ビット位置 0 (最下位ビット) はドライブ A、ビット位置 1 はドライブ B、ビット位置 2 はドライブ C、以下同様です。</para>
+      ///   <para>関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.U4)]
       internal static extern uint GetLogicalDrives();
 
-      /// <summary>Retrieves information about the file system and volume associated with the specified root directory.</summary>
+      /// <summary>指定されたルートディレクトリに関連付けられたファイルシステムとボリュームに関する情報を取得します。</summary>
       /// <returns>
-      /// If all the requested information is retrieved, the return value is nonzero.
-      /// If not all the requested information is retrieved, the return value is zero.
+      /// 要求されたすべての情報が取得された場合、戻り値はゼロ以外です。
+      /// 要求されたすべての情報が取得されなかった場合、戻り値はゼロです。
       /// </returns>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
-      /// <remarks>"lpRootPathName" must end with a trailing backslash.</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</remarks>
+      /// <remarks>"lpRootPathName" は末尾のバックスラッシュで終わる必要があります。</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "GetVolumeInformationW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]
       internal static extern bool GetVolumeInformation([MarshalAs(UnmanagedType.LPWStr)] string lpRootPathName, StringBuilder lpVolumeNameBuffer, [MarshalAs(UnmanagedType.U4)] uint nVolumeNameSize, [MarshalAs(UnmanagedType.U4)] out uint lpVolumeSerialNumber, [MarshalAs(UnmanagedType.U4)] out int lpMaximumComponentLength, [MarshalAs(UnmanagedType.U4)] out VOLUME_INFO_FLAGS lpFileSystemAttributes, StringBuilder lpFileSystemNameBuffer, [MarshalAs(UnmanagedType.U4)] uint nFileSystemNameSize);
 
-      /// <summary>Retrieves information about the file system and volume associated with the specified file.</summary>
+      /// <summary>指定されたファイルに関連付けられたファイルシステムとボリュームに関する情報を取得します。</summary>
       /// <returns>
-      /// If all the requested information is retrieved, the return value is nonzero.
-      /// If not all the requested information is retrieved, the return value is zero. To get extended error information, call GetLastError.
+      /// 要求されたすべての情報が取得された場合、戻り値はゼロ以外です。
+      /// 要求されたすべての情報が取得されなかった場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。
       /// </returns>
-      /// <remarks>To retrieve the current compression state of a file or directory, use FSCTL_GET_COMPRESSION.</remarks>
-      /// <remarks>SMB does not support volume management functions.</remarks>
-      /// <remarks>Minimum supported client: Windows Vista [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2008 [desktop apps only]</remarks>
+      /// <remarks>ファイルまたはディレクトリの現在の圧縮状態を取得するには、FSCTL_GET_COMPRESSION を使用してください。</remarks>
+      /// <remarks>SMB はボリューム管理関数をサポートしていません。</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows Vista [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2008 [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "GetVolumeInformationByHandleW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]
       internal static extern bool GetVolumeInformationByHandle(SafeFileHandle hFile, StringBuilder lpVolumeNameBuffer, [MarshalAs(UnmanagedType.U4)] uint nVolumeNameSize, [MarshalAs(UnmanagedType.U4)] out uint lpVolumeSerialNumber, [MarshalAs(UnmanagedType.U4)] out int lpMaximumComponentLength, out VOLUME_INFO_FLAGS lpFileSystemAttributes, StringBuilder lpFileSystemNameBuffer, [MarshalAs(UnmanagedType.U4)] uint nFileSystemNameSize);
 
-      /// <summary>Retrieves a volume GUID path for the volume that is associated with the specified volume mount point (drive letter, volume GUID path, or mounted folder).</summary>
+      /// <summary>指定されたボリュームマウントポイント (ドライブ文字、ボリューム GUID パス、またはマウントされたフォルダ) に関連付けられたボリュームのボリューム GUID パスを取得します。</summary>
       /// <returns>
-      /// If the function succeeds, the return value is nonzero.
-      /// If the function fails, the return value is zero. To get extended error information, call GetLastError.
+      /// 関数が成功した場合、戻り値はゼロ以外です。
+      /// 関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。
       /// </returns>
-      /// <remarks>Use GetVolumeNameForVolumeMountPoint to obtain a volume GUID path for use with functions such as SetVolumeMountPoint and FindFirstVolumeMountPoint that require a volume GUID path as an input parameter.</remarks>
-      /// <remarks>SMB does not support volume management functions.</remarks>
-      /// <remarks>Mount points aren't supported by ReFS volumes.</remarks>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <remarks>入力パラメータとしてボリューム GUID パスを必要とする SetVolumeMountPoint や FindFirstVolumeMountPoint などの関数で使用するボリューム GUID パスを取得するには、GetVolumeNameForVolumeMountPoint を使用してください。</remarks>
+      /// <remarks>SMB はボリューム管理関数をサポートしていません。</remarks>
+      /// <remarks>マウントポイントは ReFS ボリュームではサポートされていません。</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "GetVolumeNameForVolumeMountPointW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]
       internal static extern bool GetVolumeNameForVolumeMountPoint([MarshalAs(UnmanagedType.LPWStr)] string lpszVolumeMountPoint, StringBuilder lpszVolumeName, [MarshalAs(UnmanagedType.U4)] uint cchBufferLength);
 
-      /// <summary>Retrieves the volume mount point where the specified path is mounted.</summary>
+      /// <summary>指定されたパスがマウントされているボリュームマウントポイントを取得します。</summary>
       /// <remarks>
-      ///   <para>If a specified path is passed, GetVolumePathName returns the path to the volume mount point, which means that it returns the
-      ///   root of the volume where the end point of the specified path is located.</para>
-      ///   <para>For example, assume that you have volume D mounted at C:\Mnt\Ddrive and volume E mounted at "C:\Mnt\Ddrive\Mnt\Edrive". Also
-      ///   assume that you have a file with the path "E:\Dir\Subdir\MyFile".</para>
-      ///   <para>If you pass "C:\Mnt\Ddrive\Mnt\Edrive\Dir\Subdir\MyFile" to GetVolumePathName, it returns the path "C:\Mnt\Ddrive\Mnt\Edrive\".</para>
-      ///   <para>If a network share is specified, GetVolumePathName returns the shortest path for which GetDriveType returns DRIVE_REMOTE,
-      ///   which means that the path is validated as a remote drive that exists, which the current user can access.</para>
-      ///   <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      ///   <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      ///   <para>指定されたパスが渡された場合、GetVolumePathName はボリュームマウントポイントへのパスを返します。
+      ///   これは、指定されたパスのエンドポイントが存在するボリュームのルートを返すことを意味します。</para>
+      ///   <para>例えば、ボリューム D が C:\Mnt\Ddrive にマウントされ、ボリューム E が "C:\Mnt\Ddrive\Mnt\Edrive" にマウントされているとします。
+      ///   また、パス "E:\Dir\Subdir\MyFile" のファイルがあるとします。</para>
+      ///   <para>"C:\Mnt\Ddrive\Mnt\Edrive\Dir\Subdir\MyFile" を GetVolumePathName に渡すと、パス "C:\Mnt\Ddrive\Mnt\Edrive\" が返されます。</para>
+      ///   <para>ネットワーク共有が指定された場合、GetVolumePathName は GetDriveType が DRIVE_REMOTE を返す最短パスを返します。
+      ///   これは、パスが現在のユーザーがアクセスできる存在するリモートドライブとして検証されることを意味します。</para>
+      ///   <para>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</para>
       /// </remarks>
       /// <returns>
-      ///   <para>If the function succeeds, the return value is nonzero.</para>
-      ///   <para>If the function fails, the return value is zero. To get extended error information, call GetLastError.</para>
+      ///   <para>関数が成功した場合、戻り値はゼロ以外です。</para>
+      ///   <para>関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。</para>
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "GetVolumePathNameW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]
       internal static extern bool GetVolumePathName([MarshalAs(UnmanagedType.LPWStr)] string lpszFileName, StringBuilder lpszVolumePathName, [MarshalAs(UnmanagedType.U4)] uint cchBufferLength);
 
-      /// <summary>Retrieves a list of drive letters and mounted folder paths for the specified volume.</summary>
-      /// <remarks>Minimum supported client: Windows XP.</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003.</remarks>
+      /// <summary>指定されたボリュームのドライブ文字とマウントされたフォルダパスの一覧を取得します。</summary>
+      /// <remarks>サポートされる最小クライアント: Windows XP。</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003。</remarks>
       /// <returns>
-      ///   If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error
-      ///   information, call GetLastError.
+      ///   関数が成功した場合、戻り値はゼロ以外です。関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには
+      ///   GetLastError を呼び出してください。
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "GetVolumePathNamesForVolumeNameW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]
       internal static extern bool GetVolumePathNamesForVolumeName([MarshalAs(UnmanagedType.LPWStr)] string lpszVolumeName, char[] lpszVolumePathNames, [MarshalAs(UnmanagedType.U4)] uint cchBuferLength, [MarshalAs(UnmanagedType.U4)] out uint lpcchReturnLength);
 
-      /// <summary>Sets the label of a file system volume.</summary>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only].</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only].</remarks>
-      /// <remarks>"lpRootPathName" must end with a trailing backslash.</remarks>
+      /// <summary>ファイルシステムボリュームのラベルを設定します。</summary>
+      /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]。</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]。</remarks>
+      /// <remarks>"lpRootPathName" は末尾のバックスラッシュで終わる必要があります。</remarks>
       /// <returns>
-      ///   If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error
-      ///   information, call GetLastError.
+      ///   関数が成功した場合、戻り値はゼロ以外です。関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには
+      ///   GetLastError を呼び出してください。
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "SetVolumeLabelW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]
       internal static extern bool SetVolumeLabel([MarshalAs(UnmanagedType.LPWStr)] string lpRootPathName, [MarshalAs(UnmanagedType.LPWStr)] string lpVolumeName);
 
-      /// <summary>Associates a volume with a drive letter or a directory on another volume.</summary>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only].</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only].</remarks>
+      /// <summary>ボリュームをドライブ文字または別のボリューム上のディレクトリに関連付けます。</summary>
+      /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]。</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]。</remarks>
       /// <returns>
-      ///   If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error
-      ///   information, call GetLastError.
+      ///   関数が成功した場合、戻り値はゼロ以外です。関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには
+      ///   GetLastError を呼び出してください。
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "SetVolumeMountPointW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]
       internal static extern bool SetVolumeMountPoint([MarshalAs(UnmanagedType.LPWStr)] string lpszVolumeMountPoint, [MarshalAs(UnmanagedType.LPWStr)] string lpszVolumeName);
 
-      /// <summary>Retrieves information about MS-DOS device names.</summary>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only].</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only].</remarks>
+      /// <summary>MS-DOS デバイス名に関する情報を取得します。</summary>
+      /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]。</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]。</remarks>
       /// <returns>
-      ///   If the function succeeds, the return value is the number of TCHARs stored into the buffer pointed to by lpTargetPath. If the
-      ///   function fails, the return value is zero. To get extended error information, call GetLastError. If the buffer is too small, the
-      ///   function fails and the last error code is ERROR_INSUFFICIENT_BUFFER.
+      ///   関数が成功した場合、戻り値は lpTargetPath が指すバッファに格納された TCHAR の数です。
+      ///   関数が失敗した場合、戻り値はゼロです。拡張エラー情報を取得するには GetLastError を呼び出してください。バッファが小さすぎる場合、
+      ///   関数は失敗し、最後のエラーコードは ERROR_INSUFFICIENT_BUFFER です。
       /// </returns>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "QueryDosDeviceW"), SuppressUnmanagedCodeSecurity]

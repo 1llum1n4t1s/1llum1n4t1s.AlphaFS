@@ -35,7 +35,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="path">A path that describes a directory to decrypt.</param>
+      /// <param name="path">復号化するディレクトリを示すパス。</param>
       [SecurityCritical]
       public static void Decrypt(string path)
       {
@@ -51,8 +51,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="path">A path that describes a directory to decrypt.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="path">復号化するディレクトリを示すパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void Decrypt(string path, PathFormat pathFormat)
       {
@@ -68,7 +68,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="path">A path that describes a directory to decrypt.</param>
+      /// <param name="path">復号化するディレクトリを示すパス。</param>
       /// <param name="recursive"><c>true</c> to decrypt the directory recursively. <c>false</c> only decrypt the directory.</param>
       [SecurityCritical]
       public static void Decrypt(string path, bool recursive)
@@ -85,9 +85,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="path">A path that describes a directory to decrypt.</param>
+      /// <param name="path">復号化するディレクトリを示すパス。</param>
       /// <param name="recursive"><c>true</c> to decrypt the directory recursively. <c>false</c> only decrypt the directory.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void Decrypt(string path, bool recursive, PathFormat pathFormat)
       {

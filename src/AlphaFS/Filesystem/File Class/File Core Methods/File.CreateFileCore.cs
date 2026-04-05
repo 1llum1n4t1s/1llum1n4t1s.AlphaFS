@@ -33,7 +33,7 @@ namespace Alphaleonis.Win32.Filesystem
    public static partial class File
    {
       /// <summary>Creates or opens a file, directory or I/O device.</summary>
-      /// <returns>A <see cref="SafeFileHandle"/> that provides read/write access to the file or directory specified by <paramref name="path"/>.</returns>
+      /// <returns><paramref name="path"/>で指定されたファイルまたはディレクトリへの読み取り/書き込みアクセスを提供する<see cref="SafeFileHandle"/>。</returns>
       /// <remarks>
       ///   <para>To obtain a directory handle using CreateFile, specify the FILE_FLAG_BACKUP_SEMANTICS flag as part of dwFlagsAndAttributes.</para>
       ///   <para>The most commonly used I/O devices are as follows: file, file stream, directory, physical disk, volume, console buffer, tape drive, communications resource, mailslot, and pipe.</para>
@@ -42,17 +42,17 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="Exception"/>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="isFolder">When <c>true</c> indicates the source is a directory, <c>false</c> indicates a file and <c>null</c> specifies a physical device.</param>
       /// <param name="path">The path and name of the file or directory to create.</param>
       /// <param name="attributes">One of the <see cref="ExtendedFileAttributes"/> values that describes how to create or overwrite the file or directory.</param>
-      /// <param name="fileSecurity">A <see cref="FileSecurity"/> instance that determines the access control and audit security for the file or directory.</param>
-      /// <param name="fileMode">A <see cref="FileMode"/> constant that determines how to open or create the file or directory.</param>
-      /// <param name="fileSystemRights">A <see cref="FileSystemRights"/> constant that determines the access rights to use when creating access and audit rules for the file or directory.</param>
-      /// <param name="fileShare">A <see cref="FileShare"/> constant that determines how the file or directory will be shared by processes.</param>
-      /// <param name="checkPath"></param>
-      /// <param name="continueOnException"><c>true</c> suppress any Exception that might be thrown as a result from a failure, such as ACLs protected directories or non-accessible reparse points.</param>
-      /// <param name="pathFormat">Indicates the format of the <paramref name="path"/> parameter.</param>
+      /// <param name="fileSecurity">ファイルまたはディレクトリのアクセス制御と監査セキュリティを決定する<see cref="FileSecurity"/>インスタンス。</param>
+      /// <param name="fileMode">ファイルまたはディレクトリの開き方または作成方法を決定する<see cref="FileMode"/>定数。</param>
+      /// <param name="fileSystemRights">ファイルまたはディレクトリのアクセスルールと監査ルールの作成時に使用するアクセス権を決定する<see cref="FileSystemRights"/>定数。</param>
+      /// <param name="fileShare">プロセスによるファイルまたはディレクトリの共有方法を決定する<see cref="FileShare"/>定数。</param>
+      /// <param name="checkPath">チェックするパス。</param>
+      /// <param name="continueOnException"><c>true</c>の場合、ACLで保護されたディレクトリやアクセスできないリパースポイントなどの失敗の結果としてスローされる可能性のある例外を抑制します。</param>
+      /// <param name="pathFormat"><paramref name="path"/>パラメータの形式を示します。</param>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Object needs to be disposed by caller.")]
       [SecurityCritical]
       internal static SafeFileHandle CreateFileCore(KernelTransaction transaction, bool? isFolder, string path, ExtendedFileAttributes attributes, FileSecurity fileSecurity, FileMode fileMode, FileSystemRights fileSystemRights, FileShare fileShare, bool checkPath, bool continueOnException, PathFormat pathFormat)
@@ -64,15 +64,15 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
-         // When isFile == null, we're working with a device.
-         // When opening a VOLUME or removable media drive (for example, a floppy disk drive or flash memory thumb drive),
-         // the path string should be the following form: "\\.\X:"
-         // Do not use a trailing backslash ('\'), which indicates the root.
+         // isFile == nullの場合、デバイスを操作しています。
+         // ボリュームまたはリムーバブルメディアドライブ(フロッピーディスクドライブやフラッシュメモリサムドライブなど)を開く場合、
+         // パス文字列は次の形式にする必要があります: "\\.\X:"
+         // ルートを示す末尾のバックスラッシュ('\')は使用しないでください。
 
          var pathLp = Path.GetExtendedLengthPathCore(transaction, path, pathFormat, GetFullPathOptions.TrimEnd | GetFullPathOptions.RemoveTrailingDirectorySeparator);
 
 
-         // CreateFileXxx() does not support FileMode.Append mode.
+         // CreateFileXxx()はFileMode.Appendモードをサポートしていません。
          var isAppend = fileMode == FileMode.Append;
          if (isAppend)
          {
@@ -94,7 +94,7 @@ namespace Alphaleonis.Win32.Filesystem
             var safeHandle = transaction == null || !NativeMethods.IsAtLeastWindowsVista
 
                // CreateFile() / CreateFileTransacted()
-               // 2013-01-13: MSDN confirms LongPath usage.
+               // 2013-01-13: MSDNはLongPathの使用を確認しています。
 
                ? NativeMethods.CreateFile(pathLp, fileSystemRights, fileShare, securityAttributes, fileMode, attributes, IntPtr.Zero)
 

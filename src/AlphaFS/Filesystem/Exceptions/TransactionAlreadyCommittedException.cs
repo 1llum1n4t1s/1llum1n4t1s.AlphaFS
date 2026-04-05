@@ -23,26 +23,26 @@ using System;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>[AlphaFS] It is too late to perform the requested operation, since the Transaction has already been committed.</summary>
+   /// <summary>[AlphaFS] トランザクションが既にコミットされているため、要求された操作を実行するには遅すぎます。</summary>
    [Serializable]
    public class TransactionAlreadyCommittedException : TransactionException
    {
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="TransactionAlreadyCommittedException"/> class.</summary>
+      /// <summary>[AlphaFS] <see cref="TransactionAlreadyCommittedException"/>クラスの新しいインスタンスを初期化します。</summary>
       public TransactionAlreadyCommittedException()
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="TransactionAlreadyCommittedException"/> class.</summary>
-      /// <param name="message">The message.</param>
+      /// <summary>[AlphaFS] <see cref="TransactionAlreadyCommittedException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="message">メッセージ。</param>
       public TransactionAlreadyCommittedException(string message) : base(message)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="TransactionAlreadyCommittedException"/> class.</summary>
-      /// <param name="message">The message.</param>
-      /// <param name="innerException">The inner exception.</param>
+      /// <summary>[AlphaFS] <see cref="TransactionAlreadyCommittedException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="message">メッセージ。</param>
+      /// <param name="innerException">内部例外。</param>
       public TransactionAlreadyCommittedException(string message, Exception innerException) : base(message, innerException)
       {
       }

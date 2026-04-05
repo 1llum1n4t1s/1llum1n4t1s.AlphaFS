@@ -23,8 +23,8 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>Exposes static methods for creating, moving, and enumerating through directories and subdirectories.
-   ///   <para>This class cannot be inherited.</para>
+   /// <summary>ディレクトリとサブディレクトリの作成、移動、列挙のための静的メソッドを公開します。
+   ///   <para>このクラスは継承できません。</para>
    /// </summary>
    [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
    public static partial class Directory

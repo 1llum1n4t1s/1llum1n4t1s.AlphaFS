@@ -28,16 +28,16 @@ namespace Alphaleonis.Win32.Security
 {
    internal static partial class NativeMethods
    {
-      /// <summary>The GetNamedSecurityInfo function retrieves a copy of the security descriptor for an object specified by name.
+      /// <summary>GetNamedSecurityInfo関数は、名前で指定されたオブジェクトのセキュリティ記述子のコピーを取得します。
       /// <para>&#160;</para>
       /// <returns>
-      /// <para>If the function succeeds, the return value is ERROR_SUCCESS.</para>
-      /// <para>If the function fails, the return value is a nonzero error code defined in WinError.h.</para>
+      /// <para>関数が成功した場合、戻り値はERROR_SUCCESSです。</para>
+      /// <para>関数が失敗した場合、戻り値はWinError.hで定義された0以外のエラーコードです。</para>
       /// </returns>
       /// <para>&#160;</para>
       /// <remarks>
-      /// <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      /// <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      /// <para>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</para>
+      /// <para>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</para>
       /// </remarks>
       /// </summary>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]

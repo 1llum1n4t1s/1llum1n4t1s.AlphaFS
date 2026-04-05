@@ -31,8 +31,8 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Volume
    {
-      /// <summary>[AlphaFS] Retrieves a sorted list of all existing MS-DOS device names.</summary>
-      /// <returns>An <see cref="IEnumerable{String}"/> sorted list of all existing MS-DOS device names.</returns>
+      /// <summary>[AlphaFS] 既存のすべての MS-DOS デバイス名のソートされたリストを取得します。</summary>
+      /// <returns>既存のすべての MS-DOS デバイス名のソートされた <see cref="IEnumerable{String}"/> リスト。</returns>
       [SecurityCritical]
       public static IEnumerable<string> QueryAllDosDevices()
       {
@@ -40,11 +40,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Retrieves the current mapping for a particular MS-DOS device name.</summary>
-      /// <returns>The current mapping for a particular MS-DOS device name.</returns>
+      /// <summary>[AlphaFS] 特定の MS-DOS デバイス名の現在のマッピングを取得します。</summary>
+      /// <returns>特定の MS-DOS デバイス名の現在のマッピング。</returns>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="FileNotFoundException"/>
-      /// <param name="deviceName">An MS-DOS device name string specifying the target of the query, such as: "C:", "D:" or "\\?\Volume{GUID}".</param>
+      /// <param name="deviceName">クエリのターゲットを指定する MS-DOS デバイス名文字列。例: "C:"、"D:" または "\\?\Volume{GUID}"。</param>
       [SecurityCritical]
       public static string QueryDosDevice(string deviceName)
       {
@@ -62,17 +62,17 @@ namespace Alphaleonis.Win32.Filesystem
 
 
 
-      /// <summary>[AlphaFS] Retrieves the current mapping for a particular MS-DOS device name. The function can also obtain a list of all existing MS-DOS device names.</summary>
-      /// <returns>An <see cref="IEnumerable{String}"/> sorted list of all existing MS-DOS device names or the .</returns>
+      /// <summary>[AlphaFS] 特定の MS-DOS デバイス名の現在のマッピングを取得します。この関数は既存のすべての MS-DOS デバイス名のリストも取得できます。</summary>
+      /// <returns>既存のすべての MS-DOS デバイス名のソートされた <see cref="IEnumerable{String}"/> リスト。</returns>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="FileNotFoundException"/>
-      /// <param name="deviceName">An MS-DOS device name string specifying the target of the query, such as: "C:", "D:" or "\\?\Volume{GUID}".</param>
-      /// <param name="sort"><c>true</c> to sort the list with MS-DOS device names.</param>
+      /// <param name="deviceName">クエリのターゲットを指定する MS-DOS デバイス名文字列。例: "C:"、"D:" または "\\?\Volume{GUID}"。</param>
+      /// <param name="sort"><c>true</c> は MS-DOS デバイス名のリストをソートします。</param>
       [SecurityCritical]
       internal static IEnumerable<string> QueryDosDeviceCore(string deviceName, bool sort)
       {
-         // deviceName is allowed to be null: Retrieve a list of all existing MS-DOS device names.
-         // The deviceName cannot have a trailing backslash.
+         // deviceName は null が許可されています: 既存のすべての MS-DOS デバイス名のリストを取得します。
+         // deviceName には末尾のバックスラッシュを含めることはできません。
 
          if (!Utils.IsNullOrWhiteSpace(deviceName))
          {
@@ -99,7 +99,7 @@ namespace Alphaleonis.Win32.Filesystem
 
          uint returnedBufferSize = 0;
 
-         var bufferSize = (uint) (sort ? NativeMethods.DefaultFileBufferSize : 64);
+         var bufferSize = (uint) (sort ? NativeMethods.DefaultNativeQueryBufferSize : 64);
 
          var sortedList = new List<string>(sort ? 256 : 0);
 

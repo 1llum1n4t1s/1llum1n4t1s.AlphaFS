@@ -23,26 +23,26 @@ using System;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>[AlphaFS] The remote server or share does not support transacted file operations.</summary>
+   /// <summary>[AlphaFS] リモートサーバーまたは共有がトランザクションファイル操作をサポートしていません。</summary>
    [Serializable]
    public class UnsupportedRemoteTransactionException : TransactionException
    {
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="UnsupportedRemoteTransactionException"/> class.</summary>
+      /// <summary>[AlphaFS] <see cref="UnsupportedRemoteTransactionException"/>クラスの新しいインスタンスを初期化します。</summary>
       public UnsupportedRemoteTransactionException()
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="UnsupportedRemoteTransactionException"/> class.</summary>
-      /// <param name="message">The message.</param>
+      /// <summary>[AlphaFS] <see cref="UnsupportedRemoteTransactionException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="message">メッセージ。</param>
       public UnsupportedRemoteTransactionException(string message) : base(message)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="UnsupportedRemoteTransactionException"/> class.</summary>
-      /// <param name="message">The message.</param>
-      /// <param name="innerException">The inner exception.</param>
+      /// <summary>[AlphaFS] <see cref="UnsupportedRemoteTransactionException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="message">メッセージ。</param>
+      /// <param name="innerException">内部例外。</param>
       public UnsupportedRemoteTransactionException(string message, Exception innerException) : base(message, innerException)
       {
       }

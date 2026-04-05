@@ -25,16 +25,16 @@ using System.Globalization;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>Contains information about Server Message Block (SMB) shares. This class cannot be inherited.</summary>
+   /// <summary>サーバーメッセージブロック (SMB) 共有に関する情報を含みます。このクラスは継承できません。</summary>
    [Serializable]
    public sealed class ShareInfo
    {
-      #region Constructor
+      #region コンストラクター
 
-      /// <summary>Creates a <see cref="ShareInfo"/> instance.</summary>
-      /// <param name="host">A host to retrieve shares from.</param>
-      /// <param name="shareLevel">One of the <see cref="ShareInfoLevel"/> options.</param>
-      /// <param name="shareInfo">A <see cref="NativeMethods.SHARE_INFO_2"/> or <see cref="NativeMethods.SHARE_INFO_503"/> instance.</param>
+      /// <summary><see cref="ShareInfo"/> インスタンスを作成します。</summary>
+      /// <param name="host">共有を取得するホスト。</param>
+      /// <param name="shareLevel"><see cref="ShareInfoLevel"/> オプションのいずれか。</param>
+      /// <param name="shareInfo"><see cref="NativeMethods.SHARE_INFO_2"/> または <see cref="NativeMethods.SHARE_INFO_503"/> インスタンス。</param>
       internal ShareInfo(string host, ShareInfoLevel shareLevel, object shareInfo)
       {
          host = host ?? Environment.MachineName;
@@ -113,83 +113,83 @@ namespace Alphaleonis.Win32.Network
          ShareLevel = shareLevel;
       }
 
-      #endregion // Constructor
+      #endregion // コンストラクター
 
 
-      #region Methods
+      #region メソッド
 
-      /// <summary>Returns the full path to the share.</summary>
-      /// <returns>A string that represents this instance.</returns>
+      /// <summary>共有へのフルパスを返します。</summary>
+      /// <returns>このインスタンスを表す文字列。</returns>
       public override string ToString()
       {
          return NetFullPath;
       }
 
-      #endregion // Methods
+      #endregion // メソッド
 
 
-      #region Properties
+      #region プロパティ
 
-      /// <summary>The number of current connections to the resource.</summary>
+      /// <summary>リソースへの現在の接続数。</summary>
       public long CurrentUses { get; private set; }
 
 
       private DirectoryInfo _directoryInfo;
 
-      /// <summary>The <see cref="DirectoryInfo"/> instance associated with this share.</summary>
+      /// <summary>この共有に関連付けられた <see cref="DirectoryInfo"/> インスタンス。</summary>
       public DirectoryInfo DirectoryInfo
       {
          get { return _directoryInfo ?? (_directoryInfo = new DirectoryInfo(null, NetFullPath, PathFormat.FullPath)); }
       }
 
 
-      /// <summary>Returns the full UNC path to the share.</summary>
+      /// <summary>共有への完全な UNC パスを返します。</summary>
       public string NetFullPath { get; internal set; }
 
 
-      /// <summary>The maximum number of concurrent connections that the shared resource can accommodate.</summary>
-      /// <remarks>The number of connections is unlimited if the value specified in this member is –1.</remarks>
+      /// <summary>共有リソースが収容できる同時接続の最大数。</summary>
+      /// <remarks>このメンバーで指定された値が -1 の場合、接続数は無制限です。</remarks>
       public long MaxUses { get; private set; }
 
 
-      /// <summary>The name of the shared resource.</summary>
+      /// <summary>共有リソースの名前。</summary>
       public string NetName { get; private set; }
 
 
-      /// <summary>The share's password (when the server is running with share-level security).</summary>
+      /// <summary>共有のパスワード（サーバーが共有レベルのセキュリティで実行されている場合）。</summary>
       public string Password { get; private set; }
 
 
-      /// <summary>The local path for the shared resource.</summary>
-      /// <remarks>For disks, this member is the path being shared. For print queues, this member is the name of the print queue being shared.</remarks>
+      /// <summary>共有リソースのローカルパス。</summary>
+      /// <remarks>ディスクの場合、このメンバーは共有されているパスです。印刷キューの場合、このメンバーは共有されている印刷キューの名前です。</remarks>
       public string Path { get; private set; }
 
 
-      /// <summary>The shared resource's permissions for servers running with share-level security.</summary>
-      /// <remarks>Note that Windows does not support share-level security. This member is ignored on a server running user-level security.</remarks>
+      /// <summary>共有レベルのセキュリティで実行されているサーバーの共有リソースのアクセス許可。</summary>
+      /// <remarks>Windows は共有レベルのセキュリティをサポートしていないことに注意してください。このメンバーはユーザーレベルのセキュリティで実行されているサーバーでは無視されます。</remarks>
       public AccessPermissions Permissions { get; private set; }
 
 
-      /// <summary>An optional comment about the shared resource.</summary>
+      /// <summary>共有リソースに関するオプションのコメント。</summary>
       public string Remark { get; private set; }
 
 
-      /// <summary>Specifies the SECURITY_DESCRIPTOR associated with this share.</summary>
+      /// <summary>この共有に関連付けられた SECURITY_DESCRIPTOR を指定します。</summary>
       public IntPtr SecurityDescriptor { get; private set; }
 
 
-      /// <summary>A pointer to a string that specifies the DNS or NetBIOS name of the remote server on which the shared resource resides.</summary>
-      /// <remarks>A value of "*" indicates no configured server name.</remarks>
+      /// <summary>共有リソースが存在するリモートサーバーの DNS 名または NetBIOS 名を指定する文字列へのポインター。</summary>
+      /// <remarks>"*" の値は、構成されたサーバー名がないことを示します。</remarks>
       public string ServerName { get; private set; }
 
 
-      /// <summary>The type of share.</summary>
+      /// <summary>共有の種類。</summary>
       public ShareType ShareType { get; private set; }
 
 
       private ShareResourceTypes _shareResourceType;
 
-      /// <summary>The type of share resource.</summary>
+      /// <summary>共有リソースの種類。</summary>
       public ShareResourceTypes ResourceType
       {
          get
@@ -206,9 +206,9 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>The structure level for the <see cref="ShareInfo"/> instance.</summary>
+      /// <summary><see cref="ShareInfo"/> インスタンスの構造体レベル。</summary>
       public ShareInfoLevel ShareLevel { get; private set; }
 
-      #endregion // Properties
+      #endregion // プロパティ
    }
 }

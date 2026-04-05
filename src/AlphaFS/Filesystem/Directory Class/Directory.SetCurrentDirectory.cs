@@ -29,14 +29,14 @@ namespace Alphaleonis.Win32.Filesystem
    public static partial class Directory
    {
       /// <summary>
-      /// Sets the application's current working directory to the specified directory.
+      /// アプリケーションの's current working directory to the specified directory.
       /// <para>
-      ///   MSDN: Multithreaded applications and shared library code should not use the GetCurrentDirectory function and should avoid using relative path names.
-      ///   The current directory state written by the SetCurrentDirectory function is stored as a global variable in each process,
-      ///   therefore multithreaded applications cannot reliably use this value without possible data corruption from other threads that may also be reading or setting this value.
+      ///   MSDN: マルチスレッドアプリケーションと共有ライブラリコードはGetCurrentDirectory関数を使用すべきではありません。 should avoid using relative path names.
+      ///   SetCurrentDirectory関数によって書き込まれる現在のディレクトリ状態は各プロセスのグローバル変数として格納され、
+      ///   そのためマルチスレッドアプリケーションは他のスレッドからのデータ破損の可能性なくこの値を信頼できません。 that may also be reading or setting this value.
       ///   <para>This limitation also applies to the SetCurrentDirectory and GetFullPathName functions. The exception being when the application is guaranteed to be running in a single thread,
-      ///   for example parsing file names from the command line argument string in the main thread prior to creating any additional threads.</para>
-      ///   <para>Using relative path names in multithreaded applications or shared library code can yield unpredictable results and is not supported.</para>
+      ///   例えば、追加のスレッドを作成する前にメインスレッドでコマンドライン引数文字列からファイル名を解析するなど。</para>
+      ///   <para>マルチスレッドアプリケーションや共有ライブラリコードで相対パス名を使用すると、予測不可能な結果が生じる可能性があり、サポートされていません。</para>
       /// </para>
       /// </summary>
       /// <param name="path">The path to which the current working directory is set.</param>
@@ -49,14 +49,14 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>
-      /// Sets the application's current working directory to the specified directory.
+      /// アプリケーションの's current working directory to the specified directory.
       /// <para>
-      ///   MSDN: Multithreaded applications and shared library code should not use the GetCurrentDirectory function and should avoid using relative path names.
-      ///   The current directory state written by the SetCurrentDirectory function is stored as a global variable in each process,
-      ///   therefore multithreaded applications cannot reliably use this value without possible data corruption from other threads that may also be reading or setting this value.
+      ///   MSDN: マルチスレッドアプリケーションと共有ライブラリコードはGetCurrentDirectory関数を使用すべきではありません。 should avoid using relative path names.
+      ///   SetCurrentDirectory関数によって書き込まれる現在のディレクトリ状態は各プロセスのグローバル変数として格納され、
+      ///   そのためマルチスレッドアプリケーションは他のスレッドからのデータ破損の可能性なくこの値を信頼できません。 that may also be reading or setting this value.
       ///   <para>This limitation also applies to the SetCurrentDirectory and GetFullPathName functions. The exception being when the application is guaranteed to be running in a single thread,
-      ///   for example parsing file names from the command line argument string in the main thread prior to creating any additional threads.</para>
-      ///   <para>Using relative path names in multithreaded applications or shared library code can yield unpredictable results and is not supported.</para>
+      ///   例えば、追加のスレッドを作成する前にメインスレッドでコマンドライン引数文字列からファイル名を解析するなど。</para>
+      ///   <para>マルチスレッドアプリケーションや共有ライブラリコードで相対パス名を使用すると、予測不可能な結果が生じる可能性があり、サポートされていません。</para>
       /// </para>
       /// </summary>
       /// <param name="path">The path to which the current working directory is set.</param>
@@ -81,7 +81,7 @@ namespace Alphaleonis.Win32.Filesystem
 
 
          // SetCurrentDirectory()
-         // 2016-09-29: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
+         // 2016-09-29: MSDNはLongPathの使用を確認していないが、この関数のUnicodeバージョンが存在する。
          // 2017-05-30: MSDN confirms LongPath usage: Starting with Windows 10, version 1607
 
          var success = NativeMethods.SetCurrentDirectory(pathLp);

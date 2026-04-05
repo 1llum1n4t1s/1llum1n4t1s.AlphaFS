@@ -29,12 +29,12 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Moves a <see cref="DirectoryInfo"/> instance and its contents to a new path.</summary>
+      /// <summary><see cref="DirectoryInfo"/> インスタンスとその内容を新しいパスに移動します。</summary>
       /// <remarks>
-      ///   <para>Use this method to prevent overwriting of an existing directory by default.</para>
-      ///   <para>This method does not work across disk volumes.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>デフォルトで既存のディレクトリの上書きを防止するには、このメソッドを使用します。</para>
+      ///   <para>このメソッド��ディスクボリュームをまたいで動作しません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2 つのディレクトリに同等の短いファイル名がある場合、このメソッドが失敗して例外がスローされるか、望ましくない動作が発生する可能性があります。</para>
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -43,9 +43,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <param name="destinationPath">
-      ///   <para>The name and path to which to move this directory.</para>
-      ///   <para>The destination cannot be another disk volume or a directory with the identical name.</para>
-      ///   <para>It can be an existing directory to which you want to add this directory as a subdirectory.</para>
+      ///   <para>このディレクトリの移動先の名前とパス。</para>
+      ///   <para>移動先は別のディスクボリュームまたは同一の名前のディレクトリにすることはできません。</para>
+      ///   <para>このディレクトリをサブディレクトリとして追加する既存のディレクトリにすることができます。</para>
       /// </param>
       [SecurityCritical]
       public void MoveTo(string destinationPath)
@@ -59,14 +59,14 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Moves a <see cref="DirectoryInfo"/> instance and its contents to a new path.</summary>
+      /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> インスタンスとその内容を新しいパスに移動します。</summary>
       /// <remarks>
-      ///   <para>Use this method to prevent overwriting of an existing directory by default.</para>
-      ///   <para>This method does not work across disk volumes.</para>
-      ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
-      ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
+      ///   <para>デフォルトで既存のディレクトリの上書きを防止するには、このメソッドを使用します。</para>
+      ///   <para>このメソッドはディスクボリュームをまたいで動作しません。</para>
+      ///   <para>可能な限り、このメソッドでは短いファイル名（<c>XXXXXX~1.XXX</c> など）の使用を避けてください。</para>
+      ///   <para>2 つのディレクトリに同等の短いファイル名がある場合、このメソッドが失敗して例外がスローされるか、望ましくない動作が発生する可能性があります。</para>
       /// </remarks>
-      /// <returns>A new <see cref="DirectoryInfo"/> instance if the directory was completely moved.</returns>
+      /// <returns>ディレクトリが完全に移動された場合の新しい <see cref="DirectoryInfo"/> インスタンス。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -74,11 +74,11 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <param name="destinationPath">
-      ///   <para>The name and path to which to move this directory.</para>
-      ///   <para>The destination cannot be another disk volume or a directory with the identical name.</para>
-      ///   <para>It can be an existing directory to which you want to add this directory as a subdirectory.</para>
+      ///   <para>このディレクトリの移動先の名前とパス。</para>
+      ///   <para>移動先は別のディスクボリュームまたは同一の名前のディレクトリにすることはできません。</para>
+      ///   <para>このディレクトリをサブディレクトリとして追加する既存のディレクトリにすることができます。</para>
       /// </param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [SecurityCritical]
       public DirectoryInfo MoveTo(string destinationPath, PathFormat pathFormat)
       {
@@ -91,7 +91,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a <see cref="DirectoryInfo"/> instance and its contents to a new path, <see cref="MoveOptions"/> can be specified.</summary>
+      /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> インスタンスとその内容を新しいパスに移動します。<see cref="MoveOptions"/> を指定できます。</summary>
       /// <remarks>
       ///   <para>Use this method to allow or prevent overwriting of an existing directory.</para>
       ///   <para>This method does not work across disk volumes unless <paramref name="moveOptions"/> contains <see cref="MoveOptions.CopyAllowed"/>.</para>
@@ -110,7 +110,7 @@ namespace Alphaleonis.Win32.Filesystem
       ///   <para>The destination cannot be another disk volume unless <paramref name="moveOptions"/> contains <see cref="MoveOptions.CopyAllowed"/>, or a directory with the identical name.</para>
       ///   <para>It can be an existing directory to which you want to add this directory as a subdirectory.</para>
       /// </param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the directory is to be moved. This parameter can be <c>null</c>.</param>
+      /// <param name="moveOptions">ディレクトリの移動方法を指定する <see cref="MoveOptions"/>。このパラメーターは <c>null</c> にできます。</param>
       [SecurityCritical]
       public DirectoryInfo MoveTo(string destinationPath, MoveOptions moveOptions)
       {
@@ -123,7 +123,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a <see cref="DirectoryInfo"/> instance and its contents to a new path, <see cref="MoveOptions"/> can be specified.</summary>
+      /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> インスタンスとその内容を新しいパスに移動します。<see cref="MoveOptions"/> を指定できます。</summary>
       /// <remarks>
       ///   <para>Use this method to allow or prevent overwriting of an existing directory.</para>
       ///   <para>This method does not work across disk volumes unless <paramref name="moveOptions"/> contains <see cref="MoveOptions.CopyAllowed"/>.</para>
@@ -142,8 +142,8 @@ namespace Alphaleonis.Win32.Filesystem
       ///   <para>The destination cannot be another disk volume unless <paramref name="moveOptions"/> contains <see cref="MoveOptions.CopyAllowed"/>, or a directory with the identical name.</para>
       ///   <para>It can be an existing directory to which you want to add this directory as a subdirectory.</para>
       /// </param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the directory is to be moved. This parameter can be <c>null</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="moveOptions">ディレクトリの移動方法を指定する <see cref="MoveOptions"/>。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [SecurityCritical]
       public DirectoryInfo MoveTo(string destinationPath, MoveOptions moveOptions, PathFormat pathFormat)
       {
@@ -156,8 +156,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a <see cref="DirectoryInfo"/> instance and its contents to a new path, <see cref="MoveOptions"/> can be specified,
-      /// and the possibility of notifying the application of its progress through a callback function.
+      /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> インスタンスとその内容を新しいパスに移動します。<see cref="MoveOptions"/> を指定でき、
+      /// コールバック関数を通じてアプリケーションに進行状況を通知できます。
       /// </summary>
       /// <remarks>
       ///   <para>Use this method to allow or prevent overwriting of an existing directory.</para>
@@ -165,7 +165,7 @@ namespace Alphaleonis.Win32.Filesystem
       ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
       ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
       /// </remarks>
-      /// <returns>A <see cref="CopyMoveResult"/> class with details of the Move action.</returns>
+      /// <returns>移動操作の詳細を含む <see cref="CopyMoveResult"/> クラス。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -177,13 +177,13 @@ namespace Alphaleonis.Win32.Filesystem
       ///   <para>The destination cannot be another disk volume unless <paramref name="moveOptions"/> contains <see cref="MoveOptions.CopyAllowed"/>, or a directory with the identical name.</para>
       ///   <para>It can be an existing directory to which you want to add this directory as a subdirectory.</para>
       /// </param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the directory is to be moved. This parameter can be <c>null</c>.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the directory has been moved. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
+      /// <param name="moveOptions">ディレクトリの移動方法を指定する <see cref="MoveOptions"/>。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="progressHandler">ディレクトリの別の部分が移動されるたびに呼び出されるコールバック関数。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメーターは <c>null</c> にできます。</param>
       [SecurityCritical]
       public CopyMoveResult MoveTo(string destinationPath, MoveOptions moveOptions, CopyMoveProgressRoutine progressHandler, object userProgressData)
       {
-         // Reject DelayUntilReboot.
+         // DelayUntilReboot を拒否する。
          if ((moveOptions & MoveOptions.DelayUntilReboot) != 0)
          {
             throw new ArgumentException("The DelayUntilReboot flag is invalid for this method.", "moveOptions");
@@ -197,8 +197,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Moves a <see cref="DirectoryInfo"/> instance and its contents to a new path, <see cref="MoveOptions"/> can be specified,
-      ///   <para>and the possibility of notifying the application of its progress through a callback function.</para>
+      /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> インスタンスとその内容を新しいパスに移動します。<see cref="MoveOptions"/> を指定でき、
+      ///   <para>コールバック関数を通じてアプリケーションに進行状況を通知できます。</para>
       /// </summary>
       /// <remarks>
       ///   <para>Use this method to allow or prevent overwriting of an existing directory.</para>
@@ -206,7 +206,7 @@ namespace Alphaleonis.Win32.Filesystem
       ///   <para>Whenever possible, avoid using short file names (such as <c>XXXXXX~1.XXX</c>) with this method.</para>
       ///   <para>If two directories have equivalent short file names then this method may fail and raise an exception and/or result in undesirable behavior.</para>
       /// </remarks>
-      /// <returns>A <see cref="CopyMoveResult"/> class with details of the Move action.</returns>
+      /// <returns>移動操作の詳細を含む <see cref="CopyMoveResult"/> クラス。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
@@ -218,14 +218,14 @@ namespace Alphaleonis.Win32.Filesystem
       ///   <para>The destination cannot be another disk volume unless <paramref name="moveOptions"/> contains <see cref="MoveOptions.CopyAllowed"/>, or a directory with the identical name.</para>
       ///   <para>It can be an existing directory to which you want to add this directory as a subdirectory.</para>
       /// </param>
-      /// <param name="moveOptions"><see cref="MoveOptions"/> that specify how the directory is to be moved. This parameter can be <c>null</c>.</param>
-      /// <param name="progressHandler">A callback function that is called each time another portion of the directory has been moved. This parameter can be <c>null</c>.</param>
-      /// <param name="userProgressData">The argument to be passed to the callback function. This parameter can be <c>null</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="moveOptions">ディレクトリの移動方法を指定する <see cref="MoveOptions"/>。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="progressHandler">ディレクトリの別の部分が移動されるたびに呼び出されるコールバック関数。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="userProgressData">コールバック関数に渡される引数。このパラメーターは <c>null</c> にできます。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [SecurityCritical]
       public CopyMoveResult MoveTo(string destinationPath, MoveOptions moveOptions, CopyMoveProgressRoutine progressHandler, object userProgressData, PathFormat pathFormat)
       {
-         // Reject DelayUntilReboot.
+         // DelayUntilReboot を拒否する。
          if ((moveOptions & MoveOptions.DelayUntilReboot) != 0)
          {
             throw new ArgumentException("The DelayUntilReboot flag is invalid for this method.", "moveOptions");

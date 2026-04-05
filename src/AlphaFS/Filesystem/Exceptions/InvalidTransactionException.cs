@@ -23,26 +23,26 @@ using System;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>[AlphaFS] The transaction handle associated with this operation is not valid.</summary>
+   /// <summary>[AlphaFS] この操作に関連付けられたトランザクションハンドルが無効です。</summary>
    [Serializable]
    public class InvalidTransactionException : TransactionException
    {
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="InvalidTransactionException"/> class.</summary>
+      /// <summary>[AlphaFS] <see cref="InvalidTransactionException"/>クラスの新しいインスタンスを初期化します。</summary>
       public InvalidTransactionException()
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="InvalidTransactionException"/> class.</summary>
-      /// <param name="message">The message.</param>
+      /// <summary>[AlphaFS] <see cref="InvalidTransactionException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="message">メッセージ。</param>
       public InvalidTransactionException(string message) : base(message)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="InvalidTransactionException"/> class.</summary>
-      /// <param name="message">The message.</param>
-      /// <param name="innerException">The inner exception.</param>
+      /// <summary>[AlphaFS] <see cref="InvalidTransactionException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="message">メッセージ。</param>
+      /// <param name="innerException">内部例外。</param>
       public InvalidTransactionException(string message, Exception innerException) : base(message, innerException)
       {
       }

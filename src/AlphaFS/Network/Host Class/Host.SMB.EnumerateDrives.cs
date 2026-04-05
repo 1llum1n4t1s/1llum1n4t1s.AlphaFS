@@ -31,7 +31,7 @@ namespace Alphaleonis.Win32.Network
 {
    public static partial class Host
    {
-      /// <summary>Enumerates drives from the local host.</summary>
+      /// <summary>ローカルホストからドライブを列挙します.</summary>
       /// <returns><see cref="IEnumerable{String}"/> drives from the local host.</returns>
       /// <exception cref="NetworkInformationException"/>
       [SecurityCritical]
@@ -41,10 +41,10 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>Enumerates local drives from the specified host.</summary>
+      /// <summary>指定されたホストからローカルドライブを列挙します。</summary>
       /// <returns><see cref="IEnumerable{String}"/> drives from the specified host.</returns>
       /// <exception cref="NetworkInformationException"/>
-      /// <param name="host">The DNS or NetBIOS name of the remote server. <c>null</c> refers to the local host.</param>
+      /// <param name="host">リモートサーバーの DNS 名または NetBIOS 名。 <c>null</c> ローカルホストを参照します。</param>
       [SecurityCritical]
       public static IEnumerable<DriveInfo> EnumerateDrives(string host)
       {
@@ -56,10 +56,10 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>Enumerates local drives from the specified host.</summary>
+      /// <summary>指定されたホストからローカルドライブを列挙します。</summary>
       /// <returns><see cref="IEnumerable{String}"/> drives from the specified host.</returns>
       /// <exception cref="NetworkInformationException"/>
-      /// <param name="host">The DNS or NetBIOS name of the remote server. <c>null</c> refers to the local host.</param>
+      /// <param name="host">リモートサーバーの DNS 名または NetBIOS 名。 <c>null</c> ローカルホストを参照します。</param>
       /// <param name="continueOnException">
       ///   <para><c>true</c> suppress any Exception that might be thrown as a result from a failure,</para>
       ///   <para>such as unavailable resources.</para>
@@ -77,11 +77,11 @@ namespace Alphaleonis.Win32.Network
 
 
 
-      /// <summary>Enumerates local drives from the specified host.</summary>
+      /// <summary>指定されたホストからローカルドライブを列挙します。</summary>
       /// <returns><see cref="IEnumerable{String}"/> drives from the specified host.</returns>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="NetworkInformationException"/>
-      /// <param name="host">The DNS or NetBIOS name of the remote server. <c>null</c> refers to the local host.</param>
+      /// <param name="host">リモートサーバーの DNS 名または NetBIOS 名。 <c>null</c> ローカルホストを参照します。</param>
       /// <param name="continueOnException">
       ///   <para><c>true</c> suppress any Exception that might be thrown as a result from a failure,</para>
       ///   <para>such as unavailable resources.</para>

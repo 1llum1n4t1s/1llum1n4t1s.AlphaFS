@@ -25,8 +25,8 @@ using System.Text;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>Information about an alternate data stream.</summary>  
-   /// <seealso cref="O:Alphaleonis.Win32.Filesystem.File.EnumerateAlternateDataStreams"/> 
+   /// <summary>代替データストリームに関する情報を表します。</summary>
+   /// <seealso cref="O:Alphaleonis.Win32.Filesystem.File.EnumerateAlternateDataStreams"/>
    [Serializable]
    public struct AlternateDataStreamInfo : IEquatable<AlternateDataStreamInfo>
    {
@@ -54,25 +54,25 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region Properties
 
-      /// <summary>Gets the full path to the stream.</summary>
+      /// <summary>ストリームへのフルパスを取得します。</summary>
       /// <remarks>
-      ///   This is a path in long path format that can be passed to <see cref="O:Alphaleonis.Win32.Filesystem.File.Open"/> to open the stream if
-      ///   <see cref="PathFormat.FullPath"/> or <see cref="PathFormat.LongFullPath"/> is specified.
+      ///   これはロングパス形式のパスで、<see cref="PathFormat.FullPath"/> または <see cref="PathFormat.LongFullPath"/> を指定した場合に
+      ///   <see cref="O:Alphaleonis.Win32.Filesystem.File.Open"/> に渡してストリームを開くことができます。
       /// </remarks>
-      /// <value>The full path to the stream in long path format.</value>
+      /// <value>ロングパス形式でのストリームへのフルパス。</value>
       public string FullPath
       {
          get { return string.Format(CultureInfo.InvariantCulture, "{0}{1}", _fullPath, !Utils.IsNullOrWhiteSpace(StreamName) ? Path.StreamSeparator + StreamName : string.Empty); }
       }
       
 
-      /// <summary>Gets the size of the stream.</summary>      
+      /// <summary>ストリームのサイズを取得します。</summary>
       public long Size { get; private set; }
 
 
-      /// <summary>Gets the name of the alternate data stream.</summary>
-      /// <remarks>This value is an empty string for the default stream (:$DATA), and for any other data stream it contains the name of the stream.</remarks>
-      /// <value>The name of the stream.</value>
+      /// <summary>代替データストリームの名前を取得します。</summary>
+      /// <remarks>デフォルトストリーム (:$DATA) の場合は空文字列となり、その他のデータストリームの場合はストリーム名が含まれます。</remarks>
+      /// <value>ストリームの名前。</value>
       public string StreamName
       {
          get { return _streamName; }
@@ -83,17 +83,17 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region Methods
 
-      /// <summary>Returns the hash code for this instance.</summary>
-      /// <returns>A 32-bit signed integer that is the hash code for this instance.</returns>
+      /// <summary>このインスタンスのハッシュコードを返します。</summary>
+      /// <returns>このインスタンスのハッシュコードである32ビット符号付き整数。</returns>
       public override int GetHashCode()
       {
          return Utils.CombineHashCodesOf(StreamName, FullPath);
       }
       
 
-      /// <summary>Determines whether the specified Object is equal to the current Object.</summary>
-      /// <param name="other">Another <see cref="AlternateDataStreamInfo"/> instance to compare to.</param>
-      /// <returns><c>true</c> if the specified Object is equal to the current Object; otherwise, <c>false</c>.</returns>
+      /// <summary>指定した Object が現在の Object と等しいかどうかを判定します。</summary>
+      /// <param name="other">比較対象の <see cref="AlternateDataStreamInfo"/> インスタンス。</param>
+      /// <returns>指定した Object が現在の Object と等しい場合は <c>true</c>、それ以外の場合は <c>false</c>。</returns>
       public bool Equals(AlternateDataStreamInfo other)
       {
          return GetType() == other.GetType() &&
@@ -103,10 +103,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Indicates whether this instance and a specified object are equal.</summary>
-      /// <param name="obj">The object to compare with the current instance.</param>
+      /// <summary>このインスタンスと指定したオブジェクトが等しいかどうかを示します。</summary>
+      /// <param name="obj">現在のインスタンスと比較するオブジェクト。</param>
       /// <returns>
-      ///   true if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, false.
+      ///   <paramref name="obj"/> とこのインスタンスが同じ型で同じ値を表す場合は true、それ以外の場合は false。
       /// </returns>
       public override bool Equals(object obj)
       {
@@ -114,20 +114,20 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      // <summary>Implements the operator ==</summary>
-      /// <param name="left">A.</param>
-      /// <param name="right">B.</param>
-      /// <returns>The result of the operator.</returns>
+      // <summary>== 演算子を実装します。</summary>
+      /// <param name="left">左辺の値。</param>
+      /// <param name="right">右辺の値。</param>
+      /// <returns>演算子の結果。</returns>
       public static bool operator ==(AlternateDataStreamInfo left, AlternateDataStreamInfo right)
       {
          return left.Equals(right);
       }
 
 
-      /// <summary>Implements the operator !=</summary>
-      /// <param name="left">A.</param>
-      /// <param name="right">B.</param>
-      /// <returns>The result of the operator.</returns>
+      /// <summary>!= 演算子を実装します。</summary>
+      /// <param name="left">左辺の値。</param>
+      /// <param name="right">右辺の値。</param>
+      /// <returns>演算子の結果。</returns>
       public static bool operator !=(AlternateDataStreamInfo left, AlternateDataStreamInfo right)
       {
          return !(left == right);

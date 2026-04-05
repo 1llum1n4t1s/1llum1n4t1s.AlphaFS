@@ -23,7 +23,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>Defines the set of possible DFS target priority class settings.</summary>
+   /// <summary>DFS ターゲット優先度クラス設定の可能なセットを定義します.</summary>
    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Dfs")]
    public enum DfsTargetPriorityClass
    {

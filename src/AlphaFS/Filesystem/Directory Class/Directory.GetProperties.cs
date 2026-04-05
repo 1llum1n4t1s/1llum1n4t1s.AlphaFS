@@ -28,14 +28,14 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>[AlphaFS] Gets the properties of the particular directory without following any symbolic links or mount points.
+      /// <summary>[AlphaFS] シンボリックリンクやマウントポイントをたどらずに、特定のディレクトリのプロパティを取得します。
       ///   <para>Properties include aggregated info from <see cref="FileAttributes"/> of each encountered file system object, plus additional ones: Total, File, Size and Error.</para>
-      ///   <para><b>Total:</b> is the total number of enumerated objects.</para>
+      ///   <para><b>Total:</b> 列挙されたオブジェクトの総数。</para>
       ///   <para><b>File:</b> is the total number of files. File is considered when object is neither <see cref="FileAttributes.Directory"/> nor <see cref="FileAttributes.ReparsePoint"/>.</para>
-      ///   <para><b>Size:</b> is the total size of enumerated objects.</para>
-      ///   <para><b>Error:</b> is the total number of errors encountered during enumeration.</para>
+      ///   <para><b>Size:</b> 列挙されたオブジェクトの合計サイズ。</para>
+      ///   <para><b>Error:</b> 列挙中に発生したエラーの総数。</para>
       /// </summary>
-      /// <returns>A dictionary mapping the keys mentioned above to their respective aggregated values.</returns>
+      /// <returns>上記のキーをそれぞれの集計値にマッピングしたディクショナリ。</returns>
       /// <remarks><b>Directory:</b> is an object which has <see cref="FileAttributes.Directory"/> attribute without <see cref="FileAttributes.ReparsePoint"/> one.</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -51,14 +51,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Gets the properties of the particular directory without following any symbolic links or mount points.
+      /// <summary>[AlphaFS] シンボリックリンクやマウントポイントをたどらずに、特定のディレクトリのプロパティを取得します。
       ///   <para>Properties include aggregated info from <see cref="FileAttributes"/> of each encountered file system object, plus additional ones: Total, File, Size and Error.</para>
-      ///   <para><b>Total:</b> is the total number of enumerated objects.</para>
+      ///   <para><b>Total:</b> 列挙されたオブジェクトの総数。</para>
       ///   <para><b>File:</b> is the total number of files. File is considered when object is neither <see cref="FileAttributes.Directory"/> nor <see cref="FileAttributes.ReparsePoint"/>.</para>
-      ///   <para><b>Size:</b> is the total size of enumerated objects.</para>
-      ///   <para><b>Error:</b> is the total number of errors encountered during enumeration.</para>
+      ///   <para><b>Size:</b> 列挙されたオブジェクトの合計サイズ。</para>
+      ///   <para><b>Error:</b> 列挙中に発生したエラーの総数。</para>
       /// </summary>
-      /// <returns>A dictionary mapping the keys mentioned above to their respective aggregated values.</returns>
+      /// <returns>上記のキーをそれぞれの集計値にマッピングしたディクショナリ。</returns>
       /// <remarks><b>Directory:</b> is an object which has <see cref="FileAttributes.Directory"/> attribute without <see cref="FileAttributes.ReparsePoint"/> one.</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -67,7 +67,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <param name="path">The target directory.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static Dictionary<string, long> GetProperties(string path, PathFormat pathFormat)
       {
@@ -75,14 +75,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Gets the properties of the particular directory without following any symbolic links or mount points.
+      /// <summary>[AlphaFS] シンボリックリンクやマウントポイントをたどらずに、特定のディレクトリのプロパティを取得します。
       ///   <para>Properties include aggregated info from <see cref="FileAttributes"/> of each encountered file system object, plus additional ones: Total, File, Size and Error.</para>
-      ///   <para><b>Total:</b> is the total number of enumerated objects.</para>
+      ///   <para><b>Total:</b> 列挙されたオブジェクトの総数。</para>
       ///   <para><b>File:</b> is the total number of files. File is considered when object is neither <see cref="FileAttributes.Directory"/> nor <see cref="FileAttributes.ReparsePoint"/>.</para>
-      ///   <para><b>Size:</b> is the total size of enumerated objects.</para>
-      ///   <para><b>Error:</b> is the total number of errors encountered during enumeration.</para>
+      ///   <para><b>Size:</b> 列挙されたオブジェクトの合計サイズ。</para>
+      ///   <para><b>Error:</b> 列挙中に発生したエラーの総数。</para>
       /// </summary>
-      /// <returns>A dictionary mapping the keys mentioned above to their respective aggregated values.</returns>
+      /// <returns>上記のキーをそれぞれの集計値にマッピングしたディクショナリ。</returns>
       /// <remarks><b>Directory:</b> is an object which has <see cref="FileAttributes.Directory"/> attribute without <see cref="FileAttributes.ReparsePoint"/> one.</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -91,7 +91,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <param name="path">The target directory.</param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
       [SecurityCritical]
       public static Dictionary<string, long> GetProperties(string path, DirectoryEnumerationOptions options)
       {
@@ -99,14 +99,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Gets the properties of the particular directory without following any symbolic links or mount points.
+      /// <summary>[AlphaFS] シンボリックリンクやマウントポイントをたどらずに、特定のディレクトリのプロパティを取得します。
       ///   <para>Properties include aggregated info from <see cref="FileAttributes"/> of each encountered file system object, plus additional ones: Total, File, Size and Error.</para>
-      ///   <para><b>Total:</b> is the total number of enumerated objects.</para>
+      ///   <para><b>Total:</b> 列挙されたオブジェクトの総数。</para>
       ///   <para><b>File:</b> is the total number of files. File is considered when object is neither <see cref="FileAttributes.Directory"/> nor <see cref="FileAttributes.ReparsePoint"/>.</para>
-      ///   <para><b>Size:</b> is the total size of enumerated objects.</para>
-      ///   <para><b>Error:</b> is the total number of errors encountered during enumeration.</para>
+      ///   <para><b>Size:</b> 列挙されたオブジェクトの合計サイズ。</para>
+      ///   <para><b>Error:</b> 列挙中に発生したエラーの総数。</para>
       /// </summary>
-      /// <returns>A dictionary mapping the keys mentioned above to their respective aggregated values.</returns>
+      /// <returns>上記のキーをそれぞれの集計値にマッピングしたディクショナリ。</returns>
       /// <remarks><b>Directory:</b> is an object which has <see cref="FileAttributes.Directory"/> attribute without <see cref="FileAttributes.ReparsePoint"/> one.</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -115,8 +115,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <param name="path">The target directory.</param>
-      /// <param name="options"><see cref="DirectoryEnumerationOptions"/> flags that specify how the directory is to be enumerated.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="options">ディレクトリの列挙方法を指定する <see cref="DirectoryEnumerationOptions"/> フラグ。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static Dictionary<string, long> GetProperties(string path, DirectoryEnumerationOptions options, PathFormat pathFormat)
       {

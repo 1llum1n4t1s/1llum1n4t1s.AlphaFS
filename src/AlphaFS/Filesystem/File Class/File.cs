@@ -21,9 +21,9 @@
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>Provides static methods for the creation, copying, deletion, moving, and opening of a single file, and aids in the creation of FileStream objects.</summary>
+   /// <summary>単一ファイルの作成、コピー、削除、移動、およびオープンのための静的メソッドを提供し、FileStreamオブジェクトの作成を支援します。</summary>
    public static partial class File
    {
-      // This file only exists for the documentation.
+      // このファイルはドキュメント用にのみ存在します。
    }
 }

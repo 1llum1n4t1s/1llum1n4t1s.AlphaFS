@@ -20,6 +20,7 @@
  */
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
@@ -35,30 +36,59 @@ using System.Threading;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>Class that retrieves file system entries (i.e. files and directories) using Win32 API FindFirst()/FindNext().</summary>
+   /// <summary>Win32 API FindFirst()/FindNext()を使用してファイルシステムエントリ（ファイルやディレクトリ）を取得するクラス。</summary>
    [Serializable]
    internal sealed class FindFileSystemEntryInfo
    {
       #region Fields
 
-      [NonSerialized] private static readonly Regex WildcardMatchAll = new Regex(@"^(\*)+(\.\*+)+$", RegexOptions.IgnoreCase); // special case to recognize *.* or *.** etc
+      [NonSerialized] private static readonly Regex WildcardMatchAll = new Regex(@"^(\*)+(\.\*+)+$", RegexOptions.IgnoreCase); // *.* や *.** 等を認識する特殊ケース
+
+      /// <summary>コンパイル済み正規表現キャッシュの最大エントリ数。上限に達するとキャッシュをクリアして無制限なメモリ増加を防止する。</summary>
+      private const int RegexCacheMaxSize = 64;
+      [NonSerialized] private static readonly ConcurrentDictionary<string, Regex> RegexCache = new ConcurrentDictionary<string, Regex>();
       [NonSerialized] private Regex _nameFilter;
       [NonSerialized] private string _searchPattern = Path.WildcardStarMatchAll;
 
       #endregion // Fields
 
 
+      #region Private Static Methods
+
+      /// <summary>検索パターンに対応するコンパイル済み正規表現をキャッシュから取得、または新規作成してキャッシュに追加する。
+      /// キャッシュが<see cref="RegexCacheMaxSize"/>を超えた場合はクリアして無制限なメモリ増加を防止する。</summary>
+      /// <param name="searchPattern">ワイルドカード検索パターン。</param>
+      /// <returns>検索パターンに一致するコンパイル済み<see cref="Regex"/>インスタンス。</returns>
+      private static Regex GetOrAddRegex(string searchPattern)
+      {
+         if (RegexCache.TryGetValue(searchPattern, out var cached))
+            return cached;
+
+         // キャッシュが上限に達した場合はクリアして、古いCompiledパターンがメモリに留まり続けるのを防ぐ。
+         if (RegexCache.Count >= RegexCacheMaxSize)
+            RegexCache.Clear();
+
+         var regex = new Regex(
+            string.Format(CultureInfo.InvariantCulture, "^{0}$", Regex.Escape(searchPattern).Replace(@"\*", ".*").Replace(@"\?", ".")),
+            RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
+         return RegexCache.GetOrAdd(searchPattern, regex);
+      }
+
+      #endregion // Private Static Methods
+
+
       #region Constructor
 
-      /// <summary>Initializes a new instance of the <see cref="FindFileSystemEntryInfo"/> class.</summary>
-      /// <param name="transaction">The NTFS Kernel transaction, if used.</param>
-      /// <param name="isFolder">if set to <c>true</c> the path is a folder.</param>
-      /// <param name="path">The path.</param>
-      /// <param name="searchPattern">The wildcard search pattern.</param>
-      /// <param name="options">The enumeration options.</param>
-      /// <param name="customFilters">The custom filters.</param>
-      /// <param name="pathFormat">The format of the path.</param>
-      /// <param name="typeOfT">The type of objects to be retrieved.</param>
+      /// <summary><see cref="FindFileSystemEntryInfo"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="transaction">使用する場合のNTFSカーネルトランザクション。</param>
+      /// <param name="isFolder"><c>true</c>に設定するとパスはフォルダです。</param>
+      /// <param name="path">パス。</param>
+      /// <param name="searchPattern">ワイルドカード検索パターン。</param>
+      /// <param name="options">列挙オプション。</param>
+      /// <param name="customFilters">カスタムフィルター。</param>
+      /// <param name="pathFormat">パスの形式。</param>
+      /// <param name="typeOfT">取得するオブジェクトの型。</param>
       [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
       public FindFileSystemEntryInfo(KernelTransaction transaction, bool isFolder, string path, string searchPattern, DirectoryEnumerationOptions? options, DirectoryEnumerationFilters customFilters, PathFormat pathFormat, Type typeOfT)
       {
@@ -91,7 +121,7 @@ namespace Alphaleonis.Win32.Filesystem
 
          LargeCache = (options & DirectoryEnumerationOptions.LargeCache) != 0 ? NativeMethods.UseLargeCache : NativeMethods.FIND_FIRST_EX_FLAGS.NONE;
 
-         // Only FileSystemEntryInfo makes use of (8.3) AlternateFileName.
+         // FileSystemEntryInfoのみが(8.3形式)AlternateFileNameを使用します。
          FindExInfoLevel = AsString || AsFileSystemInfo || (options & DirectoryEnumerationOptions.BasicSearch) != 0 ? NativeMethods.FindexInfoLevel : NativeMethods.FINDEX_INFO_LEVELS.Standard;
 
 
@@ -118,7 +148,7 @@ namespace Alphaleonis.Win32.Filesystem
             SkipReparsePoints = (options & DirectoryEnumerationOptions.SkipReparsePoints) != 0;
 
 
-            // Need folders or files to enumerate.
+            // 列挙するためにフォルダまたはファイルが必要です。
             if ((options & DirectoryEnumerationOptions.FilesAndFolders) == 0)
             {
                options |= DirectoryEnumerationOptions.FilesAndFolders;
@@ -134,10 +164,10 @@ namespace Alphaleonis.Win32.Filesystem
 
          FileSystemObjectType = (options & DirectoryEnumerationOptions.FilesAndFolders) == DirectoryEnumerationOptions.FilesAndFolders
 
-            // Folders and files (null).
+            // フォルダとファイル(null)。
             ? (bool?) null
 
-            // Only folders (true) or only files (false).
+            // フォルダのみ(true)またはファイルのみ(false)。
             : (options & DirectoryEnumerationOptions.Folders) != 0;
       }
 
@@ -146,76 +176,76 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region Properties
 
-      /// <summary>Gets or sets the ability to return the object as a <see cref="FileSystemInfo"/> instance.</summary>
-      /// <value><c>true</c> returns the object as a <see cref="FileSystemInfo"/> instance.</value>
+      /// <summary>オブジェクトを<see cref="FileSystemInfo"/>インスタンスとして返す機能を取得または設定します。</summary>
+      /// <value><c>true</c>の場合、オブジェクトを<see cref="FileSystemInfo"/>インスタンスとして返します。</value>
       public bool AsFileSystemInfo { get; private set; }
 
 
-      /// <summary>Gets or sets the ability to return the full path in long full path format.</summary>
-      /// <value><c>true</c> returns the full path in long full path format, <c>false</c> returns the full path in regular path format.</value>
+      /// <summary>長いフルパス形式でフルパスを返す機能を取得または設定します。</summary>
+      /// <value><c>true</c>の場合は長いフルパス形式で、<c>false</c>の場合は通常のパス形式でフルパスを返します。</value>
       public bool AsLongPath { get; private set; }
 
 
-      /// <summary>Gets or sets the ability to return the object instance as a <see cref="string"/>.</summary>
-      /// <value><c>true</c> returns the full path of the object as a <see cref="string"/></value>
+      /// <summary>オブジェクトインスタンスを<see cref="string"/>として返す機能を取得または設定します。</summary>
+      /// <value><c>true</c>の場合、オブジェクトのフルパスを<see cref="string"/>として返します。</value>
       public bool AsString { get; private set; }
 
 
-      /// <summary>Gets or sets the ability to skip on access errors.</summary>
-      /// <value><c>true</c> suppress any Exception that might be thrown as a result from a failure, such as ACLs protected directories or non-accessible reparse points.</value>
+      /// <summary>アクセスエラー時にスキップする機能を取得または設定します。</summary>
+      /// <value><c>true</c>の場合、ACL保護されたディレクトリやアクセスできないリパースポイントなどの障害による例外を抑制します。</value>
       public bool ContinueOnException { get; private set; }
 
 
-      /// <summary>Gets the file system object type.</summary>
+      /// <summary>ファイルシステムオブジェクトの種類を取得します。</summary>
       /// <value>
-      /// <c>null</c> = Return files and directories.
-      /// <c>true</c> = Return only directories.
-      /// <c>false</c> = Return only files.
+      /// <c>null</c> = ファイルとディレクトリを返します。
+      /// <c>true</c> = ディレクトリのみを返します。
+      /// <c>false</c> = ファイルのみを返します。
       /// </value>
       public bool? FileSystemObjectType { get; private set; }
 
 
-      /// <summary>Gets or sets if the path is an absolute or relative path.</summary>
-      /// <value>Gets a value indicating whether the specified path string contains absolute or relative path information.</value>
+      /// <summary>パスが絶対パスか相対パスかを取得または設定します。</summary>
+      /// <value>指定されたパス文字列が絶対パス情報または相対パス情報を含むかどうかを示す値を取得します。</value>
       public bool IsRelativePath { get; private set; }
 
       
-      /// <summary>Gets or sets the initial path to the folder.</summary>
-      /// <value>The initial path to the file or folder in long path format.</value>
+      /// <summary>フォルダへの初期パスを取得または設定します。</summary>
+      /// <value>長いパス形式でのファイルまたはフォルダへの初期パス。</value>
       public string OriginalInputPath { get; private set; }
 
 
-      /// <summary>Gets or sets the path to the folder.</summary>
-      /// <value>The path to the file or folder in long path format.</value>
+      /// <summary>フォルダへのパスを取得または設定します。</summary>
+      /// <value>長いパス形式でのファイルまたはフォルダへのパス。</value>
       public string InputPath { get; private set; }
 
 
-      /// <summary>Gets or sets the absolute full path prefix of the relative path.</summary>
+      /// <summary>相対パスの絶対フルパスプレフィックスを取得または設定します。</summary>
       private string RelativeAbsolutePrefix { get; set; }
 
       
-      /// <summary>Gets or sets a value indicating which <see cref="NativeMethods.FINDEX_INFO_LEVELS"/> to use.</summary>
-      /// <value><c>true</c> indicates a folder object, <c>false</c> indicates a file object.</value>
+      /// <summary>使用する<see cref="NativeMethods.FINDEX_INFO_LEVELS"/>を示す値を取得または設定します。</summary>
+      /// <value><c>true</c>はフォルダオブジェクト、<c>false</c>はファイルオブジェクトを示します。</value>
       public bool IsDirectory { get; private set; }
 
 
-      /// <summary>Uses a larger buffer for directory queries, which can increase performance of the find operation.</summary>
-      /// <remarks>This value is not supported until Windows Server 2008 R2 and Windows 7.</remarks>
+      /// <summary>ディレクトリクエリに大きなバッファを使用し、検索操作のパフォーマンスを向上させます。</summary>
+      /// <remarks>この値はWindows Server 2008 R2およびWindows 7以降でサポートされています。</remarks>
       public NativeMethods.FIND_FIRST_EX_FLAGS LargeCache { get; private set; }
 
 
-      /// <summary>The FindFirstFileEx function does not query the short file name, improving overall enumeration speed.</summary>
-      /// <remarks>This value is not supported until Windows Server 2008 R2 and Windows 7.</remarks>
+      /// <summary>FindFirstFileEx関数は短いファイル名をクエリしないため、全体的な列挙速度が向上します。</summary>
+      /// <remarks>この値はWindows Server 2008 R2およびWindows 7以降でサポートされています。</remarks>
       public NativeMethods.FINDEX_INFO_LEVELS FindExInfoLevel { get; private set; }
 
 
-      /// <summary>Specifies whether the search should include only the current directory or should include all subdirectories.</summary>
-      /// <value><c>true</c> to include all subdirectories.</value>
+      /// <summary>検索が現在のディレクトリのみを含むか、すべてのサブディレクトリを含むかを指定します。</summary>
+      /// <value>すべてのサブディレクトリを含む場合は<c>true</c>。</value>
       public bool Recursive { get; private set; }
 
 
-      /// <summary>Search for file system object-name using a pattern.</summary>
-      /// <value>The path which has wildcard characters, for example, an asterisk (<see cref="Path.WildcardStarMatchAll"/>) or a question mark (<see cref="Path.WildcardQuestion"/>).</value>
+      /// <summary>パターンを使用してファイルシステムオブジェクト名を検索します。</summary>
+      /// <value>ワイルドカード文字を含むパス。例えば、アスタリスク（<see cref="Path.WildcardStarMatchAll"/>）やクエスチョンマーク（<see cref="Path.WildcardQuestion"/>）。</value>
       [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
       public string SearchPattern
       {
@@ -232,38 +262,38 @@ namespace Alphaleonis.Win32.Filesystem
 
             _nameFilter = _searchPattern == Path.WildcardStarMatchAll || WildcardMatchAll.IsMatch(_searchPattern)
                ? null
-               : new Regex(string.Format(CultureInfo.InvariantCulture, "^{0}$", Regex.Escape(_searchPattern).Replace(@"\*", ".*").Replace(@"\?", ".")), RegexOptions.IgnoreCase);
+               : GetOrAddRegex(_searchPattern);
          }
       }
 
 
-      /// <summary><c>true</c> skips ReparsePoints, <c>false</c> will follow ReparsePoints.</summary>
+      /// <summary><c>true</c>の場合リパースポイントをスキップし、<c>false</c>の場合リパースポイントをたどります。</summary>
       public bool SkipReparsePoints { get; private set; }
 
 
-      /// <summary>Get or sets the KernelTransaction instance.</summary>
-      /// <value>The transaction.</value>
+      /// <summary>KernelTransactionインスタンスを取得または設定します。</summary>
+      /// <value>トランザクション。</value>
       public KernelTransaction Transaction { get; private set; }
 
 
-      /// <summary>Gets or sets the custom enumeration in/exclusion filter.</summary>
-      /// <value>The method determining if the object should be in/excluded from the output or not.</value>
+      /// <summary>カスタム列挙の包含/除外フィルターを取得または設定します。</summary>
+      /// <value>オブジェクトを出力に含めるか除外するかを決定するメソッド。</value>
       public Predicate<FileSystemEntryInfo> InclusionFilter { get; private set; }
 
 
-      /// <summary>Gets or sets the custom enumeration recursion filter.</summary>
-      /// <value>The method determining if the directory should be recursively traversed or not.</value>
+      /// <summary>カスタム列挙の再帰フィルターを取得または設定します。</summary>
+      /// <value>ディレクトリを再帰的にトラバースするかどうかを決定するメソッド。</value>
       public Predicate<FileSystemEntryInfo> RecursionFilter { get; private set; }
 
 
-      /// <summary>Gets or sets the handler of errors that may occur.</summary>
-      /// <value>The error handler method.</value>
+      /// <summary>発生する可能性のあるエラーのハンドラーを取得または設定します。</summary>
+      /// <value>エラーハンドラーメソッド。</value>
       public ErrorHandler ErrorHandler { get; private set; }
 
 
 #if !NET35
-      /// <summary>Gets or sets the cancellation token to abort the enumeration.</summary>
-      /// <value>A <see cref="CancellationToken"/> instance.</value>
+      /// <summary>列挙を中止するためのキャンセルトークンを取得または設定します。</summary>
+      /// <value><see cref="CancellationToken"/>インスタンス。</value>
       private CancellationToken CancellationToken { get; set; }
 #endif
 
@@ -315,7 +345,7 @@ namespace Alphaleonis.Win32.Filesystem
 
       private T NewFileSystemEntryType<T>(bool isFolder, FileSystemEntryInfo fsei, string fileName, string pathLp, NativeMethods.WIN32_FIND_DATA win32FindData)
       {
-         // Determine yield, e.g. don't return files when only folders are requested and vice versa.
+         // yield（返却）を決定します。例えば、フォルダのみが要求された場合はファイルを返さず、その逆も同様です。
 
          if (null != FileSystemObjectType && (!(bool) FileSystemObjectType || !isFolder) && (!(bool) !FileSystemObjectType || isFolder))
 
@@ -324,7 +354,7 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
-         // Determine yield from name filtering.
+         // 名前フィルタリングからyield（返却）を決定します。
 
          if (null != fileName && !(null == _nameFilter || null != _nameFilter && _nameFilter.IsMatch(fileName)))
 
@@ -339,20 +369,20 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
-         // Return object instance FullPath property as string, optionally in long path format.
+         // オブジェクトインスタンスのFullPathプロパティを文字列として返します。オプションで長いパス形式で返します。
 
          return AsString ? null == InclusionFilter || InclusionFilter(fsei) ? (T) (object) (AsLongPath ? fsei.LongFullPath : fsei.FullPath) : (T) (object) null
 
 
-            // Make sure the requested file system object type is returned.
-            // null = Return files and directories.
-            // true = Return only directories.
-            // false = Return only files.
+            // 要求されたファイルシステムオブジェクトの種類が返されることを確認します。
+            // null = ファイルとディレクトリを返します。
+            // true = ディレクトリのみを返します。
+            // false = ファイルのみを返します。
 
             : null != InclusionFilter && !InclusionFilter(fsei)
                ? (T) (object) null
 
-               // Return object instance of type FileSystemInfo.
+               // FileSystemInfo型のオブジェクトインスタンスを返します。
 
                : AsFileSystemInfo
                   ? (T) (object) (fsei.IsDirectory
@@ -361,7 +391,7 @@ namespace Alphaleonis.Win32.Filesystem
 
                      : new FileInfo(Transaction, fsei.LongFullPath, PathFormat.LongFullPath) {EntryInfo = fsei})
 
-                  // Return object instance of type FileSystemEntryInfo.
+                  // FileSystemEntryInfo型のオブジェクトインスタンスを返します。
 
                   : (T) (object) fsei;
       }
@@ -406,11 +436,11 @@ namespace Alphaleonis.Win32.Filesystem
          {
             var regularPath = Path.GetCleanExceptionPath(pathLp);
 
-            // Pass control to the ErrorHandler when set.
+            // ErrorHandlerが設定されている場合、制御を渡します。
 
             if (null == ErrorHandler || !ErrorHandler((int) lastError, new Win32Exception((int) lastError).Message, regularPath))
             {
-               // When the ErrorHandler returns false, thrown the Exception.
+               // ErrorHandlerがfalseを返した場合、例外をスローします。
 
                NativeError.ThrowException(lastError, regularPath);
             }
@@ -439,8 +469,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets an enumerator that returns all of the file system objects that match both the wildcards that are in any of the directories to be searched and the custom predicate.</summary>
-      /// <returns>An <see cref="IEnumerable{T}"/> instance: FileSystemEntryInfo, DirectoryInfo, FileInfo or string (full path).</returns>
+      /// <summary>検索対象のディレクトリ内のワイルドカードとカスタム述語の両方に一致するすべてのファイルシステムオブジェクトを返す列挙子を取得します。</summary>
+      /// <returns><see cref="IEnumerable{T}"/>インスタンス: FileSystemEntryInfo、DirectoryInfo、FileInfo、またはstring（フルパス）。</returns>
       [SecurityCritical]
       public IEnumerable<T> Enumerate<T>()
       {
@@ -453,7 +483,7 @@ namespace Alphaleonis.Win32.Filesystem
          // If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the Queue.
          // This constructor is an O(n) operation, where n is capacity.
 
-         var dirs = new Queue<string>(NativeMethods.DefaultFileBufferSize);
+         var dirs = new Queue<string>(NativeMethods.DefaultDirectoryQueueCapacity);
 
          dirs.Enqueue(Path.AddTrailingDirectorySeparator(InputPath, false));
 
@@ -468,15 +498,15 @@ namespace Alphaleonis.Win32.Filesystem
             {
 
 
-               // Removes the object at the beginning of your Queue.
-               // The algorithmic complexity of this is O(1). It doesn't loop over elements.
+               // キューの先頭からオブジェクトを削除します。
+               // このアルゴリズムの計算量はO(1)です。要素をループしません。
 
                var pathLp = dirs.Dequeue();
 
 
                using var handle = FindFirstFile(pathLp + Path.WildcardStarMatchAll, out var win32FindData, out var lastError);
-               // When the handle is null and we are still here, it means the ErrorHandler is active.
-               // We hit an inaccessible folder, so break and continue with the next one.
+               // ハンドルがnullでここにいるということは、ErrorHandlerがアクティブであることを意味します。
+               // アクセスできないフォルダに遭遇したため、中断して次のフォルダに進みます。
                if (null == handle)
                {
                   continue;
@@ -491,7 +521,7 @@ namespace Alphaleonis.Win32.Filesystem
                   }
 
 
-                  // Skip reparse points here to cleanly separate regular directories from links.
+                  // リパースポイントをスキップして、通常のディレクトリとリンクをきれいに分離します。
                   if (SkipReparsePoints && (win32FindData.dwFileAttributes & FileAttributes.ReparsePoint) != 0)
                   {
                      continue;
@@ -502,10 +532,28 @@ namespace Alphaleonis.Win32.Filesystem
 
                   var isFolder = (win32FindData.dwFileAttributes & FileAttributes.Directory) != 0;
 
-                  // Skip entries ".." and "."
+                  // ".."と"."エントリをスキップします。
                   if (isFolder && (fileName.Equals(Path.ParentDirectoryPrefix, StringComparison.Ordinal) || fileName.Equals(Path.CurrentDirectoryPrefix, StringComparison.Ordinal)))
                   {
                      continue;
+                  }
+
+
+                  // 事前フィルタリング: WIN32_FIND_DATA から直接判定してオブジェクト生成を回避
+                  // フォルダは再帰キューイングが必要なためスキップしない
+                  if (!isFolder)
+                  {
+                     // フォルダのみ要求なのにファイル → スキップ
+                     if (null != FileSystemObjectType && (bool) FileSystemObjectType)
+                     {
+                        continue;
+                     }
+
+                     // _nameFilter にマッチしないファイル → オブジェクト生成をスキップ
+                     if (null != _nameFilter && !_nameFilter.IsMatch(fileName))
+                     {
+                        continue;
+                     }
                   }
 
 
@@ -514,7 +562,7 @@ namespace Alphaleonis.Win32.Filesystem
                   var res = NewFileSystemEntryType<T>(isFolder, fsei, fileName, pathLp, win32FindData);
 
 
-                  // If recursion is requested, add it to the queue for later traversal.
+                  // 再帰が要求された場合、後でトラバースするためにキューに追加します。
                   if (isFolder && Recursive && (null == RecursionFilter || RecursionFilter(fsei)))
 
                   {
@@ -522,10 +570,10 @@ namespace Alphaleonis.Win32.Filesystem
                   }
 
 
-                  // Codacy: When constraints have not been applied to restrict a generic type parameter to be a reference type, then a value type,
-                  // such as a struct, could also be passed. In such cases, comparing the type parameter to null would always be false,
-                  // because a struct can be empty, but never null. If a value type is truly what's expected, then the comparison should use default().
-                  // If it's not, then constraints should be added so that no value type can be passed.
+                  // Codacy: ジェネリック型パラメータを参照型に制限する制約が適用されていない場合、structなどの値型も渡される可能性があります。
+                  // そのような場合、型パラメータとnullの比較は常にfalseになります。
+                  // structは空にはなれますが、nullにはなれないためです。値型が本当に期待されるものであれば、比較にはdefault()を使用するべきです。
+                  // そうでなければ、値型が渡せないように制約を追加するべきです。
 
                   if (Equals(res, default(T)))
                   {
@@ -556,11 +604,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets a specific file system object.</summary>
+      /// <summary>特定のファイルシステムオブジェクトを取得します。</summary>
       /// <returns>
-      /// <para>The return type is based on C# inference. Possible return types are:</para>
-      /// <para> <see cref="string"/>- (full path), <see cref="FileSystemInfo"/>- (<see cref="DirectoryInfo"/> or <see cref="FileInfo"/>), <see cref="FileSystemEntryInfo"/> instance</para>
-      /// <para>or null in case an Exception is raised and <see cref="ContinueOnException"/> is <c>true</c>.</para>
+      /// <para>戻り値の型はC#の型推論に基づきます。可能な戻り値の型:</para>
+      /// <para> <see cref="string"/>（フルパス）、<see cref="FileSystemInfo"/>（<see cref="DirectoryInfo"/>または<see cref="FileInfo"/>）、<see cref="FileSystemEntryInfo"/>インスタンス</para>
+      /// <para>または例外が発生し<see cref="ContinueOnException"/>が<c>true</c>の場合はnull。</para>
       /// </returns>
       [SecurityCritical]
       public T Get<T>()
@@ -570,7 +618,7 @@ namespace Alphaleonis.Win32.Filesystem
             NativeMethods.WIN32_FIND_DATA win32FindData;
             var lastError = 0;
 
-            // Not explicitly set to be a folder.
+            // フォルダとして明示的に設定されていない場合。
 
             if (!IsDirectory)
             {
@@ -597,7 +645,7 @@ namespace Alphaleonis.Win32.Filesystem
             {
                if (null == handle)
                {
-                  // InputPath might be a logical drive such as: "C:\", "D:\".
+                  // InputPathは論理ドライブ（例: "C:\"、"D:\"）の可能性があります。
 
                   var attrs = new NativeMethods.WIN32_FILE_ATTRIBUTE_DATA();
 

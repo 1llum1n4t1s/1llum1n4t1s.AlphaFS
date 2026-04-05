@@ -27,7 +27,7 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Volume
    {
-      /// <summary>[AlphaFS] Deletes the label of the file system volume that is the root of the current directory.</summary>
+      /// <summary>[AlphaFS] 現在のディレクトリのルートであるファイルシステムボリュームのラベルを削除します。</summary>
       [SecurityCritical]
       public static void DeleteCurrentVolumeLabel()
       {
@@ -35,9 +35,9 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Deletes the label of a file system volume.</summary>
+      /// <summary>[AlphaFS] ファイルシステムボリュームのラベルを削除します。</summary>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="rootPathName">The root directory of a file system volume. This is the volume the function will remove the label.</param>
+      /// <param name="rootPathName">ファイルシステムボリュームのルートディレクトリ。この関数がラベルを削除するボリュームです。</param>
       [SecurityCritical]
       public static void DeleteVolumeLabel(string rootPathName)
       {
@@ -51,11 +51,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Retrieve the label of a file system volume.</summary>
+      /// <summary>[AlphaFS] ファイルシステムボリュームのラベルを取得します。</summary>
       /// <param name="volumePath">
-      ///   A path to a volume. For example: "C:\", "\\server\share", or "\\?\Volume{c0580d5e-2ad6-11dc-9924-806e6f6e6963}\".
+      ///   ボリュームへのパス。例: "C:\"、"\\server\share"、または "\\?\Volume{c0580d5e-2ad6-11dc-9924-806e6f6e6963}\"。
       /// </param>
-      /// <returns>The the label of the file system volume. This function can return <c>string.Empty</c> since a volume label is generally not mandatory.</returns>
+      /// <returns>ファイルシステムボリュームのラベル。ボリュームラベルは一般的に必須ではないため、この関数は <c>string.Empty</c> を返すことがあります。</returns>
       [SecurityCritical]
       public static string GetVolumeLabel(string volumePath)
       {
@@ -63,9 +63,9 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets the label of the file system volume that is the root of the current directory.</summary>
+      /// <summary>[AlphaFS] 現在のディレクトリのルートであるファイルシステムボリュームのラベルを設定します。</summary>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="volumeName">A name for the volume.</param>
+      /// <param name="volumeName">ボリュームの名前。</param>
       [SecurityCritical]
       public static void SetCurrentVolumeLabel(string volumeName)
       {
@@ -85,28 +85,28 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets the label of a file system volume.</summary>
+      /// <summary>[AlphaFS] ファイルシステムボリュームのラベルを設定します。</summary>
       /// <param name="volumePath">
-      ///   <para>A path to a volume. For example: "C:\", "\\server\share", or "\\?\Volume{c0580d5e-2ad6-11dc-9924-806e6f6e6963}\"</para>
-      ///   <para>If this parameter is <c>null</c>, the function uses the current drive.</para>
+      ///   <para>ボリュームへのパス。例: "C:\"、"\\server\share"、または "\\?\Volume{c0580d5e-2ad6-11dc-9924-806e6f6e6963}\"</para>
+      ///   <para>このパラメーターが <c>null</c> の場合、関数は現在のドライブを使用します。</para>
       /// </param>
       /// <param name="volumeName">
-      ///   <para>A name for the volume.</para>
-      ///   <para>If this parameter is <c>null</c>, the function deletes any existing label</para>
-      ///   <para>from the specified volume and does not assign a new label.</para>
+      ///   <para>ボリュームの名前。</para>
+      ///   <para>このパラメーターが <c>null</c> の場合、関数は指定されたボリュームから既存のラベルを削除し、</para>
+      ///   <para>新しいラベルを割り当てません。</para>
       /// </param>
       [SecurityCritical]
       public static void SetVolumeLabel(string volumePath, string volumeName)
       {
-         // rootPathName == null is allowed, means current drive.
+         // rootPathName == null は許可されています。現在のドライブを意味します。
 
-         // Setting volume label only applies to Logical Drives pointing to local resources.
+         // ボリュームラベルの設定は、ローカルリソースを指す論理ドライブにのみ適用されます。
          //if (!Path.IsLocalPath(rootPathName))
          //return false;
 
          volumePath = Path.AddTrailingDirectorySeparator(volumePath, false);
 
-         // NTFS uses a limit of 32 characters for the volume label as of Windows Server 2003.
+         // NTFS は Windows Server 2003 以降、ボリュームラベルに 32 文字の制限を使用しています。
          using (new NativeMethods.ChangeErrorMode(NativeMethods.ErrorMode.FailCriticalErrors))
          {
             var success = NativeMethods.SetVolumeLabel(volumePath, volumeName);

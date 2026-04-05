@@ -27,22 +27,22 @@ using System.Runtime.InteropServices;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>Contains information about a Distributed File System (DFS) root or link. This class cannot be inherited.
-   /// <para>This structure contains the name, status, GUID, time-out, number of targets, and information about each target of the root or link.</para>
+   /// <summary>分散ファイルシステム (DFS) ルートまたはリンクに関する情報を含みます。このクラスは継承できません。
+   /// <para>この構造体には、ルートまたはリンクの名前、状態、GUID、タイムアウト、ターゲット数、および各ターゲットに関する情報が含まれます。</para>
    /// </summary>
    [Serializable]
    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Dfs")]
    public sealed class DfsInfo
    {
-      #region Constructor
+      #region コンストラクター
 
-      /// <summary>Initializes a new instance of the <see cref="DfsInfo"/> class which acts as a wrapper for a DFS root or link target.</summary>
+      /// <summary>DFS ルートまたはリンクターゲットのラッパーとして機能する <see cref="DfsInfo"/> クラスの新しいインスタンスを初期化します。</summary>
       public DfsInfo()
       {
       }
 
-      /// <summary>Initializes a new instance of the <see cref="DfsInfo"/> class, which acts as a wrapper for a DFS root or link target.</summary>
-      /// <param name="structure">An initialized <see cref="NativeMethods.DFS_INFO_9"/> instance.</param>
+      /// <summary>DFS ルートまたはリンクターゲットのラッパーとして機能する <see cref="DfsInfo"/> クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="structure">初期化された <see cref="NativeMethods.DFS_INFO_9"/> インスタンス。</param>
       internal DfsInfo(NativeMethods.DFS_INFO_9 structure)
       {
          Comment = structure.Comment;
@@ -63,48 +63,48 @@ namespace Alphaleonis.Win32.Network
          }
       }
 
-      #endregion // Constructor
+      #endregion // コンストラクター
 
-      #region Methods
+      #region メソッド
 
-      /// <summary>Returns the Universal Naming Convention (UNC) path of the DFS root or link.</summary>
-      /// <returns>A string that represents this instance.</returns>
+      /// <summary>DFS ルートまたはリンクの汎用名前付け規則 (UNC) パスを返します。</summary>
+      /// <returns>このインスタンスを表す文字列。</returns>
       public override string ToString()
       {
          return EntryPath;
       }
 
-      #endregion // Methods
+      #endregion // メソッド
 
-      #region Properties
+      #region プロパティ
 
       private DirectoryInfo _directoryInfo;
 
-      /// <summary>The <see cref="DirectoryInfo"/> instance of the DFS root or link.</summary>
+      /// <summary>DFS ルートまたはリンクの <see cref="DirectoryInfo"/> インスタンス。</summary>
       public DirectoryInfo DirectoryInfo
       {
          get { return _directoryInfo ?? (_directoryInfo = new DirectoryInfo(null, EntryPath, PathFormat.FullPath)); }
       }
 
-      /// <summary>The comment of the DFS root or link.</summary>
+      /// <summary>DFS ルートまたはリンクのコメント。</summary>
       public string Comment { get; internal set; }
 
-      /// <summary>The Universal Naming Convention (UNC) path of the DFS root or link.</summary>
+      /// <summary>DFS ルートまたはリンクの汎用名前付け規則 (UNC) パス。</summary>
       public string EntryPath { get; internal set; }
 
-      /// <summary>Specifies the GUID of the DFS root or link.</summary>
+      /// <summary>DFS ルートまたはリンクの GUID を指定します。</summary>
       public Guid Guid { get; internal set; }
 
 
       private readonly List<DfsStorageInfo> _storageInfoCollection = new List<DfsStorageInfo>();
 
-      /// <summary>The collection of DFS targets of the DFS root or link.</summary>
+      /// <summary>DFS ルートまたはリンクの DFS ターゲットのコレクション。</summary>
       public IEnumerable<DfsStorageInfo> StorageInfoCollection
       {
          get { return _storageInfoCollection; }
       }
 
-      /// <summary>An <see cref="DfsVolumeStates"/> enum that specifies a set of bit flags that describe the DFS root or link.</summary>
+      /// <summary>DFS ルートまたはリンクを記述するビットフラグのセットを指定する <see cref="DfsVolumeStates"/> 列挙型。</summary>
       public DfsVolumeStates State { get; internal set; }
 
       //DfsVolumeStates flavorBits = (structure3.State & (DfsVolumeStates) DfsNamespaceFlavors.All);
@@ -116,25 +116,25 @@ namespace Alphaleonis.Win32.Network
       //   DFS_VOLUME_STATE_OFFLINE or DFS_VOLUME_STATE_ONLINE)
       //State = flavorBits | structure3.State;
 
-      /// <summary>Specifies the time-out, in seconds, of the DFS root or link.</summary>
+      /// <summary>DFS ルートまたはリンクのタイムアウト（秒単位）を指定します。</summary>
       public long Timeout { get; internal set; }
 
-      /// <summary>Specifies a set of flags that describe specific properties of a DFS namespace, root, or link.</summary>
+      /// <summary>DFS 名前空間、ルート、またはリンクの特定のプロパティを記述するフラグのセットを指定します。</summary>
       [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags")]
       public DfsPropertyFlags PropertyFlags { get; internal set; }
       
-      /// <summary>For domain-based DFS namespaces, this member specifies the size of the corresponding Active Directory data blob, in bytes.
-      /// For stand-alone DFS namespaces, this field specifies the size of the metadata stored in the registry,
-      /// including the key names and value names, in addition to the specific data items associated with them. This field is valid for DFS roots only.
+      /// <summary>ドメインベースの DFS 名前空間の場合、対応する Active Directory データ BLOB のサイズ（バイト単位）を指定します。
+      /// スタンドアロン DFS 名前空間の場合、レジストリに格納されているメタデータのサイズを指定します。
+      /// これには、関連付けられた特定のデータ項目に加えて、キー名と値の名前が含まれます。このフィールドは DFS ルートでのみ有効です。
       /// </summary>
       public long MetadataSize { get; internal set; }
 
 
-      /// <summary>Pointer to a SECURITY_DESCRIPTOR structure that specifies a self-relative security descriptor to be associated with the DFS link's reparse point.
-      /// This field is valid for DFS links only.
+      /// <summary>DFS リンクのリパースポイントに関連付ける自己相対セキュリティ記述子を指定する SECURITY_DESCRIPTOR 構造体へのポインター。
+      /// このフィールドは DFS リンクでのみ有効です。
       /// </summary>
       public IntPtr SecurityDescriptor { get; internal set; }
       
-      #endregion // Properties
+      #endregion // プロパティ
    }
 }

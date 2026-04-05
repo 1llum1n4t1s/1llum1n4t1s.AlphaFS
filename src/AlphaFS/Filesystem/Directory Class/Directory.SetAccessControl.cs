@@ -28,7 +28,7 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>Applies access control list (ACL) entries described by a <see cref="DirectorySecurity"/> object to the specified directory.</summary>
+      /// <summary><see cref="DirectorySecurity"/> オブジェクトで記述されたアクセス制御リスト（ACL）エントリを指定されたディレクトリに適用します。</summary>
       /// <param name="path">A directory to add or remove access control list (ACL) entries from.</param>
       /// <param name="directorySecurity">A <see cref="DirectorySecurity "/> object that describes an ACL entry to apply to the directory described by the path parameter.</param>
       [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
@@ -39,10 +39,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Applies access control list (ACL) entries described by a <see cref="DirectorySecurity"/> object to the specified directory.</summary>
+      /// <summary>[AlphaFS] <see cref="DirectorySecurity"/> オブジェクトで記述されたアクセス制御リスト（ACL）エントリを指定されたディレクトリに適用します。</summary>
       /// <param name="path">A directory to add or remove access control list (ACL) entries from.</param>
       /// <param name="directorySecurity">A <see cref="DirectorySecurity "/> object that describes an ACL entry to apply to the directory described by the path parameter.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
       [SecurityCritical]
       public static void SetAccessControl(string path, DirectorySecurity directorySecurity, PathFormat pathFormat)
@@ -51,7 +51,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Applies access control list (ACL) entries described by a <see cref="DirectorySecurity"/> object to the specified directory.</summary>
+      /// <summary><see cref="DirectorySecurity"/> オブジェクトで記述されたアクセス制御リスト（ACL）エントリを指定されたディレクトリに適用します。</summary>
       /// <remarks>Note that unlike the BCL <c>System.IO.Directory.SetAccessControl</c> method, this method does <b>not</b> automatically
       /// determine what parts of the specified <see cref="DirectorySecurity"/> instance has been modified. Instead, the
       /// parameter <paramref name="includeSections"/> is used to specify what entries from <paramref name="directorySecurity"/> to apply to <paramref name="path"/>.</remarks>
@@ -66,14 +66,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Applies access control list (ACL) entries described by a <see cref="DirectorySecurity"/> object to the specified directory.</summary>
+      /// <summary>[AlphaFS] <see cref="DirectorySecurity"/> オブジェクトで記述されたアクセス制御リスト（ACL）エントリを指定されたディレクトリに適用します。</summary>
       /// <remarks>Note that unlike the BCL <c>System.IO.Directory.SetAccessControl</c> method, this method does <b>not</b> automatically
       /// determine what parts of the specified <see cref="DirectorySecurity"/> instance has been modified. Instead, the
       /// parameter <paramref name="includeSections"/> is used to specify what entries from <paramref name="directorySecurity"/> to apply to <paramref name="path"/>.</remarks>
       /// <param name="path">A directory to add or remove access control list (ACL) entries from.</param>
       /// <param name="directorySecurity">A <see cref="DirectorySecurity "/> object that describes an ACL entry to apply to the directory described by the path parameter.</param>
       /// <param name="includeSections">One or more of the <see cref="AccessControlSections"/> values that specifies the type of access control list (ACL) information to set.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
       [SecurityCritical]
       public static void SetAccessControl(string path, DirectorySecurity directorySecurity, AccessControlSections includeSections, PathFormat pathFormat)
@@ -82,7 +82,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
       
       
-      /// <summary>Applies access control list (ACL) entries described by a <see cref="DirectorySecurity"/> object to the specified directory.</summary>
+      /// <summary><see cref="DirectorySecurity"/> オブジェクトで記述されたアクセス制御リスト（ACL）エントリを指定されたディレクトリに適用します。</summary>
       /// <param name="handle">A <see cref="SafeFileHandle"/> to a file to add or remove access control list (ACL) entries from.</param>
       /// <param name="directorySecurity">A <see cref="DirectorySecurity "/> object that describes an ACL entry to apply to the directory described by the path parameter.</param>
       [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
@@ -93,7 +93,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
       
 
-      /// <summary>Applies access control list (ACL) entries described by a <see cref="DirectorySecurity"/> object to the specified directory.</summary>
+      /// <summary><see cref="DirectorySecurity"/> オブジェクトで記述されたアクセス制御リスト（ACL）エントリを指定されたディレクトリに適用します。</summary>
       /// <param name="handle">A <see cref="SafeFileHandle"/> to a file to add or remove access control list (ACL) entries from.</param>
       /// <param name="directorySecurity">A <see cref="DirectorySecurity "/> object that describes an ACL entry to apply to the directory described by the path parameter.</param>
       /// <param name="includeSections">One or more of the <see cref="AccessControlSections"/> values that specifies the type of access control list (ACL) information to set.</param>

@@ -24,13 +24,13 @@ using System.Net;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>Used to create a temporary connection to a network resource that will be disconnected once this instance is disposed.</summary>
+   /// <summary>ネットワークリソースへの一時的な接続を作成するために使用されます that will be disconnected once this instance is disposed.</summary>
    public sealed class DriveConnection : IDisposable
    {
-      #region Constructors
+      #region コンストラクター
 
-      /// <summary>Creates a temporary connection to a network resource. The function can redirect a local device to a network resource, using the current user credentials.</summary>
-      /// <param name="remoteName">The network resource to connect to. The string can be up to <c>MAX_PATH</c> characters in length.</param>
+      /// <summary>Creates a temporary connection to a network resource. この関数はローカルデバイスをネットワークリソースにリダイレクトできます, using the current user credentials.</summary>
+      /// <param name="remoteName">接続先のネットワークリソース。文字列の長さは最大 <c>MAX_PATH</c> characters in length.</param>
       public DriveConnection(string remoteName)
       {
          Share = remoteName;
@@ -43,8 +43,8 @@ namespace Alphaleonis.Win32.Network
       }
 
       
-      /// <summary>Creates a temporary connection to a network resource. The function can redirect a local device to a network resource, using a user name and password.</summary>
-      /// <param name="remoteName">The network resource to connect to. The string can be up to <c>MAX_PATH</c> characters in length.</param>
+      /// <summary>Creates a temporary connection to a network resource. この関数はローカルデバイスをネットワークリソースにリダイレクトできます, using a user name and password.</summary>
+      /// <param name="remoteName">接続先のネットワークリソース。文字列の長さは最大 <c>MAX_PATH</c> characters in length.</param>
       /// <param name="userName">
       ///   The user name for making the connection. If <paramref name="userName"/> is <c>null</c>, the function uses the default
       ///   user name. (The user context for the process provides the default user name)
@@ -53,7 +53,7 @@ namespace Alphaleonis.Win32.Network
       ///   The password to be used for making the network connection. If <paramref name="password"/> is <c>null</c>, the function
       ///   uses the current default password associated with the user specified by <paramref name="userName"/>.
       /// </param>
-      /// <param name="prompt"><c>true</c> always pops-up an authentication dialog box.</param>
+      /// <param name="prompt"><c>true</c> は常に認証ダイアログボックスをポップアップします。</param>
       public DriveConnection(string remoteName, string userName, string password, bool prompt)
       {
          Share = remoteName;
@@ -69,10 +69,10 @@ namespace Alphaleonis.Win32.Network
       }
 
       
-      /// <summary>Creates a temporary connection to a network resource. The function can redirect a local device to a network resource, <see cref="NetworkCredential"/> can be supplied.</summary>
-      /// <param name="remoteName">The network resource to connect to. The string can be up to <c>MAX_PATH</c> characters in length.</param>
+      /// <summary>Creates a temporary connection to a network resource. この関数はローカルデバイスをネットワークリソースにリダイレクトできます, <see cref="NetworkCredential"/> can be supplied.</summary>
+      /// <param name="remoteName">接続先のネットワークリソース。文字列の長さは最大 <c>MAX_PATH</c> characters in length.</param>
       /// <param name="credentials">An instance of <see cref="NetworkCredential"/> which provides credentials for password-based authentication schemes such as basic, digest, NTLM, and Kerberos authentication.</param>
-      /// <param name="prompt"><c>true</c> always pops-up an authentication dialog box.</param>
+      /// <param name="prompt"><c>true</c> は常に認証ダイアログボックスをポップアップします。</param>
       public DriveConnection(string remoteName, NetworkCredential credentials, bool prompt)
       {
          Share = remoteName;
@@ -93,10 +93,10 @@ namespace Alphaleonis.Win32.Network
          Dispose(false);
       }
 
-      #endregion // Constructors
+      #endregion // コンストラクター
 
 
-      #region Properties
+      #region プロパティ
 
       /// <summary>The last available drive letter used for this connection.</summary>
       /// <value>The last available drive letter used for this connection.</value>
@@ -107,10 +107,10 @@ namespace Alphaleonis.Win32.Network
       /// <value>The path originally specified by the user.</value>
       public string Share { get; private set; }
 
-      #endregion // Properties
+      #endregion // プロパティ
 
 
-      #region Methods
+      #region メソッド
 
       /// <summary>Releases all resources used by the <see cref="DriveConnection"/> class.</summary>
       public void Dispose()
@@ -138,12 +138,12 @@ namespace Alphaleonis.Win32.Network
 
 
       /// <summary>Returns the last available drive letter used for this connection.</summary>
-      /// <returns>A string that represents this instance.</returns>
+      /// <returns>このインスタンスを表す文字列。</returns>
       public override string ToString()
       {
          return LocalName;
       }
 
-      #endregion // Methods
+      #endregion // メソッド
    }
 }

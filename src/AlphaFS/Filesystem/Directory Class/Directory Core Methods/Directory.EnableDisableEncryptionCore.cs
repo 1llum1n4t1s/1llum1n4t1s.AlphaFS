@@ -29,8 +29,8 @@ namespace Alphaleonis.Win32.Filesystem
    public static partial class Directory
    {
       /// <summary>Enables/disables encryption of the specified directory and the files in it.
-      ///   <para>This method only creates/modifies the file "Desktop.ini" in the root of <paramref name="path"/> and  enables/disables encryption by writing: "Disable=0" or "Disable=1".</para>
-      ///   <para>This method does not affect encryption of files and subdirectories below the indicated directory.</para>
+      ///   <para>このメソッドは <paramref name="path"/> のルートにある "Desktop.ini" ファイルの作成/変更のみを行います。 and  enables/disables encryption by writing: "Disable=0" or "Disable=1".</para>
+      ///   <para>このメソッドは、指定されたディレクトリ以下のファイルとサブディレクトリの暗号化には影響しません。</para>
       /// </summary>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -41,7 +41,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="UnauthorizedAccessException"/>
       /// <param name="path">The name of the directory for which to enable encryption.</param>
       /// <param name="enable"><c>true</c> enabled encryption, <c>false</c> disables encryption.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       internal static void EnableDisableEncryptionCore(string path, bool enable, PathFormat pathFormat)
       {

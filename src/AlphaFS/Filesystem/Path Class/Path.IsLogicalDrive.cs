@@ -25,24 +25,24 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>[AlphaFS] Checks if <paramref name="path"/> is in a logical drive format, such as "C:", "D:".</summary>
-      /// <returns>true when <paramref name="path"/> is in a logical drive format, such as "C:", "D:".</returns>
+      /// <summary>[AlphaFS] <paramref name="path"/> が "C:"、"D:" のような論理ドライブ形式であるかどうかをチェックします。</summary>
+      /// <returns><paramref name="path"/> が "C:"、"D:" のような論理ドライブ形式の場合に true。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="path">The absolute path to check.</param>
+      /// <param name="path">チェックする絶対パス。</param>
       public static bool IsLogicalDrive(string path)
       {
          return IsLogicalDriveCore(path, false, PathFormat.FullPath);
       }
 
 
-      /// <summary>[AlphaFS] Checks if <paramref name="path"/> is in a logical drive format, such as "C:", "D:".</summary>
-      /// <returns>true when <paramref name="path"/> is in a logical drive format, such as "C:", "D:".</returns>
+      /// <summary>[AlphaFS] <paramref name="path"/> が "C:"、"D:" のような論理ドライブ形式であるかどうかをチェックします。</summary>
+      /// <returns><paramref name="path"/> が "C:"、"D:" のような論理ドライブ形式の場合に true。</returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="path">The absolute path to check.</param>
-      /// <param name="isRegularPath"><c>true</c> indicates the path is already a regular path.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="path">チェックする絶対パス。</param>
+      /// <param name="isRegularPath"><c>true</c> はパスが既に通常のパスであることを示します。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       internal static bool IsLogicalDriveCore(string path, bool isRegularPath, PathFormat pathFormat)
       {
          if (pathFormat != PathFormat.LongFullPath)
@@ -65,7 +65,7 @@ namespace Alphaleonis.Win32.Filesystem
          
          var c = regularPath.ToUpperInvariant()[0];
 
-         // Don't use char.IsLetter() here as that can be misleading; The only valid drive letters are: A-Z.
+         // char.IsLetter() は誤解を招く可能性があるため使用しない。有効なドライブ文字は A-Z のみ。
 
          return regularPath[1] == VolumeSeparatorChar && c >= 'A' && c <= 'Z';
       }

@@ -33,19 +33,19 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region AssocXxx
 
-      /// <summary>Returns a pointer to an IQueryAssociations object.</summary>
-      /// <returns>If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code.</returns>
-      /// <remarks>Minimum supported client: Windows 2000 Professional, Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows 2000 Server [desktop apps only]</remarks>
+      /// <summary>IQueryAssociations オブジェクトへのポインタを返します。</summary>
+      /// <returns>この関数が成功した場合、S_OK を返します。それ以外の場合、HRESULT エラーコードを返します。</returns>
+      /// <remarks>サポートされる最小クライアント: Windows 2000 Professional, Windows XP [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows 2000 Server [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("shlwapi.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.U4)]
       internal static extern uint AssocCreate(Guid clsid, ref Guid riid, out IntPtr ppv);
 
-      /// <summary>Searches for and retrieves a file or protocol association-related string from the registry.</summary>
-      /// <returns>Return value Type: HRESULT. Returns a standard COM error value, including the following: S_OK, E_POINTER and S_FALSE.</returns>
-      /// <remarks>Minimum supported client: Windows 2000 Professional</remarks>
-      /// <remarks>Minimum supported server: Windows 2000 Server</remarks>
+      /// <summary>レジストリからファイルまたはプロトコルの関連付けに関連する文字列を検索して取得します。</summary>
+      /// <returns>戻り値の型: HRESULT。S_OK、E_POINTER、S_FALSE を含む標準 COM エラー値を返します。</returns>
+      /// <remarks>サポートされる最小クライアント: Windows 2000 Professional</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows 2000 Server</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("shlwapi.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "AssocQueryStringW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.U4)]
@@ -57,8 +57,8 @@ namespace Alphaleonis.Win32.Filesystem
       internal static readonly Guid ClsidQueryAssociations = new Guid("A07034FD-6CAA-4954-AC3F-97A27216F98A");
       internal const string QueryAssociationsGuid = "C46CA590-3C3F-11D2-BEE6-0000F805CA57";
 
-      /// <summary>AOT-safe wrapper for the IQueryAssociations COM interface (IUnknown-based).
-      /// Uses raw vtable function pointer calls instead of runtime COM interop.</summary>
+      /// <summary>IQueryAssociations COM インターフェイス (IUnknown ベース) の AOT セーフラッパー。
+      /// ランタイム COM 相互運用の代わりに生の vtable 関数ポインタ呼び出しを使用します。</summary>
       internal sealed unsafe class QueryAssociationsWrapper : IDisposable
       {
          private nint _ptr;
@@ -70,7 +70,7 @@ namespace Alphaleonis.Win32.Filesystem
 
          internal bool IsValid => _ptr != 0;
 
-         /// <summary>Initializes the IQueryAssociations interface and sets the root key to the appropriate ProgID.</summary>
+         /// <summary>IQueryAssociations インターフェイスを初期化し、ルートキーを適切な ProgID に設定します。</summary>
          internal void Init(Shell32.AssociationAttributes flags, string pszAssoc, nint hkProgid, nint hwnd)
          {
             // IUnknown vtable: [0] QueryInterface, [1] AddRef, [2] Release
@@ -87,7 +87,7 @@ namespace Alphaleonis.Win32.Filesystem
             Marshal.ThrowExceptionForHR(hr);
          }
 
-         /// <summary>Searches for and retrieves a file or protocol association-related string from the registry.</summary>
+         /// <summary>レジストリからファイルまたはプロトコルの関連付けに関連する文字列を検索して取得します。</summary>
          internal void GetString(Shell32.AssociationAttributes flags, Shell32.AssociationString str, string pwszExtra, StringBuilder pwszOut, out int pcchOut)
          {
             // IQueryAssociations vtable: [3] Init, [4] GetKey, [5] GetString
@@ -96,7 +96,7 @@ namespace Alphaleonis.Win32.Filesystem
 
             int hr;
             pcchOut = pwszOut.Capacity;
-            // Allocate a temporary buffer for the output
+            // 出力用の一時バッファを割り当てる
             var buffer = new char[pcchOut];
             fixed (char* pExtra = pwszExtra)
             fixed (char* pOut = buffer)
@@ -114,7 +114,7 @@ namespace Alphaleonis.Win32.Filesystem
             Marshal.ThrowExceptionForHR(hr);
          }
 
-         /// <summary>Releases the COM object reference.</summary>
+         /// <summary>COM オブジェクト参照を解放します。</summary>
          public void Dispose()
          {
             var ptr = _ptr;
@@ -128,7 +128,7 @@ namespace Alphaleonis.Win32.Filesystem
          }
       }
 
-      /// <summary>Creates a new IQueryAssociations wrapper from AssocCreate.</summary>
+      /// <summary>AssocCreate から新しい IQueryAssociations ラッパーを作成します。</summary>
       internal static QueryAssociationsWrapper CreateQueryAssociations()
       {
          var iid = new Guid(QueryAssociationsGuid);
@@ -143,71 +143,71 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region Path
 
-      /// <summary>Determines whether a path to a file system object such as a file or folder is valid.</summary>
-      /// <returns><c>true</c> if the file exists; otherwise, <c>false</c>. Call GetLastError for extended error information.</returns>
+      /// <summary>ファイルやフォルダなどのファイルシステムオブジェクトへのパスが有効かどうかを判断します。</summary>
+      /// <returns>ファイルが存在する場合は <c>true</c>、それ以外は <c>false</c>。拡張エラー情報を取得するには GetLastError を呼び出してください。</returns>
       /// <remarks>
-      /// This function tests the validity of the path.
-      /// A path specified by Universal Naming Convention (UNC) is limited to a file only; that is, \\server\share\file is permitted.
-      /// A network share path to a server or server share is not permitted; that is, \\server or \\server\share.
-      /// This function returns FALSE if a mounted remote drive is out of service.
+      /// この関数はパスの有効性をテストします。
+      /// UNC (汎用名前付け規則) で指定されたパスはファイルのみに制限されます。つまり、\\server\share\file は許可されます。
+      /// サーバーまたはサーバー共有へのネットワーク共有パスは許可されません。つまり、\\server や \\server\share は不可です。
+      /// マウントされたリモートドライブがサービス停止中の場合、この関数は FALSE を返します。
       /// </remarks>
-      /// <remarks>Minimum supported client: Windows 2000 Professional</remarks>
-      /// <remarks>Minimum supported server: Windows 2000 Server</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows 2000 Professional</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows 2000 Server</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("Shlwapi.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "PathFileExistsW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]
       internal static extern bool PathFileExists([MarshalAs(UnmanagedType.LPWStr)] string pszPath);
 
 
-      /// <summary>Converts a file URL to a Microsoft MS-DOS path.</summary>
-      /// <returns>Type: HRESULT
-      /// If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code.
+      /// <summary>ファイル URL を Microsoft MS-DOS パスに変換します。</summary>
+      /// <returns>型: HRESULT
+      /// この関数が成功した場合、S_OK を返します。それ以外の場合、HRESULT エラーコードを返します。
       /// </returns>
-      /// <remarks>Minimum supported client: Windows 2000 Professional, Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows 2000 Server [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows 2000 Professional, Windows XP [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows 2000 Server [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("shlwapi.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "PathCreateFromUrlW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.U4)]
       internal static extern uint PathCreateFromUrl([MarshalAs(UnmanagedType.LPWStr)] string pszUrl, StringBuilder pszPath, [MarshalAs(UnmanagedType.U4)] ref uint pcchPath, [MarshalAs(UnmanagedType.U4)] uint dwFlags);
 
 
-      /// <summary>Creates a path from a file URL.</summary>
-      /// <returns>Type: HRESULT
-      /// If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code.
+      /// <summary>ファイル URL からパスを作成します。</summary>
+      /// <returns>型: HRESULT
+      /// この関数が成功した場合、S_OK を返します。それ以外の場合、HRESULT エラーコードを返します。
       /// </returns>
-      /// <remarks>Minimum supported client: Windows Vista [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2008 [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows Vista [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2008 [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("shlwapi.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.U4)]
       internal static extern uint PathCreateFromUrlAlloc([MarshalAs(UnmanagedType.LPWStr)] string pszIn, out StringBuilder pszPath, [MarshalAs(UnmanagedType.U4)] uint dwFlags);
 
 
-      /// <summary>Converts a Microsoft MS-DOS path to a canonicalized URL.</summary>
-      /// <returns>Type: HRESULT
-      /// Returns S_FALSE if pszPath is already in URL format. In this case, pszPath will simply be copied to pszUrl.
-      /// Otherwise, it returns S_OK if successful or a standard COM error value if not.
+      /// <summary>Microsoft MS-DOS パスを正規化された URL に変換します。</summary>
+      /// <returns>型: HRESULT
+      /// pszPath が既に URL 形式の場合、S_FALSE を返します。この場合、pszPath は単に pszUrl にコピーされます。
+      /// それ以外の場合、成功すれば S_OK を返し、失敗した場合は標準 COM エラー値を返します。
       /// </returns>
       /// <remarks>
-      /// UrlCreateFromPath does not support extended paths. These are paths that include the extended-length path prefix "\\?\".
+      /// UrlCreateFromPath は拡張パスをサポートしていません。これらは拡張長パスプレフィックス "\\?\" を含むパスです。
       /// </remarks>
-      /// <remarks>Minimum supported client: Windows 2000 Professional, Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows 2000 Server [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows 2000 Professional, Windows XP [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows 2000 Server [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("shlwapi.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "UrlCreateFromPathW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.U4)]
       internal static extern uint UrlCreateFromPath([MarshalAs(UnmanagedType.LPWStr)] string pszPath, StringBuilder pszUrl, ref uint pcchUrl, [MarshalAs(UnmanagedType.U4)] uint dwFlags);
 
 
-      /// <summary>Tests whether a URL is a specified type.</summary>
+      /// <summary>URL が指定された種類かどうかをテストします。</summary>
       /// <returns>
-      /// Type: BOOL
-      /// For all but one of the URL types, UrlIs returns <c>true</c> if the URL is the specified type, <c>true</c> otherwise.
-      /// If UrlIs is set to <see cref="Shell32.UrlType.IsAppliable"/>, UrlIs will attempt to determine the URL scheme.
-      /// If the function is able to determine a scheme, it returns <c>true</c>, or <c>false</c>.
+      /// 型: BOOL
+      /// URL の種類の1つを除くすべてについて、URL が指定された種類の場合 UrlIs は <c>true</c> を返し、それ以外は <c>true</c> を返します。
+      /// UrlIs が <see cref="Shell32.UrlType.IsAppliable"/> に設定されている場合、UrlIs は URL スキームの判定を試みます。
+      /// 関数がスキームを判定できた場合は <c>true</c> を返し、それ以外は <c>false</c> を返します。
       /// </returns>
-      /// <remarks>Minimum supported client: Windows 2000 Professional, Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows 2000 Server [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows 2000 Professional, Windows XP [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows 2000 Server [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("shlwapi.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "UrlIsW"), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.Bool)]
@@ -216,19 +216,19 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // Path
 
 
-      /// <summary>Destroys an icon and frees any memory the icon occupied.</summary>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows 2000 Server [desktop apps only]</remarks>
+      /// <summary>アイコンを破棄し、アイコンが占有していたメモリを解放します。</summary>
+      /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows 2000 Server [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("user32.dll", SetLastError = false)]
       [return: MarshalAs(UnmanagedType.Bool)]
       internal static extern bool DestroyIcon(IntPtr hIcon);
 
 
-      /// <summary>Retrieves information about an object in the file system, such as a file, folder, directory, or drive root.</summary>
-      /// <remarks>You should call this function from a background thread. Failure to do so could cause the UI to stop responding.</remarks>
-      /// <remarks>Minimum supported client: Windows 2000 Professional [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows 2000 Server [desktop apps only]</remarks>
+      /// <summary>ファイル、フォルダ、ディレクトリ、ドライブルートなど、ファイルシステム内のオブジェクトに関する情報を取得します。</summary>
+      /// <remarks>この関数はバックグラウンドスレッドから呼び出す必要があります���そうしないと、UI が応答しなくなる可能性があります。</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows 2000 Professional [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows 2000 Server [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("shell32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "SHGetFileInfoW"), SuppressUnmanagedCodeSecurity]
       internal static extern IntPtr ShGetFileInfo([MarshalAs(UnmanagedType.LPWStr)] string pszPath, FileAttributes dwFileAttributes, [MarshalAs(UnmanagedType.Struct)] out Shell32.FileInfo psfi, [MarshalAs(UnmanagedType.U4)] uint cbFileInfo, [MarshalAs(UnmanagedType.U4)] Shell32.FileAttributes uFlags);

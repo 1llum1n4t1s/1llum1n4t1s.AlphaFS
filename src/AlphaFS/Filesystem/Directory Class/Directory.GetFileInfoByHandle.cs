@@ -1,4 +1,4 @@
-﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy 
  *  of this software and associated documentation files (the "Software"), to deal 
@@ -26,10 +26,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>[AlphaFS] Retrieves file information for the specified directory.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリのファイル情報を取得します。</summary>
       /// <returns>A <see cref="ByHandleFileInfo"/> instance containing the requested information.</returns>
       /// <remarks>Directory IDs are not guaranteed to be unique over time, because file systems are free to reuse them. In some cases, the directory ID for a directory can change over time.</remarks>
-      /// <param name="path">The path to the directory.</param>
+      /// <param name="path">ディレクトリへのパス。</param>
       [SecurityCritical]
       public static ByHandleFileInfo GetFileInfoByHandle(string path)
       {
@@ -37,11 +37,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Retrieves file information for the specified directory.</summary>
+      /// <summary>[AlphaFS] 指定されたディレクトリのファイル情報を取得します。</summary>
       /// <returns>A <see cref="ByHandleFileInfo"/> instance containing the requested information.</returns>
       /// <remarks>Directory IDs are not guaranteed to be unique over time, because file systems are free to reuse them. In some cases, the directory ID for a directory can change over time.</remarks>
-      /// <param name="path">The path to the directory.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="path">ディレクトリへのパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static ByHandleFileInfo GetFileInfoByHandle(string path, PathFormat pathFormat)
       {

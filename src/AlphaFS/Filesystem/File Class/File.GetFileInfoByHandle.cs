@@ -27,10 +27,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Retrieves file information for the specified file.</summary>
-      /// <returns>A <see cref="ByHandleFileInfo"/> object containing the requested information.</returns>
-      /// <remarks>File IDs are not guaranteed to be unique over time, because file systems are free to reuse them. In some cases, the file ID for a file can change over time.</remarks>
-      /// <param name="path">The path to the file.</param>
+      /// <summary>[AlphaFS] 指定されたファイルのファイル情報を取得します。</summary>
+      /// <returns>要求された情報を含む<see cref="ByHandleFileInfo"/>オブジェクト。</returns>
+      /// <remarks>ファイルIDは時間の経過とともに一意であることが保証さ���ていません。ファイルシステムはそれらを再利用できるためです。場合によっては、ファイルのファイルIDが時間の経過とともに変更されることがあります。</remarks>
+      /// <param name="path">ファイルへのパス。</param>
       [SecurityCritical]
       public static ByHandleFileInfo GetFileInfoByHandle(string path)
       {
@@ -38,11 +38,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Retrieves file information for the specified file.</summary>
-      /// <returns>A <see cref="ByHandleFileInfo"/> object containing the requested information.</returns>
-      /// <remarks>File IDs are not guaranteed to be unique over time, because file systems are free to reuse them. In some cases, the file ID for a file can change over time.</remarks>
-      /// <param name="path">The path to the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <summary>[AlphaFS] 指定されたファイルのファイル情報を取得します。</summary>
+      /// <returns>要求された情報を含む<see cref="ByHandleFileInfo"/>オブジェクト。</returns>
+      /// <remarks>ファイルIDは時間の経過とともに一意であることが保証さ���ていません。ファイルシステムはそれらを再利用できるためです。場合によっては、ファイルのファイルIDが時間の経過とともに変更されることがあります。</remarks>
+      /// <param name="path">ファイルへのパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static ByHandleFileInfo GetFileInfoByHandle(string path, PathFormat pathFormat)
       {
@@ -51,8 +51,8 @@ namespace Alphaleonis.Win32.Filesystem
       
       
       /// <summary>[AlphaFS] Retrieves file information for the specified <see cref="SafeFileHandle"/>.</summary>
-      /// <returns>A <see cref="ByHandleFileInfo"/> object containing the requested information.</returns>
-      /// <returns>A <see cref="ByHandleFileInfo"/> object containing the requested information.</returns>
+      /// <returns>要求された情報を含む<see cref="ByHandleFileInfo"/>オブジェクト。</returns>
+      /// <returns>要求された情報を含む<see cref="ByHandleFileInfo"/>オブジェクト。</returns>
       /// <param name="handle">A <see cref="SafeFileHandle"/> connected to the open file or directory from which to retrieve the information.</param>
       [SecurityCritical]
       public static ByHandleFileInfo GetFileInfoByHandle(SafeFileHandle handle)

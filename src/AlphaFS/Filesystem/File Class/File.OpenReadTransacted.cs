@@ -27,12 +27,12 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Opens an existing file for reading.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to be opened for reading.</param>
-      /// <returns>A read-only <see cref="FileStream"/> on the specified path.</returns>
+      /// <summary>[AlphaFS] 既存のファイルを読み取り用に開きます。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">読み取り用に開くファイル。</param>
+      /// <returns>指定されたパス上の読み取り専用<see cref="FileStream"/>。</returns>
       /// <remarks>
-      ///   This method is equivalent to the <see cref="FileStream"/>(string, FileMode, FileAccess, FileShare) constructor overload with a
+      ///   このメソッドは<see cref="FileStream"/>(string, FileMode, FileAccess, FileShare)コンストラクタオーバーロードで、
       ///   <see cref="FileMode"/> value of Open, a <see cref="FileAccess"/> value of Read and a <see cref="FileShare"/> value of Read.
       /// </remarks>
       [SecurityCritical]
@@ -42,13 +42,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens an existing file for reading.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to be opened for reading.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>A read-only <see cref="FileStream"/> on the specified path.</returns>
+      /// <summary>[AlphaFS] 既存のファイルを読み取り用に開きます。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">読み取り用に開くファイル。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>指定されたパス上の読み取り専用<see cref="FileStream"/>。</returns>
       /// <remarks>
-      ///   This method is equivalent to the <see cref="FileStream"/>(string, FileMode, FileAccess, FileShare) constructor overload with a
+      ///   このメソッドは<see cref="FileStream"/>(string, FileMode, FileAccess, FileShare)コンストラクタオーバーロードで、
       ///   <see cref="FileMode"/> value of Open, a <see cref="FileAccess"/> value of Read and a <see cref="FileShare"/> value of Read.
       /// </remarks>
       [SecurityCritical]

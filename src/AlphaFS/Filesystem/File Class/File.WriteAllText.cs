@@ -30,8 +30,8 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Creates a new file, writes the specified string to the file, and then closes the file. If the target file already exists, it is overwritten.</summary>
-      /// <remarks>This method uses UTF-8 encoding without a Byte-Order Mark (BOM)</remarks>
+      /// <summary>新しいファイルを作成し、指定された文字列をファイルに書き込み、ファイルを閉じます。対象ファイルが既に存在する場合は上書きされます。</summary>
+      /// <remarks>このメソッドはBOM(バイトオーダーマーク)なしのUTF-8エンコーディングを使用します。</remarks>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
@@ -42,8 +42,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="path">The file to write to.</param>
-      /// <param name="contents">The string to write to the file.</param>
+      /// <param name="path">書き込むファイル。</param>
+      /// <param name="contents">ファイルに書き込む文字列。</param>
       [SecurityCritical]
       public static void WriteAllText(string path, string contents)
       {
@@ -51,10 +51,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Creates a new file, writes the specified string to the file using the specified encoding, and then closes the file. If the target file already exists, it is overwritten.</summary>
-      /// <param name="path">The file to write to.</param>
-      /// <param name="contents">The string to write to the file.</param>
-      /// <param name="encoding">The <see cref="Encoding"/> applied to the contents of the file.</param>
+      /// <summary>新しいファイルを作成し、指定されたエンコーディングを使用して指定された文字列をファイルに書き込み、ファイルを閉じます。対象ファイルが既に存在する場合は上書きされます。</summary>
+      /// <param name="path">書き込むファイル。</param>
+      /// <param name="contents">ファイルに書き込む文字列。</param>
+      /// <param name="encoding">ファイルの内容に適用される<see cref="Encoding"/>。</param>
       [SecurityCritical]
       public static void WriteAllText(string path, string contents, Encoding encoding)
       {
@@ -64,8 +64,8 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Creates a new file, writes the specified string to the file, and then closes the file. If the target file already exists, it is overwritten.</summary>
-      /// <remarks>This method uses UTF-8 encoding without a Byte-Order Mark (BOM)</remarks>
+      /// <summary>[AlphaFS] 新しいファイルを作成し、指定された文字列をファイルに書き込み、ファイルを閉じます。対象ファイルが既に存在する場合は上書きされます。</summary>
+      /// <remarks>このメソッドはBOM(バイトオーダーマーク)なしのUTF-8エンコーディングを使用します。</remarks>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
@@ -76,9 +76,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="path">The file to write to.</param>
-      /// <param name="contents">The string to write to the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="path">書き込むファイル。</param>
+      /// <param name="contents">ファイルに書き込む文字列。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void WriteAllText(string path, string contents, PathFormat pathFormat)
       {
@@ -86,7 +86,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates a new file, writes the specified string to the file using the specified encoding, and then closes the file. If the target file already exists, it is overwritten.</summary>
+      /// <summary>[AlphaFS] 新しいファイルを作成し、指定されたエンコーディングを使用して指定された文字列をファイルに書き込み、ファイルを閉じます。対象ファイルが既に存在する場合は上書きされます。</summary>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
@@ -97,10 +97,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="path">The file to write to.</param>
-      /// <param name="contents">The string to write to the file.</param>
-      /// <param name="encoding">The <see cref="Encoding"/> applied to the contents of the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="path">書き込むファイル。</param>
+      /// <param name="contents">ファイルに書き込む文字列。</param>
+      /// <param name="encoding">ファイルの内容に適用される<see cref="Encoding"/>。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void WriteAllText(string path, string contents, Encoding encoding, PathFormat pathFormat)
       {

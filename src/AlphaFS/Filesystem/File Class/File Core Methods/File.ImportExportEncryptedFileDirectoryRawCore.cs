@@ -45,7 +45,7 @@ namespace Alphaleonis.Win32.Filesystem
 
 
          // OpenEncryptedFileRaw()
-         // 2015-08-02: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
+         // 2015-08-02: MSDNはLongPathの使用を確認していませんが、この関数のUnicodeバージョンが存在します。
 
          var lastError = NativeMethods.OpenEncryptedFileRaw(destinationPathLp, mode, out var context);
 

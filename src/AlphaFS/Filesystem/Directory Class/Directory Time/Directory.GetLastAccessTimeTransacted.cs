@@ -26,9 +26,9 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>[AlphaFS] Gets the date and time that the specified directory was last accessed.</summary>
-      /// <returns>A <see cref="DateTime"/> structure set to the date and time that the specified directory was last accessed. This value is expressed in local time.</returns>
-      /// <param name="transaction">The transaction.</param>
+      /// <summary>[AlphaFS] 指定されたディレクトリが最後にアクセスされた日時を取得します。</summary>
+      /// <returns>指定されたディレクトリが最後にアクセスされた日時に設定された <see cref="DateTime"/> 構造体。 この値はローカル時刻で表されます。</returns>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The directory for which to obtain access date and time information.</param>
       [SecurityCritical]
       public static DateTime GetLastAccessTimeTransacted(KernelTransaction transaction, string path)
@@ -37,11 +37,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Gets the date and time that the specified directory was last accessed.</summary>
-      /// <returns>A <see cref="DateTime"/> structure set to the date and time that the specified directory was last accessed. This value is expressed in local time.</returns>
-      /// <param name="transaction">The transaction.</param>
+      /// <summary>[AlphaFS] 指定されたディレクトリが最後にアクセスされた日時を取得します。</summary>
+      /// <returns>指定されたディレクトリが最後にアクセスされた日時に設定された <see cref="DateTime"/> 構造体。 この値はローカル時刻で表されます。</returns>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The directory for which to obtain access date and time information.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static DateTime GetLastAccessTimeTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)
       {

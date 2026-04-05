@@ -27,22 +27,22 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Sets the specified <see cref="FileAttributes"/> of the file on the specified path.</summary>
+      /// <summary>[AlphaFS] 指定されたパス上のファイルに指定された<see cref="FileAttributes"/>を設定します。</summary>
       /// <remarks>
-      ///   Certain file attributes, such as <see cref="FileAttributes.Hidden"/> and <see cref="FileAttributes.ReadOnly"/>, can be combined.
-      ///   Other attributes, such as <see cref="FileAttributes.Normal"/>, must be used alone.
+      ///   <see cref="FileAttributes.Hidden"/>や<see cref="FileAttributes.ReadOnly"/>などの特定のファイル属性は組み合わせることができます。
+      ///   <see cref="FileAttributes.Normal"/>などの他の属性は単独で使用する必要があります。
       /// </remarks>
       /// <remarks>
-      ///   It is not possible to change the <see cref="FileAttributes.Compressed"/> status of a File object using this method.
+      ///   このメソッドを使用してFileオブジェクトの<see cref="FileAttributes.Compressed"/>ステータスを変更することはできません。
       /// </remarks>
       /// <exception cref="ArgumentException">path is empty, contains only white spaces, contains invalid characters, or the file attribute is invalid.</exception>
       /// <exception cref="DirectoryNotFoundException">The specified path is invalid, (for example, it is on an unmapped drive).</exception>
       /// <exception cref="FileNotFoundException">The file cannot be found.</exception>
       /// <exception cref="NotSupportedException">path is in an invalid format.</exception>
       /// <exception cref="UnauthorizedAccessException">path specified a file that is read-only. -or- This operation is not supported on the current platform. -or- path specified a directory. -or- The caller does not have the required permission.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the file.</param>
-      /// <param name="fileAttributes">A bitwise combination of the enumeration values.</param>      
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルへのパス。</param>
+      /// <param name="fileAttributes">列挙値のビット単位の組み合わせ。</param>      
       [SecurityCritical]
       public static void SetAttributesTransacted(KernelTransaction transaction, string path, FileAttributes fileAttributes)
       {
@@ -50,23 +50,23 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Sets the specified <see cref="FileAttributes"/> of the file on the specified path.</summary>
+      /// <summary>[AlphaFS] 指定されたパス上のファイルに指定された<see cref="FileAttributes"/>を設定します。</summary>
       /// <remarks>
-      ///   Certain file attributes, such as <see cref="FileAttributes.Hidden"/> and <see cref="FileAttributes.ReadOnly"/>, can be combined.
-      ///   Other attributes, such as <see cref="FileAttributes.Normal"/>, must be used alone.
+      ///   <see cref="FileAttributes.Hidden"/>や<see cref="FileAttributes.ReadOnly"/>などの特定のファイル属性は組み合わせることができます。
+      ///   <see cref="FileAttributes.Normal"/>などの他の属性は単独で使用する必要があります。
       /// </remarks>
       /// <remarks>
-      ///   It is not possible to change the <see cref="FileAttributes.Compressed"/> status of a File object using this method.
+      ///   このメソッドを使用してFileオブジェクトの<see cref="FileAttributes.Compressed"/>ステータスを変更することはできません。
       /// </remarks>
       /// <exception cref="ArgumentException">path is empty, contains only white spaces, contains invalid characters, or the file attribute is invalid.</exception>
       /// <exception cref="DirectoryNotFoundException">The specified path is invalid, (for example, it is on an unmapped drive).</exception>
       /// <exception cref="FileNotFoundException">The file cannot be found.</exception>
       /// <exception cref="NotSupportedException">path is in an invalid format.</exception>
       /// <exception cref="UnauthorizedAccessException">path specified a file that is read-only. -or- This operation is not supported on the current platform. -or- path specified a directory. -or- The caller does not have the required permission.</exception>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the file.</param>
-      /// <param name="fileAttributes">A bitwise combination of the enumeration values.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>      
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルへのパス。</param>
+      /// <param name="fileAttributes">列挙値のビット単位の組み合わせ。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>      
       [SecurityCritical]
       public static void SetAttributesTransacted(KernelTransaction transaction, string path, FileAttributes fileAttributes, PathFormat pathFormat)
       {

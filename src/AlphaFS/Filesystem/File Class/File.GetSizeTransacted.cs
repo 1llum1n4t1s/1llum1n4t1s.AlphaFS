@@ -25,10 +25,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Retrieves the size of the specified file.</summary>
-      /// <returns>The file size, in bytes.</returns>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the file.</param>
+      /// <summary>[AlphaFS] 指定されたファイルのサイズを取得します。</summary>
+      /// <returns>ファイルサイズ(バイト単位)。</returns>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルへのパス。</param>
       [SecurityCritical]
       public static long GetSizeTransacted(KernelTransaction transaction, string path)
       {
@@ -36,11 +36,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Retrieves the size of the specified file.</summary>
-      /// <returns>The file size, in bytes.</returns>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <summary>[AlphaFS] 指定されたファイルのサイズを取得します。</summary>
+      /// <returns>ファイルサイズ(バイト単位)。</returns>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルへのパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static long GetSizeTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)
       {
@@ -48,11 +48,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Retrieves the size of the specified file.</summary>
-      /// <returns>The file size of the first or all streams, in bytes.</returns>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the file.</param>
-      /// <param name="sizeOfAllStreams"><c>true</c> to retrieve the size of all alternate data streams, <c>false</c> to get the size of the first stream.</param>
+      /// <summary>[AlphaFS] 指定されたファイルのサイズを取得します。</summary>
+      /// <returns>最初のストリームまたはすべてのストリームのファイルサイズ(バイト単位)。</returns>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルへのパス。</param>
+      /// <param name="sizeOfAllStreams">すべての代替データストリームのサイズを取得する場合は<c>true</c>、最初のストリームのサイズを取得する場合は<c>false</c>。</param>
       [SecurityCritical]
       public static long GetSizeTransacted(KernelTransaction transaction, string path, bool sizeOfAllStreams)
       {
@@ -60,12 +60,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Retrieves the size of the specified file.</summary>
-      /// <returns>The file size of the first or all streams, in bytes.</returns>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the file.</param>
-      /// <param name="sizeOfAllStreams"><c>true</c> to retrieve the size of all alternate data streams, <c>false</c> to get the size of the first stream.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <summary>[AlphaFS] 指定されたファイルのサイズを取得します。</summary>
+      /// <returns>最初のストリームまたはすべてのストリームのファイルサイズ(バイト単位)。</returns>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルへのパス。</param>
+      /// <param name="sizeOfAllStreams">すべての代替データストリームのサイズを取得する場合は<c>true</c>、最初のストリームのサイズを取得する場合は<c>false</c>。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static long GetSizeTransacted(KernelTransaction transaction, string path, bool sizeOfAllStreams, PathFormat pathFormat)
       {

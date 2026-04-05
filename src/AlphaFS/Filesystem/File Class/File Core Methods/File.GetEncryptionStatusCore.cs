@@ -28,9 +28,9 @@ namespace Alphaleonis.Win32.Filesystem
    public static partial class File
    {
       /// <summary>Retrieves the encryption status of the specified file.</summary>
-      /// <param name="path">The name of the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>The <see cref="FileEncryptionStatus"/> of the specified <paramref name="path"/>.</returns>
+      /// <param name="path">ファイルの名前。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>指定された<paramref name="path"/>の<see cref="FileEncryptionStatus"/>。</returns>
       [SecurityCritical]
       internal static FileEncryptionStatus GetEncryptionStatusCore(string path, PathFormat pathFormat)
       {
@@ -42,7 +42,7 @@ namespace Alphaleonis.Win32.Filesystem
          var pathLp = Path.GetExtendedLengthPathCore(null, path, pathFormat, GetFullPathOptions.RemoveTrailingDirectorySeparator | GetFullPathOptions.FullCheck);
 
          // FileEncryptionStatus()
-         // 2013-01-13: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
+         // 2013-01-13: MSDNはLongPathの使用を確認していませんが、この関数のUnicodeバージョンが存在します。
 
          if (!NativeMethods.FileEncryptionStatus(pathLp, out var status))
          {

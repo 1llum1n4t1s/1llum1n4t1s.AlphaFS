@@ -27,70 +27,70 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Gets a list of processes that have a lock on the files specified by <paramref name="filePath"/>.</summary>
+      /// <summary>[AlphaFS] <paramref name="filePath"/>で指定されたファイルにロックを持つプロセスのリストを取得します。</summary>
       /// <returns>
       /// <c>null</c> when no processes found that are locking the file specified by <paramref name="filePath"/>.
-      /// A list of processes locking the file specified by <paramref name="filePath"/>.
+      /// <paramref name="filePath"/>で指定されたファイルをロックしているプロセスのリスト。
       /// </returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentOutOfRangeException"/>
       /// <exception cref="InvalidOperationException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="filePath">The path to the file.</param>
+      /// <param name="filePath">ファイルへのパス。</param>
       public static Collection<Process> GetProcessForFileLock(string filePath)
       {
          return GetProcessForFileLockCore(null, new Collection<string>(new[] {filePath}), PathFormat.RelativePath);
       }
 
 
-      /// <summary>[AlphaFS] Gets a list of processes that have a lock on the files specified by <paramref name="filePath"/>.</summary>
+      /// <summary>[AlphaFS] <paramref name="filePath"/>で指定されたファイルにロックを持つプロセスのリストを取得します。</summary>
       /// <returns>
       /// <c>null</c> when no processes found that are locking the file specified by <paramref name="filePath"/>.
-      /// A list of processes locking the file specified by <paramref name="filePath"/>.
+      /// <paramref name="filePath"/>で指定されたファイルをロックしているプロセスのリスト。
       /// </returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentOutOfRangeException"/>
       /// <exception cref="InvalidOperationException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="filePath">The path to the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="filePath">ファイルへのパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       public static Collection<Process> GetProcessForFileLock(string filePath, PathFormat pathFormat)
       {
          return GetProcessForFileLockCore(null, new Collection<string>(new[] {filePath}), pathFormat);
       }
 
 
-      /// <summary>[AlphaFS] Gets a list of processes that have a lock on the file(s) specified by <paramref name="filePaths"/>.</summary>
+      /// <summary>[AlphaFS] <paramref name="filePaths"/>で指定されたファイルにロックを持つプロセスのリストを取得します。</summary>
       /// <returns>
       /// <c>null</c> when no processes found that are locking the file(s) specified by <paramref name="filePaths"/>.
-      /// A list of processes locking the file(s) specified by <paramref name="filePaths"/>.
+      /// <paramref name="filePaths"/>で指定されたファイルをロックしているプロセスのリスト。
       /// </returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentOutOfRangeException"/>
       /// <exception cref="InvalidOperationException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="filePaths">A list with one or more file paths.</param>
+      /// <param name="filePaths">1つ以上のファイルパスのリスト。</param>
       public static Collection<Process> GetProcessForFileLock(Collection<string> filePaths)
       {
          return GetProcessForFileLockCore(null, filePaths, PathFormat.RelativePath);
       }
 
 
-      /// <summary>[AlphaFS] Gets a list of processes that have a lock on the file(s) specified by <paramref name="filePaths"/>.</summary>
+      /// <summary>[AlphaFS] <paramref name="filePaths"/>で指定されたファイルにロックを持つプロセスのリストを取得します。</summary>
       /// <returns>
       /// <c>null</c> when no processes found that are locking the file(s) specified by <paramref name="filePaths"/>.
-      /// A list of processes locking the file(s) specified by <paramref name="filePaths"/>.
+      /// <paramref name="filePaths"/>で指定されたファイルをロックしているプロセスのリスト。
       /// </returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="ArgumentOutOfRangeException"/>
       /// <exception cref="InvalidOperationException"/>
       /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="filePaths">A list with one or more file paths.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="filePaths">1つ以上のファイルパスのリスト。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       public static Collection<Process> GetProcessForFileLock(Collection<string> filePaths, PathFormat pathFormat)
       {
          return GetProcessForFileLockCore(null, filePaths, pathFormat);

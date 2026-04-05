@@ -30,22 +30,22 @@ using System.Transactions;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>A KTM transaction object for use with the transacted operations in <see cref="Filesystem"/>.</summary>
+   /// <summary><see cref="Filesystem"/>のトランザクション操作で使用するKTMトランザクションオブジェクト。</summary>
    public sealed class KernelTransaction : MarshalByRefObject, IDisposable
    {
       // IKernelTransaction IID: 79427A2B-F895-40e0-BE79-B57DC82ED231
       private static readonly Guid IID_IKernelTransaction = new Guid("79427A2B-F895-40e0-BE79-B57DC82ED231");
 
-      /// <summary>Initializes a new instance of the <see cref="KernelTransaction"/> class, internally using the specified <see cref="Transaction"/>.
-      /// This method allows the usage of methods accepting a <see cref="KernelTransaction"/> with an instance of <see cref="System.Transactions.Transaction"/>.
+      /// <summary>指定された<see cref="Transaction"/>を内部的に使用して、<see cref="KernelTransaction"/>クラスの新しいインスタンスを初期化します。
+      /// このメソッドにより、<see cref="System.Transactions.Transaction"/>のインスタンスで<see cref="KernelTransaction"/>を受け入れるメソッドを使用できます。
       /// </summary>
       /// <remarks>
-      /// <para>This constructor is NOT compatible with NativeAOT deployment because
-      /// <see cref="TransactionInterop.GetDtcTransaction"/> and <see cref="Marshal.GetIUnknownForObject"/>
-      /// internally rely on built-in COM interop which is not supported in NativeAOT.</para>
-      /// <para>For AOT-safe usage, use the other constructors that call CreateTransaction directly.</para>
+      /// <para>このコンストラクタはNativeAOTデプロイメントと互換性がありません。
+      /// <see cref="TransactionInterop.GetDtcTransaction"/>と<see cref="Marshal.GetIUnknownForObject"/>は
+      /// 内部的にNativeAOTで��ポートされていない組み込みCOM��互運用に依存しているためです。</para>
+      /// <para>AOT安全な使用方法については、CreateTransactionを直接呼び出す他のコンストラクタを使用してください。</para>
       /// </remarks>
-      /// <param name="transaction">The transaction to use for any transactional operations.</param>
+      /// <param name="transaction">トランザクション操作に使用するトランザクション。</param>
       [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands")]
       [SecurityCritical]
       [RequiresUnreferencedCode("This constructor uses TransactionInterop.GetDtcTransaction and Marshal.GetIUnknownForObject which require COM interop not available in NativeAOT. Use the parameterless constructor or the constructor with timeout/description parameters instead.")]
@@ -55,7 +55,7 @@ namespace Alphaleonis.Win32.Filesystem
          var punk = Marshal.GetIUnknownForObject(dtcTransaction);
          try
          {
-            // QueryInterface for IKernelTransaction
+            // IKernelTransactionのQueryInterface
             var iid = IID_IKernelTransaction;
             nint* vtable = *(nint**)punk;
             var queryFn = (delegate* unmanaged[Stdcall]<nint, Guid*, nint*, int>)vtable[0];
@@ -73,7 +73,7 @@ namespace Alphaleonis.Win32.Filesystem
             }
             finally
             {
-               // Release IKernelTransaction
+               // IKernelTransactionを解放
                var releaseFn = (delegate* unmanaged[Stdcall]<nint, uint>)ktxVtable[2];
                releaseFn(pKtx);
             }
@@ -84,28 +84,28 @@ namespace Alphaleonis.Win32.Filesystem
          }
       }
 
-      /// <summary>Initializes a new instance of the <see cref="KernelTransaction"/> class with a default security descriptor, infinite timeout and no description.</summary>
+      /// <summary>デフォルトのセキュリティ記述子、無限のタイムアウト、説明なしで<see cref="KernelTransaction"/>クラスの新しいインスタンスを初期化します。</summary>
       [SecurityCritical]
       public KernelTransaction()
          : this(0, null)
       {
       }
 
-      /// <summary>Initializes a new instance of the <see cref="KernelTransaction"/> class with a default security descriptor.</summary>
-      /// <param name="timeout"><para>The time, in milliseconds, when the transaction will be aborted if it has not already reached the prepared state.</para></param>
-      /// <param name="description">A user-readable description of the transaction. This parameter may be <c>null</c>.</param>
+      /// <summary>デフォルトのセキュリティ記述子で<see cref="KernelTransaction"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="timeout"><para>トランザクションが準備状態に達していない場合に中止されるまでの時間（ミリ秒）。</para></param>
+      /// <param name="description">ユーザーが読み取り可能なトランザクションの説明。このパラメータは<c>null</c>にできます。</param>
       [SecurityCritical]      
       public KernelTransaction(int timeout, string description)
          : this(null, timeout, description)
       {
       }
 
-      /// <summary>Initializes a new instance of the <see cref="KernelTransaction"/> class.</summary>
-      /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
-      /// <param name="securityDescriptor">The <see cref="ObjectSecurity"/> security descriptor.</param>
-      /// <param name="timeout"><para>The time, in milliseconds, when the transaction will be aborted if it has not already reached the prepared state.</para>
-      /// <para>Specify 0 to provide an infinite timeout.</para></param>
-      /// <param name="description">A user-readable description of the transaction. This parameter may be <c>null</c>.</param>
+      /// <summary><see cref="KernelTransaction"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <exception cref="PlatformNotSupportedException">オペレーティングシステムがWindows Vistaより古い場合。</exception>
+      /// <param name="securityDescriptor"><see cref="ObjectSecurity"/>セキュリティ記述子。</param>
+      /// <param name="timeout"><para>トランザクションが準備状態に達していない場合に中止されるまでの時間（ミリ秒）。</para>
+      /// <para>無限のタイムアウトを指定するには0を指定します。</para></param>
+      /// <param name="description">ユーザーが読み取り可能なトランザクションの説明。このパラメータは<c>null</c>にできます。</param>
       [SecurityCritical]
       public KernelTransaction(ObjectSecurity securityDescriptor, int timeout, string description)
       {
@@ -121,10 +121,10 @@ namespace Alphaleonis.Win32.Filesystem
          NativeMethods.IsValidHandle(_hTrans, lastError);
       }
 
-      /// <summary>Requests that the specified transaction be committed.</summary>
+      /// <summary>指定されたトランザクションのコミットを要求します。</summary>
       /// <exception cref="TransactionAlreadyCommittedException"/>
       /// <exception cref="TransactionAlreadyAbortedException"/>
-      /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
+      /// <exception cref="PlatformNotSupportedException">オペレーティングシステムがWindows Vistaより古い場合。</exception>
       /// <exception cref="Win32Exception"/>
       [SecurityCritical]
       public void Commit()
@@ -140,10 +140,10 @@ namespace Alphaleonis.Win32.Filesystem
          }
       }
 
-      /// <summary>Requests that the specified transaction be rolled back. This function is synchronous.</summary>
+      /// <summary>指定されたトランザクションのロールバックを要求します。この関数は同期的です。</summary>
       /// <exception cref="TransactionAlreadyCommittedException"/>
       /// <exception cref="Win32Exception"/>
-      /// <exception cref="PlatformNotSupportedException">The operating system is older than Windows Vista.</exception>
+      /// <exception cref="PlatformNotSupportedException">オペレーティングシステムがWindows Vistaより古い場合。</exception>
       [SecurityCritical]
       public void Rollback()
       {
@@ -177,8 +177,8 @@ namespace Alphaleonis.Win32.Filesystem
          }
       }
 
-      /// <summary>Gets the safe handle.</summary>
-      /// <value>The safe handle.</value>
+      /// <summary>セーフハンドルを取得します。</summary>
+      /// <value>セーフハンドル。</value>
       public SafeHandle SafeHandle
       {
          get { return _hTrans; }
@@ -188,7 +188,7 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region IDisposable Members
 
-      /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+      /// <summary>アンマネージリソースの解放、リリース、またはリセットに関連するアプリケーション定義のタスクを実行します。</summary>
       public void Dispose()
       {
          _hTrans.Close();

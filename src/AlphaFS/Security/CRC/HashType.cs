@@ -23,34 +23,34 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Alphaleonis.Win32.Security
 {
-   /// <summary>Enum containing the supported hash types.</summary>
+   /// <summary>サポートされるハッシュタイプを含む列挙型。</summary>
    public enum HashType
    {
-      /// <summary>CRC-32 (Cyclic Redundancy Check)</summary>
+      /// <summary>CRC-32（巡回冗長検査）</summary>
       [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "CRC")]
       CRC32,
 
-      /// <summary>CRC-64 ISO-3309 compliant.</summary>
+      /// <summary>CRC-64 ISO-3309準拠。</summary>
       [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "CRC")]
       [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "ISO")]
       CRC64ISO3309,
 
-      /// <summary>MD5 (Message digest)</summary>
+      /// <summary>MD5（メッセージダイジェスト）</summary>
       MD5,
 
-      /// <summary>SHA-1 (Secure Hash Algorithm)</summary>
+      /// <summary>SHA-1（セキュアハッシュアルゴリズム）</summary>
       [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "SHA")]
       SHA1,
 
-      /// <summary>SHA-256 (Secure Hash Algorithm)</summary>
+      /// <summary>SHA-256（セキュアハッシュアルゴリズム）</summary>
       [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "SHA")]
       SHA256,
 
-      /// <summary>SHA-384 (Secure Hash Algorithm)</summary>
+      /// <summary>SHA-384（セキュアハッシュアルゴリズム）</summary>
       [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "SHA")]
       SHA384,
 
-      /// <summary>SHA-512 (Secure Hash Algorithm)</summary>
+      /// <summary>SHA-512（セキュアハッシュアルゴリズム）</summary>
       [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "SHA")]
       SHA512
    }

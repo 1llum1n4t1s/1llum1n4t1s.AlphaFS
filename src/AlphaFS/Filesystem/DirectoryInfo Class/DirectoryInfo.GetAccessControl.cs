@@ -28,8 +28,8 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Gets a <see cref="DirectorySecurity"/> object that encapsulates the access control list (ACL) entries for the directory described by the current DirectoryInfo object.</summary>
-      /// <returns>A <see cref="DirectorySecurity"/> object that encapsulates the access control rules for the directory.</returns>
+      /// <summary>現在の DirectoryInfo オブジェクトで記述されたディレクトリのアクセス制御リスト (ACL) エントリをカプセル化する <see cref="DirectorySecurity"/> オブジェクトを取得します。</summary>
+      /// <returns>ディレクトリのアクセス制御規則をカプセル化する <see cref="DirectorySecurity"/> オブジェクト。</returns>
       [SecurityCritical]
       public DirectorySecurity GetAccessControl()
       {
@@ -37,9 +37,9 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets a <see cref="DirectorySecurity"/> object that encapsulates the specified type of access control list (ACL) entries for the directory described by the current <see cref="DirectoryInfo"/> object.</summary>
-      /// <param name="includeSections">One of the <see cref="AccessControlSections"/> values that specifies the type of access control list (ACL) information to receive.</param>
-      /// <returns>A <see cref="DirectorySecurity"/> object that encapsulates the access control rules for the file described by the path parameter.</returns>
+      /// <summary>現在の <see cref="DirectoryInfo"/> オブジェクトで記述されたディレクトリの指定された種類のアクセス制御リスト (ACL) エントリをカプセル化する <see cref="DirectorySecurity"/> オブジェクトを取得します。</summary>
+      /// <param name="includeSections">受信するアクセス制御リスト (ACL) 情報の種類を指定する <see cref="AccessControlSections"/> 値の 1 つ。</param>
+      /// <returns>path パラメーターで記述されたファイルのアクセス制御規則をカプセル化する <see cref="DirectorySecurity"/> オブジェクト。</returns>
       [SecurityCritical]
       public DirectorySecurity GetAccessControl(AccessControlSections includeSections)
       {

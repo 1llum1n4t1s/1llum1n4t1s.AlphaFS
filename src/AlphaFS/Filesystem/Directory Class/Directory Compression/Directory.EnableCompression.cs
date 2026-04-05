@@ -27,15 +27,15 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>[AlphaFS] Enables NTFS compression of the specified directory and the files in it.</summary>
-      /// <remarks>This method enables the directory-compression attribute. It will not compress the current contents of the directory. However, newly created files and directories will be compressed.</remarks>
+      /// <summary>[AlphaFS] 指定されたディレクトリとその中のファイルのNTFS圧縮を有効にします。</summary>
+      /// <remarks>このメソッドはディレクトリの圧縮属性を有効にします。ディレクトリの現在の内容は圧縮されません。ただし、新しく作成されるファイルとディレクトリは圧縮されます。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="path">A path to a directory to compress.</param>
+      /// <param name="path">圧縮するディレクトリへのパス。</param>
       [SecurityCritical]
       public static void EnableCompression(string path)
       {
@@ -43,16 +43,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Enables NTFS compression of the specified directory and the files in it.</summary>
-      /// <remarks>This method enables the directory-compression attribute. It will not compress the current contents of the directory. However, newly created files and directories will be compressed.</remarks>
+      /// <summary>[AlphaFS] 指定されたディレクトリとその中のファイルのNTFS圧縮を有効にします。</summary>
+      /// <remarks>このメソッドはディレクトリの圧縮属性を有効にします。ディレクトリの現在の内容は圧縮されません。ただし、新しく作成されるファイルとディレクトリは圧縮されます。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="DirectoryNotFoundException"/>
       /// <exception cref="IOException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
-      /// <param name="path">A path to a directory to compress.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="path">圧縮するディレクトリへのパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static void EnableCompression(string path, PathFormat pathFormat)
       {

@@ -25,23 +25,23 @@ namespace Alphaleonis.Win32.Filesystem
    {
       private static void CopyFolderTimestamps(CopyMoveArguments cma)
       {
-         // TODO 2018-01-09: Not 100% yet with local + UNC paths.
+         // TODO 2018-01-09: ローカル + UNCパスの組み合わせでまだ100%ではない。
          var dstLp = cma.SourcePathLp.ReplaceIgnoreCase(cma.SourcePathLp, cma.DestinationPathLp);
 
 
-         // Traverse the source folder, processing only folders.
+         // ソースフォルダを走査し、フォルダのみを処理する。
 
          foreach (var fseiSource in EnumerateFileSystemEntryInfosCore<FileSystemEntryInfo>(true, cma.Transaction, cma.SourcePathLp, Path.WildcardStarMatchAll, null, null, cma.DirectoryEnumerationFilters, PathFormat.LongFullPath))
 
             File.CopyTimestampsCore(cma.Transaction, true, fseiSource.LongFullPath, Path.CombineCore(false, dstLp, fseiSource.FileName), false, PathFormat.LongFullPath);
 
-         
-         // Process the root directory, the given path.
+
+         // ルートディレクトリ（指定されたパス）を処理する。
 
          File.CopyTimestampsCore(cma.Transaction, true, cma.SourcePathLp, cma.DestinationPathLp, false, PathFormat.LongFullPath);
 
 
-         // TODO: When enabled on Computer, FindFirstFile will change the last accessed time.
+         // TODO: コンピュータで有効にすると、FindFirstFileが最終アクセス日時を変更してしまう。
       }
    }
 }

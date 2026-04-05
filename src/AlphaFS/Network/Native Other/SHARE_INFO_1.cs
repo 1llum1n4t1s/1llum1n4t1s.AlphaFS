@@ -25,19 +25,19 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Contains information about the shared resource, including the name and type of the resource, and a comment associated with the resource.</summary>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <summary>共有リソースに関する情報を含みます, 名前を含む and type of the resource, and a comment associated with the resource.</summary>
+      /// <remarks>サポートされる最小クライアント: Windows XP [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [desktop apps only]</remarks>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct SHARE_INFO_1
       {
-         /// <summary>The name of a shared resource.</summary>
+         /// <summary>共有リソースの名前。</summary>
          [MarshalAs(UnmanagedType.LPWStr)] public readonly string shi1_netname;
 
-         /// <summary>The type of share.</summary>
+         /// <summary>共有の種類.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly ShareType shi1_type;
 
-         /// <summary>An optional comment about the shared resource.</summary>
+         /// <summary>共有リソースに関するオプションのコメント。</summary>
          [MarshalAs(UnmanagedType.LPWStr)] public readonly string shi1_remark;
       }
    }

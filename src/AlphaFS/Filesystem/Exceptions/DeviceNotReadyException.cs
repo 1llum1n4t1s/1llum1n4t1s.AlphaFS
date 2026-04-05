@@ -25,7 +25,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>[AlphaFS] The requested operation could not be completed because the device is not ready.</summary>
+   /// <summary>[AlphaFS] デバイスの準備ができていないため、要求された操作を完了できませんでした。</summary>
    [Serializable]
    public class DeviceNotReadyException : System.IO.IOException
    {
@@ -33,31 +33,31 @@ namespace Alphaleonis.Win32.Filesystem
       private static readonly string ErrorText = string.Format(CultureInfo.InvariantCulture, "({0}) {1}", Win32Errors.ERROR_NOT_READY, new Win32Exception((int) Win32Errors.ERROR_NOT_READY).Message.Trim().TrimEnd('.').Trim());
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="DeviceNotReadyException"/> class.</summary>
+      /// <summary>[AlphaFS] <see cref="DeviceNotReadyException"/>クラスの新しいインスタンスを初期化します。</summary>
       public DeviceNotReadyException() : base(string.Format(CultureInfo.InvariantCulture, "{0}.", ErrorText), ErrorCode)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="DeviceNotReadyException"/> class.</summary>
-      /// <param name="message">The message.</param>
+      /// <summary>[AlphaFS] <see cref="DeviceNotReadyException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="message">メッセージ。</param>
       public DeviceNotReadyException(string message) : base(message, ErrorCode)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="DeviceNotReadyException"/> class.</summary>
-      /// <param name="path">The path to the file system object.</param>
-      /// <param name="isPath">Always set to true when using this constructor.</param>
+      /// <summary>[AlphaFS] <see cref="DeviceNotReadyException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="path">ファイルシステムオブジェクトへのパス。</param>
+      /// <param name="isPath">このコンストラクタを使用する場合は常にtrueに設定します。</param>
       [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "isPath")]
       public DeviceNotReadyException(string path, bool isPath) : base(string.Format(CultureInfo.InvariantCulture, "{0}: [{1}]", ErrorText, Path.GetCleanExceptionPath(path)), ErrorCode)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="DeviceNotReadyException"/> class.</summary>
-      /// <param name="path">The path to the device.</param>
-      /// <param name="innerException">The inner exception.</param>
+      /// <summary>[AlphaFS] <see cref="DeviceNotReadyException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="path">デバイスへのパス。</param>
+      /// <param name="innerException">内部例外。</param>
       public DeviceNotReadyException(string path, Exception innerException) : base(string.Format(CultureInfo.InvariantCulture, "{0}: [{1}]", ErrorText, Path.GetCleanExceptionPath(path)), innerException)
       {
       }

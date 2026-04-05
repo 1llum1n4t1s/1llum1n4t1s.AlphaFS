@@ -26,27 +26,27 @@ using Microsoft.Win32.SafeHandles;
 
 namespace Alphaleonis.Win32
 {
-   /// <summary>Represents a wrapper class for a handle used by the Token Win32 API functions.</summary>
+   /// <summary>トークンWin32 API関数で使用されるハンドルのラッパークラスを表します。</summary>
    [SecurityCritical]
    public sealed class SafeTokenHandle : SafeHandleZeroOrMinusOneIsInvalid
    {
-      /// <summary>Initializes a new instance of the <see cref="SafeTokenHandle"/> class.</summary>
+      /// <summary><see cref="SafeTokenHandle"/>クラスの新しいインスタンスを初期化します。</summary>
       public SafeTokenHandle() : base(true)
       {
       }
 
 
-      /// <summary>Initializes a new instance of the <see cref="SafeTokenHandle"/> class.</summary>
-      /// <param name="handle">The handle.</param>
-      /// <param name="callerHandle"><c>true</c> [owns handle].</param>
+      /// <summary><see cref="SafeTokenHandle"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="handle">ハンドル。</param>
+      /// <param name="callerHandle"><c>true</c>の場合、ハンドルを所有します。</param>
       public SafeTokenHandle(IntPtr handle, bool callerHandle) : base(callerHandle)
       {
          SetHandle(handle);
       }
 
 
-      /// <summary>When overridden in a derived class, executes the code required to free the handle.</summary>
-      /// <returns><c>true</c> if the handle is released successfully; otherwise, in the event of a catastrophic failure, <c>false</c>. In this case, it generates a ReleaseHandleFailed Managed Debugging Assistant.</returns>
+      /// <summary>派生クラスでオーバーライドされた場合、ハンドルを解放するために必要なコードを実行します。</summary>
+      /// <returns>ハンドルが正常に解放された場合は<c>true</c>、致命的な障害が発生した場合は<c>false</c>。この場合、ReleaseHandleFailed マネージデバッグアシスタントが生成されます。</returns>
       protected override bool ReleaseHandle()
       {
          return NativeMethods.CloseHandle(handle);

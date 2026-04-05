@@ -29,8 +29,8 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Creates a directory.</summary>
-      /// <remarks>If the directory already exists, this method does nothing.</remarks>
+      /// <summary>ディレクトリを作成します。</summary>
+      /// <remarks>ディレクトリが既に存在する場合、このメソッドは何もしません。</remarks>
       [SecurityCritical]
       public void Create()
       {
@@ -38,9 +38,9 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Creates a directory using a <see cref="DirectorySecurity"/> object.</summary>
-      /// <param name="directorySecurity">The access control to apply to the directory.</param>
-      /// <remarks>If the directory already exists, this method does nothing.</remarks>
+      /// <summary><see cref="DirectorySecurity"/> オブジェクトを使用してディレクトリを作成します。</summary>
+      /// <param name="directorySecurity">ディレクトリに適用するアクセス制御。</param>
+      /// <remarks>ディレクトリが既に存在する場合、このメソッドは何もしません。</remarks>
       [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
       [SecurityCritical]
       public void Create(DirectorySecurity directorySecurity)
@@ -51,9 +51,9 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Creates a directory using a <see cref="DirectorySecurity"/> object.</summary>
-      /// <param name="compress">When <c>true</c> compresses the directory using NTFS compression.</param>
-      /// <remarks>If the directory already exists, this method does nothing.</remarks>
+      /// <summary>[AlphaFS] ディレクトリを作成します。</summary>
+      /// <param name="compress"><c>true</c> の場合、NTFS 圧縮を使用してディレクトリを圧縮します。</param>
+      /// <remarks>ディレクトリが既に存在する場合、このメソッドは何もしません。</remarks>
       [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
       [SecurityCritical]
       public DirectoryInfo Create(bool compress)
@@ -62,10 +62,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates a directory using a <see cref="DirectorySecurity"/> object.</summary>
-      /// <param name="directorySecurity">The access control to apply to the directory.</param>
-      /// <param name="compress">When <c>true</c> compresses the directory using NTFS compression.</param>
-      /// <remarks>If the directory already exists, this method does nothing.</remarks>
+      /// <summary>[AlphaFS] <see cref="DirectorySecurity"/> オブジェクトを使用してディレクトリを作成します。</summary>
+      /// <param name="directorySecurity">ディレクトリに適用するアクセス制御。</param>
+      /// <param name="compress"><c>true</c> の場合、NTFS 圧縮を使用してディレクトリを圧縮します。</param>
+      /// <remarks>ディレクトリが既に存在する場合、このメソッドは何もしません。</remarks>
       [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
       [SecurityCritical]
       public DirectoryInfo Create(DirectorySecurity directorySecurity, bool compress)

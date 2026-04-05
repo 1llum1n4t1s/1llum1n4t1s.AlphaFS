@@ -28,20 +28,20 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Replaces the contents of a specified file with the contents of another file, deleting the original file, and creating a backup of the replaced file.</summary>
-      /// <remarks>The Replace method replaces the contents of a specified file with the contents of another file. It also creates a backup of the file that was replaced.</remarks>
+      /// <summary>指定されたファイルの内容を別のファイルの内容で置換し、元のファイルを削除し、置換されたファイルのバックアップを作成します。</summary>
+      /// <remarks>Replaceメソッドは、指定されたファイルの内容を別のファイルの内容で置換します。また、置換されたファイルのバックアップを作成します。</remarks>
       /// <remarks>
-      ///   If the <paramref name="sourceFileName"/> and <paramref name="destinationFileName"/> are on different volumes, this method will
-      ///   raise an exception. If the <paramref name="destinationBackupFileName"/> is on a different volume from the source file, the backup
-      ///   file will be deleted.
+      ///   <paramref name="sourceFileName"/>と<paramref name="destinationFileName"/>が異なるボリューム上にある場合、このメソッドは
+      ///   例外が発生します。<paramref name="destinationBackupFileName"/>がソースファイルと異なるボリューム上にある場合、バックアップ
+      ///   ファイルは削除されます。
       /// </remarks>
       /// <remarks>
-      ///   Pass null to the <paramref name="destinationBackupFileName"/> parameter if you do not want to create a backup of the file being
-      ///   replaced.
+      ///   置換されるファイルのバックアップを作成しない場合は、<paramref name="destinationBackupFileName"/>パラメータにnullを渡します。
+      ///   
       /// </remarks>
-      /// <param name="sourceFileName">The name of a file that replaces the file specified by <paramref name="destinationFileName"/>.</param>
-      /// <param name="destinationFileName">The name of the file being replaced.</param>
-      /// <param name="destinationBackupFileName">The name of the backup file.</param>      
+      /// <param name="sourceFileName"><paramref name="destinationFileName"/>で指定されたファイルを置換するファイルの名前。</param>
+      /// <param name="destinationFileName">置換されるファイルの名前。</param>
+      /// <param name="destinationBackupFileName">バックアップファイルの名前。</param>      
       [SecurityCritical]
       public static void Replace(string sourceFileName, string destinationFileName, string destinationBackupFileName)
       {
@@ -49,20 +49,20 @@ namespace Alphaleonis.Win32.Filesystem
       }
       
 
-      /// <summary>Replaces the contents of a specified file with the contents of another file, deleting the original file, and creating a backup of the replaced file and optionally ignores merge errors.</summary>
-      /// <remarks>The Replace method replaces the contents of a specified file with the contents of another file. It also creates a backup of the file that was replaced.</remarks>
+      /// <summary>指定されたファイルの内容を別のファイルの内容で置換し、元のファイルを削除し、置換されたファイルのバックアップを作成します。オプションでマージエラーを無視します。</summary>
+      /// <remarks>Replaceメソッドは、指定されたファイルの内容を別のファイルの内容で置換します。また、置換されたファイルのバックアップを作成します。</remarks>
       /// <remarks>
-      ///   If the <paramref name="sourceFileName"/> and <paramref name="destinationFileName"/> are on different volumes, this method will
-      ///   raise an exception. If the <paramref name="destinationBackupFileName"/> is on a different volume from the source file, the backup
-      ///   file will be deleted.
+      ///   <paramref name="sourceFileName"/>と<paramref name="destinationFileName"/>が異なるボリューム上にある場合、このメソッドは
+      ///   例外が発生します。<paramref name="destinationBackupFileName"/>がソースファイルと異なるボリューム上にある場合、バックアップ
+      ///   ファイルは削除されます。
       /// </remarks>
       /// <remarks>
-      ///   Pass null to the <paramref name="destinationBackupFileName"/> parameter if you do not want to create a backup of the file being
-      ///   replaced.
+      ///   置換されるファイルのバックアップを作成しない場合は、<paramref name="destinationBackupFileName"/>パラメータにnullを渡します。
+      ///   
       /// </remarks>
-      /// <param name="sourceFileName">The name of a file that replaces the file specified by <paramref name="destinationFileName"/>.</param>
-      /// <param name="destinationFileName">The name of the file being replaced.</param>
-      /// <param name="destinationBackupFileName">The name of the backup file.</param>
+      /// <param name="sourceFileName"><paramref name="destinationFileName"/>で指定されたファイルを置換するファイルの名前。</param>
+      /// <param name="destinationFileName">置換されるファイルの名前。</param>
+      /// <param name="destinationBackupFileName">バックアップファイルの名前。</param>
       /// <param name="ignoreMetadataErrors">
       ///   <c>true</c> to ignore merge errors (such as attributes and access control lists (ACLs)) from the replaced file to the
       ///   replacement file; otherwise, <c>false</c>.
@@ -77,25 +77,25 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Replaces the contents of a specified file with the contents of another file, deleting the original file, and creating a backup of the replaced file and optionally ignores merge errors.</summary>
-      /// <remarks>The Replace method replaces the contents of a specified file with the contents of another file. It also creates a backup of the file that was replaced.</remarks>
+      /// <summary>[AlphaFS] 指定されたファイルの内容を別のファイルの内容で置換し、元のファイルを削除し、置換されたファイルのバックアップを作成します。オプションでマージエラーを無視します。</summary>
+      /// <remarks>Replaceメソッドは、指定されたファイルの内容を別のファイルの内容で置換します。また、置換されたファイルのバックアップを作成します。</remarks>
       /// <remarks>
-      ///   If the <paramref name="sourceFileName"/> and <paramref name="destinationFileName"/> are on different volumes, this method will
-      ///   raise an exception. If the <paramref name="destinationBackupFileName"/> is on a different volume from the source file, the backup
-      ///   file will be deleted.
+      ///   <paramref name="sourceFileName"/>と<paramref name="destinationFileName"/>が異なるボリューム上にある場合、このメソッドは
+      ///   例外が発生します。<paramref name="destinationBackupFileName"/>がソースファイルと異なるボリューム上にある場合、バックアップ
+      ///   ファイルは削除されます。
       /// </remarks>
       /// <remarks>
-      ///   Pass null to the <paramref name="destinationBackupFileName"/> parameter if you do not want to create a backup of the file being
-      ///   replaced.
+      ///   置換されるファイルのバックアップを作成しない場合は、<paramref name="destinationBackupFileName"/>パラメータにnullを渡します。
+      ///   
       /// </remarks>
-      /// <param name="sourceFileName">The name of a file that replaces the file specified by <paramref name="destinationFileName"/>.</param>
-      /// <param name="destinationFileName">The name of the file being replaced.</param>
-      /// <param name="destinationBackupFileName">The name of the backup file.</param>
+      /// <param name="sourceFileName"><paramref name="destinationFileName"/>で指定されたファイルを置換するファイルの名前。</param>
+      /// <param name="destinationFileName">置換されるファイルの名前。</param>
+      /// <param name="destinationBackupFileName">バックアップファイルの名前。</param>
       /// <param name="ignoreMetadataErrors">
       ///   <c>true</c> to ignore merge errors (such as attributes and access control lists (ACLs)) from the replaced file to the
       ///   replacement file; otherwise, <c>false</c>.
       /// </param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>      
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>      
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "dest")]
       [SecurityCritical]
       public static void Replace(string sourceFileName, string destinationFileName, string destinationBackupFileName, bool ignoreMetadataErrors, PathFormat pathFormat)

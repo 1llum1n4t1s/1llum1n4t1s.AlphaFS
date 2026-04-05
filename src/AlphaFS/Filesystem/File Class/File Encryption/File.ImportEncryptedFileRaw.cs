@@ -25,26 +25,26 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Restores (import) encrypted files. This is one of a group of Encrypted File System (EFS) functions that is
-      ///   intended to implement backup and restore functionality, while maintaining files in their encrypted state.</summary>
+      /// <summary>[AlphaFS] 暗号化されたファイルを復元(インポート)します。 This is one of a group of Encrypted File System (EFS) functions that is
+      ///   暗号化された状態のまま、ファイルのバックアップおよび復元機能を実装することを目的としています。</summary>
       /// <remarks>
       ///   <para>
-      ///     If the caller does not have access to the key for the file, the caller needs
+      ///     呼び出し元がファイルのキーにアクセスできない場合、呼び出し元は
       ///     <see cref="Security.Privilege.Backup"/> to restore encrypted files. See
       ///     <see cref="Security.PrivilegeEnabler"/>.
       ///   </para>
       ///   <para>
-      ///     To restore an encrypted file call one of the
+      ///     暗号化されたファイルを復元するには、次のいずれかを呼び出します。
       ///     <see cref="O:Alphaleonis.Win32.Filesystem.File.ImportEncryptedFileRaw"/> overloads and specify the file to restore
-      ///     along with the destination stream of the restored data.
+      ///     復元データのコピー先ストリームとともに指定します。
       ///   </para>
       ///   <para>
-      ///     This function is intended for the restoration of only encrypted files; see <see cref="BackupFileStream"/> for
-      ///     backup of unencrypted files.
+      ///     この関数は暗号化されたファイルのみの復元を目的としています。暗号化されていないファイルのバックアップについては<see cref="BackupFileStream"/>を参照してください。
+      ///     backup 
       ///   </para>
       /// </remarks>
-      /// <param name="inputStream">The stream to read previously backed up data from.</param>
-      /// <param name="destinationFilePath">The path of the destination file to restore to.</param>
+      /// <param name="inputStream">以前にバックアップしたデータを読み取るストリーム。</param>
+      /// <param name="destinationFilePath">復元先のファイルのパス。</param>
       /// <seealso cref="O:Alphaleonis.Win32.Filesystem.File.ExportEncryptedFileRaw"/>
       public static void ImportEncryptedFileRaw(Stream inputStream, string destinationFilePath)
       {
@@ -52,27 +52,27 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Restores (import) encrypted files. This is one of a group of Encrypted File System (EFS) functions that is
-      ///   intended to implement backup and restore functionality, while maintaining files in their encrypted state.</summary>
+      /// <summary>[AlphaFS] 暗号化されたファイルを復元(インポート)します。 This is one of a group of Encrypted File System (EFS) functions that is
+      ///   暗号化された状態のまま、ファイルのバックアップおよび復元機能を実装することを目的としています。</summary>
       /// <remarks>
       ///   <para>
-      ///     If the caller does not have access to the key for the file, the caller needs
+      ///     呼び出し元がファイルのキーにアクセスできない場合、呼び出し元は
       ///     <see cref="Security.Privilege.Backup"/> to restore encrypted files. See
       ///     <see cref="Security.PrivilegeEnabler"/>.
       ///   </para>
       ///   <para>
-      ///     To restore an encrypted file call one of the
+      ///     暗号化されたファイルを復元するには、次のいずれかを呼び出します。
       ///     <see cref="O:Alphaleonis.Win32.Filesystem.File.ImportEncryptedFileRaw"/> overloads and specify the file to restore
-      ///     along with the destination stream of the restored data.
+      ///     復元データのコピー先ストリームとともに指定します。
       ///   </para>
       ///   <para>
-      ///     This function is intended for the restoration of only encrypted files; see <see cref="BackupFileStream"/> for
-      ///     backup of unencrypted files.
+      ///     この関数は暗号化されたファイルのみの復元を目的としています。暗号化されていないファイルのバックアップについては<see cref="BackupFileStream"/>を参照してください。
+      ///     backup 
       ///   </para>
       /// </remarks>
-      /// <param name="inputStream">The stream to read previously backed up data from.</param>
-      /// <param name="destinationFilePath">The path of the destination file to restore to.</param>
-      /// <param name="pathFormat">The path format of the <paramref name="destinationFilePath"/> parameter.</param>
+      /// <param name="inputStream">以前にバックアップしたデータを読み取るストリーム。</param>
+      /// <param name="destinationFilePath">復元先のファイルのパス。</param>
+      /// <param name="pathFormat"><paramref name="destinationFilePath"/>パラメータのパス形式。</param>
       /// <seealso cref="O:Alphaleonis.Win32.Filesystem.File.ExportEncryptedFileRaw"/>
       public static void ImportEncryptedFileRaw(Stream inputStream, string destinationFilePath, PathFormat pathFormat)
       {
@@ -80,27 +80,27 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Restores (import) encrypted files. This is one of a group of Encrypted File System (EFS) functions that is
-      ///   intended to implement backup and restore functionality, while maintaining files in their encrypted state.</summary>
+      /// <summary>[AlphaFS] 暗号化されたファイルを復元(インポート)します。 This is one of a group of Encrypted File System (EFS) functions that is
+      ///   暗号化された状態のまま、ファイルのバックアップおよび復元機能を実装することを目的としています。</summary>
       /// <remarks>
       ///   <para>
-      ///     If the caller does not have access to the key for the file, the caller needs
+      ///     呼び出し元がファイルのキーにアクセスできない場合、呼び出し元は
       ///     <see cref="Security.Privilege.Backup"/> to restore encrypted files. See
       ///     <see cref="Security.PrivilegeEnabler"/>.
       ///   </para>
       ///   <para>
-      ///     To restore an encrypted file call one of the
+      ///     暗号化されたファイルを復元するには、次のいずれかを呼び出します。
       ///     <see cref="O:Alphaleonis.Win32.Filesystem.File.ImportEncryptedFileRaw"/> overloads and specify the file to restore
-      ///     along with the destination stream of the restored data.
+      ///     復元データのコピー先ストリームとともに指定します。
       ///   </para>
       ///   <para>
-      ///     This function is intended for the restoration of only encrypted files; see <see cref="BackupFileStream"/> for
-      ///     backup of unencrypted files.
+      ///     この関数は暗号化されたファイルのみの復元を目的としています。暗号化されていないファイルのバックアップについては<see cref="BackupFileStream"/>を参照してください。
+      ///     backup 
       ///   </para>
       /// </remarks>
-      /// <param name="inputStream">The stream to read previously backed up data from.</param>
-      /// <param name="destinationFilePath">The path of the destination file to restore to.</param>
-      /// <param name="overwriteHidden">If set to <c>true</c> a hidden file will be overwritten on import.</param>
+      /// <param name="inputStream">以前にバックアップしたデータを読み取るストリーム。</param>
+      /// <param name="destinationFilePath">復元先のファイルのパス。</param>
+      /// <param name="overwriteHidden"><c>true</c>に設定した場合、インポート時に隠しファイルが上書きされます。</param>
       /// <seealso cref="O:Alphaleonis.Win32.Filesystem.File.ExportEncryptedFileRaw"/>
       public static void ImportEncryptedFileRaw(Stream inputStream, string destinationFilePath, bool overwriteHidden)
       {
@@ -108,28 +108,28 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Restores (import) encrypted files. This is one of a group of Encrypted File System (EFS) functions that is
-      ///   intended to implement backup and restore functionality, while maintaining files in their encrypted state.</summary>
+      /// <summary>[AlphaFS] 暗号化されたファイルを復元(インポート)します。 This is one of a group of Encrypted File System (EFS) functions that is
+      ///   暗号化された状態のまま、ファイルのバックアップおよび復元機能を実装することを目的としています。</summary>
       /// <remarks>
       ///   <para>
-      ///     If the caller does not have access to the key for the file, the caller needs
+      ///     呼び出し元がファイルのキーにアクセスできない場合、呼び出し元は
       ///     <see cref="Security.Privilege.Backup"/> to restore encrypted files. See
       ///     <see cref="Security.PrivilegeEnabler"/>.
       ///   </para>
       ///   <para>
-      ///     To restore an encrypted file call one of the
+      ///     暗号化されたファイルを復元するには、次のいずれかを呼び出します。
       ///     <see cref="O:Alphaleonis.Win32.Filesystem.File.ImportEncryptedFileRaw"/> overloads and specify the file to restore
-      ///     along with the destination stream of the restored data.
+      ///     復元データのコピー先ストリームとともに指定します。
       ///   </para>
       ///   <para>
-      ///     This function is intended for the restoration of only encrypted files; see <see cref="BackupFileStream"/> for
-      ///     backup of unencrypted files.
+      ///     この関数は暗号化されたファイルのみの復元を目的としています。暗号化されていないファイルのバックアップについては<see cref="BackupFileStream"/>を参照してください。
+      ///     backup 
       ///   </para>
       /// </remarks>
-      /// <param name="inputStream">The stream to read previously backed up data from.</param>
-      /// <param name="destinationFilePath">The path of the destination file to restore to.</param>
-      /// <param name="overwriteHidden">If set to <c>true</c> a hidden file will be overwritten on import.</param>
-      /// <param name="pathFormat">The path format of the <paramref name="destinationFilePath"/> parameter.</param>
+      /// <param name="inputStream">以前にバックアップしたデータを読み取るストリーム。</param>
+      /// <param name="destinationFilePath">復元先のファイルのパス。</param>
+      /// <param name="overwriteHidden"><c>true</c>に設定した場合、インポート時に隠しファイルが上書きされます。</param>
+      /// <param name="pathFormat"><paramref name="destinationFilePath"/>パラメータのパス形式。</param>
       /// <seealso cref="O:Alphaleonis.Win32.Filesystem.File.ExportEncryptedFileRaw"/>
       public static void ImportEncryptedFileRaw(Stream inputStream, string destinationFilePath, bool overwriteHidden, PathFormat pathFormat)
       {

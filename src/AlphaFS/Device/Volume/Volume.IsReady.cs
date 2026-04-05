@@ -25,11 +25,11 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Volume
    {
-      /// <summary>[AlphaFS] Gets a value indicating whether a drive is ready.</summary>
+      /// <summary>[AlphaFS] ドライブの準備ができているかどうかを示す値を取得します。</summary>
       /// <param name="drivePath">
-      ///   A path to a drive. For example: "C:\", "\\server\share", or "\\?\Volume{c0580d5e-2ad6-11dc-9924-806e6f6e6963}\".
+      ///   ドライブへのパス。例: "C:\"、"\\server\share"、または "\\?\Volume{c0580d5e-2ad6-11dc-9924-806e6f6e6963}\"。
       /// </param>
-      /// <returns><c>true</c> if <paramref name="drivePath"/> is ready; otherwise, <c>false</c>.</returns>
+      /// <returns><paramref name="drivePath"/> の準備ができている場合は <c>true</c>、それ以外の場合は <c>false</c>。</returns>
       [SecurityCritical]
       public static bool IsReady(string drivePath)
       {

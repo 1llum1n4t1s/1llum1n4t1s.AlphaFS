@@ -30,7 +30,7 @@ namespace Alphaleonis.Win32.Network
    {
       #region Constants
       
-      /// <summary>A constant of type DWORD that is set to –1. This value is valid as an input parameter to any method in section 3.1.4 that takes a PreferedMaximumLength parameter. When specified as an input parameter, this value indicates that the method MUST allocate as much space as the data requires.</summary>
+      /// <summary>DWORD 型の定数で –1. This value is valid as an input parameter to any method in section 3.1.4 that takes a PreferedMaximumLength parameter. When specified as an input parameter, this value indicates that the method MUST allocate as much space as the data requires.</summary>
       /// <remarks>MSDN "2.2.2.2 MAX_PREFERRED_LENGTH": http://msdn.microsoft.com/en-us/library/cc247107.aspx </remarks>
       internal const int MaxPreferredLength = -1;
 

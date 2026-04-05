@@ -25,10 +25,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Path
    {
-      /// <summary>Removes the trailing <see cref="DirectorySeparatorChar"/> or <see cref="AltDirectorySeparatorChar"/> character from the string, when present.</summary>
-      /// <returns>A text string where the trailing <see cref="DirectorySeparatorChar"/> or <see cref="AltDirectorySeparatorChar"/> character has been removed. The function returns <c>null</c> when <paramref name="path"/> is <c>null</c>.</returns>
-      /// <param name="path">A text string from which the trailing <see cref="DirectorySeparatorChar"/> or <see cref="AltDirectorySeparatorChar"/> is to be removed, when present.</param>
-      /// <param name="removeAlternateSeparator">If <c>true</c> the trailing <see cref="AltDirectorySeparatorChar"/> character will be removed instead.</param>
+      /// <summary>文字列の末尾にある <see cref="DirectorySeparatorChar"/> または <see cref="AltDirectorySeparatorChar"/> 文字が存在する場合に削除します。</summary>
+      /// <returns>末尾の <see cref="DirectorySeparatorChar"/> または <see cref="AltDirectorySeparatorChar"/> 文字が削除されたテキスト文字列。<paramref name="path"/> が <c>null</c> の場合は <c>null</c> を返します。</returns>
+      /// <param name="path">末尾の <see cref="DirectorySeparatorChar"/> または <see cref="AltDirectorySeparatorChar"/> が存在する場合に削除するテキスト文字列。</param>
+      /// <param name="removeAlternateSeparator"><c>true</c> の場合、代わりに末尾の <see cref="AltDirectorySeparatorChar"/> 文字が削除されます。</param>
       [SecurityCritical]
       internal static string RemoveTrailingDirectorySeparatorCore(string path, bool removeAlternateSeparator)
       {

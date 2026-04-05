@@ -29,7 +29,7 @@ namespace Alphaleonis.Win32.Network
 {
    public static partial class Host
    {
-      /// <summary>Enumerates open resources from the local host.</summary>
+      /// <summary>ローカルホストからオープンリソースを列挙します.</summary>
       /// <returns><see cref="IEnumerable{OpenResourceInfo}"/> open resources from the local host.</returns>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="NetworkInformationException"/>
@@ -40,11 +40,11 @@ namespace Alphaleonis.Win32.Network
       }
 
       
-      /// <summary>Enumerates open resources from the specified host.</summary>
+      /// <summary>指定されたホストからオープンリソースを列挙します。</summary>
       /// <returns><see cref="IEnumerable{String}"/> open resources from the specified <paramref name="host"/>.</returns>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="NetworkInformationException"/>
-      /// <param name="host">The DNS or NetBIOS name of the remote server. <c>null</c> refers to the local host.</param>
+      /// <param name="host">リモートサーバーの DNS 名または NetBIOS 名。 <c>null</c> ローカルホストを参照します。</param>
       /// <param name="basePath">
       ///   This parameter may be <c>null</c>. Enumerates only resources that have the value of the basepath parameter as a prefix.
       ///   (A prefix is the portion of a path that comes before a backslash.)
@@ -54,7 +54,7 @@ namespace Alphaleonis.Win32.Network
       ///   does not begin with two backslashes ("\\") it indicates the name of the user. If <paramref name="typeName"/> begins with two
       ///   backslashes ("\\") it indicates the name of the connection.
       /// </param>
-      /// <param name="continueOnException"><c>true</c> suppress any Exception that might be thrown as a result from a failure, such as unavailable resources.</param>
+      /// <param name="continueOnException"><c>true</c> リソース不足などの失敗から発生する可能性のある例外を抑制します。</param>
       [SecurityCritical]
       public static IEnumerable<OpenResourceInfo> EnumerateOpenResources(string host, string basePath, string typeName, bool continueOnException)
       {
@@ -64,11 +64,11 @@ namespace Alphaleonis.Win32.Network
 
 
 
-      /// <summary>>Enumerates open resources from the specified host.</summary>
+      /// <summary>>指定されたホストからオープンリソースを列挙します。</summary>
       /// <returns><see cref="IEnumerable{String}"/> open resources from the specified <paramref name="host"/>.</returns>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="NetworkInformationException"/>
-      /// <param name="host">The DNS or NetBIOS name of the remote server. <c>null</c> refers to the local host.</param>
+      /// <param name="host">リモートサーバーの DNS 名または NetBIOS 名。 <c>null</c> ローカルホストを参照します。</param>
       /// <param name="basePath">
       ///   This parameter may be <c>null</c>. Enumerates only resources that have the value of the basepath parameter as a prefix.
       ///   (A prefix is the portion of a path that comes before a backslash.)
@@ -78,7 +78,7 @@ namespace Alphaleonis.Win32.Network
       ///   does not begin with two backslashes ("\\") it indicates the name of the user. If <paramref name="typeName"/> begins with two
       ///   backslashes ("\\") it indicates the name of the connection.
       /// </param>
-      /// <param name="continueOnException"><c>true</c> suppress any Exception that might be thrown as a result from a failure, such as unavailable resources.</param>
+      /// <param name="continueOnException"><c>true</c> リソース不足などの失敗から発生する可能性のある例外を抑制します。</param>
       [SecurityCritical]
       internal static IEnumerable<OpenResourceInfo> EnumerateOpenResourcesCore(string host, string basePath, string typeName, bool continueOnException)
       {

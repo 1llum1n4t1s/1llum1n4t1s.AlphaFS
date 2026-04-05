@@ -23,41 +23,41 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>The type of the data contained in the backup stream.</summary>
+      /// <summary>バックアップストリームに含まれるデータの種類。</summary>
       internal enum STREAM_ID
       {
-         /// <summary>This indicates an error.</summary>
+         /// <summary>エラーを示します。</summary>
          NONE = 0,
 
-         /// <summary>Standard data. This corresponds to the NTFS $DATA stream type on the default (unnamed) data stream.</summary>
+         /// <summary>標準データ。デフォルト（無名）データストリーム上の NTFS $DATA ストリームタイプに対応します。</summary>
          BACKUP_DATA = 1,
 
-         /// <summary>Extended attribute data. This corresponds to the NTFS $EA stream type.</summary>
+         /// <summary>拡張属性データ。NTFS $EA ストリームタイプに対応します。</summary>
          BACKUP_EA_DATA = 2,
 
-         /// <summary>Security descriptor data.</summary>
+         /// <summary>セキュリティ記述子データ。</summary>
          BACKUP_SECURITY_DATA = 3,
 
-         /// <summary>Alternative data streams. This corresponds to the NTFS $DATA stream type on a named data stream.</summary>
+         /// <summary>代替データストリーム。名前付きデータストリーム上の NTFS $DATA ストリームタイプに対応します。</summary>
          BACKUP_ALTERNATE_DATA = 4,
 
-         /// <summary>Hard link information. This corresponds to the NTFS $FILE_NAME stream type.</summary>
+         /// <summary>ハードリンク情報。NTFS $FILE_NAME ストリームタイプに対応します。</summary>
          BACKUP_LINK = 5,
 
-         /// <summary>Property data.</summary>
+         /// <summary>プロパティデータ。</summary>
          BACKUP_PROPERTY_DATA = 6,
 
-         /// <summary>Objects identifiers. This corresponds to the NTFS $OBJECT_ID stream type.</summary>
+         /// <summary>オブジェクト識別子。NTFS $OBJECT_ID ストリームタイプに対応します。</summary>
          BACKUP_OBJECT_ID = 7,
 
-         /// <summary>Reparse points. This corresponds to the NTFS $REPARSE_POINT stream type.</summary>
+         /// <summary>リパースポイント。NTFS $REPARSE_POINT ストリームタイプに対応します。</summary>
          BACKUP_REPARSE_DATA = 8,
 
-         /// <summary>Sparse file. This corresponds to the NTFS $DATA stream type for a sparse file.</summary>
+         /// <summary>スパースファイル。スパースファイル用の NTFS $DATA ストリームタイプに対応します。</summary>
          BACKUP_SPARSE_BLOCK = 9,
 
-         /// <summary>Transactional NTFS (TxF) data stream.</summary>
-         /// <remarks>Windows Server 2003 and Windows XP:  This value is not supported.</remarks>
+         /// <summary>トランザクション NTFS (TxF) データストリーム。</summary>
+         /// <remarks>Windows Server 2003 および Windows XP: この値はサポートされていません。</remarks>
          BACKUP_TXFS_DATA = 10
       }
    }

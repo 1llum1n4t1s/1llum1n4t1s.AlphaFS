@@ -23,21 +23,21 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>Contains information about a DFS root or link target in a DFS namespace or from the cache maintained by the DFS client.
-   /// <para>This class cannot be inherited.</para>
+   /// <summary>DFS 名前空間内の DFS ルートまたはリンクターゲット、または DFS クライアントが管理するキャッシュからの情報を含みます。
+   /// <para>このクラスは継承できません。</para>
    /// </summary>
    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Dfs")]
    public sealed class DfsStorageInfo
    {
-      #region Constructor
+      #region コンストラクター
 
-      /// <summary>Initializes a new instance of the <see cref="DfsStorageInfo"/> class, which acts as a wrapper for a DFS root or link target.</summary>
+      /// <summary>DFS ルートまたはリンクターゲットのラッパーとして機能する <see cref="DfsStorageInfo"/> クラスの新しいインスタンスを初期化します。</summary>
       public DfsStorageInfo()
       {
       }
 
-      /// <summary>Initializes a new instance of the <see cref="DfsStorageInfo"/> class, which acts as a wrapper for a DFS root or link target.</summary>
-      /// <param name="structure">An initialized <see cref="NativeMethods.DFS_STORAGE_INFO_1"/> instance.</param>
+      /// <summary>DFS ルートまたはリンクターゲットのラッパーとして機能する <see cref="DfsStorageInfo"/> クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="structure">初期化された <see cref="NativeMethods.DFS_STORAGE_INFO_1"/> インスタンス。</param>
       internal DfsStorageInfo(NativeMethods.DFS_STORAGE_INFO_1 structure)
       {
          ServerName = structure.ServerName;
@@ -49,36 +49,36 @@ namespace Alphaleonis.Win32.Network
          TargetPriorityRank = structure.TargetPriority.TargetPriorityRank;
       }
 
-      #endregion // Constructor
+      #endregion // コンストラクター
 
-      #region Methods
+      #region メソッド
 
-      /// <summary>The share name of the DFS root target or link target.</summary>
-      /// <returns>A string that represents this instance.</returns>
+      /// <summary>DFS ルートターゲットまたはリンクターゲットの共有名。</summary>
+      /// <returns>このインスタンスを表す文字列。</returns>
       public override string ToString()
       {
          return ShareName;
       }
 
-      #endregion // Methods
+      #endregion // メソッド
 
-      #region Properties
+      #region プロパティ
 
-      /// <summary>The server name of the DFS root target or link target.</summary>
+      /// <summary>DFS ルートターゲットまたはリンクターゲットのサーバー名。</summary>
       public string ServerName { get; private set; }
 
-      /// <summary>The share name of the DFS root target or link target.</summary>
+      /// <summary>DFS ルートターゲットまたはリンクターゲットの共有名。</summary>
       public string ShareName { get; private set; }
 
-      /// <summary>An <see cref="DfsStorageStates"/> enum of the DFS root target or link target.</summary>
+      /// <summary>DFS ルートターゲットまたはリンクターゲットの <see cref="DfsStorageStates"/> 列挙型。</summary>
       public DfsStorageStates State { get; private set; }
 
-      /// <summary>Contains a DFS target's priority class and rank.</summary>
+      /// <summary>DFS ターゲットの優先度クラスとランクを含みます。</summary>
       public DfsTargetPriorityClass TargetPriorityClass { get; private set; }
 
-      /// <summary>Specifies the priority rank value of the target. The default value is 0, which indicates the highest priority rank within a priority class.</summary>
+      /// <summary>ターゲットの優先度ランク値を指定します。デフォルト値は 0 で、優先度クラス内の最高優先度ランクを示します。</summary>
       public int TargetPriorityRank { get; private set; }
 
-      #endregion // Properties
+      #endregion // プロパティ
    }
 }

@@ -23,26 +23,26 @@ using System;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>[AlphaFS] The exception that is thrown when an attempt to create a file or directory that already exists was made.</summary>
+   /// <summary>[AlphaFS] トランザクション操作に関連する例外の基底クラス。</summary>
    [Serializable]
    public class TransactionException : SystemException
    {
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="TransactionException"/> class.</summary>
+      /// <summary>[AlphaFS] <see cref="TransactionException"/>クラスの新しいインスタンスを初期化します。</summary>
       public TransactionException()
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="TransactionException"/> class.</summary>
-      /// <param name="message">The message.</param>
+      /// <summary>[AlphaFS] <see cref="TransactionException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="message">メッセージ。</param>
       public TransactionException(string message) : base(message)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="TransactionException"/> class.</summary>
-      /// <param name="message">The message.</param>
-      /// <param name="innerException">The inner exception.</param>
+      /// <summary>[AlphaFS] <see cref="TransactionException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="message">メッセージ。</param>
+      /// <param name="innerException">内部例外。</param>
       public TransactionException(string message, Exception innerException) : base(message, innerException)
       {
       }

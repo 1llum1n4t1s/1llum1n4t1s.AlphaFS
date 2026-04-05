@@ -25,7 +25,7 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public sealed partial class DirectoryInfo
    {
-      /// <summary>[AlphaFS] Refreshes the state of the <see cref="FileSystemEntryInfo"/> EntryInfo property.</summary>
+      /// <summary>[AlphaFS] <see cref="FileSystemEntryInfo"/> の EntryInfo プロパティの状態を更新します。</summary>
       [SecurityCritical]
       public new void RefreshEntryInfo()
       {

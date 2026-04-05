@@ -29,8 +29,8 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Applies access control list (ACL) entries described by a <see cref="DirectorySecurity"/> object to the directory described by the current DirectoryInfo object.</summary>
-      /// <param name="directorySecurity">A <see cref="DirectorySecurity"/> object that describes an ACL entry to apply to the directory described by the path parameter.</param>
+      /// <summary>現在の DirectoryInfo オブジェクトで記述されたディレクトリに、<see cref="DirectorySecurity"/> オブジェクトで記述されたアクセス制御リスト (ACL) エントリを適用します。</summary>
+      /// <param name="directorySecurity">path パラメーターで記述されたディレクトリに適用する ACL エントリを記述する <see cref="DirectorySecurity"/> オブジェクト。</param>
       [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
       [SecurityCritical]
       public void SetAccessControl(DirectorySecurity directorySecurity)
@@ -39,9 +39,9 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Applies access control list (ACL) entries described by a <see cref="DirectorySecurity"/> object to the directory described by the current DirectoryInfo object.</summary>
-      /// <param name="directorySecurity">A <see cref="DirectorySecurity"/> object that describes an ACL entry to apply to the directory described by the path parameter.</param>
-      /// <param name="includeSections">One or more of the <see cref="AccessControlSections"/> values that specifies the type of access control list (ACL) information to set.</param>
+      /// <summary>現在の DirectoryInfo オブジェクトで記述されたディレクトリに、<see cref="DirectorySecurity"/> オブジェクトで記述されたアクセス制御リスト (ACL) エントリを適用します。</summary>
+      /// <param name="directorySecurity">path パラメーターで記述されたディレクトリに適用する ACL エントリを記述する <see cref="DirectorySecurity"/> オブジェクト。</param>
+      /// <param name="includeSections">設定するアクセス制御リスト (ACL) 情報の種類を指定する <see cref="AccessControlSections"/> 値の 1 つ以上。</param>
       [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
       [SecurityCritical]
       public void SetAccessControl(DirectorySecurity directorySecurity, AccessControlSections includeSections)

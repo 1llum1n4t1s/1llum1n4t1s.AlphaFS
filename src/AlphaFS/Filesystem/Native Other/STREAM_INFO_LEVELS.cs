@@ -23,17 +23,17 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Defines values that are used with the FindFirstStreamW function to specify the information level of the returned data.</summary>
+      /// <summary>FindFirstStreamW 関数と共に使用して、返されるデータの情報レベルを指定する値を定義します。</summary>
       /// <remarks>
-      ///   <para>Minimum supported client: Windows Vista [desktop apps only]</para>
-      ///   <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      ///   <para>サポートされる最小クライアント: Windows Vista [デスクトップアプリのみ]</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</para>
       /// </remarks>
       internal enum STREAM_INFO_LEVELS
       {
-         /// <summary>The FindFirstStreamW function retrieves standard stream information. The data is returned in a <see cref="WIN32_FIND_STREAM_DATA"/> structure.</summary>
+         /// <summary>FindFirstStreamW 関数が標準のストリーム情報を取得します。データは <see cref="WIN32_FIND_STREAM_DATA"/> 構造体で返されます。</summary>
          FindStreamInfoStandard = 0,
 
-         /// <summary>Used to determine valid enumeration values. All supported enumeration values are less than FindStreamInfoMaxInfoLevel.</summary>
+         /// <summary>有効な列挙値を判定するために使用されます。サポートされるすべての列挙値は FindStreamInfoMaxInfoLevel より小さい値です。</summary>
          FindStreamInfoMaxInfoLevel = 1
       }
    }

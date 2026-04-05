@@ -26,10 +26,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Enumerates all altername datastreams of the specified file.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the file to enumerate streams of.</param>
-      /// <returns>An enumeration of <see cref="AlternateDataStreamInfo"/> instances.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルのすべての代替データストリームを列挙します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ストリームを列挙するファイルへのパス。</param>
+      /// <returns><see cref="AlternateDataStreamInfo"/>インスタンスの列挙。</returns>
       [SecurityCritical]
       public static IEnumerable<AlternateDataStreamInfo> EnumerateAlternateDataStreamsTransacted(KernelTransaction transaction, string path)
       {
@@ -37,11 +37,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Enumerates all altername datastreams of the specified file.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the file to enumerate streams of.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>An enumeration of <see cref="AlternateDataStreamInfo"/> instances.</returns>
+      /// <summary>[AlphaFS] 指定されたファイルのすべての代替データストリームを列挙します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ストリームを列挙するファイルへのパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns><see cref="AlternateDataStreamInfo"/>インスタンスの列挙。</returns>
       [SecurityCritical]
       public static IEnumerable<AlternateDataStreamInfo> EnumerateAlternateDataStreamsTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)
       {

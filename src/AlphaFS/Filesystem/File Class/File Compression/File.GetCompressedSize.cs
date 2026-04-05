@@ -25,14 +25,13 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Retrieves the actual number of bytes of disk storage used to store a specified file.</summary>
+      /// <summary>[AlphaFS] 指定されたファイルの格納に使用されているディスクストレージの実際のバイト数を取得します。</summary>
       /// <remarks>
-      ///   If the file is located on a volume that supports compression and the file is compressed, the value obtained is the compressed size
-      ///   of the specified file. If the file is located on a volume that supports sparse files and the file is a sparse file, the value
-      ///   obtained is the sparse size of the specified file.
+      ///   圧縮をサポートするボリューム上にファイルがあり、そのファイルが圧縮されている場合、取得される値は指定されたファイルの圧縮サイズです。
+      ///   スパースファイルをサポートするボリューム上にファイルがあり、そのファイルがスパースファイルの場合、取得される値は指定されたファイルのスパースサイズです。
       /// </remarks>
-      /// <param name="path"><para>The name of the file.</para></param>
-      /// <returns>The actual number of bytes of disk storage used to store the specified file.</returns>
+      /// <param name="path"><para>ファイルの名前。</para></param>
+      /// <returns>指定されたファイルの格納に使用されているディスクストレージの実際のバイト数。</returns>
       [SecurityCritical]
       public static long GetCompressedSize(string path)
       {
@@ -40,15 +39,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Retrieves the actual number of bytes of disk storage used to store a specified file.</summary>
+      /// <summary>[AlphaFS] 指定されたファイルの格納に使用されているディスクストレージの実際のバイト数を取得します。</summary>
       /// <remarks>
-      ///   If the file is located on a volume that supports compression and the file is compressed, the value obtained is the compressed size
-      ///   of the specified file. If the file is located on a volume that supports sparse files and the file is a sparse file, the value
-      ///   obtained is the sparse size of the specified file.
+      ///   圧縮をサポートするボリューム上にファイルがあり、そのファイルが圧縮されている場合、取得される値は指定されたファイルの圧縮サイズです。
+      ///   スパースファイルをサポートするボリューム上にファイルがあり、そのファイルがスパースファイルの場合、取得される値は指定されたファイルのスパースサイズです。
       /// </remarks>
-      /// <param name="path"><para>The name of the file.</para></param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>The actual number of bytes of disk storage used to store the specified file.</returns>
+      /// <param name="path"><para>ファイルの名前。</para></param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>指定されたファイルの格納に使用されているディスクストレージの実際のバイト数。</returns>
       [SecurityCritical]
       public static long GetCompressedSize(string path, PathFormat pathFormat)
       {

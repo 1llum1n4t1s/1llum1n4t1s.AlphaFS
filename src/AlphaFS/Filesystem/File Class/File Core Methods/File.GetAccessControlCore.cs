@@ -37,10 +37,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <typeparam name="T">Generic type parameter.</typeparam>
-      /// <param name="isFolder">Specifies that <paramref name="path"/> is a file or directory.</param>
+      /// <param name="isFolder"><paramref name="path"/>がファイルかディレクトリかを指定します。</param>
       /// <param name="path">The path to a file or directory containing a <see cref="FileSecurity"/>/<see cref="DirectorySecurity"/> object that describes the file's/directory's access control list (ACL) information.</param>
-      /// <param name="includeSections">One (or more) of the <see cref="AccessControlSections"/> values that specifies the type of access control list (ACL) information to receive.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="includeSections">受信するアクセス制御リスト(ACL)情報の種類を指定する<see cref="AccessControlSections"/>値の1つ(または複数)。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times", Justification = "Disposing is controlled.")]
       [SecurityCritical]
       internal static T GetAccessControlCore<T>(bool isFolder, string path, AccessControlSections includeSections, PathFormat pathFormat)
@@ -66,7 +66,7 @@ namespace Alphaleonis.Win32.Filesystem
 
 
             // Get/SetNamedSecurityInfo does not work with a handle but with a path, hence does not honor the privileges.
-            // It magically does since Windows Server 2012 / 8 but not in previous OS versions.
+            // Windows Server 2012 / 8以降では問題なく動作しますが、それ以前のOSバージョンでは動作しません。
 
             var lastError = Security.NativeMethods.GetNamedSecurityInfo(pathLp, SE_OBJECT_TYPE.SE_FILE_OBJECT, securityInfo, out pSidOwner, out pSidGroup, out pDacl, out pSacl, out var pSecurityDescriptor);
 

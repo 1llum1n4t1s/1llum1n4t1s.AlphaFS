@@ -24,19 +24,19 @@ namespace Alphaleonis.Win32.Network
    /// <summary>The <see cref="SessionInfo"/> information level.</summary>
    public enum SessionInfoLevel
    {
-      /// <summary>Contains the name of the computer that established the session.</summary>
+      /// <summary>セッションを確立したコンピューターの名前を含みます.</summary>
       Info0 = 0,
       
-      /// <summary>Contains information about the session, including name of the computer; name of the user; and open files, pipes, and devices on the computer.</summary>
+      /// <summary>セッションに関する情報を含みます, コンピューター名を含むter; name of the user; and open files, pipes, and devices on the computer.</summary>
       Info1 = 1,
       
-      /// <summary>Contains information about the session, including name of the computer; name of the user; open files, pipes, and devices on the computer; and the type of client that established the session.</summary>
+      /// <summary>セッションに関する情報を含みます, コンピューター名を含むter; name of the user; open files, pipes, and devices on the computer; and the type of client that established the session.</summary>
       Info2 = 2,
       
-      /// <summary>Contains information about the session, including name of the computer; name of the user; and active and idle times for the session.</summary>
+      /// <summary>セッションに関する情報を含みます, コンピューター名を含むter; name of the user; and active and idle times for the session.</summary>
       Info10 = 10,
 
-      /// <summary>Contains information about the session, including name of the computer; name of the user; open files, pipes, and devices on the computer; and the name of the transport the client is using.</summary>
+      /// <summary>セッションに関する情報を含みます, コンピューター名を含むter; name of the user; open files, pipes, and devices on the computer; and the name of the transport the client is using.</summary>
       Info502 = 502
    }
 }

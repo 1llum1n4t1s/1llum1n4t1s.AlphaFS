@@ -28,10 +28,10 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Creates or opens a file for writing UTF-8 encoded text.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to be opened for writing.</param>
-      /// <returns>A StreamWriter that writes to the specified file using UTF-8 encoding.</returns>
+      /// <summary>[AlphaFS] UTF-8エンコードされたテキストの書き込み用にファイルを作成または開きます。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">書き込み用に開くファイル。</param>
+      /// <returns>UTF-8エンコーディングを使用して指定されたファイルに書き込むStreamWriter。</returns>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       [SecurityCritical]
       public static StreamWriter CreateTextTransacted(KernelTransaction transaction, string path)
@@ -40,11 +40,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates or opens a file for writing <see cref="Encoding"/> encoded text.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to be opened for writing.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>A StreamWriter that writes to the specified file using UTF-8 encoding.</returns>
+      /// <summary>[AlphaFS] <see cref="Encoding"/>エンコードされたテキストの書き込み用にファイルを作成または開きます。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">書き込み用に開くファイル。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>UTF-8エンコーディングを使用して指定されたファイルに書き込むStreamWriter。</returns>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       [SecurityCritical]
       public static StreamWriter CreateTextTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)
@@ -53,11 +53,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates or opens a file for writing <see cref="Encoding"/> encoded text.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to be opened for writing.</param>
-      /// <param name="encoding">The encoding that is applied to the contents of the file.</param>
-      /// <returns>A StreamWriter that writes to the specified file using UTF-8 encoding.</returns>
+      /// <summary>[AlphaFS] <see cref="Encoding"/>エンコードされたテキストの書き込み用にファイルを作成または開きます。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">書き込み用に開くファイル。</param>
+      /// <param name="encoding">ファイルの内容に適用されるエンコーディング。</param>
+      /// <returns>UTF-8エンコーディングを使用して指定されたファイルに書き込むStreamWriter。</returns>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       [SecurityCritical]
       public static StreamWriter CreateTextTransacted(KernelTransaction transaction, string path, Encoding encoding)
@@ -66,12 +66,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Creates or opens a file for writing <see cref="Encoding"/> encoded text.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The file to be opened for writing.</param>
-      /// <param name="encoding">The encoding that is applied to the contents of the file.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
-      /// <returns>A StreamWriter that writes to the specified file using UTF-8 encoding.</returns>
+      /// <summary>[AlphaFS] <see cref="Encoding"/>エンコードされたテキストの書き込み用にファイルを作成または開きます。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">書き込み用に開くファイル。</param>
+      /// <param name="encoding">ファイルの内容に適用されるエンコーディング。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
+      /// <returns>UTF-8エンコーディングを使用して指定されたファイルに書き込むStreamWriter。</returns>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       [SecurityCritical]
       public static StreamWriter CreateTextTransacted(KernelTransaction transaction, string path, Encoding encoding, PathFormat pathFormat)

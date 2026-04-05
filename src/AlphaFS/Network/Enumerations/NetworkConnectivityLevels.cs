@@ -23,7 +23,7 @@ using System;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>Specifies what types of networks are enumerated.</summary>
+   /// <summary>列挙されるネットワークの種類を指定します.</summary>
    [Flags]
    public enum NetworkConnectivityLevels
    {

@@ -23,34 +23,34 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>FINDEX_SEARCH_OPS Enumeration - Defines values that are used with the FindFirstFileEx function to specify the type of filtering to perform.</summary>
+      /// <summary>FINDEX_SEARCH_OPS 列挙型 - FindFirstFileEx 関数と共に使用して、実行するフィルタリングの種類を指定する値を定義します。</summary>
       /// <remarks>
-      ///   <para>Minimum supported client: Windows XP [desktop apps | Windows Store apps]</para>
-      ///   <para>Minimum supported server: Windows Server 2003 [desktop apps | Windows Store apps]</para>
+      ///   <para>サポートされる最小クライアント: Windows XP [デスクトップアプリ | Windows ストアアプリ]</para>
+      ///   <para>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリ | Windows ストアアプリ]</para>
       /// </remarks>
       internal enum FINDEX_SEARCH_OPS
       {
-         /// <summary>The search for a file that matches a specified file name.
-         /// <para>The lpSearchFilter parameter of FindFirstFileEx must be NULL when this search operation is used.</para>
+         /// <summary>指定されたファイル名に一致するファイルを検索します。
+         /// <para>この検索操作を使用する場合、FindFirstFileEx の lpSearchFilter パラメーターは NULL でなければなりません。</para>
          /// </summary>
          SearchNameMatch = 0,
 
-         /// <summary>This is an advisory flag. If the file system supports directory filtering,
-         /// <para>the function searches for a file that matches the specified name and is also a directory.</para> 
-         /// <para>If the file system does not support directory filtering, this flag is silently ignored.</para>
+         /// <summary>これはアドバイザリフラグです。ファイルシステムがディレクトリフィルタリングをサポートする場合、
+         /// <para>関数は指定された名前に一致し、かつディレク��リであるファイルを検索します。</para>
+         /// <para>ファイルシステムがディレクトリフィルタリングをサポートしない場合、このフラグは黙って無視されます。</para>
          /// <para>&#160;</para>
          /// <remarks>
-         /// <para>The lpSearchFilter parameter of the FindFirstFileEx function must be NULL when this search value is used.</para>
-         /// <para>If directory filtering is desired, this flag can be used on all file systems,</para>
-         /// <para>but because it is an advisory flag and only affects file systems that support it,</para>
-         /// <para>the application must examine the file attribute data stored in the lpFindFileData parameter</para>
-         /// <para>of the FindFirstFileEx function to determine whether the function has returned a handle to a directory.</para>
+         /// <para>この検索値を使用する場合、FindFirstFileEx 関数の lpSearchFilter パラメーターは NULL でなければなりません。</para>
+         /// <para>ディレクトリフィルタリングが必要な場合、このフラグはすべてのファイルシステムで使用できますが、</para>
+         /// <para>アドバイザリフラグであり、サポートするファイルシステムにのみ影響するため、</para>
+         /// <para>アプリケーションは FindFirstFileEx 関数の lpFindFileData パラメーターに格納されたファイル属性データを</para>
+         /// <para>調べて、関数がディレクトリへのハンドルを返したかどうかを判定する必要があります。</para>
          /// </remarks>
          /// </summary>
          SearchLimitToDirectories = 1,
 
-         /// <summary>This filtering type is not available.</summary>
-         /// <remarks>For more information, see Device Interface Classes.</remarks>
+         /// <summary>このフィルタリングタイプは利用できません。</summary>
+         /// <remarks>詳細については、Device Interface Classes を参照してください。</remarks>
          SearchLimitToDevices = 2
       }
    }

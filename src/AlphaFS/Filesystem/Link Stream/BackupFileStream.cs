@@ -33,10 +33,10 @@ using SecurityNativeMethods = Alphaleonis.Win32.Security.NativeMethods;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>The <see cref="BackupFileStream"/> provides access to data associated with a specific file or directory, including security information and alternative data streams, for backup and restore operations.</summary>
-   /// <remarks>This class uses the <see href="http://msdn.microsoft.com/en-us/library/aa362509(VS.85).aspx">BackupRead</see>, 
-   /// <see href="http://msdn.microsoft.com/en-us/library/aa362510(VS.85).aspx">BackupSeek</see> and 
-   /// <see href="http://msdn.microsoft.com/en-us/library/aa362511(VS.85).aspx">BackupWrite</see> functions from the Win32 API to provide access to the file or directory.
+   /// <summary><see cref="BackupFileStream"/> は、セキュリティ情報や代替データストリームを含む、特定のファイルまたはディレクトリに関連付けられたデータへのアクセスを提供し、バックアップおよび復元操作に使用します。</summary>
+   /// <remarks>このクラスは Win32 API の <see href="http://msdn.microsoft.com/en-us/library/aa362509(VS.85).aspx">BackupRead</see>、
+   /// <see href="http://msdn.microsoft.com/en-us/library/aa362510(VS.85).aspx">BackupSeek</see>、および
+   /// <see href="http://msdn.microsoft.com/en-us/library/aa362511(VS.85).aspx">BackupWrite</see> 関数を使用してファイルまたはディレクトリへのアクセスを提供します。
    /// </remarks>
    public sealed class BackupFileStream : Stream
    {
@@ -50,10 +50,10 @@ namespace Alphaleonis.Win32.Filesystem
 
 
 
-      /// <summary>Initializes a new instance of the <see cref="BackupFileStream"/> class with the specified path and creation mode.</summary>
-      /// <param name="path">A relative or absolute path for the file that the current <see cref="BackupFileStream"/> object will encapsulate.</param>
-      /// <param name="mode">A <see cref="FileMode"/> constant that determines how to open or create the file.</param>
-      /// <remarks>The file will be opened for exclusive access for both reading and writing.</remarks>
+      /// <summary>指定されたパスと作成モードで <see cref="BackupFileStream"/> クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="path">現在の <see cref="BackupFileStream"/> オブジェクトがカプセル化するファイルの相対パスまたは絶対パス。</param>
+      /// <param name="mode">ファイルを開くまたは作成する方法を決定する <see cref="FileMode"/> 定数。</param>
+      /// <remarks>ファイルは読み取りと書き込みの両方で排他アクセスとして開かれます。</remarks>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       [SecurityCritical]
       public BackupFileStream(string path, FileMode mode) : this(File.CreateFileCore(null, false, path, ExtendedFileAttributes.Normal, null, mode, FileSystemRights.Read | FileSystemRights.Write, FileShare.None, true, false, PathFormat.RelativePath), FileSystemRights.Read | FileSystemRights.Write)
@@ -61,11 +61,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Initializes a new instance of the <see cref="BackupFileStream"/> class with the specified path, creation mode and access rights.</summary>
-      /// <param name="path">A relative or absolute path for the file that the current <see cref="BackupFileStream"/> object will encapsulate.</param>
-      /// <param name="mode">A <see cref="FileMode"/> constant that determines how to open or create the file.</param>
-      /// <param name="access">A <see cref="FileSystemRights"/> constant that determines the access rights to use when creating access and audit rules for the file.</param>
-      /// <remarks>The file will be opened for exclusive access.</remarks>
+      /// <summary>指定されたパス、作成モード、およびアクセス権で <see cref="BackupFileStream"/> クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="path">現在の <see cref="BackupFileStream"/> オブジェクトがカプセル化するファイルの相対パスまたは絶対パス。</param>
+      /// <param name="mode">ファイルを開くまたは作成する方法を決定する <see cref="FileMode"/> 定数。</param>
+      /// <param name="access">ファイルのアクセスルールおよび監査ルールを作成する際に使用するアクセス権を決定する <see cref="FileSystemRights"/> 定数。</param>
+      /// <remarks>ファイルは排他アクセスとして開かれます。</remarks>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       [SecurityCritical]
       public BackupFileStream(string path, FileMode mode, FileSystemRights access) : this(File.CreateFileCore(null, false, path, ExtendedFileAttributes.Normal, null, mode, access, FileShare.None, true, false, PathFormat.RelativePath), access)
@@ -73,11 +73,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Initializes a new instance of the <see cref="BackupFileStream"/> class with the specified path, creation mode, access rights and sharing permission.</summary>
-      /// <param name="path">A relative or absolute path for the file that the current <see cref="BackupFileStream"/> object will encapsulate.</param>
-      /// <param name="mode">A <see cref="FileMode"/> constant that determines how to open or create the file.</param>
-      /// <param name="access">A <see cref="FileSystemRights"/> constant that determines the access rights to use when creating access and audit rules for the file.</param>
-      /// <param name="share">A <see cref="FileShare"/> constant that determines how the file will be shared by processes.</param>
+      /// <summary>指定されたパス、作成モード、アクセス権、および共有許可で <see cref="BackupFileStream"/> クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="path">現在の <see cref="BackupFileStream"/> オブジェクトがカプセル化するファイルの相対パスまたは絶対パス。</param>
+      /// <param name="mode">ファイルを開くまたは作成する方法を決定する <see cref="FileMode"/> 定数。</param>
+      /// <param name="access">ファイルのアクセスルールおよび監査ルールを作成する際に使用するアクセス権を決定する <see cref="FileSystemRights"/> 定数。</param>
+      /// <param name="share">プロセス間でファイルを共有する方法を決定する <see cref="FileShare"/> 定数。</param>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       [SecurityCritical]
       public BackupFileStream(string path, FileMode mode, FileSystemRights access, FileShare share) : this(File.CreateFileCore(null, false, path, ExtendedFileAttributes.Normal, null, mode, access, share, true, false, PathFormat.RelativePath), access)
@@ -85,12 +85,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Initializes a new instance of the <see cref="BackupFileStream"/> class with the specified path, creation mode, access rights and sharing permission, and additional file attributes.</summary>
-      /// <param name="path">A relative or absolute path for the file that the current <see cref="BackupFileStream"/> object will encapsulate.</param>
-      /// <param name="mode">A <see cref="FileMode"/> constant that determines how to open or create the file.</param>
-      /// <param name="access">A <see cref="FileSystemRights"/> constant that determines the access rights to use when creating access and audit rules for the file.</param>
-      /// <param name="share">A <see cref="FileShare"/> constant that determines how the file will be shared by processes.</param>
-      /// <param name="attributes">A <see cref="ExtendedFileAttributes"/> constant that specifies additional file attributes.</param>
+      /// <summary>指定されたパス、作成モード、アクセス権、共有許可、および追加のファイル属性で <see cref="BackupFileStream"/> クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="path">現在の <see cref="BackupFileStream"/> オブジェクトがカプセル化するファイルの相対パスまたは絶対パス。</param>
+      /// <param name="mode">ファイルを開くまたは作成する方法を決定する <see cref="FileMode"/> 定数。</param>
+      /// <param name="access">ファイルのアクセスルールおよび監査ルールを作成する際に使用するアクセス権を決定する <see cref="FileSystemRights"/> 定数。</param>
+      /// <param name="share">プロセス間でファイルを共有する方法を決定する <see cref="FileShare"/> 定数。</param>
+      /// <param name="attributes">追加のファイル属性を指定する <see cref="ExtendedFileAttributes"/> 定数。</param>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       [SecurityCritical]
       public BackupFileStream(string path, FileMode mode, FileSystemRights access, FileShare share, ExtendedFileAttributes attributes) : this(File.CreateFileCore(null, false, path, attributes, null, mode, access, share, true, false, PathFormat.RelativePath), access)
@@ -98,13 +98,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Initializes a new instance of the <see cref="BackupFileStream"/> class with the specified path, creation mode, access rights and sharing permission, additional file attributes, access control and audit security.</summary>
-      /// <param name="path">A relative or absolute path for the file that the current <see cref="BackupFileStream"/> object will encapsulate.</param>
-      /// <param name="mode">A <see cref="FileMode"/> constant that determines how to open or create the file.</param>
-      /// <param name="access">A <see cref="FileSystemRights"/> constant that determines the access rights to use when creating access and audit rules for the file.</param>
-      /// <param name="share">A <see cref="FileShare"/> constant that determines how the file will be shared by processes.</param>
-      /// <param name="attributes">A <see cref="ExtendedFileAttributes"/> constant that specifies additional file attributes.</param>
-      /// <param name="security">A <see cref="FileSecurity"/> constant that determines the access control and audit security for the file. This parameter This parameter may be <c>null</c>.</param>
+      /// <summary>指定されたパス、作成モード、アクセス権、共有許可、追加のファイル属性、アクセス制御および監査セキュリティで <see cref="BackupFileStream"/> クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="path">現在の <see cref="BackupFileStream"/> オブジェクトがカプセル化するファイルの相対パスまたは絶対パス。</param>
+      /// <param name="mode">ファイルを開くまたは作成する方法を決定する <see cref="FileMode"/> 定数。</param>
+      /// <param name="access">ファイルのアクセスルールおよび監査ルールを作成する際に使用するアクセス権を決定する <see cref="FileSystemRights"/> 定数。</param>
+      /// <param name="share">プロセス間でファイルを共有する方法を決定する <see cref="FileShare"/> 定数。</param>
+      /// <param name="attributes">追加のファイル属性を指定する <see cref="ExtendedFileAttributes"/> 定数。</param>
+      /// <param name="security">ファイルのアクセス制御および監査セキュリティを決定する <see cref="FileSecurity"/> 定数。このパラメーターは <c>null</c> にすることができます。</param>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       [SecurityCritical]
       public BackupFileStream(string path, FileMode mode, FileSystemRights access, FileShare share, ExtendedFileAttributes attributes, FileSecurity security) : this(File.CreateFileCore(null, false, path, attributes, security, mode, access, share, true, false, PathFormat.RelativePath), access)
@@ -112,11 +112,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Initializes a new instance of the <see cref="BackupFileStream"/> class with the specified path and creation mode.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">A relative or absolute path for the file that the current <see cref="BackupFileStream"/> object will encapsulate.</param>
-      /// <param name="mode">A <see cref="FileMode"/> constant that determines how to open or create the file.</param>
-      /// <remarks>The file will be opened for exclusive access for both reading and writing.</remarks>
+      /// <summary>指定されたパスと作成モードで <see cref="BackupFileStream"/> クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">現在の <see cref="BackupFileStream"/> オブジェクトがカプセル化するファイルの相対パスまたは絶対パス。</param>
+      /// <param name="mode">ファイルを開くまたは作成する方法を決定する <see cref="FileMode"/> 定数。</param>
+      /// <remarks>ファイルは読み取りと書き込みの両方で排他アクセスとして開かれます。</remarks>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       [SecurityCritical]
       public BackupFileStream(KernelTransaction transaction, string path, FileMode mode) : this(File.CreateFileCore(transaction, false, path, ExtendedFileAttributes.Normal, null, mode, FileSystemRights.Read | FileSystemRights.Write, FileShare.None, true, false, PathFormat.RelativePath), FileSystemRights.Read | FileSystemRights.Write)
@@ -124,12 +124,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Initializes a new instance of the <see cref="BackupFileStream"/> class with the specified path, creation mode and access rights.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">A relative or absolute path for the file that the current <see cref="BackupFileStream"/> object will encapsulate.</param>
-      /// <param name="mode">A <see cref="FileMode"/> constant that determines how to open or create the file.</param>
-      /// <param name="access">A <see cref="FileSystemRights"/> constant that determines the access rights to use when creating access and audit rules for the file.</param>
-      /// <remarks>The file will be opened for exclusive access.</remarks>
+      /// <summary>指定されたパス、作成モード、およびアクセス権で <see cref="BackupFileStream"/> クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">現在の <see cref="BackupFileStream"/> オブジェクトがカプセル化するファイルの相対パスまたは絶対パス。</param>
+      /// <param name="mode">ファイルを開くまたは作成する方法を決定する <see cref="FileMode"/> 定数。</param>
+      /// <param name="access">ファイルのアクセスルールおよび監査ルールを作成する際に使用するアクセス権を決定する <see cref="FileSystemRights"/> 定数。</param>
+      /// <remarks>ファイルは排他アクセスとして開かれます。</remarks>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       [SecurityCritical]
       public BackupFileStream(KernelTransaction transaction, string path, FileMode mode, FileSystemRights access) : this(File.CreateFileCore(transaction, false, path, ExtendedFileAttributes.Normal, null, mode, access, FileShare.None, true, false, PathFormat.RelativePath), access)
@@ -137,12 +137,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Initializes a new instance of the <see cref="BackupFileStream"/> class with the specified path, creation mode, access rights and sharing permission.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">A relative or absolute path for the file that the current <see cref="BackupFileStream"/> object will encapsulate.</param>
-      /// <param name="mode">A <see cref="FileMode"/> constant that determines how to open or create the file.</param>
-      /// <param name="access">A <see cref="FileSystemRights"/> constant that determines the access rights to use when creating access and audit rules for the file.</param>
-      /// <param name="share">A <see cref="FileShare"/> constant that determines how the file will be shared by processes.</param>
+      /// <summary>指定されたパス、作成モード、アクセス権、および共有許可で <see cref="BackupFileStream"/> クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">現在の <see cref="BackupFileStream"/> オブジェクトがカプセル化するファイルの相対パスまたは絶対パス。</param>
+      /// <param name="mode">ファイルを開くまたは作成する方法を決定する <see cref="FileMode"/> 定数。</param>
+      /// <param name="access">ファイルのアクセスルールおよび監査ルールを作成する際に使用するアクセス権を決定する <see cref="FileSystemRights"/> 定数。</param>
+      /// <param name="share">プロセス間でファイルを共有する方法を決定する <see cref="FileShare"/> 定数。</param>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       [SecurityCritical]
       public BackupFileStream(KernelTransaction transaction, string path, FileMode mode, FileSystemRights access, FileShare share) : this(File.CreateFileCore(transaction, false, path, ExtendedFileAttributes.Normal, null, mode, access, share, true, false, PathFormat.RelativePath), access)
@@ -150,13 +150,13 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Initializes a new instance of the <see cref="BackupFileStream"/> class with the specified path, creation mode, access rights and sharing permission, and additional file attributes.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">A relative or absolute path for the file that the current <see cref="BackupFileStream"/> object will encapsulate.</param>
-      /// <param name="mode">A <see cref="FileMode"/> constant that determines how to open or create the file.</param>
-      /// <param name="access">A <see cref="FileSystemRights"/> constant that determines the access rights to use when creating access and audit rules for the file.</param>
-      /// <param name="share">A <see cref="FileShare"/> constant that determines how the file will be shared by processes.</param>
-      /// <param name="attributes">A <see cref="ExtendedFileAttributes"/> constant that specifies additional file attributes.</param>
+      /// <summary>指定されたパス、作成モード、アクセス権、共有許可、および追加のファイル属性で <see cref="BackupFileStream"/> クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">現在の <see cref="BackupFileStream"/> オブジェクトがカプセル化するファイルの相対パスまたは絶対パス。</param>
+      /// <param name="mode">ファイルを開くまたは作成する方法を決定する <see cref="FileMode"/> 定数。</param>
+      /// <param name="access">ファイルのアクセスルールおよび監査ルールを作成する際に使用するアクセス権を決定する <see cref="FileSystemRights"/> 定数。</param>
+      /// <param name="share">プロセス間でファイルを共有する方法を決定する <see cref="FileShare"/> 定数。</param>
+      /// <param name="attributes">追加のファイル属性を指定する <see cref="ExtendedFileAttributes"/> 定数。</param>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       [SecurityCritical]
       public BackupFileStream(KernelTransaction transaction, string path, FileMode mode, FileSystemRights access, FileShare share, ExtendedFileAttributes attributes) : this(File.CreateFileCore(transaction, false, path, attributes, null, mode, access, share, true, false, PathFormat.RelativePath), access)
@@ -164,14 +164,14 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Initializes a new instance of the <see cref="BackupFileStream"/> class with the specified path, creation mode, access rights and sharing permission, additional file attributes, access control and audit security.</summary>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">A relative or absolute path for the file that the current <see cref="BackupFileStream"/> object will encapsulate.</param>
-      /// <param name="mode">A <see cref="FileMode"/> constant that determines how to open or create the file.</param>
-      /// <param name="access">A <see cref="FileSystemRights"/> constant that determines the access rights to use when creating access and audit rules for the file.</param>
-      /// <param name="share">A <see cref="FileShare"/> constant that determines how the file will be shared by processes.</param>
-      /// <param name="attributes">A <see cref="ExtendedFileAttributes"/> constant that specifies additional file attributes.</param>
-      /// <param name="security">A <see cref="FileSecurity"/> constant that determines the access control and audit security for the file. This parameter This parameter may be <c>null</c>.</param>
+      /// <summary>指定されたパス、作成モード、アクセス権、共有許可、追加のファイル属性、アクセス制御および監査セキュリティで <see cref="BackupFileStream"/> クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">現在の <see cref="BackupFileStream"/> オブジェクトがカプセル化するファイルの相対パスまたは絶対パス。</param>
+      /// <param name="mode">ファイルを開くまたは作成する方法を決定する <see cref="FileMode"/> 定数。</param>
+      /// <param name="access">ファイルのアクセスルールおよび監査ルールを作成する際に使用するアクセス権を決定する <see cref="FileSystemRights"/> 定数。</param>
+      /// <param name="share">プロセス間でファイルを共有する方法を決定する <see cref="FileShare"/> 定数。</param>
+      /// <param name="attributes">追加のファイル属性を指定する <see cref="ExtendedFileAttributes"/> 定数。</param>
+      /// <param name="security">ファイルのアクセス制御および監査セキュリティを決定する <see cref="FileSecurity"/> 定数。このパラメーターは <c>null</c> にすることができます。</param>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       [SecurityCritical]
       public BackupFileStream(KernelTransaction transaction, string path, FileMode mode, FileSystemRights access, FileShare share, ExtendedFileAttributes attributes, FileSecurity security) : this(File.CreateFileCore(transaction, false, path, attributes, security, mode, access, share, true, false, PathFormat.RelativePath), access)
@@ -179,9 +179,9 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Initializes a new instance of the <see cref="BackupFileStream"/> class for the specified file handle, with the specified read/write permission.</summary>
-      /// <param name="handle">A file handle for the file that this <see cref="BackupFileStream"/> object will encapsulate.</param>
-      /// <param name="access">A <see cref="FileSystemRights"/> constant that gets the <see cref="CanRead"/> and <see cref="CanWrite"/> properties of the <see cref="BackupFileStream"/> object.</param>
+      /// <summary>指定されたファイルハンドルと読み取り/書き込み許可で <see cref="BackupFileStream"/> クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="handle">この <see cref="BackupFileStream"/> オブジェクトがカプセル化するファイルのファイルハンドル。</param>
+      /// <param name="access"><see cref="BackupFileStream"/> オブジェクトの <see cref="CanRead"/> および <see cref="CanWrite"/> プロパティを取得する <see cref="FileSystemRights"/> 定数。</param>
       [SecurityCritical]
       public BackupFileStream(SafeFileHandle handle, FileSystemRights access)
       {
@@ -195,8 +195,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>When overridden in a derived class, gets the length in bytes of the stream.</summary>
-      /// <value>This method always throws an exception.</value>
+      /// <summary>派生クラスでオーバーライドされた場合、ストリームの長さをバイト単位で取得します。</summary>
+      /// <value>このメソッドは常に例外をスローします。</value>
       /// <exception cref="NotSupportedException"/>
       public override long Length
       {
@@ -204,8 +204,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>When overridden in a derived class, gets or sets the position within the current stream.</summary>
-      /// <value>This method always throws an exception.</value>
+      /// <summary>派生クラスでオーバーライドされた場合、現在のストリーム内の位置を取得または設定します。</summary>
+      /// <value>このメソッドは常に例外をスローします。</value>
       /// <exception cref="NotSupportedException"/>
       public override long Position
       {
@@ -214,11 +214,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>When overridden in a derived class, sets the position within the current stream.</summary>
-      /// <param name="offset">A byte offset relative to the <paramref name="origin"/> parameter.</param>
-      /// <param name="origin">A value of type <see cref="System.IO.SeekOrigin"/> indicating the reference point used to obtain the new position.</param>
-      /// <returns>The new position within the current stream.</returns>
-      /// <remarks><para><note><para>This stream does not support seeking using this method, and calling this method will always throw <see cref="NotSupportedException"/>. See <see cref="Skip"/> for an alternative way of seeking forward.</para></note></para></remarks>
+      /// <summary>派生クラスでオーバーライドされた場合、現在のストリーム内の位置を設定します。</summary>
+      /// <param name="offset"><paramref name="origin"/> パラメーターに対する相対的なバイトオフセット。</param>
+      /// <param name="origin">新しい位置を取得するために使用される参照ポイントを示す <see cref="System.IO.SeekOrigin"/> 型の値。</param>
+      /// <returns>現在のストリーム内の新しい位置。</returns>
+      /// <remarks><para><note><para>このストリームはこのメソッドによるシークをサポートしていません。このメソッドを呼び出すと常に <see cref="NotSupportedException"/> がスローされます。前方へのシークの代替方法については <see cref="Skip"/> を参照してください。</para></note></para></remarks>
       /// <exception cref="NotSupportedException"/>
       public override long Seek(long offset, SeekOrigin origin)
       {
@@ -226,9 +226,9 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>When overridden in a derived class, sets the length of the current stream.</summary>
-      /// <param name="value">The desired length of the current stream in bytes.</param>
-      /// <remarks>This method is not supported by the <see cref="BackupFileStream"/> class, and calling it will always generate a <see cref="NotSupportedException"/>.</remarks>
+      /// <summary>派生クラスでオーバーライドされた場合、現在のストリームの長さを設定します。</summary>
+      /// <param name="value">現在のストリームの希望する長さ（バイト単位）。</param>
+      /// <remarks>このメソッドは <see cref="BackupFileStream"/> クラスではサポートされておらず、呼び出すと常に <see cref="NotSupportedException"/> が生成されます。</remarks>
       /// <exception cref="NotSupportedException"/>
       public override void SetLength(long value)
       {
@@ -238,49 +238,49 @@ namespace Alphaleonis.Win32.Filesystem
       
 
 
-      /// <summary>Gets a value indicating whether the current stream supports reading.</summary>
-      /// <returns><c>true</c> if the stream supports reading, <c>false</c> otherwise.</returns>
+      /// <summary>現在のストリームが読み取りをサポートするかどうかを示す値を取得します。</summary>
+      /// <returns>ストリームが読み取りをサポートする場合は <c>true</c>、それ以外の場合は <c>false</c>。</returns>
       public override bool CanRead
       {
          get { return _canRead; }
       }
 
-      /// <summary>Gets a value indicating whether the current stream supports seeking.</summary>        
-      /// <returns>This method always returns <c>false</c>.</returns>
+      /// <summary>現在のストリームがシークをサポートするかどうかを示す値を取得します。</summary>
+      /// <returns>このメソッドは常に <c>false</c> を返します。</returns>
       public override bool CanSeek
       {
          get { return false; }
       }
 
-      /// <summary>Gets a value indicating whether the current stream supports writing.</summary>
-      /// <returns><c>true</c> if the stream supports writing, <c>false</c> otherwise.</returns>
+      /// <summary>現在のストリームが書き込みをサポートするかどうかを示す値を取得します。</summary>
+      /// <returns>ストリームが書き込みをサポートする場合は <c>true</c>、それ以外の場合は <c>false</c>。</returns>
       public override bool CanWrite
       {
          get { return _canWrite; }
       }
 
-      /// <summary>Gets a <see cref="SafeFileHandle"/> object that represents the operating system file handle for the file that the current <see cref="BackupFileStream"/> object encapsulates.</summary>
-      /// <value>A <see cref="SafeFileHandle"/> object that represents the operating system file handle for the file that 
-      /// the current <see cref="BackupFileStream"/> object encapsulates.</value>
+      /// <summary>現在の <see cref="BackupFileStream"/> オブジェクトがカプセル化するファイルのオペレーティングシステムファイルハンドルを表す <see cref="SafeFileHandle"/> オブジェクトを取得します。</summary>
+      /// <value>現在の <see cref="BackupFileStream"/> オブジェクトがカプセル化するファイルのオペレーティングシステムファイルハンドルを表す
+      /// <see cref="SafeFileHandle"/> オブジェクト。</value>
       private SafeFileHandle SafeFileHandle { get; set; }
 
 
 
 
-      /// <summary>Reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.</summary>
-      /// <remarks>This method will not backup the access-control list (ACL) data for the file or directory.</remarks>
+      /// <summary>現在のストリームからバイトシーケンスを読み取り、読み取ったバイト数だけストリーム内の位置を進めます。</summary>
+      /// <remarks>このメソッドはファイルまたはディレクトリのアクセス制御リスト (ACL) データをバックアップしません。</remarks>
       /// <param name="buffer">
-      ///   An array of bytes. When this method returns, the buffer contains the specified byte array with the values between
-      ///   <paramref name="offset"/> and (<paramref name="offset"/> + <paramref name="count"/> - 1) replaced by the bytes read from the
-      ///   current source.
+      ///   バイト配列。このメソッドが戻ると、バッファーには指定されたバイト配列の
+      ///   <paramref name="offset"/> から (<paramref name="offset"/> + <paramref name="count"/> - 1) までの値が、
+      ///   現在のソースから読み取ったバイトで置き換えられた状態で格納されます。
       /// </param>
       /// <param name="offset">
-      ///   The zero-based byte offset in <paramref name="buffer"/> at which to begin storing the data read from the current stream.
+      ///   現在のストリームから読み取ったデータの格納を開始する、<paramref name="buffer"/> 内のゼロベースのバイトオフセット。
       /// </param>
-      /// <param name="count">The maximum number of bytes to be read from the current stream.</param>
+      /// <param name="count">現在のストリームから読み取る最大バイト数。</param>
       /// <returns>
-      ///   The total number of bytes read into the buffer. This can be less than the number of bytes requested if that many bytes are not
-      ///   currently available, or zero (0) if the end of the stream has been reached.
+      ///   バッファーに読み取られたバイトの合計数。要求されたバイト数が現在利用できない場合は要求数より少ない値、
+      ///   ストリームの末尾に達した場合はゼロ (0) になります。
       /// </returns>
       ///
       /// <exception cref="System.ArgumentException"/>
@@ -294,15 +294,15 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>When overridden in a derived class, reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.</summary>
-      /// <param name="buffer">An array of bytes. When this method returns, the buffer contains the specified byte array with the values
-      /// between <paramref name="offset"/> and (<paramref name="offset"/> + <paramref name="count"/> - 1) replaced by the bytes read from the current source.</param>
-      /// <param name="offset">The zero-based byte offset in <paramref name="buffer"/> at which to begin storing the data read from the current stream.</param>
-      /// <param name="count">The maximum number of bytes to be read from the current stream.</param>
-      /// <param name="processSecurity">Indicates whether the function will backup the access-control list (ACL) data for the file or directory.</param>
+      /// <summary>派生クラスでオーバーライドされた場合、現在のストリームからバイトシーケンスを読み取り、読み取ったバイト数だけストリーム内の位置を進めます。</summary>
+      /// <param name="buffer">バイト配列。このメソッドが戻ると、バッファーには指定されたバイト配列の
+      /// <paramref name="offset"/> から (<paramref name="offset"/> + <paramref name="count"/> - 1) までの値が、現在のソースから読み取ったバイトで置き換えられた状態で格納されます。</param>
+      /// <param name="offset">現在のストリームから読み取ったデータの格納を開始する、<paramref name="buffer"/> 内のゼロベースのバイトオフセット。</param>
+      /// <param name="count">現在のストリームから読み取る最大バイト数。</param>
+      /// <param name="processSecurity">関数がファイルまたはディレクトリのアクセス制御リスト (ACL) データをバックアップするかどうかを示します。</param>
       /// <returns>
-      /// The total number of bytes read into the buffer. This can be less than the number of bytes requested if that many bytes are not
-      /// currently available, or zero (0) if the end of the stream has been reached.
+      /// バッファーに読み取られたバイトの合計数。要求されたバイト数が現在利用できない場合は要求数より少ない値、
+      /// ストリームの末尾に達した場合はゼロ (0) になります。
       /// </returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
@@ -350,41 +350,40 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
-         // See File.GetAccessControlCore(): .CopyTo() does not work there?
-         // 2017-06-13: Is .CopyTo() doing anything useful here?
+         // File.GetAccessControlCore() 参照: .CopyTo() はそこでは動作しない？
+         // 2017-06-13: .CopyTo() はここで何か有用なことをしているのか？
          safeBuffer.CopyTo(buffer, offset, count);
 
          return (int) numberOfBytesRead;
       }
 
 
-      /// <summary>Writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.</summary>
+      /// <summary>現在のストリームにバイトシーケンスを書き込み、書き込んだバイト数だけこのストリーム内の現在位置を進めます。</summary>
       /// <overloads>
-      /// Writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
+      /// 現在のストリームにバイトシーケンスを書き込み、書き込んだバイト数だけこのストリーム内の現在位置を進めます。
       /// </overloads>
-      /// <param name="buffer">An array of bytes. This method copies <paramref name="count"/> bytes from <paramref name="buffer"/> to the current stream.</param>
-      /// <param name="offset">The zero-based byte offset in <paramref name="buffer"/> at which to begin copying bytes to the current stream.</param>
-      /// <param name="count">The number of bytes to be written to the current stream.</param>
+      /// <param name="buffer">バイト配列。このメソッドは <paramref name="buffer"/> から <paramref name="count"/> バイトを現在のストリームにコピーします。</param>
+      /// <param name="offset">現在のストリームへのバイトのコピーを開始する、<paramref name="buffer"/> 内のゼロベースのバイトオフセット。</param>
+      /// <param name="count">現在のストリームに書き込むバイト数。</param>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="System.ArgumentNullException"/>
       /// <exception cref="System.ArgumentOutOfRangeException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="ObjectDisposedException"/>
-      /// <remarks>This method will not process the access-control list (ACL) data for the file or directory.</remarks>      
+      /// <remarks>このメソッドはファイルまたはディレクトリのアクセス制御リスト (ACL) データを処理しません。</remarks>
       public override void Write(byte[] buffer, int offset, int count)
       {
          Write(buffer, offset, count, false);
       }
 
 
-      /// <summary>When overridden in a derived class, writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.</summary>
-      /// <param name="buffer">An array of bytes. This method copies <paramref name="count"/> bytes from <paramref name="buffer"/> to the current stream.</param>
-      /// <param name="offset">The zero-based byte offset in <paramref name="buffer"/> at which to begin copying bytes to the current stream.</param>
-      /// <param name="count">The number of bytes to be written to the current stream.</param>
-      /// <param name="processSecurity">Specifies whether the function will restore the access-control list (ACL) data for the file or directory. 
-      /// If this is <c>true</c> you need to specify <see cref="FileSystemRights.TakeOwnership"/> and <see cref="FileSystemRights.ChangePermissions"/> access when 
-      /// opening the file or directory handle. If the handle does not have those access rights, the operating system denies 
-      /// access to the ACL data, and ACL data restoration will not occur.</param>
+      /// <summary>派生クラスでオーバーライドされた場合、現在のストリームにバイトシーケンスを書き込み、書き込んだバイト数だけこのストリーム内の現在位置を進めます。</summary>
+      /// <param name="buffer">バイト配列。このメソッドは <paramref name="buffer"/> から <paramref name="count"/> バイトを現在のストリームにコピーします。</param>
+      /// <param name="offset">現在のストリームへのバイトのコピーを開始する、<paramref name="buffer"/> 内のゼロベースのバイトオフセット。</param>
+      /// <param name="count">現在のストリームに書き込むバイト数。</param>
+      /// <param name="processSecurity">関数がファイルまたはディレクトリのアクセス制御リスト (ACL) データを復元するかどうかを指定します。
+      /// これが <c>true</c> の場合、ファイルまたはディレクトリハンドルを開く際に <see cref="FileSystemRights.TakeOwnership"/> および <see cref="FileSystemRights.ChangePermissions"/> アクセスを指定する必要があります。
+      /// ハンドルにこれらのアクセス権がない場合、オペレーティングシステムは ACL データへのアクセスを拒否し、ACL データの復元は行われません。</param>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="System.ArgumentOutOfRangeException"/>
@@ -430,7 +429,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Clears all buffers for this stream and causes any buffered data to be written to the underlying device.</summary>
+      /// <summary>このストリームのすべてのバッファーをクリアし、バッファーされたデータを基になるデバイスに書き込みます。</summary>
       public override void Flush()
       {
          var success = NativeMethods.FlushFileBuffers(SafeFileHandle);
@@ -443,17 +442,16 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Skips ahead the specified number of bytes from the current stream.</summary>
-      /// <remarks><para>This method represents the Win32 API implementation of <see href="http://msdn.microsoft.com/en-us/library/aa362509(VS.85).aspx">BackupSeek</see>.</para>
+      /// <summary>現在のストリームから指定されたバイト数だけ前方にスキップします。</summary>
+      /// <remarks><para>このメソッドは Win32 API の <see href="http://msdn.microsoft.com/en-us/library/aa362509(VS.85).aspx">BackupSeek</see> の実装です。</para>
       /// <para>
-      /// Applications use the <see cref="Skip"/> method to skip portions of a data stream that cause errors. This function does not 
-      /// seek across stream headers. For example, this function cannot be used to skip the stream name. If an application 
-      /// attempts to seek past the end of a substream, the function fails, the return value indicates the actual number of bytes 
-      /// the function seeks, and the file position is placed at the start of the next stream header.
+      /// アプリケーションは <see cref="Skip"/> メソッドを使用して、エラーの原因となるデータストリームの部分をスキップします。この関数はストリームヘッダーを
+      /// 越えてシークしません。例えば、この関数はストリーム名をスキップするために使用できません。アプリケーションがサブストリームの末尾を越えて
+      /// シークしようとすると関数は失敗し、戻り値は関数が実際にシークしたバイト数を示し、ファイル位置は次のストリームヘッダーの先頭に配置されます。
       /// </para>
       /// </remarks>
-      /// <param name="bytes">The number of bytes to skip.</param>
-      /// <returns>The number of bytes actually skipped.</returns>
+      /// <param name="bytes">スキップするバイト数。</param>
+      /// <returns>実際にスキップされたバイト数。</returns>
       [SecurityCritical]
       public long Skip(long bytes)
       {
@@ -463,7 +461,7 @@ namespace Alphaleonis.Win32.Filesystem
          var lastError = Marshal.GetLastWin32Error();
          if (!success && lastError != Win32Errors.ERROR_SEEK)
          {
-            // Error Code 25 indicates a seek error, we just skip that here.
+            // エラーコード25はシークエラーを示すため、ここではスキップする。
             NativeError.ThrowException(lastError);
          }
 
@@ -471,11 +469,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Gets a <see cref="FileSecurity"/> object that encapsulates the access control list (ACL) entries for the file described by the current <see cref="BackupFileStream"/> object.</summary>
+      /// <summary>現在の <see cref="BackupFileStream"/> オブジェクトが記述するファイルのアクセス制御リスト (ACL) エントリをカプセル化する <see cref="FileSecurity"/> オブジェクトを取得します。</summary>
       /// <exception cref="IOException"/>
       /// <returns>
-      ///   A <see cref="FileSecurity"/> object that encapsulates the access control list (ACL) entries for the file described by the current
-      ///   <see cref="BackupFileStream"/> object.
+      ///   現在の <see cref="BackupFileStream"/> オブジェクトが記述するファイルのアクセス制御リスト (ACL) エントリをカプセル化する
+      ///   <see cref="FileSecurity"/> オブジェクト。
       /// </returns>
       [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
       [SecurityCritical]
@@ -505,7 +503,7 @@ namespace Alphaleonis.Win32.Filesystem
             var managedBuffer = new byte[length];
 
             
-            // .CopyTo() does not work there?
+            // .CopyTo() はそこでは動作しない？
             if (null != pSecurityDescriptor)
             {
                pSecurityDescriptor.CopyTo(managedBuffer, 0, (int) length);
@@ -527,8 +525,8 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Applies access control list (ACL) entries described by a <see cref="FileSecurity"/> object to the file described by the current <see cref="BackupFileStream"/> object.</summary>
-      /// <param name="fileSecurity">A <see cref="FileSecurity"/> object that describes an ACL entry to apply to the current file.</param>
+      /// <summary><see cref="FileSecurity"/> オブジェクトで記述されたアクセス制御リスト (ACL) エントリを、現在の <see cref="BackupFileStream"/> オブジェクトが記述するファイルに適用します。</summary>
+      /// <param name="fileSecurity">現在のファイルに適用する ACL エントリを記述する <see cref="FileSecurity"/> オブジェクト。</param>
       [SecurityCritical]
       public void SetAccessControl(ObjectSecurity fileSecurity)
       {
@@ -536,9 +534,9 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Prevents other processes from changing the <see cref="BackupFileStream"/> while permitting read access.</summary>
-      /// <param name="position">The beginning of the range to lock. The value of this parameter must be equal to or greater than zero (0).</param>
-      /// <param name="length">The range to be locked.</param>
+      /// <summary>読み取りアクセスを許可しながら、��のプロセスが <see cref="BackupFileStream"/> を変更することを防止します。</summary>
+      /// <param name="position">ロックする範囲の先頭。このパラメーターの値はゼロ (0) 以上でなければなりません。</param>
+      /// <param name="length">ロックする範囲。</param>
       /// <exception cref="ArgumentOutOfRangeException"/>
       /// <exception cref="ObjectDisposedException"/>
       [SecurityCritical]
@@ -565,9 +563,9 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Allows access by other processes to all or part of a file that was previously locked.</summary>
-      /// <param name="position">The beginning of the range to unlock.</param>
-      /// <param name="length">The range to be unlocked.</param>
+      /// <summary>以前にロックされた��ァイルの全体または一部への他のプロセスによるアクセスを許可します。</summary>
+      /// <param name="position">ロック解除する範囲の先頭。</param>
+      /// <param name="length">ロック解除する範囲。</param>
       /// <exception cref="ArgumentOutOfRangeException"/>
       /// <exception cref="ArgumentOutOfRangeException"/>
       /// <exception cref="ObjectDisposedException"/>
@@ -595,12 +593,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Reads a stream header from the current <see cref="BackupFileStream"/>.</summary>
-      /// <returns>The stream header read from the current <see cref="BackupFileStream"/>, or <c>null</c> if the end-of-file 
-      /// was reached before the required number of bytes of a header could be read.</returns>
+      /// <summary>現在の <see cref="BackupFileStream"/> からストリームヘッダーを読み取ります。</summary>
+      /// <returns>現在の <see cref="BackupFileStream"/> から読み取ったストリームヘッダー。ヘッダーの必要バイト数を読み取る前に
+      /// ファイル終端に達した場合は <c>null</c>。</returns>
       /// <exception cref="IOException"/>
-      /// <remarks>The stream must be positioned at where an actual header starts for the returned object to represent valid 
-      /// information.</remarks>
+      /// <remarks>返されるオブジェクトが有効な情報を表すためには、ストリームが実際のヘッダーが開始する位置に
+      /// 配置されている必要があります。</remarks>
       [SecurityCritical]
       public BackupStreamInfo ReadStreamInfo()
       {
@@ -652,22 +650,22 @@ namespace Alphaleonis.Win32.Filesystem
 
       #region Disposable Members
 
-      /// <summary>Releases unmanaged resources and performs other cleanup operations before the <see cref="BackupFileStream"/> is reclaimed by garbage collection.</summary>
+      /// <summary><see cref="BackupFileStream"/> がガベージコレクションによって回収される前に、アンマネージリソースを解放し、その他のクリーンアップ操作を実行します。</summary>
       ~BackupFileStream()
       {
          Dispose(false);
       }
 
 
-      /// <summary>Releases the unmanaged resources used by the <see cref="System.IO.Stream"/> and optionally releases the managed resources.</summary>
-      /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+      /// <summary><see cref="System.IO.Stream"/> で使用されるアンマネージリソースを解放し、オプションでマネージリソースも解放します。</summary>
+      /// <param name="disposing">マネージリソースとアンマネージリソースの両方を解放する場合は <c>true</c>、アンマネージリソースのみを解放する場合は <c>false</c>。</param>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       protected override void Dispose(bool disposing)
       {
          if (disposing)
          {
-            // If one of the constructors previously threw an exception,
-            // than the object hasn't been initialized properly and call from finalize will fail.         
+            // コンストラクタのいずれかが以前に例外をスローした場合、
+            // オブジェクトは正しく初期化されておらず、ファイナライザーからの呼び出しは失敗する。
 
             if (null != SafeFileHandle && !SafeFileHandle.IsInvalid)
             {
@@ -677,7 +675,7 @@ namespace Alphaleonis.Win32.Filesystem
                   {
                      uint temp;
 
-                     // MSDN: To release the memory used by the data structure, call BackupRead with the bAbort parameter set to TRUE when the backup operation is complete.
+                     // MSDN: データ構造が使用するメモリを解放するには、バックアップ操作完了時に bAbort パラメーターを TRUE に設定して BackupRead を呼び出す。
                      var success = NativeMethods.BackupRead(SafeFileHandle, new SafeGlobalMemoryBufferHandle(), 0, out temp, true, false, ref _context);
 
                      var lastError = Marshal.GetLastWin32Error();

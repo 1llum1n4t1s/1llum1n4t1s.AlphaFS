@@ -30,12 +30,12 @@ using System.Security.Cryptography;
 
 namespace Alphaleonis.Win32.Security
 {
-   /// <summary>Implements a 32-bit CRC hash algorithm compatible with Zip etc.</summary>
+   /// <summary>Zip等と互換性のある32ビットCRCハッシュアルゴリズムを実装します。</summary>
    /// <remarks>
-   ///   Crc32 should only be used for backward compatibility with older file formats and algorithms.
-   ///   It is not secure enough for new applications. If you need to call multiple times for the same data
-   ///   either use the HashAlgorithm interface or remember that the result of one Compute call needs to be ~ (XOR)
-   ///   before being passed in as the seed for the next Compute call.
+   ///   Crc32は古いファイル形式やアルゴリズムとの後方互換性のためにのみ使用してください。
+   ///   新しいアプリケーションには十分なセキュリティを提供しません。同一データに対して複数回呼び出す必要がある場合は、
+   ///   HashAlgorithmインターフェースを使用するか、あるComputeの呼び出し結果を次のCompute呼び出しのシードとして
+   ///   渡す前に ~ (XOR) する必要があることを覚えておいてください。
    /// </remarks>
    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Crc")]
    internal sealed class Crc32 : HashAlgorithm
@@ -49,15 +49,15 @@ namespace Alphaleonis.Win32.Security
       private static uint[] s_defaultTable;
       
 
-      /// <summary>Initializes a new instance of Crc32.</summary>
+      /// <summary>Crc32の新しいインスタンスを初期化します。</summary>
       public Crc32() : this(DefaultPolynomial, DefaultSeed)
       {
       }
 
 
-      /// <summary>Initializes a new instance of Crc32.</summary>
-      /// <param name="polynomial">The polynomial.</param>
-      /// <param name="seed">The seed.</param>
+      /// <summary>Crc32の新しいインスタンスを初期化します。</summary>
+      /// <param name="polynomial">多項式。</param>
+      /// <param name="seed">シード値。</param>
       private Crc32(uint polynomial, uint seed)
       {
          m_table = InitializeTable(polynomial);
@@ -66,25 +66,25 @@ namespace Alphaleonis.Win32.Security
       }
 
 
-      /// <summary>Initializes an implementation of the <see cref="T:System.Security.Cryptography.HashAlgorithm"/> class.</summary>
+      /// <summary><see cref="T:System.Security.Cryptography.HashAlgorithm"/>クラスの実装を初期化します。</summary>
       public override void Initialize()
       {
          m_hash = m_seed;
       }
 
 
-      /// <summary>When overridden in a derived class, routes data written to the object into the hash algorithm for computing the hash.</summary>
-      /// <param name="array">The input to compute the hash code for..</param>
-      /// <param name="ibStart">The offset into the byte array from which to begin using data.</param>
-      /// <param name="cbSize">The number of bytes in the byte array to use as data.</param>
+      /// <summary>派生クラスでオーバーライドされた場合、オブジェクトに書き込まれたデータをハッシュ計算用のハッシュアルゴリズムにルーティングします。</summary>
+      /// <param name="array">ハッシュコードを計算する入力データ。</param>
+      /// <param name="ibStart">データの使用を開始するバイト配列内のオフセット。</param>
+      /// <param name="cbSize">データとして使用するバイト配列内のバイト数。</param>
       protected override void HashCore(byte[] array, int ibStart, int cbSize)
       {
          m_hash = CalculateHash(m_table, m_hash, array, ibStart, cbSize);
       }
 
 
-      /// <summary>Finalizes the hash computation after the last data is processed by the cryptographic stream object.</summary>
-      /// <returns>This method finalizes any partial computation and returns the correct hash value for the data stream.</returns>
+      /// <summary>暗号ストリームオブジェクトによって最後のデータが処理された後、ハッシュ計算を完了します。</summary>
+      /// <returns>部分的な計算を完了し、データストリームの正しいハッシュ値を返します。</returns>
       protected override byte[] HashFinal()
       {
          var hashBuffer = UInt32ToBigEndianBytes(~m_hash);
@@ -93,17 +93,17 @@ namespace Alphaleonis.Win32.Security
       }
 
 
-      /// <summary>Gets the size, in bits, of the computed hash code.</summary>
-      /// <value>The size, in bits, of the computed hash code.</value>
+      /// <summary>計算されたハッシュコードのサイズをビット単位で取得します。</summary>
+      /// <value>計算されたハッシュコードのビット単位のサイズ。</value>
       public override int HashSize
       {
          get { return 32; }
       }
 
 
-      /// <summary>Initializes the table.</summary>
-      /// <returns>The table.</returns>
-      /// <param name="polynomial">The polynomial.</param>
+      /// <summary>テーブルを初期化します。</summary>
+      /// <returns>初期化されたテーブル。</returns>
+      /// <param name="polynomial">多項式。</param>
       private static uint[] InitializeTable(uint polynomial)
       {
          if (polynomial == DefaultPolynomial && s_defaultTable != null)
@@ -132,13 +132,13 @@ namespace Alphaleonis.Win32.Security
       }
 
 
-      /// <summary>Calculates the hash.</summary>
-      /// <returns>The calculated hash.</returns>
-      /// <param name="table">The table.</param>
-      /// <param name="seed">The seed.</param>
-      /// <param name="buffer">The buffer.</param>
-      /// <param name="start">The start.</param>
-      /// <param name="size">The size.</param>
+      /// <summary>ハッシュを計算します。</summary>
+      /// <returns>計算されたハッシュ値。</returns>
+      /// <param name="table">CRCテーブル。</param>
+      /// <param name="seed">シード値。</param>
+      /// <param name="buffer">入力バッファ。</param>
+      /// <param name="start">開始位置。</param>
+      /// <param name="size">サイズ。</param>
       private static uint CalculateHash(uint[] table, uint seed, IList<byte> buffer, int start, int size)
       {
          var hash = seed;
@@ -150,9 +150,9 @@ namespace Alphaleonis.Win32.Security
       }
 
 
-      /// <summary>Int 32 to big endian bytes.</summary>
-      /// <returns>A byte[].</returns>
-      /// <param name="uint32">The second uint 3.</param>
+      /// <summary>UInt32値をビッグエンディアンのバイト配列に変換します。</summary>
+      /// <returns>バイト配列。</returns>
+      /// <param name="uint32">変換するUInt32値。</param>
       private static byte[] UInt32ToBigEndianBytes(uint uint32)
       {
          return new byte[] { (byte)(uint32 >> 24), (byte)(uint32 >> 16), (byte)(uint32 >> 8), (byte)uint32 };

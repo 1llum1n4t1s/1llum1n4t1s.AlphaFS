@@ -23,26 +23,26 @@ using System;
 
 namespace Alphaleonis.Win32.Filesystem
 {
-   /// <summary>[AlphaFS] It is too late to perform the requested operation, since the Transaction has already been aborted.</summary>
+   /// <summary>[AlphaFS] トランザクションが既に中止されているため、要求された操作を実行するには遅すぎます。</summary>
    [Serializable]
    public class TransactionAlreadyAbortedException : TransactionException
    {
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="TransactionAlreadyAbortedException"/> class.</summary>
+      /// <summary>[AlphaFS] <see cref="TransactionAlreadyAbortedException"/>クラスの新しいインスタンスを初期化します。</summary>
       public TransactionAlreadyAbortedException()
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="TransactionAlreadyAbortedException"/> class.</summary>
-      /// <param name="message">The message.</param>
+      /// <summary>[AlphaFS] <see cref="TransactionAlreadyAbortedException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="message">メッセージ。</param>
       public TransactionAlreadyAbortedException(string message) : base(message)
       {
       }
 
 
-      /// <summary>[AlphaFS] Initializes a new instance of the <see cref="TransactionAlreadyAbortedException"/> class.</summary>
-      /// <param name="message">The message.</param>
-      /// <param name="innerException">The inner exception.</param>
+      /// <summary>[AlphaFS] <see cref="TransactionAlreadyAbortedException"/>クラスの新しいインスタンスを初期化します。</summary>
+      /// <param name="message">メッセージ。</param>
+      /// <param name="innerException">内部例外。</param>
       public TransactionAlreadyAbortedException(string message, Exception innerException) : base(message, innerException)
       {
       }

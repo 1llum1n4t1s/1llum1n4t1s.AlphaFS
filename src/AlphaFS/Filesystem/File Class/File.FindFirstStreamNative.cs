@@ -34,7 +34,7 @@ namespace Alphaleonis.Win32.Filesystem
          var safeFindFileHandle = null == transaction
 
             // FindFirstStreamW() / FindFirstStreamTransactedW()
-            // 2018-01-15: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
+            // 2018-01-15: MSDNはLongPathの使用を確認していませんが、この関数のUnicodeバージョンが存在します。
 
             ? NativeMethods.FindFirstStreamW(pathLp, NativeMethods.STREAM_INFO_LEVELS.FindStreamInfoStandard, buffer, 0)
             : NativeMethods.FindFirstStreamTransactedW(pathLp, NativeMethods.STREAM_INFO_LEVELS.FindStreamInfoStandard, buffer, 0, transaction.SafeHandle);

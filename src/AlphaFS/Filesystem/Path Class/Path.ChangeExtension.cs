@@ -28,11 +28,11 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Changes the extension of a path string.</summary>
-      /// <returns>The modified path information.</returns>
+      /// <summary>パス文字列の拡張子を変更します。</summary>
+      /// <returns>変更されたパス情報。</returns>
       /// <exception cref="ArgumentException"/>
-      /// <param name="path">The path information to modify. The path cannot contain any of the characters defined in <see cref="GetInvalidPathChars"/>.</param>
-      /// <param name="extension">The new extension (with or without a leading period). Specify <c>null</c> to remove an existing extension from path.</param>
+      /// <param name="path">変更するパス情報。パスには <see cref="GetInvalidPathChars"/> で定義されている文字を含めることはできません。</param>
+      /// <param name="extension">新しい拡張子（先頭のピリオドの有無は問いません）。既存の拡張子をパスから削除するには <c>null</c> を指定します。</param>
       [SecurityCritical]
       public static string ChangeExtension(string path, string extension)
       {

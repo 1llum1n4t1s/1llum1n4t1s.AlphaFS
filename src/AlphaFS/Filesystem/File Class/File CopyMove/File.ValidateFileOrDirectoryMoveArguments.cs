@@ -91,7 +91,7 @@ namespace Alphaleonis.Win32.Filesystem
 
             if (!driveChecked)
             {
-               // Check for local or network drives, such as: "C:" or "\\server\c$" (but not for "\\?\GLOBALROOT\").
+               // ローカルドライブまたはネットワークドライブをチェックする。例: "C:" または "\\server\c$"("\\?\GLOBALROOT\"は除く)。
                if (!sourcePath.StartsWith(Path.GlobalRootPrefix, StringComparison.OrdinalIgnoreCase))
                {
                   Directory.ExistsDriveOrFolderOrFile(cma.Transaction, sourcePath, isFolder, (int) Win32Errors.NO_ERROR, true, false);
@@ -106,8 +106,8 @@ namespace Alphaleonis.Win32.Filesystem
             }
 
 
-            // MSDN: .NET 4+ Trailing spaces are removed from the end of the path parameters before moving the directory.
-            // TrimEnd() is also applied for AlphaFS implementation of method Directory.Copy(), .NET does not have this method.
+            // MSDN: .NET 4+ ディレクトリを移動する前にパスパラメータの末尾のスペースが削除されます。
+            // TrimEnd()はAlphaFSのDirectory.Copy()メソッド実装にも適用されます。.NETにはこのメソッドはありません。
 
             const GetFullPathOptions fullPathOptions = GetFullPathOptions.TrimEnd | GetFullPathOptions.RemoveTrailingDirectorySeparator;
 
@@ -120,7 +120,7 @@ namespace Alphaleonis.Win32.Filesystem
             }
 
 
-            // When destinationPath is null, the file/folder needs to be removed on Computer startup.
+            // destinationPathがnullの場合、コンピュータ起動時にファイル/フォルダを削除する必要がある。
 
             cma.DeleteOnStartup = cma.DelayUntilReboot && null == destinationPath;
             
@@ -135,7 +135,7 @@ namespace Alphaleonis.Win32.Filesystem
                {
                   cma.DestinationPathLp = destinationPathLp;
 
-                  // Process Move action options, possible fallback to Copy action.
+                  // 移動アクションのオプションを処理し、コピーアクションへのフォールバックの可能性あり。
 
                   if (!cma.IsCopy)
                   {
@@ -150,7 +150,7 @@ namespace Alphaleonis.Win32.Filesystem
 
                   if (cma.CopyTimestamps)
 
-                     // Remove the AlphaFS flag since it is unknown to the native Win32 CopyFile/MoveFile functions.
+                     // ネイティブWin32 CopyFile/MoveFile関数では不明なAlphaFSフラグを削除する。
 
                   {
                      cma.CopyOptions &= ~CopyOptions.CopyTimestamp;
@@ -159,7 +159,7 @@ namespace Alphaleonis.Win32.Filesystem
             }
 
 
-            // Setup callback function for progress notifications.
+            // 進行状況通知用のコールバック関数を設定する。
 
             if (null == cma.Routine && null != cma.ProgressHandler)
             {

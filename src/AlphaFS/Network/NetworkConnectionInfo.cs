@@ -26,29 +26,29 @@ using System.Net.NetworkInformation;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>Represents a connection to a network.</summary>
+   /// <summary>ネットワークへの接続を表します。</summary>
    public class NetworkConnectionInfo : IDisposable
    {
-      #region Private Fields
+      #region プライベートフィールド
 
       private NativeMethods.NetworkConnectionWrapper _networkConnection;
 
-      #endregion // Private Fields
+      #endregion // プライベートフィールド
 
 
-      #region Constructors
+      #region コンストラクター
 
       internal NetworkConnectionInfo(NativeMethods.NetworkConnectionWrapper networkConnection)
       {
          _networkConnection = networkConnection;
       }
 
-      #endregion // Constructors
+      #endregion // コンストラクター
 
 
       #region IDisposable
 
-      /// <summary>Releases the underlying COM references.</summary>
+      /// <summary>基になる COM 参照を解放します。</summary>
       public void Dispose()
       {
          _networkConnection?.Dispose();
@@ -58,7 +58,7 @@ namespace Alphaleonis.Win32.Network
       #endregion // IDisposable
 
 
-      #region Private Helpers
+      #region プライベートヘルパー
 
       private void ThrowIfDisposed()
       {
@@ -66,12 +66,12 @@ namespace Alphaleonis.Win32.Network
             throw new ObjectDisposedException(GetType().FullName);
       }
 
-      #endregion // Private Helpers
+      #endregion // プライベートヘルパー
 
 
-      #region Properties
+      #region プロパティ
 
-      /// <summary>Gets the unique identifier for this connection. This value of this property is not cached.</summary>
+      /// <summary>この接続の一意の識別子を取得します。このプロパティの値はキャッシュされません。</summary>
       [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "ID")]
       public Guid ConnectionId
       {
@@ -79,37 +79,37 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>Gets a value that indicates the connectivity of this connection. This value of this property is not cached.</summary>
+      /// <summary>この接続の接続性を示す値を取得します。このプロパティの値はキャッシュされません。</summary>
       public ConnectivityStates Connectivity
       {
          get { ThrowIfDisposed(); return _networkConnection.GetConnectivity(); }
       }
 
 
-      /// <summary>Gets a value that indicates whether the network associated with this connection is an Active Directory network and whether the machine has been authenticated by Active Directory. This value of this property is not cached.</summary>
+      /// <summary>この接続に関連付けられたネットワークが Active Directory ネットワークかどうか、およびマシンが Active Directory によって認証されているかどうかを示す値を取得します。このプロパティの値はキャッシュされません。</summary>
       public DomainType DomainType
       {
          get { ThrowIfDisposed(); return _networkConnection.GetDomainType(); }
       }
 
 
-      /// <summary>Gets a value that indicates whether this connection has network connectivity. This value of this property is not cached.</summary>
+      /// <summary>この接続がネットワーク接続を持っているかどうかを示す値を取得します。このプロパティの値はキャッシュされません。</summary>
       public bool IsConnected
       {
          get { ThrowIfDisposed(); return _networkConnection.IsConnected; }
       }
 
 
-      /// <summary>Gets a value that indicates whether this connection has Internet access. This value of this property is not cached.</summary>
+      /// <summary>この接続がインターネットアクセスを持っているかどうかを示す値を取得します。このプロパティの値はキャッシュされません。</summary>
       public bool IsConnectedToInternet
       {
          get { ThrowIfDisposed(); return _networkConnection.IsConnectedToInternet; }
       }
 
 
-      /// <summary>Creates a new <see cref="NetworkInfo"/> instance that represents the network associated with this connection.
-      /// <para>Caller is responsible for disposing the returned <see cref="NetworkInfo"/> instance.</para></summary>
-      /// <returns>A new <see cref="NetworkInfo"/> instance. The caller must dispose this object when done.</returns>
+      /// <summary>この接続に関連付けられたネットワークを表す新しい <see cref="NetworkInfo"/> インスタンスを作成します。
+      /// <para>呼び出し元は返された <see cref="NetworkInfo"/> インスタンスの破棄に責任を持ちます。</para></summary>
+      /// <returns>新しい <see cref="NetworkInfo"/> インスタンス。呼び出し元は使用後にこのオブジェクトを破棄する必要があります。</returns>
       public NetworkInfo GetNetworkInfo()
       {
          ThrowIfDisposed();
@@ -117,7 +117,7 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>Gets the network interface for this connection. This value of this property is not cached.</summary>
+      /// <summary>この接続のネットワークインターフェースを取得します。このプロパティの値はキャッシュされません。</summary>
       public NetworkInterface NetworkInterface
       {
          get
@@ -150,14 +150,14 @@ namespace Alphaleonis.Win32.Network
          }
       }
 
-      #endregion // Properties
+      #endregion // プロパティ
 
 
-      #region Methods
+      #region メソッド
 
-      /// <summary>Returns the network name and adapter name for this connection.
-      /// <para>Note: This method performs COM calls and enumerates all network interfaces, which may be expensive. Avoid calling in tight loops.</para></summary>
-      /// <returns>A string that represents this instance.</returns>
+      /// <summary>この接続のネットワーク名とアダプター名を返します。
+      /// <para>注意: このメソッドは COM 呼び出しを行い、すべてのネットワークインターフェースを列挙するため、コストが高い場合があります。タイトなループでの呼び出しは避けてください。</para></summary>
+      /// <returns>このインスタンスを表す文字列。</returns>
       public override string ToString()
       {
          using var netInfo = GetNetworkInfo();
@@ -167,9 +167,9 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>Determines whether the specified Object is equal to the current Object.</summary>
-      /// <param name="obj">Another object to compare to.</param>
-      /// <returns><c>true</c> if the specified Object is equal to the current Object; otherwise, <c>false</c>.</returns>
+      /// <summary>指定されたオブジェクトが現在のオブジェクトと等しいかどうかを判断します。</summary>
+      /// <param name="obj">比較する別のオブジェクト。</param>
+      /// <returns>指定されたオブジェクトが現在のオブジェクトと等しい場合は <c>true</c>、それ以外の場合は <c>false</c>。</returns>
       public override bool Equals(object obj)
       {
          if (null == obj || GetType() != obj.GetType())
@@ -183,33 +183,33 @@ namespace Alphaleonis.Win32.Network
       }
 
 
-      /// <summary>Serves as a hash function for a particular type.</summary>
-      /// <returns>A hash code for the current Object.</returns>
+      /// <summary>特定の型のハッシュ関数として機能します。</summary>
+      /// <returns>現在のオブジェクトのハッシュコード。</returns>
       public override int GetHashCode()
       {
          return ConnectionId.GetHashCode();
       }
 
 
-      /// <summary>Implements the operator ==</summary>
-      /// <param name="left">A.</param>
-      /// <param name="right">B.</param>
-      /// <returns>The result of the operator.</returns>
+      /// <summary>== 演算子を実装します。</summary>
+      /// <param name="left">A。</param>
+      /// <param name="right">B。</param>
+      /// <returns>演算子の結果。</returns>
       public static bool operator ==(NetworkConnectionInfo left, NetworkConnectionInfo right)
       {
          return ReferenceEquals(left, null) && ReferenceEquals(right, null) || !ReferenceEquals(left, null) && !ReferenceEquals(right, null) && left.Equals(right);
       }
 
 
-      /// <summary>Implements the operator !=</summary>
-      /// <param name="left">A.</param>
-      /// <param name="right">B.</param>
-      /// <returns>The result of the operator.</returns>
+      /// <summary>!= 演算子を実装します。</summary>
+      /// <param name="left">A。</param>
+      /// <param name="right">B。</param>
+      /// <returns>演算子の結果。</returns>
       public static bool operator !=(NetworkConnectionInfo left, NetworkConnectionInfo right)
       {
          return !(left == right);
       }
 
-      #endregion // Methods
+      #endregion // メソッド
    }
 }

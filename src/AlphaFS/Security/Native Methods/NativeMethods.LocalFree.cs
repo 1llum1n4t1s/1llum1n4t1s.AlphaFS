@@ -28,19 +28,19 @@ namespace Alphaleonis.Win32.Security
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Frees the specified local memory object and invalidates its handle.</summary>
+      /// <summary>指定されたローカルメモリオブジェクトを解放し、そのハンドルを無効にします。</summary>
       /// <returns>
-      /// If the function succeeds, the return value is <c>null</c>.
-      /// If the function fails, the return value is equal to a handle to the local memory object. To get extended error information, call GetLastError.
+      /// 関数が成功した場合、戻り値は<c>null</c>です。
+      /// 関数が失敗した場合、戻り値はローカルメモリオブジェクトへのハンドルと等しくなります。拡張エラー情報を取得するには、GetLastErrorを呼び出します。
       /// </returns>
-      /// <remarks>SetLastError is set to <c>false</c>.</remarks>
+      /// <remarks>SetLastErrorは<c>false</c>に設定されています。</remarks>
       /// <remarks>
-      /// Note  The local functions have greater overhead and provide fewer features than other memory management functions.
-      /// New applications should use the heap functions unless documentation states that a local function should be used.
-      /// For more information, see Global and Local Functions.
+      /// 注: ローカル関数は他のメモリ管理関数よりもオーバーヘッドが大きく、提供する機能が少なくなっています。
+      /// ドキュメントでローカル関数を使用すべきと記載されていない限り、新しいアプリケーションではヒープ関数を使用してください。
+      /// 詳細については、グローバル関数とローカル関数を参照してください。
       /// </remarks>
-      /// <remarks>Minimum supported client: Windows XP [desktop apps only]</remarks>
-      /// <remarks>Minimum supported server: Windows Server 2003 [desktop apps only]</remarks>
+      /// <remarks>サポートされる最小クライアント: Windows XP [デスクトップアプリのみ]</remarks>
+      /// <remarks>サポートされる最小サーバー: Windows Server 2003 [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("kernel32.dll", SetLastError = false, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
       internal static extern IntPtr LocalFree(IntPtr hMem);

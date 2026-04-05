@@ -27,16 +27,16 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Replaces the contents of a specified file with the file described by the current <see cref="FileInfo"/> object, deleting the original file, and creating a backup of the replaced file.</summary>
-      /// <returns>A <see cref="FileInfo"/> object that encapsulates information about the file described by the <paramref name="destinationFileName"/> parameter.</returns>
+      /// <summary>現在の <see cref="FileInfo"/> オブジェクトで記述されたファイルで指定されたファイルの内容を置換し、元のファイルを削除し、置換されたファイルのバックアップを作成します。</summary>
+      /// <returns><paramref name="destinationFileName"/> パラメーターで記述されたファイルに関する情報をカプセル化する <see cref="FileInfo"/> オブジェクト。</returns>
       /// <remarks>
-      ///   The Replace method replaces the contents of a specified file with the contents of the file described by the current
-      ///   <see cref="FileInfo"/> object. It also creates a backup of the file that was replaced. Finally, it returns a new
-      ///    <see cref="FileInfo"/> object that describes the overwritten file.
+      ///   Replace メソッドは、現在の <see cref="FileInfo"/> オブジェクトで記述されたファイルの内容で指定されたファイルの内容を置換します。
+      ///   また、置換されたファイルのバックアップも作成します。最後に、上書きされたファイルを記述する新しい
+      ///   <see cref="FileInfo"/> オブジェクトを返します。
       /// </remarks>
-      /// <remarks>Pass null to the <paramref name="destinationBackupFileName"/> parameter if you do not want to create a backup of the file being replaced.</remarks>
-      /// <param name="destinationFileName">The name of a file to replace with the current file.</param>
-      /// <param name="destinationBackupFileName">The name of a file with which to create a backup of the file described by the <paramref name="destinationFileName"/> parameter.</param>
+      /// <remarks>置換されるファイルのバックアップを作成しない場合は、<paramref name="destinationBackupFileName"/> パラメーターに null を渡します。</remarks>
+      /// <param name="destinationFileName">現在のファイルで置換するファイルの名前。</param>
+      /// <param name="destinationBackupFileName"><paramref name="destinationFileName"/> パラメーターで記述されたファイルのバックアップを作成するファイルの名前。</param>
       [SecurityCritical]
       public FileInfo Replace(string destinationFileName, string destinationBackupFileName)
       {
@@ -44,17 +44,17 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Replaces the contents of a specified file with the file described by the current <see cref="FileInfo"/> object, deleting the original file, and creating a backup of the replaced file. Also specifies whether to ignore merge errors.</summary>
-      /// <returns>A <see cref="FileInfo"/> object that encapsulates information about the file described by the <paramref name="destinationFileName"/> parameter.</returns>
+      /// <summary>現在の <see cref="FileInfo"/> オブジェクトで記述されたファイルで指定されたファイルの内容を置換し、元のファイルを削除し、置換されたファイルのバックアップを作成します。マージエラーを無視するかどうかも指定します。</summary>
+      /// <returns><paramref name="destinationFileName"/> パラメーターで記述されたファイルに関する情報をカプセル化する <see cref="FileInfo"/> オブジェクト。</returns>
       /// <remarks>
-      ///   The Replace method replaces the contents of a specified file with the contents of the file described by the current
-      ///   <see cref="FileInfo"/> object. It also creates a backup of the file that was replaced. Finally, it returns a new
-      ///   <see cref="FileInfo"/> object that describes the overwritten file.
+      ///   Replace メソッドは、現在の <see cref="FileInfo"/> オブジェクトで記述されたファイルの内容で指定されたファイルの内容を置換します。
+      ///   また、置換されたファイルのバックアップも作成します。最後に、上書きされたファイルを記述する新しい
+      ///   <see cref="FileInfo"/> オブジェクトを返します。
       /// </remarks>
-      /// <remarks>Pass null to the <paramref name="destinationBackupFileName"/> parameter if you do not want to create a backup of the file being replaced.</remarks>
+      /// <remarks>置換されるファイルのバックアップを作成しない場合は、<paramref name="destinationBackupFileName"/> パラメーターに null を渡します。</remarks>
       /// <param name="destinationFileName">The name of a file to replace with the current file.</param>
       /// <param name="destinationBackupFileName">The name of a file with which to create a backup of the file described by the <paramref name="destinationFileName"/> parameter.</param>
-      /// <param name="ignoreMetadataErrors"><c>true</c> to ignore merge errors (such as attributes and ACLs) from the replaced file to the replacement file; otherwise, <c>false</c>.</param>
+      /// <param name="ignoreMetadataErrors">置換されたファイルから置換ファイルへのマージエラー（属性や ACL など）を無視する場合は <c>true</c>、それ以外の場合は <c>false</c>。</param>
       [SecurityCritical]
       public FileInfo Replace(string destinationFileName, string destinationBackupFileName, bool ignoreMetadataErrors)
       {
@@ -74,7 +74,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <remarks>Pass null to the <paramref name="destinationBackupFileName"/> parameter if you do not want to create a backup of the file being replaced.</remarks>
       /// <param name="destinationFileName">The name of a file to replace with the current file.</param>
       /// <param name="destinationBackupFileName">The name of a file with which to create a backup of the file described by the <paramref name="destinationFileName"/> parameter.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [SecurityCritical]
       public FileInfo Replace(string destinationFileName, string destinationBackupFileName, PathFormat pathFormat)
       {
@@ -92,8 +92,8 @@ namespace Alphaleonis.Win32.Filesystem
       /// <remarks>Pass null to the <paramref name="destinationBackupFileName"/> parameter if you do not want to create a backup of the file being replaced.</remarks>
       /// <param name="destinationFileName">The name of a file to replace with the current file.</param>
       /// <param name="destinationBackupFileName">The name of a file with which to create a backup of the file described by the <paramref name="destinationFileName"/> parameter.</param>
-      /// <param name="ignoreMetadataErrors"><c>true</c> to ignore merge errors (such as attributes and ACLs) from the replaced file to the replacement file; otherwise, <c>false</c>.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="ignoreMetadataErrors">置換されたファイルから置換ファイルへのマージエラー（属性や ACL など）を無視する場合は <c>true</c>、それ以外の場合は <c>false</c>。</param>
+      /// <param name="pathFormat">パスパラメーターの形式を示します。</param>
       [SecurityCritical]
       public FileInfo Replace(string destinationFileName, string destinationBackupFileName, bool ignoreMetadataErrors, PathFormat pathFormat)
       {

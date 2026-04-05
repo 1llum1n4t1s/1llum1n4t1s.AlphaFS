@@ -29,9 +29,9 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Opens a file in the specified mode.</summary>
-      /// <returns>A <see cref="FileStream"/> file opened in the specified mode, with read/write access and unshared.</returns>
-      /// <param name="mode">A <see cref="FileMode"/> constant specifying the mode (for example, Open or Append) in which to open the file.</param>
+      /// <summary>指定されたモードでファイルを開きます。</summary>
+      /// <returns>指定されたモードで開かれた読み取り/書き込みアクセスの非共有 <see cref="FileStream"/> ファイル。</returns>
+      /// <param name="mode">ファイルを開くモード（Open や Append など）を指定する <see cref="FileMode"/> 定数。</param>
       [SecurityCritical]
       public FileStream Open(FileMode mode)
       {
@@ -39,10 +39,10 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Opens a file in the specified mode with read, write, or read/write access.</summary>
-      /// <returns>A <see cref="FileStream"/> object opened in the specified mode and access, and unshared.</returns>
-      /// <param name="mode">A <see cref="FileMode"/> constant specifying the mode (for example, Open or Append) in which to open the file.</param>
-      /// <param name="access">A <see cref="FileAccess"/> constant specifying whether to open the file with Read, Write, or ReadWrite file access.</param>
+      /// <summary>読み取り、書き込み、または読み取り/書き込みアクセスで指定されたモードでファイルを開きます。</summary>
+      /// <returns>指定されたモードとアクセスで開かれた非共有 <see cref="FileStream"/> オブジェクト。</returns>
+      /// <param name="mode">ファイルを開くモード（Open や Append など）を指定する <see cref="FileMode"/> 定数。</param>
+      /// <param name="access">Read、Write、または ReadWrite のいずれのファイルアクセスでファイルを開くかを指定する <see cref="FileAccess"/> 定数。</param>
       [SecurityCritical]
       public FileStream Open(FileMode mode, FileAccess access)
       {
@@ -50,11 +50,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>Opens a file in the specified mode with read, write, or read/write access and the specified sharing option.</summary>
-      /// <returns>A <see cref="FileStream"/> object opened with the specified mode, access, and sharing options.</returns>
-      /// <param name="mode">A <see cref="FileMode"/> constant specifying the mode (for example, Open or Append) in which to open the file.</param>
-      /// <param name="access">A <see cref="FileAccess"/> constant specifying whether to open the file with Read, Write, or ReadWrite file access.</param>
-      /// <param name="share">A <see cref="FileShare"/> constant specifying the type of access other <see cref="FileStream"/> objects have to this file.</param>
+      /// <summary>読み取り、書き込み、または読み取り/書き込みアクセスと指定された共有オプションで指定されたモードでファイルを開きます。</summary>
+      /// <returns>指定されたモード、アクセス、および共有オプションで開かれた <see cref="FileStream"/> オブジェクト。</returns>
+      /// <param name="mode">ファイルを開くモード（Open や Append など）を指定する <see cref="FileMode"/> 定数。</param>
+      /// <param name="access">Read、Write、または ReadWrite のいずれのファイルアクセスでファイルを開くかを指定する <see cref="FileAccess"/> 定数。</param>
+      /// <param name="share">他の <see cref="FileStream"/> オブジェクトがこのファイルに持つアクセスの種類を指定する <see cref="FileShare"/> 定数。</param>
       [SecurityCritical]
       public FileStream Open(FileMode mode, FileAccess access, FileShare share)
       {
@@ -64,10 +64,10 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Opens a file in the specified mode with read, write, or read/write access.</summary>
-      /// <returns>A <see cref="FileStream"/> object opened in the specified mode and access, and unshared.</returns>
-      /// <param name="mode">A <see cref="FileMode"/> constant specifying the mode (for example, Open or Append) in which to open the file.</param>
-      /// <param name="rights">A <see cref="FileSystemRights"/> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten along with additional options.</param>
+      /// <summary>[AlphaFS] 読み取り、書き込み、または読み取り/書き込みアクセスで指定されたモードでファイルを開きます。</summary>
+      /// <returns>指定されたモードとアクセスで開かれた非共有 <see cref="FileStream"/> オブジェクト。</returns>
+      /// <param name="mode">ファイルを開くモード（Open や Append など）を指定する <see cref="FileMode"/> 定数。</param>
+      /// <param name="rights">ファイルが存在しない場合にファイルを作成するかどうかを指定し、既存のファイルの内容を保持するか上書きするかを追加オプションと共に決定する <see cref="FileSystemRights"/> 値。</param>
       [SecurityCritical]
       public FileStream Open(FileMode mode, FileSystemRights rights)
       {
@@ -75,11 +75,11 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Opens a file in the specified mode with read, write, or read/write access and the specified sharing option.</summary>
-      /// <returns>A <see cref="FileStream"/> object opened with the specified mode, access, and sharing options.</returns>
-      /// <param name="mode">A <see cref="FileMode"/> constant specifying the mode (for example, Open or Append) in which to open the file.</param>
-      /// <param name="rights">A <see cref="FileSystemRights"/> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten along with additional options.</param>
-      /// <param name="share">A <see cref="FileShare"/> constant specifying the type of access other <see cref="FileStream"/> objects have to this file.</param>
+      /// <summary>[AlphaFS] 読み取り、書き込み、または読み取り/書き込みアクセスと指定された共有オプションで指定されたモードでファイルを開きます。</summary>
+      /// <returns>指定されたモード、アクセス、および共有オプションで開かれた <see cref="FileStream"/> オブジェクト。</returns>
+      /// <param name="mode">ファイルを開くモード（Open や Append など）を指定する <see cref="FileMode"/> 定数。</param>
+      /// <param name="rights">ファイルが存在しない場合にファイルを作成するかどうかを指定し、既存のファイルの内容を保持するか上書きするかを追加オプションと共に決定する <see cref="FileSystemRights"/> 値。</param>
+      /// <param name="share">他の <see cref="FileStream"/> オブジェクトがこのファイルに持つアクセスの種類を指定する <see cref="FileShare"/> 定数。</param>
       [SecurityCritical]
       public FileStream Open(FileMode mode, FileSystemRights rights, FileShare share)
       {

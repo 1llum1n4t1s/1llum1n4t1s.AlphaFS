@@ -29,14 +29,14 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>The WNetCancelConnection function cancels an existing network connection. You can also call the function to remove remembered network connections that are not currently connected.</summary>
+      /// <summary>WNetCancelConnection 関数は既存のネットワーク接続をキャンセルします. You can also call the function to remove remembered network connections that are not currently connected.</summary>
       /// <returns>
       /// If the function succeeds, the return value is <see cref="Win32Errors.NO_ERROR"/>
       /// If the function fails, the return value is a system error code.
       /// </returns>
       /// <remarks>
-      /// <para>Minimum supported client: Windows 2000 Professional [desktop apps only]</para>
-      /// <para>Minimum supported server: Windows 2000 Server [desktop apps only]</para>
+      /// <para>サポートされる最小クライアント: Windows 2000 Professional [desktop apps only]</para>
+      /// <para>サポートされる最小サーバー: Windows 2000 Server [desktop apps only]</para>
       /// </remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("mpr.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "WNetCancelConnection2W"), SuppressUnmanagedCodeSecurity]
@@ -50,8 +50,8 @@ namespace Alphaleonis.Win32.Network
       /// If the function fails, the return value is a system error code.
       /// </returns>
       /// <remarks>
-      /// <para>Minimum supported client: Windows 2000 Professional [desktop apps only]</para>
-      /// <para>Minimum supported server: Windows 2000 Server [desktop apps only]</para>
+      /// <para>サポートされる最小クライアント: Windows 2000 Professional [desktop apps only]</para>
+      /// <para>サポートされる最小サーバー: Windows 2000 Server [desktop apps only]</para>
       /// </remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("mpr.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "WNetGetUniversalNameW"), SuppressUnmanagedCodeSecurity]
@@ -59,14 +59,14 @@ namespace Alphaleonis.Win32.Network
       internal static extern uint WNetGetUniversalName([MarshalAs(UnmanagedType.LPWStr)] string lpLocalPath, [MarshalAs(UnmanagedType.U4)] uint dwInfoLevel, SafeGlobalMemoryBufferHandle lpBuffer, [MarshalAs(UnmanagedType.U4)] out uint lpBufferSize);
 
 
-      /// <summary>The WNetUseConnection function creates a connection to a network resource. The function can redirect a local device to a network resource.</summary>
+      /// <summary>The WNetUseConnection function creates a connection to a network resource. この関数はローカルデバイスをネットワークリソースにリダイレクトできます.</summary>
       /// <returns>
       /// If the function succeeds, the return value is <see cref="Win32Errors.NO_ERROR"/>
       /// If the function fails, the return value is a system error code.
       /// </returns>
       /// <remarks>
-      /// <para>Minimum supported client: Windows 2000 Professional [desktop apps only]</para>
-      /// <para>Minimum supported server: Windows 2000 Server [desktop apps only]</para>
+      /// <para>サポートされる最小クライアント: Windows 2000 Professional [desktop apps only]</para>
+      /// <para>サポートされる最小サーバー: Windows 2000 Server [desktop apps only]</para>
       /// </remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
       [DllImport("mpr.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "WNetUseConnectionW"), SuppressUnmanagedCodeSecurity]

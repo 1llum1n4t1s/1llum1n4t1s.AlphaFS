@@ -29,15 +29,15 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Volume
    {
-      /// <summary>[AlphaFS] 
-      ///   Retrieves a volume <see cref="Guid"/> path for the volume that is associated with the specified volume mount point (drive letter,
-      ///   volume GUID path, or mounted folder).
+      /// <summary>[AlphaFS]
+      ///   指定されたボリュームマウントポイント（ドライブ文字、ボリューム GUID パス、またはマウントフォルダー）に関連付けられた
+      ///   ボリュームの <see cref="Guid"/> パスを取得します。
       /// </summary>
       /// <exception cref="ArgumentNullException"/>
       /// <param name="volumeMountPoint">
-      ///   The path of a mounted folder (for example, "Y:\MountX\") or a drive letter (for example, "X:\").
+      ///   マウントフォルダーのパス（例: "Y:\MountX\"）またはドライブ文字（例: "X:\"）。
       /// </param>
-      /// <returns>The unique volume name of the form: "\\?\Volume{GUID}\".</returns>
+      /// <returns>"\\?\Volume{GUID}\" 形式の一意のボリューム名。</returns>
       [SuppressMessage("Microsoft.Interoperability", "CA1404:CallGetLastErrorImmediatelyAfterPInvoke", Justification = "Marshal.GetLastWin32Error() is manipulated.")]
       [SecurityCritical]
       public static string GetVolumeGuid(string volumeMountPoint)
@@ -47,7 +47,7 @@ namespace Alphaleonis.Win32.Filesystem
             throw new ArgumentNullException("volumeMountPoint");
          }
 
-         // The string must end with a trailing backslash ('\').
+         // 文字列は末尾のバックスラッシュ ('\') で終わる必要があります。
          volumeMountPoint = Path.GetFullPathCore(null, false, volumeMountPoint, GetFullPathOptions.AsLongPath | GetFullPathOptions.AddTrailingDirectorySeparator | GetFullPathOptions.FullCheck);
 
          var volumeGuid = new StringBuilder(100);
@@ -56,7 +56,7 @@ namespace Alphaleonis.Win32.Filesystem
          using (new NativeMethods.ChangeErrorMode(NativeMethods.ErrorMode.FailCriticalErrors))
          {
             // GetVolumeNameForVolumeMountPoint()
-            // 2013-07-18: MSDN does not confirm LongPath usage but a Unicode version of this function exists.
+            // 2013-07-18: MSDN は LongPath の使用を確認していませんが、この関数の Unicode バージョンが存在します。
 
             if (!NativeMethods.GetVolumeNameForVolumeMountPoint(volumeMountPoint, volumeGuid, (uint)volumeGuid.Capacity))
             {
@@ -68,7 +68,7 @@ namespace Alphaleonis.Win32.Filesystem
                return null;
             }
 
-            // The string must end with a trailing backslash.
+            // 文字列は末尾のバックスラッシュで終わる必要があります。
             if (!NativeMethods.GetVolumeNameForVolumeMountPoint(Path.AddTrailingDirectorySeparator(volumeGuid.ToString(), false), uniqueName, (uint)uniqueName.Capacity))
             {
                var lastError = (uint) Marshal.GetLastWin32Error();

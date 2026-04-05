@@ -25,10 +25,10 @@ namespace Alphaleonis.Win32.Network
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Contains statistical information about the server.</summary>
+      /// <summary>サーバーに関する統計情報を含みます.</summary>
       /// <remarks>
-      /// <para>Minimum supported client: Windows XP [desktop apps only]</para>
-      /// <para>Minimum supported server: Windows Server 2003 [desktop apps only]</para>
+      /// <para>サポートされる最小クライアント: Windows XP [desktop apps only]</para>
+      /// <para>サポートされる最小サーバー: Windows Server 2003 [desktop apps only]</para>
       /// </remarks>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct STAT_SERVER_0
@@ -47,25 +47,25 @@ namespace Alphaleonis.Win32.Network
          /// <summary>Specifies a DWORD value that indicates the number of times a server device is opened.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint sts0_devopens;
 
-         /// <summary>Specifies a DWORD value that indicates the number of server print jobs spooled.</summary>
+         /// <summary>サーバーの数を示す DWORD 値を指定します print jobs spooled.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint sts0_jobsqueued;
 
-         /// <summary>Specifies a DWORD value that indicates the number of times the server session started.</summary>
+         /// <summary>の回数を示す DWORD 値を指定します server session started.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint sts0_sopens;
 
-         /// <summary>Specifies a DWORD value that indicates the number of times the server session automatically disconnected.</summary>
+         /// <summary>の回数を示す DWORD 値を指定します server session automatically disconnected.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint sts0_stimedout;
 
-         /// <summary>Specifies a DWORD value that indicates the number of times the server sessions failed with an error.</summary>
+         /// <summary>の回数を示す DWORD 値を指定します server sessions failed with an error.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint sts0_serrorout;
 
-         /// <summary>Specifies a DWORD value that indicates the number of server password violations.</summary>
+         /// <summary>サーバーの数を示す DWORD 値を指定します password violations.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint sts0_pwerrors;
 
-         /// <summary>Specifies a DWORD value that indicates the number of server access permission errors.</summary>
+         /// <summary>サーバーの数を示す DWORD 値を指定します access permission errors.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint sts0_permerrors;
 
-         /// <summary>Specifies a DWORD value that indicates the number of server system errors.</summary>
+         /// <summary>サーバーの数を示す DWORD 値を指定します system errors.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint sts0_syserrors;
 
          /// <summary>Specifies the low-order DWORD of the number of server bytes sent to the network.</summary>
@@ -83,10 +83,10 @@ namespace Alphaleonis.Win32.Network
          /// <summary>Specifies a DWORD value that indicates the average server response time (in milliseconds).</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint sts0_avresponse;
 
-         /// <summary>Specifies a DWORD value that indicates the number of times the server required a request buffer but failed to allocate one. This value indicates that the server parameters may need adjustment.</summary>
+         /// <summary>の回数を示す DWORD 値を指定します server required a request buffer but failed to allocate one. This value indicates that the server parameters may need adjustment.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint sts0_reqbufneed;
 
-         /// <summary>Specifies a DWORD value that indicates the number of times the server required a big buffer but failed to allocate one. This value indicates that the server parameters may need adjustment.</summary>
+         /// <summary>の回数を示す DWORD 値を指定します server required a big buffer but failed to allocate one. This value indicates that the server parameters may need adjustment.</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint sts0_bigbufneed;
       }
    }

@@ -37,13 +37,13 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnauthorizedAccessException"/>
       /// <exception cref="DirectoryReadOnlyException"/>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="fsEntryInfo">A FileSystemEntryInfo instance. Use either <paramref name="fsEntryInfo"/> or <paramref name="path"/>, not both.</param>
       /// <param name="path">The name of the directory to remove. Use either <paramref name="path"/> or <paramref name="fsEntryInfo"/>, not both.</param>
       /// <param name="recursive"><c>true</c> to remove all files and subdirectories recursively; <c>false</c> otherwise only the top level empty directory.</param>
       /// <param name="ignoreReadOnly"><c>true</c> overrides read only attribute of files and directories.</param>
       /// <param name="continueOnNotFound">When <c>true</c> does not throw an <see cref="DirectoryNotFoundException"/> when the directory does not exist.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       internal static void DeleteDirectoryCore(KernelTransaction transaction, FileSystemEntryInfo fsEntryInfo, string path, bool recursive, bool ignoreReadOnly, bool continueOnNotFound, PathFormat pathFormat)
       {
@@ -66,7 +66,7 @@ namespace Alphaleonis.Win32.Filesystem
          PrepareDirectoryForDelete(transaction, fsEntryInfo, ignoreReadOnly);
 
 
-         // Do not follow mount points nor symbolic links, but do delete the reparse point itself.
+         // マウントポイントやシンボリックリンクはたどらず、リパースポイント自体を削除する。
          // If directory is reparse point, disable recursion.
 
          if (recursive && !fsEntryInfo.IsReparsePoint)

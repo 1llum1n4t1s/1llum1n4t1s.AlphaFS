@@ -24,26 +24,26 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>Specifies types of network connectivity state.</summary>    
+   /// <summary>ネットワーク接続状態の種類を指定します.</summary>    
    [Flags]
    public enum ConnectivityStates
    {
-      /// <summary>The underlying network interfaces have no connectivity to any network.</summary>
+      /// <summary>基になるネットワークインターフェースはどのネットワークにも接続していません.</summary>
       None = 0,
 
-      /// <summary>There is connectivity to a network, but the service cannot detect any IPv4 Network Traffic.</summary>
+      /// <summary>ネットワークへの接続はありますが、サービスは IPv4 ネットワークトラフィックを検出できません.</summary>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pv")]
       IPv4NoTraffic = 1,
 
-      /// <summary>There is connectivity to a network, but the service cannot detect any IPv6 Network Traffic.</summary>
+      /// <summary>ネットワークへの接続はありますが、サービスは IPv6 ネットワークトラフィックを検出できません.</summary>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pv")]
       IPv6NoTraffic = 2,
 
-      /// <summary>There is connectivity to the local subnet using the IPv4 protocol.</summary>
+      /// <summary>IPv4 プロトコルを使用してローカルサブネットへの接続があります.</summary>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pv")]
       IPv4Subnet = 16,
 
-      /// <summary>There is connectivity to a routed network using the IPv4 protocol.</summary>
+      /// <summary>IPv4 プロトコルを使用してルーティングされたネットワークへの接続があります.</summary>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pv")]
       IPv4LocalNetwork = 32,
 
@@ -51,11 +51,11 @@ namespace Alphaleonis.Win32.Network
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pv")]
       IPv4Internet = 64,
 
-      /// <summary>There is connectivity to the local subnet using the IPv6 protocol.</summary>
+      /// <summary>IPv6 プロトコルを使用してローカルサブネットへの接続があります.</summary>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pv")]
       IPv6Subnet = 256,
 
-      /// <summary>There is connectivity to a local network using the IPv6 protocol.</summary>
+      /// <summary>IPv6 プロトコルを使用してローカルネットワークへの接続があります.</summary>
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pv")]
       IPv6LocalNetwork = 512,
 

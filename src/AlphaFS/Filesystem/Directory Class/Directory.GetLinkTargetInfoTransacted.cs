@@ -26,17 +26,17 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class Directory
    {
-      /// <summary>[AlphaFS] Gets information about the target of a mount point or symbolic link on an NTFS file system.</summary>
+      /// <summary>[AlphaFS] NTFSファイルシステム上のマウントポイントまたはシンボリックリンクのターゲットに関する情報を取得します。</summary>
       /// <returns>
       ///   An instance of <see cref="LinkTargetInfo"/> or <see cref="SymbolicLinkTargetInfo"/> containing information about the symbolic link
-      ///   or mount point pointed to by <paramref name="path"/>.
+      ///   または <paramref name="path"/> が指すマウントポイント。
       /// </returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="NotAReparsePointException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnrecognizedReparsePointException"/>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The path to the reparse point.</param>
       [SecurityCritical]
       public static LinkTargetInfo GetLinkTargetInfoTransacted(KernelTransaction transaction, string path)
@@ -45,24 +45,24 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Gets information about the target of a mount point or symbolic link on an NTFS file system.</summary>
+      /// <summary>[AlphaFS] NTFSファイルシステム上のマウントポイントまたはシンボリックリンクのターゲットに関する情報を取得します。</summary>
       /// <returns>
       ///   An instance of <see cref="LinkTargetInfo"/> or <see cref="SymbolicLinkTargetInfo"/> containing information about the symbolic link
-      ///   or mount point pointed to by <paramref name="path"/>.
+      ///   または <paramref name="path"/> が指すマウントポイント。
       /// </returns>
-      /// <summary>[AlphaFS] Gets information about the target of a mount point or symbolic link on an NTFS file system.</summary>
+      /// <summary>[AlphaFS] NTFSファイルシステム上のマウントポイントまたはシンボリックリンクのターゲットに関する情報を取得します。</summary>
       /// <returns>
       ///   An instance of <see cref="LinkTargetInfo"/> or <see cref="SymbolicLinkTargetInfo"/> containing information about the symbolic link
-      ///   or mount point pointed to by <paramref name="path"/>.
+      ///   または <paramref name="path"/> が指すマウントポイント。
       /// </returns>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <exception cref="NotAReparsePointException"/>
       /// <exception cref="NotSupportedException"/>
       /// <exception cref="UnrecognizedReparsePointException"/>
-      /// <param name="transaction">The transaction.</param>
+      /// <param name="transaction">トランザクション。</param>
       /// <param name="path">The path to the reparse point.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SecurityCritical]
       public static LinkTargetInfo GetLinkTargetInfoTransacted(KernelTransaction transaction, string path, PathFormat pathFormat)
       {

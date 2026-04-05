@@ -28,18 +28,18 @@ namespace Alphaleonis.Win32.Filesystem
    {
       #region .NET
 
-      /// <summary>Gets a value indicating whether the specified path string contains absolute or relative path information.</summary>
-      /// <returns><c>true</c> if <paramref name="path"/> contains a root; otherwise, <c>false</c>.</returns>
+      /// <summary>指定されたパス文字列に絶対パス情報と相対パス情報のどちらが含まれているかを示す値を取得します。</summary>
+      /// <returns><paramref name="path"/> にルートが含まれている場合は <c>true</c>、それ以外は <c>false</c>。</returns>
       /// <remarks>
-      ///   The IsPathRooted method returns <c>true</c> if the first character is a directory separator character such as
-      ///   <see cref="DirectorySeparatorChar"/>, or if the path starts with a drive letter and colon (<see cref="VolumeSeparatorChar"/>).
-      ///   For example, it returns true for path strings such as "\\MyDir\\MyFile.txt", "C:\\MyDir", or "C:MyDir".
-      ///   It returns <c>false</c> for path strings such as "MyDir".
+      ///   IsPathRooted メソッドは、最初の文字が <see cref="DirectorySeparatorChar"/> のようなディレクトリ区切り文字の場合、
+      ///   またはパスがドライブ文字とコロン（<see cref="VolumeSeparatorChar"/>）で始まる場合に <c>true</c> を返します。
+      ///   例えば、"\\MyDir\\MyFile.txt"、"C:\\MyDir"、"C:MyDir" のようなパス文字列に対して true を返します。
+      ///   "MyDir" のようなパス文字列に対しては <c>false</c> を返します。
       /// </remarks>
-      /// <remarks>This method does not verify that the path or file name exists.</remarks>
+      /// <remarks>このメソッドはパスやファイル名が存在するかどうかを検証しません。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="path">The path to test. The path cannot contain any of the characters defined in <see cref="GetInvalidPathChars"/>.</param>
+      /// <param name="path">テストするパス。パスには <see cref="GetInvalidPathChars"/> で定義されている文字を含めることはできません。</param>
       [SecurityCritical]
       public static bool IsPathRooted(string path)
       {
@@ -49,19 +49,19 @@ namespace Alphaleonis.Win32.Filesystem
       #endregion // .NET
 
 
-      /// <summary>[AlphaFS] Gets a value indicating whether the specified path string contains absolute or relative path information.</summary>
-      /// <returns><c>true</c> if <paramref name="path"/> contains a root; otherwise, <c>false</c>.</returns>
+      /// <summary>[AlphaFS] 指定されたパス文字列に絶対パス情報と相対パス情報のどちらが含まれているかを示す値を取得します。</summary>
+      /// <returns><paramref name="path"/> にルートが含まれている場合は <c>true</c>、それ以外は <c>false</c>。</returns>
       /// <remarks>
-      ///   The IsPathRooted method returns true if the first character is a directory separator character such as
-      ///   <see cref="DirectorySeparatorChar"/>, or if the path starts with a drive letter and colon (<see cref="VolumeSeparatorChar"/>).
-      ///   For example, it returns <c>true</c> for path strings such as "\\MyDir\\MyFile.txt", "C:\\MyDir", or "C:MyDir".
-      ///   It returns <c>false</c> for path strings such as "MyDir".
+      ///   IsPathRooted メソッドは、最初の文字が <see cref="DirectorySeparatorChar"/> のようなディレクトリ区切り文字の場合、
+      ///   またはパスがドライブ文字とコロン（<see cref="VolumeSeparatorChar"/>）で始まる場合に <c>true</c> を返します。
+      ///   例えば、"\\MyDir\\MyFile.txt"、"C:\\MyDir"、"C:MyDir" のようなパス文字列に対して <c>true</c> を返します。
+      ///   "MyDir" のようなパス文字列に対しては <c>false</c> を返します。
       /// </remarks>
-      /// <remarks>This method does not verify that the path or file name exists.</remarks>
+      /// <remarks>このメソッドはパスやファイル名が存在するかどうかを検証しません。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
-      /// <param name="path">The path to test. The path cannot contain any of the characters defined in <see cref="GetInvalidPathChars"/>.</param>
-      /// <param name="checkInvalidPathChars"><c>true</c> will check <paramref name="path"/> for invalid path characters.</param>
+      /// <param name="path">テストするパス。パスには <see cref="GetInvalidPathChars"/> で定義されている文字を含めることはできません。</param>
+      /// <param name="checkInvalidPathChars"><c>true</c> の場合、<paramref name="path"/> の無効なパス文字をチェックします。</param>
       [SecurityCritical]
       public static bool IsPathRooted(string path, bool checkInvalidPathChars)
       {

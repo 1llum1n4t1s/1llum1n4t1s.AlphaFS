@@ -26,48 +26,48 @@ namespace Alphaleonis.Win32.Filesystem
 {
    internal static partial class NativeMethods
    {
-      /// <summary>Contains information that the GetFileInformationByHandle function retrieves.</summary>
+      /// <summary>GetFileInformationByHandle 関数が取得する情報を格納します。</summary>
       [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
       internal struct BY_HANDLE_FILE_INFORMATION
       {
-         /// <summary>The file attributes.</summary>
+         /// <summary>ファイル属性。</summary>
          public readonly FileAttributes dwFileAttributes;
 
 
-         /// <summary>A <see cref="FILETIME"/> structure that specifies when a file or directory is created.</summary>
+         /// <summary>ファイルまたはディレクトリが作成された日時を指定する <see cref="FILETIME"/> 構造体。</summary>
          public readonly FILETIME ftCreationTime;
 
 
-         /// <summary>A <see cref="FILETIME"/> structure. For a file, the structure specifies the last time that a file is read from or written to.
-         /// For a directory, the structure specifies when the directory is created.
-         /// For both files and directories, the specified date is correct, but the time of day is always set to midnight.
+         /// <summary><see cref="FILETIME"/> 構造体。ファイルの場合、最後にファイルが読み取りまたは書き込みされた日時を指定します。
+         /// ディレクトリの場合、ディレクトリが作成された日時を指定します。
+         /// ファイルとディレクトリの両方において、指定された日付は正しいですが、時刻は常に午前0時に設定されます。
          /// </summary>
          public readonly FILETIME ftLastAccessTime;
 
 
-         /// <summary>A <see cref="FILETIME"/> structure. For a file, the structure specifies the last time that a file is written to.
-         /// For a directory, the structure specifies when the directory is created.</summary>
+         /// <summary><see cref="FILETIME"/> 構造体。ファイルの場合、最後にファイルが書き込まれた日時を指定します。
+         /// ディレクトリの場合、ディレクトリが作成された日時を指定します。</summary>
          public readonly FILETIME ftLastWriteTime;
 
 
-         /// <summary>The serial number of the volume that contains a file.</summary>
+         /// <summary>ファイルを含むボリュームのシリアル番号。</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint dwVolumeSerialNumber;
 
 
-         /// <summary>The high-order part of the file size.</summary>
+         /// <summary>ファイルサイズの上位部分。</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint nFileSizeHigh;
 
 
-         /// <summary>The low-order part of the file size.</summary>
+         /// <summary>ファイルサイズの下位部分。</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint nFileSizeLow;
 
-         /// <summary>The number of links to this file. For the FAT file system this member is always 1. For the NTFS file system, it can be more than 1.</summary>
+         /// <summary>このファイルへのリンク数。FAT ファイルシステムではこのメンバーは常に 1 です。NTFS ファイルシステムでは 1 より大きくなる場合があります。</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint nNumberOfLinks;
 
-         /// <summary>The high-order part of a unique identifier that is associated with a file.</summary>
+         /// <summary>ファイルに関連付けられた一意の識別子の上位部分。</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint nFileIndexHigh;
 
-         /// <summary>The low-order part of a unique identifier that is associated with a file.</summary>
+         /// <summary>ファイルに関連付けられた一意の識別子の下位部分。</summary>
          [MarshalAs(UnmanagedType.U4)] public readonly uint nFileIndexLow;
       }
    }

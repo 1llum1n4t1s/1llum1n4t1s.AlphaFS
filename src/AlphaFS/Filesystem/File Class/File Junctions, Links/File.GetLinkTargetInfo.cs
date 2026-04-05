@@ -25,11 +25,11 @@ namespace Alphaleonis.Win32.Filesystem
 {
    public static partial class File
    {
-      /// <summary>[AlphaFS] Gets information about the target of a mount point or symbolic link on an NTFS file system.</summary>
-      /// <param name="path">The path to the reparse point.</param>
+      /// <summary>[AlphaFS] NTFSファイルシステム上のマウントポイントまたはシンボリックリンクのターゲットに関する情報を取得します。</summary>
+      /// <param name="path">リパースポイントへのパス。</param>
       /// <returns>
-      ///   An instance of <see cref="LinkTargetInfo"/> or <see cref="SymbolicLinkTargetInfo"/> containing information about the symbolic link
-      ///   or mount point pointed to by <paramref name="path"/>.
+      ///   <see cref="LinkTargetInfo"/>または<see cref="SymbolicLinkTargetInfo"/>のインスタンスで、シンボリックリンクに関する情報を含みます
+      ///   または<paramref name="path"/>が指すマウントポイント。
       /// </returns>
       [SecurityCritical]
       public static LinkTargetInfo GetLinkTargetInfo(string path)
@@ -38,12 +38,12 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>[AlphaFS] Gets information about the target of a mount point or symbolic link on an NTFS file system.</summary>
-      /// <param name="path">The path to the reparse point.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <summary>[AlphaFS] NTFSファイルシステム上のマウントポイントまたはシンボリックリンクのターゲットに関する情報を取得します。</summary>
+      /// <param name="path">リパースポイントへのパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
-      ///   An instance of <see cref="LinkTargetInfo"/> or <see cref="SymbolicLinkTargetInfo"/> containing information about the symbolic link
-      ///   or mount point pointed to by <paramref name="path"/>.
+      ///   <see cref="LinkTargetInfo"/>または<see cref="SymbolicLinkTargetInfo"/>のインスタンスで、シンボリックリンクに関する情報を含みます
+      ///   または<paramref name="path"/>が指すマウントポイント。
       /// </returns>
       [SecurityCritical]
       public static LinkTargetInfo GetLinkTargetInfo(string path, PathFormat pathFormat)

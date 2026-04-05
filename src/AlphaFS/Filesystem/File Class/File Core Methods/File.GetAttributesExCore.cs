@@ -34,9 +34,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="ArgumentException"/>
       /// <exception cref="NotSupportedException"/>
       /// <typeparam name="T">Generic type parameter.</typeparam>
-      /// <param name="transaction">The transaction.</param>
-      /// <param name="path">The path to the file or directory.</param>
-      /// <param name="pathFormat">Indicates the format of the path parameter(s).</param>
+      /// <param name="transaction">トランザクション。</param>
+      /// <param name="path">ファイルまたはディレクトリへのパス。</param>
+      /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <param name="returnErrorOnNotFound"></param>
       [SuppressMessage("Microsoft.Interoperability", "CA1404:CallGetLastErrorImmediatelyAfterPInvoke", Justification = "Marshal.GetLastWin32Error() is manipulated.")]
       [SecurityCritical]
@@ -125,7 +125,7 @@ namespace Alphaleonis.Win32.Filesystem
                if (!(null == transaction || !NativeMethods.IsAtLeastWindowsVista
 
                   // GetFileAttributesEx() / GetFileAttributesTransacted()
-                  // 2013-01-13: MSDN confirms LongPath usage.
+                  // 2013-01-13: MSDNはLongPathの使用を確認しています。
 
                   ? NativeMethods.GetFileAttributesEx(pathLp, NativeMethods.GET_FILEEX_INFO_LEVELS.GetFileExInfoStandard, out win32AttrData)
 
@@ -139,7 +139,7 @@ namespace Alphaleonis.Win32.Filesystem
                      case Win32Errors.ERROR_PATH_NOT_FOUND: // On folders.
                      case Win32Errors.ERROR_NOT_READY:      // DeviceNotReadyException: Floppy device or network drive not ready.
 
-                        // In case someone latched onto the file. Take the perf hit only for failure.
+                        // In case someone latched onto 閉じます。 Take the perf hit only for failure.
                         return FillAttributeInfoCore(transaction, pathLp, ref win32AttrData, true, returnErrorOnNotFound);
                   }
 

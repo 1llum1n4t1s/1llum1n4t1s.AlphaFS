@@ -28,14 +28,14 @@ using System.Security.Principal;
 namespace Alphaleonis.Win32.Security
 {
    /// <summary>
-   /// This object is used to enable a specific privilege for the currently running process during its lifetime. 
-   /// It should be disposed as soon as the elevated privilege is no longer needed.
-   /// For more information see the documentation on AdjustTokenPrivileges on MSDN.
+   /// このオブジェクトは、現在実行中のプロセスの存続期間中に特定の特権を有効にするために使用されます。
+   /// 昇格された特権が不要になったらすぐにDisposeする必要があります。
+   /// 詳細については、MSDNのAdjustTokenPrivilegesのドキュメントを参照してください。
    /// </summary>
    internal sealed class InternalPrivilegeEnabler : IDisposable
    {
-      /// <summary>Initializes a new instance of the <see cref="PrivilegeEnabler"/> class and enabling the specified privilege for the currently running process.</summary>
-      /// <param name="privilegeName">The name of the privilege.</param>
+      /// <summary><see cref="PrivilegeEnabler"/>クラスの新しいインスタンスを初期化し、現在実行中のプロセスに対して指定された特権を有効にします。</summary>
+      /// <param name="privilegeName">特権の名前。</param>
       [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands")]
       [SecurityCritical]
       public InternalPrivilegeEnabler(Privilege privilegeName)
@@ -51,8 +51,8 @@ namespace Alphaleonis.Win32.Security
 
 
       /// <summary>
-      /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-      /// In this case the privilege previously enabled will be disabled.
+      /// アンマネージリソースの解放、リリース、またはリセットに関連するアプリケーション定義のタスクを実行します。
+      /// この場合、以前に有効にされた特権が無効になります。
       /// </summary>            
       public void Dispose()
       {
@@ -73,8 +73,8 @@ namespace Alphaleonis.Win32.Security
       public Privilege EnabledPrivilege { get; private set; }
 
 
-      /// <summary>Adjusts the privilege.</summary>
-      /// <param name="enable"><c>true</c> the privilege will be enabled, otherwise disabled.</param>
+      /// <summary>特権を調整します。</summary>
+      /// <param name="enable"><c>true</c>の場合、特権が有効になります。それ以外の場合は無効になります。</param>
       [SecurityCritical]
       private void AdjustPrivilege(bool enable)
       {
@@ -88,7 +88,7 @@ namespace Alphaleonis.Win32.Security
             PrivilegeCount = 1,
             Luid = Filesystem.NativeMethods.LongToLuid(EnabledPrivilege.LookupLuid()),
 
-            // 2 = SePrivilegeEnabled;
+            // 2 = SePrivilegeEnabled（特権有効化フラグ）
             Attributes = (uint) (enable ? 2 : 0)
          };
 
@@ -102,7 +102,7 @@ namespace Alphaleonis.Win32.Security
          }
 
 
-         // If no privilege was changed, we don't want to reset it.
+         // 特権が変更されなかった場合、リセットしない
          if (mOldPrivilege.PrivilegeCount == 0)
          {
             EnabledPrivilege = null;
