@@ -169,8 +169,8 @@ namespace Alphaleonis.Win32.Filesystem
          {
             handle.Close();
          }
-
-         handle = null;
+         // 値渡しのため `handle = null` は呼び出し元に伝播しない死コードだった。
+         // SafeHandle.Close() は冪等なので、呼び出し元での null 化は不要。
       }
 
 

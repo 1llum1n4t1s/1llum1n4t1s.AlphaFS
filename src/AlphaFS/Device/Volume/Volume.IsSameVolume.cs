@@ -42,7 +42,16 @@ namespace Alphaleonis.Win32.Filesystem
 
             return volInfo1.SerialNumber.Equals(volInfo2.SerialNumber) || volInfo1.Guid.Equals(volInfo2.Guid, StringComparison.OrdinalIgnoreCase);
          }
-         catch { }
+         catch (Exception ex)
+         {
+            // ネットワーク切断 / アクセス権なし / 不正なパス等の場合は false（判定不能 = 異ボリューム扱い）を返す。
+            // ただし完全無音化すると `Directory.Move` の Copy+Delete fallback を意図せず誘発するため、
+            // 切り分け可能な形で Trace に記録する。
+            System.Diagnostics.Trace.TraceWarning(
+               string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                  "Volume.IsSameVolume: 判定失敗 path1='{0}' path2='{1}': {2}",
+                  path1, path2, ex.Message));
+         }
 
          return false;
       }

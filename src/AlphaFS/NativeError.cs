@@ -182,7 +182,9 @@ namespace Alphaleonis.Win32
                throw new NotImplementedException($"{Resources.Exception_From_Successful_Operation} {errorMessage}");
 
             default:
-               // We don't have a specific exception to generate for this error.               
+               // 特定の例外型にマップできない Win32 エラーは IOException(message, hresult) で投げる。
+               // 第二引数の HResult は IOException.HResult プロパティに保存されるため、呼出側は
+               // (ex.HResult & 0xFFFF) や Marshal.GetExceptionForHR 経由で元の Win32 エラーコードを復元できる。
                throw new System.IO.IOException(errorMessage, Win32Errors.GetHrFromWin32Error(errorCode));
          }
       }

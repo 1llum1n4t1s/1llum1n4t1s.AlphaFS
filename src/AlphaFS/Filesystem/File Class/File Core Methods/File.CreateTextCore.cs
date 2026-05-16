@@ -34,7 +34,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <param name="path">書き込み用に開くファイル。</param>
       /// <param name="encoding">ファイルの内容に適用される<see cref="Encoding"/>。</param>
       /// <param name="pathFormat">パスパラメータの形式を示します。</param>
-      /// <returns>A <see cref="StreamWriter"/> that writes to the specified file using NativeMethods.DefaultFileBufferSize encoding.</returns>
+      /// <returns>指定されたファイルに <paramref name="encoding"/> を使って書き込む <see cref="StreamWriter"/>。バッファサイズには <c>NativeMethods.DefaultFileBufferSize</c> (65536) が使われます。</returns>
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       [SecurityCritical]
       internal static StreamWriter CreateTextCore(KernelTransaction transaction, string path, Encoding encoding, PathFormat pathFormat)
