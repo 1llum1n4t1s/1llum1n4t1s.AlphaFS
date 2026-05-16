@@ -1,6 +1,54 @@
 Changelog
 =========
 
+## [1.0.37] - 2026-05-17
+
+### コードレビュー指摘の P0/P1/P3 修正 (/rere 12 人分隊レビュー)
+
+#### 🛡️ セキュリティ・データ整合性 (Critical)
+- COM ラッパー 7 クラスに finalizer + Dispose(bool) パターン追加 (NetworkWrapper / NetworkConnectionWrapper / NetworkListManagerWrapper / QueryAssociationsWrapper / NetworkInfo / NetworkConnectionInfo / Shell32Info)
+  - NetworkInfo / NetworkConnectionInfo は sealed 化
+  - AOT 環境で Dispose 漏れ時の COM 参照永久リーク確定の脆弱性を解消
+- `AdjustTokenPrivileges` の `ERROR_NOT_ALL_ASSIGNED` 検出を追加
+  - 非管理者ユーザで Backup/Restore 等を要求した場合のサイレント成功を防ぐ
+- `PrivilegeEnabler` の部分構築失敗時の特権リーク防止 (try/catch で巻き戻し)
+- `PrivilegeEnabler.Dispose` の catch にログ追加 (特権無効化失敗を可視化)
+
+#### 🪟 OS 判定 / AOT 互換性
+- Windows 11 / Server 2022 以降を Later 判定 (`dwBuildNumber` チェック追加)
+  - 誤って `EnumOsName.Windows10` と返すバグを修正
+- `Utils.GetEnumDescription` / `Device.EnumerateDevices` に `[RequiresUnreferencedCode]` 注釈
+- `Win32Errors.ERROR_NOT_ALL_ASSIGNED` 定数を有効化
+
+#### ⚡ パフォーマンス
+- CRC32 / CRC64 ホットループの `IList<byte>` → `byte[]` 化 (仮想インタフェース呼び出し除去)
+
+#### 📝 ドキュメント・設定整合性
+- CLAUDE.md の完全二重重複を削除
+- CLAUDE.md の `DefaultFileBufferSize = 4096` → `65536` 修正 (実装と整合)
+- CLAUDE.md の Breaking Changes セクションに README へのリンク追加
+- `*.csproj` の `<Authors>` セパレータを統一 (`;` と `,` 混在 → カンマ統一)
+- 30 ファイル / 132 行の UTF-8 文字化け修正 (フォーク作業中の混入)
+- `KernelTransaction` XML doc 内の COM 関連文字化けを修正
+- MSTest.TestFramework / TestAdapter 4.1.0 → 4.2.3 へ更新
+- `File.CreateTextCore` の `<returns>` XML doc 誤記を修正
+- `NativeError.ThrowException` default ブランチに HResult 利用方針コメント追加
+
+#### 🚀 CI/CD
+- `publish.yml` に `dotnet test` ステップ追加
+- `publish.yml` に `permissions: contents:read` 追加 (最小権限原則)
+- `publish.yml` に csproj `<Version>` とブランチ名の整合チェック追加
+- `publish.ps1` に `--skip-duplicate` 追加 (重複 push を CI 失敗と区別)
+- csproj から `CleanBinObjBeforeBuild` Target を削除 (インクリメンタルビルド復活)
+- `GenerateAppIcon` Target に Inputs/Outputs 追加 (アイコンキャッシュ有効化)
+
+#### 🩺 運用・保守性
+- `Volume.IsSameVolume` の `catch{}` に `Trace.TraceWarning` を追加 (`Directory.Move` の Copy+Delete fallback 誤発動の診断)
+- `NativeMethods.Utilities.CloseSafeHandle` の死コード `handle = null` を削除
+- `tests/AlphaFS.UnitTest/AlphaFS.UnitTest.csproj` の `<Version>1.0.16</Version>` を削除 (`IsPackable=false` のため不要)
+
+---
+
 Version 2.3  (2018-XX-XX)
 -------------
 

@@ -250,3 +250,8 @@ __pycache__/
 
 # Cake
 tools/
+
+# Claude Code / MCP ローカル設定 (個人開発環境用、共有しない)
+.claude/
+.mcp.json
+.serena/
