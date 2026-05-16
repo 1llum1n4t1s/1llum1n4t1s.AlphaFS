@@ -41,7 +41,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] ローカルホスト上の利用可能な全デバイスを列挙します。</summary>
       /// <returns>ローカルホストからの <see cref="DeviceGuid"/> 型の <see cref="IEnumerable{DeviceInfo}"/> インスタンス。</returns>
       /// <param name="deviceGuid"><see cref="DeviceGuid"/> デバイスのいずれか。</param>
+      /// <remarks>このメソッドは内部で <see cref="DeviceGuid"/> 列挙型の <see cref="System.ComponentModel.DescriptionAttribute"/> を
+      /// リフレクションで読み取るため NativeAOT / トリミングと互換性がありません。AOT publish では呼出側に IL2026 警告が表示されます。</remarks>
       [SecurityCritical]
+      [RequiresUnreferencedCode("Internally reads DescriptionAttribute on DeviceGuid via reflection; not safe under trimming/AOT.")]
       public static IEnumerable<DeviceInfo> EnumerateDevices(DeviceGuid deviceGuid)
       {
          return EnumerateDevicesCore(null, deviceGuid, true);
@@ -52,7 +55,10 @@ namespace Alphaleonis.Win32.Filesystem
       /// <returns>指定された <paramref name="hostName"/> に対する <see cref="DeviceGuid"/> 型の <see cref="IEnumerable{DeviceInfo}"/> インスタンス。</returns>
       /// <param name="hostName">デバイスが存在するローカルまたはリモートホストの名前。<c>null</c> はローカルホストを参照します。</param>
       /// <param name="deviceGuid"><see cref="DeviceGuid"/> デバイスのいずれか。</param>
+      /// <remarks>このメソッドは内部で <see cref="DeviceGuid"/> 列挙型の <see cref="System.ComponentModel.DescriptionAttribute"/> を
+      /// リフレクションで読み取るため NativeAOT / トリミングと互換性がありません。AOT publish では呼出側に IL2026 警告が表示されます。</remarks>
       [SecurityCritical]
+      [RequiresUnreferencedCode("Internally reads DescriptionAttribute on DeviceGuid via reflection; not safe under trimming/AOT.")]
       public static IEnumerable<DeviceInfo> EnumerateDevices(string hostName, DeviceGuid deviceGuid)
       {
          return EnumerateDevicesCore(hostName, deviceGuid, true);
@@ -63,6 +69,7 @@ namespace Alphaleonis.Win32.Filesystem
 
       /// <summary>[AlphaFS] ローカルまたはリモートホスト上の利用可能な全デバイスを列挙します。</summary>
       [SecurityCritical]
+      [RequiresUnreferencedCode("Internally reads DescriptionAttribute on DeviceGuid via reflection; not safe under trimming/AOT.")]
       internal static IEnumerable<DeviceInfo> EnumerateDevicesCore(string hostName, DeviceGuid deviceGuid, bool getAllProperties)
       {
          if (Utils.IsNullOrWhiteSpace(hostName))

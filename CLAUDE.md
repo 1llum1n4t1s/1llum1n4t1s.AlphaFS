@@ -58,13 +58,14 @@ Tests use **MSTest** (`MSTest.TestFramework` 4.1.0). Many tests require elevated
 
 - `MaxPath = 260` (standard Windows limit)
 - `MaxPathUnicode = 32700` (extended path support via `\\?\` prefix)
-- `DefaultFileBufferSize = 4096`
+- `DefaultFileBufferSize = 65536` (file I/O buffer)
+- `DefaultNativeQueryBufferSize = 4096` (native API scratch buffer)
 
 ## Breaking Changes from Upstream
 
 This fork modernized COM interop for NativeAOT. Key API changes:
 1. `NetworkConnectionInfo.NetworkInfo` property → `GetNetworkInfo()` method
-2. `NetworkInfo`, `NetworkConnectionInfo`, `Shell32Info` now implement `IDisposable` — use `using` statements
+2. `NetworkInfo`, `NetworkConnectionInfo`, `Shell32Info` now implement `IDisposable` — use `using` statements (full list including `Shell32Info` is in [README.md §"Breaking Changes from Upstream"](README.md))
 
 ## CI/CD
 

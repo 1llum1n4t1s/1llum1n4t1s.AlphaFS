@@ -27,7 +27,7 @@ namespace Alphaleonis.Win32.Filesystem
    {
       /// <summary>[AlphaFS] 指定されたファイルのファイル情報を取得します。</summary>
       /// <returns>要求された情報を含む<see cref="ByHandleFileInfo"/>オブジェクト。</returns>
-      /// <remarks>ファイルIDは時間の経過とともに一意であることが保証さ���ていません。ファイルシステムはそれらを再利用できるためです。場合によっては、ファイルのファイルIDが時間の経過とともに変更されることがあります。</remarks>
+      /// <remarks>ファイルIDは時間の経過とともに一意であることが保証されていません。ファイルシステムはそれらを再利用できるためです。場合によっては、ファイルのファイルIDが時間の経過とともに変更されることがあります。</remarks>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="path">ファイルへのパス。</param>
       [SecurityCritical]
@@ -39,7 +39,7 @@ namespace Alphaleonis.Win32.Filesystem
 
       /// <summary>[AlphaFS] 指定されたファイルのファイル情報を取得します。</summary>
       /// <returns>要求された情報を含む<see cref="ByHandleFileInfo"/>オブジェクト。</returns>
-      /// <remarks>ファイルIDは時間の経過とともに一意であることが保証さ���ていません。ファイルシステムはそれらを再利用できるためです。場合によっては、ファイルのファイルIDが時間の経過とともに変更されることがあります。</remarks>
+      /// <remarks>ファイルIDは時間の経過とともに一意であることが保証されていません。ファイルシステムはそれらを再利用できるためです。場合によっては、ファイルのファイルIDが時間の経過とともに変更されることがあります。</remarks>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="path">ファイルへのパス。</param>
       /// <param name="pathFormat">パスパラメータの形式を示します。</param>

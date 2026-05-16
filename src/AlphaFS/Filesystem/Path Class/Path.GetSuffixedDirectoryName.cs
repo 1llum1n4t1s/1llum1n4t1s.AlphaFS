@@ -42,7 +42,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] 指定された <paramref name="path"/> のディレクトリ情報を末尾に <see cref="DirectorySeparatorChar"/> 文字を付加して返します。</summary>
       /// <returns>
       ///   <para>指定された <paramref name="path"/> の末尾に <see cref="DirectorySeparatorChar"/> 文字を付加したディレクトリ情報。</para>
-      ///   <para><paramref name="path"/> �� <c>null</c> の場合、またはルートを示す場合（"\"、"C:"、"\\server\share" など）は <c>null</c>。</para>
+      ///   <para><paramref name="path"/> が <c>null</c> の場合、またはルートを示す場合（"\"、"C:"、"\\server\share" など）は <c>null</c>。</para>
       /// </returns>
       /// <remarks>このメソッドは Path.GetDirectoryName() + Path.AddTrailingDirectorySeparator() を呼び出すのと同様です。</remarks>
       /// <param name="path">パス。</param>

@@ -21,6 +21,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text;
 
@@ -110,6 +111,9 @@ namespace Alphaleonis
       /// <summary>列挙フィールド値の属性を取得します。</summary>
       /// <returns>列挙オプションに属する説明（文字列として）。</returns>
       /// <param name="enumValue"><see cref="Alphaleonis.Win32.Filesystem.DeviceGuid"/> 列挙型のいずれか。</param>
+      /// <remarks>列挙型のフィールドと <see cref="DescriptionAttribute"/> をリフレクションで読み取るため、NativeAOT / トリミングでは
+      /// 該当属性が削除されるとマッピングが壊れる可能性がある。利用側は呼び出し対象 enum 型のメタデータが保持されるよう注意すること。</remarks>
+      [RequiresUnreferencedCode("Uses reflection (Type.GetField + GetCustomAttributes) to read DescriptionAttribute. Enum type metadata and DescriptionAttribute must be preserved for AOT/trimming.")]
       public static string GetEnumDescription(Enum enumValue)
       {
          var enumValueString = enumValue.ToString();

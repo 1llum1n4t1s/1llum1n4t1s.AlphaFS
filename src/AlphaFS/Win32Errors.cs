@@ -554,7 +554,7 @@ namespace Alphaleonis.Win32
       //public const uint ERROR_DELAY_LOAD_FAILED = 1285;
       //public const uint ERROR_VDM_DISALLOWED = 1286;
       //public const uint ERROR_UNIDENTIFIED_ERROR = 1287;
-      //public const uint ERROR_NOT_ALL_ASSIGNED = 1300;
+      public const uint ERROR_NOT_ALL_ASSIGNED = 1300;
       //public const uint ERROR_SOME_NOT_MAPPED = 1301;
       //public const uint ERROR_NO_QUOTAS_FOR_ACCOUNT = 1302;
       //public const uint ERROR_LOCAL_USER_SESSION_KEY = 1303;

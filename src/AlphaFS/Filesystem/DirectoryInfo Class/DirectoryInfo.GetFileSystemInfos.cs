@@ -40,7 +40,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <remarks>
       /// DirectoryInfo にファイルもディレクトリもない場合、このメソッドは空の配列を返します。このメソッドは再帰的ではありません。
       /// サブディレクトリの場合、このメソッドによって返される FileSystemInfo オブジェクトは、派生クラス DirectoryInfo にキャストできます。
-      /// Attributes プロパテ���によって返される FileAttributes 値を使用して、FileSystemInfo がファイルかディレクトリかを判断します。
+      /// Attributes プロパティによって返される FileAttributes 値を使用して、FileSystemInfo がファイルかディレクトリかを判断します。
       /// </remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>

@@ -312,7 +312,12 @@ namespace Alphaleonis.Win32
          //    Windows 2000	               5.0               Not applicable
 
 
-         // 2017-01-07: 10 == Windows の最新 MajorVersion。
+         // 2026-05-17: Windows 11 / Server 2022 以降も dwMajorVersion=10 を返す（Build 番号で識別する必要がある）。
+         // Build 22000+: Windows 11 (workstation)
+         // Build 20348:  Windows Server 2022
+         // Build 26100+: Windows 11 24H2 / Windows Server 2025
+         // EnumOsName に専用値（Windows11 等）が無いため、Windows 10 / Server 2016 より新しい OS は Later 扱いとし、
+         // 誤判定（Windows 11 を Windows10 と返す）を防ぐ。enum 拡張は将来の破壊的変更扱いとして保留。
          if (verInfo.dwMajorVersion > 10)
          {
             _enumOsName = EnumOsName.Later;
@@ -326,14 +331,20 @@ namespace Alphaleonis.Win32
 
                case 10:
 
-                  // Windows 10 or Windows Server 2016
-
-                  _enumOsName = verInfo.wProductType == NativeMethods.VER_NT_WORKSTATION
-                     ? EnumOsName.Windows10
-                     : EnumOsName.WindowsServer2016;
+                  // Windows 10 / Server 2016 と、それ以降 (Windows 11 / Server 2022 / Server 2025) を Build 番号で区別する。
+                  if (verInfo.wProductType == NativeMethods.VER_NT_WORKSTATION)
+                  {
+                     // Build 22000+ = Windows 11 (Server 2022 は Server 区分なのでここには来ない)
+                     _enumOsName = verInfo.dwBuildNumber >= 22000 ? EnumOsName.Later : EnumOsName.Windows10;
+                  }
+                  else
+                  {
+                     // Build 20348+ = Windows Server 2022, 26100+ = Windows Server 2025
+                     _enumOsName = verInfo.dwBuildNumber >= 20348 ? EnumOsName.Later : EnumOsName.WindowsServer2016;
+                  }
 
                   break;
-                  
+
 
                #endregion // Version 10
 

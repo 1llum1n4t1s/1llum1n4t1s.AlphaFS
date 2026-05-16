@@ -173,8 +173,20 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
+      /// <summary>Dispose 漏れ時のセーフネットとして基盤となる COM 参照を解放するファイナライザ。</summary>
+      ~Shell32Info()
+      {
+         Dispose(false);
+      }
+
       /// <summary>基盤となるCOM参照を解放します。</summary>
       public void Dispose()
+      {
+         Dispose(true);
+         GC.SuppressFinalize(this);
+      }
+
+      private void Dispose(bool disposing)
       {
          _iQaNone?.Dispose();
          _iQaByExe?.Dispose();

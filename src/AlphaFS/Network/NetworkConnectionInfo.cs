@@ -27,7 +27,7 @@ using System.Net.NetworkInformation;
 namespace Alphaleonis.Win32.Network
 {
    /// <summary>ネットワークへの接続を表します。</summary>
-   public class NetworkConnectionInfo : IDisposable
+   public sealed class NetworkConnectionInfo : IDisposable
    {
       #region プライベートフィールド
 
@@ -48,8 +48,20 @@ namespace Alphaleonis.Win32.Network
 
       #region IDisposable
 
+      /// <summary>Dispose 漏れ時のセーフネットとして基になる COM 参照を解放するファイナライザ。</summary>
+      ~NetworkConnectionInfo()
+      {
+         Dispose(false);
+      }
+
       /// <summary>基になる COM 参照を解放します。</summary>
       public void Dispose()
+      {
+         Dispose(true);
+         GC.SuppressFinalize(this);
+      }
+
+      private void Dispose(bool disposing)
       {
          _networkConnection?.Dispose();
          _networkConnection = null;

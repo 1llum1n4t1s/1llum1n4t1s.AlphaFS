@@ -101,6 +101,18 @@ namespace Alphaleonis.Win32.Security
             NativeError.ThrowException(lastError);
          }
 
+         // MSDN AdjustTokenPrivileges 仕様: success=TRUE であっても GetLastError が ERROR_NOT_ALL_ASSIGNED (1300) を返す場合、
+         // 要求した特権の一部または全部がトークンに割り当てられておらず実際には有効化されていない。
+         // このサイレント失敗を検出して呼び出し側に通知することで、後続のファイル操作の謎の権限エラーを防止する。
+         // 無効化 (enable == false) の場合、特権が既にトークンに無いだけのため警告対象外。
+         if (enable && lastError == Win32Errors.ERROR_NOT_ALL_ASSIGNED)
+         {
+            EnabledPrivilege = null;
+            throw new UnauthorizedAccessException(
+               string.Format(System.Globalization.CultureInfo.CurrentCulture,
+                  "特権 '{0}' をトークンに割り当てられませんでした。プロセスがこの特権を保持していない可能性があります（管理者権限が必要な場合があります）。",
+                  EnabledPrivilege?.ToString() ?? newPrivilege.Luid.ToString()));
+         }
 
          // 特権が変更されなかった場合、リセットしない
          if (mOldPrivilege.PrivilegeCount == 0)

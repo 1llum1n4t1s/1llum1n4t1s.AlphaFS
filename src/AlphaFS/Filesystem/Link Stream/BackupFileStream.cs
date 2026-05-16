@@ -534,7 +534,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>読み取りアクセスを許可しながら、��のプロセスが <see cref="BackupFileStream"/> を変更することを防止します。</summary>
+      /// <summary>読み取りアクセスを許可しながら、他のプロセスが <see cref="BackupFileStream"/> を変更することを防止します。</summary>
       /// <param name="position">ロックする範囲の先頭。このパラメーターの値はゼロ (0) 以上でなければなりません。</param>
       /// <param name="length">ロックする範囲。</param>
       /// <exception cref="ArgumentOutOfRangeException"/>
@@ -563,7 +563,7 @@ namespace Alphaleonis.Win32.Filesystem
       }
 
 
-      /// <summary>以前にロックされた��ァイルの全体または一部への他のプロセスによるアクセスを許可します。</summary>
+      /// <summary>以前にロックされたファイルの全体または一部への他のプロセスによるアクセスを許可します。</summary>
       /// <param name="position">ロック解除する範囲の先頭。</param>
       /// <param name="length">ロック解除する範囲。</param>
       /// <exception cref="ArgumentOutOfRangeException"/>

@@ -39,9 +39,21 @@ namespace Alphaleonis.Win32.Network
             _ptr = comPtr;
          }
 
+         /// <summary>Dispose 漏れ時のセーフネットとして COM 参照を解放するファイナライザ。</summary>
+         ~NetworkListManagerWrapper()
+         {
+            Dispose(false);
+         }
+
          internal bool IsValid => _ptr != 0;
 
          public void Dispose()
+         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+         }
+
+         private void Dispose(bool disposing)
          {
             var ptr = _ptr;
             _ptr = 0;

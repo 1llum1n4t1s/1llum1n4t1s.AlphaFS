@@ -33,7 +33,7 @@ namespace Alphaleonis.Win32.Filesystem
       #region Obsolete
 
       /// <summary>[AlphaFS] <see cref="DirectoryInfo"/> インスタンスとその内容を新しいパスにコピーします。</summary>
-      /// <returns>新しい <see cref="DirectoryInfo"/> イ���スタンスを返します。</returns>
+      /// <returns>新しい <see cref="DirectoryInfo"/> インスタンスを返します。</returns>
       /// <remarks>
       ///   <para>非常に大きなファイル転送には、<see cref="CopyOptions.NoBuffering"/> オプションが推奨されます。</para>
       ///   <para>このメソッドを使用して、既存のディレクトリの上書きを許可または防止します。</para>

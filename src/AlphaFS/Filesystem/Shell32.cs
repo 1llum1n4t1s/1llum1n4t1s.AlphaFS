@@ -266,7 +266,7 @@ namespace Alphaleonis.Win32.Filesystem
          /// <summary>0x000000100 - ファイルを表すアイコンのハンドルとシステムイメージリスト内のアイコンインデックスを取得します。ハンドルは構造体の<see cref="FileInfo.IconHandle"/>メンバーにコピーされ、インデックスは<see cref="FileInfo.IconIndex"/>メンバーにコピーされます。</summary>
          Icon = 256,
 
-         /// <summary>0x000000200 - ファイルの表示名を取得します��名前は構造体の<see cref="FileInfo.DisplayName"/>メンバーにコピーされます。</summary>
+         /// <summary>0x000000200 - ファイルの表示名を取得します。名前は構造体の<see cref="FileInfo.DisplayName"/>メンバーにコピーされます。</summary>
          /// <remarks>返される表示名は、存在する場合は8.3形式ではなく長いファイル名を使用します。</remarks>
          DisplayName = 512,
 
@@ -307,7 +307,7 @@ namespace Alphaleonis.Win32.Filesystem
       public struct FileInfo
       {
          /// <summary>ファイルを表すアイコンへのハンドル。</summary>
-         /// <remarks>呼び出し元は不要になった時点でDestroyIcon()で��のハンドルを破棄する責任があります。</remarks>
+         /// <remarks>呼び出し元は不要になった時点でDestroyIcon()でこのハンドルを破棄する責任があります。</remarks>
          [SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
          public readonly IntPtr IconHandle;
 
@@ -320,7 +320,7 @@ namespace Alphaleonis.Win32.Filesystem
          [MarshalAs(UnmanagedType.U4)]
          public readonly GetAttributesOf Attributes;
 
-         /// <summary>Windows Shellに表示されるファイル名、またはファイルを表すアイコンを含��ファイルのパスとファイル名。</summary>
+         /// <summary>Windows Shellに表示されるファイル名、またはファイルを表すアイコンを含むファイルのパスとファイル名。</summary>
          [SuppressMessage("Microsoft.Design", "CA1051:DoNotDeclareVisibleInstanceFields")]
          [MarshalAs(UnmanagedType.ByValTStr, SizeConst = NativeMethods.MaxPath)]
          public string DisplayName;

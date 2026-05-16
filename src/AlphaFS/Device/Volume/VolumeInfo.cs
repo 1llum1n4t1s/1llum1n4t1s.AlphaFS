@@ -134,7 +134,7 @@ namespace Alphaleonis.Win32.Filesystem
          using (new NativeMethods.ChangeErrorMode(NativeMethods.ErrorMode.FailCriticalErrors))
          {
             // GetVolumeInformationXxx()
-            // 2013-07-18: MSDN は LongPath の使用を確認していませんが、この関数��� Unicode バージョンが存在します。
+            // 2013-07-18: MSDN は LongPath の使用を確認していませんが、この関数の Unicode バージョンが存在します。
 
             uint lastError;
 

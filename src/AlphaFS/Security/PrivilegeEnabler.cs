@@ -35,18 +35,33 @@ namespace Alphaleonis.Win32.Security
 
       /// <summary><see cref="PrivilegeEnabler"/>クラスの新しいインスタンスを初期化します。
       /// これにより、指定された特権が有効になり（既に有効でない場合）、オブジェクトがDisposeされたときに再び無効になります。
-      /// （既に有効な特権��無効にされません。）
+      /// （既に有効な特権は無効にされません。）
       /// </summary>
       /// <param name="privilege">有効にする特権。</param>
       /// <param name="privileges">追加で有効にする特権。</param>
       public PrivilegeEnabler(Privilege privilege, params Privilege[] privileges)
       {
-         _enabledPrivileges.Add(new InternalPrivilegeEnabler(privilege));
-
-         if (privileges != null)
+         try
          {
-            foreach (var priv in privileges)
-               _enabledPrivileges.Add(new InternalPrivilegeEnabler(priv));
+            _enabledPrivileges.Add(new InternalPrivilegeEnabler(privilege));
+
+            if (privileges != null)
+            {
+               foreach (var priv in privileges)
+                  _enabledPrivileges.Add(new InternalPrivilegeEnabler(priv));
+            }
+         }
+         catch
+         {
+            // 部分構築中に失敗した場合、既に有効化済みの特権を全て Dispose して状態を巻き戻す。
+            // これがないと有効化済み特権がプロセス寿命中残留してセキュリティ境界が壊れる。
+            foreach (var t in _enabledPrivileges)
+            {
+               try { t.Dispose(); }
+               catch { /* 巻き戻し中の失敗は致命的でないので個別に無視 */ }
+            }
+            _enabledPrivileges.Clear();
+            throw;
          }
       }
 
@@ -64,9 +79,14 @@ namespace Alphaleonis.Win32.Security
             {
                t.Dispose();
             }
-            catch
+            catch (Exception ex)
             {
-               // ここではすべての例外を無視する
+               // Dispose 連鎖を破壊しないよう個別の例外は catch するが、完全無音化すると
+               // セキュリティ境界の崩壊（特権が残留）に気付けないため Trace に記録する。
+               System.Diagnostics.Trace.TraceWarning(
+                  string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                     "PrivilegeEnabler.Dispose: 特権 '{0}' の無効化に失敗しました: {1}",
+                     t?.EnabledPrivilege?.ToString() ?? "(unknown)", ex.Message));
             }
          }
       }

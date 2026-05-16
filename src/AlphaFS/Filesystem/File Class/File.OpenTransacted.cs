@@ -158,7 +158,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] (トランザクション) 指定されたパスで、指定された作成モード、読み取り/書き込みおよび共有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="path">開くファイル。</param>
-      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="mode">ファイルの開き方または作成方法を決定する定数。</param>
       /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
       
       /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
@@ -178,7 +178,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] (トランザクション) 指定されたパスで、指定された作成モード、読み取り/書き込みおよび共有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="path">開くファイル。</param>
-      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="mode">ファイルの開き方または作成方法を決定する定数。</param>
       /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
       
       /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
@@ -205,13 +205,13 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] (トランザクション) 指定されたパスで、指定された作成モード、読み取り/書き込みおよび共有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="path">開くファイル。</param>
-      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="mode">ファイルの開き方または作成方法を決定する定数。</param>
       /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
       
       /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
       /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
       /// デフォルトのバッファサイズは4096です。</param>
-      /// <param name="options">追加のファイルオプション���指定する値。</param>
+      /// <param name="options">追加のファイルオプションを指定する値。</param>
       /// <returns>
       ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
       ///   および指定された共有オプションの<see cref="FileStream"/>。
@@ -226,7 +226,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] (トランザクション) 指定されたパスで、指定された作成モード、読み取り/書き込みおよび共有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="path">開くファイル。</param>
-      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="mode">ファイルの開き方または作成方法を決定する定数。</param>
       /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
       
       /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
@@ -247,7 +247,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] (トランザクション) 指定されたパスで、指定された作成モード、読み取り/書き込みおよび共有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="path">開くファイル。</param>
-      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="mode">ファイルの開き方または作成方法を決定する定数。</param>
       /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
       
       /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
@@ -268,7 +268,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] (トランザクション) 指定されたパスで、指定された作成モード、読み取り/書き込みおよび共有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="path">開くファイル。</param>
-      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="mode">ファイルの開き方または作成方法を決定する定数。</param>
       /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
       
       /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
@@ -296,13 +296,13 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] (トランザクション) 指定されたパスで、指定された作成モード、読み取り/書き込みおよび共有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="path">開くファイル。</param>
-      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="mode">ファイルの開き方または作成方法を決定する定数。</param>
       /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
       
       /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
       /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
       /// デフォルトのバッファサイズは4096です。</param>
-      /// <param name="options">追加のファイルオプション���指定する値。</param>
+      /// <param name="options">追加のファイルオプションを指定する値。</param>
       /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
       ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
@@ -318,7 +318,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] (トランザクション) 指定されたパスで、指定された作成モード、読み取り/書き込みおよび共有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="path">開くファイル。</param>
-      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="mode">ファイルの開き方または作成方法を決定する定数。</param>
       /// <param name="access">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
       
       /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
@@ -344,13 +344,13 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] (トランザクション) 指定されたパスで、指定された作成モード、読み取り/書き込みおよび共有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="path">開くファイル。</param>
-      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="mode">ファイルの開き方または作成方法を決定する定数。</param>
       /// <param name="rights">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
       
       /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
       /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
       /// デフォルトのバッファサイズは4096です。</param>
-      /// <param name="options">追加のファイルオプション���指定する値。</param>
+      /// <param name="options">追加のファイルオプションを指定する値。</param>
       /// <returns>
       ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
       ///   および指定された共有オプションの<see cref="FileStream"/>。
@@ -365,7 +365,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] (トランザクション) 指定されたパスで、指定された作成モード、読み取り/書き込みおよび共有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="path">開くファイル。</param>
-      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="mode">ファイルの開き方または作成方法を決定する定数。</param>
       /// <param name="rights">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
       
       /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
@@ -386,13 +386,13 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] (トランザクション) 指定されたパスで、指定された作成モード、読み取り/書き込みおよび共有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="path">開くファイル。</param>
-      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="mode">ファイルの開き方または作成方法を決定する定数。</param>
       /// <param name="rights">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
       
       /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
       /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
       /// デフォルトのバッファサイズは4096です。</param>
-      /// <param name="options">追加のファイルオプション���指定する値。</param>
+      /// <param name="options">追加のファイルオプションを指定する値。</param>
       /// <param name="security">ファイルのアクセス制御と監査セキュリティを決定する値。</param>
       /// <returns>
       ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
@@ -408,7 +408,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] (トランザクション) 指定されたパスで、指定された作成モード、読み取り/書き込みおよび共有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="path">開くファイル。</param>
-      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="mode">ファイルの開き方または作成方法を決定する定数。</param>
       /// <param name="rights">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
       
       /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
@@ -430,13 +430,13 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] (トランザクション) 指定されたパスで、指定された作成モード、読み取り/書き込みおよび共有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="path">開くファイル。</param>
-      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="mode">ファイルの開き方または作成方法を決定する定数。</param>
       /// <param name="rights">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
       
       /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
       /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
       /// デフォルトのバッファサイズは4096です。</param>
-      /// <param name="options">追加のファイルオプション���指定する値。</param>
+      /// <param name="options">追加のファイルオプションを指定する値。</param>
       /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
       ///   指定されたパスで、指定されたモード、読み取り/書き込みまたは読み書きアクセス、
@@ -452,7 +452,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] (トランザクション) 指定されたパスで、指定された作成モード、読み取り/書き込みおよび共有権限、バッファサイズを使用して<see cref="FileStream"/>を開きます。</summary>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="path">開くファイル。</param>
-      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="mode">ファイルの開き方または作成方法を決定する定数。</param>
       /// <param name="rights">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
       
       /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
@@ -474,13 +474,13 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] (Transacted) Opens a <see cref="FileStream"/> on the specified path using the specified  creation mode, access rights and sharing permission, the buffer size, additional file options, access control and audit security.</summary>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="path">開くファイル。</param>
-      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="mode">ファイルの開き方または作成方法を決定する定数。</param>
       /// <param name="rights">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
       
       /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>
       /// <param name="bufferSize">0より大きい正の<see cref="System.Int32"/>値でバッファサイズを示します。
       /// デフォルトのバッファサイズは4096です。</param>
-      /// <param name="options">追加のファイルオプション���指定する値。</param>
+      /// <param name="options">追加のファイルオプションを指定する値。</param>
       /// <param name="security">ファイルのアクセス制御と監査セキュリティを決定する値。</param>
       /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       /// <returns>
@@ -497,7 +497,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>[AlphaFS] (Transacted) Opens a <see cref="FileStream"/> on the specified path using the specified  creation mode, access rights and sharing permission, the buffer size, additional file options, access control and audit security.</summary>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="path">開くファイル。</param>
-      /// <param name="mode">ファイルの開き方または���成方法を決定する定数。</param>
+      /// <param name="mode">ファイルの開き方または作成方法を決定する定数。</param>
       /// <param name="rights">ファイルに対して実行できる操作を指定する<see cref="FileAccess"/>値。</param>
       
       /// <param name="share">プロセスによるファイルの共有方法を決定する定数。</param>

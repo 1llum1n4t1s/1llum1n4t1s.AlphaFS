@@ -13,7 +13,7 @@
     <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
     <Product>1llum1n4t1s.AlphaFS</Product>
     <Description>AlphaFS is a .NET library providing more complete Win32 file system functionality to the .NET platform than the standard System.IO classes. Features highlights: creating hardlinks, accessing hidden volumes, enumeration of volumes, transactional file operations and much more.</Description>
-    <Authors>Alphaleonis;Yomodo,ゆろち</Authors>
+    <Authors>Alphaleonis,Yomodo,ゆろち</Authors>
     <Copyright>Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov, 2026 ゆろち</Copyright>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -44,12 +44,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.Security.Permissions" Version="10.0.5" />
+    <PackageReference Include="System.Security.Permissions" Version="10.0.8" />
   </ItemGroup>
-  <Target Name="CleanBinObjBeforeBuild" BeforeTargets="Restore">
-    <RemoveDir Directories="$(MSBuildProjectDirectory)\bin;$(MSBuildProjectDirectory)\obj" />
-  </Target>
-  <Target Name="GenerateAppIcon" BeforeTargets="BeforeBuild">
+  <!-- インクリメンタルビルドを毎回破壊する CleanBinObjBeforeBuild は削除。
+       クリーンビルドが必要な場合は `dotnet clean` を明示的に実行する。 -->
+  <Target Name="GenerateAppIcon" BeforeTargets="BeforeBuild"
+          Inputs="$(MSBuildThisFileDirectory)..\..\icon\app_icon.png;$(MSBuildThisFileDirectory)..\..\icon\generate_icon.ps1"
+          Outputs="$(MSBuildThisFileDirectory)..\..\icon\app.ico">
     <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildThisFileDirectory)..\..\icon\generate_icon.ps1&quot;" WorkingDirectory="$(MSBuildThisFileDirectory)..\.." />
   </Target>
 </Project>

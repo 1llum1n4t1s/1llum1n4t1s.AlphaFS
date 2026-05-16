@@ -28,7 +28,7 @@ namespace Alphaleonis.Win32.Network
 {
    /// <summary>ローカルマシン上のネットワークを表します。同様のネットワークシグネチャを持つネットワーク接続のコレクションを表すこともできます。</summary>
    [Serializable]
-   public class NetworkInfo : IEquatable<NetworkInfo>, IDisposable
+   public sealed class NetworkInfo : IEquatable<NetworkInfo>, IDisposable
    {
       #region プライベートフィールド
 
@@ -50,8 +50,20 @@ namespace Alphaleonis.Win32.Network
 
       #region IDisposable
 
+      /// <summary>Dispose 漏れ時のセーフネットとして基になる COM 参照を解放するファイナライザ。</summary>
+      ~NetworkInfo()
+      {
+         Dispose(false);
+      }
+
       /// <summary>基になる COM 参照を解放します。</summary>
       public void Dispose()
+      {
+         Dispose(true);
+         GC.SuppressFinalize(this);
+      }
+
+      private void Dispose(bool disposing)
       {
          _network?.Dispose();
          _network = null;

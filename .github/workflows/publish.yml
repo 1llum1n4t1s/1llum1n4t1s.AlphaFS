@@ -6,27 +6,53 @@ on:
       - 'release/**'
   workflow_dispatch:
 
+# 最小権限原則: NuGet 公開には GITHUB_TOKEN への書き込み権限は不要。
+# actions/checkout が利用する contents:read のみ許可する。
+permissions:
+  contents: read
+
 jobs:
   publish:
     runs-on: windows-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
-      
+
       - name: Restore dependencies
         run: dotnet restore AlphaFS.slnx
-      
+
       - name: Build Release
         run: dotnet build AlphaFS.slnx -c Release --no-restore
-      
+
+      - name: Verify csproj Version matches branch name
+        # ブランチ release/x.y.z が push されたら、AlphaFS.csproj の <Version> が x.y.z と一致しているか照合。
+        # 一致しない場合は CI を fail-fast させて NuGet への誤バージョン push を防ぐ。
+        # workflow_dispatch (手動実行) では照合をスキップ。
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/release/')
+        run: |
+          $csprojVersion = ([xml](Get-Content src/AlphaFS/AlphaFS.csproj)).Project.PropertyGroup.Version
+          $expectedVersion = '${{ github.ref_name }}' -replace '^release/', ''
+          if ($csprojVersion -ne $expectedVersion) {
+            Write-Error "csproj Version='$csprojVersion' does not match branch 'release/$expectedVersion'. Update <Version> in AlphaFS.csproj before pushing."
+            exit 1
+          }
+          Write-Host "Version OK: csproj=$csprojVersion matches branch release/$expectedVersion"
+        shell: pwsh
+
+      - name: Run unit tests
+        # 多くのテストは管理者権限や特定 NTFS / SMB 構成を必要とし、windows-latest agent では Assert.Inconclusive で
+        # 自然に skip される。Assert.Fail で落ちるテストはリリースを止めるべき本物のリグレッションのため、
+        # ここでフィルタなく走らせる。privileged テストの分離は別タスクで継続。
+        run: dotnet test AlphaFS.slnx -c Release --no-build --logger "console;verbosity=normal"
+
       - name: Pack
         run: dotnet pack src/AlphaFS/AlphaFS.csproj -c Release --no-build -o artifacts
-      
+
       - name: Publish to NuGet
         run: |
           $apiKey = $env:NUGET_API_KEY

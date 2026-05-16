@@ -144,8 +144,10 @@ namespace Alphaleonis.Win32.Security
       /// <param name="buffer">入力バッファ。</param>
       /// <param name="start">開始位置。</param>
       /// <param name="size">サイズ。</param>
-      private static ulong CalculateHash(ulong seed, ulong[] table, IList<byte> buffer, int start, int size)
+      private static ulong CalculateHash(ulong seed, ulong[] table, byte[] buffer, int start, int size)
       {
+         // IList<byte> ではなく byte[] を直接受けることで JIT がインデクサ仮想ディスパッチを避け、
+         // 境界チェック除去と直接アドレッシングが効くようになる。
          var hash = seed;
 
          for (var i = start; i < start + size; i++)

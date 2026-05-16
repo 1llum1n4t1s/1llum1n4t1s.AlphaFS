@@ -68,6 +68,12 @@ namespace Alphaleonis.Win32.Filesystem
             _ptr = comPtr;
          }
 
+         /// <summary>Dispose 漏れ時のセーフネットとして COM 参照を解放するファイナライザ。</summary>
+         ~QueryAssociationsWrapper()
+         {
+            Dispose(false);
+         }
+
          internal bool IsValid => _ptr != 0;
 
          /// <summary>IQueryAssociations インターフェイスを初期化し、ルートキーを適切な ProgID に設定します。</summary>
@@ -116,6 +122,12 @@ namespace Alphaleonis.Win32.Filesystem
 
          /// <summary>COM オブジェクト参照を解放します。</summary>
          public void Dispose()
+         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+         }
+
+         private void Dispose(bool disposing)
          {
             var ptr = _ptr;
             _ptr = 0;
@@ -226,7 +238,7 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>ファイル、フォルダ、ディレクトリ、ドライブルートなど、ファイルシステム内のオブジェクトに関する情報を取得します。</summary>
-      /// <remarks>この関数はバックグラウンドスレッドから呼び出す必要があります���そうしないと、UI が応答しなくなる可能性があります。</remarks>
+      /// <remarks>この関数はバックグラウンドスレッドから呼び出す必要があります。そうしないと、UI が応答しなくなる可能性があります。</remarks>
       /// <remarks>サポートされる最小クライアント: Windows 2000 Professional [デスクトップアプリのみ]</remarks>
       /// <remarks>サポートされる最小サーバー: Windows 2000 Server [デスクトップアプリのみ]</remarks>
       [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]

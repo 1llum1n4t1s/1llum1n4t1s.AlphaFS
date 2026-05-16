@@ -39,7 +39,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <param name="path">アクセス制御リスト(ACL)エントリを追加または削除するファイルまたはディレクトリ。このパラメータは<c>null</c>にできます。</param>
       /// <param name="handle">A <see cref="SafeFileHandle"/> to add or remove access control list (ACL) entries from. This parameter This parameter may be <c>null</c>.</param>
       /// <param name="objectSecurity"><paramref name="path"/>/<paramref name="handle"/>パラメータで記述されたファイルまたはディレクトリに適用するACLエントリを記述する<see cref="FileSecurity"/>/<see cref="DirectorySecurity"/>オブジェクト。</param>
-      /// <param name="includeSections">設定するアクセス制御リスト(ACL)情報の種類を指��する<see cref="AccessControlSections"/>値の1つ以上。</param>
+      /// <param name="includeSections">設定するアクセス制御リスト(ACL)情報の種類を指定する<see cref="AccessControlSections"/>値の1つ以上。</param>
       /// <param name="pathFormat">パスパラメータの形式を示します。</param>
       [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
       [SecurityCritical]

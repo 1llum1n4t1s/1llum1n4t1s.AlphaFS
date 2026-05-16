@@ -53,7 +53,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <param name="path">A directory to add or remove access control list (ACL) entries from.</param>
       /// <param name="fileSecurity">A <see cref="FileSecurity "/> object that describes an ACL entry to apply to the directory described by the path parameter.</param>
-      /// <param name="includeSections">設定するアクセス制御リスト(ACL)情報の種類を指��する<see cref="AccessControlSections"/>値の1つ以上。</param>      
+      /// <param name="includeSections">設定するアクセス制御リスト(ACL)情報の種類を指定する<see cref="AccessControlSections"/>値の1つ以上。</param>      
       [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
       [SecurityCritical]
       public static void SetAccessControl(string path, FileSecurity fileSecurity, AccessControlSections includeSections)
@@ -83,7 +83,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <param name="path">A directory to add or remove access control list (ACL) entries from.</param>
       /// <param name="fileSecurity">A <see cref="FileSecurity "/> object that describes an ACL entry to apply to the directory described by the path parameter.</param>
-      /// <param name="includeSections">設定するアクセス制御リスト(ACL)情報の種類を指��する<see cref="AccessControlSections"/>値の1つ以上。</param>
+      /// <param name="includeSections">設定するアクセス制御リスト(ACL)情報の種類を指定する<see cref="AccessControlSections"/>値の1つ以上。</param>
       /// <param name="pathFormat">パスパラメータの形式を示します。</param>      
       [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
       [SecurityCritical]
@@ -113,7 +113,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <exception cref="NotSupportedException"/>
       /// <param name="handle">A <see cref="SafeFileHandle"/> to a file to add or remove access control list (ACL) entries from.</param>
       /// <param name="fileSecurity">A <see cref="FileSecurity"/> object that describes an ACL entry to apply to the file described by the <paramref name="handle"/> parameter.</param>      
-      /// <param name="includeSections">設定するアクセス制御リスト(ACL)情報の種類を指��する<see cref="AccessControlSections"/>値の1つ以上。</param>
+      /// <param name="includeSections">設定するアクセス制御リスト(ACL)情報の種類を指定する<see cref="AccessControlSections"/>値の1つ以上。</param>
       [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
       [SecurityCritical]
       public static void SetAccessControl(SafeFileHandle handle, FileSecurity fileSecurity, AccessControlSections includeSections)

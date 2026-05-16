@@ -22,6 +22,7 @@
 using Alphaleonis.Win32.Network;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Security;
 
 namespace Alphaleonis.Win32.Filesystem
@@ -56,7 +57,9 @@ namespace Alphaleonis.Win32.Filesystem
       /// <summary>ローカルホスト上の利用可能な全デバイスを列挙します。</summary>
       /// <param name="deviceGuid"><see cref="Filesystem.DeviceGuid"/> デバイスのいずれか。</param>
       /// <returns>ローカルホストからの <see cref="Filesystem.DeviceGuid"/> 型の <see cref="IEnumerable{DeviceInfo}"/> インスタンス。</returns>
+      /// <remarks>内部で <see cref="Device.EnumerateDevicesCore"/> 経由でリフレクションを使用するため NativeAOT / トリミングと互換性がありません。</remarks>
       [SecurityCritical]
+      [RequiresUnreferencedCode("Calls Device.EnumerateDevicesCore which uses reflection on DeviceGuid enum.")]
       public IEnumerable<DeviceInfo> EnumerateDevices(DeviceGuid deviceGuid)
       {
          return Device.EnumerateDevicesCore(HostName, deviceGuid, true);

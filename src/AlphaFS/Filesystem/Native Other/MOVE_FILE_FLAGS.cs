@@ -29,7 +29,7 @@ namespace Alphaleonis.Win32.Filesystem
          None = 0,
 
          /// <summary>MOVE_FILE_REPLACE_EXISTSING
-         /// <para>コピー先のファイル名が既に存在する場合、関数はその内容をソ���スファイルの内容で置き換えます。</para>
+         /// <para>コピー先のファイル名が既に存在する場合、関数はその内容をソースファイルの内容で置き換えます。</para>
          /// <para>lpNewFileName または lpExistingFileName がディレクトリを指定する場合、この値は使用できません。</para>
          /// <para>ソースまたはコピー先のいずれかがディレクトリを指定する場合、この値は使用できません。</para>
          /// </summary>
@@ -43,12 +43,12 @@ namespace Alphaleonis.Win32.Filesystem
 
          /// <summary>MOVE_FILE_DELAY_UNTIL_REBOOT
          /// <para>
-         /// オペレーティングシステムが再起動されるまで��システムはファイルを移動しません。
+         /// オペレーティングシステムが再起動されるまで、システムはファイルを移動しません。
          /// システムは AUTOCHK が実行された直後、ページングファイルの作成前にファイルを移動します。
          /// </para>
          /// <para>
-         /// これにより、このパラメーターは以前の起動からのページングファイ��を削除する機能を有効にします。
-         /// この値は、プロセスが管理者グループまたは LocalSystem アカウントに属するユーザ��のコンテキスト内にある場合にのみ使用できます。
+         /// これにより、このパラメーターは以前の起動からのページングファイルを削除する機能を有効にします。
+         /// この値は、プロセスが管理者グループまたは LocalSystem アカウントに属するユーザーのコンテキスト内にある場合にのみ使用できます。
          /// </para>
          /// <para>この値は <see cref="MOVE_FILE_FLAGS.MOVE_FILE_COPY_ALLOWED"/> と併用できません。</para>
          /// </summary>
@@ -73,7 +73,7 @@ namespace Alphaleonis.Win32.Filesystem
 
 
          /// <summary>MOVE_FILE_FAIL_IF_NOT_TRACKABLE
-         /// <para>ソースファイルがリンクソースであるが、移動後��ファイルを追跡できない場合、関数は失敗します。</para>
+         /// <para>ソースファイルがリンクソースであるが、移動後にファイルを追跡できない場合、関数は失敗します。</para>
          /// <para>この状況は、コピー先が FAT ファイルシステムでフォーマットされたボリュームである場合に発生する可能性があります。</para>
          /// </summary>
          MOVE_FILE_FAIL_IF_NOT_TRACKABLE = 32

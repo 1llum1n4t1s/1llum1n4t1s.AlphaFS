@@ -37,7 +37,7 @@ namespace Alphaleonis.Win32.Filesystem
       ///      <see cref="Security.PrivilegeEnabler"/>.
       ///   </para>
       ///   <para>
-      ///      暗号化されたファイルをバックアップするには、次のいずれか���呼び出します。
+      ///      暗号化されたファイルをバックアップするには、次のいずれかを呼び出します。
       ///      <see cref="O:Alphaleonis.Win32.Filesystem.File.ExportEncryptedFileRaw"/> overloads and specify the file to backup
       ///      バックアップデータのコピー先ストリームとともに指定します。
       ///   </para>
@@ -67,7 +67,7 @@ namespace Alphaleonis.Win32.Filesystem
       ///      <see cref="Security.PrivilegeEnabler"/>.
       ///   </para>
       ///   <para>
-      ///      暗号化されたファイルをバックアップするには、次のいずれか���呼び出します。
+      ///      暗号化されたファイルをバックアップするには、次のいずれかを呼び出します。
       ///      <see cref="O:Alphaleonis.Win32.Filesystem.File.ExportEncryptedFileRaw"/> overloads and specify the file to backup
       ///      バックアップデータのコピー先ストリームとともに指定します。
       ///   </para>

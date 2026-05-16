@@ -27,7 +27,7 @@ namespace Alphaleonis.Win32.Filesystem
    {
       /// <summary>[AlphaFS] ファイルの一意識別子を取得します。識別子は64ビットのボリュームシリアル番号と128ビットのファイルシステムエントリ識別子で構成されます。</summary>
       /// <returns>要求された情報を含む<see cref="FileIdInfo"/>インスタンス。</returns>
-      /// <remarks>ファイルIDは時間の経過とともに一意であることが保証さ���ていません。ファイルシステムはそれらを再利用できるためです。場合によっては、ファイルのファイルIDが時間の経過とともに変更されることがあります。</remarks>
+      /// <remarks>ファイルIDは時間の経過とともに一意であることが保証されていません。ファイルシステムはそれらを再利用できるためです。場合によっては、ファイルのファイルIDが時間の経過とともに変更されることがあります。</remarks>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="path">ファイルへのパス。</param>
       [SecurityCritical]
@@ -39,7 +39,7 @@ namespace Alphaleonis.Win32.Filesystem
 
       /// <summary>[AlphaFS] ファイルの一意識別子を取得します。識別子は64ビットのボリュームシリアル番号と128ビットのファイルシステムエントリ識別子で構成されます。</summary>
       /// <returns>要求された情報を含む<see cref="FileIdInfo"/>インスタンス。</returns>
-      /// <remarks>ファイルIDは時間の経過とともに一意であることが保証さ���ていません。ファイルシステムはそれらを再利用できるためです。場合によっては、ファイルのファイルIDが時間の経過とともに変更されることがあります。</remarks>
+      /// <remarks>ファイルIDは時間の経過とともに一意であることが保証されていません。ファイルシステムはそれらを再利用できるためです。場合によっては、ファイルのファイルIDが時間の経過とともに変更されることがあります。</remarks>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="path">ファイルへのパス。</param>
       /// <param name="pathFormat">パスパラメータの形式を示します。</param>

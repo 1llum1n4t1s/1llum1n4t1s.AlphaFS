@@ -18,7 +18,9 @@ if ($recent)
     Write-Host "Package path: $pkgPath"
     Write-Host "API key length: $($apiKey.Length)"
     
-    $result = dotnet nuget push "$pkgPath" --api-key $apiKey --source https://api.nuget.org/v3/index.json 2>&1
+    # --skip-duplicate: 既に公開済みのバージョンを再 push しても 409 で CI を落とさず exit 0 で抜ける。
+    # これにより誤再 push と本物の公開失敗 (API key 失効 / NuGet downtime 等) を CI ログで区別しやすくなる。
+    $result = dotnet nuget push "$pkgPath" --api-key $apiKey --source https://api.nuget.org/v3/index.json --skip-duplicate 2>&1
     $exitCode = $LASTEXITCODE
     
     if ($exitCode -ne 0)

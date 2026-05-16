@@ -28,12 +28,12 @@ namespace Alphaleonis.Win32.Filesystem
    {
       /// <summary>[AlphaFS] 指定されたパスの短いパス形式を取得します。</summary>
       /// <returns>8.3形式のパス。</returns>
-      /// <remarks>8.3名前生成が無効化されているNTFSボリュームでは��敗します。</remarks>
-      /// <remarks>短いパス名を取得するには、パスが実際に存在する���要があります。</remarks>
+      /// <remarks>8.3名前生成が無効化されているNTFSボリュームでは失敗します。</remarks>
+      /// <remarks>短いパス名を取得するには、パスが実際に存在する必要があります。</remarks>
       /// <exception cref="ArgumentException"/>
       /// <exception cref="ArgumentNullException"/>
       /// <param name="transaction">トランザクション。</param>
-      /// <param name="path">フォルダまたは��ァイルへの既存のパス。</param>
+      /// <param name="path">フォルダまたはファイルへの既存のパス。</param>
       [SecurityCritical]
       public static string GetShort83PathTransacted(KernelTransaction transaction, string path)
       {

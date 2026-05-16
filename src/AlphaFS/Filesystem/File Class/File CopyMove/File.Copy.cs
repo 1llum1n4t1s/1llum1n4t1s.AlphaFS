@@ -162,7 +162,7 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きが許可されます。  <see cref="CopyOptions"/> can be specified,
-      /// およびコールバック関数を通じてアプリケーショ��に進行状況を通知する可能性があります。
+      /// およびコールバック関数を通じてアプリケーションに進行状況を通知する可能性があります。
       /// </summary>
       /// <remarks>
       ///   <para>非常に大きなファイル転送には<see cref="CopyOptions.NoBuffering"/>オプションが推奨されます。</para>
@@ -199,7 +199,7 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きが許可されます。  <see cref="CopyOptions"/> can be specified,
-      /// およびコールバック関数を通じてアプリケーショ��に進行状況を通知する可能性があります。
+      /// およびコールバック関数を通じてアプリケーションに進行状況を通知する可能性があります。
       /// </summary>
       /// <remarks>
       ///   <para>非常に大きなファイル転送には<see cref="CopyOptions.NoBuffering"/>オプションが推奨されます。</para>
@@ -693,7 +693,7 @@ namespace Alphaleonis.Win32.Filesystem
       
 
       /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きが許可されます。  <see cref="CopyOptions"/> can be specified,
-      /// およびコールバック関数を通じてアプリケーショ��に進行状況を通知する可能性があります。
+      /// およびコールバック関数を通じてアプリケーションに進行状況を通知する可能性があります。
       /// </summary>
       /// <remarks>
       ///   <para>非常に大きなファイル転送には<see cref="CopyOptions.NoBuffering"/>オプションが推奨されます。</para>
@@ -728,7 +728,7 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きが許可されます。  <see cref="CopyOptions"/> can be specified,
-      /// およびコールバック関数を通じてアプリケーショ��に進行状況を通知する可能性があります。
+      /// およびコールバック関数を通じてアプリケーションに進行状況を通知する可能性があります。
       /// </summary>
       /// <remarks>
       ///   <para>非常に大きなファイル転送には<see cref="CopyOptions.NoBuffering"/>オプションが推奨されます。</para>
@@ -765,7 +765,7 @@ namespace Alphaleonis.Win32.Filesystem
       
 
       /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きが許可されます。  <see cref="CopyOptions"/> can be specified,
-      /// およびコールバック関数を通じてアプリケーショ��に進行状況を通知する可能性があります。
+      /// およびコールバック関数を通じてアプリケーションに進行状況を通知する可能性があります。
       /// </summary>
       /// <remarks>
       ///   <para>非常に大きなファイル転送には<see cref="CopyOptions.NoBuffering"/>オプションが推奨されます。</para>
@@ -804,7 +804,7 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>[AlphaFS] 既存のファイルを新しいファイルにコピーします。同名ファイルの上書きが許可されます。  <see cref="CopyOptions"/> can be specified,
-      /// およびコールバック関数を通じてアプリケーショ��に進行状況を通知する可能性があります。
+      /// およびコールバック関数を通じてアプリケーションに進行状況を通知する可能性があります。
       /// </summary>
       /// <remarks>
       ///   <para>非常に大きなファイル転送には<see cref="CopyOptions.NoBuffering"/>オプションが推奨されます。</para>

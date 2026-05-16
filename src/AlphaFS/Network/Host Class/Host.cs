@@ -34,7 +34,7 @@ using Path = Alphaleonis.Win32.Filesystem.Path;
 
 namespace Alphaleonis.Win32.Network
 {
-   /// <summary>ローカルまたはリモートホストから��ットワークリソース情報を取得するための静的メソッドを提供します。</summary>
+   /// <summary>ローカルまたはリモートホストからネットワークリソース情報を取得するための静的メソッドを提供します。</summary>
    public static partial class Host
    {
       private static readonly NativeMethods.NetworkListManagerWrapper Manager = NativeMethods.CreateNetworkListManager();
@@ -54,16 +54,16 @@ namespace Alphaleonis.Win32.Network
 
       internal struct ConnectDisconnectArguments
       {
-         /// <summary>ネットワークリソースのプロバイダーが���イアログボックスのオーナーウィンドウとして使用できるウィンドウへのハンドル。</summary>
+         /// <summary>ネットワークリソースのプロバイダーがダイアログボックスのオーナーウィンドウとして使用できるウィンドウへのハンドル。</summary>
          public IntPtr WinOwner;
 
-         /// <summary>リダイレクトするローカルデバイスの名前。���: "F:"。<see cref="LocalName"/> が <c>null</c> または <c>string.Empty</c> の場合、最後に利用可能なドライブ文字が使用されます。文字は Z: から始まり、次に Y: というように割り当てられます。</summary>
+         /// <summary>リダイレクトするローカルデバイスの名前。例: "F:"。<see cref="LocalName"/> が <c>null</c> または <c>string.Empty</c> の場合、最後に利用可能なドライブ文字が使用されます。文字は Z: から始まり、次に Y: というように割り当てられます。</summary>
          public string LocalName;
 
          /// <summary>接続/切断するネットワークリソース。例: \\server または \\server\share。文字列の長さは最大 <see cref="Filesystem.NativeMethods.MaxPath"/> 文字です。</summary>
          public string RemoteName;
 
-         /// <summary><see cref="NetworkCredential"/> インスタンス。これ��、<see cref="UserName"/> と <see cref="Password"/> の組み合わせのいずれかを使用します。</summary>
+         /// <summary><see cref="NetworkCredential"/> インスタンス。これか、<see cref="UserName"/> と <see cref="Password"/> の組み合わせのいずれかを使用します。</summary>
          public NetworkCredential Credential;
 
          /// <summary>接続を確立するためのユーザー名。<see cref="UserName"/> が <c>null</c> の場合、関数はデフォルトのユーザー名を使用します。（プロセスのユーザーコンテキストがデフォルトのユーザー名を提供します）</summary>

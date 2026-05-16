@@ -34,7 +34,7 @@ namespace Alphaleonis.Win32.Filesystem
 
 
       /// <summary>非トランザクション/トランザクションファイルまたはディレクトリとその子要素を新しい場所にコピー/移動します。 <see cref="CopyOptions"/>または<see cref="MoveOptions"/>を指定でき、
-      /// およびコールバック関数を通じてアプリケーショ��に進行状況を通知する可能性があります。
+      /// およびコールバック関数を通じてアプリケーションに進行状況を通知する可能性があります。
       /// </summary>
       /// <remarks>
       ///   <para>非常に大きなファイル転送には<see cref="CopyOptions.NoBuffering"/>オプションが推奨されます。</para>

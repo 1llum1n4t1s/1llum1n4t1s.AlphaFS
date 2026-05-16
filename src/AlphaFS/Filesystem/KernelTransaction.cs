@@ -42,7 +42,7 @@ namespace Alphaleonis.Win32.Filesystem
       /// <remarks>
       /// <para>このコンストラクタはNativeAOTデプロイメントと互換性がありません。
       /// <see cref="TransactionInterop.GetDtcTransaction"/>と<see cref="Marshal.GetIUnknownForObject"/>は
-      /// 内部的にNativeAOTで��ポートされていない組み込みCOM��互運用に依存しているためです。</para>
+      /// 内部的にNativeAOTでサポートされていない組み込みCOM相互運用に依存しているためです。</para>
       /// <para>AOT安全な使用方法については、CreateTransactionを直接呼び出す他のコンストラクタを使用してください。</para>
       /// </remarks>
       /// <param name="transaction">トランザクション操作に使用するトランザクション。</param>

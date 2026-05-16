@@ -30,7 +30,7 @@ namespace Alphaleonis.Win32.Filesystem
    {
       /// <summary>Gets the unique identifier for a file. The identifier is composed of a 64-bit volume serial number and 128-bit file system entry identifier.</summary>
       /// <returns>要求された情報を含む<see cref="FileIdInfo"/>インスタンス。</returns>
-      /// <remarks>ファイルIDは時間の経過とともに一意であることが保証さ���ていません。ファイルシステムはそれらを再利用できるためです。場合によっては、ファイルのファイルIDが時間の経過とともに変更されることがあります。</remarks>
+      /// <remarks>ファイルIDは時間の経過とともに一意であることが保証されていません。ファイルシステムはそれらを再利用できるためです。場合によっては、ファイルのファイルIDが時間の経過とともに変更されることがあります。</remarks>
       /// <param name="transaction">トランザクション。</param>
       /// <param name="isFolder"><paramref name="path"/>がファイルかディレクトリかを指定します。</param>
       /// <param name="path">ファイルへのパス。</param>
