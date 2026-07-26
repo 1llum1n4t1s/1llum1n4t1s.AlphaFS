@@ -21,6 +21,7 @@
 
 using System;
 using System.Globalization;
+using System.Security.AccessControl;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AlphaFS.UnitTest
@@ -74,6 +75,98 @@ namespace AlphaFS.UnitTest
          if (!Alphaleonis.Win32.Security.ProcessContext.IsElevatedProcess)
          {
             Assert.Inconclusive(string.Format(CultureInfo.CurrentCulture, "管理者権限が必要なため {0} の検証を skip しました。", what));
+         }
+      }
+
+
+      /// <summary>マシン全体の状態を恒久的に変更する検証を有効化する環境変数。既定では実行しない。</summary>
+      public const string EnableMachineStateTestsVariable = "ALPHAFS_ENABLE_MACHINE_STATE_TESTS";
+
+
+      /// <summary>
+      ///   マシン全体の状態を恒久的に変更し、後始末できない検証を skip する。
+      /// </summary>
+      /// <remarks>
+      ///   例: MoveOptions.DelayUntilReboot は HKLM の PendingFileRenameOperations にエントリを追加し、
+      ///   次回起動時に実際の削除が走る。テストからは取り消せないため、明示的に
+      ///   <see cref="EnableMachineStateTestsVariable"/> を設定した場合だけ実行する。
+      /// </remarks>
+      public static void RequireMachineStateOptIn(string what)
+      {
+         var enabled = Environment.GetEnvironmentVariable(EnableMachineStateTestsVariable);
+
+         if (string.IsNullOrWhiteSpace(enabled) || enabled.Equals("0", StringComparison.OrdinalIgnoreCase) || enabled.Equals("false", StringComparison.OrdinalIgnoreCase))
+         {
+            Assert.Inconclusive(string.Format(CultureInfo.CurrentCulture,
+               "{0} はマシン全体の状態を恒久的に変更し取り消せないため skip しました。実行するには環境変数 {1} を 1 に設定してください。", what, EnableMachineStateTestsVariable));
+         }
+      }
+
+
+      private static readonly Lazy<bool> DenyAclRoundTripSupported = new Lazy<bool>(DetectDenyAclSupport);
+
+
+      /// <summary>
+      ///   現在のユーザーに対する拒否 ACE を「付与して解除できる」環境かどうかを実地に確認する。
+      /// </summary>
+      /// <remarks>
+      ///   拒否 ACE は所有者以外に対して WRITE_DAC も拒否するため、作成したオブジェクトの所有者が
+      ///   自分自身にならない環境 (昇格プロセスでは所有者が BUILTIN\Administrators になる等) では
+      ///   一度付与すると解除できず、テストが後始末できないまま失敗する。
+      ///   実際に往復できるかを 1 度だけ試し、できない環境では該当テストを skip する。
+      /// </remarks>
+      public static void RequireDenyAclRoundTrip(string what)
+      {
+         if (!DenyAclRoundTripSupported.Value)
+         {
+            Assert.Inconclusive(string.Format(CultureInfo.CurrentCulture, "拒否 ACE の付与と解除ができない環境のため {0} の検証を skip しました。", what));
+         }
+      }
+
+
+      private static bool DetectDenyAclSupport()
+      {
+         var probe = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "AlphaFS.DenyAclProbe." + Guid.NewGuid().ToString("N").Substring(0, 8));
+
+         try
+         {
+            System.IO.Directory.CreateDirectory(probe);
+         }
+         catch (Exception)
+         {
+            return false;
+         }
+
+         var user = (Environment.UserDomainName + @"\" + Environment.UserName).TrimStart('\\');
+         var rule = new FileSystemAccessRule(user, FileSystemRights.FullControl, InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit, PropagationFlags.None, AccessControlType.Deny);
+
+         try
+         {
+            var security = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(probe);
+            security.AddAccessRule(rule);
+            Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(probe, security);
+
+            // 付与できても解除できなければ意味が無いので、往復できることまで確認する。
+            security = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(probe);
+            security.RemoveAccessRule(rule);
+            Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(probe, security);
+
+            return true;
+         }
+         catch (Exception)
+         {
+            return false;
+         }
+         finally
+         {
+            try
+            {
+               System.IO.Directory.Delete(probe, true);
+            }
+            catch (Exception)
+            {
+               // 拒否 ACE が外せなかった場合は削除もできない。一時ディレクトリなので放置してよい。
+            }
          }
       }
 

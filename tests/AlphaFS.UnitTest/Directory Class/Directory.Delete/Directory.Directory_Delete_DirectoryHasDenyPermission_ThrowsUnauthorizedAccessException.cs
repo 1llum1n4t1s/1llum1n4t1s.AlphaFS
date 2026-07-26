@@ -40,6 +40,7 @@ namespace AlphaFS.UnitTest
       private void Directory_Delete_DirectoryHasDenyPermission_ThrowsUnauthorizedAccessException(bool isNetwork)
       {
          UnitTestConstants.RequireElevation("拒否 ACL 付きディレクトリの削除");
+         UnitTestConstants.RequireDenyAclRoundTrip("拒否 ACL 付きディレクトリの削除");
 
          using (var tempRoot = new TemporaryDirectory(isNetwork))
          {

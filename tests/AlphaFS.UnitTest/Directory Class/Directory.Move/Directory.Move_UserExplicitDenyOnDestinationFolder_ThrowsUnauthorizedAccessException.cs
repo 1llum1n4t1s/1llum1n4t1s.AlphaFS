@@ -40,6 +40,7 @@ namespace AlphaFS.UnitTest
       private void Directory_Move_UserExplicitDenyOnDestinationFolder_ThrowsUnauthorizedAccessException(bool isNetwork)
       {
          UnitTestConstants.RequireElevation("拒否 ACL 付き移動先への移動");
+         UnitTestConstants.RequireDenyAclRoundTrip("拒否 ACL 付き移動先への移動");
 
          using (var tempRoot = new TemporaryDirectory(isNetwork))
          {

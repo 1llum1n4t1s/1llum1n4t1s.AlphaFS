@@ -65,7 +65,10 @@ namespace AlphaFS.UnitTest
                Console.WriteLine("\tExpected: {0}", expected);
                Console.WriteLine("\tAlphaFS  : {0}", actual);
 
-               Assert.AreEqual(expected, actual);
+               // SDDL 全体の完全一致は環境に依存する (OS が Owner / Group を付与し、明示的な
+               // セキュリティ記述子を渡すと DACL に P フラグが付く。SACL の可否も権限次第)。
+               // このテストの目的は「指定した ACE が実際に適用されたか」なので、その ACE の存在を検証する。
+               Assert.Contains("(A;;FA;;;WD)", actual, StringComparison.Ordinal);
             }
          }
 

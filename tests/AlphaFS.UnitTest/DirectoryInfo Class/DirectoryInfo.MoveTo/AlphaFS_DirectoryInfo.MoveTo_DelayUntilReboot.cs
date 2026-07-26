@@ -35,6 +35,10 @@ namespace AlphaFS.UnitTest
       {
          UnitTestAssert.IsElevatedProcess();
 
+         // HKLM の PendingFileRenameOperations にエントリを追加し、次回起動時に実削除が走る。
+         // テストからは取り消せないため、明示的にオプトインした場合だけ実行する。
+         UnitTestConstants.RequireMachineStateOptIn("MoveOptions.DelayUntilReboot");
+
          AlphaFS_DirectoryInfo_MoveTo_DelayUntilReboot(false);
       }
 
