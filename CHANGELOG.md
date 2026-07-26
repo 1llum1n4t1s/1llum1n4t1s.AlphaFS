@@ -1,6 +1,18 @@
 Changelog
 =========
 
+## [1.0.38] - 2026-07-26
+
+### 📦 依存パッケージの更新
+- System.Security.Permissions 10.0.8 → 10.0.10
+- MSTest.TestAdapter / MSTest.TestFramework 4.2.3 → 4.3.2
+- 脆弱性・非推奨パッケージはなし
+
+### 🔧 ビルド構成
+- バージョン定義をリポジトリ直下の `Directory.Build.props` に一元化
+  - `AlphaFS.csproj` の `<Version>` を削除し、継承へ変更
+  - CI のバージョン照合も `Directory.Build.props` を参照するよう更新
+
 ## [1.0.37] - 2026-05-17
 
 ### コードレビュー指摘の P0/P1/P3 修正 (/rere 12 人分隊レビュー)

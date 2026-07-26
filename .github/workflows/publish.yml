@@ -29,19 +29,19 @@ jobs:
       - name: Build Release
         run: dotnet build AlphaFS.slnx -c Release --no-restore
 
-      - name: Verify csproj Version matches branch name
-        # ブランチ release/x.y.z が push されたら、AlphaFS.csproj の <Version> が x.y.z と一致しているか照合。
+      - name: Verify Version matches branch name
+        # ブランチ release/x.y.z が push されたら、Directory.Build.props の <Version> が x.y.z と一致しているか照合。
         # 一致しない場合は CI を fail-fast させて NuGet への誤バージョン push を防ぐ。
         # workflow_dispatch (手動実行) では照合をスキップ。
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/release/')
         run: |
-          $csprojVersion = ([xml](Get-Content src/AlphaFS/AlphaFS.csproj)).Project.PropertyGroup.Version
+          $propsVersion = ([xml](Get-Content Directory.Build.props)).Project.PropertyGroup.Version
           $expectedVersion = '${{ github.ref_name }}' -replace '^release/', ''
-          if ($csprojVersion -ne $expectedVersion) {
-            Write-Error "csproj Version='$csprojVersion' does not match branch 'release/$expectedVersion'. Update <Version> in AlphaFS.csproj before pushing."
+          if ($propsVersion -ne $expectedVersion) {
+            Write-Error "Directory.Build.props Version='$propsVersion' does not match branch 'release/$expectedVersion'. Update <Version> in Directory.Build.props before pushing."
             exit 1
           }
-          Write-Host "Version OK: csproj=$csprojVersion matches branch release/$expectedVersion"
+          Write-Host "Version OK: Directory.Build.props=$propsVersion matches branch release/$expectedVersion"
         shell: pwsh
 
       - name: Run unit tests
