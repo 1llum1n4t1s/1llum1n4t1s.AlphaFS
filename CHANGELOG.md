@@ -16,6 +16,14 @@ Changelog
     `AlphaFS_Directory.Copy_UserExplicitDenyOnDestinationFolder`
 - 同じく skip 時のメッセージに、握り潰していた例外の型とメッセージを含めるよう変更
   - CI 上で skip されたときに、環境要因なのか実装の問題なのかを後から判断できるようにするため
+- 上記の変更により CI で実際に走り始めた 3 テストが、DACL のみを更新するよう修正
+  - 拒否 ACE の付与・解除に `Directory.SetAccessControl(path, security)` の既定オーバーロードを
+    使っていたが、この既定は `AccessControlSections.All` を書き込む。読み取り側の
+    `Directory.GetAccessControl(path)` は `Access | Group | Owner` しか読まないため、
+    読んでいない SACL と変更していない Owner まで書きに行き、所有者が `BUILTIN\Administrators`
+    になる昇格環境では `(5) Access is denied` で失敗していた
+  - 意図どおり `AccessControlSections.Access` を明示するオーバーロードに変更
+    (リポジトリ内の他の ACL テストは元からこの形)
 
 ## [2.1.1] - 2026-07-27
 

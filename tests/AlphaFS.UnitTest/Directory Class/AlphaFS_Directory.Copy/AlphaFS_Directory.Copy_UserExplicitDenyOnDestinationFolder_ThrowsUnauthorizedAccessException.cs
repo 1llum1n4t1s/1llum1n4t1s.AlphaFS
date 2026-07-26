@@ -1,4 +1,4 @@
-/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy 
  *  of this software and associated documentation files (the "Software"), to deal 
@@ -63,7 +63,7 @@ namespace AlphaFS.UnitTest
 
             var dirSecurity = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(dstFolder.FullName);
             dirSecurity.AddAccessRule(rule);
-            Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(dstFolder.FullName, dirSecurity);
+            Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(dstFolder.FullName, dirSecurity, System.Security.AccessControl.AccessControlSections.Access);
 
             try
             {
@@ -73,7 +73,7 @@ namespace AlphaFS.UnitTest
             {
                dirSecurity = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(dstFolder.FullName);
                dirSecurity.RemoveAccessRule(rule);
-               Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(dstFolder.FullName, dirSecurity);
+               Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(dstFolder.FullName, dirSecurity, System.Security.AccessControl.AccessControlSections.Access);
             }
          }
          
