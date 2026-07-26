@@ -29,7 +29,7 @@ rtk dotnet test tests/AlphaFS.UnitTest/AlphaFS.UnitTest.csproj --filter "FullyQu
 rtk dotnet pack src/AlphaFS/AlphaFS.csproj -c Release -o artifacts
 ```
 
-Tests use **MSTest** (`MSTest.TestFramework` 4.1.0). Many tests require elevated privileges or specific NTFS/network configurations, so some may skip or fail in non-privileged environments — treat those as environment-dependent rather than regressions.
+Tests use **MSTest** (`MSTest.TestFramework` 4.3.2). Many tests require elevated privileges or specific NTFS/network configurations, so some may skip or fail in non-privileged environments — treat those as environment-dependent rather than regressions.
 
 ## Architecture
 
