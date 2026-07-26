@@ -36,10 +36,11 @@ namespace AlphaFS.UnitTest
          AlphaFS_Shell32Info_GetVerbCommand(true);
       }
       
-      // TODO: Bad assumption. Can we think of something better here?
       private void AlphaFS_Shell32Info_GetVerbCommand(bool isNetwork)
       {
-         // Assumption: Extention: .txt is associated with: C:\Windows\System32\notepad.exe
+         // かつては ".txt は C:\Windows\System32\notepad.exe に関連付けられている" と決め打ちしていたが、
+         // 現行の Windows ではストア版メモ帳や任意のエディターが既定になり得るため成立しない。
+         // 特定のアプリを期待せず「実行可能ファイルを指すコマンド文字列が返ること」を検証する。
 
 
          using var tempRoot = new TemporaryDirectory(isNetwork);
@@ -56,15 +57,21 @@ namespace AlphaFS.UnitTest
          Console.WriteLine("\tMethod: Shell32Info.GetVerbCommand(\"{0}\")  == [{1}]", cmd, result);
 
 
-         Assert.IsTrue(result.StartsWith(System.IO.Path.Combine(Environment.SystemDirectory, "notepad.exe"), StringComparison.OrdinalIgnoreCase));
-            
+         // "open" 動詞は .txt に必ず関連付けられているので、実行可能ファイルを指すコマンドが返るはず。
+         Assert.IsFalse(Alphaleonis.Utils.IsNullOrWhiteSpace(result), "The \"open\" verb command is empty, but is expected not to.");
+         Assert.Contains(".exe", result, StringComparison.OrdinalIgnoreCase);
+
 
          cmd = "print";
          result = shell32Info.GetVerbCommand(cmd);
          Console.WriteLine("\tMethod: Shell32Info.GetVerbCommand(\"{0}\") == [{1}]\n", cmd, result);
 
 
-         Assert.IsTrue(result.StartsWith(System.IO.Path.Combine(Environment.SystemDirectory, "notepad.exe"), StringComparison.OrdinalIgnoreCase));
+         // "print" 動詞は関連付けられたアプリによっては存在しない。存在する場合だけ形式を検証する。
+         if (!Alphaleonis.Utils.IsNullOrWhiteSpace(result))
+         {
+            Assert.Contains(".exe", result, StringComparison.OrdinalIgnoreCase);
+         }
       }
    }
 }

@@ -121,7 +121,15 @@ namespace Alphaleonis.Win32.Security
       private static NativeMethods.TOKEN_ELEVATION_TYPE GetProcessElevationType()
       {
 
-         var success = NativeMethods.OpenProcessToken(Process.GetCurrentProcess().Handle, NativeMethods.TOKEN.TOKEN_READ, out var tokenHandle);
+         bool success;
+         SafeTokenHandle tokenHandle;
+
+         // Process インスタンスを保持せずに .Handle だけ渡すと、ネイティブ呼び出しの前に Process が
+         // 回収されてハンドルが閉じられ得る。using で呼び出し完了まで生存させる。
+         using (var process = Process.GetCurrentProcess())
+         {
+            success = NativeMethods.OpenProcessToken(process.Handle, NativeMethods.TOKEN.TOKEN_READ, out tokenHandle);
+         }
 
          var lastError = Marshal.GetLastWin32Error();
          if (!success)

@@ -244,11 +244,11 @@ namespace AlphaFS.UnitTest
          Console.WriteLine("\n\tFile system objects counted: {0:N0}", fsoCount);
 
 
-         Assert.IsGreaterThan(fsoCount, 0, "No files enumerated, but it is expected.");
+         Assert.IsGreaterThan(0, fsoCount, "No files enumerated, but it is expected.");
 
-         Assert.IsGreaterThan(foundExt1, 0, "No " + findExtensions[0] + " files enumerated, but it is expected.");
-         Assert.IsGreaterThan(foundExt2, 0, "No " + findExtensions[1] + " files enumerated, but it is expected.");
-         Assert.IsGreaterThan(foundExt3, 0, "No " + findExtensions[2] + " files enumerated, but it is expected.");
+         Assert.IsGreaterThan(0, foundExt1, "No " + findExtensions[0] + " files enumerated, but it is expected.");
+         Assert.IsGreaterThan(0, foundExt2, "No " + findExtensions[1] + " files enumerated, but it is expected.");
+         Assert.IsGreaterThan(0, foundExt3, "No " + findExtensions[2] + " files enumerated, but it is expected.");
 
 
          Console.WriteLine();

@@ -20,6 +20,7 @@
  */
 
 using System;
+using System.Globalization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AlphaFS.UnitTest
@@ -71,13 +72,15 @@ namespace AlphaFS.UnitTest
 
          if (!isNetwork)
          {
-            // Even 1 byte more or less results in failure, so do these tests asap.
-            
             var expected = new System.IO.DriveInfo(drive);
-            
 
-            Assert.AreEqual(expected.AvailableFreeSpace, actual.AvailableFreeSpace, "AvailableFreeSpace AlphaFS != System.IO");
-            Assert.AreEqual(expected.TotalFreeSpace, actual.TotalFreeSpace, "TotalFreeSpace AlphaFS != System.IO");
+
+            // 空き容量は 2 回の読み取りの間にも変動する (テストは並列実行され、他プロセスも書き込む)。
+            // 完全一致を要求すると本質的に不安定になるため、実装差を検知できる範囲の許容誤差で比較する。
+            AssertFreeSpaceClose(expected.AvailableFreeSpace, actual.AvailableFreeSpace, expected.TotalSize, "AvailableFreeSpace");
+            AssertFreeSpaceClose(expected.TotalFreeSpace, actual.TotalFreeSpace, expected.TotalSize, "TotalFreeSpace");
+
+            // 総容量は変動しないので完全一致を要求する。
             Assert.AreEqual(expected.TotalSize, actual.TotalSize, "TotalSize AlphaFS != System.IO");
 
 
@@ -101,6 +104,20 @@ namespace AlphaFS.UnitTest
          UnitTestConstants.Dump(actual.VolumeInfo);
 
          Console.WriteLine();
+      }
+
+
+      /// <summary>空き容量を許容誤差付きで比較する。実装差 (0 や別ボリュームの値) は検知しつつ、読み取り間の変動は許容する。</summary>
+      private static void AssertFreeSpaceClose(long expected, long actual, long totalSize, string propertyName)
+      {
+         // ドライブ全体の 1% か 256 MB の大きい方を許容幅とする。
+         var tolerance = Math.Max(totalSize / 100, 256L * 1024 * 1024);
+         var difference = Math.Abs(expected - actual);
+
+         Console.WriteLine("\t{0}: System.IO=[{1:N0}] AlphaFS=[{2:N0}] 差=[{3:N0}] 許容=[{4:N0}]", propertyName, expected, actual, difference, tolerance);
+
+         Assert.IsLessThanOrEqualTo(tolerance, difference,
+            string.Format(CultureInfo.CurrentCulture, "{0} の差が許容範囲を超えています。AlphaFS != System.IO", propertyName));
       }
    }
 }

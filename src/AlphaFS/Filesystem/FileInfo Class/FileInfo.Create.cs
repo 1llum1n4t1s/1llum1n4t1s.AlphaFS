@@ -33,7 +33,12 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public FileStream Create()
       {
-         return File.CreateFileStreamCore(Transaction, LongFullName, ExtendedFileAttributes.Normal, null, FileMode.Create, FileAccess.ReadWrite, FileShare.None, NativeMethods.DefaultFileBufferSize, PathFormat.LongFullPath);
+         var fileStream = File.CreateFileStreamCore(Transaction, LongFullName, ExtendedFileAttributes.Normal, null, FileMode.Create, FileAccess.ReadWrite, FileShare.None, NativeMethods.DefaultFileBufferSize, PathFormat.LongFullPath);
+
+         // System.IO は自身が行った変更でキャッシュ済みの状態を無効化する。同じ挙動にそろえる。
+         Refresh();
+
+         return fileStream;
       }
 
       #endregion // .NET

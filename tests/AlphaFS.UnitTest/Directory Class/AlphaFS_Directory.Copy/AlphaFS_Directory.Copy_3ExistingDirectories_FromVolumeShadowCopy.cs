@@ -40,6 +40,8 @@ namespace AlphaFS.UnitTest
       // TODO: This test potentially takes a very long time since it just copies three random directories which may be very large. Fix this!
       private void AlphaFS_Directory_Copy_3ExistingDirectories_FromVolumeShadowCopy(bool isNetwork)
       {
+         UnitTestConstants.RequireElevation("ボリュームシャドウコピーからのコピー");
+
          var testOk = false;
          
          using (var tempRoot = new TemporaryDirectory(isNetwork))

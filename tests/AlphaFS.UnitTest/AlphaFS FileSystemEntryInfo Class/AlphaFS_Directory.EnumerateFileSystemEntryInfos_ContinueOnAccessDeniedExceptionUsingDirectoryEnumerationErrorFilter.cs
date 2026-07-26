@@ -152,7 +152,7 @@ namespace AlphaFS.UnitTest
          Console.WriteLine("\n\tFile system objects counted: {0:N0}", fsoCount);
 
 
-         Assert.IsGreaterThan(fsoCount, 0, "No file system entries enumerated, but it is expected.");
+         Assert.IsGreaterThan(0, fsoCount, "No file system entries enumerated, but it is expected.");
 
          Assert.IsTrue(gotException, "The Exception is not caught, but it is expected.");
 

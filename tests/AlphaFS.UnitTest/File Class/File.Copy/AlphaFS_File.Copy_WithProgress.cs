@@ -98,7 +98,7 @@ namespace AlphaFS.UnitTest
 
             Console.WriteLine("\tCallback: Copied: [{0}%] --> [{1:N0}] bytes.", pct.ToString("N2", CultureInfo.CurrentCulture), totalBytesTransferred);
 
-            Assert.IsGreaterThan(totalBytesTransferred, 0);
+            Assert.IsGreaterThan(0, totalBytesTransferred);
 
 
             var bytes = Convert.ToInt64(userData);
@@ -111,7 +111,9 @@ namespace AlphaFS.UnitTest
 
             else
             {
-               Assert.IsLessThan(totalBytesTransferred, bytes);
+               // MSTest 4 の署名は IsLessThan(upperBound, value) で「value < upperBound」を検証する。
+               // 転送途中なので totalBytesTransferred < bytes を期待する。
+               Assert.IsLessThan(bytes, totalBytesTransferred);
             }
          }
 

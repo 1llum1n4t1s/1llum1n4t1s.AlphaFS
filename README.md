@@ -89,3 +89,23 @@ var info = new Shell32Info(path);
 // After
 using var info = new Shell32Info(path);
 ```
+
+### 5. `System.IO` の現行挙動に合わせた変更
+
+.NET Framework 時代の挙動を引き継いでいた箇所を、ドロップイン代替として現行の `System.IO` に合わせました。
+
+| API | Before (this fork) | After |
+|---|---|---|
+| `Path.Combine("C:", "file")` | `C:file` (ドライブ相対) | `C:\file` |
+| `DirectoryInfo.Parent` / `Root` / 列挙結果の `ToString()` | 名前のみ (`MyFolder`) | フルパス (`C:\dir\MyFolder`) |
+| `FileInfo` / `DirectoryInfo` の `Create()` / `Delete()` | キャッシュを保持（`Refresh()` まで `Exists` が古い値） | 自動でキャッシュを無効化 |
+
+`Path.GetFullPath` / `GetPathRoot` の拡張長パス (`\\?\`) 処理や、不正なパスに対する例外送出は
+AlphaFS が意図的に `System.IO` より厳格なままです（本ライブラリの目的のため変更していません）。
+
+### 6. `OperatingSystem.EnumOsName` に新しい値を追加
+
+Windows 11 以降を `Later` として扱っていたのを改め、専用の値を割り当てました。
+`Later` は「このライブラリが知らない将来の OS」だけを表します。既存の値は変更していません。
+
+追加値: `WindowsServer2019` / `Windows11` / `WindowsServer2022` / `WindowsServer2025`

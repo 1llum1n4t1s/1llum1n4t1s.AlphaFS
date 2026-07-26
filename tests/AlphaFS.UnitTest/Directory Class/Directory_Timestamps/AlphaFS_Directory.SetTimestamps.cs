@@ -39,6 +39,8 @@ namespace AlphaFS.UnitTest
 
       private void AlphaFS_Directory_SetTimestamps(bool isNetwork)
       {
+         UnitTestConstants.RequireElevation("ディレクトリのタイムスタンプ変更");
+
          using (var tempRoot = new TemporaryDirectory(isNetwork))
          {
             var folder = tempRoot.CreateDirectoryRandomizedAttributes();

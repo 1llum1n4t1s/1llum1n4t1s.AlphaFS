@@ -35,6 +35,8 @@ namespace AlphaFS.UnitTest
       {
          UnitTestConstants.PrintUnitTestHeader(false);
 
+         UnitTestConstants.RequireElevation("サーバー統計情報の取得");
+
          var host = Environment.MachineName;
 
          Console.WriteLine("Input Host Name: [{0}]", host);

@@ -45,10 +45,16 @@ jobs:
         shell: pwsh
 
       - name: Run unit tests
-        # 多くのテストは管理者権限や特定 NTFS / SMB 構成を必要とし、windows-latest agent では Assert.Inconclusive で
-        # 自然に skip される。Assert.Fail で落ちるテストはリリースを止めるべき本物のリグレッションのため、
-        # ここでフィルタなく走らせる。privileged テストの分離は別タスクで継続。
-        run: dotnet test AlphaFS.slnx -c Release --no-build --logger "console;verbosity=normal"
+        # MSTest 4.x は Microsoft.Testing.Platform (MTP) v2 を使う。VSTest 専用の `--logger` は MTP では
+        # 不正な引数となり、テストを 1 件も実行しないまま exit 5 で抜けてしまうため指定しない
+        # (MTP は既定でコンソールへ結果を出力する)。MTP モードへの切り替えは repo 直下の global.json で行う。
+        #
+        # ALPHAFS_SKIP_NETWORK_TESTS: runner には SMB 管理共有が無いため、ネットワーク側の検証は
+        # Assert.Inconclusive で skip する。ローカル側は先に実行されるのでリグレッションは検知できる。
+        # 管理者権限が必要な検証も同様に skip されるため、失敗はすべて本物のリグレッションとして扱う。
+        env:
+          ALPHAFS_SKIP_NETWORK_TESTS: '1'
+        run: dotnet test AlphaFS.slnx -c Release --no-build
 
       - name: Pack
         run: dotnet pack src/AlphaFS/AlphaFS.csproj -c Release --no-build -o artifacts

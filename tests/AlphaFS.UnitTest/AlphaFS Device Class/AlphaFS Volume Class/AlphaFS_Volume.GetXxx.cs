@@ -35,7 +35,9 @@ namespace AlphaFS.UnitTest
          UnitTestConstants.PrintUnitTestHeader(false);
 
 
-         var deviceNamePrefix = Alphaleonis.Win32.Filesystem.Path.DevicePrefix + "HarddiskVolume";
+         // デバイス名は構成により "\Device\HarddiskVolume4" にも "\Device\Volume{GUID}" にもなる
+         // (記憶域スペース / 動的ボリューム / VHD など)。特定の形式ではなく "\Device\" 配下であることを検証する。
+         var deviceNamePrefix = Alphaleonis.Win32.Filesystem.Path.DevicePrefix;
 
          var volumePrefix = Alphaleonis.Win32.Filesystem.Path.VolumePrefix + "{";
          

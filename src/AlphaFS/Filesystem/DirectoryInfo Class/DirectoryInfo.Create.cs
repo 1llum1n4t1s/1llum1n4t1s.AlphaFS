@@ -35,6 +35,9 @@ namespace Alphaleonis.Win32.Filesystem
       public void Create()
       {
          Directory.CreateDirectoryCore(true, Transaction, LongFullName, null, null, false, PathFormat.LongFullPath);
+
+         // System.IO は自身が行った変更でキャッシュ済みの状態を無効化する。同じ挙動にそろえる。
+         Refresh();
       }
 
 
@@ -46,6 +49,9 @@ namespace Alphaleonis.Win32.Filesystem
       public void Create(DirectorySecurity directorySecurity)
       {
          Directory.CreateDirectoryCore(true, Transaction, LongFullName, null, directorySecurity, false, PathFormat.LongFullPath);
+
+         // System.IO は自身が行った変更でキャッシュ済みの状態を無効化する。同じ挙動にそろえる。
+         Refresh();
       }
 
       #endregion // .NET
@@ -58,7 +64,12 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public DirectoryInfo Create(bool compress)
       {
-         return Directory.CreateDirectoryCore(true, Transaction, LongFullName, null, null, compress, PathFormat.LongFullPath);
+         var directoryInfo = Directory.CreateDirectoryCore(true, Transaction, LongFullName, null, null, compress, PathFormat.LongFullPath);
+
+         // System.IO は自身が行った変更でキャッシュ済みの状態を無効化する。同じ挙動にそろえる。
+         Refresh();
+
+         return directoryInfo;
       }
 
 
@@ -70,7 +81,12 @@ namespace Alphaleonis.Win32.Filesystem
       [SecurityCritical]
       public DirectoryInfo Create(DirectorySecurity directorySecurity, bool compress)
       {
-         return Directory.CreateDirectoryCore(true, Transaction, LongFullName, null, directorySecurity, compress, PathFormat.LongFullPath);
+         var directoryInfo = Directory.CreateDirectoryCore(true, Transaction, LongFullName, null, directorySecurity, compress, PathFormat.LongFullPath);
+
+         // System.IO は自身が行った変更でキャッシュ済みの状態を無効化する。同じ挙動にそろえる。
+         Refresh();
+
+         return directoryInfo;
       }
    }
 }

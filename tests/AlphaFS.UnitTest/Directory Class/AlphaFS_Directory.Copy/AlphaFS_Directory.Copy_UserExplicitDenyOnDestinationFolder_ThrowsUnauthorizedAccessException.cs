@@ -39,6 +39,8 @@ namespace AlphaFS.UnitTest
 
       private void AlphaFS_Directory_Copy_UserExplicitDenyOnDestinationFolder_ThrowsUnauthorizedAccessException(bool isNetwork)
       {
+         UnitTestConstants.RequireElevation("拒否 ACL 付きコピー先へのコピー");
+
          using (var tempRoot = new TemporaryDirectory(isNetwork))
          {
             var srcFolder = tempRoot.CreateTree();

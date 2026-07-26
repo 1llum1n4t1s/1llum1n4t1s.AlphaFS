@@ -20,12 +20,76 @@
  */
 
 using System;
+using System.Globalization;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AlphaFS.UnitTest
 {
    /// <summary>Containts static variables, used by unit tests.</summary>
    public static partial class UnitTestConstants
    {
+      /// <summary>ネットワーク側の検証を明示的に無効化する環境変数。CI のように SMB 管理共有へ到達できない環境で 1 / true を設定する。</summary>
+      public const string SkipNetworkTestsVariable = "ALPHAFS_SKIP_NETWORK_TESTS";
+
+      private static readonly Lazy<bool> NetworkShareAvailable = new Lazy<bool>(DetectNetworkShare);
+
+
+      /// <summary>UNC (管理共有) 経由の検証が実行できる環境かどうか。</summary>
+      public static bool IsNetworkTestingAvailable
+      {
+         get { return NetworkShareAvailable.Value; }
+      }
+
+
+      private static bool DetectNetworkShare()
+      {
+         var skip = Environment.GetEnvironmentVariable(SkipNetworkTestsVariable);
+
+         if (!string.IsNullOrWhiteSpace(skip) && !skip.Equals("0", StringComparison.OrdinalIgnoreCase) && !skip.Equals("false", StringComparison.OrdinalIgnoreCase))
+         {
+            return false;
+         }
+
+         // 実際に管理共有へ到達できるかを 1 度だけ確認する。到達できない環境ではネットワーク側の検証を skip する。
+         try
+         {
+            return System.IO.Directory.Exists(Alphaleonis.Win32.Filesystem.Path.LocalToUnc(Environment.SystemDirectory));
+         }
+         catch (Exception)
+         {
+            return false;
+         }
+      }
+
+
+      /// <summary>
+      ///   管理者権限が必要な検証を、非特権環境では失敗ではなく skip として扱う。
+      /// </summary>
+      /// <remarks>
+      ///   ACL の拒否設定、ボリュームシャドウコピー、タイムスタンプ変更などは昇格した状態でしか成功しない。
+      ///   CI runner や通常のユーザーセッションでは実行できないため、リグレッションと区別できるよう skip する。
+      /// </remarks>
+      public static void RequireElevation(string what)
+      {
+         if (!Alphaleonis.Win32.Security.ProcessContext.IsElevatedProcess)
+         {
+            Assert.Inconclusive(string.Format(CultureInfo.CurrentCulture, "管理者権限が必要なため {0} の検証を skip しました。", what));
+         }
+      }
+
+
+      /// <summary>
+      ///   ネットワーク共有 (SMB 管理共有 / ドライブ割り当て) が前提の検証を、到達できない環境では skip として扱う。
+      /// </summary>
+      public static void RequireNetworkTesting(string what)
+      {
+         if (!IsNetworkTestingAvailable)
+         {
+            Assert.Inconclusive(string.Format(CultureInfo.CurrentCulture, "ネットワーク共有へ到達できないため {0} の検証を skip しました。", what));
+         }
+      }
+
+
       public static void PrintUnitTestHeader(bool? isNetwork = null)
       {
          if (null == isNetwork)
@@ -40,6 +104,14 @@ namespace AlphaFS.UnitTest
 
 
          Console.WriteLine();
+
+
+         // ネットワーク共有へ到達できない環境では、失敗ではなく skip として扱う。
+         // ローカル側の検証は先に実行済みなので、本物のリグレッションは引き続き検知できる。
+         if (isNetwork.HasValue && isNetwork.Value && !IsNetworkTestingAvailable)
+         {
+            Assert.Inconclusive("ネットワーク共有 (SMB 管理共有) へ到達できないため、ネットワーク側の検証を skip しました。");
+         }
       }
    }
 }

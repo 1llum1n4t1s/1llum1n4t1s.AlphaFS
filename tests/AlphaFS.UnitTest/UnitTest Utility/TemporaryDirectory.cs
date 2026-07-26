@@ -36,6 +36,9 @@ namespace AlphaFS.UnitTest
 
       public TemporaryDirectory(bool isNetwork, string folderPrefix = null, string root = null)
       {
+         // ネットワーク共有へ到達できない環境では、UNC パスを組み立てる前に skip する。
+         UnitTestConstants.PrintUnitTestHeader(isNetwork);
+
          if (Alphaleonis.Utils.IsNullOrWhiteSpace(folderPrefix))
          {
             folderPrefix = "AlphaFS.TempRoot";
@@ -50,9 +53,6 @@ namespace AlphaFS.UnitTest
          {
             root = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(root);
          }
-
-
-         UnitTestConstants.PrintUnitTestHeader(isNetwork);
 
 
          do

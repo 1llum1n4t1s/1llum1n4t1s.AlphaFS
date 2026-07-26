@@ -40,6 +40,9 @@ namespace Alphaleonis.Win32.Filesystem
       public override void Delete()
       {
          Directory.DeleteDirectoryCore(Transaction, EntryInfo, null, false, false, false, PathFormat.LongFullPath);
+
+         // System.IO は自身が行った変更でキャッシュ済みの状態を無効化する。同じ挙動にそろえる。
+         Refresh();
       }
 
 
@@ -59,6 +62,9 @@ namespace Alphaleonis.Win32.Filesystem
       public void Delete(bool recursive)
       {
          Directory.DeleteDirectoryCore(Transaction, EntryInfo, null, recursive, false, false, PathFormat.LongFullPath);
+
+         // System.IO は自身が行った変更でキャッシュ済みの状態を無効化する。同じ挙動にそろえる。
+         Refresh();
       }
 
       #endregion // .NET
@@ -81,6 +87,9 @@ namespace Alphaleonis.Win32.Filesystem
       public void Delete(bool recursive, bool ignoreReadOnly)
       {
          Directory.DeleteDirectoryCore(Transaction, EntryInfo, null, recursive, ignoreReadOnly, false, PathFormat.LongFullPath);
+
+         // System.IO は自身が行った変更でキャッシュ済みの状態を無効化する。同じ挙動にそろえる。
+         Refresh();
       }
 
 
@@ -102,6 +111,9 @@ namespace Alphaleonis.Win32.Filesystem
       public void Delete(bool recursive, bool ignoreReadOnly, bool continueOnNotFound)
       {
          Directory.DeleteDirectoryCore(Transaction, EntryInfo, null, recursive, ignoreReadOnly, continueOnNotFound, PathFormat.LongFullPath);
+
+         // System.IO は自身が行った変更でキャッシュ済みの状態を無効化する。同じ挙動にそろえる。
+         Refresh();
       }
    }
 }

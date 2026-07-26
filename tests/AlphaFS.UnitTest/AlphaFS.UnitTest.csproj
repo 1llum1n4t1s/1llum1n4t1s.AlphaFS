@@ -4,6 +4,12 @@
     <TargetFramework>net10.0-windows</TargetFramework>
     <PlatformTarget>x64</PlatformTarget>
     <IsPackable>false</IsPackable>
+    <!-- MSTest 4.x は Microsoft.Testing.Platform (MTP) v2 を同梱しており、.NET 10 SDK では
+         VSTest 経由の `dotnet test` をサポートしない。MTP ランナーを有効化し、テストプロジェクトを
+         実行可能ホスト (Exe) としてビルドする。リポジトリ直下の global.json で
+         `dotnet test` 側も MTP モードへ切り替えている。 -->
+    <EnableMSTestRunner>true</EnableMSTestRunner>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MSTest.TestAdapter" Version="4.3.2" />

@@ -35,7 +35,10 @@ namespace AlphaFS.UnitTest
          UnitTestConstants.PrintUnitTestHeader(false);
 
          const string path = @"\\\\.txt";
-         Assert.ThrowsExactly<ArgumentException>(() => System.IO.Path.GetFullPath(path));
+         // .NET Core 以降の System.IO.Path.GetFullPath は不正な UNC 形式を検証せず正規化して返す。
+         // 正規化後の文字列は実装詳細なので固定せず、「例外を投げない」ことだけを確認する。
+         // AlphaFS は \\server\share 形式を検証し ArgumentException を投げる (意図的な差異)。
+         Console.WriteLine("System.IO.Path.GetFullPath: [{0}]", System.IO.Path.GetFullPath(path));
 
          Assert.ThrowsExactly<ArgumentException>(() => Alphaleonis.Win32.Filesystem.Path.GetFullPath(path));
       }

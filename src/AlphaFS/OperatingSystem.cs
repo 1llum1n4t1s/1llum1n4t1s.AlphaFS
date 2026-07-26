@@ -79,7 +79,20 @@ namespace Alphaleonis.Win32
          /// <summary>Windows Server 2016</summary>
          WindowsServer2016 = 12,
 
+         /// <summary>Windows Server 2019 (build 17763+)。</summary>
+         WindowsServer2019 = 13,
+
+         /// <summary>Windows 11 (build 22000+)。</summary>
+         Windows11 = 14,
+
+         /// <summary>Windows Server 2022 (build 20348+)。</summary>
+         WindowsServer2022 = 15,
+
+         /// <summary>Windows Server 2025 (build 26100+)。</summary>
+         WindowsServer2025 = 16,
+
          /// <summary>現在インストールされているものより後のバージョンの Windows。</summary>
+         /// <remarks>既知の OS には専用の値を割り当てるため、この値は「このライブラリが知らない将来の OS」だけを表す。</remarks>
          Later = 65535
       }
 
@@ -143,11 +156,17 @@ namespace Alphaleonis.Win32
          {
             if (null == _isWow64Process)
             {
-               var processHandle = Process.GetCurrentProcess().Handle;
+               // Process インスタンスを変数に保持せずに .Handle だけ取り出すと、ネイティブ呼び出しの前に
+               // Process が回収・ファイナライズされてハンドルが閉じられ、ERROR_INVALID_HANDLE になり得る。
+               // using で呼び出しが終わるまで確実に生存させる。
+               bool value;
 
-               if (!NativeMethods.IsWow64Process(processHandle, out var value))
+               using (var process = Process.GetCurrentProcess())
                {
-                  throw new Win32Exception(Marshal.GetLastWin32Error());
+                  if (!NativeMethods.IsWow64Process(process.Handle, out value))
+                  {
+                     throw new Win32Exception(Marshal.GetLastWin32Error());
+                  }
                }
 
                // プロセスが WOW64 で実行されている場合に TRUE に設定される値へのポインター。
@@ -313,11 +332,7 @@ namespace Alphaleonis.Win32
 
 
          // 2026-05-17: Windows 11 / Server 2022 以降も dwMajorVersion=10 を返す（Build 番号で識別する必要がある）。
-         // Build 22000+: Windows 11 (workstation)
-         // Build 20348:  Windows Server 2022
-         // Build 26100+: Windows 11 24H2 / Windows Server 2025
-         // EnumOsName に専用値（Windows11 等）が無いため、Windows 10 / Server 2016 より新しい OS は Later 扱いとし、
-         // 誤判定（Windows 11 を Windows10 と返す）を防ぐ。enum 拡張は将来の破壊的変更扱いとして保留。
+         // Later は「このライブラリが知らない将来の OS」専用。既知の OS は必ず専用の EnumOsName に解決する。
          if (verInfo.dwMajorVersion > 10)
          {
             _enumOsName = EnumOsName.Later;
@@ -331,16 +346,21 @@ namespace Alphaleonis.Win32
 
                case 10:
 
-                  // Windows 10 / Server 2016 と、それ以降 (Windows 11 / Server 2022 / Server 2025) を Build 番号で区別する。
+                  // major=10 の系列は Build 番号でしか世代を区別できない。
                   if (verInfo.wProductType == NativeMethods.VER_NT_WORKSTATION)
                   {
-                     // Build 22000+ = Windows 11 (Server 2022 は Server 区分なのでここには来ない)
-                     _enumOsName = verInfo.dwBuildNumber >= 22000 ? EnumOsName.Later : EnumOsName.Windows10;
+                     // Build 22000+ = Windows 11 (Server 系は Server 区分なのでここには来ない)
+                     _enumOsName = verInfo.dwBuildNumber >= 22000 ? EnumOsName.Windows11 : EnumOsName.Windows10;
                   }
+
                   else
                   {
-                     // Build 20348+ = Windows Server 2022, 26100+ = Windows Server 2025
-                     _enumOsName = verInfo.dwBuildNumber >= 20348 ? EnumOsName.Later : EnumOsName.WindowsServer2016;
+                     // 26100+ = Server 2025, 20348+ = Server 2022, 17763+ = Server 2019, それ未満 = Server 2016
+                     _enumOsName =
+                        verInfo.dwBuildNumber >= 26100 ? EnumOsName.WindowsServer2025 :
+                        verInfo.dwBuildNumber >= 20348 ? EnumOsName.WindowsServer2022 :
+                        verInfo.dwBuildNumber >= 17763 ? EnumOsName.WindowsServer2019 :
+                                                         EnumOsName.WindowsServer2016;
                   }
 
                   break;

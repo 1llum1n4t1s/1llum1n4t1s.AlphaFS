@@ -29,10 +29,16 @@ namespace AlphaFS.UnitTest
       // Pattern: <class>_<function>_<scenario>_<expected result>
 
 
+      // ドライブ文字の割り当てはマシン全体の状態を変えるため、ドライブを列挙する他テストと並列実行させない。
+      [DoNotParallelize]
       [TestMethod]
       public void AlphaFS_Directory_Move_FileToMappedDriveLetter_LocalAndNetwork_Success()
       {
          // Do not pass isNetwork, as to always use UnitTestConstants.TempPath
+
+         // ローカル側の検証であっても UNC 共有へのドライブ割り当てが必要なため、
+         // 共有へ到達できない環境では skip する。
+         UnitTestConstants.RequireNetworkTesting("マップされたドライブ文字への移動");
 
          using (var tempRoot = new TemporaryDirectory())
          {

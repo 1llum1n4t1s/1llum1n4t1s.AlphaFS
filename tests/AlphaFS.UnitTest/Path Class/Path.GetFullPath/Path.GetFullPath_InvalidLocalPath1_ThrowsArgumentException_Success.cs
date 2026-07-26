@@ -34,9 +34,14 @@ namespace AlphaFS.UnitTest
       {
          UnitTestConstants.PrintUnitTestHeader(false);
 
-         UnitTestAssert.ThrowsException<ArgumentException>(() => System.IO.Path.GetFullPath(UnitTestConstants.SysDrive + @"\?test.txt"));
+         var path = UnitTestConstants.SysDrive + @"\?test.txt";
 
-         UnitTestAssert.ThrowsException<ArgumentException>(() => Alphaleonis.Win32.Filesystem.Path.GetFullPath(UnitTestConstants.SysDrive + @"\?test.txt"));
+         // .NET Framework 時代の System.IO.Path.GetFullPath は不正文字を検証して ArgumentException を投げていたが、
+         // .NET Core 以降は検証を行わずパスをそのまま返す。AlphaFS は意図的に従来どおり検証を続けるため、
+         // ここでは「AlphaFS の方が厳格である」という差異を明示的に固定する。
+         Assert.AreEqual(path, System.IO.Path.GetFullPath(path));
+
+         UnitTestAssert.ThrowsException<ArgumentException>(() => Alphaleonis.Win32.Filesystem.Path.GetFullPath(path));
 
          // @"\*test.txt");
          // @"\\test.txt");

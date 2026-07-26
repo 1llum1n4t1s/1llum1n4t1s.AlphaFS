@@ -42,6 +42,41 @@ namespace AlphaFS.UnitTest
       };
 
 
+      /// <summary>
+      ///   AlphaFS が System.IO と意図的に異なる結果を返す入力パスかどうかを判定する。
+      /// </summary>
+      /// <remarks>
+      ///   AlphaFS は拡張長プレフィックス (<c>\\?\</c>) を解決・除去して通常形式のパスを返すのが仕様であり、
+      ///   プレフィックスを保持する System.IO とは結果が一致しない。また UNC ルート (<c>\\server\share</c>) を
+      ///   ルートではなく 1 つの構成要素として扱うため、GetFileName 系の結果も一致しない。
+      ///   これらは不具合ではなくライブラリの目的そのものなので、System.IO との等価表明の対象から外す。
+      /// </remarks>
+      public static bool DivergesFromSystemIo(string path)
+      {
+         if (Alphaleonis.Utils.IsNullOrWhiteSpace(path))
+         {
+            return false;
+         }
+
+         // 拡張長プレフィックス (\\?\ および \\?\UNC\) を含むパス。
+         if (path.StartsWith(Alphaleonis.Win32.Filesystem.Path.LongPathPrefix, StringComparison.Ordinal))
+         {
+            return true;
+         }
+
+         // UNC ルート (\\server\share) そのもの。末尾に構成要素が無いものだけが対象。
+         if (path.StartsWith(Alphaleonis.Win32.Filesystem.Path.UncPrefix, StringComparison.Ordinal))
+         {
+            var parts = path.Substring(Alphaleonis.Win32.Filesystem.Path.UncPrefix.Length)
+               .Split(new[] { Alphaleonis.Win32.Filesystem.Path.DirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries);
+
+            return parts.Length <= 2;
+         }
+
+         return false;
+      }
+
+
       public static readonly string[] InputPaths =
       {
          @".",

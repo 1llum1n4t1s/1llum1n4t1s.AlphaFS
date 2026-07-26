@@ -59,8 +59,10 @@ namespace AlphaFS.UnitTest
             diAlphaFS.Create();
             existsSysIo = diSysIo.Exists;
             exists = diAlphaFS.Exists;
+            // Create() / Delete() は自身が行った変更でキャッシュ済みの状態を無効化するため、
+            // Refresh() を待たずに Exists が最新の値を返す (System.IO と同じ挙動)。
             Assert.AreEqual(existsSysIo, exists);
-            Assert.IsFalse(exists, "The directory exists, but is expected not to.");
+            Assert.IsTrue(exists, "The directory does not exist, but is expected to.");
 
 
             diSysIo.Refresh();
@@ -76,7 +78,7 @@ namespace AlphaFS.UnitTest
             existsSysIo = diSysIo.Exists;
             exists = diAlphaFS.Exists;
             Assert.AreEqual(existsSysIo, exists);
-            Assert.IsTrue(exists, "The directory does not exists, but is expected to.");
+            Assert.IsFalse(exists, "The directory exists, but is expected not to.");
 
 
             diSysIo.Refresh();

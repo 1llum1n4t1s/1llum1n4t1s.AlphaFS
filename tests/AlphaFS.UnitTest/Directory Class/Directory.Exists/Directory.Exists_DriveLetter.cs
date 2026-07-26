@@ -78,8 +78,10 @@ namespace AlphaFS.UnitTest
 
 
 
-         // \\?\C:
-         sysIOshouldBe = false;
+         // \\?\C:  /  \\?\UNC\SERVER\C$
+         // ローカルのドライブ形式 (\\?\C:) は末尾に区切り文字が無いと System.IO が解釈できず false になるが、
+         // UNC 形式 (\\?\UNC\...) は区切り文字が無くても解釈できるため true になる。
+         sysIOshouldBe = isNetwork;
          inputDrive = isNetwork ? Alphaleonis.Win32.Filesystem.Path.LongPathUncPrefix + driveSysIO.TrimStart('\\') : Alphaleonis.Win32.Filesystem.Path.LongPathPrefix + driveSysIO;
          existSysIO = System.IO.Directory.Exists(inputDrive);
          existAlpha = Alphaleonis.Win32.Filesystem.Directory.Exists(inputDrive);
@@ -94,7 +96,9 @@ namespace AlphaFS.UnitTest
 
 
          // \\?\C:\
-         sysIOshouldBe = false;
+         // 末尾に区切り文字が付く形式は .NET Core 以降の System.IO も解釈できるようになり true を返す
+         // (区切り無しの \\?\C: は依然として false)。AlphaFS はどちらの形式でも true。
+         sysIOshouldBe = true;
          inputDrive = (isNetwork ? Alphaleonis.Win32.Filesystem.Path.LongPathUncPrefix + driveSysIO.TrimStart('\\') : Alphaleonis.Win32.Filesystem.Path.LongPathPrefix + driveSysIO) + @"\";
          existSysIO = System.IO.Directory.Exists(inputDrive);
          existAlpha = Alphaleonis.Win32.Filesystem.Directory.Exists(inputDrive);

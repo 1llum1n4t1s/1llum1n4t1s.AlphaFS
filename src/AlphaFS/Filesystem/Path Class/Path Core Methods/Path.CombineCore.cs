@@ -72,7 +72,10 @@ namespace Alphaleonis.Win32.Filesystem
 
                var ch = paths[index][paths[index].Length - 1];
 
-               if (!IsDVsc(ch, null))
+               // ディレクトリ区切りのみを見る (ボリューム区切り ':' は含めない)。
+               // .NET Framework は "C:" + "file" を "C:file" (ドライブ相対) にしていたが、
+               // .NET Core 以降の System.IO.Path.Combine は "C:\file" を返す。ドロップイン代替として現行挙動に合わせる。
+               if (!IsDVsc(ch, false))
                {
                   ++capacity;
                }
@@ -95,7 +98,8 @@ namespace Alphaleonis.Win32.Filesystem
                {
                   var ch = buffer[buffer.Length - 1];
 
-                  if (!IsDVsc(ch, null))
+                  // capacity 計算と同じ判定にそろえる (ボリューム区切り ':' は区切りとみなさない)。
+                  if (!IsDVsc(ch, false))
                   {
                      buffer.Append(DirectorySeparatorChar);
                   }

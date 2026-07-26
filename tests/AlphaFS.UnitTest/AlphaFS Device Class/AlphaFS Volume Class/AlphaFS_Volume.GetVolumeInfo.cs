@@ -73,7 +73,19 @@ namespace AlphaFS.UnitTest
                }
 
 
-               var volInfo = Alphaleonis.Win32.Filesystem.Volume.GetVolumeInfo(driveName);
+               Alphaleonis.Win32.Filesystem.VolumeInfo volInfo;
+
+               try
+               {
+                  volInfo = Alphaleonis.Win32.Filesystem.Volume.GetVolumeInfo(driveName);
+               }
+               catch (Exception ex)
+               {
+                  // 到達できないマップ済みドライブ (割り当て先が削除済みなど) は検証対象外。
+                  // ローカル側の分岐と同じ扱いにする。
+                  Console.WriteLine("\nCaught (UNEXPECTED) {0}: [{1}]\n", ex.GetType().FullName, ex.Message.Replace(Environment.NewLine, "  "));
+                  continue;
+               }
 
                UnitTestConstants.Dump(volInfo);
 
@@ -128,7 +140,7 @@ namespace AlphaFS.UnitTest
          }
 
 
-         Assert.IsGreaterThan(logicalDriveCount, 0, "No logical drives enumerated, but it is expected.");
+         Assert.IsGreaterThan(0, logicalDriveCount, "No logical drives enumerated, but it is expected.");
 
 
          Console.WriteLine();

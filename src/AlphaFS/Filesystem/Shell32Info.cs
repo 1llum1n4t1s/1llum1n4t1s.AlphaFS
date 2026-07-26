@@ -96,7 +96,10 @@ namespace Alphaleonis.Win32.Filesystem
       private static string GetString(NativeMethods.QueryAssociationsWrapper iQa, Shell32.AssociationString assocString, string shellVerb)
       {
          // COMラッパーが初期化されていないか破棄されている場合のnullポインター逆参照を回避します。
-         if (null == iQa || !iQa.IsValid)
+         // Init に失敗した IQueryAssociations (拡張子のないファイルなど関連付けが解決できない場合) へ
+         // GetString を発行すると、shlwapi 内部でアクセス違反 (0xC0000005) が起きてプロセスが即死するため、
+         // ポインタの有効性だけでなく初期化済みかどうかも確認する。
+         if (null == iQa || !iQa.IsValid || !iQa.IsInitialized)
          {
             return string.Empty;
          }

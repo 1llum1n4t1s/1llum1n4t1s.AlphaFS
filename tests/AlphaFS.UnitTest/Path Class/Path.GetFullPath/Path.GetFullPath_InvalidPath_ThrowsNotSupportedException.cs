@@ -34,9 +34,13 @@ namespace AlphaFS.UnitTest
       {
          UnitTestConstants.PrintUnitTestHeader(false);
 
-         UnitTestAssert.ThrowsException<NotSupportedException>(() => System.IO.Path.GetFullPath(UnitTestConstants.SysDrive + @"\dev\test\aaa:aaa.txt"));
+         var path = UnitTestConstants.SysDrive + @"\dev\test\aaa:aaa.txt";
 
-         UnitTestAssert.ThrowsException<NotSupportedException>(() => Alphaleonis.Win32.Filesystem.Path.GetFullPath(UnitTestConstants.SysDrive + @"\dev\test\aaa:aaa.txt"));
+         // .NET Core 以降の System.IO.Path.GetFullPath は代替データストリーム構文 (aaa:aaa.txt) を拒否せず
+         // そのまま返す。AlphaFS は従来どおり NotSupportedException を投げる (意図的な差異)。
+         Assert.AreEqual(path, System.IO.Path.GetFullPath(path));
+
+         UnitTestAssert.ThrowsException<NotSupportedException>(() => Alphaleonis.Win32.Filesystem.Path.GetFullPath(path));
       }
    }
 }

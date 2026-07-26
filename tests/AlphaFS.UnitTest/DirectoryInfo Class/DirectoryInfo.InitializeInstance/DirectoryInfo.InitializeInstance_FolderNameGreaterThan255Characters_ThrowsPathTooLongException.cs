@@ -57,7 +57,11 @@ namespace AlphaFS.UnitTest
             Console.WriteLine();
 
 
-            UnitTestAssert.ThrowsException<System.IO.PathTooLongException>(() => new System.IO.DirectoryInfo(isNetwork ? unc : local));
+            // .NET Framework の System.IO はコンストラクター時点で長さを検証し PathTooLongException を投げていたが、
+            // .NET Core 以降は検証せず、実際の I/O 時まで例外にならない。
+            // AlphaFS は NTFS のコンポーネント長制限 (255 文字) を従来どおり検証する (意図的な差異)。
+            var sysIo = new System.IO.DirectoryInfo(isNetwork ? unc : local);
+            Assert.IsNotNull(sysIo);
 
             UnitTestAssert.ThrowsException<System.IO.PathTooLongException>(() => new Alphaleonis.Win32.Filesystem.DirectoryInfo(isNetwork ? unc : local));
          }

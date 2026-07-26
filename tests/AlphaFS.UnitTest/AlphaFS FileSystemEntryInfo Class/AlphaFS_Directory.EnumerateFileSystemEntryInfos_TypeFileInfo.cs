@@ -59,7 +59,7 @@ namespace AlphaFS.UnitTest
          }
 
 
-         Assert.IsGreaterThan(count, 0, "Nothing is enumerated, but it is expected.");
+         Assert.IsGreaterThan(0, count, "Nothing is enumerated, but it is expected.");
       }
    }
 }

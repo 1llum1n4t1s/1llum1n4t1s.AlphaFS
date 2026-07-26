@@ -55,12 +55,14 @@ namespace AlphaFS.UnitTest
             Assert.IsFalse(exists, "The file exists, but is expected not to.");
 
 
+            // Create() / Delete() は自身が行った変更でキャッシュ済みの状態を無効化するため、
+            // Refresh() を待たずに Exists が最新の値を返す (System.IO と同じ挙動)。
             var fsSysIo = fiSysIo.Create();
             var fsAlphaFS = fiAlphaFS.Create();
             existsSysIo = fiSysIo.Exists;
             exists = fiAlphaFS.Exists;
             Assert.AreEqual(existsSysIo, exists);
-            Assert.IsFalse(exists, "The file exists, but is expected not to.");
+            Assert.IsTrue(exists, "The file does not exist, but is expected to.");
 
 
             fiSysIo.Refresh();
@@ -78,7 +80,7 @@ namespace AlphaFS.UnitTest
             existsSysIo = fiSysIo.Exists;
             exists = fiAlphaFS.Exists;
             Assert.AreEqual(existsSysIo, exists);
-            Assert.IsTrue(exists, "The file does not exists, but is expected to.");
+            Assert.IsFalse(exists, "The file exists, but is expected not to.");
 
 
             fiSysIo.Refresh();

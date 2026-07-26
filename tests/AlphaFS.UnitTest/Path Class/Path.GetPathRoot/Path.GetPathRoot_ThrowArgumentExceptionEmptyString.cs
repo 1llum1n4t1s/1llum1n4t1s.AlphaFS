@@ -34,8 +34,10 @@ namespace AlphaFS.UnitTest
       {
          UnitTestConstants.PrintUnitTestHeader(false);
 
-         UnitTestAssert.ThrowsException<ArgumentException>(() => System.IO.Path.GetPathRoot(string.Empty));
-         
+         // .NET Core 以降の System.IO.Path.GetPathRoot は空文字に対して例外ではなく null を返す。
+         // AlphaFS は従来どおり ArgumentException を投げる (意図的な差異)。
+         Assert.IsNull(System.IO.Path.GetPathRoot(string.Empty));
+
          UnitTestAssert.ThrowsException<ArgumentException>(() => Alphaleonis.Win32.Filesystem.Path.GetPathRoot(string.Empty));
       }
    }

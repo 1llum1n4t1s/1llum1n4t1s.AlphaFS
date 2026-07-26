@@ -29,6 +29,8 @@ namespace AlphaFS.UnitTest
       // Pattern: <class>_<function>_<scenario>_<expected result>
 
 
+      // ドライブ文字の割り当てはマシン全体の状態を変えるため、ドライブを列挙する他テストと並列実行させない。
+      [DoNotParallelize]
       [TestMethod]
       public void AlphaFS_Volume_DefineDosDevice_RegularDriveMapping_Local_Success()
       {

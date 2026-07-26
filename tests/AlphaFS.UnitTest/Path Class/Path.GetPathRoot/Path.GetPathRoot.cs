@@ -51,7 +51,8 @@ namespace AlphaFS.UnitTest
             {
                expected = System.IO.Path.GetPathRoot(path);
 
-               skipAssert = path.StartsWith(Alphaleonis.Win32.Filesystem.Path.LongPathUncPrefix);
+               // AlphaFS が System.IO と意図的に異なる結果を返す入力 (拡張長パス / UNC ルート) は等価表明の対象外にする。
+               skipAssert = UnitTestConstants.DivergesFromSystemIo(path);
             }
             catch (Exception ex)
             {

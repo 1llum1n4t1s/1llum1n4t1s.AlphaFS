@@ -43,7 +43,8 @@ namespace AlphaFS.UnitTest
 
             string expected = null;
             string actual = null;
-            var skipAssert = false;
+            // AlphaFS が System.IO と意図的に異なる結果を返す入力 (拡張長パス / UNC ルート) は等価表明の対象外にする。
+            var skipAssert = UnitTestConstants.DivergesFromSystemIo(path);
             
 
             // System.IO

@@ -33,6 +33,9 @@ namespace Alphaleonis.Win32.Filesystem
       public override void Delete()
       {
          File.DeleteFileCore(Transaction, LongFullName, false, Attributes, PathFormat.LongFullPath);
+
+         // System.IO は自身が行った変更でキャッシュ済みの状態を無効化する。同じ挙動にそろえる。
+         Refresh();
       }
 
       #endregion // .NET
@@ -45,6 +48,9 @@ namespace Alphaleonis.Win32.Filesystem
       public void Delete(bool ignoreReadOnly)
       {
          File.DeleteFileCore(Transaction, LongFullName, ignoreReadOnly, Attributes, PathFormat.LongFullPath);
+
+         // System.IO は自身が行った変更でキャッシュ済みの状態を無効化する。同じ挙動にそろえる。
+         Refresh();
       }
    }
 }

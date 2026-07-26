@@ -69,7 +69,9 @@ namespace Alphaleonis.Win32.Filesystem
 
          LongFullName = Path.GetLongPathCore(fullPath, GetFullPathOptions.None);
 
-         OriginalPath = Path.GetFileName(fullPath, true);
+         // .NET Framework は Parent / Root / 列挙結果の DirectoryInfo.ToString() に「名前だけ」を返していたが、
+         // .NET Core 以降の System.IO はフルパスを返す。ドロップイン代替として現行挙動に合わせる。
+         OriginalPath = fullPath;
 
          FullPath = fullPath;
 

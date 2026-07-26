@@ -1,6 +1,42 @@
 Changelog
 =========
 
+## [2.0.0] - 2026-07-26
+
+テストが実行されていなかった問題を修正したところ、プロセスを即死させる不具合を含む複数の潜在バグが表面化したため、まとめて修正しました。
+あわせて .NET Framework 時代の挙動を引きずっていた箇所を現行の `System.IO` に合わせています (破壊的変更)。
+
+### 💥 破壊的変更
+
+- `Path.Combine("C:", "file")` の結果を `C:file` (ドライブ相対) から `C:\file` へ変更
+- `DirectoryInfo.Parent` / `Root` / 列挙結果の `ToString()` が、名前のみではなくフルパスを返すよう変更
+- `FileInfo` / `DirectoryInfo` の `Create()` / `Delete()` がキャッシュを自動で無効化するよう変更
+  - `Refresh()` を呼ばなくても `Exists` が最新の値を返す
+- `OperatingSystem.EnumOsName` に `WindowsServer2019` / `Windows11` / `WindowsServer2022` / `WindowsServer2025` を追加
+  - Windows 11 以降を `Later` と判定していたのを是正。`Later` は「未知の将来 OS」専用の値になった (既存の値は不変)
+
+`Path.GetFullPath` / `GetPathRoot` の拡張長パス (`\\?\`) 処理と、不正なパスに対する例外送出は、
+AlphaFS が意図的に `System.IO` より厳格なまま維持しています。
+
+### 🐛 不具合修正
+
+- `Shell32Info` のプロパティ参照でプロセスがアクセス違反 (0xC0000005) で即死する問題を修正
+  - `IQueryAssociations::GetString` を vtable インデックス 5 (実際は `GetKey`) で呼び出していた
+  - `Init` に失敗した COM オブジェクトに対しても `GetString` を発行していた (拡張子の無いファイルなどで発生)
+- `Process.GetCurrentProcess().Handle` をインスタンス未保持で使用していた 3 箇所を修正
+  - GC による回収でハンドルが閉じられ、`ERROR_INVALID_HANDLE` になり得た
+  - 対象: `OperatingSystem.IsWow64Process` / `ProcessContext` / `Path.GetFinalPathNameByHandleCore`
+
+### 🧪 テスト
+
+- MSTest 4.x / Microsoft.Testing.Platform (MTP) へ移行し、テストが 1 件も実行されていなかった状態を解消
+  - テストプロジェクトに `EnableMSTestRunner` を設定し、リポジトリ直下に `global.json` を追加
+  - CI のテスト実行から VSTest 専用の `--logger` を削除
+- `Assert.IsGreaterThan` / `IsLessThan` の引数逆転 17 箇所を修正
+- ネットワーク共有・管理者権限が利用できない環境では失敗ではなく skip するよう整備
+  - 環境変数 `ALPHAFS_SKIP_NETWORK_TESTS=1` でネットワーク側の検証を明示的に無効化できる
+- ドライブ文字を割り当てるテストを並列実行対象から除外し、テスト間干渉を解消
+
 ## [1.0.38] - 2026-07-26
 
 ### 📦 依存パッケージの更新

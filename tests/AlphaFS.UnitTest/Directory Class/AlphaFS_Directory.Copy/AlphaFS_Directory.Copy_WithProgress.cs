@@ -112,7 +112,7 @@ namespace AlphaFS.UnitTest
 
             Console.WriteLine("\tCallback: Copied: [{0}%] --> [{1:N0}] bytes.", pct.ToString("N2", CultureInfo.CurrentCulture), totalBytesTransferred);
 
-            Assert.IsGreaterThan(totalBytesTransferred, 0);
+            Assert.IsGreaterThan(0, totalBytesTransferred);
          }
 
 

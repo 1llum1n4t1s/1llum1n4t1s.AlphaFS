@@ -65,7 +65,7 @@ namespace AlphaFS.UnitTest
 
          Console.WriteLine();
 
-         Assert.IsGreaterThan(cnt, 0, "No entries enumerated.");
+         Assert.IsGreaterThan(0, cnt, "No entries enumerated.");
       }
    }
 }

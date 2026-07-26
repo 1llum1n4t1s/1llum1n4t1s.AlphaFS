@@ -62,6 +62,7 @@ namespace Alphaleonis.Win32.Filesystem
       internal sealed unsafe class QueryAssociationsWrapper : IDisposable
       {
          private nint _ptr;
+         private bool _initialized;
 
          internal QueryAssociationsWrapper(nint comPtr)
          {
@@ -76,29 +77,56 @@ namespace Alphaleonis.Win32.Filesystem
 
          internal bool IsValid => _ptr != 0;
 
+         /// <summary><see cref="Init"/> が成功済みかどうか。
+         /// 未初期化の IQueryAssociations に対して GetString を呼ぶと、shlwapi 内部で
+         /// アクセス違反 (0xC0000005) が発生しプロセスが即死するため、呼び出し側はこれを確認する。</summary>
+         internal bool IsInitialized => _initialized;
+
          /// <summary>IQueryAssociations インターフェイスを初期化し、ルートキーを適切な ProgID に設定します。</summary>
          internal void Init(Shell32.AssociationAttributes flags, string pszAssoc, nint hkProgid, nint hwnd)
          {
             // IUnknown vtable: [0] QueryInterface, [1] AddRef, [2] Release
-            // IQueryAssociations vtable: [3] Init, [4] GetKey, [5] GetString, [6] GetData
+            // IQueryAssociations vtable (shlwapi.h の宣言順): [3] Init, [4] GetString, [5] GetKey, [6] GetData, [7] GetEnum
+            if (_ptr == 0)
+            {
+               throw new ObjectDisposedException(nameof(QueryAssociationsWrapper));
+            }
+
             nint* vtable = *(nint**)_ptr;
             var initFn = (delegate* unmanaged[Stdcall]<nint, Shell32.AssociationAttributes, char*, nint, nint, int>)vtable[3];
 
             int hr;
+            _initialized = false;
             fixed (char* pAssoc = pszAssoc)
             {
                hr = initFn(_ptr, flags, pAssoc, hkProgid, hwnd);
             }
 
             Marshal.ThrowExceptionForHR(hr);
+
+            _initialized = true;
          }
 
          /// <summary>レジストリからファイルまたはプロトコルの関連付けに関連する文字列を検索して取得します。</summary>
          internal void GetString(Shell32.AssociationAttributes flags, Shell32.AssociationString str, string pwszExtra, StringBuilder pwszOut, out int pcchOut)
          {
-            // IQueryAssociations vtable: [3] Init, [4] GetKey, [5] GetString
+            // IQueryAssociations vtable (shlwapi.h の宣言順): [3] Init, [4] GetString, [5] GetKey, [6] GetData, [7] GetEnum
+            // 誤って [5] (GetKey) を呼ぶと HKEY* を期待する引数へ文字バッファを渡すことになり、
+            // プロセスがアクセス違反 (0xC0000005) で即死する。
+            if (_ptr == 0)
+            {
+               throw new ObjectDisposedException(nameof(QueryAssociationsWrapper));
+            }
+
+            // Init が失敗したままの IQueryAssociations は shlwapi 内部で未設定のルートキーを
+            // 逆参照するため、ネイティブ呼び出しへ入る前に確実に弾く。
+            if (!_initialized)
+            {
+               throw new InvalidOperationException("IQueryAssociations が初期化されていません。先に Init を成功させてください。");
+            }
+
             nint* vtable = *(nint**)_ptr;
-            var getStringFn = (delegate* unmanaged[Stdcall]<nint, Shell32.AssociationAttributes, Shell32.AssociationString, char*, char*, int*, int>)vtable[5];
+            var getStringFn = (delegate* unmanaged[Stdcall]<nint, Shell32.AssociationAttributes, Shell32.AssociationString, char*, char*, int*, int>)vtable[4];
 
             int hr;
             pcchOut = pwszOut.Capacity;
