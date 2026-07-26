@@ -30,8 +30,24 @@ are replications of the `System.IO.Path`, `System.IO.File`, `System.IO.FileInfo`
 recursive file enumerations, native backups and manipulations with advanced flags and options.
 They also contain extensions to these, and there are many more features for several functions.
 
-When only  these `System.IO` classes are used, it is just a matter of replacing `using System.IO;`
-with `using Alphaleonis.Win32.Filesystem;`, which makes AlphaFS a **true** drop-in replacement.
+When only  these `System.IO` classes are used, it is mostly a matter of replacing `using System.IO;`
+with `using Alphaleonis.Win32.Filesystem;`.
+
+### Where the drop-in replacement is not exact
+
+`System.IO` has grown since AlphaFS was first written, so a few members now differ. All of the
+differences below surface as compiler errors rather than silent misbehaviour, but they are worth
+knowing before you swap the `using`:
+
+| Member | `System.IO` | AlphaFS |
+|---|---|---|
+| `File.CreateSymbolicLink(path, target)` | returns `FileSystemInfo` | returns `void` |
+| `Directory.CreateSymbolicLink(path, target)` | returns `FileSystemInfo` | returns `void` |
+| `FileSystemInfo.LinkTarget` | property | not available — use `File.GetLinkTargetInfo(path)` |
+| `File.ResolveLinkTarget(path, returnFinalTarget)` | returns `FileSystemInfo` | not available — use `File.GetLinkTargetInfo(path)` |
+
+Note that the statement form (`File.CreateSymbolicLink(a, b);`) compiles and behaves identically on
+both; only code that consumes the return value needs changing.
 
 Another thing AlphaFS brings to the table is support for transactional NTFS (TxF). Almost every method in
 these classes exist in two versions. One normal, and one that can work with transactions, more specifically the

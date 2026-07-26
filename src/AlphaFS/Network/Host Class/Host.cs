@@ -1,4 +1,4 @@
-/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy 
  *  of this software and associated documentation files (the "Software"), to deal 
@@ -37,10 +37,21 @@ namespace Alphaleonis.Win32.Network
    /// <summary>ローカルまたはリモートホストからネットワークリソース情報を取得するための静的メソッドを提供します。</summary>
    public static partial class Host
    {
-      private static readonly NativeMethods.NetworkListManagerWrapper Manager = NativeMethods.CreateNetworkListManager();
+      // INetworkListManager は使うたびに生成し、使い終わったら解放する。
+      // 以前は静的フィールドの初期化子で CoCreateInstance していたが、
+      //  - 一度でも COM の生成に失敗すると TypeInitializationException が sticky になり、
+      //    以降そのプロセスでは Host のネットワーク列挙が永久に使えなくなる
+      //    (未 CoInitialize のスレッド、Server Core、Network List Service 無効の環境で起こり得る)
+      //  - 生の vtable ポインタをプロセス寿命で保持するため、生成時と別のアパートメントから
+      //    呼ぶとマーシャリングを伴わない COM 呼び出しになる
+      // という問題があった。生成コストは列挙 1 回あたり 1 度だけで、列挙自体が RPC を伴うため誤差。
+      private static NativeMethods.NetworkListManagerWrapper CreateManager()
+      {
+         return NativeMethods.CreateNetworkListManager();
+      }
 
       internal delegate uint EnumerateNetworkObjectDelegate(FunctionData functionData, out SafeGlobalMemoryBufferHandle netApiBuffer, [MarshalAs(UnmanagedType.I4)] int prefMaxLen,
-         [MarshalAs(UnmanagedType.U4)] out uint entriesRead, [MarshalAs(UnmanagedType.U4)] out uint totalEntries, [MarshalAs(UnmanagedType.U4)] out uint resumeHandle);
+         [MarshalAs(UnmanagedType.U4)] out uint entriesRead, [MarshalAs(UnmanagedType.U4)] out uint totalEntries, [MarshalAs(UnmanagedType.U4)] ref uint resumeHandle);
 
 
       /// <summary>Win32 関数に追加データを渡すために使用される構造体。</summary>
@@ -261,12 +272,17 @@ namespace Alphaleonis.Win32.Network
 
 
          uint lastError;
+
+         // 再開ハンドルはループの外で保持し、次の反復へ渡す。以前は do ブロック内で毎回宣言して
+         // out で受けるだけだったため、ネイティブ側へは常に 0 が渡っていた。
+         // ERROR_MORE_DATA が返ると同じ先頭チャンクを取得し続けて前進せず、無限ループになる。
+         uint resumeHandle = 0;
+
          do
          {
             uint totalEntries;
-            uint resumeHandle;
 
-            lastError = enumerateNetworkObject(functionData, out var buffer, NativeMethods.MaxPreferredLength, out var entriesRead, out totalEntries, out resumeHandle);
+            lastError = enumerateNetworkObject(functionData, out var buffer, NativeMethods.MaxPreferredLength, out var entriesRead, out totalEntries, ref resumeHandle);
 
             using (buffer)
                switch (lastError)

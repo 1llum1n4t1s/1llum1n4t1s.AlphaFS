@@ -86,7 +86,11 @@ namespace Alphaleonis.Win32.Filesystem
             foreach (var fsei in EnumerateFileSystemEntryInfosCore<FileSystemEntryInfo>(true, transaction, dirs.Pop(), Path.WildcardStarMatchAll, null, DirectoryEnumerationOptions.ContinueOnException, null, PathFormat.LongFullPath))
             {
                // Ensure the directory is empty.
-               if (IsEmptyCore(transaction, fsei.LongFullPath, pathFormat))
+               // fsei.LongFullPath は既に長絶対パスなので LongFullPath を渡す。呼び出し元由来の
+               // pathFormat (公開 API では RelativePath) を渡すと、ディレクトリ 1 件ごとに
+               // GetFullPathName の P/Invoke とパス全長の再構築が走っていた。
+               // 直下の DeleteDirectoryCore と直上の列挙は元から LongFullPath を渡している。
+               if (IsEmptyCore(transaction, fsei.LongFullPath, PathFormat.LongFullPath))
                {
                   DeleteDirectoryCore(transaction, fsei, null, false, ignoreReadOnly, true, PathFormat.LongFullPath);
                }

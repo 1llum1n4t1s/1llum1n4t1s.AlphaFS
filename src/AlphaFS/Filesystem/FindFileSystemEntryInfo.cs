@@ -1,4 +1,4 @@
-/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy 
  *  of this software and associated documentation files (the "Software"), to deal 
@@ -30,9 +30,7 @@ using System.Runtime.InteropServices;
 using System.Security;
 using System.Text.RegularExpressions;
 
-#if !NET35
 using System.Threading;
-#endif
 
 namespace Alphaleonis.Win32.Filesystem
 {
@@ -135,9 +133,7 @@ namespace Alphaleonis.Win32.Filesystem
 
             ErrorHandler = customFilters.ErrorFilter;
 
-#if !NET35
             CancellationToken = customFilters.CancellationToken;
-#endif
          }
 
 
@@ -293,11 +289,9 @@ namespace Alphaleonis.Win32.Filesystem
       public ErrorHandler ErrorHandler { get; private set; }
 
 
-#if !NET35
       /// <summary>列挙を中止するためのキャンセルトークンを取得または設定します。</summary>
       /// <value><see cref="CancellationToken"/>インスタンス。</value>
       private CancellationToken CancellationToken { get; set; }
-#endif
 
       #endregion // Properties
 
@@ -493,9 +487,7 @@ namespace Alphaleonis.Win32.Filesystem
          using (new NativeMethods.ChangeErrorMode(NativeMethods.ErrorMode.FailCriticalErrors))
 
             while (dirs.Count > 0
-#if !NET35
                && !CancellationToken.IsCancellationRequested
-#endif
             )
             {
 
@@ -586,18 +578,14 @@ namespace Alphaleonis.Win32.Filesystem
                   yield return res;
 
                } while (
-#if !NET35
                   !CancellationToken.IsCancellationRequested &&
-#endif
                   NativeMethods.FindNextFile(handle, out win32FindData));
 
 
                lastError = Marshal.GetLastWin32Error();
 
                if (!ContinueOnException
-#if !NET35
                    && !CancellationToken.IsCancellationRequested
-#endif
                   )
                {
                   ThrowPossibleException((uint) lastError, pathLp);

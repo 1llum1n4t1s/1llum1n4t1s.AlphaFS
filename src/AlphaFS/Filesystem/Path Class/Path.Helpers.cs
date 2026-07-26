@@ -1,4 +1,4 @@
-/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy 
  *  of this software and associated documentation files (the "Software"), to deal 
@@ -190,10 +190,6 @@ namespace Alphaleonis.Win32.Filesystem
                return GetLongPathCore(path, GetFullPathOptions.None);
 
             case PathFormat.RelativePath:
-#if NET35
-               // .NET 3.5 the TrimEnd option has no effect.
-               options = options & ~GetFullPathOptions.TrimEnd;
-#endif
                return GetFullPathCore(transaction, false, path, GetFullPathOptions.AsLongPath | options);
 
             default:
@@ -515,35 +511,12 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
-         // Call the Win32 API to do the final canonicalization step.
-
-         const int result = 1;
-
-         // Throw an ArgumentException for paths like \\, \\server, \\server\
-         // This check can only be properly done after normalizing, so // \\foo\.. will be properly rejected.
-         // Also, reject \\?\GLOBALROOT\ (an internal kernel path) because it provides aliases for drives.
-
-         if (newBuffer.Length > 1 && newBuffer[0] == DirectorySeparatorChar && newBuffer[1] == DirectorySeparatorChar)
-         {
-            var startIndex = 2;
-
-            while (startIndex < result)
-            {
-               if (newBuffer[startIndex] == DirectorySeparatorChar)
-               {
-                  startIndex++;
-                  break;
-               }
-
-               startIndex++;
-            }
-
-            if (startIndex == result)
-            {
-               throw new ArgumentException(path, "path");
-            }
-         }
-
+         // 削除済み: 「\\, \\server, \\server\ のような UNC パスを弾く」ための検証ブロックがここにあったが、
+         // 上限が const int result = 1 に固定されており、startIndex は 2 から始まるため
+         // while (startIndex < result) も if (startIndex == result) も決して成立しない完全な死コードだった。
+         // 実行時に何もしていなかったため、そのまま除去しても観測可能な挙動は変わらない。
+         // この検証を本当に有効化すると現在通っているパスを弾き始めるので、復活させるなら
+         // 受け入れ可能なパスの範囲を決め直したうえで別途行う。
 
          return newBuffer.ToString();
       }

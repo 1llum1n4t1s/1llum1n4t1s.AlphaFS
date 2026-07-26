@@ -18,23 +18,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '10.0.x'
-
-      - name: Restore dependencies
-        run: dotnet restore AlphaFS.slnx
-
-      - name: Build Release
-        run: dotnet build AlphaFS.slnx -c Release --no-restore
-
       - name: Verify Version matches branch name
-        # ブランチ release/x.y.z が push されたら、Directory.Build.props の <Version> が x.y.z と一致しているか照合。
+        # ブランチ release/x.y.z に対して、Directory.Build.props の <Version> が x.y.z と一致しているか照合。
         # 一致しない場合は CI を fail-fast させて NuGet への誤バージョン push を防ぐ。
-        # workflow_dispatch (手動実行) では照合をスキップ。
-        if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/release/')
+        #
+        # この照合は push / workflow_dispatch のどちらの経路でも必ず実行する。条件付き skip にすると、
+        # skip されたステップは success 扱いのまま後続の Pack / Publish へ進んでしまい、
+        # release ブランチ以外 (例: version を bump 済みの main) からの手動実行で
+        # 未公開バージョンが nuget.org へ確定公開される。NuGet はバージョン番号を永久に予約し、
+        # unlist はできても同一バージョンの再アップロードはできないため、この事故は不可逆。
+        #
+        # restore/build より前に置いて、数分ではなく数秒で落とす。
         run: |
+          if ('${{ github.ref }}' -notlike 'refs/heads/release/*') {
+            Write-Error "This workflow must run on a 'release/x.y.z' branch. Current ref: '${{ github.ref }}'."
+            exit 1
+          }
           $propsVersion = ([xml](Get-Content Directory.Build.props)).Project.PropertyGroup.Version
           $expectedVersion = '${{ github.ref_name }}' -replace '^release/', ''
           if ($propsVersion -ne $expectedVersion) {
@@ -44,6 +43,18 @@ jobs:
           Write-Host "Version OK: Directory.Build.props=$propsVersion matches branch release/$expectedVersion"
         shell: pwsh
 
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore AlphaFS.slnx
+
+      - name: Build Release
+        # ContinuousIntegrationBuild: SourceLink が埋め込むパスを決定論的な形に正規化する。
+        run: dotnet build AlphaFS.slnx -c Release --no-restore -p:ContinuousIntegrationBuild=true
+
       - name: Run unit tests
         # MSTest 4.x は Microsoft.Testing.Platform (MTP) v2 を使う。VSTest 専用の `--logger` は MTP では
         # 不正な引数となり、テストを 1 件も実行しないまま exit 5 で抜けてしまうため指定しない
@@ -51,7 +62,10 @@ jobs:
         #
         # ALPHAFS_SKIP_NETWORK_TESTS: runner には SMB 管理共有が無いため、ネットワーク側の検証は
         # Assert.Inconclusive で skip する。ローカル側は先に実行されるのでリグレッションは検知できる。
-        # 管理者権限が必要な検証も同様に skip されるため、失敗はすべて本物のリグレッションとして扱う。
+        #
+        # 注意: GitHub runner は管理者権限で動くため、RequireElevation でガードされた検証は
+        # skip されず実行される (skip されるのは非昇格環境のみ)。ローカルの非昇格シェルでは通るのに
+        # CI では落ちる、という差はこれが原因になり得る。
         env:
           ALPHAFS_SKIP_NETWORK_TESTS: '1'
         run: dotnet test AlphaFS.slnx -c Release --no-build
@@ -60,9 +74,8 @@ jobs:
         run: dotnet pack src/AlphaFS/AlphaFS.csproj -c Release --no-build -o artifacts
 
       - name: Publish to NuGet
-        run: |
-          $apiKey = $env:NUGET_API_KEY
-          .\publish.ps1
+        # publish.ps1 は -ApiKey 既定値として $env:NUGET_API_KEY を読む (動的スコープに依存しない)。
+        run: .\publish.ps1
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         shell: pwsh

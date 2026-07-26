@@ -21,6 +21,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -128,9 +129,13 @@ namespace Alphaleonis.Win32.Filesystem
       /// リムーバブルストレージデバイスが読み書き操作の準備ができているかを示します。ドライブの準備ができているかテストせずに
       /// DriveInfo でドライブを照会すると、IOException が発生します。
       ///
-      /// TotalSize、TotalFreeSpace、DriveFormat などの他のメンバーからの例外をキャッチする代わりに IsReady() に依存しないでください。
-      /// コードが IsReady をチェックしてから他のプロパティにアクセスするまでの間に
+      /// AlphaFS の DriveInfo は System.IO.DriveInfo と異なり、TotalSize、TotalFreeSpace、DriveFormat などの
+      /// メンバーが取得に失敗しても例外を投げず、既定値 (0 / null / 空文字) を返します。
+      /// そのため「取得できなかった」と「本当に 0 / ラベル無し」を戻り値から区別できません。
+      /// ドライブが利用可能かどうかは、これらのプロパティを読む前に IsReady で確認してください。
+      /// なお IsReady をチェックしてから他のプロパティにアクセスするまでの間に
       /// （アクセスがチェック直後であっても）、ドライブが切断されたりディスクが取り外されたりする可能性があります。
+      /// 失敗の詳細は Trace の警告として出力されます。
       /// </remarks>
       public bool IsReady
       {
@@ -407,8 +412,14 @@ namespace Alphaleonis.Win32.Filesystem
                #endregion // ドライブ
             }
          }
-         catch
+         catch (Exception ex)
          {
+            // このメソッドは「取得できなければ既定値」という契約で公開プロパティから使われるため、
+            // 例外はここで飲み込む (投げるように変えると TotalSize などが 0 を返す前提の利用者を壊す)。
+            // ただし何も残さないと、アクセス拒否やドライブ未準備といった本当の失敗と
+            // 「本当に 0 バイト / ラベル無し」が呼び出し側から区別できず、原因に到達できない。
+            // 少なくとも診断できるよう Trace に残す。
+            Trace.TraceWarning("DriveInfo.GetDeviceInfo(type: {0}, mode: {1}) failed for [{2}]: {3}", type, mode, Name, ex.Message);
          }
 
          return type == 0 && mode > 0 ? string.Empty : null;

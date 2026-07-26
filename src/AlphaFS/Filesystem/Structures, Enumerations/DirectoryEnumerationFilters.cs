@@ -1,4 +1,4 @@
-/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy 
  *  of this software and associated documentation files (the "Software"), to deal 
@@ -21,9 +21,7 @@
 
 using System;
 
-#if !NET35
 using System.Threading;
-#endif
 
 namespace Alphaleonis.Win32.Filesystem
 {
@@ -77,10 +75,8 @@ namespace Alphaleonis.Win32.Filesystem
       public int ErrorRetryTimeout { get; set; }
 
 
-#if !NET35
       /// <summary>Gets or sets the cancellation token to abort the enumeration.</summary>
       /// <value>A <see cref="CancellationToken"/> instance.</value>
       public CancellationToken CancellationToken { get; set; }
-#endif
    }
 }

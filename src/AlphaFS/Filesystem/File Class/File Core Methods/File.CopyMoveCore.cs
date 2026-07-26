@@ -67,6 +67,16 @@ namespace Alphaleonis.Win32.Filesystem
          var isSingleFileAction = null == copyMoveResult && copyMoveRes.IsFile;
 
 
+         // 宛先の親ディレクトリを確保するかどうか。
+         // 単一ファイルの Copy/Move (copyMoveResult == null) では、親を自動作成するのが AlphaFS 独自の
+         // 仕様なので常に行う。ディレクトリツリーのコピーでは Directory.CopyMoveDirectoryCore が
+         // 直前に宛先ディレクトリを CreateDirectoryCore で作成済みなので、初回試行では省略する。
+         // 以前はファイル 1 個ごと、しかも試行ごとに GetFullPathNameW 1 回と
+         // GetFileAttributesExW 2 回が無駄に走っていた。
+         // 一度でも失敗した後は、宛先が外部から消された可能性があるので作り直す。
+         var ensureParentFolder = null == copyMoveResult;
+
+
          var attempts = 1;
 
          var retryTimeout = 0;
@@ -117,7 +127,7 @@ namespace Alphaleonis.Win32.Filesystem
             copyMoveRes.IsCanceled = false;
 
 
-            if (!cma.DelayUntilReboot)
+            if (!cma.DelayUntilReboot && ensureParentFolder)
             {
                // Ensure the file's parent directory exists.
 
@@ -163,6 +173,9 @@ namespace Alphaleonis.Win32.Filesystem
             copyMoveRes.ErrorCode = lastError;
 
             copyMoveRes.IsCanceled = cancel;
+
+            // 失敗したので、再試行では宛先の親ディレクトリを作り直す。
+            ensureParentFolder = true;
 
             
             // 呼び出し元に例外を報告する。

@@ -70,6 +70,10 @@ namespace Alphaleonis.Win32.Security
       }
 
 
+      /// <summary>SE_PRIVILEGE_ENABLED: TOKEN_PRIVILEGES.Attributes の「特権が有効」フラグ。</summary>
+      private const uint SePrivilegeEnabled = 2;
+
+
       public Privilege EnabledPrivilege { get; private set; }
 
 
@@ -88,8 +92,7 @@ namespace Alphaleonis.Win32.Security
             PrivilegeCount = 1,
             Luid = Filesystem.NativeMethods.LongToLuid(EnabledPrivilege.LookupLuid()),
 
-            // 2 = SePrivilegeEnabled（特権有効化フラグ）
-            Attributes = (uint) (enable ? 2 : 0)
+            Attributes = enable ? SePrivilegeEnabled : 0
          };
 
 
@@ -107,15 +110,29 @@ namespace Alphaleonis.Win32.Security
          // 無効化 (enable == false) の場合、特権が既にトークンに無いだけのため警告対象外。
          if (enable && lastError == Win32Errors.ERROR_NOT_ALL_ASSIGNED)
          {
+            // 特権名はフィールドをクリアする前に取り出す。以前は EnabledPrivilege = null を先に実行していたため、
+            // 続くメッセージ組み立てで EnabledPrivilege?.ToString() が常に null に評価され、
+            // どの特権が不足しているのか分からない LUID 構造体の型名だけが表示されていた。
+            var privilegeName = EnabledPrivilege?.ToString() ?? newPrivilege.Luid.ToString();
+
             EnabledPrivilege = null;
+
             throw new UnauthorizedAccessException(
                string.Format(System.Globalization.CultureInfo.CurrentCulture,
                   "特権 '{0}' をトークンに割り当てられませんでした。プロセスがこの特権を保持していない可能性があります（管理者権限が必要な場合があります）。",
-                  EnabledPrivilege?.ToString() ?? newPrivilege.Luid.ToString()));
+                  privilegeName));
          }
 
-         // 特権が変更されなかった場合、リセットしない
-         if (mOldPrivilege.PrivilegeCount == 0)
+         // 巻き戻しが必要かどうかを判定する。EnabledPrivilege を null にすると Dispose 時の
+         // AdjustPrivilege(false) が実行されなくなる。
+         //
+         // PrivilegeCount == 0 だけでは不十分。AdjustTokenPrivileges は NewState に列挙した特権を
+         // 「値が変わったかどうかに関わらず」PreviousState へ返すため、元から有効だった特権でも
+         // PrivilegeCount は 1 になる。前の状態が SE_PRIVILEGE_ENABLED だったかは Attributes でしか
+         // 判別できず、これを見ないとスコープ離脱時にホストプロセスが常用している特権まで無効化してしまう
+         // (トークンはプロセス共有なので他スレッドにも波及する)。
+         // PrivilegeEnabler の公開ドキュメント「既に有効な特権は無効にされません。」はこの挙動を約束している。
+         if (mOldPrivilege.PrivilegeCount == 0 || (mOldPrivilege.Attributes & SePrivilegeEnabled) != 0)
          {
             EnabledPrivilege = null;
          }

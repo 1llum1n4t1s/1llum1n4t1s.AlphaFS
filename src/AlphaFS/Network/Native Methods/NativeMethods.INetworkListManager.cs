@@ -1,4 +1,4 @@
-/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Alphaleonis.Win32.Network
 {
@@ -55,8 +56,10 @@ namespace Alphaleonis.Win32.Network
 
          private void Dispose(bool disposing)
          {
-            var ptr = _ptr;
-            _ptr = 0;
+            // Interlocked で所有権を奪う。非アトミックな読み取り→クリアだと、並行 Dispose
+            // (公開型は利用者が任意のスレッドから呼べる) やファイナライザとの競合で双方が非 0 を読み、
+            // IUnknown::Release が二重に走って COM 参照カウントがアンダーフローする。
+            var ptr = Interlocked.Exchange(ref _ptr, 0);
             if (ptr != 0)
             {
                nint* vtable = *(nint**)ptr;

@@ -114,7 +114,11 @@ namespace AlphaFS.UnitTest
          {
             var randomFileName = System.IO.Path.GetFileNameWithoutExtension(System.IO.Path.GetRandomFileName());
 
-            switch (new Random(DateTime.UtcNow.Millisecond).Next(1, 3))
+            // Random.Next(min, max) の上限は排他なので、case 3 まで出すには 4 を渡す。
+            // 以前は Next(1, 3) だったため case 3 が一度も選ばれない dead code になっていた。
+            // シードも DateTime.UtcNow.Millisecond ではなく Random.Shared を使う
+            // (同一ミリ秒内に複数回呼ぶと必ず同じ値が返るため)。
+            switch (Random.Shared.Next(1, 4))
             {
                case 1:
                   return randomFileName.Replace("a", "ä").Replace("e", "ë").Replace("i", "ï").Replace("o", "ö").Replace("u", "ü");
@@ -359,12 +363,16 @@ namespace AlphaFS.UnitTest
 
       private static void SetReadOnlyAndOrHiddenAttributes(System.IO.FileSystemInfo fsi, bool readOnly = false, bool hidden = false)
       {
-         if (readOnly && new Random(DateTime.UtcNow.Millisecond).Next(0, 1000) % 2 == 0)
+         // Random.Shared を使う。以前は判定ごとに new Random(DateTime.UtcNow.Millisecond) を
+         // 作っていたため、同一ミリ秒内では 2 つの Random が同じ系列になり、readOnly と hidden の
+         // 判定結果が必ず一致していた。その結果「ReadOnly だけ」「Hidden だけ」という属性の
+         // 組み合わせが構造的に生成されず、ランダム化ツリーの状態空間が半分死んでいた。
+         if (readOnly && Random.Shared.Next(0, 1000) % 2 == 0)
          {
             fsi.Attributes |= System.IO.FileAttributes.ReadOnly;
          }
 
-         if (hidden && new Random(DateTime.UtcNow.Millisecond).Next(0, 1000) % 2 == 0)
+         if (hidden && Random.Shared.Next(0, 1000) % 2 == 0)
          {
             fsi.Attributes |= System.IO.FileAttributes.Hidden;
          }
@@ -375,27 +383,14 @@ namespace AlphaFS.UnitTest
 
       #region Disposable Members
 
-      ~TemporaryDirectory()
-      {
-         Dispose(false);
-      }
-
-
+      // ファイナライザは持たない。アンマネージリソースを保持していないうえ、以前あった
+      // ~TemporaryDirectory() -> Dispose(false) は削除処理が if (isDisposing) の内側にあるため
+      // 何もしない no-op で、「Dispose し忘れても最後に消えてくれる」という誤解だけを生んでいた。
       public void Dispose()
-      {
-         Dispose(true);
-         GC.SuppressFinalize(this);
-      }
-
-
-      private void Dispose(bool isDisposing)
       {
          try
          {
-            if (isDisposing)
-            {
-               System.IO.Directory.Delete(Directory.FullName, true);
-            }
+            System.IO.Directory.Delete(Directory.FullName, true);
          }
          catch
          {

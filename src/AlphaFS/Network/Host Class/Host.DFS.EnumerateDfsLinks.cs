@@ -1,4 +1,4 @@
-/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy 
  *  of this software and associated documentation files (the "Software"), to deal 
@@ -57,11 +57,11 @@ namespace Alphaleonis.Win32.Network
 
          return EnumerateNetworkObjectCore(fd, (NativeMethods.DFS_INFO_9 structure, SafeGlobalMemoryBufferHandle buffer) => new DfsInfo(structure),
 
-            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, out uint resumeHandle1) =>
+            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle1) =>
             {
                totalEntries = 0;
 
-               return NativeMethods.NetDfsEnum(dfsName, 9, prefMaxLen, out buffer, out entriesRead, out resumeHandle1);
+               return NativeMethods.NetDfsEnum(dfsName, 9, prefMaxLen, out buffer, out entriesRead, ref resumeHandle1);
 
             }, false);
       }

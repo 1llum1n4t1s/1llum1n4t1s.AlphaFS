@@ -1,4 +1,4 @@
-/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy 
  *  of this software and associated documentation files (the "Software"), to deal 
@@ -79,7 +79,7 @@ namespace Alphaleonis.Win32.Network
 
          return EnumerateNetworkObjectCore(new FunctionData(), (NativeMethods.DFS_INFO_300 structure, SafeGlobalMemoryBufferHandle buffer) => new DfsInfo {EntryPath = structure.DfsName},
 
-            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, out uint resumeHandle) =>
+            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle) =>
             {
                totalEntries = 0;
 
@@ -89,7 +89,7 @@ namespace Alphaleonis.Win32.Network
                // Furthermore, the UNC prefix: \\ is not required and always removed.
                var stripUnc = !Utils.IsNullOrWhiteSpace(host) ? Path.GetRegularPathCore(host, GetFullPathOptions.CheckInvalidPathChars, false).Replace(Path.UncPrefix, string.Empty) : Environment.MachineName;
 
-               return NativeMethods.NetDfsEnum(stripUnc, 300, prefMaxLen, out buffer, out entriesRead, out resumeHandle);
+               return NativeMethods.NetDfsEnum(stripUnc, 300, prefMaxLen, out buffer, out entriesRead, ref resumeHandle);
 
             }, continueOnException).Select(dfs => dfs.EntryPath);
       }

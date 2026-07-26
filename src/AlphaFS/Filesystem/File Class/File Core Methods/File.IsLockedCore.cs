@@ -54,10 +54,13 @@ namespace Alphaleonis.Win32.Filesystem
 
             throw;
          }
-         catch (Exception ex)
-         {
-            NativeError.ThrowException(Marshal.GetHRForException(ex) & NativeMethods.OverflowExceptionBitShift, filePath);
-         }
+
+         // IOException 以外はそのまま伝播させる。以前はここに catch (Exception) があり、
+         // 例外の HRESULT 下位 16bit を Win32 エラーコードとして再解釈して投げ直していたが、
+         // 直前の catch (IOException) が I/O 系をすべて処理済みなので、この経路に来るのは
+         // 常に Win32 由来でない例外だった。結果、パス検証由来の ArgumentException (HRESULT
+         // 0x80070057) が IOException "(87) パラメーターが間違っています" に化け、
+         // 呼び出し側の catch (ArgumentException) が空振りしていた。
 
          return false;
       }

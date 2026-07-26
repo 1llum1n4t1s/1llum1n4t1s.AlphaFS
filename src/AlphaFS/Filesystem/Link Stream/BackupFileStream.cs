@@ -350,9 +350,11 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
-         // File.GetAccessControlCore() 参照: .CopyTo() はそこでは動作しない？
-         // 2017-06-13: .CopyTo() はここで何か有用なことをしているのか？
-         safeBuffer.CopyTo(buffer, offset, count);
+         // 実際に読み取れた分だけをコピーする。要求量 count を丸ごとコピーすると、
+         // BackupRead が要求より少なく返したとき (ストリーム境界では通常起きる) に、
+         // AllocHGlobal で確保したままゼロ初期化されていないネイティブヒープの内容が
+         // 呼び出し元のバッファへ転写されてしまう。
+         safeBuffer.CopyTo(buffer, offset, (int) numberOfBytesRead);
 
          return (int) numberOfBytesRead;
       }
@@ -628,19 +630,37 @@ namespace Alphaleonis.Win32.Filesystem
 
 
          var streamID = hBuf.PtrToStructure<NativeMethods.WIN32_STREAM_ID>(0);
-         var nameLength = (uint) Math.Min(streamID.dwStreamNameSize, hBuf.Capacity);
 
 
-         success = NativeMethods.BackupRead(SafeFileHandle, hBuf, nameLength, out numberOfBytesRead, false, _processSecurity, ref _context);
+         // ストリーム名はヘッダーとは別に dwStreamNameSize バイトを丸ごと読み切る必要がある。
+         // ヘッダー用に確保した WIN32_STREAM_ID サイズ (Pack = 1 で 20 バイト = 10 文字) のバッファを
+         // 使い回して Math.Min で切り詰めると、名前が欠けるだけでは済まない。読み残したバイトが
+         // BackupRead のシーケンシャル位置に残り、次の WIN32_STREAM_ID として誤解釈されるため、
+         // 以降のヘッダー解析がすべて破綻する。
+         // 例: ダウンロードしたファイルに自動付与される ":Zone.Identifier:$DATA" は 22 文字 = 44 バイト。
 
-         lastError = Marshal.GetLastWin32Error();
-         if (!success)
+         var name = string.Empty;
+         var nameLength = streamID.dwStreamNameSize;
+
+         if (nameLength > 0)
          {
-            NativeError.ThrowException(lastError);
+            using var nameBuf = new SafeGlobalMemoryBufferHandle((int) nameLength);
+
+            success = NativeMethods.BackupRead(SafeFileHandle, nameBuf, nameLength, out numberOfBytesRead, false, _processSecurity, ref _context);
+
+            lastError = Marshal.GetLastWin32Error();
+            if (!success)
+            {
+               NativeError.ThrowException(lastError);
+            }
+
+            if (numberOfBytesRead < nameLength)
+            {
+               throw new IOException(Resources.Read_Incomplete_Header);
+            }
+
+            name = nameBuf.PtrToStringUni(0, (int) numberOfBytesRead / UnicodeEncoding.CharSize);
          }
-
-
-         var name = hBuf.PtrToStringUni(0, (int) nameLength / UnicodeEncoding.CharSize);
 
          return new BackupStreamInfo(streamID, name);
       }
@@ -669,27 +689,37 @@ namespace Alphaleonis.Win32.Filesystem
 
             if (null != SafeFileHandle && !SafeFileHandle.IsInvalid)
             {
-               if (_context != IntPtr.Zero)
+               try
                {
-                  try
+                  if (_context != IntPtr.Zero)
                   {
-                     uint temp;
-
-                     // MSDN: データ構造が使用するメモリを解放するには、バックアップ操作完了時に bAbort パラメーターを TRUE に設定して BackupRead を呼び出す。
-                     var success = NativeMethods.BackupRead(SafeFileHandle, new SafeGlobalMemoryBufferHandle(), 0, out temp, true, false, ref _context);
-
-                     var lastError = Marshal.GetLastWin32Error();
-                     if (!success)
+                     try
                      {
-                        NativeError.ThrowException(lastError);
+                        uint temp;
+
+                        // MSDN: データ構造が使用するメモリを解放するには、バックアップ操作完了時に bAbort パラメーターを TRUE に設定して BackupRead を呼び出す。
+                        var success = NativeMethods.BackupRead(SafeFileHandle, new SafeGlobalMemoryBufferHandle(), 0, out temp, true, false, ref _context);
+
+                        var lastError = Marshal.GetLastWin32Error();
+                        if (!success)
+                        {
+                           NativeError.ThrowException(lastError);
+                        }
+                     }
+                     finally
+                     {
+                        _context = IntPtr.Zero;
                      }
                   }
-                  finally
-                  {
-                     _context = IntPtr.Zero;
-
-                     NativeMethods.CloseSafeHandle(SafeFileHandle);
-                  }
+               }
+               finally
+               {
+                  // ファイルハンドルのクローズは _context の有無に関わらず必ず行う。
+                  // _context が非ゼロになるのは BackupRead / BackupWrite / BackupSeek を
+                  // 一度でも呼んだ後だけなので、内側の分岐に置くと「開いただけで I/O していない」
+                  // インスタンスが Dispose されてもハンドルが残る。パス指定コンストラクタの既定は
+                  // FileShare.None なので、GC がファイナライザを走らせるまでファイルがロックされ続ける。
+                  NativeMethods.CloseSafeHandle(SafeFileHandle);
                }
             }
          }

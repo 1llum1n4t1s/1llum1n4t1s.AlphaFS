@@ -3,7 +3,10 @@
     <TargetFramework>net10.0-windows</TargetFramework>
     <IsAotCompatible>true</IsAotCompatible>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <PlatformTarget>x64</PlatformTarget>
+    <!-- PlatformTarget は指定しない (AnyCPU)。x64 を刻むと PE のマシン種別が AMD64 で固定され、
+         Arm64 ネイティブの .NET プロセスがこのアセンブリをロードできなくなる
+         (FileLoadException: The assembly architecture is not compatible with the current process architecture)。
+         コード側に x64 固有の依存は無く、ポインタ幅依存の箇所は Arm64 でも正しく動作する。 -->
     <ApplicationIcon>../../icon/app.ico</ApplicationIcon>
     <IsPackable>true</IsPackable>
     <PackageId>1llum1n4t1s.AlphaFS</PackageId>
@@ -23,6 +26,14 @@
     <!-- バージョンはリポジトリ直下の Directory.Build.props の <Version> で一元管理 (継承)。 -->
     <PackageIcon>icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <!-- SourceLink とシンボルパッケージ。P/Invoke ラッパーという性質上、利用者側の障害スタックは
+         必ず AlphaFS 内部のフレームで止まるため、ファイル名と行番号が出せないと原因に到達できない。
+         .NET SDK 8 以降は GitHub 向け SourceLink が同梱されているので、追加の PackageReference は不要。
+         dotnet nuget push は隣接する .snupkg を自動で併送する。 -->
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
   <ItemGroup>
     <None Include="../../icon/app_icon.png" Pack="true" PackagePath="icon.png" Visible="false" />
@@ -44,6 +55,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <!-- CAS 由来の型 (SecurityPermission / PermissionSet / FileIOPermission 等) は使っていないが、
+         NativeError が ERROR_BAD_RECOVERY_POLICY に対して投げる System.Security.Policy.PolicyException
+         がこのパッケージへ型フォワードされているため、参照は必須。削除すると CS1069 でビルドできない。 -->
     <PackageReference Include="System.Security.Permissions" Version="10.0.10" />
   </ItemGroup>
   <!-- インクリメンタルビルドを毎回破壊する CleanBinObjBeforeBuild は削除。

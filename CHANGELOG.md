@@ -1,6 +1,110 @@
 Changelog
 =========
 
+## [2.1.0] - 2026-07-26
+
+8 観点 + 検証 2 段のコードレビュー (/rere) で確定した指摘をまとめて修正しました。
+Arm64 での利用不能、`BackupFileStream` のハンドルリークと代替データストリーム名の破損、
+NuGet への誤バージョン公開を許す CI の穴が主な内容です。
+
+### 🎉 新機能・対応環境
+
+- **Arm64 ネイティブの .NET プロセスから利用できるようになりました**
+  - `AlphaFS.csproj` の `<PlatformTarget>x64</PlatformTarget>` を削除 (AnyCPU へ)
+  - x64 を刻んだアセンブリは PE のマシン種別が AMD64 で固定され、Arm64 プロセスでは
+    `FileLoadException: The assembly architecture is not compatible with the current process architecture.`
+    でロードできなかった。コード側に x64 固有の依存は無く、ポインタ幅依存の箇所は Arm64 でも正しく動作する
+- `OperatingSystem.EnumProcessorArchitecture` に `Arm` (5) / `Arm64` (12) を追加
+  - Arm64 環境で `ProcessorArchitecture` が未定義値 12 を返し、`Unknown` にすら落ちなかったのを是正 (既存の値は不変)
+- NuGet パッケージに SourceLink とシンボルパッケージ (`.snupkg`) を同梱
+  - P/Invoke ラッパーという性質上、利用者の障害スタックは AlphaFS 内部で止まるため、
+    ファイル名・行番号が出せないと原因に到達できなかった
+
+### 🐛 不具合修正
+
+- `BackupFileStream.Dispose()` がファイルハンドルを閉じない問題を修正
+  - `CloseSafeHandle` が `_context != IntPtr.Zero` の分岐内にあり、`BackupRead` / `BackupWrite` / `BackupSeek` を
+    一度も呼んでいないインスタンスではハンドルが残っていた
+  - パス指定コンストラクタの既定は `FileShare.None` なので、GC まで対象ファイルがロックされ続けていた
+- `BackupFileStream.ReadStreamInfo()` が代替データストリーム名を 10 文字で打ち切る問題を修正
+  - ヘッダー用の 20 バイトバッファを名前の読み取りに使い回していた
+  - 読み残しが次の `WIN32_STREAM_ID` として誤解釈され、以降のヘッダー解析がすべて破綻していた
+  - ダウンロードしたファイルに自動付与される `:Zone.Identifier:$DATA` (44 バイト) で確実に発生
+- `BackupFileStream.Read()` が実際の読み取り長ではなく要求量を丸ごとコピーしていた問題を修正
+  - 未初期化のネイティブヒープ内容が呼び出し元のバッファへ転写されていた
+- `Host` の SMB / DFS 列挙が `ERROR_MORE_DATA` で無限ループする問題を修正
+  - 再開ハンドルがデリゲート定義上 `out` のみで、次の反復へ渡す口が存在しなかった
+- `Directory.CreateJunction` / `File.CreateSymbolicLink` が投げる `IOException` の `HResult` を HRESULT へ変換
+  - 生の `183` は severity bit が 0 で HRESULT 規約上「成功」を意味していた
+- `File.Copy` が既存ファイルに対して投げる `AlreadyExistsException` のメッセージが `(80)` ではなく `(183)` を表示していた問題を修正
+- `File.CreateFileStreamCore` が、`FileStream` 構築の失敗時に有効なファイルハンドルを閉じずに伝播していた問題を修正
+- `PrivilegeEnabler` が、元から有効だった特権をスコープ離脱時に無効化していた問題を修正
+  - 巻き戻し判定が `TOKEN_PRIVILEGES.PrivilegeCount` だけを見ており、`Attributes` の `SE_PRIVILEGE_ENABLED` を検査していなかった
+  - 公開ドキュメント「既に有効な特権は無効にされません。」の記述どおりの挙動になった
+- `PrivilegeEnabler` の `UnauthorizedAccessException` に特権名が出ない問題を修正 (フィールドを先にクリアしていた)
+- `NativeMethods.SYSTEM_INFO` のマーシャリング幅を修正
+  - `wProcessorArchitecture` が enum の基底型 int (4 バイト) として扱われ、`dwPageSize` 以降がネイティブ配置とずれていた
+- COM ラッパー 4 種の `Dispose` を `Interlocked.Exchange` 化し、並行 Dispose での二重 `Release` を防止
+- `OperatingSystem` の初期化で、センチネルより後に代入されるフィールドがあったのを是正
+  - 初回アクセスが競合すると `VersionName` が `Later`、`IsServer` が `false` を返し得た
+
+### ⚠️ 挙動変更
+
+- `File.IsLocked` / `FileInfo.IsLocked` が、パス検証由来の `ArgumentException` をそのまま伝播するようになりました
+  - 従来は例外の HRESULT 下位 16bit を Win32 エラーコードとして再解釈し、
+    `IOException: (87) パラメーターが間違っています` へ変換していた
+  - `catch (ArgumentException)` を書いていたコードが正しく動くようになる一方、
+    `catch (IOException)` だけで受けていたコードは例外が抜けるようになる
+- `Alphaleonis.Win32.DriveInfo` の各プロパティが取得に失敗した際、`Trace` に警告を出力するようになりました
+  - 戻り値 (0 / null / 空文字) は従来どおりで、公開契約は変更していない
+
+### ⚡ 性能
+
+- `Directory.CreateDirectory` が、既存の祖先ディレクトリを見つけた時点で走査を打ち切るようになりました
+  - 従来はセグメント数 D に対し常に D 回のカーネル呼び出しと O(D×n) の文字列コピーを行っていた
+  - ディレクトリツリーのコピーでは宛先フォルダ 1 個ごとにこの走査が発生していた
+- `Directory.Copy` / `Move` が、ツリー内のファイルごとに宛先の親ディレクトリを作り直さなくなりました
+  - ファイル N 個あたり `GetFullPathNameW` × N + `GetFileAttributesExW` × 2N を削減 (再試行時は従来どおり作り直す)
+- `Path.IsLogicalDrive` がパス全体を大文字化しなくなりました
+  - ほぼ全ての公開 API が通るホットパスで、拡張長パスでは 1 呼び出しあたり数十 KB を確保していた
+- `Directory.DeleteEmptySubdirectories` が、確定済みの長絶対パスを再正規化しなくなりました
+- `Host` のネットワーク列挙が `INetworkListManager` を都度生成・解放するようになりました
+  - 一過性の COM 生成失敗が `TypeInitializationException` として永続化し、
+    以降そのプロセスで列挙が使えなくなる問題を解消
+
+### 🔒 CI / リリース
+
+- `publish.yml` のバージョン照合を、`push` / `workflow_dispatch` のどちらの経路でも必ず実行するよう修正
+  - 従来は `workflow_dispatch` で照合ステップが skip され (skip は success 扱い)、
+    `release/**` 以外のブランチから未公開バージョンを nuget.org へ確定公開できた
+  - NuGet はバージョン番号を永久に予約し、unlist しても同一バージョンの再アップロードはできないため不可逆だった
+  - 照合を checkout 直後へ移動し、失敗を数分ではなく数秒で検出
+- `publish.ps1` が `Directory.Build.props` の `<Version>` から push 対象を決め打ちするよう修正
+  - 更新時刻が最新の `*.nupkg` を選ぶ方式では、`artifacts/` に別バージョンや別 ID の
+    パッケージが残っていた場合にそれを公開し得た
+  - `param([string]$ApiKey = $env:NUGET_API_KEY)` を追加し、PowerShell の動的スコープ依存を解消
+  - API キーの文字数をログ出力するのをやめた
+
+### 🧹 整理
+
+- `Path.NormalizePath` 内の到達不能な UNC 検証ブロックを削除 (`const int result = 1` により実行時に何もしていなかった)
+- 単一 TFM では常に一方しか選ばれない `#if NET35` を src / tests から除去 (16 箇所)
+- 復元に使われていない `src/AlphaFS/packages.config` と、`<startup/>` のみの `src/AlphaFS/app.config` を削除
+- `CLAUDE.md` の名前空間 → ディレクトリ対応表の誤りを修正 (`src/AlphaFS/Device/` は `Alphaleonis.Win32.Filesystem`)
+- `CLAUDE.md` にテスト用環境変数 (`ALPHAFS_SKIP_NETWORK_TESTS` / `ALPHAFS_ENABLE_MACHINE_STATE_TESTS`) と、
+  昇格環境では `RequireElevation` のテストが skip されない点を追記
+- `README.md` に、現行 `System.IO` と食い違う API (`CreateSymbolicLink` の戻り値型、`LinkTarget` / `ResolveLinkTarget` の不在) の一覧を追記
+- `OperatingSystem.EnumOsName` の順序保証に関するドキュメントを実態に合わせて訂正
+  - クライアント系とサーバー系が交互に配置されているため、ライン跨ぎの序数比較は build 番号順と一致しない
+
+### 🧪 テスト
+
+- ランダム化テストヘルパーの欠陥を 2 件修正
+  - `Random.Next(1, 3)` の上限が排他のため `case 3` (â/ê/î 系のパス名) が一度も選ばれていなかった
+  - 属性設定で `new Random(DateTime.UtcNow.Millisecond)` を 2 つ作っていたため、同一ミリ秒内では
+    ReadOnly と Hidden の判定が必ず一致し、「片方だけ」の組み合わせが生成されていなかった
+- `TemporaryDirectory` の no-op なファイナライザを削除
+
 ## [2.0.0] - 2026-07-26
 
 テストが実行されていなかった問題を修正したところ、プロセスを即死させる不具合を含む複数の潜在バグが表面化したため、まとめて修正しました。

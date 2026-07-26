@@ -205,10 +205,17 @@ namespace Alphaleonis.Win32.Filesystem
                var path1 = path.Substring(0, index + 1);
                var path2 = longPathPrefix + path1.TrimStart('\\');
 
-               if (!File.ExistsCore(transaction, true, path2, PathFormat.LongFullPath))
+               if (File.ExistsCore(transaction, true, path2, PathFormat.LongFullPath))
                {
-                  list.Push(path2);
+                  // 祖先ディレクトリが存在するなら、そのさらに上位も必ず存在する。根まで走査を続けても
+                  // 結果は変わらないので打ち切る。以前は毎回根まで舐めており、セグメント数 D に対して
+                  // D 回のカーネル呼び出しと O(D * n) の文字列コピーが発生していた
+                  // (ツリーコピーでは宛先フォルダ 1 個ごとにこの走査が走る)。
+                  // .NET 本体の FileSystem.CreateDirectory も最初に見つかった親で打ち切る。
+                  break;
                }
+
+               list.Push(path2);
 
                while (index > rootLength && !Path.IsDVsc(path[index], false))
                   --index;

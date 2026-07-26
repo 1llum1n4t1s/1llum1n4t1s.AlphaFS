@@ -1,4 +1,4 @@
-/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy 
  *  of this software and associated documentation files (the "Software"), to deal 
@@ -141,15 +141,10 @@ namespace Alphaleonis.Win32.Network
             
             foreach (var nic in NetworkInterface.GetAllNetworkInterfaces())
             {
-#if NET35
-               guid = new Guid(nic.Id);
-
-#else
                if (!Guid.TryParse(nic.Id, out var guid))
                {
                   continue;
                }
-#endif
 
                if (Equals(adapterId, guid))
                {

@@ -55,7 +55,14 @@ namespace Alphaleonis.Win32.Filesystem
          }
          catch
          {
-            NativeMethods.IsValidHandle(safeHandle, false);
+            // CreateFileCore が成功した後に FileStream のコンストラクタが投げた場合、safeHandle は
+            // 「有効なまま」残る。NativeMethods.IsValidHandle() は無効または閉済みのハンドルしか
+            // 閉じないため、ここで使うと有効なハンドルが取り残されてファイルがロックされ続ける。
+            // File.OpenCore と同じ後始末に揃える。
+            if (null != safeHandle && !safeHandle.IsClosed)
+            {
+               safeHandle.Close();
+            }
 
             throw;
          }

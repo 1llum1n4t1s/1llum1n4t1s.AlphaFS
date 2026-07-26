@@ -31,6 +31,15 @@ rtk dotnet pack src/AlphaFS/AlphaFS.csproj -c Release -o artifacts
 
 Tests use **MSTest** (`MSTest.TestFramework` 4.3.2). Many tests require elevated privileges or specific NTFS/network configurations, so some may skip or fail in non-privileged environments — treat those as environment-dependent rather than regressions.
 
+Two environment variables change which tests run:
+
+| Variable | Default | Effect |
+|---|---|---|
+| `ALPHAFS_SKIP_NETWORK_TESTS` | unset (network tests run) | Set to any value other than `0`/`false` to make the network half of each test `Assert.Inconclusive`. Used by CI, where no SMB admin share exists. The local half still runs first, so regressions are still caught. |
+| `ALPHAFS_ENABLE_MACHINE_STATE_TESTS` | unset (test is skipped) | Opt-in for tests that permanently modify machine state. Currently gates `AlphaFS_DirectoryInfo_MoveTo_DelayUntilReboot_Local_Success`, which writes to `HKLM` (`PendingFileRenameOperations`). Leave unset unless you intend that change. |
+
+Note that elevation is **not** an opt-out: tests guarded by `RequireElevation` skip only in *non*-elevated processes. GitHub runners are elevated, so those tests run in CI even when they are skipped on a local non-elevated shell.
+
 ## Architecture
 
 ### Namespace → Directory Mapping
@@ -40,7 +49,10 @@ Tests use **MSTest** (`MSTest.TestFramework` 4.3.2). Many tests require elevated
 | `Alphaleonis.Win32.Filesystem` | `src/AlphaFS/Filesystem/` | File, Directory, Path, FileInfo, DirectoryInfo + extensions |
 | `Alphaleonis.Win32.Network` | `src/AlphaFS/Network/` | Host class, SMB/DFS, network connections |
 | `Alphaleonis.Win32.Security` | `src/AlphaFS/Security/` | Privilege elevation, CRC |
-| `Alphaleonis.Win32` | `src/AlphaFS/Device/` | Volume, DriveInfo, DiskSpaceInfo, DeviceInfo |
+| `Alphaleonis.Win32.Filesystem` | `src/AlphaFS/Device/` | Volume, DriveInfo, DiskSpaceInfo, DeviceInfo |
+| `Alphaleonis.Win32` | `src/AlphaFS/` (repo root of the project) | `OperatingSystem`, `NativeError`, `Win32Errors`, `Resources`, and the `Safe Handles/` memory/token wrappers |
+
+> Note: everything under `src/AlphaFS/Device/` declares `namespace Alphaleonis.Win32.Filesystem`, not `Alphaleonis.Win32`. Only the files listed in the last row live in the bare `Alphaleonis.Win32` namespace.
 
 ### Key Design Patterns
 

@@ -63,7 +63,10 @@ namespace Alphaleonis.Win32.Filesystem
 
          var regularPath = path.StartsWith(LogicalDrivePrefix, StringComparison.OrdinalIgnoreCase) ? path.Substring(LogicalDrivePrefix.Length) : path;
          
-         var c = regularPath.ToUpperInvariant()[0];
+         // 必要なのは先頭 1 文字だけなので、パス全体を大文字化した文字列を確保しない。
+         // ここは Path.GetLongPathCore 経由でほぼ全ての公開 API が通るホットパスで、
+         // 拡張長パス (最大 32,700 文字) では 1 呼び出しあたり数十 KB のアロケーションになっていた。
+         var c = char.ToUpperInvariant(regularPath[0]);
 
          // char.IsLetter() は誤解を招く可能性があるため使用しない。有効なドライブ文字は A-Z のみ。
 

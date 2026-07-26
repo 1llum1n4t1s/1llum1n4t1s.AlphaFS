@@ -38,7 +38,11 @@ namespace Alphaleonis.Win32.Filesystem
          {
             throw new IOException(string.Format(CultureInfo.InvariantCulture, "({0}) {1}", Win32Errors.ERROR_ALREADY_EXISTS,
 
-               string.Format(CultureInfo.InvariantCulture, isFolder ? Resources.Target_File_Is_A_Directory : Resources.Target_Directory_Is_A_File, fsoPath)), (int) Win32Errors.ERROR_ALREADY_EXISTS);
+               // HResult には生の Win32 コードではなく HRESULT へ変換した値を入れる。0x000000B7 は
+               // severity bit が 0 なので HRESULT の規約上「成功」を意味してしまい、
+               // Marshal.GetExceptionForHR や ex.HResult < 0 による判定が誤動作する。
+               // リポジトリ内の他の全経路 (NativeError / AlreadyExistsException) と同じ変換に揃える。
+               string.Format(CultureInfo.InvariantCulture, isFolder ? Resources.Target_File_Is_A_Directory : Resources.Target_Directory_Is_A_File, fsoPath)), Win32Errors.GetHrFromWin32Error(Win32Errors.ERROR_ALREADY_EXISTS));
          }
       }
    }

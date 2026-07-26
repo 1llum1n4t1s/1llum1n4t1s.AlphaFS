@@ -130,7 +130,10 @@ namespace Alphaleonis.Win32
 
             case Win32Errors.ERROR_ALREADY_EXISTS:
             case Win32Errors.ERROR_FILE_EXISTS:
-               throw new AlreadyExistsException(readPath ?? writePath, true);
+               // 組み立て済みの errorMessage を使う。(path, isPath) のコンストラクタは
+               // ERROR_ALREADY_EXISTS (183) 固定の文言を使うため、呼び出し元が
+               // ERROR_FILE_EXISTS (80) を渡した場合でもメッセージが "(183)" になってしまう。
+               throw new AlreadyExistsException(errorMessage);
 
 
             case Win32Errors.ERROR_DIR_NOT_EMPTY:

@@ -1,4 +1,4 @@
-/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy 
  *  of this software and associated documentation files (the "Software"), to deal 
@@ -82,7 +82,7 @@ namespace Alphaleonis.Win32.Network
 
                new DfsInfo {EntryPath = string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}{3}", Path.UncPrefix, !Utils.IsNullOrWhiteSpace(domain) ? domain : NativeMethods.ComputerDomain, Path.DirectorySeparatorChar, structure.FtDfsName)},
 
-            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, out uint resumeHandle) =>
+            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle) =>
             {
                totalEntries = 0;
 
@@ -92,7 +92,7 @@ namespace Alphaleonis.Win32.Network
                // Furthermore, the UNC prefix: \\ is not required and always removed.
                var stripUnc = !Utils.IsNullOrWhiteSpace(domain) ? Path.GetRegularPathCore(domain, GetFullPathOptions.CheckInvalidPathChars, false).Replace(Path.UncPrefix, string.Empty) : NativeMethods.ComputerDomain;
 
-               return NativeMethods.NetDfsEnum(stripUnc, 200, prefMaxLen, out buffer, out entriesRead, out resumeHandle);
+               return NativeMethods.NetDfsEnum(stripUnc, 200, prefMaxLen, out buffer, out entriesRead, ref resumeHandle);
 
             }, continueOnException).Select(dfs => dfs.EntryPath);
       }

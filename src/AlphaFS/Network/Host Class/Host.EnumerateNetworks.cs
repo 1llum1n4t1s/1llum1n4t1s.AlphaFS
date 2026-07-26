@@ -55,14 +55,16 @@ namespace Alphaleonis.Win32.Network
       [SecurityCritical]
       internal static IEnumerable<NetworkInfo> EnumerateNetworksCore(Guid? networkID, NetworkConnectivityLevels networkConnectivityLevels)
       {
+         using var manager = CreateManager();
+
          if (null != networkID)
          {
-            return new[] { new NetworkInfo(Manager.GetNetwork((Guid) networkID)) };
+            return new[] { new NetworkInfo(manager.GetNetwork((Guid) networkID)) };
          }
 
          // Eagerly wrap all COM wrappers into NetworkInfo objects (which have finalizers)
          // to prevent COM reference leaks if the caller partially enumerates.
-         var networks = Manager.GetNetworks(networkConnectivityLevels);
+         var networks = manager.GetNetworks(networkConnectivityLevels);
          var result = new List<NetworkInfo>();
 
          try

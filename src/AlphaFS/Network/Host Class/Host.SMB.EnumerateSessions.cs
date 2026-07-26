@@ -1,4 +1,4 @@
-/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy 
  *  of this software and associated documentation files (the "Software"), to deal 
@@ -97,9 +97,9 @@ namespace Alphaleonis.Win32.Network
 
          foreach (var sessionInfo in EnumerateNetworkObjectCore(fd, (NativeMethods.SESSION_INFO_502 structure, SafeGlobalMemoryBufferHandle buffer) => new SessionInfo(stripUnc, SessionInfoLevel.Info502, structure),
 
-            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, out uint resumeHandle) =>
+            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle) =>
 
-               NativeMethods.NetSessionEnum(stripUnc, clientName, userName, SessionInfoLevel.Info502, out buffer, NativeMethods.MaxPreferredLength, out entriesRead, out totalEntries, out resumeHandle), true))
+               NativeMethods.NetSessionEnum(stripUnc, clientName, userName, SessionInfoLevel.Info502, out buffer, NativeMethods.MaxPreferredLength, out entriesRead, out totalEntries, ref resumeHandle), true))
          {
             yield return sessionInfo;
             hasItems = true;
@@ -115,9 +115,9 @@ namespace Alphaleonis.Win32.Network
 
          foreach (var sessionInfo in EnumerateNetworkObjectCore(fd, (NativeMethods.SESSION_INFO_2 structure, SafeGlobalMemoryBufferHandle buffer) => new SessionInfo(stripUnc, SessionInfoLevel.Info2, structure),
 
-            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, out uint resumeHandle) =>
+            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle) =>
 
-               NativeMethods.NetSessionEnum(stripUnc, clientName, userName, SessionInfoLevel.Info2, out buffer, NativeMethods.MaxPreferredLength, out entriesRead, out totalEntries, out resumeHandle), true))
+               NativeMethods.NetSessionEnum(stripUnc, clientName, userName, SessionInfoLevel.Info2, out buffer, NativeMethods.MaxPreferredLength, out entriesRead, out totalEntries, ref resumeHandle), true))
          {
             yield return sessionInfo;
             hasItems = true;
@@ -133,9 +133,9 @@ namespace Alphaleonis.Win32.Network
 
          foreach (var sessionInfo in EnumerateNetworkObjectCore(fd, (NativeMethods.SESSION_INFO_1 structure, SafeGlobalMemoryBufferHandle buffer) => new SessionInfo(stripUnc, SessionInfoLevel.Info1, structure),
 
-            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, out uint resumeHandle) =>
+            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle) =>
 
-               NativeMethods.NetSessionEnum(stripUnc, clientName, userName, SessionInfoLevel.Info1, out buffer, NativeMethods.MaxPreferredLength, out entriesRead, out totalEntries, out resumeHandle), true))
+               NativeMethods.NetSessionEnum(stripUnc, clientName, userName, SessionInfoLevel.Info1, out buffer, NativeMethods.MaxPreferredLength, out entriesRead, out totalEntries, ref resumeHandle), true))
          {
             yield return sessionInfo;
             hasItems = true;
@@ -151,9 +151,9 @@ namespace Alphaleonis.Win32.Network
 
          foreach (var sessionInfo in EnumerateNetworkObjectCore(fd, (NativeMethods.SESSION_INFO_10 structure, SafeGlobalMemoryBufferHandle buffer) => new SessionInfo(stripUnc, SessionInfoLevel.Info10, structure),
 
-            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, out uint resumeHandle) =>
+            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle) =>
 
-               NativeMethods.NetSessionEnum(stripUnc, clientName, userName, SessionInfoLevel.Info10, out buffer, NativeMethods.MaxPreferredLength, out entriesRead, out totalEntries, out resumeHandle), true))
+               NativeMethods.NetSessionEnum(stripUnc, clientName, userName, SessionInfoLevel.Info10, out buffer, NativeMethods.MaxPreferredLength, out entriesRead, out totalEntries, ref resumeHandle), true))
          {
             yield return sessionInfo;
             hasItems = true;
@@ -169,9 +169,9 @@ namespace Alphaleonis.Win32.Network
 
          foreach (var sessionInfo in EnumerateNetworkObjectCore(fd, (NativeMethods.SESSION_INFO_0 structure, SafeGlobalMemoryBufferHandle buffer) => new SessionInfo(stripUnc, SessionInfoLevel.Info0, structure),
 
-            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, out uint resumeHandle) =>
+            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle) =>
 
-               NativeMethods.NetSessionEnum(stripUnc, clientName, userName, SessionInfoLevel.Info0, out buffer, NativeMethods.MaxPreferredLength, out entriesRead, out totalEntries, out resumeHandle), true))
+               NativeMethods.NetSessionEnum(stripUnc, clientName, userName, SessionInfoLevel.Info0, out buffer, NativeMethods.MaxPreferredLength, out entriesRead, out totalEntries, ref resumeHandle), true))
          {
             yield return sessionInfo;
          }

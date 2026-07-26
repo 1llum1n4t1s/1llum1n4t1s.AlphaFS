@@ -44,14 +44,16 @@ namespace Alphaleonis.Win32.Network
       [SecurityCritical]
       internal static IEnumerable<NetworkConnectionInfo> EnumerateNetworkConnectionsCore(Guid? networkConnectionID)
       {
+         using var manager = CreateManager();
+
          if (null != networkConnectionID)
          {
-            return new[] { new NetworkConnectionInfo(Manager.GetNetworkConnection((Guid) networkConnectionID)) };
+            return new[] { new NetworkConnectionInfo(manager.GetNetworkConnection((Guid) networkConnectionID)) };
          }
 
          // Eagerly wrap all COM wrappers into NetworkConnectionInfo objects (which have finalizers)
          // to prevent COM reference leaks if the caller partially enumerates.
-         var connections = Manager.GetNetworkConnections();
+         var connections = manager.GetNetworkConnections();
          var result = new List<NetworkConnectionInfo>();
 
          try

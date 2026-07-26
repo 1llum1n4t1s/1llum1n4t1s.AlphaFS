@@ -1,4 +1,4 @@
-/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy 
  *  of this software and associated documentation files (the "Software"), to deal 
@@ -84,7 +84,7 @@ namespace Alphaleonis.Win32.Network
       {
          return EnumerateNetworkObjectCore(new FunctionData {ExtraData1 = share}, (NativeMethods.CONNECTION_INFO_1 structure, SafeGlobalMemoryBufferHandle buffer) => new OpenConnectionInfo(host, structure),
 
-            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, out uint resumeHandle) =>
+            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle) =>
             {
                // When host == null, the local computer is used.
                // However, the resulting OpenResourceInfo.Host property will be empty.
@@ -92,7 +92,7 @@ namespace Alphaleonis.Win32.Network
                // Furthermore, the UNC prefix: \\ is not required and always removed.
                var stripUnc = Utils.IsNullOrWhiteSpace(host) ? Environment.MachineName : Path.GetRegularPathCore(host, GetFullPathOptions.CheckInvalidPathChars, false).Replace(Path.UncPrefix, string.Empty);
 
-               return NativeMethods.NetConnectionEnum(stripUnc, functionData.ExtraData1, 1, out buffer, NativeMethods.MaxPreferredLength, out entriesRead, out totalEntries, out resumeHandle);
+               return NativeMethods.NetConnectionEnum(stripUnc, functionData.ExtraData1, 1, out buffer, NativeMethods.MaxPreferredLength, out entriesRead, out totalEntries, ref resumeHandle);
 
             }, continueOnException);
       }

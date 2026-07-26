@@ -91,7 +91,7 @@ namespace Alphaleonis.Win32.Network
       {
          return EnumerateNetworkObjectCore(new FunctionData {EnumType = 1}, (string structure, SafeGlobalMemoryBufferHandle buffer) => structure,
 
-            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, out uint resume) =>
+            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resume) =>
             {
                // When host == null, the local computer is used.
                // However, the resulting Host property will be empty.
@@ -99,7 +99,7 @@ namespace Alphaleonis.Win32.Network
                // Furthermore, the UNC prefix: \\ is not required and always removed.
                var stripUnc = Utils.IsNullOrWhiteSpace(host) ? Environment.MachineName : Path.GetRegularPathCore(host, GetFullPathOptions.CheckInvalidPathChars, false).Replace(Path.UncPrefix, string.Empty);
 
-               return NativeMethods.NetServerDiskEnum(stripUnc, 0, out buffer, NativeMethods.MaxPreferredLength, out entriesRead, out totalEntries, out resume);
+               return NativeMethods.NetServerDiskEnum(stripUnc, 0, out buffer, NativeMethods.MaxPreferredLength, out entriesRead, out totalEntries, ref resume);
 
             }, continueOnException);
       }

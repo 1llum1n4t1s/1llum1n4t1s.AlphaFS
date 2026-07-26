@@ -32,7 +32,16 @@ namespace Alphaleonis.Win32
    public static class OperatingSystem
    {
       /// <summary>名前付き Windows バージョンを記述するフラグのセット。</summary>
-      /// <remarks>列挙の値は順序付けられています。より後にリリースされたオペレーティングシステムバージョンはより大きな数値を持つため、名前付きバージョン間の比較は意味があります。</remarks>
+      /// <remarks>
+      ///   <para>値は同一の製品ライン内ではリリース順に並んでいますが、クライアント系とサーバー系が交互に配置されているため、
+      ///   ライン跨ぎの比較は build 番号の前後関係と一致しません。</para>
+      ///   <para>たとえば <see cref="Windows11"/> (build 22000) は <see cref="WindowsServer2022"/> (build 20348) より
+      ///   大きい値を持ちますが、リリースは Windows 11 のほうが後です。逆に Windows 10 22H2 (build 19045) 上で
+      ///   <c>IsAtLeast(WindowsServer2016)</c> は <c>false</c> になります。</para>
+      ///   <para>したがって <see cref="IsAtLeast(EnumOsName)"/> による序数比較は、同じ製品ライン内で使ってください。
+      ///   厳密な OS バージョン判定が必要な場合は <see cref="OSVersion"/> の build 番号を比較するか、
+      ///   BCL の <c>System.OperatingSystem.IsWindowsVersionAtLeast</c> を使ってください。</para>
+      /// </remarks>
       [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Os")]
       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Os")]
       public enum EnumOsName
@@ -107,6 +116,12 @@ namespace Alphaleonis.Win32
          /// </summary>
          X86 = 0,
 
+         /// <summary>PROCESSOR_ARCHITECTURE_ARM
+         /// <para>システムは 32 ビット ARM プロセッサ上で実行されています。</para>
+         /// </summary>
+         [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Arm")]
+         Arm = 5,
+
          /// <summary>PROCESSOR_ARCHITECTURE_IA64
          /// <para>システムは Itanium プロセッサ上で実行されています。</para>
          /// </summary>
@@ -118,6 +133,12 @@ namespace Alphaleonis.Win32
          /// <para>システムは 64 ビット版の Windows を実行しています。</para>
          /// </summary>
          X64 = 9,
+
+         /// <summary>PROCESSOR_ARCHITECTURE_ARM64
+         /// <para>システムは 64 ビット ARM プロセッサ上で実行されています。</para>
+         /// </summary>
+         [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Arm")]
+         Arm64 = 12,
 
          /// <summary>PROCESSOR_ARCHITECTURE_UNKNOWN
          /// <para>不明なアーキテクチャ。</para>
@@ -304,8 +325,12 @@ namespace Alphaleonis.Win32
          _osVersion = new Version(verInfo.dwMajorVersion, verInfo.dwMinorVersion, verInfo.dwBuildNumber);
 
          _processorArchitecture = sysInfo.wProcessorArchitecture;
-         _servicePackVersion = new Version(verInfo.wServicePackMajor, verInfo.wServicePackMinor);
          _isServer = verInfo.wProductType == NativeMethods.VER_NT_DOMAIN_CONTROLLER || verInfo.wProductType == NativeMethods.VER_NT_SERVER;
+
+         // _servicePackVersion は「初期化済み」を示すセンチネルとして各プロパティから参照されるため、
+         // 代入はこのメソッドの最後 (_enumOsName を決めた後) に行う。ここで先に代入すると、
+         // 初回アクセスが複数スレッドで競合したときに、他方のスレッドが VersionName に
+         // 未設定の既定値 EnumOsName.Later を見てしまう。
 
 
          // RtlGetVersion: https://msdn.microsoft.com/en-us/library/windows/hardware/ff561910%28v=vs.85%29.aspx
@@ -452,8 +477,12 @@ namespace Alphaleonis.Win32
                   break;
             }
          }
+
+
+         // 初期化完了を示すセンチネル。他のフィールドを全て確定させた後に代入する。
+         _servicePackVersion = new Version(verInfo.wServicePackMajor, verInfo.wServicePackMinor);
       }
-      
+
 
       private static class NativeMethods
       {
@@ -483,7 +512,11 @@ namespace Alphaleonis.Win32
          [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
          internal struct SYSTEM_INFO
          {
-            public readonly EnumProcessorArchitecture wProcessorArchitecture;
+            // ネイティブの SYSTEM_INFO では wProcessorArchitecture / wReserved とも WORD (2 バイト)。
+            // EnumProcessorArchitecture をそのままフィールドにすると基底型 int として 4 バイトで
+            // マーシャルされ、dwPageSize 以降の全フィールドがネイティブ配置とずれる。
+            // 公開 enum の基底型は変えずに、生の ushort で受けてプロパティで変換する。
+            private readonly ushort wProcessorArchitectureRaw;
             private readonly ushort wReserved;
             public readonly uint dwPageSize;
             public readonly IntPtr lpMinimumApplicationAddress;
@@ -494,6 +527,8 @@ namespace Alphaleonis.Win32
             public readonly uint dwAllocationGranularity;
             public readonly ushort wProcessorLevel;
             public readonly ushort wProcessorRevision;
+
+            public EnumProcessorArchitecture wProcessorArchitecture => (EnumProcessorArchitecture) wProcessorArchitectureRaw;
          }
 
 
