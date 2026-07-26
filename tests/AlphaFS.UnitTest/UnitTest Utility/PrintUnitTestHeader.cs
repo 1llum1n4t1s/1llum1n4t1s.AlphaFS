@@ -1,4 +1,4 @@
-/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy 
  *  of this software and associated documentation files (the "Software"), to deal 
@@ -141,7 +141,23 @@ namespace AlphaFS.UnitTest
       }
 
 
-      private static readonly Lazy<bool> DenyAclRoundTripSupported = new Lazy<bool>(DetectDenyAclSupport);
+      private static readonly Lazy<DenyAclProbeResult> DenyAclRoundTrip = new Lazy<DenyAclProbeResult>(DetectDenyAclSupport);
+
+
+      /// <summary>拒否 ACE の往復が可能かどうかと、不可能だった場合の理由。</summary>
+      private sealed class DenyAclProbeResult
+      {
+         public DenyAclProbeResult(bool supported, string reason)
+         {
+            Supported = supported;
+            Reason = reason;
+         }
+
+         public bool Supported { get; }
+
+         /// <summary>skip する場合の理由。握り潰した例外の内容を含む。</summary>
+         public string Reason { get; }
+      }
 
 
       /// <summary>
@@ -152,27 +168,39 @@ namespace AlphaFS.UnitTest
       ///   自分自身にならない環境 (昇格プロセスでは所有者が BUILTIN\Administrators になる等) では
       ///   一度付与すると解除できず、テストが後始末できないまま失敗する。
       ///   実際に往復できるかを 1 度だけ試し、できない環境では該当テストを skip する。
+      ///
+      ///   <para>判定には <see cref="System.IO"/> の ACL API を使い、被テスト対象である
+      ///   <c>Alphaleonis.Win32.Filesystem.Directory.GetAccessControl</c> /
+      ///   <c>SetAccessControl</c> は使わない。被テスト対象でプローブすると、AlphaFS 側の回帰が
+      ///   「環境が非対応」に化けて該当テストが黙って skip され、回帰を見逃す。</para>
+      ///
+      ///   <para>skip する場合は握り潰した例外の内容をメッセージに含める。理由が残らないと、
+      ///   CI 上で skip されたときに環境要因なのか実装の問題なのかを後から判断できない。</para>
       /// </remarks>
       public static void RequireDenyAclRoundTrip(string what)
       {
-         if (!DenyAclRoundTripSupported.Value)
+         var probe = DenyAclRoundTrip.Value;
+
+         if (!probe.Supported)
          {
-            Assert.Inconclusive(string.Format(CultureInfo.CurrentCulture, "拒否 ACE の付与と解除ができない環境のため {0} の検証を skip しました。", what));
+            Assert.Inconclusive(string.Format(CultureInfo.CurrentCulture, "拒否 ACE の付与と解除ができない環境のため {0} の検証を skip しました。理由: {1}", what, probe.Reason));
          }
       }
 
 
-      private static bool DetectDenyAclSupport()
+      private static DenyAclProbeResult DetectDenyAclSupport()
       {
          var probe = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "AlphaFS.DenyAclProbe." + Guid.NewGuid().ToString("N").Substring(0, 8));
 
+         System.IO.DirectoryInfo probeInfo;
+
          try
          {
-            System.IO.Directory.CreateDirectory(probe);
+            probeInfo = System.IO.Directory.CreateDirectory(probe);
          }
-         catch (Exception)
+         catch (Exception ex)
          {
-            return false;
+            return new DenyAclProbeResult(false, string.Format(CultureInfo.CurrentCulture, "プローブ用ディレクトリを作成できませんでした ({0}: {1})", ex.GetType().Name, ex.Message));
          }
 
          var user = (Environment.UserDomainName + @"\" + Environment.UserName).TrimStart('\\');
@@ -180,20 +208,20 @@ namespace AlphaFS.UnitTest
 
          try
          {
-            var security = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(probe);
+            var security = System.IO.FileSystemAclExtensions.GetAccessControl(probeInfo);
             security.AddAccessRule(rule);
-            Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(probe, security);
+            System.IO.FileSystemAclExtensions.SetAccessControl(probeInfo, security);
 
             // 付与できても解除できなければ意味が無いので、往復できることまで確認する。
-            security = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(probe);
+            security = System.IO.FileSystemAclExtensions.GetAccessControl(probeInfo);
             security.RemoveAccessRule(rule);
-            Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(probe, security);
+            System.IO.FileSystemAclExtensions.SetAccessControl(probeInfo, security);
 
-            return true;
+            return new DenyAclProbeResult(true, null);
          }
-         catch (Exception)
+         catch (Exception ex)
          {
-            return false;
+            return new DenyAclProbeResult(false, string.Format(CultureInfo.CurrentCulture, "System.IO でも拒否 ACE を往復できませんでした ({0}: {1})", ex.GetType().Name, ex.Message));
          }
          finally
          {

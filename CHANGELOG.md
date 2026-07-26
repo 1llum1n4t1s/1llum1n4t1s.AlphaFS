@@ -1,6 +1,22 @@
 Changelog
 =========
 
+## [2.1.2] - 2026-07-27
+
+テストの環境判定のみの変更です。ライブラリ本体 (`src/`) に変更はなく、利用者から見た挙動は 2.1.1 と同一です。
+
+### 🧪 テスト
+
+- 拒否 ACE の環境判定 (`RequireDenyAclRoundTrip`) を、被テスト対象ではなく `System.IO` の ACL API で行うよう変更
+  - 従来は `Alphaleonis.Win32.Filesystem.Directory.GetAccessControl` / `SetAccessControl` でプローブし、
+    例外を握り潰していたため、AlphaFS 側の回帰が「環境が非対応」に化けて該当 3 テストが黙って skip されていた
+  - `System.IO` で判定することで、AlphaFS だけが失敗するケースは skip されずテスト失敗として表面化する
+  - 対象: `Directory.Delete_DirectoryHasDenyPermission` /
+    `Directory.Move_UserExplicitDenyOnDestinationFolder` /
+    `AlphaFS_Directory.Copy_UserExplicitDenyOnDestinationFolder`
+- 同じく skip 時のメッセージに、握り潰していた例外の型とメッセージを含めるよう変更
+  - CI 上で skip されたときに、環境要因なのか実装の問題なのかを後から判断できるようにするため
+
 ## [2.1.1] - 2026-07-27
 
 v2.1.0 のリリース報告で「未完了」として残していた項目への対応です。公開 API の変更はありません。
