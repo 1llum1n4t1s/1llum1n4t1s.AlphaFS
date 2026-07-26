@@ -47,6 +47,8 @@ namespace AlphaFS.UnitTest
 
 
             Alphaleonis.Win32.Filesystem.Directory.Delete(folder.FullName, true, true);
+
+            Assert.IsFalse(System.IO.Directory.Exists(folder.FullName), "The directory exists, but is expected not to.");
          }
 
          Console.WriteLine();

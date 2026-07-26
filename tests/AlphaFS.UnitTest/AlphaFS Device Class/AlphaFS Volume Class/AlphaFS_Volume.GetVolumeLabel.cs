@@ -45,19 +45,89 @@ namespace AlphaFS.UnitTest
             }
 
 
+            // System.IO 側のラベルを先に 1 回だけ読む。
+            //
+            // GetDrives() での列挙、IsReady の確認、VolumeLabel の読み取りは別々の時点なので、
+            // その間にドライブが消えると DriveNotFoundException になる。
+            // ネットワークドライブの切断のほか、ドライブ文字を割り当てる他のテスト
+            // (AlphaFS_Host.ConnectDrive_And_DisconnectDrive は「最後の空き文字」= 通常 Z: を使う)
+            // と重なった場合にも起こる。
+            //
+            // 比較対象の期待値を取れないだけなので、そのドライブは対象から外す。
+            // ガードは System.IO 側の probe だけに掛け、被テスト対象である
+            // Volume.GetVolumeLabel の失敗は握り潰さない。
+            string expectedLabel;
+
+            try
+            {
+               expectedLabel = driveInfo.VolumeLabel;
+            }
+            catch (System.IO.IOException ex)
+            {
+               Console.WriteLine("#{0:000}\tSkipped Logical Drive Path: [{1}]\t\t{2}", logicalDriveCount + 1, driveInfo.Name, ex.Message);
+
+               continue;
+            }
+
+
             Console.Write("#{0:000}\tInput Logical Drive Path: [{1}]", ++logicalDriveCount, driveInfo.Name);
 
 
-            var volumeLabel = Alphaleonis.Win32.Filesystem.Volume.GetVolumeLabel(driveInfo.Name);
+            string volumeLabel;
 
-            Console.WriteLine("\t\tLabel: [{0}]", driveInfo.VolumeLabel);
+            try
+            {
+               volumeLabel = Alphaleonis.Win32.Filesystem.Volume.GetVolumeLabel(driveInfo.Name);
+            }
+            catch (System.IO.IOException)
+            {
+               // AlphaFS 側が失敗した場合、ドライブがこの瞬間に消えたのかを System.IO で再確認する。
+               // System.IO でも読めなくなっていれば環境要因なので skip、読めるなら本物の回帰として投げ直す。
+               if (!DriveHasVanished(driveInfo))
+               {
+                  throw;
+               }
+
+               Console.WriteLine("\t\t(drive became unavailable, skipped)");
+
+               --logicalDriveCount;
+
+               continue;
+            }
 
 
-            Assert.AreEqual(driveInfo.VolumeLabel, volumeLabel, "The volume labels do not match, but it is expected.");
+            Console.WriteLine("\t\tLabel: [{0}]", expectedLabel);
+
+
+            Assert.AreEqual(expectedLabel, volumeLabel, "The volume labels do not match, but it is expected.");
          }
 
 
          Assert.IsGreaterThan(0, logicalDriveCount, "No logical drives enumerated, but it is expected.");
+      }
+
+
+      /// <summary>ドライブが列挙後に利用できなくなったかを System.IO で再確認します。</summary>
+      /// <returns>ドライブが消えている場合は <c>true</c>。まだ読める場合は <c>false</c>。</returns>
+      private static bool DriveHasVanished(System.IO.DriveInfo driveInfo)
+      {
+         try
+         {
+            var recheck = new System.IO.DriveInfo(driveInfo.Name);
+
+            if (!recheck.IsReady)
+            {
+               return true;
+            }
+
+            var unused = recheck.VolumeLabel;
+
+            return false;
+         }
+         catch (System.IO.IOException)
+         {
+            return true;
+         }
       }
    }
 }

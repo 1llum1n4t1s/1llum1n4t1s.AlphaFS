@@ -103,6 +103,44 @@ namespace AlphaFS.UnitTest
       }
 
 
+      /// <summary>
+      ///   トランザクショナル NTFS (TxF) が使えない環境では skip する。
+      /// </summary>
+      /// <remarks>
+      ///   TxF は NTFS でのみ動作する。ReFS / FAT32 / exFAT、およびネットワークドライブでは使えないため、
+      ///   リグレッションと区別できるよう skip する。
+      ///   判定には被テスト対象ではなく <see cref="System.IO.DriveInfo"/> を使い、
+      ///   AlphaFS 側の回帰が「環境非対応」に化けないようにしている。
+      /// </remarks>
+      /// <param name="path">検証で使うローカルパス。</param>
+      public static void RequireTransactionalNtfs(string path)
+      {
+         var root = System.IO.Path.GetPathRoot(System.IO.Path.GetFullPath(path));
+
+         string format;
+
+         try
+         {
+            var drive = new System.IO.DriveInfo(root);
+
+            format = drive.IsReady ? drive.DriveFormat : null;
+         }
+         catch (Exception ex)
+         {
+            Assert.Inconclusive(string.Format(CultureInfo.CurrentCulture,
+               "ボリューム [{0}] のファイルシステムを判定できなかったため TxF の検証を skip しました: {1}", root, ex.Message));
+
+            return;
+         }
+
+         if (!string.Equals(format, "NTFS", StringComparison.OrdinalIgnoreCase))
+         {
+            Assert.Inconclusive(string.Format(CultureInfo.CurrentCulture,
+               "ボリューム [{0}] は {1} で、トランザクショナル NTFS (TxF) が使えないため skip しました。", root, format ?? "不明"));
+         }
+      }
+
+
       private static readonly Lazy<bool> DenyAclRoundTripSupported = new Lazy<bool>(DetectDenyAclSupport);
 
 

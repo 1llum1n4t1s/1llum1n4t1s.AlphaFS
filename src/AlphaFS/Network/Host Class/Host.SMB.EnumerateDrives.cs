@@ -1,4 +1,4 @@
-/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy 
  *  of this software and associated documentation files (the "Software"), to deal 
@@ -89,9 +89,9 @@ namespace Alphaleonis.Win32.Network
       [SecurityCritical]
       internal static IEnumerable<string> EnumerateDrivesCore(string host, bool continueOnException)
       {
-         return EnumerateNetworkObjectCore(new FunctionData {EnumType = 1}, (string structure, SafeGlobalMemoryBufferHandle buffer) => structure,
+         return EnumerateNetworkObjectCore(new FunctionData {EnumType = 1}, (string structure, SafeNetApiBufferHandle buffer) => structure,
 
-            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resume) =>
+            (FunctionData functionData, out SafeNetApiBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resume) =>
             {
                // When host == null, the local computer is used.
                // However, the resulting Host property will be empty.

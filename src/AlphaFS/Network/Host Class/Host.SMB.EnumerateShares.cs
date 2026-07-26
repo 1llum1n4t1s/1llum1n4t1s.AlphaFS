@@ -126,9 +126,9 @@ namespace Alphaleonis.Win32.Network
 
          // Start with SHARE_INFO_503 structure.
 
-         foreach (var shareInfo in EnumerateNetworkObjectCore(fd, (NativeMethods.SHARE_INFO_503 structure, SafeGlobalMemoryBufferHandle buffer) => new ShareInfo(stripUnc, ShareInfoLevel.Info503, structure),
+         foreach (var shareInfo in EnumerateNetworkObjectCore(fd, (NativeMethods.SHARE_INFO_503 structure, SafeNetApiBufferHandle buffer) => new ShareInfo(stripUnc, ShareInfoLevel.Info503, structure),
 
-            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle) =>
+            (FunctionData functionData, out SafeNetApiBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle) =>
 
                NativeMethods.NetShareEnum(stripUnc, 503, out buffer, NativeMethods.MaxPreferredLength, out entriesRead, out totalEntries, ref resumeHandle), continueOnException).Where(si => yieldAll || si.ShareType == shareType))
          {
@@ -144,9 +144,9 @@ namespace Alphaleonis.Win32.Network
 
          // Fallback on SHARE_INFO_2 structure.
 
-         foreach (var shareInfo in EnumerateNetworkObjectCore(fd, (NativeMethods.SHARE_INFO_2 structure, SafeGlobalMemoryBufferHandle buffer) => new ShareInfo(stripUnc, ShareInfoLevel.Info2, structure),
+         foreach (var shareInfo in EnumerateNetworkObjectCore(fd, (NativeMethods.SHARE_INFO_2 structure, SafeNetApiBufferHandle buffer) => new ShareInfo(stripUnc, ShareInfoLevel.Info2, structure),
 
-            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle) =>
+            (FunctionData functionData, out SafeNetApiBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle) =>
 
                NativeMethods.NetShareEnum(stripUnc, 2, out buffer, NativeMethods.MaxPreferredLength, out entriesRead, out totalEntries, ref resumeHandle), continueOnException).Where(si => yieldAll || si.ShareType == shareType))
          {
@@ -162,9 +162,9 @@ namespace Alphaleonis.Win32.Network
 
          // Fallback on SHARE_INFO_1 structure.
 
-         foreach (var shareInfo in EnumerateNetworkObjectCore(fd, (NativeMethods.SHARE_INFO_1 structure, SafeGlobalMemoryBufferHandle buffer) => new ShareInfo(stripUnc, ShareInfoLevel.Info1, structure),
+         foreach (var shareInfo in EnumerateNetworkObjectCore(fd, (NativeMethods.SHARE_INFO_1 structure, SafeNetApiBufferHandle buffer) => new ShareInfo(stripUnc, ShareInfoLevel.Info1, structure),
 
-            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle) =>
+            (FunctionData functionData, out SafeNetApiBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle) =>
 
                NativeMethods.NetShareEnum(stripUnc, 1, out buffer, NativeMethods.MaxPreferredLength, out entriesRead, out totalEntries, ref resumeHandle), continueOnException).Where(si => yieldAll || si.ShareType == shareType))
          {

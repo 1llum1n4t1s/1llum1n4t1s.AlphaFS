@@ -88,9 +88,9 @@ namespace Alphaleonis.Win32.Network
 
          var fd = new FunctionData {ExtraData1 = basePath, ExtraData2 = typeName};
 
-         return EnumerateNetworkObjectCore(fd, (NativeMethods.FILE_INFO_3 structure, SafeGlobalMemoryBufferHandle buffer) => new OpenResourceInfo(host, structure),
+         return EnumerateNetworkObjectCore(fd, (NativeMethods.FILE_INFO_3 structure, SafeNetApiBufferHandle buffer) => new OpenResourceInfo(host, structure),
 
-            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle) =>
+            (FunctionData functionData, out SafeNetApiBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle) =>
             {
                // When host == null, the local computer is used.
                // However, the resulting Host property will be empty.

@@ -1,6 +1,61 @@
 Changelog
 =========
 
+## [2.1.1] - 2026-07-27
+
+v2.1.0 のリリース報告で「未完了」として残していた項目への対応です。公開 API の変更はありません。
+
+### 🐛 不具合修正
+
+- netapi32 が確保したバッファを `NetApiBufferFree` で解放するようになりました
+  - 従来は `LocalFree` (`Marshal.FreeHGlobal`) で解放しており、netapi32 の内部ヒープ実装に
+    たまたま一致していただけで、Win32 の契約としては未定義動作だった
+  - 専用の `SafeNetApiBufferHandle` を追加し、`NetShareEnum` / `NetSessionEnum` / `NetFileEnum` /
+    `NetConnectionEnum` / `NetServerDiskEnum` / `NetDfsEnum` / `NetShareGetInfo` / `NetStatisticsGet` /
+    `NetDfsGetInfo` / `NetDfsGetClientInfo` の 10 本すべてを移行
+  - 呼び出し側が確保する `WNetGetUniversalName` (mpr.dll) のバッファは従来どおり
+
+### 🧪 テスト
+
+- **TxF (Transacted) API のスモークテストを追加** (12 件)
+  - `KernelTransaction` を取る API はソース 109 ファイル・パラメータ 601 箇所に及ぶ一方、
+    テストが 1 件も存在せず、通常版の変更が Transacted 版を壊しても検知できない状態だった
+  - 対象: `File.WriteAllText` / `ReadAllText` / `GetSize` / `Copy` / `Move` / `Delete` / `Exists`、
+    `Directory.CreateDirectory` (多階層含む) / `Exists` / `Delete` / `EnumerateFiles`
+  - commit で反映されること、rollback および commit なしの Dispose で取り消されること、
+    未コミットの変更がトランザクション外から見えないことを検証する
+  - TxF が使えない環境 (ReFS / FAT32 等) は `UnitTestConstants.RequireTransactionalNtfs` で skip。
+    判定には被テスト対象ではなく `System.IO.DriveInfo` を使う
+- **ドライブ文字の取り合いによる不安定な失敗を修正** (2 件、根本原因は同一)
+  - `DriveConnection` は「最後の空きドライブ文字」(通常 `Z:`) を割り当てるが、これを使う
+    4 つのテストに `[DoNotParallelize]` が付いておらず、互いに、またドライブを列挙する
+    テストと並列実行されていた
+    - `AlphaFS_Host_DriveConnection_Network_Success` が `ERROR_ALREADY_ASSIGNED`
+      (ローカルデバイス名は既に使用されています) で落ちる
+    - `AlphaFS_Volume_GetVolumeLabel_Local_Success` が `DriveNotFoundException` で落ちる
+      (列挙中に `Z:` が消える)
+  - `AlphaFS_Host.DriveConnection` / `AlphaFS_Host.GetMappedConnectionName` /
+    `AlphaFS_Host.GetMappedUncName` / `AlphaFS_Directory.CreateJunction_FromMappedDrive` に
+    `[DoNotParallelize]` を追加し、ドライブ文字を割り当てる全 8 テストで指定が揃った
+  - あわせて `AlphaFS_Volume_GetVolumeLabel_Local_Success` 自体の TOCTOU も解消
+    - ドライブの列挙・`IsReady` の確認・`VolumeLabel` の読み取りが別々の時点で行われており、
+      `VolumeLabel` は 2 回読んでいた。読み取りを 1 回にまとめ、System.IO 側の probe だけを
+      ガードして、被テスト対象である `Volume.GetVolumeLabel` の失敗は握り潰さないようにした
+      (ネットワークドライブの切断など、テスト外の要因にも耐えるようにするため)
+- `Directory_Delete_ExistingDirectory_LocalAndNetwork_Success` に削除後の非存在検証を追加
+
+### 🔒 CI
+
+- `actions/checkout` と `actions/setup-dotnet` をフルコミット SHA へ固定
+  - このジョブは `secrets.NUGET_API_KEY` を扱うため、書き換え可能なタグ参照を避ける
+- テスト実行に `--report-trx` を追加し、失敗時に TRX を成果物としてアップロードするよう変更
+  - 稀に発生する不安定な失敗が、コンソールログが流れた後でも特定できるようにするため
+- `.github/dependabot.yml` を追加 (月 1 回、GitHub Actions と NuGet)
+  - SHA 固定した Action は手動では追随できないため、Dependabot に SHA とバージョンコメントを更新させる
+  - minor / patch はグループ化して PR 数を抑え、メジャー更新だけ個別 PR にする
+  - `MSTest.TestAdapter` と `MSTest.TestFramework` は常に同一バージョンへ揃うよう専用グループにする
+  - NuGet はソリューション (`AlphaFS.slnx`) ではなくプロジェクトのディレクトリを直接指定する
+
 ## [2.1.0] - 2026-07-26
 
 8 観点 + 検証 2 段のコードレビュー (/rere) で確定した指摘をまとめて修正しました。

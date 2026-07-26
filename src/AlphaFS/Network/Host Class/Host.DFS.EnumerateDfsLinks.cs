@@ -55,9 +55,9 @@ namespace Alphaleonis.Win32.Network
 
          var fd = new FunctionData();
 
-         return EnumerateNetworkObjectCore(fd, (NativeMethods.DFS_INFO_9 structure, SafeGlobalMemoryBufferHandle buffer) => new DfsInfo(structure),
+         return EnumerateNetworkObjectCore(fd, (NativeMethods.DFS_INFO_9 structure, SafeNetApiBufferHandle buffer) => new DfsInfo(structure),
 
-            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle1) =>
+            (FunctionData functionData, out SafeNetApiBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle1) =>
             {
                totalEntries = 0;
 

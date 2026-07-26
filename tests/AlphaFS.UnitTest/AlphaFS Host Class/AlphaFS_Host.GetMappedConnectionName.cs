@@ -1,4 +1,4 @@
-/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy 
  *  of this software and associated documentation files (the "Software"), to deal 
@@ -29,6 +29,11 @@ namespace AlphaFS.UnitTest
       // Pattern: <class>_<function>_<scenario>_<expected result>
 
 
+      // DriveConnection は「最後の空きドライブ文字」(通常 Z:) を割り当てる。
+      // ドライブ文字の割り当てはマシン全体の状態を変えるため、
+      // 同じことをする他テストやドライブを列挙するテストと並列実行させない。
+      // 並列実行すると ERROR_ALREADY_ASSIGNED で不定期に失敗する。
+      [DoNotParallelize]
       [TestMethod]
       public void AlphaFS_Host_GetMappedConnectionName_Success()
       {

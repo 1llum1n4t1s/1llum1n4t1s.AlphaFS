@@ -82,9 +82,9 @@ namespace Alphaleonis.Win32.Network
       [SecurityCritical]
       internal static IEnumerable<OpenConnectionInfo> EnumerateOpenConnectionsCore(string host, string share, bool continueOnException)
       {
-         return EnumerateNetworkObjectCore(new FunctionData {ExtraData1 = share}, (NativeMethods.CONNECTION_INFO_1 structure, SafeGlobalMemoryBufferHandle buffer) => new OpenConnectionInfo(host, structure),
+         return EnumerateNetworkObjectCore(new FunctionData {ExtraData1 = share}, (NativeMethods.CONNECTION_INFO_1 structure, SafeNetApiBufferHandle buffer) => new OpenConnectionInfo(host, structure),
 
-            (FunctionData functionData, out SafeGlobalMemoryBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle) =>
+            (FunctionData functionData, out SafeNetApiBufferHandle buffer, int prefMaxLen, out uint entriesRead, out uint totalEntries, ref uint resumeHandle) =>
             {
                // When host == null, the local computer is used.
                // However, the resulting OpenResourceInfo.Host property will be empty.

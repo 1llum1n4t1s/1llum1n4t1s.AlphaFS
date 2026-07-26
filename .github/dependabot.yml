@@ -1,0 +1,62 @@
+# Dependabot の依存更新設定。
+#
+# 月 1 回に絞り、まとめられるものはグループ化して PR 数を抑える。
+# メジャー更新だけは個別 PR にして、破壊的変更を単独でレビューできるようにする。
+#
+# NuGet はソリューションではなくプロジェクトのディレクトリを直接指定する。
+# このリポジトリのソリューションは新形式の AlphaFS.slnx で、Dependabot 側の対応が不確実なため。
+version: 2
+
+updates:
+  # GitHub Actions。publish.yml は Action をフルコミット SHA で固定しているので、
+  # 手動では追随できない。Dependabot は SHA と併記のバージョンコメントの両方を更新する。
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "CI"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+
+  # 本体プロジェクト (System.Security.Permissions)。
+  - package-ecosystem: nuget
+    directory: "/src/AlphaFS"
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "依存"
+    groups:
+      alphafs-minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+
+  # テストプロジェクト (MSTest.TestAdapter / MSTest.TestFramework)。
+  # この 2 つは常に同じバージョンへ揃える必要があるため、必ずグループで上げる。
+  - package-ecosystem: nuget
+    directory: "/tests/AlphaFS.UnitTest"
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "依存"
+    groups:
+      mstest:
+        patterns:
+          - "MSTest.*"
+      test-minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch

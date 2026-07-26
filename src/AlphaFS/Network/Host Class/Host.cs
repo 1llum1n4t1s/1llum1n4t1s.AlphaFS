@@ -50,7 +50,7 @@ namespace Alphaleonis.Win32.Network
          return NativeMethods.CreateNetworkListManager();
       }
 
-      internal delegate uint EnumerateNetworkObjectDelegate(FunctionData functionData, out SafeGlobalMemoryBufferHandle netApiBuffer, [MarshalAs(UnmanagedType.I4)] int prefMaxLen,
+      internal delegate uint EnumerateNetworkObjectDelegate(FunctionData functionData, out SafeNetApiBufferHandle netApiBuffer, [MarshalAs(UnmanagedType.I4)] int prefMaxLen,
          [MarshalAs(UnmanagedType.U4)] out uint entriesRead, [MarshalAs(UnmanagedType.U4)] out uint totalEntries, [MarshalAs(UnmanagedType.U4)] ref uint resumeHandle);
 
 
@@ -251,7 +251,7 @@ namespace Alphaleonis.Win32.Network
       
 
       [SecurityCritical]
-      internal static IEnumerable<TStruct> EnumerateNetworkObjectCore<TStruct, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)] TNative>(FunctionData functionData, Func<TNative, SafeGlobalMemoryBufferHandle, TStruct> createTStruct, EnumerateNetworkObjectDelegate enumerateNetworkObject, bool continueOnException)
+      internal static IEnumerable<TStruct> EnumerateNetworkObjectCore<TStruct, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)] TNative>(FunctionData functionData, Func<TNative, SafeNetApiBufferHandle, TStruct> createTStruct, EnumerateNetworkObjectDelegate enumerateNetworkObject, bool continueOnException)
       {
          int objectSize;
          bool isString;
