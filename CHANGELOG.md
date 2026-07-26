@@ -48,8 +48,9 @@ v2.1.0 のリリース報告で「未完了」として残していた項目へ�
 
 - `actions/checkout` と `actions/setup-dotnet` をフルコミット SHA へ固定
   - このジョブは `secrets.NUGET_API_KEY` を扱うため、書き換え可能なタグ参照を避ける
-- テスト実行に `--report-trx` を追加し、失敗時に TRX を成果物としてアップロードするよう変更
-  - 稀に発生する不安定な失敗が、コンソールログが流れた後でも特定できるようにするため
+- テスト実行のコマンドに、引数を追加してはいけない理由をコメントとして明記
+  - MTP はサポートしていない引数を渡されると、テストを 1 件も実行しないまま
+    "Zero tests ran" / exit 5 で抜ける
 - `.github/dependabot.yml` を追加 (月 1 回、GitHub Actions と NuGet)
   - SHA 固定した Action は手動では追随できないため、Dependabot に SHA とバージョンコメントを更新させる
   - minor / patch はグループ化して PR 数を抑え、メジャー更新だけ個別 PR にする

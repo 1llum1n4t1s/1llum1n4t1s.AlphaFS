@@ -71,20 +71,14 @@ jobs:
         # skip されず実行される (skip されるのは非昇格環境のみ)。ローカルの非昇格シェルでは通るのに
         # CI では落ちる、という差はこれが原因になり得る。
         #
-        # --report-trx: 失敗したテスト名とスタックトレースを TRX として残す。コンソール出力だけだと
-        # 稀に発生する不安定な失敗を後から特定できない (ログが流れる / 再実行すると再現しない)。
+        # 引数はここに書いた形のまま維持する。MTP はサポートしていない引数を渡されると、
+        # テストを 1 件も実行しないまま "Zero tests ran" / exit 5 で抜ける。
+        # TRX レポート (--report-trx) はこの構成では使えない
+        # (Microsoft.Testing.Extensions.TrxReport の参照が必要)。
+        # 失敗したテスト名とスタックトレースはコンソール出力に含まれ、GitHub 側でログが保持される。
         env:
           ALPHAFS_SKIP_NETWORK_TESTS: '1'
-        run: dotnet test AlphaFS.slnx -c Release --no-build -- --report-trx --report-trx-filename test-results.trx
-
-      - name: Upload test results
-        # テストが落ちたときだけ TRX を成果物として残す。
-        if: failure()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: test-results
-          path: '**/TestResults/*.trx'
-          if-no-files-found: warn
+        run: dotnet test AlphaFS.slnx -c Release --no-build
 
       - name: Pack
         run: dotnet pack src/AlphaFS/AlphaFS.csproj -c Release --no-build -o artifacts
