@@ -1,6 +1,26 @@
 Changelog
 =========
 
+## [3.0.0] - 2026-07-27
+
+ACL 設定 API の既定挙動を `System.IO` に合わせる破壊的変更のみのリリースです。
+
+### 💥 破壊的変更
+
+- `SetAccessControl` の既定セクションを `AccessControlSections.All` から `AccessControlSections.Access` (DACL のみ) へ変更
+  - 対象: `Directory.SetAccessControl(path, security[, pathFormat])` / `File.SetAccessControl` /
+    `DirectoryInfo.SetAccessControl(security)` / `FileInfo.SetAccessControl(security)` の
+    `includeSections` を取らない全 8 オーバーロード
+  - 対になる `GetAccessControl` は元から DACL・所有者・グループしか読んでおらず、
+    読んでもいない SACL まで書きに行く非対称な実装だった
+  - さらに所有者とグループの書き込みには対象に対する `WRITE_OWNER` が必要なため、
+    `GetAccessControl` → ルール追加 → `SetAccessControl` という最も一般的な流れが、
+    所有者が自分ではない環境 (昇格プロセスが作成したディレクトリの所有者は `BUILTIN\Administrators`) で
+    `(5) Access is denied` で失敗していた。`System.IO` は変更されたセクションだけを書くためこの問題は起きず、
+    ドロップイン代替として挙動を揃えた
+  - 所有者・グループ・監査 (SACL) を書き込む場合は `includeSections` を取るオーバーロードを使う
+  - `BackupFileStream.SetAccessControl` は `GetAccessControl` が全セクションを読むバックアップ用途のため `All` のまま
+
 ## [2.1.2] - 2026-07-27
 
 テストの環境判定のみの変更です。ライブラリ本体 (`src/`) に変更はなく、利用者から見た挙動は 2.1.1 と同一です。

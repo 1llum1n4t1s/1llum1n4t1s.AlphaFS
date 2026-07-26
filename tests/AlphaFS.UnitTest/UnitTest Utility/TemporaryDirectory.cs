@@ -261,13 +261,13 @@ namespace AlphaFS.UnitTest
          {
             dirSecurity = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(folderFullPath);
             dirSecurity.AddAccessRule(rule);
-            Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(folderFullPath, dirSecurity, AccessControlSections.Access);
+            Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(folderFullPath, dirSecurity);
          }
          else
          {
             dirSecurity = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(folderFullPath);
             dirSecurity.RemoveAccessRule(rule);
-            Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(folderFullPath, dirSecurity, AccessControlSections.Access);
+            Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(folderFullPath, dirSecurity);
          }
       }
 

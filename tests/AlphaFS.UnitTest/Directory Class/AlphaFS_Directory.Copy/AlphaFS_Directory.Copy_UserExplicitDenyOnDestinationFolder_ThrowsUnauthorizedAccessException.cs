@@ -63,7 +63,7 @@ namespace AlphaFS.UnitTest
 
             var dirSecurity = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(dstFolder.FullName);
             dirSecurity.AddAccessRule(rule);
-            Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(dstFolder.FullName, dirSecurity, System.Security.AccessControl.AccessControlSections.Access);
+            Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(dstFolder.FullName, dirSecurity);
 
             try
             {
@@ -73,7 +73,7 @@ namespace AlphaFS.UnitTest
             {
                dirSecurity = Alphaleonis.Win32.Filesystem.Directory.GetAccessControl(dstFolder.FullName);
                dirSecurity.RemoveAccessRule(rule);
-               Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(dstFolder.FullName, dirSecurity, System.Security.AccessControl.AccessControlSections.Access);
+               Alphaleonis.Win32.Filesystem.Directory.SetAccessControl(dstFolder.FullName, dirSecurity);
             }
          }
          

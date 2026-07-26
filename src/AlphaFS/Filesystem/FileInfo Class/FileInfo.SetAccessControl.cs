@@ -1,4 +1,4 @@
-/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
+﻿/*  Copyright (C) 2008-2018 Peter Palotas, Jeffrey Jangli, Alexandr Normuradov
  *  
  *  Permission is hereby granted, free of charge, to any person obtaining a copy 
  *  of this software and associated documentation files (the "Software"), to deal 
@@ -35,11 +35,18 @@ namespace Alphaleonis.Win32.Filesystem
       ///   ファイルの ACL エントリを追加または削除する必要がある場合は、SetAccessControl メソッドを使用してください。
       /// </remarks>
       /// <param name="fileSecurity">現在のファイルに適用するアクセス制御リスト (ACL) エントリを記述する <see cref="FileSecurity"/> オブジェクト。</param>      
+      /// <remarks>
+      ///   既定では DACL (<see cref="AccessControlSections.Access"/>) だけを適用します。
+      ///   所有者・グループ・監査 (SACL) も書き込むには <c>includeSections</c> を取るオーバーロードを使ってください。
+      ///   <para>所有者とグループの書き込みには対象に対する WRITE_OWNER が、SACL には SeSecurityPrivilege が必要です。
+      ///   GetAccessControl → ルール追加 → SetAccessControl という通常の流れでは DACL しか変更していないので、
+      ///   それ以外を既定で書きに行くと、権限のない環境で不要に (5) Access is denied で失敗します。</para>
+      /// </remarks>
       [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
       [SecurityCritical]
       public void SetAccessControl(FileSecurity fileSecurity)
       {
-         File.SetAccessControlCore(LongFullName, null, fileSecurity, AccessControlSections.All, PathFormat.LongFullPath);
+         File.SetAccessControlCore(LongFullName, null, fileSecurity, AccessControlSections.Access, PathFormat.LongFullPath);
       }
 
 

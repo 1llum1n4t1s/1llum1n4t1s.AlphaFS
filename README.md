@@ -125,3 +125,35 @@ Windows 11 以降を `Later` として扱っていたのを改め、専用の値
 `Later` は「このライブラリが知らない将来の OS」だけを表します。既存の値は変更していません。
 
 追加値: `WindowsServer2019` / `Windows11` / `WindowsServer2022` / `WindowsServer2025`
+
+### 7. `SetAccessControl` の既定が DACL のみに変更
+
+`includeSections` を取らないオーバーロードが書き込むセクションを、`AccessControlSections.All` から
+`AccessControlSections.Access`（DACL のみ）へ変更しました。
+
+| API | Before | After |
+|---|---|---|
+| `Directory.SetAccessControl(path, security)` | `All`（DACL + SACL + 所有者 + グループ） | `Access`（DACL のみ） |
+| `File.SetAccessControl(path, security)` | 同上 | 同上 |
+| `DirectoryInfo.SetAccessControl(security)` / `FileInfo.SetAccessControl(security)` | 同上 | 同上 |
+
+対になる `GetAccessControl` は元から DACL・所有者・グループしか読んでおらず、読んでもいない SACL まで
+書きに行く非対称な状態でした。さらに所有者とグループの書き込みには対象に対する `WRITE_OWNER` が必要なため、
+`GetAccessControl` → ルール追加 → `SetAccessControl` という最も一般的な流れが、
+所有者が自分ではない環境（昇格プロセスが作成したディレクトリは所有者が `BUILTIN\Administrators` になる）で
+`(5) Access is denied` で失敗していました。`System.IO` は変更されたセクションだけを書くため、この問題は起きません。
+
+所有者・グループ・監査（SACL）も書き込みたい場合は、`includeSections` を取るオーバーロードを使ってください。
+
+```csharp
+// DACL だけ変更する場合（既定でこの動作）
+var security = Directory.GetAccessControl(path);
+security.AddAccessRule(rule);
+Directory.SetAccessControl(path, security);
+
+// 所有者も書き込む場合は明示する
+Directory.SetAccessControl(path, security, AccessControlSections.Access | AccessControlSections.Owner);
+```
+
+なお `BackupFileStream.SetAccessControl` は `GetAccessControl` が全セクションを読むバックアップ用途のため、
+`All` のまま変更していません。
