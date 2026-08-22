@@ -1,6 +1,21 @@
 Changelog
 =========
 
+## [3.0.1] - 2026-08-23
+
+再帰的なファイルシステム操作のリパースポイント安全性と、コピー・ACL・長パス処理の不具合を修正しました。
+
+### 🐛 不具合修正
+
+- 再帰的な `Directory.Delete` / `DeleteEmptySubdirectories` / `Encrypt` / `Decrypt` / `Compress` / `Decompress` が、ツリー内のジャンクションやディレクトリシンボリックリンクの参照先へ入らないよう修正
+  - 削除・暗号化・圧縮の対象として指定したツリー外のファイルを削除・変更する危険を解消
+- `Directory.Copy` が空ディレクトリまたはファイルだけのディレクトリをコピーすると、コピー先ルートを作成しない問題を修正
+  - `CopyOptions.CopySymbolicLink` を通常ディレクトリへ指定した場合は通常のツリーコピーを続行し、入れ子のディレクトリシンボリックリンクだけをリンクとして複製
+- `Directory.Compress` / `Decompress` が長い子パスへ通常パスを `LongFullPath` として渡し、260 文字超で失敗する問題を修正
+- DACL のみを指定した `File.Create` が不要な `SeSecurityPrivilege` を要求する問題と、`BackupFileStream.GetAccessControl` が P/Invoke 返却バッファの容量検査で失敗する問題を修正
+  - SACL を含む場合だけ `SeSecurityPrivilege` と `ACCESS_SYSTEM_SECURITY` を要求
+- `Path.GetFullPath` のネイティブ処理が失敗した際、実際の Win32 エラーではなく成功コード 0 から `NotImplementedException` を生成する問題を修正
+
 ## [3.0.0] - 2026-07-27
 
 ACL 設定 API の既定挙動を `System.IO` に合わせる破壊的変更のみのリリースです。
