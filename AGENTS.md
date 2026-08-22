@@ -14,19 +14,19 @@ This file provides guidance to Claude Code and other coding agents working in th
 
 ```bash
 # Build
-rtk dotnet build AlphaFS.slnx
+dotnet build AlphaFS.slnx
 
 # Build Release
-rtk dotnet build AlphaFS.slnx -c Release
+dotnet build AlphaFS.slnx -c Release
 
 # Run all tests
-rtk dotnet test AlphaFS.slnx
+dotnet test AlphaFS.slnx
 
 # Run a specific test by name
-rtk dotnet test tests/AlphaFS.UnitTest/AlphaFS.UnitTest.csproj --filter "FullyQualifiedName~TestMethodName"
+dotnet test tests/AlphaFS.UnitTest/AlphaFS.UnitTest.csproj --filter "FullyQualifiedName~TestMethodName"
 
 # Pack NuGet package (outputs to artifacts/)
-rtk dotnet pack src/AlphaFS/AlphaFS.csproj -c Release -o artifacts
+dotnet pack src/AlphaFS/AlphaFS.csproj -c Release -o artifacts
 ```
 
 Tests use **MSTest** (`MSTest.TestFramework` 4.3.2). Many tests require elevated privileges or specific NTFS/network configurations, so some may skip or fail in non-privileged environments — treat those as environment-dependent rather than regressions.
