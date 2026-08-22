@@ -88,7 +88,8 @@ namespace Alphaleonis.Win32.Filesystem
             // フォルダのシンボリックリンクをコピーする。
             // CopyFileEx() では実行できないため、エミュレートする。
 
-            if (File.HasCopySymbolicLink(cma.CopyOptions) && null != fsei && fsei.IsSymbolicLink)
+            if (File.HasCopySymbolicLink(cma.CopyOptions) && isFolder &&
+                File.GetFileSystemEntryInfoCore(cma.Transaction, true, cma.SourcePathLp, false, PathFormat.LongFullPath).IsSymbolicLink)
             {
                var lvi = File.GetLinkTargetInfoCore(cma.Transaction, cma.SourcePathLp, true, PathFormat.LongFullPath);
 
