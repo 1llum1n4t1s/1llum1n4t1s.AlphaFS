@@ -231,7 +231,17 @@ namespace AlphaFS.UnitTest
             }
             catch (Exception)
             {
-               // 拒否 ACE が外せなかった場合は削除もできない。一時ディレクトリなので放置してよい。
+               // 往復に失敗した場合はプローブに拒否 ACE が残っており、通常の削除では消せない。
+               // 放置すると %TEMP% に消せないディレクトリが溜まるので、ACE を剥がして消し切る。
+               try
+               {
+                  DenyAclCleanup.ForceDelete(probe);
+               }
+               catch (Exception)
+               {
+                  // ここまでして消せないなら所有者ですら DACL を書けない環境。プローブが Supported=false を
+                  // 返すので実害は無く、これ以上できることも無い。
+               }
             }
          }
       }

@@ -394,14 +394,12 @@ namespace AlphaFS.UnitTest
          }
          catch
          {
+            // 拒否 ACE や ReadOnly 属性が残っていると通常の再帰削除は必ず失敗する。
+            // ここで諦めると %TEMP% に二度と消せない AlphaFS.TempRoot.* が積み上がるので、
+            // 妨げになっている ACE と属性を剥がしながら削除し直す。
             try
             {
-               var dirInfo = new Alphaleonis.Win32.Filesystem.DirectoryInfo(Directory.FullName, Alphaleonis.Win32.Filesystem.PathFormat.FullPath);
-
-               if (dirInfo.Exists)
-               {
-                  dirInfo.Delete(true, true);
-               }
+               DenyAclCleanup.ForceDelete(Directory.FullName);
             }
             catch (Exception ex)
             {
