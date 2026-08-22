@@ -55,12 +55,14 @@ namespace Alphaleonis.Win32.Filesystem
             options = DirectoryEnumerationOptions.None;
          }
 
+         options |= DirectoryEnumerationOptions.SkipReparsePoints;
+
 
          // ソースフォルダを走査し、ファイルとフォルダを処理する。
 
          foreach (var fsei in EnumerateFileSystemEntryInfosCore<FileSystemEntryInfo>(null, transaction, pathLp, searchPattern, null, options | DirectoryEnumerationOptions.AsLongPath, filters, PathFormat.LongFullPath))
 
-            Device.ToggleCompressionCore(transaction, fsei.IsDirectory, fsei.FullPath, compress, PathFormat.LongFullPath);
+            Device.ToggleCompressionCore(transaction, fsei.IsDirectory, fsei.LongFullPath, compress, PathFormat.LongFullPath);
 
 
          // ルートディレクトリ（指定されたパス）を処理する。

@@ -502,14 +502,7 @@ namespace Alphaleonis.Win32.Filesystem
 
 
             var length = SecurityNativeMethods.GetSecurityDescriptorLength(pSecurityDescriptor);
-            var managedBuffer = new byte[length];
-
-            
-            // .CopyTo() はそこでは動作しない？
-            if (null != pSecurityDescriptor)
-            {
-               pSecurityDescriptor.CopyTo(managedBuffer, 0, (int) length);
-            }
+            var managedBuffer = pSecurityDescriptor.ToByteArray(0, (int) length);
 
 
             var fs = new FileSecurity();

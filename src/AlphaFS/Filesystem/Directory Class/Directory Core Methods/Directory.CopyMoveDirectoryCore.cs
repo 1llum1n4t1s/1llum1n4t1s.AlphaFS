@@ -32,6 +32,14 @@ namespace Alphaleonis.Win32.Filesystem
       {
          var dirs = new Queue<string>(NativeMethods.DefaultDirectoryQueueCapacity);
 
+         if (!File.ExistsCore(cma.Transaction, true, cma.SourcePathLp, PathFormat.LongFullPath))
+         {
+            NativeError.ThrowException(Win32Errors.ERROR_PATH_NOT_FOUND, cma.SourcePathLp);
+         }
+
+         // 空ディレクトリやファイルから始まる列挙でも、コピー先のルートを先に確保する。
+         CreateDirectoryCore(true, cma.Transaction, cma.DestinationPathLp, null, null, false, PathFormat.LongFullPath);
+
          dirs.Enqueue(cma.SourcePathLp);
 
 
@@ -55,6 +63,16 @@ namespace Alphaleonis.Win32.Filesystem
 
                if (fseiSource.IsDirectory)
                {
+                  if (fseiSource.IsSymbolicLink && File.HasCopySymbolicLink(cma.CopyOptions))
+                  {
+                     var linkTargetInfo = File.GetLinkTargetInfoCore(cma.Transaction, fseiSourcePath, false, PathFormat.LongFullPath);
+
+                     File.CreateSymbolicLinkCore(cma.Transaction, fseiDestinationPath, linkTargetInfo.SubstituteName, SymbolicLinkTarget.Directory, PathFormat.LongFullPath);
+
+                     copyMoveResult.TotalFolders++;
+                     continue;
+                  }
+
                   CreateDirectoryCore(true, cma.Transaction, fseiDestinationPath, null, null, false, PathFormat.LongFullPath);
 
                   copyMoveResult.TotalFolders++;

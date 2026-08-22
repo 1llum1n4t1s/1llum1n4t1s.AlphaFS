@@ -83,7 +83,7 @@ namespace Alphaleonis.Win32.Filesystem
 
          while (dirs.Count > 0)
          {
-            foreach (var fsei in EnumerateFileSystemEntryInfosCore<FileSystemEntryInfo>(true, transaction, dirs.Pop(), Path.WildcardStarMatchAll, null, DirectoryEnumerationOptions.ContinueOnException, null, PathFormat.LongFullPath))
+            foreach (var fsei in EnumerateFileSystemEntryInfosCore<FileSystemEntryInfo>(true, transaction, dirs.Pop(), Path.WildcardStarMatchAll, null, DirectoryEnumerationOptions.ContinueOnException | DirectoryEnumerationOptions.SkipReparsePoints, null, PathFormat.LongFullPath))
             {
                // Ensure the directory is empty.
                // fsei.LongFullPath は既に長絶対パスなので LongFullPath を渡す。呼び出し元由来の

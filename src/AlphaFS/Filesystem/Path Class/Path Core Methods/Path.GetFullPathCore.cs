@@ -135,12 +135,14 @@ namespace Alphaleonis.Win32.Filesystem
 
             else
             {
+               var lastError = System.Runtime.InteropServices.Marshal.GetLastWin32Error();
+
                if ((options & GetFullPathOptions.ContinueOnNonExist) != 0)
                {
                   return null;
                }
 
-               NativeError.ThrowException(returnLength, pathLp);
+               NativeError.ThrowException(lastError, pathLp);
             }
 
 

@@ -75,8 +75,13 @@ namespace Alphaleonis.Win32.Filesystem
             // The root folder is at the bottom of the stack.
 
             var dirs = new Stack<string>(128);
+            var filters = new DirectoryEnumerationFilters
+            {
+               // リパースポイント自体は列挙して削除するが、リンク先には入らない。
+               RecursionFilter = entry => !entry.IsReparsePoint
+            };
             
-            foreach (var fsei in EnumerateFileSystemEntryInfosCore<FileSystemEntryInfo>(null, transaction, fsEntryInfo.LongFullPath, Path.WildcardStarMatchAll, null, DirectoryEnumerationOptions.Recursive, null, PathFormat.LongFullPath))
+            foreach (var fsei in EnumerateFileSystemEntryInfosCore<FileSystemEntryInfo>(null, transaction, fsEntryInfo.LongFullPath, Path.WildcardStarMatchAll, null, DirectoryEnumerationOptions.Recursive, filters, PathFormat.LongFullPath))
             {
                PrepareDirectoryForDelete(transaction, fsei, ignoreReadOnly);
 

@@ -81,13 +81,22 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
+         var requiresSecurityPrivilege = false;
+
          if (null != fileSecurity)
          {
-            fileSystemRights |= (FileSystemRights) SECURITY_INFORMATION.UNPROTECTED_SACL_SECURITY_INFORMATION;
+            var rawSecurityDescriptor = new RawSecurityDescriptor(fileSecurity.GetSecurityDescriptorBinaryForm(), 0);
+            requiresSecurityPrivilege = null != rawSecurityDescriptor.SystemAcl;
+
+            if (requiresSecurityPrivilege)
+            {
+               // ACCESS_SYSTEM_SECURITY。FileSystemRights には名前付きメンバーがないため Win32 値を使う。
+               fileSystemRights |= (FileSystemRights) 0x01000000;
+            }
          }
 
 
-         using ((fileSystemRights & (FileSystemRights)SECURITY_INFORMATION.UNPROTECTED_SACL_SECURITY_INFORMATION) != 0 || (fileSystemRights & (FileSystemRights)SECURITY_INFORMATION.UNPROTECTED_DACL_SECURITY_INFORMATION) != 0 ? new PrivilegeEnabler(Privilege.Security) : null)
+         using (requiresSecurityPrivilege ? new PrivilegeEnabler(Privilege.Security) : null)
 
          using (var securityAttributes = new Security.NativeMethods.SecurityAttributes(fileSecurity))
          {

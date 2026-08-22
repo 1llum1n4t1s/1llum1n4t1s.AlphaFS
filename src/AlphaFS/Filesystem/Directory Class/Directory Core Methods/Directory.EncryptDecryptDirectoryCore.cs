@@ -54,9 +54,9 @@ namespace Alphaleonis.Win32.Filesystem
 
          if (recursive)
          {
-            foreach (var fsei in EnumerateFileSystemEntryInfosCore<string>(null, null, path, Path.WildcardStarMatchAll, SearchOption.AllDirectories, DirectoryEnumerationOptions.AsLongPath, null, pathFormat))
+            foreach (var fsei in EnumerateFileSystemEntryInfosCore<FileSystemEntryInfo>(null, null, path, Path.WildcardStarMatchAll, SearchOption.AllDirectories, DirectoryEnumerationOptions.SkipReparsePoints, null, pathFormat))
 
-               File.EncryptDecryptFileCore(true, fsei, encrypt, pathFormat);
+               File.EncryptDecryptFileCore(fsei.IsDirectory, fsei.LongFullPath, encrypt, pathFormat);
          }
 
          // ルートフォルダ（指定されたパス）を処理する。
