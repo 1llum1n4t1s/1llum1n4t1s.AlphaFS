@@ -46,6 +46,7 @@ namespace Alphaleonis.Win32.Filesystem
 
       [SuppressMessage("Microsoft.Reliability", "CA2006:UseSafeHandleToEncapsulateNativeResources")]
       private IntPtr _context = IntPtr.Zero;
+      private bool _contextIsForWrite;
 
 
 
@@ -341,6 +342,7 @@ namespace Alphaleonis.Win32.Filesystem
 
          using var safeBuffer = new SafeGlobalMemoryBufferHandle(count);
 
+         _contextIsForWrite = false;
          var success = NativeMethods.BackupRead(SafeFileHandle, safeBuffer, (uint) safeBuffer.Capacity, out var numberOfBytesRead, false, processSecurity, ref _context);
             
          var lastError = Marshal.GetLastWin32Error();
@@ -421,6 +423,7 @@ namespace Alphaleonis.Win32.Filesystem
 
          uint bytesWritten;
 
+         _contextIsForWrite = true;
          var success = NativeMethods.BackupWrite(SafeFileHandle, safeBuffer, (uint)safeBuffer.Capacity, out bytesWritten, false, processSecurity, ref _context);
             
          var lastError = Marshal.GetLastWin32Error();
@@ -601,6 +604,7 @@ namespace Alphaleonis.Win32.Filesystem
 
          using var hBuf = new SafeGlobalMemoryBufferHandle(sizeOf);
 
+         _contextIsForWrite = false;
          var success = NativeMethods.BackupRead(SafeFileHandle, hBuf, (uint) sizeOf, out var numberOfBytesRead, false, _processSecurity, ref _context);
 
          var lastError = Marshal.GetLastWin32Error();
@@ -639,6 +643,7 @@ namespace Alphaleonis.Win32.Filesystem
          {
             using var nameBuf = new SafeGlobalMemoryBufferHandle((int) nameLength);
 
+            _contextIsForWrite = false;
             success = NativeMethods.BackupRead(SafeFileHandle, nameBuf, nameLength, out numberOfBytesRead, false, _processSecurity, ref _context);
 
             lastError = Marshal.GetLastWin32Error();
@@ -675,50 +680,49 @@ namespace Alphaleonis.Win32.Filesystem
       [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
       protected override void Dispose(bool disposing)
       {
-         if (disposing)
+         try
          {
             // コンストラクタのいずれかが以前に例外をスローした場合、
             // オブジェクトは正しく初期化されておらず、ファイナライザーからの呼び出しは失敗する。
 
-            if (null != SafeFileHandle && !SafeFileHandle.IsInvalid)
+            if (_context != IntPtr.Zero && null != SafeFileHandle && !SafeFileHandle.IsClosed && !SafeFileHandle.IsInvalid)
             {
                try
                {
-                  if (_context != IntPtr.Zero)
+                  uint temp;
+
+                  // MSDN: データ構造が使用するメモリを解放するには、バックアップ操作完了時に
+                  // 対応する BackupRead / BackupWrite の bAbort パラメーターを TRUE にする。
+                  // SafeFileHandle は CriticalFinalizerObject なので、このファイナライザーより後に解放される。
+                  using var abortBuffer = new SafeGlobalMemoryBufferHandle();
+                  if (_contextIsForWrite)
                   {
-                     try
-                     {
-                        uint temp;
-
-                        // MSDN: データ構造が使用するメモリを解放するには、バックアップ操作完了時に bAbort パラメーターを TRUE に設定して BackupRead を呼び出す。
-                        var success = NativeMethods.BackupRead(SafeFileHandle, new SafeGlobalMemoryBufferHandle(), 0, out temp, true, false, ref _context);
-
-                        var lastError = Marshal.GetLastWin32Error();
-                        if (!success)
-                        {
-                           NativeError.ThrowException(lastError);
-                        }
-                     }
-                     finally
-                     {
-                        _context = IntPtr.Zero;
-                     }
+                     NativeMethods.BackupWrite(SafeFileHandle, abortBuffer, 0, out temp, true, false, ref _context);
+                  }
+                  else
+                  {
+                     NativeMethods.BackupRead(SafeFileHandle, abortBuffer, 0, out temp, true, false, ref _context);
                   }
                }
-               finally
+               catch (Exception)
                {
-                  // ファイルハンドルのクローズは _context の有無に関わらず必ず行う。
-                  // _context が非ゼロになるのは BackupRead / BackupWrite / BackupSeek を
-                  // 一度でも呼んだ後だけなので、内側の分岐に置くと「開いただけで I/O していない」
-                  // インスタンスが Dispose されてもハンドルが残る。パス指定コンストラクタの既定は
-                  // FileShare.None なので、GC がファイナライザを走らせるまでファイルがロックされ続ける。
-                  NativeMethods.CloseSafeHandle(SafeFileHandle);
+                  // Dispose とファイナライザーから例外を送出しない。ハンドルのクローズは
+                  // SafeHandle に任せ、ここではクリーンアップ例外を外へ出さない。
                }
             }
          }
+         finally
+         {
+            _context = IntPtr.Zero;
+            _contextIsForWrite = false;
 
+            if (disposing)
+            {
+               NativeMethods.CloseSafeHandle(SafeFileHandle);
+            }
 
-         base.Dispose(disposing);
+            base.Dispose(disposing);
+         }
       }
       
       #endregion // Disposable Members

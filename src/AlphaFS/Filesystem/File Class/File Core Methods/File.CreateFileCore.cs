@@ -117,20 +117,36 @@ namespace Alphaleonis.Win32.Filesystem
 
             if (isAppend)
             {
-               var success = NativeMethods.SetFilePointerEx(safeHandle, 0, IntPtr.Zero, SeekOrigin.End);
-
-               lastError = Marshal.GetLastWin32Error();
-
-               if (!success)
+               if (!SetFilePointerForAppend(safeHandle, isFolder, path, continueOnException))
                {
-                  NativeMethods.CloseHandleAndPossiblyThrowException(safeHandle, lastError, isFolder, path, !continueOnException);
-
                   return null;
                }
             }
 
             return safeHandle;
          }
+      }
+
+
+      internal static bool SetFilePointerForAppend(SafeFileHandle safeHandle, bool? isFolder, string path, bool continueOnException)
+      {
+         if (NativeMethods.SetFilePointerEx(safeHandle, 0, IntPtr.Zero, SeekOrigin.End))
+         {
+            return true;
+         }
+
+         var lastError = Marshal.GetLastWin32Error();
+
+         // SetFilePointerEx の失敗時点ではハンドル自体は有効なため、
+         // CloseHandleAndPossiblyThrowException は閉じない。ここで所有権を確実に解放する。
+         safeHandle.Close();
+
+         if (!continueOnException)
+         {
+            NativeError.ThrowException(lastError, isFolder, path);
+         }
+
+         return false;
       }
    }
 }
