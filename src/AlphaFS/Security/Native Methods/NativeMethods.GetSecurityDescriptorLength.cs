@@ -19,6 +19,7 @@
  *  THE SOFTWARE. 
  */
 
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Security;
@@ -38,5 +39,11 @@ namespace Alphaleonis.Win32.Security
       [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
       [return: MarshalAs(UnmanagedType.U4)]
       internal static extern uint GetSecurityDescriptorLength(SafeGlobalMemoryBufferHandle pSecurityDescriptor);
+
+
+      [SuppressMessage("Microsoft.Security", "CA2118:ReviewSuppressUnmanagedCodeSecurityUsage"), SuppressMessage("Microsoft.Security", "CA5122:PInvokesShouldNotBeSafeCriticalFxCopRule")]
+      [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode, EntryPoint = "GetSecurityDescriptorLength"), SuppressUnmanagedCodeSecurity]
+      [return: MarshalAs(UnmanagedType.U4)]
+      internal static extern uint GetSecurityDescriptorLength(IntPtr pSecurityDescriptor);
    }
 }

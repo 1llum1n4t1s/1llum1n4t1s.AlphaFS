@@ -52,7 +52,8 @@ namespace Alphaleonis.Win32.Network
          Guid = structure.Guid;
          MetadataSize = structure.MetadataSize;
          PropertyFlags = structure.PropertyFlags;
-         SecurityDescriptor = structure.pSecurityDescriptor;
+         _securityDescriptorBuffer = SafeGlobalMemoryBufferHandle.CopySecurityDescriptor(structure.pSecurityDescriptor);
+         SecurityDescriptor = null == _securityDescriptorBuffer ? IntPtr.Zero : _securityDescriptorBuffer.DangerousGetHandle();
 
          if (structure.NumberOfStorages > 0)
          {
@@ -133,7 +134,12 @@ namespace Alphaleonis.Win32.Network
       /// <summary>DFS リンクのリパースポイントに関連付ける自己相対セキュリティ記述子を指定する SECURITY_DESCRIPTOR 構造体へのポインター。
       /// このフィールドは DFS リンクでのみ有効です。
       /// </summary>
+      /// <remarks>ポインターはこの <see cref="DfsInfo"/> インスタンスが生存している間だけ有効です。</remarks>
+      [field: NonSerialized]
       public IntPtr SecurityDescriptor { get; internal set; }
+
+      [NonSerialized]
+      private SafeGlobalMemoryBufferHandle _securityDescriptorBuffer;
       
       #endregion // プロパティ
    }

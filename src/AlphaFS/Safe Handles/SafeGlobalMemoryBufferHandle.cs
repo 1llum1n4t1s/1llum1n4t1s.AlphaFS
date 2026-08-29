@@ -75,6 +75,36 @@ namespace Alphaleonis.Win32
       }
 
 
+      internal static SafeGlobalMemoryBufferHandle CopySecurityDescriptor(IntPtr securityDescriptor)
+      {
+         if (securityDescriptor == IntPtr.Zero)
+         {
+            return null;
+         }
+
+         var length = checked((int) Security.NativeMethods.GetSecurityDescriptorLength(securityDescriptor));
+         if (length == 0)
+         {
+            return null;
+         }
+
+         var managedBuffer = new byte[length];
+         Marshal.Copy(securityDescriptor, managedBuffer, 0, length);
+
+         var safeBuffer = new SafeGlobalMemoryBufferHandle(length);
+         try
+         {
+            safeBuffer.CopyFrom(managedBuffer, 0, length);
+            return safeBuffer;
+         }
+         catch
+         {
+            safeBuffer.Close();
+            throw;
+         }
+      }
+
+
       /// <summary>派生クラスでオーバーライドされた場合、ハンドルを解放するために必要なコードを実行します。</summary>
       /// <returns>
       /// ハンドルが正常に解放された場合は<c>true</c>、致命的な障害が発生した場合は

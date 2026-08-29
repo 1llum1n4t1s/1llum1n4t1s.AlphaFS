@@ -60,7 +60,7 @@ namespace Alphaleonis.Win32.Network
                Remark = s503.shi503_remark;
                ServerName = s503.shi503_servername == "*" ? host : s503.shi503_servername;
                ShareType = s503.shi503_type;
-               SecurityDescriptor = s503.shi503_security_descriptor;
+               SetSecurityDescriptor(s503.shi503_security_descriptor);
                break;
 
 
@@ -75,7 +75,7 @@ namespace Alphaleonis.Win32.Network
                Remark = s502.shi502_remark;
                ServerName = host;
                ShareType = s502.shi502_type;
-               SecurityDescriptor = s502.shi502_security_descriptor;
+               SetSecurityDescriptor(s502.shi502_security_descriptor);
                break;
 
 
@@ -123,6 +123,13 @@ namespace Alphaleonis.Win32.Network
       public override string ToString()
       {
          return NetFullPath;
+      }
+
+
+      private void SetSecurityDescriptor(IntPtr securityDescriptor)
+      {
+         _securityDescriptorBuffer = SafeGlobalMemoryBufferHandle.CopySecurityDescriptor(securityDescriptor);
+         SecurityDescriptor = null == _securityDescriptorBuffer ? IntPtr.Zero : _securityDescriptorBuffer.DangerousGetHandle();
       }
 
       #endregion // メソッド
@@ -175,7 +182,12 @@ namespace Alphaleonis.Win32.Network
 
 
       /// <summary>この共有に関連付けられた SECURITY_DESCRIPTOR を指定します。</summary>
+      /// <remarks>ポインターはこの <see cref="ShareInfo"/> インスタンスが生存している間だけ有効です。</remarks>
+      [field: NonSerialized]
       public IntPtr SecurityDescriptor { get; private set; }
+
+      [NonSerialized]
+      private SafeGlobalMemoryBufferHandle _securityDescriptorBuffer;
 
 
       /// <summary>共有リソースが存在するリモートサーバーの DNS 名または NetBIOS 名を指定する文字列へのポインター。</summary>

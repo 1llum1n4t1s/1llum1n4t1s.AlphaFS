@@ -87,9 +87,12 @@ namespace Alphaleonis.Win32.Network
 
          var lastError = getFromClient ? NativeMethods.NetDfsGetClientInfo(dfsName, serverName, shareName, 9, out var safeBuffer) : NativeMethods.NetDfsGetInfo(dfsName, null, null, 9, out safeBuffer);
 
-         if (lastError == Win32Errors.NERR_Success)
+         using (safeBuffer)
          {
-            return new DfsInfo(safeBuffer.PtrToStructure<NativeMethods.DFS_INFO_9>(0));
+            if (lastError == Win32Errors.NERR_Success)
+            {
+               return new DfsInfo(safeBuffer.PtrToStructure<NativeMethods.DFS_INFO_9>(0));
+            }
          }
 
          throw new NetworkInformationException((int)lastError);
