@@ -34,15 +34,16 @@ The API is System.IO-shaped rather than an exact clone. Intentional differences 
 ### Filesystem operation
 
 1. A static facade or Info object receives a path and operation options.
-2. Shared core code validates and normalizes the path, including UNC and `\\?\` extended-length forms.
+2. Shared core code validates and normalizes the path, including UNC and `\\?\` extended-length forms. Recursive copy/move also rejects a destination at or below its source before traversal begins.
 3. A domain-specific `NativeMethods` declaration invokes the Windows API; transactional overloads also pass the kernel transaction handle.
-4. Safe-handle types own returned handles. Managed result types project native structures where an object result is required.
-5. `NativeError` maps failed Win32 results to the library's managed exception contract.
+4. Tree copy/move preserves requested reparse points as links instead of traversing their targets. Emulated moves retain the source until the destination has completed successfully.
+5. Safe-handle types own returned handles. Managed result types project native structures where an object result is required.
+6. `NativeError` maps failed Win32 results to the library's managed exception contract.
 
 ### Network and Shell operation
 
 1. `Host` or Shell-facing APIs call Win32 networking functions or COM wrappers.
-2. Native or COM data is projected into `NetworkInfo`, `NetworkConnectionInfo`, `Shell32Info`, or related managed types.
+2. Native or COM data is projected into `NetworkInfo`, `NetworkConnectionInfo`, `Shell32Info`, or related managed types. Security descriptors exposed by `DfsInfo` and `ShareInfo` are copied into owned memory before their NetAPI result buffers are released.
 3. Types that retain COM references implement `IDisposable`; callers release them with `using`.
 
 ### Build and publication
@@ -56,7 +57,10 @@ The API is System.IO-shaped rather than an exact clone. Intentional differences 
 
 - Extended paths support up to `MaxPathUnicode` (32,700 characters); standard and extended path forms must not be mixed incorrectly.
 - Path normalization deliberately remains stricter than `System.IO` for malformed or extended paths.
+- Recursive copy/move never uses a destination at or below its source, and reparse points selected for link copying are not traversed.
+- An emulated move deletes its source only after the destination is complete; replacement rollback must not leave the caller without either the original source or a valid destination.
 - Native handles are represented by SafeHandle-derived owners. Native or COM ownership must not be replaced with untracked raw lifetime management.
+- Managed network result objects never retain borrowed pointers into NetAPI enumeration buffers after those buffers are freed.
 - `NetworkInfo`, `NetworkConnectionInfo`, and `Shell32Info` retain COM resources and therefore remain disposable.
 - Transactional and non-transactional overloads share behavior except for the transaction boundary.
 - Default `SetAccessControl` overloads write DACL changes; overloads with `AccessControlSections` are required for owner, group, or SACL writes. `BackupFileStream` keeps its all-sections backup behavior.
@@ -73,6 +77,7 @@ The API is System.IO-shaped rather than an exact clone. Intentional differences 
 | Split large types into feature-based partial files | Keeps hundreds of filesystem operations navigable without changing their public type identity. | A complete behavior trace can cross several files and shared core methods. |
 | Normalize paths before native calls | Centralizes long-path, UNC, and validation behavior across public overloads. | AlphaFS can reject malformed paths that current `System.IO` handles differently. |
 | Use P/Invoke and SafeHandle ownership | Exposes Windows-only capabilities while making native cleanup deterministic and exception-safe. | The implementation is platform-specific and requires Windows-focused tests. |
+| Stage destructive directory replacement and defer source deletion | Keeps emulated cross-volume moves recoverable when copying or replacement fails partway through. | Replacement needs temporary sibling paths and additional cleanup logic. |
 | Make COM-backed projections disposable | NativeAOT-compatible wrappers can release retained COM references predictably. | This is a breaking lifetime contract compared with archived upstream APIs. |
 | Keep the library AnyCPU and tests x64 | Consumers can load the library in x64 or Arm64 processes while native tests retain their established environment. | The local test host does not by itself validate every architecture. |
 | Pin publishing Actions to commit SHAs | Protects the credential-bearing NuGet publication path from mutable tags. | Dependabot or manual maintenance must update both SHA and version comments. |
