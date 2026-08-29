@@ -58,7 +58,7 @@
     <!-- CAS 由来の型 (SecurityPermission / PermissionSet / FileIOPermission 等) は使っていないが、
          NativeError が ERROR_BAD_RECOVERY_POLICY に対して投げる System.Security.Policy.PolicyException
          がこのパッケージへ型フォワードされているため、参照は必須。削除すると CS1069 でビルドできない。 -->
-    <PackageReference Include="System.Security.Permissions" Version="10.0.10" />
+    <PackageReference Include="System.Security.Permissions" Version="10.0.11" />
   </ItemGroup>
   <!-- インクリメンタルビルドを毎回破壊する CleanBinObjBeforeBuild は削除。
        クリーンビルドが必要な場合は `dotnet clean` を明示的に実行する。 -->
