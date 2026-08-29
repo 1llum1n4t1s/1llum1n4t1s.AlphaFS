@@ -81,4 +81,4 @@ This fork modernized COM interop for NativeAOT. Key API changes:
 
 ## CI/CD
 
-NuGet publishing is triggered by pushes to `release/**` branches via `.github/workflows/publish.yml`. The workflow: restore → build Release → pack → push to NuGet.
+NuGet publishing is triggered by pushes to `release/**` branches via `.github/workflows/publish.yml`. The workflow restores, builds, tests, packs, obtains a short-lived credential through NuGet.org Trusted Publishing, and pushes the package. Do not create or store a long-lived NuGet API key.

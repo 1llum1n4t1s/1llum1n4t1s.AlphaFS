@@ -6,18 +6,19 @@ on:
       - 'release/**'
   workflow_dispatch:
 
-# 最小権限原則: NuGet 公開には GITHUB_TOKEN への書き込み権限は不要。
-# actions/checkout が利用する contents:read のみ許可する。
+# 最小権限原則: checkout 用の contents:read と、NuGet.org の
+# Trusted Publishing で短期資格情報を取得する id-token:write だけを許可する。
 permissions:
   contents: read
+  id-token: write
 
 jobs:
   publish:
     runs-on: windows-latest
     steps:
       - name: Checkout code
-        # Action はフルコミット SHA で固定する。このジョブは secrets.NUGET_API_KEY を扱うため、
-        # 書き換え可能なタグ (@v4) 参照だとタグ移動を伴う侵害でキーが窃取され得る。
+        # Action はフルコミット SHA で固定する。このジョブは NuGet.org への公開権限を持つため、
+        # 書き換え可能なタグ参照だとタグ移動を伴う侵害で公開経路が乗っ取られ得る。
         # SHA は自動では追随しないので、末尾コメントのバージョンを見て手動更新するか、
         # .github/dependabot.yml に github-actions エコシステムを追加して自動更新させる。
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -83,9 +84,25 @@ jobs:
       - name: Pack
         run: dotnet pack src/AlphaFS/AlphaFS.csproj -c Release --no-build -o artifacts
 
+      - name: Authenticate to NuGet.org
+        id: login
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+        with:
+          user: ${{ vars.NUGET_USER }}
+
       - name: Publish to NuGet
-        # publish.ps1 は -ApiKey 既定値として $env:NUGET_API_KEY を読む (動的スコープに依存しない)。
-        run: .\publish.ps1
         env:
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+        run: |
+          $version = '${{ github.ref_name }}' -replace '^release/', ''
+          $package = "artifacts\1llum1n4t1s.AlphaFS.$version.nupkg"
+          if (-not (Test-Path -LiteralPath $package)) {
+            Write-Error "Expected package not found: $package"
+            exit 1
+          }
+          dotnet nuget push $package `
+            --api-key $env:NUGET_API_KEY `
+            --source https://api.nuget.org/v3/index.json `
+            --skip-duplicate
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
         shell: pwsh
