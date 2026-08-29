@@ -31,6 +31,11 @@ namespace Alphaleonis.Win32.Filesystem
       internal static void CopyMoveDirectoryCore(bool retry, CopyMoveArguments cma, CopyMoveResult copyMoveResult)
       {
          var dirs = new Queue<string>(NativeMethods.DefaultDirectoryQueueCapacity);
+         var fileCopyArguments = cma;
+
+         // ディレクトリのエミュレート移動は、全ファイルのコピーが成功してからソースツリーを
+         // 一括削除する。途中失敗時に置換先を復元しても、コピー済みファイルを失わない。
+         fileCopyArguments.EmulateMove = false;
 
          if (!File.ExistsCore(cma.Transaction, true, cma.SourcePathLp, PathFormat.LongFullPath))
          {
@@ -63,6 +68,19 @@ namespace Alphaleonis.Win32.Filesystem
 
                if (fseiSource.IsDirectory)
                {
+                  // ジャンクションを通常ディレクトリとして辿ると、リンク先の巨大ツリーや循環を
+                  // コピーしてしまう。リンクそのものを同じターゲットで再作成する。
+                  if (fseiSource.IsMountPoint)
+                  {
+                     var linkTargetInfo = File.GetLinkTargetInfoCore(cma.Transaction, fseiSourcePath, false, PathFormat.LongFullPath);
+                     var linkTargetPath = Path.GetRegularPathCore(linkTargetInfo.SubstituteName, GetFullPathOptions.RemoveTrailingDirectorySeparator, false);
+
+                     CreateJunctionCore(cma.Transaction, fseiDestinationPath, linkTargetPath, false, false, PathFormat.LongFullPath);
+
+                     copyMoveResult.TotalFolders++;
+                     continue;
+                  }
+
                   if (fseiSource.IsSymbolicLink && File.HasCopySymbolicLink(cma.CopyOptions))
                   {
                      var linkTargetInfo = File.GetLinkTargetInfoCore(cma.Transaction, fseiSourcePath, false, PathFormat.LongFullPath);
@@ -84,7 +102,7 @@ namespace Alphaleonis.Win32.Filesystem
                {
                   // ファイルカウントはFile.CopyMoveCoreメソッドで行われる。
 
-                  File.CopyMoveCore(retry, cma, true, false, fseiSourcePath, fseiDestinationPath, copyMoveResult);
+                  File.CopyMoveCore(retry, fileCopyArguments, true, false, fseiSourcePath, fseiDestinationPath, copyMoveResult);
 
                   if (copyMoveResult.IsCanceled)
                   {
@@ -99,11 +117,6 @@ namespace Alphaleonis.Win32.Filesystem
                   if (copyMoveResult.ErrorCode == Win32Errors.NO_ERROR)
                   {
                      copyMoveResult.TotalBytes += fseiSource.FileSize;
-
-                     if (cma.EmulateMove)
-                     {
-                        File.DeleteFileCore(cma.Transaction, fseiSourcePath, true, fseiSource.Attributes, PathFormat.LongFullPath);
-                     }
                   }
                }
             }

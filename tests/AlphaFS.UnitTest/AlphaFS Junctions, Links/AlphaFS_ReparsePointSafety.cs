@@ -110,6 +110,58 @@ namespace AlphaFS.UnitTest
 
 
       [TestMethod]
+      public void AlphaFS_Directory_Copy_NestedJunction_PreservesJunctionWithoutMaterializingTarget_Local_Success()
+      {
+         using (var tempRoot = new TemporaryDirectory())
+         {
+            var source = System.IO.Path.Combine(tempRoot.Directory.FullName, "Source");
+            var target = System.IO.Path.Combine(tempRoot.Directory.FullName, "Target");
+            var sourceJunction = System.IO.Path.Combine(source, "TargetJunction");
+            var destination = System.IO.Path.Combine(tempRoot.Directory.FullName, "Destination");
+            var destinationJunction = System.IO.Path.Combine(destination, "TargetJunction");
+
+            System.IO.Directory.CreateDirectory(source);
+            System.IO.Directory.CreateDirectory(target);
+            System.IO.File.WriteAllText(System.IO.Path.Combine(target, "target.txt"), "target");
+            Alphaleonis.Win32.Filesystem.Directory.CreateJunction(sourceJunction, target);
+
+            Alphaleonis.Win32.Filesystem.Directory.Copy(source, destination);
+
+            var destinationInfo = new Alphaleonis.Win32.Filesystem.DirectoryInfo(destinationJunction).EntryInfo;
+            Assert.IsTrue(destinationInfo.IsMountPoint);
+            Assert.AreEqual(
+               Alphaleonis.Win32.Filesystem.Directory.GetLinkTargetInfo(sourceJunction).PrintName,
+               Alphaleonis.Win32.Filesystem.Directory.GetLinkTargetInfo(destinationJunction).PrintName,
+               true);
+         }
+      }
+
+
+      [TestMethod]
+      public void AlphaFS_Directory_Copy_RootJunction_PreservesJunctionWithoutMaterializingTarget_Local_Success()
+      {
+         using (var tempRoot = new TemporaryDirectory())
+         {
+            var target = System.IO.Path.Combine(tempRoot.Directory.FullName, "Target");
+            var sourceJunction = System.IO.Path.Combine(tempRoot.Directory.FullName, "SourceJunction");
+            var destinationJunction = System.IO.Path.Combine(tempRoot.Directory.FullName, "DestinationJunction");
+
+            System.IO.Directory.CreateDirectory(target);
+            System.IO.File.WriteAllText(System.IO.Path.Combine(target, "target.txt"), "target");
+            Alphaleonis.Win32.Filesystem.Directory.CreateJunction(sourceJunction, target);
+
+            Alphaleonis.Win32.Filesystem.Directory.Copy(sourceJunction, destinationJunction);
+
+            Assert.IsTrue(new Alphaleonis.Win32.Filesystem.DirectoryInfo(destinationJunction).EntryInfo.IsMountPoint);
+            Assert.AreEqual(
+               Alphaleonis.Win32.Filesystem.Directory.GetLinkTargetInfo(sourceJunction).PrintName,
+               Alphaleonis.Win32.Filesystem.Directory.GetLinkTargetInfo(destinationJunction).PrintName,
+               true);
+         }
+      }
+
+
+      [TestMethod]
       public void AlphaFS_Directory_Encrypt_Recursive_DoesNotFollowDirectorySymbolicLink_Local_Success()
       {
          UnitTestAssert.IsElevatedProcess();

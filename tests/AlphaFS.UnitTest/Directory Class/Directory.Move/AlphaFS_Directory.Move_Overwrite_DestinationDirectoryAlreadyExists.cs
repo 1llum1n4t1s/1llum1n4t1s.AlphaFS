@@ -75,5 +75,64 @@ namespace AlphaFS.UnitTest
 
          Console.WriteLine();
       }
+
+
+      [TestMethod]
+      public void AlphaFS_Directory_Move_Overwrite_SourceMoveFails_PreservesDestination_Local_Success()
+      {
+         using var tempRoot = new TemporaryDirectory();
+         var folderSrc = tempRoot.CreateTree();
+         var folderDst = folderSrc.CreateSubdirectory("destination");
+         var destinationMarker = System.IO.Path.Combine(folderDst.FullName, "destination-marker.txt");
+         System.IO.File.WriteAllText(destinationMarker, "preserve me");
+
+         UnitTestAssert.ThrowsException<System.IO.IOException>(() =>
+            Alphaleonis.Win32.Filesystem.Directory.Move(folderSrc.FullName, folderDst.FullName, Alphaleonis.Win32.Filesystem.MoveOptions.ReplaceExisting));
+
+         Assert.IsTrue(System.IO.Directory.Exists(folderSrc.FullName));
+         Assert.IsTrue(System.IO.Directory.Exists(folderDst.FullName));
+         Assert.AreEqual("preserve me", System.IO.File.ReadAllText(destinationMarker));
+      }
+
+
+      [TestMethod]
+      public void AlphaFS_Directory_Move_Overwrite_EmulatedCopyFails_RestoresDestinationAndSource_Local_Success()
+      {
+         using var tempRoot = new TemporaryDirectory();
+         var source = System.IO.Path.Combine(tempRoot.Directory.FullName, "Source");
+         var destination = System.IO.Path.Combine(tempRoot.Directory.FullName, "Destination");
+         var sourceMarker = System.IO.Path.Combine(source, "source-marker.txt");
+         var destinationMarker = System.IO.Path.Combine(destination, "destination-marker.txt");
+
+         System.IO.Directory.CreateDirectory(source);
+         System.IO.Directory.CreateDirectory(destination);
+         System.IO.File.WriteAllText(sourceMarker, "source");
+         System.IO.File.WriteAllText(destinationMarker, "destination");
+
+         var sourceLongPath = @"\\?\" + source;
+         var destinationLongPath = @"\\?\" + destination;
+
+         Assert.ThrowsExactly<InvalidOperationException>(() =>
+            Alphaleonis.Win32.Filesystem.Directory.CopyMoveCore(new Alphaleonis.Win32.Filesystem.CopyMoveArguments
+            {
+               SourcePath = sourceLongPath,
+               SourcePathLp = sourceLongPath,
+               DestinationPath = destinationLongPath,
+               DestinationPathLp = destinationLongPath,
+               PathFormat = Alphaleonis.Win32.Filesystem.PathFormat.LongFullPath,
+               PathsChecked = true,
+               IsCopy = true,
+               EmulateMove = true,
+               MoveOptions = Alphaleonis.Win32.Filesystem.MoveOptions.ReplaceExisting,
+               DirectoryEnumerationFilters = new Alphaleonis.Win32.Filesystem.DirectoryEnumerationFilters
+               {
+                  InclusionFilter = _ => throw new InvalidOperationException("copy failure")
+               }
+            }));
+
+         Assert.AreEqual("source", System.IO.File.ReadAllText(sourceMarker));
+         Assert.AreEqual("destination", System.IO.File.ReadAllText(destinationMarker));
+         Assert.AreEqual(0, System.IO.Directory.GetFileSystemEntries(tempRoot.Directory.FullName, "Destination.alphafs-*").Length);
+      }
    }
 }

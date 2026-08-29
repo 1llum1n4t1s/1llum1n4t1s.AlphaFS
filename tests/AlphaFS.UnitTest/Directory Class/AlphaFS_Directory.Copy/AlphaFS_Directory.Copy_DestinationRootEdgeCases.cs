@@ -64,5 +64,24 @@ namespace AlphaFS.UnitTest
             Assert.AreEqual("content", System.IO.File.ReadAllText(destinationFile));
          }
       }
+
+
+      [TestMethod]
+      public void AlphaFS_Directory_Copy_DestinationInsideSource_ThrowsWithoutCreatingDestination_Local_Success()
+      {
+         using (var tempRoot = new TemporaryDirectory())
+         {
+            var source = System.IO.Path.Combine(tempRoot.Directory.FullName, "Source");
+            var destination = System.IO.Path.Combine(source, "Nested", "Destination");
+
+            System.IO.Directory.CreateDirectory(source);
+            System.IO.File.WriteAllText(System.IO.Path.Combine(source, "file.txt"), "content");
+
+            Assert.ThrowsExactly<System.IO.IOException>(() =>
+               Alphaleonis.Win32.Filesystem.Directory.Copy(source, destination));
+
+            Assert.IsFalse(System.IO.Directory.Exists(destination));
+         }
+      }
    }
 }

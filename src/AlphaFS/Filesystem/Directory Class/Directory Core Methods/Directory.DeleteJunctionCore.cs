@@ -82,7 +82,9 @@ namespace Alphaleonis.Win32.Filesystem
          if (removeDirectory)
 
          {
-            DeleteDirectoryCore(transaction, fsEntryInfo, null, false, false, true, pathFormat);
+            // キャッシュ済み情報はリパースデータ解除後もマウントポイントを示すため、
+            // 実状態を取り直してジャンクションを二重解除しないようにする。
+            DeleteDirectoryCore(transaction, null, fsEntryInfo.LongFullPath, false, false, true, pathFormat);
          }
       }
    }

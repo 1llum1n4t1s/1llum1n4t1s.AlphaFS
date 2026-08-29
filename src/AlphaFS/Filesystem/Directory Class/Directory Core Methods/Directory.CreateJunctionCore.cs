@@ -94,9 +94,9 @@ namespace Alphaleonis.Win32.Filesystem
          {
             if (overwrite)
             {
-               DeleteDirectoryCore(transaction, null, junctionPath, true, true, true, pathFormat);
-
-               CreateDirectoryCore(true, transaction, junctionPath, null, null, false, pathFormat);
+               // 上書き対象は既存ジャンクションだけに限定する。リパースポイントとして検証してから
+               // 解除することで、通常のディレクトリツリーを誤って削除しない。
+               DeleteJunctionCore(transaction, null, junctionPath, true, pathFormat);
             }
 
             else
@@ -111,6 +111,9 @@ namespace Alphaleonis.Win32.Filesystem
             }
          }
 
+
+         // 公開契約どおり、存在しないターゲットディレクトリを先に作成する。
+         CreateDirectoryCore(true, transaction, directoryPath, null, null, false, pathFormat);
 
          // Create the folder and convert it to a directory junction.
          CreateDirectoryCore(true, transaction, junctionPath, null, null, false, pathFormat);

@@ -94,5 +94,40 @@ namespace AlphaFS.UnitTest
 
          Console.WriteLine();
       }
+
+
+      [TestMethod]
+      public void AlphaFS_Directory_Copy_CopyTimestamp_PreservesNestedDirectoryTimestamps_Local_Success()
+      {
+         using var tempRoot = new TemporaryDirectory();
+         var source = System.IO.Path.Combine(tempRoot.Directory.FullName, "Source");
+         var sourceLevel1 = System.IO.Path.Combine(source, "Level1");
+         var sourceLevel2 = System.IO.Path.Combine(sourceLevel1, "Level2");
+         var destination = System.IO.Path.Combine(tempRoot.Directory.FullName, "Destination");
+         var destinationLevel1 = System.IO.Path.Combine(destination, "Level1");
+         var destinationLevel2 = System.IO.Path.Combine(destinationLevel1, "Level2");
+
+         System.IO.Directory.CreateDirectory(sourceLevel2);
+
+         var level1CreationTime = new DateTime(2020, 1, 2, 3, 4, 5, DateTimeKind.Utc);
+         var level1WriteTime = new DateTime(2021, 2, 3, 4, 5, 6, DateTimeKind.Utc);
+         var level2CreationTime = new DateTime(2022, 3, 4, 5, 6, 7, DateTimeKind.Utc);
+         var level2WriteTime = new DateTime(2023, 4, 5, 6, 7, 8, DateTimeKind.Utc);
+
+         System.IO.Directory.SetCreationTimeUtc(sourceLevel1, level1CreationTime);
+         System.IO.Directory.SetLastWriteTimeUtc(sourceLevel1, level1WriteTime);
+         System.IO.Directory.SetCreationTimeUtc(sourceLevel2, level2CreationTime);
+         System.IO.Directory.SetLastWriteTimeUtc(sourceLevel2, level2WriteTime);
+
+         Alphaleonis.Win32.Filesystem.Directory.Copy(
+            source,
+            destination,
+            Alphaleonis.Win32.Filesystem.CopyOptions.CopyTimestamp);
+
+         Assert.AreEqual(level1CreationTime, System.IO.Directory.GetCreationTimeUtc(destinationLevel1));
+         Assert.AreEqual(level1WriteTime, System.IO.Directory.GetLastWriteTimeUtc(destinationLevel1));
+         Assert.AreEqual(level2CreationTime, System.IO.Directory.GetCreationTimeUtc(destinationLevel2));
+         Assert.AreEqual(level2WriteTime, System.IO.Directory.GetLastWriteTimeUtc(destinationLevel2));
+      }
    }
 }

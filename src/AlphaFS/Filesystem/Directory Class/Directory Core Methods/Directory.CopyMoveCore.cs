@@ -57,6 +57,12 @@ namespace Alphaleonis.Win32.Filesystem
          cma = File.ValidateFileOrDirectoryMoveArguments(cma, false, isFolder);
 
 
+         if (isFolder && cma.IsCopy && IsSameOrDescendantDirectory(cma.SourcePathLp, cma.DestinationPathLp))
+         {
+            throw new IOException("コピー先ディレクトリをコピー元ディレクトリ自身、またはその配下にすることはできません。");
+         }
+
+
          var copyMoveResult = new CopyMoveResult(cma, isFolder);
 
          var errorFilter = null != cma.DirectoryEnumerationFilters && null != cma.DirectoryEnumerationFilters.ErrorFilter ? cma.DirectoryEnumerationFilters.ErrorFilter : null;
@@ -83,69 +89,100 @@ namespace Alphaleonis.Win32.Filesystem
          #endregion // Setup
 
 
-         if (cma.IsCopy)
+         var replacedDestinationPath = PrepareDirectoryReplacement(cma, isFolder);
+
+
+         try
          {
-            // フォルダのシンボリックリンクをコピーする。
-            // CopyFileEx() では実行できないため、エミュレートする。
-
-            if (File.HasCopySymbolicLink(cma.CopyOptions) && isFolder &&
-                File.GetFileSystemEntryInfoCore(cma.Transaction, true, cma.SourcePathLp, false, PathFormat.LongFullPath).IsSymbolicLink)
+            if (cma.IsCopy)
             {
-               var lvi = File.GetLinkTargetInfoCore(cma.Transaction, cma.SourcePathLp, true, PathFormat.LongFullPath);
+               var sourceEntryInfo = isFolder
+                  ? File.GetFileSystemEntryInfoCore(cma.Transaction, true, cma.SourcePathLp, false, PathFormat.LongFullPath)
+                  : null;
 
-               if (null != lvi)
+               // ルート自体がジャンクションの場合も、リンク先を列挙せずジャンクションを複製する。
+               if (null != sourceEntryInfo && sourceEntryInfo.IsMountPoint)
                {
-                  File.CreateSymbolicLinkCore(cma.Transaction, cma.DestinationPathLp, lvi.SubstituteName, SymbolicLinkTarget.Directory, PathFormat.LongFullPath);
+                  var linkTargetInfo = File.GetLinkTargetInfoCore(cma.Transaction, cma.SourcePathLp, false, PathFormat.LongFullPath);
+                  var linkTargetPath = Path.GetRegularPathCore(linkTargetInfo.SubstituteName, GetFullPathOptions.RemoveTrailingDirectorySeparator, false);
 
+                  CreateJunctionCore(cma.Transaction, cma.DestinationPathLp, linkTargetPath, false, false, PathFormat.LongFullPath);
                   copyMoveResult.TotalFolders = 1;
                }
-            }
 
-            else
-            {
-               if (isFolder)
+               // フォルダのシンボリックリンクをコピーする。
+               // CopyFileEx() では実行できないため、エミュレートする。
+
+               else if (File.HasCopySymbolicLink(cma.CopyOptions) && null != sourceEntryInfo && sourceEntryInfo.IsSymbolicLink)
                {
-                  CopyMoveDirectoryCore(retry, cma, copyMoveResult);
+                  var lvi = File.GetLinkTargetInfoCore(cma.Transaction, cma.SourcePathLp, true, PathFormat.LongFullPath);
+
+                  if (null != lvi)
+                  {
+                     File.CreateSymbolicLinkCore(cma.Transaction, cma.DestinationPathLp, lvi.SubstituteName, SymbolicLinkTarget.Directory, PathFormat.LongFullPath);
+
+                     copyMoveResult.TotalFolders = 1;
+                  }
                }
 
                else
                {
-                  File.CopyMoveCore(retry, cma, true, false, cma.SourcePathLp, cma.DestinationPathLp, copyMoveResult);
+                  if (isFolder)
+                  {
+                     CopyMoveDirectoryCore(retry, cma, copyMoveResult);
+                  }
+
+                  else
+                  {
+                     File.CopyMoveCore(retry, cma, true, false, cma.SourcePathLp, cma.DestinationPathLp, copyMoveResult);
+                  }
+               }
+            }
+
+
+            // Move
+
+            else
+            {
+               // ファイルまたはディレクトリとその子要素を移動します。
+               // 既存のディレクトリとその子要素を新しいディレクトリにコピーします。
+
+               File.CopyMoveCore(retry, cma, true, isFolder, cma.SourcePathLp, cma.DestinationPathLp, copyMoveResult);
+
+
+               // 同じドライブ上で移動が行われた場合、ファイル/フォルダの数は不明。
+               // ただし、1つのフォルダが正常に移動されたことは分かっている。
+
+               if (copyMoveResult.ErrorCode == Win32Errors.NO_ERROR && isFolder)
+               {
+                  copyMoveResult.TotalFolders = 1;
                }
             }
          }
-
-
-         // Move
-
-         else
+         catch (Exception moveException)
          {
-            // AlphaFS feature to overcome a MoveFileXxx limitation.
-            // MoveOptions.ReplaceExisting: This value cannot be used if lpNewFileName or lpExistingFileName names a directory.
-
-            if (isFolder && !cma.DelayUntilReboot && File.HasReplaceExisting(cma.MoveOptions))
-
+            try
             {
-               DeleteDirectoryCore(cma.Transaction, null, cma.DestinationPathLp, true, true, true, PathFormat.LongFullPath);
+               RestoreReplacedDirectory(cma, replacedDestinationPath);
+            }
+            catch (Exception restoreException)
+            {
+               throw new AggregateException("ディレクトリの移動と、置換先ディレクトリの復元の両方に失敗しました。", moveException, restoreException);
             }
 
-
-            // 2017-06-07: A large target directory will probably create a progress-less delay in UI.
-            // One way to get around this is to perform the delete in the File.CopyMove method.
-
-
-            // ファイルまたはディレクトリとその子要素を移動します。
-            // 既存のディレクトリとその子要素を新しいディレクトリにコピーします。
-
-            File.CopyMoveCore(retry, cma, true, isFolder, cma.SourcePathLp, cma.DestinationPathLp, copyMoveResult);
+            throw;
+         }
 
 
-            // 同じドライブ上で移動が行われた場合、ファイル/フォルダの数は不明。
-            // ただし、1つのフォルダが正常に移動されたことは分かっている。
-            
-            if (copyMoveResult.ErrorCode == Win32Errors.NO_ERROR && isFolder)
+         if (null != replacedDestinationPath)
+         {
+            if (copyMoveResult.IsCanceled || copyMoveResult.ErrorCode != Win32Errors.NO_ERROR)
             {
-               copyMoveResult.TotalFolders = 1;
+               RestoreReplacedDirectory(cma, replacedDestinationPath);
+            }
+            else
+            {
+               DeleteDirectoryCore(cma.Transaction, null, replacedDestinationPath, true, true, true, PathFormat.LongFullPath);
             }
          }
 
@@ -153,6 +190,81 @@ namespace Alphaleonis.Win32.Filesystem
          copyMoveResult.Stopwatch.Stop();
 
          return copyMoveResult;
+      }
+
+
+      private static string PrepareDirectoryReplacement(CopyMoveArguments cma, bool isFolder)
+      {
+         if (!isFolder || cma.DelayUntilReboot || !File.ExistsCore(cma.Transaction, true, cma.DestinationPathLp, PathFormat.LongFullPath))
+         {
+            return null;
+         }
+
+         if (!File.HasReplaceExisting(cma.MoveOptions))
+         {
+            if (cma.EmulateMove)
+            {
+               throw new AlreadyExistsException(cma.DestinationPathLp, true);
+            }
+
+            return null;
+         }
+
+         string replacementPath;
+         // 置換先を先に削除せず、同じ親の一時名へ退避する。ソース移動に失敗した場合は元へ戻す。
+         do
+         {
+            replacementPath = cma.DestinationPathLp + ".alphafs-" + Path.GetRandomFileName();
+         }
+         while (File.ExistsCore(cma.Transaction, true, replacementPath, PathFormat.LongFullPath) ||
+                File.ExistsCore(cma.Transaction, false, replacementPath, PathFormat.LongFullPath));
+
+         MoveDirectoryWithoutOverwrite(cma.Transaction, cma.DestinationPathLp, replacementPath);
+         return replacementPath;
+      }
+
+
+      private static void RestoreReplacedDirectory(CopyMoveArguments cma, string replacedDestinationPath)
+      {
+         if (null == replacedDestinationPath ||
+             !File.ExistsCore(cma.Transaction, true, replacedDestinationPath, PathFormat.LongFullPath))
+         {
+            return;
+         }
+
+         // エミュレート移動ではソース削除を全コピー成功後まで遅延しているため、
+         // 失敗途中のコピー先を破棄しても元データは失われない。
+         if (File.ExistsCore(cma.Transaction, true, cma.DestinationPathLp, PathFormat.LongFullPath))
+         {
+            DeleteDirectoryCore(cma.Transaction, null, cma.DestinationPathLp, true, true, true, PathFormat.LongFullPath);
+         }
+
+         MoveDirectoryWithoutOverwrite(cma.Transaction, replacedDestinationPath, cma.DestinationPathLp);
+      }
+
+
+      private static bool IsSameOrDescendantDirectory(string sourcePath, string destinationPath)
+      {
+         var sourcePathWithoutSeparator = sourcePath.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+         var destinationPathWithoutSeparator = destinationPath.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+
+         return destinationPathWithoutSeparator.Equals(sourcePathWithoutSeparator, StringComparison.OrdinalIgnoreCase) ||
+                destinationPathWithoutSeparator.StartsWith(sourcePathWithoutSeparator + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase);
+      }
+
+
+      private static void MoveDirectoryWithoutOverwrite(KernelTransaction transaction, string sourcePath, string destinationPath)
+      {
+         var moveArguments = new CopyMoveArguments
+         {
+            Transaction = transaction,
+            SourcePath = sourcePath,
+            DestinationPath = destinationPath,
+            MoveOptions = MoveOptions.None,
+            PathFormat = PathFormat.LongFullPath
+         };
+
+         File.CopyMoveCore(false, moveArguments, true, true, sourcePath, destinationPath, null);
       }
    }
 }

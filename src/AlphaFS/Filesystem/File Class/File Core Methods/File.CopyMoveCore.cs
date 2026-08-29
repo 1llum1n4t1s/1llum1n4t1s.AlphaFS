@@ -162,6 +162,13 @@ namespace Alphaleonis.Win32.Filesystem
                   {
                      CopyTimestampsCore(cma.Transaction, false, sourceFilePath, destinationFilePath, false, PathFormat.LongFullPath);
                   }
+
+                  // エミュレート移動は CopyFileXxx を使うため、コピー先と任意のタイムスタンプを
+                  // 確定した後にだけソースを削除する。
+                  if (cma.EmulateMove)
+                  {
+                     DeleteFileCore(cma.Transaction, sourceFilePath, true, 0, PathFormat.LongFullPath);
+                  }
                }
                
                break;
@@ -203,7 +210,12 @@ namespace Alphaleonis.Win32.Filesystem
 
                // Remove any read-only/hidden attribute, which might also fail.
 
-               RestartMoveOrThrowException(retry, lastError, isFolder, !cma.IsCopy, cma, sourceFilePath, destinationFilePath);
+               if (RestartMoveOrThrowException(retry, lastError, isFolder, !cma.IsCopy, cma, sourceFilePath, destinationFilePath))
+               {
+                  // 読み取り専用/隠し属性を解除した試行は、通常の再試行回数を消費せず直ちにやり直す。
+                  attempts++;
+                  continue;
+               }
 
                if (retry)
                {

@@ -26,14 +26,15 @@ namespace Alphaleonis.Win32.Filesystem
       private static void CopyFolderTimestamps(CopyMoveArguments cma)
       {
          // TODO 2018-01-09: ローカル + UNCパスの組み合わせでまだ100%ではない。
-         var dstLp = cma.SourcePathLp.ReplaceIgnoreCase(cma.SourcePathLp, cma.DestinationPathLp);
-
-
          // ソースフォルダを走査し、フォルダのみを処理する。
 
-         foreach (var fseiSource in EnumerateFileSystemEntryInfosCore<FileSystemEntryInfo>(true, cma.Transaction, cma.SourcePathLp, Path.WildcardStarMatchAll, null, null, cma.DirectoryEnumerationFilters, PathFormat.LongFullPath))
+         foreach (var fseiSource in EnumerateFileSystemEntryInfosCore<FileSystemEntryInfo>(true, cma.Transaction, cma.SourcePathLp, Path.WildcardStarMatchAll, null,
+                     DirectoryEnumerationOptions.Recursive | DirectoryEnumerationOptions.SkipReparsePoints, cma.DirectoryEnumerationFilters, PathFormat.LongFullPath))
+         {
+            var destinationPath = cma.DestinationPathLp + fseiSource.LongFullPath.Substring(cma.SourcePathLp.Length);
 
-            File.CopyTimestampsCore(cma.Transaction, true, fseiSource.LongFullPath, Path.CombineCore(false, dstLp, fseiSource.FileName), false, PathFormat.LongFullPath);
+            File.CopyTimestampsCore(cma.Transaction, true, fseiSource.LongFullPath, destinationPath, false, PathFormat.LongFullPath);
+         }
 
 
          // ルートディレクトリ（指定されたパス）を処理する。

@@ -62,7 +62,9 @@ namespace AlphaFS.UnitTest
                Console.WriteLine("Mapped drive [{0}] to [{1}]\n", drive, share);
 
 
-               System.IO.File.AppendAllText(srcFile, new string('*', new Random().Next(1, 1024)));
+               var sourceContents = new string('*', new Random().Next(1, 1024));
+
+               System.IO.File.WriteAllText(srcFile, sourceContents);
 
                var srcFileSize = new System.IO.FileInfo(srcFile).Length;
 
@@ -82,6 +84,8 @@ namespace AlphaFS.UnitTest
                Assert.IsTrue(System.IO.File.Exists(dstFile));
 
                Assert.AreEqual(srcFileSize, new System.IO.FileInfo(dstFile).Length);
+               Assert.AreEqual(sourceContents, System.IO.File.ReadAllText(dstFile));
+               Assert.IsFalse(System.IO.File.Exists(srcFile));
 
 
                Assert.IsTrue(cmr.IsCopy);
@@ -96,11 +100,45 @@ namespace AlphaFS.UnitTest
             }
             finally
             {
-               Alphaleonis.Win32.Network.Host.DisconnectDrive(drive);
+               // SMB リダイレクターは完了済み CopyFileEx を一時的に処理中と報告することがある。
+               // テスト専用マッピングを実機へ残さないよう、後始末では強制切断する。
+               Alphaleonis.Win32.Network.Host.DisconnectDrive(drive, true, false);
             }
          }
 
          Console.WriteLine();
+      }
+
+
+      [TestMethod]
+      public void AlphaFS_Directory_Move_FileBetweenLocalAndUncPaths_PreservesMoveOptions_Local_Success()
+      {
+         UnitTestConstants.RequireNetworkTesting("ローカル/UNC 間のファイル移動");
+
+         using var tempRoot = new TemporaryDirectory();
+         var srcFile = System.IO.Path.Combine(tempRoot.Directory.FullName, "source.txt");
+         var destinationLocalPath = System.IO.Path.Combine(tempRoot.CreateDirectory().FullName, "destination.txt");
+         var destinationUncPath = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(destinationLocalPath);
+         const string sourceContents = "source contents";
+         const string existingDestinationContents = "existing destination";
+
+         System.IO.File.WriteAllText(srcFile, sourceContents);
+         System.IO.File.WriteAllText(destinationLocalPath, existingDestinationContents);
+
+         UnitTestAssert.ThrowsException<Alphaleonis.Win32.Filesystem.AlreadyExistsException>(() =>
+            Alphaleonis.Win32.Filesystem.Directory.Move(srcFile, destinationUncPath, Alphaleonis.Win32.Filesystem.MoveOptions.CopyAllowed));
+
+         Assert.IsTrue(System.IO.File.Exists(srcFile));
+         Assert.AreEqual(sourceContents, System.IO.File.ReadAllText(srcFile));
+         Assert.AreEqual(existingDestinationContents, System.IO.File.ReadAllText(destinationLocalPath));
+
+         Alphaleonis.Win32.Filesystem.Directory.Move(
+            srcFile,
+            destinationUncPath,
+            Alphaleonis.Win32.Filesystem.MoveOptions.CopyAllowed | Alphaleonis.Win32.Filesystem.MoveOptions.ReplaceExisting);
+
+         Assert.IsFalse(System.IO.File.Exists(srcFile));
+         Assert.AreEqual(sourceContents, System.IO.File.ReadAllText(destinationLocalPath));
       }
    }
 }

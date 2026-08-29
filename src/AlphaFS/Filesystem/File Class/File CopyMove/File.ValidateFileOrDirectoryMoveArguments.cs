@@ -46,6 +46,17 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
+         if (null == sourcePath)
+         {
+            throw new ArgumentNullException("sourcePath");
+         }
+
+         if (sourcePath.Trim().Length == 0)
+         {
+            throw new ArgumentException(Resources.Path_Is_Zero_Length_Or_Only_White_Space, "sourcePath");
+         }
+
+
          cma.IsCopy = IsCopyAction(cma);
 
          if (!cma.IsCopy)
@@ -54,41 +65,28 @@ namespace Alphaleonis.Win32.Filesystem
          }
 
 
+         // File Move action: destinationPath is allowed to be null when MoveOptions.DelayUntilReboot is specified.
+         if (!cma.DelayUntilReboot && null == destinationPath)
+         {
+            throw new ArgumentNullException("destinationPath");
+         }
+
+         if (null != destinationPath && destinationPath.Trim().Length == 0)
+         {
+            throw new ArgumentException(Resources.Path_Is_Zero_Length_Or_Only_White_Space, "destinationPath");
+         }
+
+
+         // MSDN: .NET3.5+: IOException: The sourceDirName and destDirName parameters refer to the same file or directory.
+         // Do not use StringComparison.OrdinalIgnoreCase to allow renaming a folder with different casing.
+         if (sourcePath.Equals(destinationPath, StringComparison.Ordinal))
+         {
+            NativeError.ThrowException(Win32Errors.ERROR_SAME_DRIVE, destinationPath);
+         }
+
+
          if (cma.PathFormat != PathFormat.LongFullPath)
          {
-            if (null == sourcePath)
-            {
-               throw new ArgumentNullException("sourcePath");
-            }
-
-            // File Move action: destinationPath is allowed to be null when MoveOptions.DelayUntilReboot is specified.
-
-            if (!cma.DelayUntilReboot && null == destinationPath)
-            {
-               throw new ArgumentNullException("destinationPath");
-            }
-
-
-            if (sourcePath.Trim().Length == 0)
-            {
-               throw new ArgumentException(Resources.Path_Is_Zero_Length_Or_Only_White_Space, "sourcePath");
-            }
-
-            if (null != destinationPath && destinationPath.Trim().Length == 0)
-            {
-               throw new ArgumentException(Resources.Path_Is_Zero_Length_Or_Only_White_Space, "destinationPath");
-            }
-
-
-            // MSDN: .NET3.5+: IOException: The sourceDirName and destDirName parameters refer to the same file or directory.
-            // Do not use StringComparison.OrdinalIgnoreCase to allow renaming a folder with different casing.
-
-            if (sourcePath.Equals(destinationPath, StringComparison.Ordinal))
-            {
-               NativeError.ThrowException(Win32Errors.ERROR_SAME_DRIVE, destinationPath);
-            }
-
-
             if (!driveChecked)
             {
                // ローカルドライブまたはネットワークドライブをチェックする。例: "C:" または "\\server\c$"("\\?\GLOBALROOT\"は除く)。
@@ -113,66 +111,63 @@ namespace Alphaleonis.Win32.Filesystem
 
 
             sourcePathLp = Path.GetExtendedLengthPathCore(cma.Transaction, sourcePath, cma.PathFormat, fullPathOptions);
+         }
+
+
+         if (isFolder || !cma.IsCopy)
+         {
+            cma.SourcePathLp = sourcePathLp;
+         }
+
+
+         // destinationPathがnullの場合、コンピュータ起動時にファイル/フォルダを削除する必要がある。
+         cma.DeleteOnStartup = cma.DelayUntilReboot && null == destinationPath;
+
+         if (!cma.DeleteOnStartup)
+         {
+            if (cma.PathFormat != PathFormat.LongFullPath)
+            {
+               Path.CheckSupportedPathFormat(destinationPath, true, true);
+               destinationPathLp = Path.GetExtendedLengthPathCore(cma.Transaction, destinationPath, cma.PathFormat, GetFullPathOptions.TrimEnd | GetFullPathOptions.RemoveTrailingDirectorySeparator);
+            }
+
 
             if (isFolder || !cma.IsCopy)
             {
-               cma.SourcePathLp = sourcePathLp;
-            }
+               cma.DestinationPathLp = destinationPathLp;
 
-
-            // destinationPathがnullの場合、コンピュータ起動時にファイル/フォルダを削除する必要がある。
-
-            cma.DeleteOnStartup = cma.DelayUntilReboot && null == destinationPath;
-            
-            if (!cma.DeleteOnStartup)
-            {
-               Path.CheckSupportedPathFormat(destinationPath, true, true);
-
-               destinationPathLp = Path.GetExtendedLengthPathCore(cma.Transaction, destinationPath, cma.PathFormat, fullPathOptions);
-
-
-               if (isFolder || !cma.IsCopy)
+               // 移動アクションのオプションを処理し、コピーアクションへのフォールバックの可能性あり。
+               if (!cma.IsCopy)
                {
-                  cma.DestinationPathLp = destinationPathLp;
-
-                  // 移動アクションのオプションを処理し、コピーアクションへのフォールバックの可能性あり。
-
-                  if (!cma.IsCopy)
-                  {
-                     cma = Directory.ValidateMoveAction(cma);
-                  }
-               }
-
-
-               if (cma.IsCopy)
-               {
-                  cma.CopyTimestamps = HasCopyTimestamps(cma.CopyOptions);
-
-                  if (cma.CopyTimestamps)
-
-                     // ネイティブWin32 CopyFile/MoveFile関数では不明なAlphaFSフラグを削除する。
-
-                  {
-                     cma.CopyOptions &= ~CopyOptions.CopyTimestamp;
-                  }
+                  cma = Directory.ValidateMoveAction(cma);
                }
             }
 
 
-            // 進行状況通知用のコールバック関数を設定する。
-
-            if (null == cma.Routine && null != cma.ProgressHandler)
+            if (cma.IsCopy)
             {
-               cma.Routine = (totalFileSize, totalBytesTransferred, streamSize, streamBytesTransferred, streamNumber, callbackReason, sourceFile, destinationFile, data) =>
+               cma.CopyTimestamps = HasCopyTimestamps(cma.CopyOptions);
 
-                     cma.ProgressHandler(totalFileSize, totalBytesTransferred, streamSize, streamBytesTransferred, (int) streamNumber, callbackReason, cma.UserProgressData);
+               if (cma.CopyTimestamps)
+               {
+                  // ネイティブWin32 CopyFile/MoveFile関数では不明なAlphaFSフラグを削除する。
+                  cma.CopyOptions &= ~CopyOptions.CopyTimestamp;
+               }
             }
-
-
-            cma.PathFormat = PathFormat.LongFullPath;
-
-            cma.PathsChecked = true;
          }
+
+
+         // 進行状況通知用のコールバック関数を設定する。
+         if (null == cma.Routine && null != cma.ProgressHandler)
+         {
+            cma.Routine = (totalFileSize, totalBytesTransferred, streamSize, streamBytesTransferred, streamNumber, callbackReason, sourceFile, destinationFile, data) =>
+
+                  cma.ProgressHandler(totalFileSize, totalBytesTransferred, streamSize, streamBytesTransferred, (int) streamNumber, callbackReason, cma.UserProgressData);
+         }
+
+
+         cma.PathFormat = PathFormat.LongFullPath;
+         cma.PathsChecked = true;
          
 
          return cma;

@@ -83,11 +83,11 @@ namespace Alphaleonis.Win32.Filesystem
          // Move() をエミュレートする。
          if (!isMove)
          {
-            cma.MoveOptions = null;
-
             cma.IsCopy = true;
             cma.EmulateMove = true;
-            cma.CopyOptions = CopyOptions.None;
+            cma.CopyOptions = File.HasReplaceExisting(cma.MoveOptions)
+               ? CopyOptions.None
+               : CopyOptions.FailIfExists;
          }
 
 
