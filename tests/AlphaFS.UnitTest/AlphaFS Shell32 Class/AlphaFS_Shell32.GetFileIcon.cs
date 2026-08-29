@@ -43,10 +43,10 @@ namespace AlphaFS.UnitTest
       {
          UnitTestConstants.PrintUnitTestHeader(isNetwork);
          
-         var file = System.IO.Path.Combine(Environment.SystemDirectory, "notepad.exe");
+         var file = System.IO.Path.Combine(Environment.SystemDirectory, "cmd.exe");
          if (isNetwork)
          {
-            file = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(System.IO.Path.Combine(Environment.SystemDirectory, "notepad.exe"));
+            file = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(System.IO.Path.Combine(Environment.SystemDirectory, "cmd.exe"));
          }
 
          Console.WriteLine("Input File Path: {0}", file);

@@ -41,7 +41,7 @@ namespace AlphaFS.UnitTest
       private void AlphaFS_File_GetChangeTime(bool isNetwork)
       {
          using var tempRoot = new TemporaryDirectory(isNetwork);
-         var notepadFile = System.IO.Path.Combine(Environment.SystemDirectory, "notepad.exe");
+         var notepadFile = System.IO.Path.Combine(Environment.SystemDirectory, "cmd.exe");
 
          Console.WriteLine("Input File Path: [{0}]", notepadFile);
 

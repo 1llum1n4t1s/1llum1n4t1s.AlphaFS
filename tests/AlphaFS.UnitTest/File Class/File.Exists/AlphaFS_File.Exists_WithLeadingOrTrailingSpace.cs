@@ -41,7 +41,7 @@ namespace AlphaFS.UnitTest
       {
          UnitTestConstants.PrintUnitTestHeader(isNetwork);
 
-         var tempPath = System.IO.Path.Combine(Environment.SystemDirectory, "notepad.exe");
+         var tempPath = System.IO.Path.Combine(Environment.SystemDirectory, "cmd.exe");
          if (isNetwork)
          {
             tempPath = Alphaleonis.Win32.Filesystem.Path.LocalToUnc(tempPath);
