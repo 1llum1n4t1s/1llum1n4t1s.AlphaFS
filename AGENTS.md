@@ -6,7 +6,7 @@ This file provides guidance to Claude Code and other coding agents working in th
 
 1llum1n4t1s.AlphaFS is a maintained fork of the archived [alphaleonis/AlphaFS](https://github.com/alphaleonis/AlphaFS) library. It is a .NET library providing extended Win32 file system functionality beyond `System.IO`, including extended-length paths (up to 32,000 chars), NTFS alternate data streams, junctions/hardlinks, transactional file operations (TxF), and SMB/DFS network access.
 
-- **Target:** .NET 10.0-windows, x64, NativeAOT compatible (`IsAotCompatible=true`)
+- **Target:** .NET 10.0-windows; the library is AnyCPU, the test host is x64, and the library is NativeAOT compatible (`IsAotCompatible=true`)
 - **Language:** C# with `AllowUnsafeBlocks`
 - **NuGet Package:** `1llum1n4t1s.AlphaFS`
 
@@ -29,7 +29,7 @@ dotnet test tests/AlphaFS.UnitTest/AlphaFS.UnitTest.csproj --filter "FullyQualif
 dotnet pack src/AlphaFS/AlphaFS.csproj -c Release -o artifacts
 ```
 
-Tests use **MSTest** (`MSTest.TestFramework` 4.3.2). Many tests require elevated privileges or specific NTFS/network configurations, so some may skip or fail in non-privileged environments — treat those as environment-dependent rather than regressions.
+Tests use **MSTest 4.x** with Microsoft.Testing.Platform (MTP); the exact package versions are defined in `tests/AlphaFS.UnitTest/AlphaFS.UnitTest.csproj`. Many tests require elevated privileges or specific NTFS/network configurations, so some may skip or fail in non-privileged environments — treat those as environment-dependent rather than regressions.
 
 Two environment variables change which tests run:
 
@@ -42,36 +42,7 @@ Note that elevation is **not** an opt-out: tests guarded by `RequireElevation` s
 
 ## Architecture
 
-### Namespace → Directory Mapping
-
-| Namespace | Source Directory | Purpose |
-|---|---|---|
-| `Alphaleonis.Win32.Filesystem` | `src/AlphaFS/Filesystem/` | File, Directory, Path, FileInfo, DirectoryInfo + extensions |
-| `Alphaleonis.Win32.Network` | `src/AlphaFS/Network/` | Host class, SMB/DFS, network connections |
-| `Alphaleonis.Win32.Security` | `src/AlphaFS/Security/` | Privilege elevation, CRC |
-| `Alphaleonis.Win32.Filesystem` | `src/AlphaFS/Device/` | Volume, DriveInfo, DiskSpaceInfo, DeviceInfo |
-| `Alphaleonis.Win32` | `src/AlphaFS/` (repo root of the project) | `OperatingSystem`, `NativeError`, `Win32Errors`, `Resources`, and the `Safe Handles/` memory/token wrappers |
-
-> Note: everything under `src/AlphaFS/Device/` declares `namespace Alphaleonis.Win32.Filesystem`, not `Alphaleonis.Win32`. Only the files listed in the last row live in the bare `Alphaleonis.Win32` namespace.
-
-### Key Design Patterns
-
-**Partial classes split by feature** — Core classes like `Directory`, `File`, `DirectoryInfo`, `FileInfo` are split across many files by functionality (e.g., `Directory.Compress.cs`, `Directory.CopyMove.cs`, `Directory.CoreMethods.cs`). The `Directory Class/` and `File Class/` folders each contain 100+ files organized into subfolders by feature area.
-
-**Static facades + Info classes** — Mirrors `System.IO` patterns: static `Directory`/`File`/`Path` classes alongside object-oriented `DirectoryInfo`/`FileInfo` wrappers. AlphaFS is designed as a drop-in replacement (`using Alphaleonis.Win32.Filesystem;` instead of `using System.IO;`).
-
-**Dual normal/transactional APIs** — Most file operations have a transactional variant accepting a `KernelTransaction` parameter for TxF support.
-
-**P/Invoke + SafeHandle wrappers** — All Win32 interop is in `Filesystem/Native Methods/NativeMethods.*.cs` (13 files split by domain). Safe handles in `Safe Handles/` (11 wrapper classes). Error mapping in `NativeError.cs`.
-
-**COM Interop with IDisposable** — Shell32 and Network operations use COM wrappers. `Shell32Info`, `NetworkInfo`, and `NetworkConnectionInfo` all implement `IDisposable` to manage COM references (breaking change from upstream).
-
-### Key Constants (NativeMethods.Constants.cs)
-
-- `MaxPath = 260` (standard Windows limit)
-- `MaxPathUnicode = 32700` (extended path support via `\\?\` prefix)
-- `DefaultFileBufferSize = 65536` (file I/O buffer)
-- `DefaultNativeQueryBufferSize = 4096` (native API scratch buffer)
+The current component boundaries, operation flows, invariants, and design decisions are maintained in [DESIGN.md](DESIGN.md). Read it before changing public filesystem APIs, path normalization, native/COM resource lifetime, transactional operations, or release boundaries.
 
 ## Breaking Changes from Upstream
 
