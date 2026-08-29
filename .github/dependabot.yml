@@ -54,6 +54,9 @@ updates:
       mstest:
         patterns:
           - "MSTest.*"
+        update-types:
+          - minor
+          - patch
       test-minor-patch:
         patterns:
           - "*"
