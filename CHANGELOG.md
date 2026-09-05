@@ -329,6 +329,99 @@ AlphaFS が意図的に `System.IO` より厳格なまま維持しています�
 - `NativeMethods.Utilities.CloseSafeHandle` の死コード `handle = null` を削除
 - `tests/AlphaFS.UnitTest/AlphaFS.UnitTest.csproj` の `<Version>1.0.16</Version>` を削除 (`IsPackable=false` のため不要)
 
+## [1.0.36] — Git 記録日: 2026-04-05
+
+- ハッシュ計算・正規表現・文字列処理の不要なメモリ割り当てを減らし、Native AOT との互換性を改善。既存の非推奨公開 API は互換性のため維持。
+
+出典: [版の記録](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/commit/03fd40a7fda186f8a18c871f446fcf489f3d31a6) / [変更差分](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/compare/95137642db2b0f1258f1251acafdb3a5daa6c963...03fd40a7fda186f8a18c871f446fcf489f3d31a6)。
+
+## [1.0.34] — Git 記録日: 2026-04-05
+
+- 正規表現キャッシュに上限を設け、メモリ使用量が増え続ける問題を修正。
+- ファイル I/O とネイティブ問い合わせのバッファを分離し、不要なメモリ使用を削減。API の説明を日本語化。
+
+出典: [版の記録](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/commit/95137642db2b0f1258f1251acafdb3a5daa6c963) / [変更差分](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/compare/9f70bb45a90ef02f2dbc9293e1a768076fce82e5...95137642db2b0f1258f1251acafdb3a5daa6c963)。
+
+## [1.0.32] — Git 記録日: 2026-03-10
+
+- ディレクトリの日時設定がファイルとして処理される不具合を修正。
+- パス処理・サイズ集計・削除処理のメモリ使用量を減らし、正規表現の Native AOT 互換性を改善。
+
+出典: [版の記録](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/commit/9f70bb45a90ef02f2dbc9293e1a768076fce82e5) / [変更差分](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/compare/d619a267b0e9e3446565a880fe14b01f1d47e80d...9f70bb45a90ef02f2dbc9293e1a768076fce82e5)。
+
+## [1.0.30] — Git 記録日: 2026-02-10
+
+- AOT対応
+
+出典: [版の記録](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/commit/d619a267b0e9e3446565a880fe14b01f1d47e80d) / [変更差分](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/compare/04b8fe2b1ac1345c2f437bf6e0d03d7b72da5179...d619a267b0e9e3446565a880fe14b01f1d47e80d)。
+
+## [1.0.28] — Git 記録日: 2026-02-09
+
+- ネイティブAOT対応
+
+出典: [版の記録](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/commit/04b8fe2b1ac1345c2f437bf6e0d03d7b72da5179) / [変更差分](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/compare/1c5ae0568d6c830a9476a50693b9a3447b4aea46...04b8fe2b1ac1345c2f437bf6e0d03d7b72da5179)。
+
+## [1.0.20] — Git 記録日: 2026-02-07
+
+- UnitSizeToText で極端に大きい値を渡した際の IndexOutOfRangeException を修正
+- IsWow64Process のエラーハンドリングと Crc32 の演算子優先度を修正
+
+出典: [版の記録](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/commit/1c5ae0568d6c830a9476a50693b9a3447b4aea46) / [変更差分](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/compare/0d774561fabddafaae09ec5c7de26002aec932d2...1c5ae0568d6c830a9476a50693b9a3447b4aea46)。
+
+## [1.0.18] — Git 記録日: 2026-02-03
+
+- 末尾のディレクトリ区切り文字の判定で、両方の区切り文字を認識するよう修正。内部処理とファイル構成を整理。
+
+出典: [版の記録](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/commit/0d774561fabddafaae09ec5c7de26002aec932d2) / [変更差分](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/compare/d3fb492fd0a72fc0185463750f3043ce85311af3...0d774561fabddafaae09ec5c7de26002aec932d2)。
+
+## [1.0.16] — Git 記録日: 2026-02-01
+
+- 相対パス計算のループ処理を修正し、頻繁に実行する処理での不要な割り当てを削減。
+
+出典: [版の記録](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/commit/d3fb492fd0a72fc0185463750f3043ce85311af3) / [変更差分](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/compare/2b31561dace567b8abeec529a09d19380592fb07...d3fb492fd0a72fc0185463750f3043ce85311af3)。
+
+## [1.0.14] — Git 記録日: 2026-01-29
+
+- アイコンとビルド設定を調整し、復元前に古いビルド成果物を消去する処理を追加。
+
+出典: [版の記録](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/commit/2b31561dace567b8abeec529a09d19380592fb07) / [変更差分](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/compare/d39c24f7fd3daf6cc16e8cc26dc865c573f3472a...2b31561dace567b8abeec529a09d19380592fb07)。
+
+## [1.0.12] — Git 記録日: 2026-01-26
+
+- アイコン設定
+
+出典: [版の記録](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/commit/d39c24f7fd3daf6cc16e8cc26dc865c573f3472a) / [変更差分](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/compare/84fc32082eed68b660d56a063ba41f7be86387bb...d39c24f7fd3daf6cc16e8cc26dc865c573f3472a)。
+
+## [1.0.10] — Git 記録日: 2026-01-25
+
+- アイコン設定
+
+出典: [版の記録](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/commit/84fc32082eed68b660d56a063ba41f7be86387bb) / [変更差分](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/compare/3cf5ddaec70cb9aa8360d5ca1935069c3f585cfd...84fc32082eed68b660d56a063ba41f7be86387bb)。
+
+## [1.0.8] — Git 記録日: 2026-01-25
+
+- x64固定
+
+出典: [版の記録](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/commit/3cf5ddaec70cb9aa8360d5ca1935069c3f585cfd) / [変更差分](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/compare/aab32537460e07fe3bfa57cafd87de5de3350e2b...3cf5ddaec70cb9aa8360d5ca1935069c3f585cfd)。
+
+## [1.0.5] — Git 記録日: 2026-01-25
+
+- アイコン設定
+
+出典: [版の記録](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/commit/aab32537460e07fe3bfa57cafd87de5de3350e2b) / [変更差分](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/compare/b8430cbcc6b50f89ccac25d91167819b27c05c22...aab32537460e07fe3bfa57cafd87de5de3350e2b)。
+
+## [1.0.1] — Git 記録日: 2026-01-25
+
+- パッケージ専用の版指定を共通の Version 指定へ変更し、アセンブリとパッケージのバージョン管理を整合。
+
+出典: [版の記録](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/commit/b8430cbcc6b50f89ccac25d91167819b27c05c22) / [変更差分](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/compare/a215e0dfbe91c3dde003347386012c93af082c54...b8430cbcc6b50f89ccac25d91167819b27c05c22)。
+
+## [1.0.0] — Git 記録日: 2026-01-25
+
+- 1llum1n4t1s.AlphaFS フォークのパッケージ情報・参照先を設定。
+
+出典: [版の記録](https://github.com/1llum1n4t1s/1llum1n4t1s.AlphaFS/commit/a215e0dfbe91c3dde003347386012c93af082c54)。
+
 ---
 
 Version 2.3  (2018-XX-XX)
