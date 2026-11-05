@@ -80,7 +80,7 @@ The API is System.IO-shaped rather than an exact clone. Intentional differences 
 | Stage destructive directory replacement and defer source deletion | Keeps emulated cross-volume moves recoverable when copying or replacement fails partway through. | Replacement needs temporary sibling paths and additional cleanup logic. |
 | Make COM-backed projections disposable | NativeAOT-compatible wrappers can release retained COM references predictably. | This is a breaking lifetime contract compared with archived upstream APIs. |
 | Keep the library AnyCPU and tests x64 | Consumers can load the library in x64 or Arm64 processes while native tests retain their established environment. | The local test host does not by itself validate every architecture. |
-| Pin publishing Actions to commit SHAs | Protects the credential-bearing NuGet publication path from mutable tags. | Dependabot or manual maintenance must update both SHA and version comments. |
+| Use Git, the official .NET installer, and PowerShell OIDC exchange for publication | The release workflow runs without Node-based Actions and retains short-lived NuGet credentials. | SDK installation requires access to the official .NET distribution endpoints. |
 | Group dependency minor/patch updates but isolate majors | Reduces routine PR volume while keeping breaking changes independently reviewable. | Monthly grouped updates can delay individual patch adoption until the scheduled run. |
 
 ## Verification boundary
