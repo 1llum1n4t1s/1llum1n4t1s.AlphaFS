@@ -3,6 +3,10 @@ name: Dependency validation
 on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
+  # main への push でも同じ検証を走らせ、リリース前に main 上でテストが通ることを確認する。
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -14,7 +18,8 @@ concurrency:
 
 jobs:
   validate:
-    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.user.login == 'dependabot[bot]'
+    # PR は Dependabot 起票分のみ検証し、push / 手動実行は常に検証する。
+    if: github.event_name != 'pull_request' || github.event.pull_request.user.login == 'dependabot[bot]'
     runs-on: windows-latest
     timeout-minutes: 45
     defaults:
@@ -30,7 +35,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
         with:
-          dotnet-version: 10.0.x
+          dotnet-version: 11.0.x
       - name: Restore
         run: |
           dotnet restore AlphaFS.slnx

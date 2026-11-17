@@ -12,9 +12,17 @@ permissions:
   contents: read
   id-token: write
 
+# 同一 release ブランチへの再 push / 手動実行が重なっても、公開処理を並行させない。
+# 実行中の公開を途中で打ち切ると NuGet への push が中途半端になり得るため cancel-in-progress は false。
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   publish:
     runs-on: windows-latest
+    # 復元・ビルド・テスト・公開が固まったままランナーを占有し続けないための上限。
+    timeout-minutes: 45
     steps:
       - name: Checkout code
         shell: pwsh
@@ -76,7 +84,7 @@ jobs:
           $installer = Join-Path $env:RUNNER_TEMP 'dotnet-install.ps1'
           Invoke-WebRequest 'https://raw.githubusercontent.com/actions/setup-dotnet/a98b56852c35b8e3190ac28c8c2271da59106c68/externals/install-dotnet.ps1' -OutFile $installer
           if ((Get-FileHash -LiteralPath $installer -Algorithm SHA256).Hash -ne 'B224982626C6DDF7CE915D7D560B7060D3C42754EB621F8CC53B8C775C0CC6B5') { throw 'Pinned .NET installer SHA-256 mismatch.' }
-          & $installer -Channel 10.0 -InstallDir $installRoot -NoPath
+          & $installer -Channel 11.0 -InstallDir $installRoot -NoPath
           if ($LASTEXITCODE) { exit $LASTEXITCODE }
           "DOTNET_ROOT=$installRoot" >> $env:GITHUB_ENV
           $installRoot >> $env:GITHUB_PATH
@@ -111,6 +119,31 @@ jobs:
 
       - name: Pack
         run: dotnet pack src/AlphaFS/AlphaFS.csproj -c Release --no-build -o artifacts
+
+      - name: Verify package contents
+        # NuGet はバージョン番号を永久に予約するため、push の前に実際に送るパッケージの
+        # 版・対象フレームワーク・主要ファイルを照合し、不一致なら認証・公開へ進ませない。
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $version = '${{ github.ref_name }}' -replace '^release/', ''
+          $package = "artifacts\1llum1n4t1s.AlphaFS.$version.nupkg"
+          if (-not (Test-Path -LiteralPath $package)) { throw "Expected package not found: $package" }
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          $zip = [IO.Compression.ZipFile]::OpenRead((Resolve-Path -LiteralPath $package).Path)
+          try {
+            $names = $zip.Entries | ForEach-Object { $_.FullName }
+            if ($names -notcontains 'lib/net11.0-windows7.0/AlphaFS.dll') { throw "AlphaFS.dll for net11.0-windows is missing. Entries: $($names -join ', ')" }
+            $nuspecEntry = $zip.Entries | Where-Object { $_.FullName -like '*.nuspec' } | Select-Object -First 1
+            if (-not $nuspecEntry) { throw 'nuspec is missing.' }
+            $reader = New-Object IO.StreamReader($nuspecEntry.Open())
+            try { $nuspec = [xml]$reader.ReadToEnd() } finally { $reader.Dispose() }
+            if ($nuspec.package.metadata.version -ne $version) { throw "nuspec version '$($nuspec.package.metadata.version)' does not match '$version'." }
+            if ($nuspec.package.metadata.id -ne '1llum1n4t1s.AlphaFS') { throw "Unexpected package id '$($nuspec.package.metadata.id)'." }
+          } finally {
+            $zip.Dispose()
+          }
+          Write-Host "Package OK: $package"
 
       - name: Authenticate to NuGet.org
         id: login
