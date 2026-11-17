@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net10.0-windows</TargetFramework>
+    <TargetFramework>net11.0-windows</TargetFramework>
     <IsAotCompatible>true</IsAotCompatible>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <!-- PlatformTarget は指定しない (AnyCPU)。x64 を刻むと PE のマシン種別が AMD64 で固定され、
@@ -58,13 +58,13 @@
     <!-- CAS 由来の型 (SecurityPermission / PermissionSet / FileIOPermission 等) は使っていないが、
          NativeError が ERROR_BAD_RECOVERY_POLICY に対して投げる System.Security.Policy.PolicyException
          がこのパッケージへ型フォワードされているため、参照は必須。削除すると CS1069 でビルドできない。 -->
-    <PackageReference Include="System.Security.Permissions" Version="10.0.13" />
+    <PackageReference Include="System.Security.Permissions" Version="11.0.0" />
   </ItemGroup>
   <!-- インクリメンタルビルドを毎回破壊する CleanBinObjBeforeBuild は削除。
        クリーンビルドが必要な場合は `dotnet clean` を明示的に実行する。 -->
   <Target Name="GenerateAppIcon" BeforeTargets="BeforeBuild"
           Inputs="$(MSBuildThisFileDirectory)..\..\icon\app_icon.png;$(MSBuildThisFileDirectory)..\..\icon\generate_icon.ps1"
           Outputs="$(MSBuildThisFileDirectory)..\..\icon\app.ico">
-    <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildThisFileDirectory)..\..\icon\generate_icon.ps1&quot;" WorkingDirectory="$(MSBuildThisFileDirectory)..\.." />
+    <Exec Command="pwsh -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildThisFileDirectory)..\..\icon\generate_icon.ps1&quot;" WorkingDirectory="$(MSBuildThisFileDirectory)..\.." />
   </Target>
 </Project>

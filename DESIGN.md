@@ -2,9 +2,9 @@
 
 ## Purpose and scope
 
-1llum1n4t1s.AlphaFS is a Windows-only .NET library that exposes Win32 filesystem, volume, security, transaction, SMB, and DFS capabilities through APIs shaped like `System.IO`. It preserves AlphaFS features such as extended-length paths, alternate data streams, links, native backup streams, and TxF while maintaining the archived upstream code for .NET 10 and NativeAOT consumers.
+1llum1n4t1s.AlphaFS is a Windows-only .NET library that exposes Win32 filesystem, volume, security, transaction, SMB, and DFS capabilities through APIs shaped like `System.IO`. It preserves AlphaFS features such as extended-length paths, alternate data streams, links, native backup streams, and TxF while maintaining the archived upstream code for .NET 11 and NativeAOT consumers.
 
-The library targets `net10.0-windows`. Its boundary is the Windows API: platform-independent filesystem abstraction and non-Windows implementations are outside this repository.
+The library targets `net11.0-windows`. Its boundary is the Windows API: platform-independent filesystem abstraction and non-Windows implementations are outside this repository.
 
 ## Components and responsibilities
 

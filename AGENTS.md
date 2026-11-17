@@ -6,7 +6,7 @@ This file provides guidance to Claude Code and other coding agents working in th
 
 1llum1n4t1s.AlphaFS is a maintained fork of the archived [alphaleonis/AlphaFS](https://github.com/alphaleonis/AlphaFS) library. It is a .NET library providing extended Win32 file system functionality beyond `System.IO`, including extended-length paths (up to 32,000 chars), NTFS alternate data streams, junctions/hardlinks, transactional file operations (TxF), and SMB/DFS network access.
 
-- **Target:** .NET 10.0-windows; the library is AnyCPU, the test host is x64, and the library is NativeAOT compatible (`IsAotCompatible=true`)
+- **Target:** .NET 11.0-windows; the library is AnyCPU, the test host is x64, and the library is NativeAOT compatible (`IsAotCompatible=true`)
 - **Language:** C# with `AllowUnsafeBlocks`
 - **NuGet Package:** `1llum1n4t1s.AlphaFS`
 
