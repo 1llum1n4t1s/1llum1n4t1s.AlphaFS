@@ -50,8 +50,8 @@ The API is System.IO-shaped rather than an exact clone. Intentional differences 
 
 1. `Directory.Build.props` is the single product-version source for both projects.
 2. `global.json` selects Microsoft.Testing.Platform for `dotnet test`.
-3. Pushes to `release/**` run restore, Release build, tests, and pack on Windows.
-4. The workflow requires the release branch suffix to equal the package version before NuGet Trusted Publishing obtains a short-lived credential and uploads the package.
+3. Pushing a lightweight tag `vX.Y.Z` on a `main` commit runs restore, Release build, tests, and pack on Windows.
+4. The workflow requires the ref to be a lightweight tag pointing at the run's commit, that commit to be an ancestor of the default branch, and the tag (without `v`) to equal the package version before NuGet Trusted Publishing obtains a short-lived credential and uploads the package.
 
 ## Invariants
 
@@ -67,7 +67,7 @@ The API is System.IO-shaped rather than an exact clone. Intentional differences 
 - `System.Security.Permissions` remains a direct dependency because `NativeError` exposes `System.Security.Policy.PolicyException` for `ERROR_BAD_RECOVERY_POLICY` through that package's type forwarding.
 - The library project has no fixed `PlatformTarget`; the test host is x64 because several tests exercise Windows-native behavior under that architecture.
 - Tests that need SMB shares, elevation, NTFS features, or permanent machine-state changes declare those environmental requirements. `ALPHAFS_SKIP_NETWORK_TESTS` skips only network halves, and `ALPHAFS_ENABLE_MACHINE_STATE_TESTS` is an explicit opt-in.
-- Release publication accepts only `release/x.y.z` when `Directory.Build.props` contains the same `x.y.z`; NuGet credentials remain short-lived through Trusted Publishing.
+- Release publication accepts only a lightweight tag `vx.y.z` on an ancestor of the default branch when `Directory.Build.props` contains the same `x.y.z`; NuGet credentials remain short-lived through Trusted Publishing.
 
 ## Adopted design decisions
 
